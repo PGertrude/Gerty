@@ -1,0 +1,19 @@
+Iron Ore	35	15
+Silver Ore	40	20
+Coal	50	30
+SandStone	60	35
+Gold Ore	65	40
+Average Granite exp	56.2	45
+Mithril Ore	80	55
+Adamantite Ore	95	70
+Runite Ore	125	85
+Rune Essence	5	1
+Clay	5	1
+Copper	17.5	1
+Tin	17.5	1
+Limestone	26.5	1
+Iron	35	15
+Silver	40	20
+Pure Essence	5	30
+Sandstone	60	35
+Gem Rock	65	40

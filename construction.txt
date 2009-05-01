@@ -1,0 +1,433 @@
+Normal Plank	29	1
+Oak Plank	60	15
+Teak Plank	90	35
+Mahogany Plank	140	40
+Cloth	15	2
+Clay	10	3
+Iron Bar	10	5
+Limestone Brick	20	5
+Steel Bar	20	7
+Brown Rug	30	2
+Torn Curtains	132	2
+Clay Fireplace	30	3
+Rug	60	13
+Curtains	225	18
+Shoe Box	58	20
+Wooden Bed	117	20
+Shaving Stand	30	21
+Oak Clock	142	25
+Oak Drawers	120	27
+Oak Shaving Stand	61	29
+Oak Bed	210	30
+Stone Fireplace	40	33
+Large Oak Bed	330	34
+Oak Dresser	121	37
+Oak Wardrobe	180	39
+Opulent Curtains	315	40
+Teak Bed	300	40
+Large Teak Bed	480	45
+Teak Dresser	181	46
+Teak Drawers	180	51
+4 Poster	450	53
+Teak Clock	202	55
+Fancy Teak Dresser	182	56
+Gilded 4 poster	1330	60
+Marble Fireplace	500	63
+Teak Wardrobe	270	63
+Mahogany Dresser	281	64
+Opulent Rug	360	65
+Gilded Dresser	582	75
+Mahogany Wardrobe	420	75
+Gilded Clock	602	85
+Gilded Wardrobe	720	87
+Long Bones	1500	30
+Curved Bones	2250	30
+Oak Altar	240	45
+Steel Torches	80	45
+God Symbol	120	48
+Shuttered Window	228	49
+Small Statues	40	49
+Windchimes	323	49
+Wooden Torches	58	49	
+Teak Altar	360	50
+Steel Candlesticks	124	53
+Cloth Covered Altar	390	56
+Gold Candlesticks	46	57
+Bells	480	58
+God Icon	960	59
+Mahogany Altar	590	60
+Incense Burners	280	61
+Limestone Altar	910	64
+Mahogany Burners	600	65
+Decorative Window	4	69
+Marble Burners	1600	69
+Medium Statues	500	69
+Organ	680	69
+Marble Altar	1030	70
+Icon of Bob	1160	71
+Gilded Altar	2230	75
+Large Statues	1500	89
+Stained Glass	5	89
+Oak Decoration	120	16
+Boxing Ring	420	32
+Glove Rack	120	34
+Teak Decoration	180	36
+Fencing Ring	570	41
+Weapons Rack	180	44
+Combat Ring	630	51
+Extra Weapons Rack	440	54
+Gilded Decoration	1020	56
+Ranging Pedestals	720	71
+Balance Beam	1000	81
+Oak wardrobe	240	42
+Oak costume box	120	44
+Oak armour case	180	46
+Oak treasure chest	120	48
+Oak toy box	120	50
+Carved oak wardrobe	360	51
+Oak cape rack	240	54
+Teak wardrobe	360	60
+Teak costume box	180	62
+Teak cape rack	360	63
+Teak armour case	270	64
+Teak treasure chest	180	66
+Teak toy box	180	68
+Carved teak wardrobe	500	69
+Mahogany cape rack	560	72
+Mahogany wardrobe	540	78
+Mahogany costume box	280	80
+Gilded cape rack	860	81
+Mahogany armour case	420	82
+Mahogany treasure chest	280	84
+Mahogany toy box	280	86
+Gilded wardrobe	860	87
+Marble cape rack	500	90
+Marble wardrobe	500	96
+Magical cape rack	1000	99
+Wood Dining Table	115	10
+Wooden Bench	115	10
+Oak Decoration	120	16
+Oak Bench	240	22
+Oak Dining Table	240	22
+Rope Bell pull	64	26
+Carved Oak Bench	240	31
+Carved Oak Table	360	31
+Teak Decoration	180	36
+Bell pull	120	37
+Teak Dining Bench	360	38
+Teak Table	360	38
+Carved Teak Bench	360	44
+Carved Teak Table	600	45
+Mahogany Bench	560	52
+Mahogany Table	840	52
+Gilded Decoration	1020	56
+Posh Bell pull	390	60
+Gilded Bench	1760	61
+Opulent Table	3100	72
+Oak Staircase	600	27
+Teak Staircase	980	48
+Spiral Staircase	1040	67
+Skeleton Guard	223	70
+Candles	243	72
+Decorative Blood	4	72
+Spike Trap	223	72
+Oak Door	600	74
+Guard Dog	273	74
+Man Trap	273	76
+Hobgoblin Guard	316	78
+Tangle Vine	316	80
+Baby Red Dragon	387	82
+Marble Staircase	3200	82
+Decorative Pipe	120	83
+Marble Trap	387	84
+Steel Plated Door	800	84
+Torches	244	84
+Huge Spider	447	86
+Teleport Trap	447	88
+Troll Guard	1000	90
+Hanging Skeleton	3	94
+Hellhound	2236	94
+Marble Door	2000	94
+Skull Torches	246	94
+Marble Spiral	4400	97
+Boundary Stones	100	55
+Thorny Hedge	70	56
+Wooden Fence	280	59
+Nice Hedge	100	60
+Stone Wall	200	63
+Small Box Hedge	122	64
+Gazebo	1200	65
+Orange Flower	70	66
+Sunflower	70	66
+Iron Railings	220	67
+Topiary Hedge	141	68
+Dungeon Entrance	500	70
+Daffodils	70	71
+Marigolds	100	71
+Picket Fence	640	71
+Small Fountain	500	71
+Fancy Hedge	158	72
+Garden Fence	940	75
+Large Fountain	1000	75
+Bluebells	122	76
+Roses	122	76
+Tall Fancy Hedge	223	76
+Marble Wall	4000	79
+Tall Box Hedge	316	80
+Posh Fountain	1500	81
+Hoop and Stick	120	30
+Oak Prize Chest	240	34
+Magical Balance	176	37
+Clay Attack Stone	100	39
+Jester	390	39
+Teak Prize Chest	660	44
+Treasure Hunt	800	49
+Dartboard	290	54
+Mahogany Prize Chest	860	54
+Magical Balance 2	252	57
+Attack Stone	200	59
+Hangman	1200	59
+Magical Balance	356	77
+Marble Attack Stone	2000	79
+Archery Target	600	81
+Bagged Plant	1	31
+Decorative Rock	100	5
+Exit Portal	100	5
+Tree	31	5
+Bagged Plant 2	70	6
+Nice Tree	44	10
+Pond	100	10
+Bagged Plant	100	12
+Imp Statue	150	15
+Oak Tree	70	15
+Willow Tree	100	30
+Maple Tree	122	45
+Yew Tree	141	60
+Dungeon Entrance	500	70
+Magic Tree	223	75
+Cat Blanket	15	5
+Firepit	40	5
+Wooden Shelves	87	6
+Beer Barrel	87	7
+Pump and Drain	100	7
+Wooden Larder	228	9
+Firepit with Hook	60	11
+Cider Barrel	91	12
+Wooden Shelves 2	147	12
+Wood Table	87	12
+Firepit with Pot	80	17
+Asgarnian Ale Barrel	184	18
+Cat Basket	58	19
+Wooden Shelves 3	147	23
+Small Oven	80	24
+Greenman's Ale Barrel	184	26
+Pump and Tub	200	27
+Large Oven	100	29
+Oak Table	180	32
+Cushioned Basket	58	33
+Oak Larder	480	33
+Steel Range	120	34
+Oak Shelves	240	34
+Dragon Bitter Barrel	224	36
+Fancy Range	160	42
+Teak Larder	750	43
+Oak Shelves 2	240	45
+Sink	300	47
+Chef's Delight Barrel	224	48
+Teak Table	270	52
+Teak Shelves	330	56
+Teak Shelves 2	930	67
+Oak Cage	640	65
+Spikes	623	65
+Oak Ladder	300	68
+Oak and Steel Cage	800	70
+Skeleton Guard	223	70
+Tentacle Pool	326	71
+Candles	243	72
+Decorative Blood	4	72
+Guard Dog	273	74
+Steel Cage	400	75
+Flame Pit	357	77
+Hobgoblin Guard	316	78
+Teak Ladder	450	78
+Spiked Cage	500	80
+Baby Red Dragon	387	82
+Decorative Pipe	120	83
+Rocnar	387	83
+Torches	244	84
+Bone Cage	603	85
+Huge Spider	447	86
+Mahogany Ladder	700	88
+Troll Guard	1000	90
+Hanging Skeleton	3	94
+Hellhound	2236	94
+Skull Torches	246	94
+Crude Wooden Chair	58	1
+Wooden Bookcase	115	4
+Wooden Chair	87	8
+Rocking Chair	87	14
+Oak Chair	120	19
+Oak Armchair	180	26
+Oak Bookcase	180	29
+Teak Armchair	180	35
+Mahogany Bookcase	420	40
+Mahogany Armchair	280	50
+Teak Portal	270	50
+Teleport Focus	40	50
+Mahogany Portal	420	65
+Greater Focus	500	65
+Marble Portal	1500	80
+Scrying Pool	2000	80
+Wooden Bookcase	115	4
+Oak Staircase	600	27
+Oak Bookcase	180	29
+Elena	211	35
+Giant Dwarf	211	35
+King Arthur	211	35
+Small Map	211	38
+Mahogany Bookcase	420	40
+Silverlight	187	42
+Excalibur	194	42
+Darklight	202	42
+Lumbridge	314	44
+Morytania	314	44
+The Desert	314	44
+Anti dragon Shield	280	47
+Amulet of Glory	290	47
+Cape of Legends	300	47
+Teak Staircase	980	48
+Miscellanians	311	55
+Medium Map	451	58
+Isafdar	464	65
+Karamja	464	65
+Spiral Staircase	1040	67
+Large Map	591	78
+Marble Staircase	3200	82
+Marble Spiral	4400	97
+Oak Staircase	600	27
+Cw Armour 1	135	28
+Cw Armour 2	150	28
+Cw Armour 3	165	28
+Mithril Armour	135	28
+Adamant Armour	150	28
+Runite Armour	165	28
+Mounted Bass	151	36
+Crawling Hand	211	38
+Cockatrice Head	224	38
+Basilisk Head	243	38
+Rune Case 1	190	41
+Rune Case 2	212	41
+Teak Staircase	980	48
+Mounted Swordfish	230	56
+Kurask Head	357	58
+Abyssal Head	389	58
+Spiral Staircase	1040	67
+Mounted Shark	350	76
+KBD Heads	1103	78
+KQ Head	1103	78
+Marble Staircase	3200	82
+Marble Spiral	4400	97
+Wooden Bookcase	115	4
+Oak Bookcase	180	29
+Mahogany Bookcase	420	40
+Oak Lectern	60	40
+Globe	180	41
+Crystal Ball	280	42
+Alchemical Chart	30	43
+Wooden Telescope	121	44
+Demon Lectern	120	47
+Eagle Lectern	120	47
+Ornamental Globe	270	50
+Elemental Sphere	580	54
+Teak Demon Lectern	180	57
+Teak Eagle Lectern	180	57
+Lunar Globe	570	59
+Astronomical Chart	45	63
+Teak Telescope	181	64
+Crystal of Power	590	66
+Mahogany Demon Lectern	580	67
+Mahogany Eagle Lectern	580	67
+Celestial Globe	570	68
+Armillary Sphere	960	77
+Infernal Chart	60	83
+Mahogany Telescope	580	84
+Small Orrery	1320	86
+Large Orrery	1420	95
+Oak Decoration	120	16
+Teak Decoration	180	36
+Carved Teak Bench	360	44
+Mahogany Bench	560	52
+Gilded Decoration	1020	56
+Oak Throne	800	60
+Floor Decoration	700	61
+Gilded Bench	1760	61
+Round Shield	120	66
+Teak Throne	1450	67
+Oak Lever	300	68
+Steel Cage	1100	68
+Trapdoor	300	68
+Mahogany Throne	2200	74
+Trapdoor (Floor)	770	74
+Square Shield	360	76
+Teak Lever	450	78
+Trapdoor 2	450	78
+Gilded Throne	1800	81
+Lesser Magic Cage	2700	82
+Kite Shield	420	86
+Mahogany Lever	700	88
+Skeletal Throne	7003	88
+Trapdoor	700	88
+Greater Magic Cage	4700	89
+Crystal Throne	15000	95
+Demonic Throne	25000	99
+Round Shield	120	66
+Candles	243	72
+Decorative Blood	4	72
+Oak Door	600	74
+Demon	707	75
+Wooden Crate	143	75
+Square Shield	360	76
+Oak Chest	340	79
+Kalphite Soldier	866	80
+Decorative Pipe	120	83
+Teak Chest	530	83
+Steel Plated Door	800	84
+Torches	244	84
+Tok xil	2236	85
+Kite Shield	420	86
+Mahogany Chest	1000	87
+Dagannoth	2738	90
+Magic Chest	1000	91
+Hanging Skeleton	3	94
+Marble Door	2000	94
+Skull Torches	246	94
+Steel Dragon	3162	95
+Repair Bench	120	15
+Tool Store	120	15
+Crafting Table	240	16
+Pluming Stand	120	16
+Wooden Workbench	143	17
+Crafting Table 2 Upgrade	1	25
+Crafting Table 2 Total	241	25
+Tool Store 2 Addition	120	25
+Tool Store 2 Total	240	25
+Oak Workbench	300	32
+Crafting Table 3 Upgrade	2	34
+Crafting Table 3 Total	243	34
+Tool Store 3 Addition	120	35
+Tool Store 3 Total	360	35
+Whetstone	260	35
+Shield Easel	240	41
+Crafting Table 4 Upgrade	120	42
+Crafting Table 4 Total	363	42
+Tool Store 4 Addition	120	44
+Tool Store 4 Total	480	44
+Steel Framed Bench	440	46
+Armour Stand	500	55
+Tool Store 5 Addition	120	55
+Tool Store 5 Total	600	55
+Add Vice to Bench	140	62
+Bench with Vice	580	62
+Banner Easel	510	66
+Add Lathe to Bench	140	77
+Bench with Lathe	720	77

@@ -1,0 +1,78 @@
+Spirit Wolf	4.8	1	Gold	7	6	Wolf Bones	359	Combat - Attack	Fights
+Dreadfowl	9.3	4	Gold	8	4	Raw Chicken	374	Combat - Magic	Farm Boost(1)
+Spirit Spider	12.6	10	Gold	8	15	Spider Carcass	374	Forager - Red Spider Eggs	Fights
+Thorny Snail	12.6	13	Gold	9	16	Raw Thin Snail	389	Combat - Ranged	Beast of Burden(3)
+Granite Crab	21.6	16	Gold	7	18	Iron Ore	359	Forager - Raw Fish	Fish Boost(1) & Fights
+Mosquito	46.5	17	Gold	1	12	Proboscis	-	Combat - Attack	Fights
+Desert Wyrm	31.2	18	Green	45	19	Bucket of Sand	929	Forager - Gather Ores	Mine Boost(1) & Fights
+Spirit Scorpion	83.2	19	Crimson	57	17	Bronze Claws	1109	Combat - Controlled	Fights
+Spirit Tz-Koh	96.8	22	Crimson	64	18	Obsidian Charm	-	Combat - Magic	Fights(Drains Prayer)
+Albino Rat	202.4	23	Blue	75	22	Raw Rat Meat	1379	Combat - Attack	Fights
+Spirit Kalphite	220	25	Blue	51	22	Potato Cactus	1109	Beast of Burden (6)	Fights
+Compost Mound	49.8	28	Green	47	24	Compost	959	Forager - Compost/Seeds	Farm Boost(1+2%) & Fights
+Giant Chinchompa	255.2	29	Blue	84	31	Chinchompa	-	Combat - Ranged	Fights(Explodes)
+Vampire Bat	136	31	Crimson	84	33	Vampire Dust	1469	Combat - Controlled	Fights & Light Enhancer
+Honey Badger	140.8	32	Crimson	81	25	Honeycomb	1514	Combat - Strength	Fights
+Beaver	57.6	33	Green	72	27	Willow Logs	1334	Forager - Logs/Planks	WC Boost(2) & Fletch Knife
+Void Ravager	59.6	34	Green	74	27	Ravager Charm	-	Forager - Ores	Mine Boost(1) & Fights
+Void Spinner	59.6	34	Green	74	27	Spinner Charm	-	Healer (1HP)	Fights
+Void Shifter	59.6	34	Green	74	94	Shifter Charm	-	Combat - Attack	Fights & Teleport at 10% HP
+Void Torcher	59.6	34	Green	74	94	Torcher Charm	-	Combat - Magic	Fights
+Bronze Minotaur	316.8	36	Blue	102	30	Bronze Bar	1784	Combat - Defence	Fights
+Bull Ant	52.8	40	Gold	11	30	Marigolds	unknown	Beast of Burden (9)	Fights
+Macaw	72.4	41	Green	78	31	Guam	1424	Forager - Herbs	Remote View & Improved Herb Drops
+Evil Turnip	184.8	42	Crimson	104	30	Carved Turnip	Unknown	Combat - Ranged	Fights
+Spirit Cockatrice	75.2	43	Green	88	36	Cockatrice Egg	1574	Combat - Magic	Fights & Collects Eggs
+Spirit Guthatrice	75.2	43	Green	88	36	Guthix Egg	Unknown	Combat - Magic	Fights & Collects Eggs
+Spirit Saratrice	75.2	43	Green	88	36	Saradomin Egg	Unknown	Combat - Magic	Fights & Collects Eggs
+Spirit Zamatrice	75.2	43	Green	88	36	Zamorak Egg	Unknown	Combat - Magic	Fights & Collects Eggs
+Spirit Pengatrice	75.2	43	Green	88	36	Penguin Egg	Unknown	Combat - Magic	Fights & Collects Eggs
+Spirit Coraxatrice	75.2	43	Green	88	36	Coraxatrice Egg	Unknown	Combat - Magic	Fights & Collects Eggs
+Spirit Vulatrice	75.2	43	Green	88	36	Vulture Egg	Unknown	Combat - Magic	Fights & Collects Eggs
+Iron Minotaur	404.8	46	Blue	125	37	Iron Bar	2129	Combat - Defence	Fights
+Pyrelord	202.4	46	Crimson	111	32	Tinderbox	-	Combat - Strength	Fights & FM Boost(3) & Tinderbox(+10xp)
+Magpie	83.2	47	Green	88	34	Gold Ring	1574	Forager - Jewellery	-
+Bloated Leech	215.2	49	Crimson	117	34	Raw Beef	2009	Combat - Attack	Fights
+Spirit Terrorbird	68.4	52	Gold	12	36	Raw Bird Meat	434	Beast of Burden (12)	Fights
+Abyssal Parasite	94.8	54	Green	106	30	Abyssal Charm	1844	Beast of Burden (7)	Fights
+Spirit Jelly	484	55	Blue	151	43	Jug of Water	2519	Combat - Strength	Fights
+Ibis	98.8	56	Green	109	38	Harpoon	1889	Forager - Fish	Fish Boost(3)
+Steel Minotaur	492.8	56	Blue	141	46	Steel Bar	2369	Combat - Defence	Fights
+Spirit Graahk	501.6	57	Blue	154	49	Graahk Fur	-	Combat - Strength	Fights & Hunt Boost(5) & Tele To Graahk Area
+Spirit Kyatt	501.6	57	Blue	153	49	Kyatt Fur	-	Combat - Attack	Fights & Hunt Boost(5) & Tele To Piscatoris Area
+Spirit Larupia	501.6	57	Blue	154	49	Larupia Fur	-	Combat - Controlled	Fights & Hunt Boost(5) & Tele To Feldip Area
+Karamthulu Overlord	510.4	58	Blue	144	44	Empty Fishbowl	2414	Combat - Ranged	Fights(Water Spell)
+Smoke Devil	268	61	Crimson	141	48	Goat's Horn Dust	2369	Combat - Magic	Fights
+Abyssal Lurker	109.6	62	Green	119	41	Abyssal Charm	2039	Beast of Burden (7)	Fights
+Spirit Cobra	276.8	63	Crimson	116	56	Snake Hide	1994	Combat - Attack	Fights
+Stranger Plant	281.6	64	Crimson	128	49	Bagged Plant	2174	Combat - Controlled	Fights & Farm Boost(1+4%) & Forage Strange Fruit
+Barker Toad	87	66	Gold	11	8	Swamp Toad	419	Combat - Strength	Fight(Cannon)
+Mithril Minotaur	580.8	66	Blue	152	16	Mithril Bar	2534	Combat - Defence	Fights
+War Tortoise	58.6	67	Gold	1	43	Tortoise Shell	269	Beast of Burden (18)	Fights
+Bunyip	119.2	68	Green	110	44	Raw Shark	1904	Healer (2HP)	Fights & Raw Fish => Water Runes
+Fruit Bat	121.2	69	Green	130	45	Banana	2204	Forager Fruit/Seeds	Light Enhancer & Forage Fruit(Karamja)
+Ravenous Locust	132	70	Crimson	79	24	Pot of Flour	-	Combat - Attack	Fights & Eat opponents Food
+Arctic Bear	93.2	71	Gold	14	28	Polar Kebbit Fur	464	Combat - Controlled	Fights & Hunt Boost(7) & Tele to Rellekka Area
+Phoenix	301.8	72	Crimson	165	30	Phoenix Quill	-	Combat - Magic	Fights & Spec lowers enemy hit chance & Requires quest In Pyre Need
+Obsidian Golem	642.4	73	Blue	195	55	Obsidian charm	-	Combat - Strength	Fights & Mine Boost(7)
+Granite Lobster	325.6	74	Crimson	166	47	Granite (500g)	2744	Forager - Fish	Fights & Fish Boost(4)
+Praying Mantis	329.6	75	Crimson	168	69	Red Flowers	2774	Combat - Attack	Fights
+Adamant Minotaur	668.8	76	Blue	144	66	Adamantite Bar	2414	Combat - Defence	Fights
+Forge Regent	134	76	Green	141	45	Ruby Harvest	-	Combat - Ranged	Fights(multispell) & Tinderbox(+10xp)
+Talon Beast	1015.2	77	Crimson	174	49	Nail Beast Charm	-	combat - Strength	Fights
+Giant Ent	136.8	78	Green	94	49	Willow Branch	2114	Combat - Controlled	Fights & Increased Harvest & Ess => Nat/Earth
+Fire Titan	695.2	79	Blue	198	62	Fire Talisman	-	Combat - Magic	Fights
+Ice Titan	695.2	79	Blue	198	64	Air & Water Talisman	-	Combat - Attack	Fights
+Moss Titan	695.2	79	Blue	202	58	Earth Talisman	-	Combat - Strength	Fights
+Hydra	140.8	80	Green	128	49	Water Orb	2174	Combat - Ranged	Fights
+Spirit Dagannoth	364.8	83	Crimson	1	57	Dagannoth Hide	269	Combat - Controlled	Fights
+Lava Titan	730.4	83	Blue	219	61	Obsidian Charm	-	Combat - Strength	Fights & Mine Boost(10) & FM Boost(10) & Tele to Lava Maze
+Swamp Titan	373.6	86	Crimson	150	56	Swamp Lizard	-	Combat - Attack	Fights
+Rune Minotaur	756.8	86	Blue	1	151	Runite Bar	269	Combat - Defence	Fights
+Unicorn Stallion	154.4	88	Green	140	54	Unicorn Horn	2354	Healer - (Scroll)	Fights & Cures(Poison+Disease)
+Geyser Titan	783.2	89	Blue	222	69	Water Talisman	3584	Combat - Ranged	Fights & Range Boost(1+3%) & Recharge Glory
+Wolpertinger	404.8	92	Crimson	203	62	Raw Rabbit, Wolf Bones	3299	Combat - Magic	Fights & Hunt Boost(5) & Double Berry Harvest Exp
+Abyssal Titan	163.2	93	Green	113	32	Abyssal Charm	-	Beast of Burden (7)	Fights
+Iron Titan	417.6	95	Crimson	198	60	Iron Platebody	3224	Combat - Defence	Fights & Defence Bonus
+Pack Yak	422.4	96	Crimson	211	58	Yak Hide	3419	Beast of Burden (30)	Fights
+Steel Titan	435.2	99	Crimson	178	64	Steel Platebody	-	Combat - Ranged	Fights & Defence Bonus

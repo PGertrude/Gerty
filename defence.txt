@@ -1,0 +1,100 @@
+Chicken	12	1
+Cave bug	20	5
+Crawling Hand	64	8
+Dwarf	64	10
+Skeleton	68	25
+Crawling Hand	76	12
+Cave Crawler	80	23
+Ghost	100	19
+Bear	108	21
+Skeleton	116	22
+Wolf	136	25
+Hill giant	140	28
+Kalphite Worker	160	28
+Vampire	160	61
+Pyrefiend	180	43
+Guard dog	196	44
+Baby blue dragon	200	48
+Earth Warrior	216	51
+Moss giant	240	42
+Ice warrior	240	57
+Wild dog	248	63
+Otherworldly being	260	64
+Shadow warrior	268	48
+Ice giant	280	49
+Dagannoth	280	74
+Green dragon	300	79
+Turoth	304	83
+Lesser demon	316	82
+Greater demon	332	92
+Troll	360	69
+Kalphite Soldier	360	85
+Werewolf	360	85
+Wall beast	420	49
+Blue dragon	428	111
+Elf	432	108
+Fire giant	432	86
+Hellhound	464	122
+Bloodveld	480	76
+Dagannoth	480	92
+Bronze dragon	500	131
+Rockslug	108	29
+Monkey	24	3
+banshee	88	23
+Cockatrice	148	37
+pyrefiend	180	43
+basilisk	300	61
+Infernal Mage	240	66
+Jelly	300	78
+turoth	308	83
+zygomite	260	74
+Cave Horror	220	80
+Aberrant Spectre	360	96
+dust devil	420	93
+Kurask	388	106
+Gargoyle	420	111
+Nechryael	420	115
+Abyssal Demon	600	124
+Dark Beast	900	182
+steel dragon	880	246
+kalphite soldier	360	85
+dagannoth	280	74
+hell hound	464	122
+Black Demon	628	172
+infernal mage	240	66
+iron dragon	692	189
+black dragon	800	227
+brine rat	200	70
+goblin	20	12
+minotaur	40	12
+elf	420	108
+cave slime	100	23
+desert lizard	60	12
+bat	32	6
+suqah	432	111
+scorpian	68	14
+gorak	448	145
+king scorpian	120	34
+zombie	208	73
+spider	140	34
+icefiend	60	13
+ankou	280	86
+kalphite worker	160	28
+dog	248	63
+cow	32	2
+Greater demon	348	94
+spiritual mage saradomin	340	120
+spiritual mage zamorak	300	121
+spiritual mage bandos	424	121
+spiritual mage armadyl	344	122
+spiritual mage	340	120
+spiritual ranger saradomin	424	122
+spiritual ranger zamorak	480	118
+spiritual ranger bandos	524	115
+spiritual ranger armadyl	356	127
+spiritual ranger	424	122
+spiritual warrior saradomin	440	125
+spiritual warrior zamorak	400	115
+spiritual warrior armadyl	392	123
+spiritual warrior bandos	524	134
+spiritual warrior	440	125

@@ -1,0 +1,24 @@
+Willow Tree	67.5	30
+Lumber Willow Tree	69.1	30
+Teak Tree	85	35
+Lumber Teak Tree	87.1	35
+Maple Tree	100	45
+Mahogany Tree	125	50
+Yew Tree	175	60
+Magic Tree	250	75
+Normal Tree	25	1
+Achey Tree	25	1
+Oak Tree	37.5	15
+Hollow Tree	82.5	45
+Arctic Pine	40	54
+Eucalyptus	165	58
+Lumber Normal Tree	25.6	1
+Lumber Achey Tree	25.6	1
+Lumber Oak Tree	38.4	15
+Lumber Hollow Tree	84.5	45
+Lumber Maple Tree	102.5	45
+Lumber Mahogany Tree	128.1	50
+Lumber Arctic Pine	41	54
+Lumber Eucalyptus	169.1	58
+Lumber Yew Tree	179.3	60
+Lumber Magic Tree	256.2	75

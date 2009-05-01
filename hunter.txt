@@ -1,0 +1,42 @@
+Ruby Harvest	24	15
+Sapphire Glacialis	34	25
+Snowy White	44	35
+Black Warlock	54	45
+Red Chinchompa	265	63
+Orange Salamander	224	47
+Red Salamander	272	59
+Magic Imp	450	71
+Polar Kebbit	30	1
+Crimson Swift	34	1
+Common Kebbit	36	3
+Golden Warbler	47.6	5
+Feldip Weasel	48	7
+Copper Longtail	61.2	9
+Cerulean Twitch	64.6	11
+Desert Devil	66	13
+Tropical Wagtail	95.2	19
+Wild Kebbit	128	23
+Baby Gecko	100	27
+Baby Monkey	100	27
+Baby Raccoon	100	27
+Ferret	115.2	27
+Rabbit	144	27
+Baby Squirrel	152	29
+Swamp Lizard	152	29
+Spined Larupia	180	31
+Barb tailed Kebbit	168	33	
+Prickly Kebbit	204	37
+Wimpy Bird	167	39
+Horned Graahk	240	41
+Spotted Kebbit	104.2	43
+Diseased Kebbit	225	44
+Platypus	205	48
+Razor backed Kebbit	348	49
+Sabre toothed Kebbit	200	51
+Chinchompa	198.5	53
+Sabre toothed Kyatt	300	55
+Dark Kebbit	132	57
+Pawya	400	66
+Black Salamander	304	67
+Dashing Kebbit	156	69
+Grenwall	1100	77

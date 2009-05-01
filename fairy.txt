@@ -1,0 +1,36 @@
+AJR|Slayer Cave|Arrive outside and slightly west of cave. Rellekka (Fremennik village) to west.
+AIQ|Mudskipper Point|Mogre slayer area. Rimmington to north, Port Sarim to northeast.
+AJS|Penguin Island|Small Island with only Penguins, located north-west of Miscellania.
+AKQ|Woodland Hunting Area (Piscatoris)|Piscatoris Fishing colony to the north, falconry training ground to the east & hunting area to the south-east.
+BLQ|Yu'biusk|Requires Land of the Goblins quest.
+CIP|Miscellania|On the far west of the Island, just north of the Castle.
+DKS|Fremennik Province|By the entrance to Keldagrim, south of snow-hunting area, and east of Rellekka.
+CJR|Sinclair Mansion Eastern Ring|Arrive by Maple Trees. South to Seers Village, north to Rellekka.
+DJR|Sinclair Mansion Western Ring|Arrive by Maple Trees. South to Seers Village, north to Rellekka.
+ALS|McGrubor's Wood|North-west of Seers Village.
+BLR|Legend's Guild|Arrive just outside Legend's Guild, South-west to Ardougne, north to Seers Village.|legends
+BIS|Ardougne Zoo|Arrive in the Unicorn Cage in Ardougne Zoo.
+DJP|Necromancer's Tower|North-west to Ardougne.
+CIQ|South of Tree Gnome Maze|South-east to Yanille, west to Castle Wars.
+CLS|Hazelmere's Hut|East to Yanille.
+BKP|Forest south of Castle Wars|North to Castle Wars, east to Gu'tanoth.
+AKS|Feldip Hills|Arrive in the middle of Feldip Hills, South-east of the Gnome Glider.
+ALR|Abyss|A single-combat area of the Abyss, with only abyssal monsters. You can not runecraft here, and you do not lose prayer or get skulled upon entry.
+DKR|East of Edgeville|Arrive by the Canoe. Go east to get to the Grand exchange or west over the bridge to get to edgeville.
+DIS|Wizard's Tower|Due south of the Wizard's Tower. Cross the bridge north to arrive at Draynor Village.
+DIR|Gorak Area|Area containing level 145 Goraks. Melee Prayer does not work here.
+BKQ|Nature Grove|Area with Stags, Rabbits, a Waterfall and Trees which become Tree Spirits upon chopping.
+CKP|Star Flower Area|Area to collect Star Flowers for the Magic Essence Potion.
+BJR|Fisher King's Realm|Requires starting the Holy Grail quest. Exit to Brimhaven is south. There is a Gold Mine nearby the exit.
+BLP|Tz-haar Caves|North to the Furnace, exit to Karamja Volcano is to the west.
+DKP|Karambwan Fishing Area|Arrive on east Karamja, south of the Karambwan vessel fishing area.
+CKR|Tai Bwo Wannai Lake|Arrive just south of the Tai Bwo Wannai Lake, used to fish Karambwanji fish.
+DLS|Swamp Island|No features *dead end*.
+CKS|Morytania|Arrive next to a mushroom patch in Morytania. West of Canifis, South of Slayer Tower.
+BKR|Mort Myre Swamp|Arrive in the northern area of Mort Myre Swamp, just south of the Gate.
+BIQ|Kharidian Desert|Between Shantay Pass & the Kalphite Lair.
+DLQ|Desert Lizards|Arrive among the Desert Lizards in the Kharidian Desert, north-east of Pollnivneach.
+AIR|Tropical Island|No features *dead end*.
+BIP|Salve River Island|No features *dead end*.
+CLP|Island|No features *dead end*.
+DLR|Mort Myre Island|No features *dead end*.

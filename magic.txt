@@ -1,0 +1,137 @@
+Wind Strike	5.5	1	1 Air, 1 Mind	2	Normal	-
+Confuse	12	3	3 Water, 2 Earth, 1 Body	-	Normal	Reduces attack 5%
+Crossbow Bolt Enchant	-	4	-	-	Normal	Specify with writing Crossbow Bolt Enchant(gem type)
+Crossbow Bolt Enchant(Opal)	9	4	1 Cosmic, 2 Air	-	Normal	Enchants Opal tipped bolts
+Crossbow Bolt Enchant(Sapphire)	17	7	1 Cosmic, 1 Mind, 1 Water	-	Normal	Enchants Sapphire tipped bolts
+Crossbow Bolt Enchant(Jade)	19	14	1 Cosmic, 2 Earth	-	Normal	Enchants Jade tipped bolts
+Crossbow Bolt Enchant(Pearl)	29	24	1 Cosmic, 2 Water	-	Normal	Enchants Pearl tipped bolts
+Crossbow Bolt Enchant(Emerald)	37	27	1 Cosmic, 1 Nature, 3 Air	-	Normal	Enchants Pearl tipped bolts
+Crossbow Bolt Enchant(Red Topaz)	33	29	1 Cosmic, 2 Fire	-	Normal	Enchants Red Topaz tipped bolts
+Crossbow Bolt Enchant(Ruby)	59	49	1 Cosmic, 5 Fire, 1 Blood	-	Normal	Enchants Ruby tipped bolts
+Crossbow Bolt Enchant(Diamond)	67	57	1 Cosmic, 10 Earth, 2 Law	-	Normal	Enchants Diamond tipped bolts
+Crossbow Bolt Enchant(Dragonstone)	78	68	1 Cosmic, 1 Soul, 15 Earth	-	Normal	Enchants Dragonstone tipped bolts
+Crossbow Bolt Enchant(Onyx)	97	87	1 Cosmic, 1 Death, 20 Fire	-	Normal	Enchants Onyx tipped bolts
+Water strike	7.5	4	1 Water, 1 Air, 1 Mind	4	Normal	-
+Lvl-1 Enchant	17.5	7	1 Water, 1 Cosmic	-	Normal	Enchants Sapphire jewellery
+Earth Strike	9.5	9	2 Earth, 1 Air, 1 Mind	6	Normal	-
+Weaken	21	11	3 Water, 2 Earth, 1 Body	-	Reduces strength 5%
+Fire Strike	11.5	13	3 Fire, 2 Air, 1 Mind	8	Normal	-
+Bones to Bananas	25	15	2 Earth, 2 Water, 1 Nature	-	Normal	Turns all regular bones in inventory to bananas
+Wind Bolt	12.5	19	2 Air, 1 Chaos	9	Normal	-
+Curse	29	19	2 Water, 3 Earth, 1 Body	-	Normal	Reduces defence 5%
+Bind	30	20	3 Earth, 3 Water, 2 Nature	-	Normal	Holds target for 5 seconds
+Low Level Alchemy	31	21	3 Fire, 1 Nature	-	Normal	Converts items into a low amount of coins	low alch lo alch low lvl alch
+Water Bolt	16.5	23	2 Water, 2 Air, 1 Chaos	10	Normal	-
+Varrock Teleport	41	31	1 Fire, 3 Air, 1 Law	-	Normal	-
+Lvl-2 Enchant	37	27	3 Air, 1 Cosmic	-	Normal	Enchants Emerald jewellery
+Earth Bolt	19.5	29	3 Earth, 2 Air, 1 Chaos	11	Normal	-
+Lumbridge Teleport	41	31	1 Earth, 3 Air, 1 Law	-	Normal	-
+Bounty Locate	45	32	1 Law, 1 Air, 1 Fire	-	Normal	Teleport to your target in Bounty Hunter
+Telekinetic Grab	22.5	35	1 Air, 1 Law	-	Normal	Grabs an item from distance
+Fire Bolt	22.5	35	4 Fire, 3 Air, 1 Chaos	12	Normal	-
+Falador Teleport	48	37	1 Water, 3 Air, 1 Law	-	Normal	-
+Crumble Undead	24.5	39	2 Earth, 2 Air, 1 Chaos	15	Hits skeletons, ghosts and zombines hard & autocast with Slayer staff
+Teleport to House	30	40	1 Air, 1 Earth, 1 Law	-	Normal	Teleport to your player owned house
+Wind Blast	25.5	41	3 Air, 1 Death	13	Normal	-
+Superheat Item	53	43	4 Fire, 1 Nature	-	Normal	Smelts ores without a furnace & yelds smithing exp
+Camelot Teleport	55.5	45	5 Air, 1 Law	-	Normal	-
+Water Blast	28.5	47	3 Water, 3 Air, 1 Death	14	Normal	-
+Lvl-3 Enchant	59	49	5 Fire, 1 Cosmic	-	Normal	Enchants Ruby jewellery
+Iban Blast	30	50	5 Fire, 1 Death	25	Normal	Requires Staff of Iban, quest Underground Passage
+Snare	60	50	4 Earth, 4 Water, 3 Nature	2	Normal	Holds target for 10 seconds
+Magic Dart	30	50	1 Death, 4 Mind	20	Normal	Requires Slayer staff
+Ardougne Teleport	61	51	2 Water, 2 Law	-	Normal	-
+Earth Blast	31.5	53	4 Earth, 3 Air, 1 Death	15	Normal	-
+High Level Alchemy	65	55	5 Fire, 1 Nature	-	Normal	Converts items into a high amount of coins	high alchhi alchhigh lvl alch
+Charge Water Orb	66	56	30 Water, 3 Cosmic	-	Normal	Requires unpowerd Orb & Charges a water orb
+Lvl-4 Enchant	67	57	10 Earth, 1 Cosmic	-	Normal	Enchants Diamond jewellery
+Watchtower Teleport	68	58	2 Earth, 2 Law	-	Normal	-
+Fire Blast	34.5	69	5 Fire, 4 Air, 1 Death	16	Normal	-
+Charge Earth Orb	70	60	30 Earth, Cosmic	-	Normal	Requires unpowerd Orb & Charges an earth orb
+Bones to Peaches	35.5	60	4 Water, 4 Earth, 2 Nature	-	Normal	Turns all regular bones in inventory to Peaches
+Saradomin Strike	35	60	2 Fire, 2 Blood, 4 Air	20	Normal	Requires Staff of Saradomin & Drains prayer
+Claws of Guthix	35	60	1 Fire, 2 Blood, 4 Air	20	Normal	Requires Staff of Guthix or Void knight Mace & Drains defence
+Flames of Zamorak	35	60	4 Fire, 2 Blood, 1 Air	20	Normal	Requires Staff of Zamorak & Drains magic
+Trollheim Teleport	68	61	2 Fire, 2 Law	-	Normal	Requires quest Eadgar's Ruse
+Wind Wave	36	62	5 Air, 1 Blood	17	Normal	-
+Charge Fire Orb	73	63	30 Fire, 3 Cosmic	-	Normal	Requires unpowerd Orb & Charges a fire orb
+Water Wave	37.5	65	7 Water, 5 Air, 1 Blood	18	Normal	-
+Vulnerability	76	66	5 Earth, 5 Water, 1 Soul	-	Normal	Reduces target defence 10%
+Lvl-5 Enchant	78	68	15 Water, 15 Earth, 1 Cosmic	-	Normal	Enchants Dragonstone jewellery
+Earth Wave	40	70	7 Earth, 5 Air, 1 Blood	19	Normal	-
+Enfeeble	83	73	8 Earth, 8 Water, 1 Soul	-	Normal	Reduces target strength 10%
+Teleother Lumbridge	84	74	1 Soul, 1 Law, 1 Earth	-	Normal	Teleports target player to Lumbridge
+Fire Wave	42.5	75	7 Fire, 5 Air, 1 Blood	20	Normal	-
+Entangle	89	79	5 Earth, 5 Water, 4 Nature	-	Normal	Holds target for 15 seconds
+Stun	90	80	12 Earth, 12 Water, 1 Soul	-	Normal	Reduces target attack 10%
+Charge	180	80	3 Fire, 3 Blood, 3 Air	-	Normal	Increases Mage Arena spells' effectivity & Cast delay
+Teleother Falador	92	82	1 Soul, 1 Law, 1 Water	-	Normal	Teleports target player to Falador
+Teleport Block	80	85	1 Death, 1 Chaos, 1 Law	-	Normal	Prevents target from teleporting for 5 minutes
+Lvl-6 Enchant	97	87	20 Earth, 20 Fire, 1 Cosmic	-	Normal	Enchants Onyx jewellery
+Teleother Camelot	100	90	2 Soul, 1 Law	-	Normal	Teleports target player to Camelot
+Smoke Rush	30	50	2 Chaos, 2 Death, 1 Fire, 1 Air	15	Ancient Magick	Poisons(2)
+Shadow Rush	31	52	2 Chaos, 2 Death, 1 Air, 1 Soul	16	Ancient Magick	Reduces targets attack 10%
+Paddewwa Teleport	64	54	2 Law, 1 Fire, 1 Air	Ancient Magick	Teleport to Edgeville dungeon
+Blood Rush	33	56	2 Chaos, 2 Death, 1 Blood	17	Ancient Magick	Heals 25% of damage dealt
+Ice Rush	34	58	2 Chaos, 2 Death, 2 Water	18	Ancient Magick	Freezes target for 5 seconds
+Senntisten Teleport	70	60	2 Law, 1 Soul	-	Ancient Magick	Teleport to west of Digsite
+Miasmic Rush	36	61	2 Chaos, 1 Soul, 1 Earth	18	Ancient Magick	Requires Zuriel's staff & Slows targets range and melee attack speed by half for 12 seconds
+Smoke Burst	36	62	4 Chaos, 2 Death, 2 Fire, 2 Air	19	Ancient Magick	Multi target(max 9) & Poisons(2)
+Shadow Burst	37	64	4 Chaos, 2 Death, 2 Air, 2 Soul	20	Ancient Magick	Multi target(max 9) & Reduces targets attack 10%
+Kharyrll Teleport	76	66	2 Law, 1 Blood	-	Ancient Magick	Teleport to Canifis
+Blood Burst	39	68	4 Chaos, 2 Death, 2 Blood	21	Ancient Magick	Multi target(max 9) & Heals 25% of damage dealt
+Ice Burst	40	70	4 Chaos, 2 Death, 4 Water	22	Ancient Magick	Multi target(max 9) & Freezes target for 5 seconds
+Lassar Teleport	82	72	2 Law, 4 Water	-	Ancient Magick	Teleport to Ice Mountain
+Miasmic Burst	42	73	4 Chaos, 2 Soul, 2 Earth	-	Ancient Magick	Requires Zuriel's staff & Slows targets range and melee attack speed by half for 24 seconds
+Smoke Blitz	43	76	2 Death, 2 Blood, 2 Fire, 2 Air	23	Ancient Magick	Poisons(4)
+Shadow Blitz	43	76	2 Death, 2 Blood, 2 Air, 2 Soul	24	Ancient Magick	Reduces targets attack 10%
+Dareeyak Teleport	88	78	2 Law, 3 Fire, 2 Air	-	Ancient Magick	Teleport to ruins west of Bandit Camp(level 22 Wilderness)
+Blood Blitz	45	80	2 Death, 4 Blood	25	Ancient Magick	Heals 25% of damage dealt
+Ice Blitz	45	80	2 Death, 2 Blood, 3 Water	26	Ancient Magick	Freezes target for 15 seconds
+Carrallangar Teleport	94	84	2 Law, 2 Soul	-	Ancient Magick	Teleport to Graveyard(level 19 Wilderness)
+Miasmic Blitz	48	85	2 Blood, 2 Soul, 3 Earth	28	Ancient Magick	Requires Zuriel's staff & Slows targets range and melee attack speed by half for 36 seconds
+Smoke Barrage	48	86	4 Death, 2 Blood, 4 Air, 4 Fire	27	Ancient Magick	Multi target(max 9) & Poisons(4)
+Shadow Barrage	49	88	4 Death, 2 Blood, 4 Air, 3 Soul	28	Ancient Magick	Multi target(max 9) & Reduces targets attack 10%
+Annakarl Teleport	100	90	2 Law, 2 Blood	-	Ancient Magick	Teleport to Demonic Ruins northeast in F2P Wilderness(level 47 Wilderness)
+Blood Barrage	51	92	4 Death, 4 Blood, 1 Soul	29	Ancient Magick	Multi target(max 9) & Heals 25% of damage dealt
+Ice Barrage	52	94	4 Death, 2 Blood, 6 Water	30	Ancient Magick	Multi target(max 9) & Freezes target for 20 seconds
+Ghorrock Teleport	106	96	2 Law, 8 Water	-	Ancient Magick	Teleport to Ice Plateau(level 44 Wilderness)
+Miasmic Barrage	54	97	4 Blood, 4 Soul, 4 Earth	32	Ancient Magick	Multi target(max 9) & Slows targets range and melee attack speed by half for 48 seconds
+Bake Pie	60	65	1 Astral, 4 Water, 5 Fire	-	Lunar	Bakes pies & No burning & Yields cooking exp
+Cure Plant	60	66	1 Astral, 8 Earth	-	Lunar	Cures disease on farmed plant
+Monster Examine	61	66	1 Astral, 1 Cosmic, 1 Mind	-	Lunar	Requires quest Dream Mentor & Tells you monster Hitpoints, Max hit, if they can be poisoned and if they are a slayer monster
+NPC Contact	63	67	1 Astral, 2 Air, 1 Cosmic	-	Lunar	Magically speak with NPC's: Bert, Honest Jimmy, Advisor Ghrim, Murphy, Lanthus and 6 Slayer masters
+Cure Other	65	68	1 Astral, 10 Earth, 1 Law	-	Lunar	Cures poisoned player
+Humidify	65	68	1 Astra, 3 Water, 1 Fire	-	Lunar	Requires quest Dream Mentor & Fills all objects in inventory that can contain water & Does not work on Quest items
+Moonclan Teleport	66	69	2 Astral, 2 Earth, 1 Law	-	Lunar	Teleport to Moonclan Island(Lunar isle)
+Tele Group Moonclan	67	70	2 Astral, 4 Earth, 1 Law	-	Lunar	Teleports you and nearby players to Moonclan Island(Lunar isle)	Telegroup moonclan	tele group moon clan
+Cure Me	69	71	2 Astral, 2 Cosmic, 1 Law	-	Lunar	Cures poison
+Hunter Kit	70	71	2 Astral, 3 Earth	-	Lunar	Requires quest Dream Mentor & Creates basic hunter kit: Noose, butterfly net, bird snare, noose wand, rabbit snare, teasing stick and unlit torch
+Waterbirth Teleport	71	72	2 Astral, 1 Water, 1 Law	-	Lunar	Teleport to Waterbirth Island
+Tele Group Waterbirth	72	73	2 Astral, 2 Cosmic, 2 Law	-	Lunar	Teleports you and nearby players to Waterbirth Island	telegroup waterbirth
+Cure Group	74	74	2 Astral, 2 Cosmic, 2 Law	-	Lunar	Cures you and nearby players from poison
+Stat Spy	76	75	2 Astral, 2 Cosmic, 2 Body	-	Lunar	Requires quest "Dream Mentor" & View target players stats
+Barbarian Teleport	76	75	2 Astral, 3 Fire, 2 Law	-	Lunar	Teleport to Barbarian Outpost
+Tele Group Barbarian	77	76	2 Astral, 3 Fire, 2 Law	-	Lunar	Teleports you and nearby players to Barbarian Outpost	Telegroup barbarian
+Superglass Make	78	77	2 Astral, 10 Air, 6 Fire	-	Lunar	Makes Molten glass from Buckets of sand and Soda ash or Seaweed(uncooked) & Full inventory per cast & Bonus on 0 to 9 Molten glass per cast & Destroys buckets & Yields 10 exp per Molten glass
+Khazard Teleport	80	78	2 Astral, 4 Water, 2 Law	-	Lunar	Teleport to Port Khazard
+Tele Group Khazard	81	79	2 Astral, 8 Water, 2 Law	-	Lunar	Teleports you and nearby players to Port Khazard	telegroup khazard	tele group port khazard
+Dream	82	79	2 Astral, 1 Cosmic, 5 Body	-	Lunar	Requires quest Dream Mentor & Triples hitpoint restoration rate & Getting attacked or doing any action will wake you up & You can still chat and browse menus
+String Jewellery	83	80	2 Astral, 5 Water, 10 Earth	-	Lunar	Strings an amulet without wool & Yields 4 crafting exp
+Stat Restore Pot Share	84	81	2 Astral, 10 Water, 10 Earth	-	Lunar	Works on Restore-, Super restore-, Prayer-, Energy- and Super Energy Potions & Gives one dose to up to 4 nearby players
+Magic Imbue	87	82	2 Astral, 7 Water, 7 Fire	-	Lunar	Allows you to craft Combined runes without a talisman for a short period of time
+Fertile Soil	87	83	3 Astral, 15 Earth, 2 Nature	-	Lunar	Fertilise a farming patch with Super Compost & Yields 18 farming exp
+Boost Potion Share	88	84	3 Astral, 10 Water, 12 Earth	-	Lunar	Works on (super) attack-, (super) strength-, (super) defence-, agility-, fishing-, ranging- and magic potions & Gives one dose to up to 4 nearby players
+Fishing Guild Teleport	89	85	3 Astral, 10 Water, 3 Law	-	Lunar	Teleport to Fishing Guild
+Tele Group Fishing Guild	90	86	3 Astral, 14 Water, 3 Law	-	Lunar	Teleports you and nearby players to Fishing Guild	telegroup fishingguild	telegroup fishing guild
+Plank Make	90	86	2 Astral, 15 Earth, 1 Nature	-	Lunar	Requires quest Dream Mentor & Makes one plank of a log at lowerd cost; Normal - 90; Oak - 175; Teak - 350; Mahogany - 1050
+Catherby Teleport	92	87	3 Astral, 10 Water, 3 Law	-	Lunar	Teleport to Catherby
+Tele Group Catherby	93	88	3 Astral, 15 Water, 3 Law	-	Lunar	Teleports you and nearby players to Catherby	telegroup catherby
+Ice Plateau Teleport	96	89	3 Astral, 8 Water, 3 Law	-	Lunar	Teleport to Ice Plateau(level 50 Wilderness)
+Tele Group Ice Plateau	99	90	3 Astral, 16 Water, 3 Law	-	Lunar	Teleports you and nearby players to Ice Plateau(level 50 Wilderness)	telegroup ice plateau	telegroup iceplateau
+Energy Transfer	100	91	3 Astral, 1 Nature, 2 Law	-	Lunar	Spend your Hitpoints and Special Attack energy to give another player Special attack and Run energy
+Heal Other	101	92	3 Astral, 3 Law, 1 Blood	-	Lunar	Transfer up to 75% of your current Hitpoints to target player
+Vengeance Other	108	93	3 Astral, 10 Earth, 2 Death	-	Lunar	Target player will recoil up to 75% of the damage on the next hit over 0 they receive	Vengence other vengance other vengeance other
+Vengeance	112	94	4 Astral, 10 Earth, 2 Death	-	Lunar	You will recoil up to 75% of the damage on the next hit over 0 you receive	Vengencevengancevengeance
+Heal Group	124	95	4 Astral, 6 Law, 3 Blood	-	Lunar	Transfer up to 75% of your current Hitpoints to nearby players, starting with the most injured
+Spellbook Swap	130	96	3 Astral, 2 Cosmic, 1 Law	-	Lunar	Requires quest Dream Mentor & Allows you to swap spellbooks(Normal or Ancient) for one cast & Spellbook will return to Lunar after 2 minutes if no spells were cast

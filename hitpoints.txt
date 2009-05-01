@@ -1,0 +1,100 @@
+Chicken	4	1
+Cave bug	6.66	5
+Crawling Hand	21.328	8
+Dwarf	21.328	10
+Skeleton	22.661	25
+Crawling Hand	25.327	12
+Cave Crawler	26.66	23
+Ghost	33.325	19
+Bear	35.991	21
+Skeleton	38.657	22
+Wolf	45.322	25
+Hill giant	46.655	28
+Kalphite Worker	53.32	28
+Vampire	53.32	61
+Pyrefiend	59.985	43
+Guard dog	65.317	44
+Baby blue dragon	66.65	48
+Earth Warrior	71.982	51
+Moss giant	79.98	42
+Ice warrior	79.98	57
+Wild dog	82.646	63
+Otherworldly being	86.645	64
+Shadow warrior	89.311	48
+Ice giant	93.31	49
+Dagannoth	93.31	74
+Green dragon	99.975	79
+Turoth	101.308	83
+Lesser demon	105.307	82
+Greater demon	110.639	92
+Troll	90	69
+Kalphite Soldier	90	85
+Werewolf	119.97	85
+Wall beast	139.965	49
+Blue dragon	142.631	111
+Elf	143.964	108
+Fire giant	143.964	86
+Hellhound	154.628	122
+Bloodveld	159.96	76
+Dagannoth	159.96	92
+Bronze dragon	166.625	131
+Rockslug	35.991	29
+Monkey	7.998	3
+banshee	29.326	23
+Cockatrice	49.321	37
+pyrefiend	59.985	43
+basilisk	99.975	61
+Infernal Mage	79.98	66
+Jelly	99.975	78
+turoth	102.641	83
+zygomite	86.645	74
+Cave Horror	73.315	80
+Aberrant Spectre	119.97	96
+dust devil	139.965	93
+Kurask	129.301	106
+Gargoyle	139.965	111
+Nechryael	139.965	115
+Abyssal Demon	199.95	124
+Dark Beast	299.925	182
+steel dragon	293.26	246
+kalphite soldier	119.97	85
+dagannoth	93.31	74
+hell hound	154.628	122
+Black Demon	209.281	172
+infernal mage	79.98	66
+iron dragon	230.609	189
+black dragon	265.267	227
+brine rat	66.65	70
+goblin	6.665	12
+minotaur	13.333	12
+elf	139.965	108
+cave slime	33.325	23
+desert lizard	19.995	12
+bat	10.664	6
+suqah	143.964	111
+scorpian	22.661	14
+gorak	149.296	145
+king scorpian	39.99	34
+zombie	69.316	73
+spider	46.655	34
+icefiend	19.995	13
+ankou	93.31	86
+kalphite worker	53.32	28
+dog	82.646	63
+cow	10.664	2
+Greater demon	87	94
+spiritual mage saradomin	113.305	120
+spiritual mage zamorak	99.975	121
+spiritual mage bandos	141.298	121
+spiritual mage armadyl	114.638	122
+spiritual mage	113.305	120
+spiritual ranger	141.298	122
+spiritual ranger saradomin	141.298	122
+spiritual ranger zamorak	159.96	118
+spiritual ranger bandos	174.623	115
+spiritual ranger armadyl	118.637	127
+spiritual warrior	146.63	125
+spiritual warrior saradomin	146.63	125
+spiritual warrior zamorak	133.3	115
+spiritual warrior armadyl	130.634	123
+spiritual warrior bandos	174.623	134

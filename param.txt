@@ -1,0 +1,1389 @@
+Cooking|Cooked Meat|30|1
+Cooking|Cooked Chicken|30|1
+Cooking|Cooked Rabbit|30|1
+Cooking|Anchovies|30|1
+Cooking|Crayfish|30|1
+Cooking|Shrimps|30|1
+Cooking|Karambwanji|30|1
+Cooking|Sardine|40|1
+Cooking|Karambwan|80|1
+Cooking|Bread|40|1
+Cooking|Ugthanki Kebab|80|1
+Cooking|Herring|50|5
+Cooking|Fruit Blast|50|6
+Cooking|Baked Potato|15|7
+Cooking|Pineapple Punch|70|8
+Cooking|Redberry Pie|78|10
+Cooking|Toad Crunchies|100|10
+Cooking|Mackerel|60|10
+Cooking|Roast Bird Meat|63.5|11
+Cooking|Thin Snail|70|12
+Cooking|Spicy Crunchies|00|12
+Cooking|Worm Crunchies|100|14
+Cooking|Cider|182|14
+Cooking|Trout|70|15
+Cooking|Roasted Rabbit|72|16
+Cooking|Choc Chip Crunchies|100|16
+Cooking|Jungle Spider|80|16
+Cooking|Lean Snail|80|17
+Cooking|Cod|75|18
+Cooking|Wizard Blizzard|110|18
+Cooking|Dwarven Stout|215|19
+Cooking|Meat Pie|104|20
+Cooking|Nettle Tea|52|20
+Cooking|Pike|80|20
+Cooking|Short Green Guy (SGG)|120|20
+Cooking|Crab Meat|100|21
+Cooking|Pot of Cream|18|21
+Cooking|Roast Beast Meat|82|21
+Cooking|Sweetcorn|104|21
+Cooking|Fat Snail|95|22
+Cooking|Asgarnian Ale|248|24
+Cooking|Stew|117|25
+Cooking|Salmon|90|25
+Cooking|Fruit Batta|150|25
+Cooking|Toad Batta|152|26
+Cooking|Worm Batta|154|27
+Cooking|Vegetable Batta|156|28
+Cooking|Slimy Eel|95|28
+Cooking|Greenman's Ale|281|29
+Cooking|Mud Pie|128|29
+Cooking|Cheese and Tomato Batta|158|29
+Cooking|Tuna|100|30
+Cooking|Chompy Bird|140|30
+Cooking|Apple Pie|130|30
+Cooking|Worm Hole|170|30
+Cooking|Fishcake|100|31
+Cooking|Drunk Dragon|170|32
+Cooking|Chocolate Saturday|170|33
+Cooking|Garden Pie|138|34
+Cooking|Wizard's Mind Bomb|313|34
+Cooking|Plain Pizza|143|35
+Cooking|Wine|200|35
+Cooking|Vegetable Ball|175|35
+Cooking|Rainbow Fish|110|35
+Cooking|Blurberry Special|170|37
+Cooking|Pat of Butter|40|38
+Cooking|Cave Eel|115|38
+Cooking|Dragon Bitter|347|39
+Cooking|Potato with Butter|55|39
+Cooking|Lobster|120|40
+Cooking|Cake|180|40
+Cooking|Tangled Toad Legs|185|40
+Cooking|Cooked Jubbly|160|41
+Cooking|Chili Potato|136|41
+Cooking|Chocolate Bomb|190|42
+Cooking|Bass|130|43
+Cooking|Moonlight Mead|380|44
+Cooking|Meat Pizza|169|45
+Cooking|Swordfish|140|45
+Cooking|Fish Pie|164|47
+Cooking|Potato with Cheese|95|47
+Cooking|Cheese|64|48
+Cooking|Axeman's Folly|413|49
+Cooking|Chocolate Cake|210|50
+Cooking|Oomlie Wrap|30|50
+Cooking|Egg Potato|191|51
+Cooking|Lava Eel|140|53
+Cooking|Chef's Delight|446|54
+Cooking|Anchovy Pizza|182|55
+Cooking|Slayer's Respite|479|59
+Cooking|Curry|280|60
+Cooking|Monkfish|150|62
+Cooking|Mushroom Potato|230|64
+Cooking|Pineapple Pizza|195|65
+Cooking|Tuna Potato|310|68
+Cooking|Admiral Pie|210|70
+Cooking|Shark|210|80
+Cooking|Sea Turtle|212|82
+Cooking|Wild Pie|240|85
+Cooking|Manta Ray|216|91
+Cooking|Summer Pie|270|95
+Crafting|Green Dragonhide|62|57
+Crafting|Blue Dragonhide|70|66
+Crafting|Red Dragonhide|78|73
+Crafting|Black Dragonhide|86|79
+Crafting|Ball Of Wool|2.5|1
+Crafting|Gold Ring|15|5
+Crafting|Gold Necklace|20|6
+Crafting|Gold Bracelet|25|7
+Crafting|Gold Amulet|30|8
+Crafting|Bow String|15|10
+Crafting|Cut Sapphire|50|20
+Crafting|Cut Emerald|67.5|27
+Crafting|Cut Ruby|85|34
+Crafting|Cut Diamond|107.5|43
+Crafting|Cut Dragonstone|137.5|55
+Crafting|Onyx|167.5|67
+Crafting|Sapphire Ring|40|20
+Crafting|Sapphire Necklace|55|22
+Crafting|Sapphire Bracelet|60|23
+Crafting|Sapphire Amulet|65|24
+Crafting|Emerald Ring|55|27
+Crafting|Emerald Necklace|60|29
+Crafting|Emerald Bracelet|65|30
+Crafting|Emerald Amulet|70|31
+Crafting|Ruby Ring|70|34
+Crafting|Ruby Necklace|75|40
+Crafting|Ruby Bracelet|80|42
+Crafting|Ruby Amulet|85|50
+Crafting|Diamond Ring|85|43
+Crafting|Diamond Necklace|90|56
+Crafting|Diamond Bracelet|95|58
+Crafting|Diamond Amulet|100|70
+Crafting|Dragonstone Ring|100|55
+Crafting|Dragonstone Necklace|105|72
+Crafting|Dragonstone Bracelet|110|74
+Crafting|Dragonstone Amulet|150|80
+Crafting|Onyx Ring|115|67
+Crafting|Onyx Necklace|120|82
+Crafting|Onyx Bracelet|120|82
+Crafting|Onyx Amulet|165|90
+Crafting|Leather Gloves|13.8|1
+Crafting|Leather Boots|16.3|7
+Crafting|Cowl|18.5|9
+Crafting|Leather Vambraces|22|11
+Crafting|Leather Body|25|14
+Crafting|Leather Chaps|27|18
+Crafting|Hard Leather Body|35|28
+Crafting|Attach Kebbit Claws|5.8|32
+Crafting|Coif|37|38
+Crafting|Studded Body|40|41
+Crafting|Yak-hide Legs|32|43
+Crafting|Studded Leather Chaps|42|44
+Crafting|Snakeskin Boots|30|45
+Crafting|Yak-hide Body|32|46
+Crafting|Snakeskin Vambraces|35|47
+Crafting|Snakeskin Bandana|45|48
+Crafting|Snakeskin Chaps|50|51
+Crafting|Snakeskin Body|55|53
+Crafting|Green Dragonhide Vambraces|62|57
+Crafting|Green Dragonhide Chaps|124|60
+Crafting|Green Dragonhide Body|186|63
+Crafting|Blue Dragonhide Vambraces|70|66
+Crafting|Blue Dragonhide Chaps|140|68
+Crafting|Blue Dragonhide Body|210|71
+Crafting|Red Dragonhide Vambraces|78|73
+Crafting|Red Dragonhide Chaps|156|75
+Crafting|Red Dragonhide Body|234|77
+Crafting|Black Dragonhide Vambraces|86|79
+Crafting|Feather Headdress|50|79
+Crafting|Black Dragonhide Chaps|172|82
+Crafting|Black Dragonhide Body|258|84
+Crafting|Molten Glass|20|1
+Crafting|Beer Glass|17.5|1
+Crafting|Candle Lantern|19|4
+Crafting|Oil Lamp|25|12
+Crafting|Oil Lantern|50|26
+Crafting|Glass Vial|35|33
+Crafting|Fishbowl|42.5|42
+Crafting|Glass Orb|52.5||46
+Crafting|Bullseye Lantern Lens|55|49
+Crafting|Light Orb|70|87
+Crafting|Add Wire to Light Orb|104|87
+Crafting|Water Battlestaff|100|54
+Crafting|Earth Battlestaff|112.5|58
+Crafting|Fire Battlestaff|125|62
+Crafting|Air Battlestaff|137.5|66
+Crafting|Pot|12.6|1
+Crafting|Pie Dish|25|7
+Crafting|Bowl|33|8
+Crafting|Plant Pot|37.5|19
+Crafting|Pot Lid|40|25
+Crafting|Holy Symbol|50|16
+Crafting|Unholy Symbol|50|17
+Crafting|Silver Sickle|50|18
+Crafting|Lightning Conductor|50|20
+Crafting|Silver Crossbow Bolts|50|21
+Crafting|Tiara|52.5|23
+Crafting|Silvthrill Rod|55|25|
+Crafting|Demonic Sigil|50|30
+Crafting|Crossbow String|15|10
+Crafting|Magic String|30|19
+Crafting|Rope|25|30
+Crafting|Strip of Cloth|12|10
+Crafting|Sack|38|21
+Crafting|Basket|56|36
+Crafting|Fixing a Broken Staff|14|1
+Crafting|Clockwork|15|8
+Crafting|Toy Horsey|15|10
+Crafting|Soldier|15|13
+Crafting|Doll|15|18
+Crafting|Sextant|15|23
+Crafting|Watch|15|28
+Crafting|Clockwork Suit|15|30
+Crafting|Mouse|15|33
+Crafting|Painting a Full Helm|37|38
+Crafting|Painting a Kite Shield|40|43
+Crafting|Painting a Banner|42|48
+Crafting|Cat|15|85
+Crafting|Apply Dye to Cape|2.5|1
+Crafting|Limestone Brick|6|1
+Crafting|Polished Buttons|5|3
+Crafting|Crab Helmet or Claw|32.5|15
+Crafting|Snail Helmet|32.5|15
+Crafting|Rebuild Mort'ton Temple|5|20
+Crafting|Penguin Bongos|25|30
+Crafting|Origami Balloon|35|36
+Crafting|Apply Dye to Origami Balloon|10|36
+Crafting|Create + Dye Origami Balloon|45|36
+Crafting|Strung Rabbit Foot|4|37
+Farming|Torstol|224.5|lvl 85|-
+Farming|Spirit Tree|19501.3|lvl 83|5 Monkey nuts, 1 Monkey bar, 1 Grounded suqah tooth
+Farming|Dwarf Weed|192|lvl 79|-
+Farming|Magic Tree|13913.8|lvl 75|25 Coconuts
+Farming|Lantadyme|151.5|lvl 73|-
+Farming|Calquat Tree|12322.5|lvl 72|None
+Farming|Poison Ivy(pick)|45|lvl 70|15 Coconuts
+Farming|Poison Ivy Bush|974|lvl 70|15 Coconuts
+Farming|Palm Tree|10512.6|lvl 68|15 Papaya
+Farming|Cadantine|120|lvl 67|-
+Farming|Belladonna|142.2|lvl 63|-
+Farming|Snapdragon|98.5|lvl 62|-
+Farming|Yew Tree|7150.9|lvl 60|10 Cactus Spines
+Farming|Whiteberry(pick)|29|lvl 59|8 Mushrooms
+Farming|Whiteberry Bush|631.5|lvl 59|8 Mushrooms
+Farming|Papaya Tree|6380.4|lvl 57|10 Pineapples
+Farming|Kwuarm|78|lvl 56|-
+Farming|Cactus Spine(pick)|25|lvl 55|-
+Farming|Cactus|490.5|lvl 55|-
+Farming|Bittercap Mushroom|119.2|lvl 53|-
+Farming|Pineapple Tree|4791.7|lvl 51|10 Watermelon
+Farming|Avantoe|61.5|lvl 50|-
+Farming|Jangerberry(pick)|19|lvl 48|6 Watermelons
+Farming|Jangerberry Bush|411|lvl 48|6 Watermelons
+Farming|Watermelon|54.5|lvl 47|10 Leaves of Curry
+Farming|Maple Tree|3448.4|lvl 45|1 Basket of Oranges
+Farming|Irit Leaf|48.5|lvl 44|-
+Farming|Curry Tree|3036.9|lvl 42|5 Baskets of Bananas
+Farming|Orange Tree|2586.7|lvl 39|3 Baskets of Strawberries
+Farming|Toadflax|38.5|lvl 38|-
+Farming|Dwellberry(pick)|12|lvl 36|3 Baskets of Strawberries
+Farming|Dwellberry Bush|257|lvl 36|3 Baskets of Strawberries
+Farming|Banana Tree|1840.5|lvl 33|4 Baskets of Apples
+Farming|Ranarr Weed|30.5|lvl 32|-
+Farming|Strawberry|29|lvl 31|1 Basket of Apples
+Farming|Willow Tree|1481.3|lvl 30|1 Basket of Apples
+Farming|Wildblood Hops|26|lvl 28|1 Nasturtium
+Farming|Apple Tree|1272.5|lvl 27|9 Raw sweetcorn
+Farming|Harralander|24|lvl 26|-
+Farming|Scarecrow|25|lvl 23|-
+Farming|Cadavaberry(pick)|7|lvl 22|3 Baskets of Tomatoes
+Farming|Cadavaberry Bush|148.5|lvl 22|3 Baskets of Tomatoes
+Farming|Krandorian Hops|19.5|lvl 21|3 Sacks of Cabbage
+Farming|Sweetcorn|19|lvl 20|10 Jute Fibres
+Farming|Tarromin|18|lvl 19|-
+Farming|Yanillian Hops|16|lvl 16|1 Basket of Tomatoes
+Farming|Oak Tree|467.5|lvl 15|1 Basket of Tomatoes
+Farming|Marrentill|15|lvl 14|-
+Farming|Jute|14.5|lvl 13|6 Barley malt
+Farming|Tomatoe|14|lvl 12|2 Sacks of Cabbages
+Farming|Redberry(pick)|5|lvl 10|4 Sacks of Cabbage
+Farming|Redberry Bush|93.5|lvl 10|4 Sacks of Cabbage
+Farming|Asgarnian Hops|12|lvl 8|1 Sack of Onions
+Farming|Guam|12.5|lvl 9|-
+Farming|Cabbage|11.5|lvl 7|1 Sack of Onions
+Farming|Onion|11|lvl 5|1 Sack of potatoes
+Farming|Hammerstone Hops|10|lvl 4|1 Marigold
+Farming|Barley Hops|9.5|lvl 3|3 Buckets of compost
+Farming|Potatoe|9|lvl 1|2 Buckets of Compost
+Firemaking|Teak Log|105|lvl 35
+Firemaking|Willow Log|90|lvl 30
+Firemaking|Oak Log|60|lvl 15
+Firemaking|Normal Log|40|lvl 1
+Firemaking|Pyred Magic|lvl 80
+Firemaking|Pyred Yew|255|lvl 65
+Firemaking|Pyred Eucalyptus|246|lvl 63
+Firemaking|Pyred Mahogany|210|lvl 55
+Firemaking|Pyred Maple|175|lvl 50
+Firemaking|Pyred Arctic Pine|158|lvl 47
+Firemaking|Pyred Teak|120|lvl 40
+Firemaking|Pyred Willow|100|lvl 35
+Firemaking|Pyred Oak|70|lvl 20
+Firemaking|Pyred Normal|50|lvl 5
+Firemaking|Arctic Pine|125|lvl 42
+Firemaking|Magic Log|303.8|lvl 75
+Firemaking|Yew Log|202.5|lvl 60
+Firemaking|Mahogany Log|157.5|lvl 50
+Firemaking|Maple Log|135|lvl 45
+Firemaking|Teak Log|105|lvl 35
+Firemaking|Willow Log|90|lvl 30
+Firemaking|Oak Log|60|lvl 15
+Firemaking|Normal Log|40|lvl 1
+Fishing|Barbarian Shark|110|lvl 96
+Fishing|Barbarian Swordfish|100|lvl 70
+Fishing|Leaping Sturgeon|80|lvl 70
+Fishing|Karambwan|105|lvl 65
+Fishing|Leaping Salmon|70|lvl 58
+Fishing|Barbarian Tuna|80|lvl 55
+Fishing|Lava Eel|60|lvl 53
+Fishing|Leaping Trout|50|lvl 48
+Fishing|Bass|100|lvl 46
+Fishing|Rainbowfish|80|lvl 38
+Fishing|Cave Eel|80|lvl 38
+Fishing|Frog Spawn|75|lvl 33
+Fishing|Slimey Eel|65|lvl 28
+Fishing|Pike|60|lvl 25
+Fishing|Cod|45|lvl 23
+Fishing|Mackerel|20|lvl 16
+Fishing|Anchovy|40|lvl 15
+Fishing|Herring|30|lvl 10
+Fishing|Sardine|20|lvl 5
+Fishing|Karambwanji|10|lvl 5
+Fishing|Shrimp|10|lvl 1
+Fishing|Manta Ray|46|lvl 81
+Fishing|Sea Turtle|38|lvl 79
+Fishing|Shark|110|lvl 76
+Fishing|Monkfish|120|lvl 62
+Fishing|Swordfish|100|lvl 50
+Fishing|Lobster|90|lvl 40
+Fishing|Tuna|80|lvl 35
+Fishing|Salmon|70|lvl 30
+Fishing|Trout|50|lvl 20
+Fletching|Dragon Dart|25|lvl 95
+Fletching|Dragon Arrow|16.33|lvl 90
+Fletching|Rune Dart|18.8|lvl 81
+Fletching|Rune Brutal Arrow|15|lvl 77
+Fletching|Rune Arrow|13.83|lvl 75
+Fletching|Onyx Tipped Bolt|19.4|lvl 73
+Fletching|Dragonstone Tipped Bolt|18.3|lvl 71
+Fletching|Rune Crossbow|200|lvl 69
+Fletching|Rune Bolt|10|lvl 69
+Fletching|Adamant Dart|15|lvl 67
+Fletching|Diamond Tipped Bolt|14|lvl 65
+Fletching|Ruby Tipped Bolt|13.3|lvl 63
+Fletching|Brutal Adamant Arrow|12.6|lvl 62
+Fletching|Adamant Crossbow|164|lvl 61
+Fletching|Adamant Bolt|7|lvl 61
+Fletching|Adamant Arrow|11.33|lvl 60
+Fletching|Mithril Grapple|16|lvl 59
+Fletching|Emerald Tipped Bolt|10.5|lvl 58
+Fletching|Sapphire Tipped Bolt|9.7|lvl 56
+Fletching|Mithril Crossbow|128|lvl 54
+Fletching|Mithril Bolt|5|lvl 54
+Fletching|Mithril Dart|11.2|lvl 52
+Fletching|Barbed Bolt|10|lvl 51
+Fletching|Maple Shortbow|100|lvl 50
+Fletching|Mithril Brutal Arrow|10|lvl 49
+Fletching|Steel Crossbow|108|lvl 46
+Fletching|Steel Bolt|3.5|lvl 46
+Fletching|Mithril Arrow|8.83|lvl 45
+Fletching|Silver Bolt|2.5|lvl 43
+Fletching|Long Kebbit Bolt|7.95|lvl 42
+Fletching|Pearl Tipped Bolt|4.7|lvl 41
+Fletching|Iron Crossbow|88|lvl 39
+Fletching|Iron Bolt|1.5|lvl 39
+Fletching|Black Brutal Arrow|8.9|lvl 38
+Fletching|Steel Dart|7.5|lvl 37
+Fletching|Willow Shortbow|33.25|lvl 35
+Fletching|Steel Brutal Arrow|7.6|lvl 33
+Fletching|Kebbit Bolt|5.8|lvl 32
+Fletching|Steel Arrow|6.33|lvl 30
+Fletching|Composite Ogre Bow|90|lvl 30
+Fletching|Jade Tipped Bolt|3.4|lvl 26
+Fletching|Blurite Crossbow|64|lvl 24
+Fletching|Blurite Bolt|1|lvl 24
+Fletching|Iron Dart|3.8|lvl 22
+Fletching|Oak Shortbow|33|lvl 20
+Fletching|Iron Brutal Arrow|5.1|lvl 18
+Fletching|Iron Arrow|3.83|lvl 15
+Fletching|Opal Tipped Bolt|2.1|lvl 11
+Fletching|Longbow|20|lvl 10
+Fletching|Bronze Crossbow|24|lvl 9
+Fletching|Bronze Bolt|0.5|lvl 9
+Fletching|Bronze Brutal Arrow|3.9|lvl 7
+Fletching|Shortbow|10|lvl 5
+Fletching|Ogre Arrow Shaft|1.6|lvl 5
+Fletching|Flighted Ogre Arrow|2.5|lvl 5
+Fletching|Ogre Arrow|3.5|lvl 5
+Fletching|Headless Arrow|1.33|lvl 1
+Fletching|Bronze Dart|1.8|lvl 1
+Fletching|Bronze Arrow|2.63|lvl 1
+Fletching|Magic Longbow|183|lvl 85
+Fletching|Magic Shortbow|166|lvl 80
+Fletching|Yew Longbow|150|lvl 70
+Fletching|Yew Shortbow|134|lvl 65
+Fletching|Maple Longbow|116|lvl 55
+Fletching|Willow Longbow|83|lvl 40
+Fletching|Oak Longbow|50|lvl 25
+Fletching|Arrow Shaft|0.33|lvl 1
+Herblore|Super Defence Potion|150|lvl 66
+Herblore|Super Restore Potion|142.5|lvl 63
+Herblore|Super Strength Potion|125|lvl 55
+Herblore|Super Energy Potion|117.5|lvl 52
+Herblore|Super AntiPoison Potion|106.3|lvl 48
+Herblore|Super Attack Potion|100|lvl 45
+Herblore|Weapon Poison(s)|190|lvl 82
+Herblore|Antidote++|177.5|lvl 79
+Herblore|Zamorak Potion|175|lvl 78
+Herblore|Clean Torstol|15|lvl 75
+Herblore|Weapon Poison+|165|lvl 73
+Herblore|Clean Dwarf Weed|13.75|lvl 70
+Herblore|Anti-Fire Breath Potion|157.5|lvl 69
+Herblore|Antidote+|155|lvl 68
+Herblore|Clean Lantadyme|13|lvl 67
+Herblore|Sanfew Serum|160|lvl 65
+Herblore|Clean Cadantine|12.5|lvl 65
+Herblore|Weapon Poison|137.5|lvl 60
+Herblore|Clean Snapdragon|11.75|lvl 59
+Herblore|Magic Essence Potion|130|lvl 57
+Herblore|Clean Kwuarm|11.25|lvl 54
+Herblore|Hunter Potion|120|lvl 53
+Herblore|Fishing Potion|112.5|lvl 50
+Herblore|Clean Avantoe|10|lvl 48
+Herblore|Harralander Tar|72.5|lvl 44
+Herblore|Summoning Potion|82|lvl 40
+Herblore|Clean Irit Leaf|9|lvl 40
+Herblore|Tarromin Tar|55|lvl 39
+Herblore|Combat Potion|84|lvl 36
+Herblore|Clean Spirit Weed|7.8|lvl 35
+Herblore|Agility Potion|80|lvl 34
+Herblore|Marrentill Tar|42.5|lvl 31
+Herblore|Defence Potion|75|lvl 30
+Herblore|Clean Toadflax|8|lvl 30
+Herblore|Energy Potion|67.5|lvl 26
+Herblore|Blamish Oil|80|lvl 25
+Herblore|Clean Ranarr Weed|8|lvl 25
+Herblore|Clean Harralander|6|lvl 20
+Herblore|Guam Tar|30|lvl 19
+Herblore|Guthix Rest Tea|59|lvl 18
+Herblore|Serum 207|50|lvl 15
+Herblore|Strength Potion|50|lvl 12
+Herblore|Clean Tarromin|5|lvl 11
+Herblore|Relicyms Balm|40|lvl 8
+Herblore|Antipoison|37.5|lvl 5
+Herblore|Clean Marrentill|3.75|lvl 5
+Herblore|Clean Guam Leaf|2.5|lvl 3
+Herblore|Attack Potion|25|lvl 3
+Herblore|Stat Restore Potion|63|lvl 22
+Herblore|Saradomin Brew|180|lvl 81
+Herblore|Magic Potion|172.5|lvl 76
+Herblore|Ranged Potion|162.5|lvl 72
+Herblore|Prayer Potion|87.5|lvl 38
+Hunter|Grenwall|1100|lvl 77
+Hunter|Dashing Kebbit|156|lvl 69
+Hunter|Black Salamander|304|lvl 67
+Hunter|Pawya|400|lvl 66
+Hunter|Dark Kebbit|132|lvl 57
+Hunter|Sabre toothed Kyatt|300|lvl 55
+Hunter|Chinchompa|198.5|lvl 53
+Hunter|Sabre toothed Kebbit|200|lvl 51
+Hunter|Razor backed Kebbit|348|lvl 49
+Hunter|Platypus|205|lvl 48
+Hunter|Diseased Kebbit|225|lvl 44
+Hunter|Spotted Kebbit|104.2|lvl 43
+Hunter|Horned Graahk|240|lvl 41
+Hunter|Wimpy Bird|167|lvl 39
+Hunter|Prickly Kebbit|204|lvl 37
+Hunter|Barb tailed Kebbit|168|lvl 33	
+Hunter|Spined Larupia|180|lvl 31
+Hunter|Swamp Lizard|152|lvl 29
+Hunter|Baby Squirrel|152|lvl 29
+Hunter|Rabbit|144|lvl 27
+Hunter|Ferret|115.2|lvl 27
+Hunter|Baby Raccoon|100|lvl 27
+Hunter|Baby Monkey|100|lvl 27
+Hunter|Baby Gecko|100|lvl 27
+Hunter|Wild Kebbit|128|lvl 23
+Hunter|Tropical Wagtail|95.2|lvl 19
+Hunter|Desert Devil|66|lvl 13
+Hunter|Cerulean Twitch|64.6|lvl 11
+Hunter|Copper Longtail|61.2|lvl 9
+Hunter|Feldip Weasel|48|lvl 7
+Hunter|Golden Warbler|47.6|lvl 5
+Hunter|Common Kebbit|36|lvl 3
+Hunter|Crimson Swift|34|lvl 1
+Hunter|Polar Kebbit|30|lvl 1
+Hunter|Magic Imp|450|lvl 71
+Hunter|Red Salamander|272|lvl 59
+Hunter|Orange Salamander|224|lvl 47
+Hunter|Red Chinchompa|265|lvl 63
+Hunter|Black Warlock|54|lvl 45
+Hunter|Snowy White|44|lvl 35
+Hunter|Sapphire Glacialis|34|lvl 25
+Hunter|Ruby Harvest|24|lvl 15
+Magic|Spellbook Swap|130|96|3 Astral, 2 Cosmic, 1 Law|-|Lunar|Requires quest Dream Mentor & Allows you to swap spellbooks(Normal or Ancient) for one cast & Spellbook will return to Lunar after 2 minutes if no spells were cast
+Magic|Heal Group|124|95|4 Astral, 6 Law, 3 Blood|-|Lunar|Transfer up to 75% of your current Hitpoints to nearby players, starting with the most injured
+Magic|Vengeance|112|94|4 Astral, 10 Earth, 2 Death|-|Lunar|You will recoil up to 75% of the damage on the next hit over 0 you receive|Vengencevengancevengeance
+Magic|Vengeance Other|108|93|3 Astral, 10 Earth, 2 Death|-|Lunar|Target player will recoil up to 75% of the damage on the next hit over 0 they receive|Vengence other vengance other vengeance other
+Magic|Heal Other|101|92|3 Astral, 3 Law, 1 Blood|-|Lunar|Transfer up to 75% of your current Hitpoints to target player
+Magic|Energy Transfer|100|91|3 Astral, 1 Nature, 2 Law|-|Lunar|Spend your Hitpoints and Special Attack energy to give another player Special attack and Run energy
+Magic|Tele Group Ice Plateau|99|90|3 Astral, 16 Water, 3 Law|-|Lunar|Teleports you and nearby players to Ice Plateau(level 50 Wilderness)|telegroup ice plateau|telegroup iceplateau
+Magic|Ice Plateau Teleport|96|89|3 Astral, 8 Water, 3 Law|-|Lunar|Teleport to Ice Plateau(level 50 Wilderness)
+Magic|Tele Group Catherby|93|88|3 Astral, 15 Water, 3 Law|-|Lunar|Teleports you and nearby players to Catherby|telegroup catherby
+Magic|Catherby Teleport|92|87|3 Astral, 10 Water, 3 Law|-|Lunar|Teleport to Catherby
+Magic|Plank Make|90|86|2 Astral, 15 Earth, 1 Nature|-|Lunar|Requires quest Dream Mentor & Makes one plank of a log at lowerd cost; Normal - 90; Oak - 175; Teak - 350; Mahogany - 1050
+Magic|Tele Group Fishing Guild|90|86|3 Astral, 14 Water, 3 Law|-|Lunar|Teleports you and nearby players to Fishing Guild|telegroup fishingguild|telegroup fishing guild
+Magic|Fishing Guild Teleport|89|85|3 Astral, 10 Water, 3 Law|-|Lunar|Teleport to Fishing Guild
+Magic|Boost Potion Share|88|84|3 Astral, 10 Water, 12 Earth|-|Lunar|Works on (super) attack-, (super) strength-, (super) defence-, agility-, fishing-, ranging- and magic potions & Gives one dose to up to 4 nearby players
+Magic|Fertile Soil|87|83|3 Astral, 15 Earth, 2 Nature|-|Lunar|Fertilise a farming patch with Super Compost & Yields 18 farming exp
+Magic|Magic Imbue|87|82|2 Astral, 7 Water, 7 Fire|-|Lunar|Allows you to craft Combined runes without a talisman for a short period of time
+Magic|Stat Restore Pot Share|84|81|2 Astral, 10 Water, 10 Earth|-|Lunar|Works on Restore-, Super restore-, Prayer-, Energy- and Super Energy Potions & Gives one dose to up to 4 nearby players
+Magic|String Jewellery|83|80|2 Astral, 5 Water, 10 Earth|-|Lunar|Strings an amulet without wool & Yields 4 crafting exp
+Magic|Dream|82|79|2 Astral, 1 Cosmic, 5 Body|-|Lunar|Requires quest Dream Mentor & Triples hitpoint restoration rate & Getting attacked or doing any action will wake you up & You can still chat and browse menus
+Magic|Tele Group Khazard|81|79|2 Astral, 8 Water, 2 Law|-|Lunar|Teleports you and nearby players to Port Khazard|telegroup khazard|tele group port khazard
+Magic|Khazard Teleport|80|78|2 Astral, 4 Water, 2 Law|-|Lunar|Teleport to Port Khazard
+Magic|Superglass Make|78|77|2 Astral, 10 Air, 6 Fire|-|Lunar|Makes Molten glass from Buckets of sand and Soda ash or Seaweed(uncooked) & Full inventory per cast & Bonus on 0 to 9 Molten glass per cast & Destroys buckets & Yields 10 exp per Molten glass
+Magic|Tele Group Barbarian|77|76|2 Astral, 3 Fire, 2 Law|-|Lunar|Teleports you and nearby players to Barbarian Outpost|Telegroup barbarian
+Magic|Barbarian Teleport|76|75|2 Astral, 3 Fire, 2 Law|-|Lunar|Teleport to Barbarian Outpost
+Magic|Stat Spy|76|75|2 Astral, 2 Cosmic, 2 Body|-|Lunar|Requires quest "Dream Mentor" & View target players stats
+Magic|Cure Group|74|74|2 Astral, 2 Cosmic, 2 Law|-|Lunar|Cures you and nearby players from poison
+Magic|Tele Group Waterbirth|72|73|2 Astral, 2 Cosmic, 2 Law|-|Lunar|Teleports you and nearby players to Waterbirth Island|telegroup waterbirth
+Magic|Waterbirth Teleport|71|72|2 Astral, 1 Water, 1 Law|-|Lunar|Teleport to Waterbirth Island
+Magic|Hunter Kit|70|71|2 Astral, 3 Earth|-|Lunar|Requires quest Dream Mentor & Creates basic hunter kit: Noose, butterfly net, bird snare, noose wand, rabbit snare, teasing stick and unlit torch
+Magic|Cure Me|69|71|2 Astral, 2 Cosmic, 1 Law|-|Lunar|Cures poison
+Magic|Tele Group Moonclan|67|70|2 Astral, 4 Earth, 1 Law|-|Lunar|Teleports you and nearby players to Moonclan Island(Lunar isle)|Telegroup moonclan|tele group moon clan
+Magic|Moonclan Teleport|66|69|2 Astral, 2 Earth, 1 Law|-|Lunar|Teleport to Moonclan Island(Lunar isle)
+Magic|Humidify|65|68|1 Astra, 3 Water, 1 Fire|-|Lunar|Requires quest Dream Mentor & Fills all objects in inventory that can contain water & Does not work on Quest items
+Magic|Cure Other|65|68|1 Astral, 10 Earth, 1 Law|-|Lunar|Cures poisoned player
+Magic|NPC Contact|63|67|1 Astral, 2 Air, 1 Cosmic|-|Lunar|Magically speak with NPC's: Bert, Honest Jimmy, Advisor Ghrim, Murphy, Lanthus and 6 Slayer masters
+Magic|Monster Examine|61|66|1 Astral, 1 Cosmic, 1 Mind|-|Lunar|Requires quest Dream Mentor & Tells you monster Hitpoints, Max hit, if they can be poisoned and if they are a slayer monster
+Magic|Cure Plant|60|66|1 Astral, 8 Earth|-|Lunar|Cures disease on farmed plant
+Magic|Bake Pie|60|65|1 Astral, 4 Water, 5 Fire|-|Lunar|Bakes pies & No burning & Yields cooking exp
+Magic|Miasmic Barrage|54|97|4 Blood, 4 Soul, 4 Earth|32|Ancient Magick|Multi target(max 9) & Slows targets range and melee attack speed by half for 48 seconds
+Magic|Ghorrock Teleport|106|96|2 Law, 8 Water|-|Ancient Magick|Teleport to Ice Plateau(level 44 Wilderness)
+Magic|Ice Barrage|52|94|4 Death, 2 Blood, 6 Water|30|Ancient Magick|Multi target(max 9) & Freezes target for 20 seconds
+Magic|Blood Barrage|51|92|4 Death, 4 Blood, 1 Soul|29|Ancient Magick|Multi target(max 9) & Heals 25% of damage dealt
+Magic|Annakarl Teleport|100|90|2 Law, 2 Blood|-|Ancient Magick|Teleport to Demonic Ruins northeast in F2P Wilderness(level 47 Wilderness)
+Magic|Shadow Barrage|49|88|4 Death, 2 Blood, 4 Air, 3 Soul|28|Ancient Magick|Multi target(max 9) & Reduces targets attack 10%
+Magic|Smoke Barrage|48|86|4 Death, 2 Blood, 4 Air, 4 Fire|27|Ancient Magick|Multi target(max 9) & Poisons(4)
+Magic|Miasmic Blitz|48|85|2 Blood, 2 Soul, 3 Earth|28|Ancient Magick|Requires Zuriel's staff & Slows targets range and melee attack speed by half for 36 seconds
+Magic|Carrallangar Teleport|94|84|2 Law, 2 Soul|-|Ancient Magick|Teleport to Graveyard(level 19 Wilderness)
+Magic|Ice Blitz|45|80|2 Death, 2 Blood, 3 Water|26|Ancient Magick|Freezes target for 15 seconds
+Magic|Blood Blitz|45|80|2 Death, 4 Blood|25|Ancient Magick|Heals 25% of damage dealt
+Magic|Dareeyak Teleport|88|78|2 Law, 3 Fire, 2 Air|-|Ancient Magick|Teleport to ruins west of Bandit Camp(level 22 Wilderness)
+Magic|Shadow Blitz|43|76|2 Death, 2 Blood, 2 Air, 2 Soul|24|Ancient Magick|Reduces targets attack 10%
+Magic|Smoke Blitz|43|76|2 Death, 2 Blood, 2 Fire, 2 Air|23|Ancient Magick|Poisons(4)
+Magic|Miasmic Burst|42|73|4 Chaos, 2 Soul, 2 Earth|-|Ancient Magick|Requires Zuriel's staff & Slows targets range and melee attack speed by half for 24 seconds
+Magic|Lassar Teleport|82|72|2 Law, 4 Water|-|Ancient Magick|Teleport to Ice Mountain
+Magic|Ice Burst|40|70|4 Chaos, 2 Death, 4 Water|22|Ancient Magick|Multi target(max 9) & Freezes target for 5 seconds
+Magic|Blood Burst|39|68|4 Chaos, 2 Death, 2 Blood|21|Ancient Magick|Multi target(max 9) & Heals 25% of damage dealt
+Magic|Kharyrll Teleport|76|66|2 Law, 1 Blood|-|Ancient Magick|Teleport to Canifis
+Magic|Shadow Burst|37|64|4 Chaos, 2 Death, 2 Air, 2 Soul|20|Ancient Magick|Multi target(max 9) & Reduces targets attack 10%
+Magic|Smoke Burst|36|62|4 Chaos, 2 Death, 2 Fire, 2 Air|19|Ancient Magick|Multi target(max 9) & Poisons(2)
+Magic|Miasmic Rush|36|61|2 Chaos, 1 Soul, 1 Earth|18|Ancient Magick|Requires Zuriel's staff & Slows targets range and melee attack speed by half for 12 seconds
+Magic|Senntisten Teleport|70|60|2 Law, 1 Soul|-|Ancient Magick|Teleport to west of Digsite
+Magic|Ice Rush|34|58|2 Chaos, 2 Death, 2 Water|18|Ancient Magick|Freezes target for 5 seconds
+Magic|Blood Rush|33|56|2 Chaos, 2 Death, 1 Blood|17|Ancient Magick|Heals 25% of damage dealt
+Magic|Paddewwa Teleport|64|54|2 Law, 1 Fire, 1 Air|Ancient Magick|Teleport to Edgeville dungeon
+Magic|Shadow Rush|31|52|2 Chaos, 2 Death, 1 Air, 1 Soul|16|Ancient Magick|Reduces targets attack 10%
+Magic|Smoke Rush|30|50|2 Chaos, 2 Death, 1 Fire, 1 Air|15|Ancient Magick|Poisons(2)
+Magic|Teleother Camelot|100|90|2 Soul, 1 Law|-|Normal|Teleports target player to Camelot
+Magic|Lvl-6 Enchant|97|87|20 Earth, 20 Fire, 1 Cosmic|-|Normal|Enchants Onyx jewellery
+Magic|Teleport Block|80|85|1 Death, 1 Chaos, 1 Law|-|Normal|Prevents target from teleporting for 5 minutes
+Magic|Teleother Falador|92|82|1 Soul, 1 Law, 1 Water|-|Normal|Teleports target player to Falador
+Magic|Charge|180|80|3 Fire, 3 Blood, 3 Air|-|Normal|Increases Mage Arena spells' effectivity & Cast delay
+Magic|Stun|90|80|12 Earth, 12 Water, 1 Soul|-|Normal|Reduces target attack 10%
+Magic|Entangle|89|79|5 Earth, 5 Water, 4 Nature|-|Normal|Holds target for 15 seconds
+Magic|Fire Wave|42.5|75|7 Fire, 5 Air, 1 Blood|20|Normal|-
+Magic|Teleother Lumbridge|84|74|1 Soul, 1 Law, 1 Earth|-|Normal|Teleports target player to Lumbridge
+Magic|Enfeeble|83|73|8 Earth, 8 Water, 1 Soul|-|Normal|Reduces target strength 10%
+Magic|Earth Wave|40|70|7 Earth, 5 Air, 1 Blood|19|Normal|-
+Magic|Lvl-5 Enchant|78|68|15 Water, 15 Earth, 1 Cosmic|-|Normal|Enchants Dragonstone jewellery
+Magic|Vulnerability|76|66|5 Earth, 5 Water, 1 Soul|-|Normal|Reduces target defence 10%
+Magic|Water Wave|37.5|65|7 Water, 5 Air, 1 Blood|18|Normal|-
+Magic|Charge Fire Orb|73|63|30 Fire, 3 Cosmic|-|Normal|Requires unpowerd Orb & Charges a fire orb
+Magic|Wind Wave|36|62|5 Air, 1 Blood|17|Normal|-
+Magic|Trollheim Teleport|68|61|2 Fire, 2 Law|-|Normal|Requires quest Eadgar's Ruse
+Magic|Flames of Zamorak|35|60|4 Fire, 2 Blood, 1 Air|20|Normal|Requires Staff of Zamorak & Drains magic
+Magic|Claws of Guthix|35|60|1 Fire, 2 Blood, 4 Air|20|Normal|Requires Staff of Guthix or Void knight Mace & Drains defence
+Magic|Saradomin Strike|35|60|2 Fire, 2 Blood, 4 Air|20|Normal|Requires Staff of Saradomin & Drains prayer
+Magic|Bones to Peaches|35.5|60|4 Water, 4 Earth, 2 Nature|-|Normal|Turns all regular bones in inventory to Peaches
+Magic|Charge Earth Orb|70|60|30 Earth, Cosmic|-|Normal|Requires unpowerd Orb & Charges an earth orb
+Magic|Fire Blast|34.5|69|5 Fire, 4 Air, 1 Death|16|Normal|-
+Magic|Watchtower Teleport|68|58|2 Earth, 2 Law|-|Normal|-
+Magic|Lvl-4 Enchant|67|57|10 Earth, 1 Cosmic|-|Normal|Enchants Diamond jewellery
+Magic|Charge Water Orb|66|56|30 Water, 3 Cosmic|-|Normal|Requires unpowerd Orb & Charges a water orb
+Magic|High Level Alchemy|65|55|5 Fire, 1 Nature|-|Normal|Converts items into a high amount of coins|high alchhi alchhigh lvl alch
+Magic|Earth Blast|31.5|53|4 Earth, 3 Air, 1 Death|15|Normal|-
+Magic|Ardougne Teleport|61|51|2 Water, 2 Law|-|Normal|-
+Magic|Magic Dart|30|50|1 Death, 4 Mind|20|Normal|Requires Slayer staff
+Magic|Snare|60|50|4 Earth, 4 Water, 3 Nature|2|Normal|Holds target for 10 seconds
+Magic|Iban Blast|30|50|5 Fire, 1 Death|25|Normal|Requires Staff of Iban, quest Underground Passage
+Magic|Lvl-3 Enchant|59|49|5 Fire, 1 Cosmic|-|Normal|Enchants Ruby jewellery
+Magic|Water Blast|28.5|47|3 Water, 3 Air, 1 Death|14|Normal|-
+Magic|Camelot Teleport|55.5|45|5 Air, 1 Law|-|Normal|-
+Magic|Superheat Item|53|43|4 Fire, 1 Nature|-|Normal|Smelts ores without a furnace & yelds smithing exp
+Magic|Wind Blast|25.5|41|3 Air, 1 Death|13|Normal|-
+Magic|Teleport to House|30|40|1 Air, 1 Earth, 1 Law|-|Normal|Teleport to your player owned house
+Magic|Crumble Undead|24.5|39|2 Earth, 2 Air, 1 Chaos|15|Hits skeletons, ghosts and zombines hard & autocast with Slayer staff
+Magic|Falador Teleport|48|37|1 Water, 3 Air, 1 Law|-|Normal|-
+Magic|Fire Bolt|22.5|35|4 Fire, 3 Air, 1 Chaos|12|Normal|-
+Magic|Telekinetic Grab|22.5|35|1 Air, 1 Law|-|Normal|Grabs an item from distance
+Magic|Bounty Locate|45|32|1 Law, 1 Air, 1 Fire|-|Normal|Teleport to your target in Bounty Hunter
+Magic|Lumbridge Teleport|41|31|1 Earth, 3 Air, 1 Law|-|Normal|-
+Magic|Earth Bolt|19.5|29|3 Earth, 2 Air, 1 Chaos|11|Normal|-
+Magic|Lvl-2 Enchant|37|27|3 Air, 1 Cosmic|-|Normal|Enchants Emerald jewellery
+Magic|Varrock Teleport|41|31|1 Fire, 3 Air, 1 Law|-|Normal|-
+Magic|Water Bolt|16.5|23|2 Water, 2 Air, 1 Chaos|10|Normal|-
+Magic|Low Level Alchemy|31|21|3 Fire, 1 Nature|-|Normal|Converts items into a low amount of coins|low alch lo alch low lvl alch
+Magic|Bind|30|20|3 Earth, 3 Water, 2 Nature|-|Normal|Holds target for 5 seconds
+Magic|Curse|29|19|2 Water, 3 Earth, 1 Body|-|Normal|Reduces defence 5%
+Magic|Wind Bolt|12.5|19|2 Air, 1 Chaos|9|Normal|-
+Magic|Bones to Bananas|25|15|2 Earth, 2 Water, 1 Nature|-|Normal|Turns all regular bones in inventory to bananas
+Magic|Fire Strike|11.5|13|3 Fire, 2 Air, 1 Mind|8|Normal|-
+Magic|Weaken|21|11|3 Water, 2 Earth, 1 Body|-|Reduces strength 5%
+Magic|Earth Strike|9.5|9|2 Earth, 1 Air, 1 Mind|6|Normal|-
+Magic|Lvl-1 Enchant|17.5|7|1 Water, 1 Cosmic|-|Normal|Enchants Sapphire jewellery
+Magic|Water strike|7.5|4|1 Water, 1 Air, 1 Mind|4|Normal|-
+Magic|Crossbow Bolt Enchant(Onyx)|97|87|1 Cosmic, 1 Death, 20 Fire|-|Normal|Enchants Onyx tipped bolts
+Magic|Crossbow Bolt Enchant(Dragonstone)|78|68|1 Cosmic, 1 Soul, 15 Earth|-|Normal|Enchants Dragonstone tipped bolts
+Magic|Crossbow Bolt Enchant(Diamond)|67|57|1 Cosmic, 10 Earth, 2 Law|-|Normal|Enchants Diamond tipped bolts
+Magic|Crossbow Bolt Enchant(Ruby)|59|49|1 Cosmic, 5 Fire, 1 Blood|-|Normal|Enchants Ruby tipped bolts
+Magic|Crossbow Bolt Enchant(Red Topaz)|33|29|1 Cosmic, 2 Fire|-|Normal|Enchants Red Topaz tipped bolts
+Magic|Crossbow Bolt Enchant(Emerald)|37|27|1 Cosmic, 1 Nature, 3 Air|-|Normal|Enchants Pearl tipped bolts
+Magic|Crossbow Bolt Enchant(Pearl)|29|24|1 Cosmic, 2 Water|-|Normal|Enchants Pearl tipped bolts
+Magic|Crossbow Bolt Enchant(Jade)|19|14|1 Cosmic, 2 Earth|-|Normal|Enchants Jade tipped bolts
+Magic|Crossbow Bolt Enchant(Sapphire)|17|7|1 Cosmic, 1 Mind, 1 Water|-|Normal|Enchants Sapphire tipped bolts
+Magic|Crossbow Bolt Enchant(Opal)|9|4|1 Cosmic, 2 Air|-|Normal|Enchants Opal tipped bolts
+Magic|Crossbow Bolt Enchant|-|4|-|-|Normal|Specify with writing Crossbow Bolt Enchant(gem type)
+Magic|Confuse|12|3|3 Water, 2 Earth, 1 Body|-|Normal|Reduces attack 5%
+Magic|Wind Strike|5.5|1|1 Air, 1 Mind|2|Normal|-
+Mining|Gem Rock|65|lvl 40
+Mining|Sandstone|60|lvl 35
+Mining|Pure Essence|5|lvl 30
+Mining|Silver|40|lvl 20
+Mining|Iron|35|lvl 15
+Mining|Limestone|26.5|lvl 1
+Mining|Tin|17.5|lvl 1
+Mining|Copper|17.5|lvl 1
+Mining|Clay|5|lvl 1
+Mining|Rune Essence|5|lvl 1
+Mining|Runite Ore|125|lvl 85
+Mining|Adamantite Ore|95|lvl 70
+Mining|Mithril Ore|80|lvl 55
+Mining|Average Granite exp|56.2|lvl 45
+Mining|Gold Ore|65|lvl 40
+Mining|SandStone|60|lvl 35
+Mining|Coal|50|lvl 30
+Mining|Silver Ore|40|lvl 20
+Mining|Iron Ore|35|lvl 15
+Prayer|Altar Ourg Bones|490|lvl 1	
+Prayer|Altar Dagannoth Bones|437.5|lvl 1	
+Prayer|Altar Raurg Bones|336|lvl 1	
+Prayer|Altar Fayrg Bones|294|lvl 1	
+Prayer|Altar Wyvern Bones|175|lvl 1	
+Prayer|Altar Baby Dragon Bones|105|lvl 1	
+Prayer|Altar Zogre Bones|78.7|lvl 1	
+Prayer|Altar Big Bones|52.5|lvl 1	
+Prayer|Altar Bat Bones|18.5|lvl 1	
+Prayer|Altar Monkey Bones|17.5|lvl 1	
+Prayer|Altar Bones|15.7|lvl 1	
+Prayer|Ecto Ourg Bones|560|lvl 1	
+Prayer|Ecto Dagannoth Bones|500|lvl 1	
+Prayer|Ecto Raurg Bones|384|lvl 1	
+Prayer|Ecto Fayrg Bones|336|lvl 1	
+Prayer|Ecto Wyvern Bones|200|lvl 1	
+Prayer|Ecto Baby Dragon Bones|120|lvl 1	
+Prayer|Ecto Zogre Bones|90|lvl 1	
+Prayer|Ecto Big Bones|60|lvl 1	
+Prayer|Ourg Bones|140|lvl 1	
+Prayer|Dagannoth Bones|125|lvl 1	
+Prayer|Fiyr Remains|100|lvl 1	
+Prayer|Raurg Bones|96|lvl 1	
+Prayer|Fayrg Bones|84|lvl 1	
+Prayer|Asyn Remains|82.5|lvl 1	
+Prayer|Riyl Remains|59.5|lvl 1	
+Prayer|Wyvern Bones|50|lvl 1	
+Prayer|Phrin Remains|46.5|lvl 1	
+Prayer|Loar Remains|33|lvl 1	
+Prayer|Ghast|30|lvl 1	
+Prayer|Shaikahan Bones|25|lvl 1	
+Prayer|Zogre Bones|22.5|lvl 1	
+Prayer|Long Bones|15|lvl 1	
+Prayer|Jogre Bones|15|lvl 1	
+Prayer|Curved Bones|15|lvl 1	
+Prayer|Big Bones|15|lvl 1	
+Prayer|Bat Bones|5.3|lvl 1	
+Prayer|Monkey Bones|5|lvl 1	
+Prayer|Burnt Bones|4.5|lvl 1	
+Prayer|Wolf Bones|4.5|lvl 1	
+Prayer|Baby Dragon Bone|30|lvl 1
+Prayer|Dragon Bone|72|lvl 1
+Prayer|Ecto Dragon Bone|288|lvl 1
+Prayer|Alter Dragon Bone|252|lvl 1
+Prayer|Normal Bone|4.5|lvl 1
+Runecraft|Air Rune|5|lvl 1
+Runecraft|Mind Rune|5.5|lvl 2
+Runecraft|Water Rune|6|lvl 5
+Runecraft|Earth Rune|6.5|lvl 9
+Runecraft|Fire Rune|7|lvl 14
+Runecraft|Body Rune|7.5|lvl 20
+Runecraft|Cosmic Rune|8|lvl 27
+Runecraft|Chaos Rune|8.5|lvl 35
+Runecraft|Astral Rune|8.7|lvl 40
+Runecraft|Nature Rune|9|lvl 44
+Runecraft|Law Rune|9.5|lvl 54
+Runecraft|Death Rune|10|lvl 65
+Runecraft|Blood Rune|10.5|lvl 77
+Runecraft|Soul Rune|11|lvl 90
+Runecraft|Mist Rune|8|lvl 6
+Runecraft|Dust Rune|8.3|lvl 10
+Runecraft|Mud Rune|9.3|lvl 13
+Runecraft|Smoke Rune|8.5|lvl 15
+Runecraft|Steam Rune|9.3|lvl 19
+Runecraft|Lava Rune|10|lvl 23
+Runecraft|Air Tiara|25|lvl 1
+Runecraft|Mind Tiara|27.5|lvl 1
+Runecraft|Water Tiara|30|lvl 1
+Runecraft|Earth Tiara|32.5|lvl 1
+Runecraft|Fire Tiara|35|lvl 1
+Runecraft|Body Tiara|37.5|lvl 1
+Runecraft|Cosmic Tiara|40|lvl 1
+Runecraft|Chaos Tiara|42.5|lvl 1
+Runecraft|Nature Tiara|45|lvl 1
+Runecraft|Law Tiara|47.5|lvl 1
+Runecraft|Death Tiara|50|lvl 1
+Runecraft|Blood Tiara|52.5|lvl 1
+Runecraft|Soul Tiara|55|lvl 1
+Slayer|Chicken|3|1|lvl -
+Slayer|Cave bug|5|5|lvl -
+Slayer|Crawling Hand|16|8|lvl -
+Slayer|Dwarf|16|10|lvl -
+Slayer|Skeleton|17|25|lvl -
+Slayer|Crawling Hand|19|12|lvl -
+Slayer|Cave Crawler|20|23|lvl -
+Slayer|Ghost|25|19|lvl -
+Slayer|Bear|27|21|lvl -
+Slayer|Skeleton|29|22|lvl -
+Slayer|Wolf|34|25|lvl -
+Slayer|Hill giant|35|28|lvl -
+Slayer|Kalphite Worker|40|28|lvl -
+Slayer|Vampire|40|61|lvl -
+Slayer|Pyrefiend|45|43|lvl -
+Slayer|Guard dog|49|44|lvl -
+Slayer|Earth Warrior|54|51|lvl -
+Slayer|Moss giant|60|42|lvl -
+Slayer|Ice warrior|60|57|lvl -
+Slayer|Wild dog|62|63|lvl -
+Slayer|Otherworldly being|65|64|lvl -
+Slayer|Shadow warrior|67|48|lvl -
+Slayer|Ice giant|70|49|lvl -
+Slayer|Dagannoth|70|74|lvl -
+Slayer|Green dragon|75|79|lvl -
+Slayer|Turoth|76|83|lvl -
+Slayer|Lesser demon|79|82|lvl -
+Slayer|Greater demon|83|92|lvl -
+Slayer|Troll|90|69|lvl -
+Slayer|Kalphite Soldier|90|85|lvl -
+Slayer|Werewolf|90|85|lvl -
+Slayer|Wall beast|105|49|lvl -
+Slayer|Blue dragon|107|111|lvl -
+Slayer|Elf|108|108|lvl -
+Slayer|Fire giant|108|86|lvl -
+Slayer|Hellhound|116|122|lvl -
+Slayer|Bloodveld|120|76|lvl 50
+Slayer|Dagannoth|120|92|lvl -
+Slayer|Bronze dragon|125|131|lvl -
+Slayer|Rockslug|27|29|lvl -
+Slayer|Monkey|6|3|lvl -
+Slayer|Banshee|22|23|lvl 15
+Slayer|Cockatrice|37|37|lvl 25
+Slayer|Pyrefiend|45|43|lvl 30
+Slayer|Basilisk|75|61|lvl 40
+Slayer|Infernal Mage|60|66|lvl 45
+Slayer|Jelly|75|78|lvl 52
+Slayer|Turoth|77|83|lvl 55
+Slayer|zygomite|65|74|lvl 57
+Slayer|Cave Horror|55|80|lvl 58
+Slayer|Aberrant Spectre|90|96|lvl 60
+Slayer|Dust devil|105|93|lvl 65
+Slayer|Kurask|97|106|lvl 70
+Slayer|Gargoyle|105|111|lvl 75
+Slayer|Nechryael|105|115|lvl 80
+Slayer|Abyssal Demon|150|124|lvl 85
+Slayer|Dark Beast|225|182|lvl 90
+Slayer|Steel dragon|220|246|lvl -
+Slayer|Kalphite soldier|90|85|lvl -
+Slayer|Dagannoth|70|74|lvl -
+Slayer|Hell hound|116|122|lvl -
+Slayer|Black Demon|157|172|lvl -
+Slayer|Infernal mage|60|66|lvl 45
+Slayer|Iron dragon|173|189|lvl -
+Slayer|Black dragon|199.33|227|lvl -
+Slayer|Brine rat|50|70|lvl -
+Slayer|Goblin|5|12|lvl -
+Slayer|Minotaur|10|12|lvl -
+Slayer|Elf|105|108|lvl -
+Slayer|Cave slime|25|23|lvl 17
+Slayer|Desert lizard|15|12|lvl -
+Slayer|Bat|8|6|lvl -
+Slayer|Suqah|108|111|lvl -
+Slayer|Scorpian|17|14|lvl -
+Slayer|Gorak|112|145|lvl -
+Slayer|King scorpian|30|34|-
+Slayer|Zombie|52.5|73|lvl -
+Slayer|Spider|35|34|lvl -
+Slayer|Icefiend|15|13|lvl -
+Slayer|Ankou|70|86|lvl -
+Slayer|Kalphite worker|40|28|lvl -
+Slayer|Dog|62|63|lvl -
+Slayer|Cow|8|2|lvl -
+Slayer|Greater demon|87|94|lvl -
+Slayer|Waterfiend|128|115|lvl -
+Slayer|Spiritual mage saradomin|85|120|lvl 83
+Slayer|Spiritual mage zamorak|75|121|lvl 83
+Slayer|Spiritual mage bandos|106|121|lvl 83
+Slayer|Spiritual mage armadyl|86|122|lvl 83
+Slayer|Spiritual mage|85|120|lvl 83
+Slayer|Spiritual ranger|106|122|lvl 63
+Slayer|Spiritual ranger saradomin|106|122|lvl 63
+Slayer|Spiritual ranger zamorak|120|118|lvl 63
+Slayer|Spiritual ranger bandos|131|115|lvl 63
+Slayer|Spiritual ranger armadyl|89|127|lvl 63
+Slayer|Spiritual warrior|110|125|lvl 68
+Slayer|Spiritual warrior saradomin|110|125|lvl 68
+Slayer|Spiritual warrior zamorak|100|115|lvl 68
+Slayer|Spiritual warrior armadyl|98|123|lvl 68
+Slayer|Spiritual warrior bandos|131|134|lvl 68
+Slayer|Baby blue dragon|50|48|lvl -
+Slayer|Fever Spider|40|49|lvl 42
+Slayer|Kalphite Queen|255|333|lvl -
+Slayer|Red Dragon|140|152|lvl -
+Slayer|Warped Terrorbird|153.6|143|56
+Slayer|Warped Tortoise|87|96|87
+Slayer|Mithril Dragon|276|304|-
+Slayer|Mutated Bloodveld|186|146|-
+Slayer|Skeletal Wyvern|210|140|72
+Smithing|Smith Runite Bar|75|lvl 85
+Smithing|Smith Adamantite Bar|62.5|lvl 70
+Smithing|Smith Mithril Bar|50|lvl 50
+Smithing|Smith Steel Bar|37.5|lvl 30
+Smithing|Smith Elemental Bar|20|lvl 20
+Smithing|Smith Iron Bar|25|lvl 15
+Smithing|Smith Blurite Bar|17|lvl 8
+Smithing|Smith Bronze Bar|12.5|lvl 1
+Smithing|Smelt Runite Bar|50|lvl 85
+Smithing|Smelt Adamantite Bar|37.5|lvl 70
+Smithing|Smelt Mithril Bar|30|lvl 50
+Smithing|Gold Gaunts|56.2|lvl 40
+Smithing|Gold Bar (Gaunts)|56.2|lvl 40
+Smithing|Gold Bar (normal)|22.5|lvl 40
+Smithing|Smelt Steel Bar|17.5|lvl 30
+Smithing|Silver Bar|13.7|lvl 20
+Smithing|Smelt Elemental Bar|7.5|lvl 20
+Smithing|Smelt Iron Bar|12.5|lvl 15
+Smithing|Smelt Blurite Bar|8|lvl 8
+Smithing|Smelt Bronze Bar|6.2|lvl 1
+Smithing|Rune Plate Body|375|lvl 99|Runite Plate Body|Runite Platebody|Rune Platebody
+Smithing|Rune Plate Legs|225|lvl 99|Runite Plate Legs|Runite Platelegs|Rune Platelegs
+Smithing|Rune Plate Skirt|225|lvl 99|Runite Plate Skirt|Runite Plateskirt|Rune Plateskirt
+Smithing|Rune 2H Sword|225|lvl 99|Runite 2H Sword
+Smithing|Rune Claws|150|lvl 98|Runite Claws
+Smithing|Rune Kite Shield|225|lvl 97|Runite Kite Shield|Runite Kiteshield|Rune Kiteshield
+Smithing|Rune Chain Body|225|lvl 96|Runite Chain Body|Runite Chainbody|Rune Chainbody
+Smithing|Rune Battle Axe|225|lvl 95|Runite Battle Axe|Runite Battleaxe|Rune Battleaxe
+Smithing|Rune Warhammer|225|lvl 94|Runite Warhammer
+Smithing|Rune Square Shield|150|lvl 93|Runite Square Shield
+Smithing|Rune Full Helm|150|lvl 92|Runite Full Helm
+Smithing|Rune Throwing Knives|75|lvl 92|Runite Throwing Knives
+Smithing|Rune Long Sword|150|lvl 91|Runite Long Sword
+Smithing|Rune Crossbow Limbs|75|lvl 91|Runite Crossbow Limbs
+Smithing|Rune Pickaxe|150|lvl 90|Runite Pickaxe
+Smithing|Rune Spear|150|lvl 90|Runite Spear
+Smithing|Rune Scimitar|150|lvl 90|Runite Scimitar
+Smithing|Rune Hasta|150|lvl 90|Runite Hastal
+Smithing|Rune Arrow Heads|75|lvl 90|Runite Arrow Heads
+Smithing|Rune Nails|75|lvl 89|Runite Nails
+Smithing|Rune Sword|75|lvl 89|Runite Sword
+Smithing|Rune Dart Tips|75|lvl 89|Runite Dart Tips
+Smithing|Rune Bolts|75|lvl 88|Runite Bolts
+Smithing|Rune Medium Helmet|75|lvl 88|Runite Med Helm
+Smithing|Rune Mace|75|lvl 87|Runite Mace
+Smithing|Rune Axe|75|lvl 86|Runite Axe
+Smithing|Rune Dagger|75|lvl 85|Runite Dagger
+Smithing|Adamant Plate Body|312.5|lvl 88|Adamant Platebody
+Smithing|Adamant Plate Legs|187.5|lvl 86|Adamant Platelegs
+Smithing|Adamant Plate Skirt|187.5|lvl 86|Adamant Plateskirt
+Smithing|Adamant 2H Sword|187.5|lvl 84
+Smithing|Adamant Claws|125|lvl 83
+Smithing|Adamant Kite Shield|187.5|lvl 82|Adamant Kiteshield
+Smithing|Adamant Chain Body|187.5|lvl 81|Adamant Chainbody
+Smithing|Adamant Battle Axe|187.5|lvl 80|Adamant Battleaxe
+Smithing|Adamant Warhammer|187.5|lvl 79
+Smithing|Adamant Square Shield|125|lvl 78
+Smithing|Adamant Full Helm|125|lvl 77
+Smithing|Adamant Throwing Knives|62.5|lvl 77
+Smithing|Adamant Long Sword|125|lvl 76
+Smithing|Adamant Crossbow Limbs|62.5|lvl 76
+Smithing|Adamant Pickaxe|125|lvl 75
+Smithing|Adamant Spear|125|lvl 75
+Smithing|Adamant Scimitar|125|lvl 75
+Smithing|Adamant Hasta|125|lvl 75
+Smithing|Adamant Arrow Heads|62.5|lvl 75
+Smithing|Adamant Nails|62.5|lvl 74
+Smithing|Adamant Sword|62.5|lvl 74
+Smithing|Adamant Dart Tips|62.5|lvl 74
+Smithing|Adamant Bolts|62.5|lvl 73
+Smithing|Adamant Med Helm|62.5|lvl 73
+Smithing|Adamant Mace|62.5|lvl 72
+Smithing|Adamant Axe|62.5|lvl 71
+Smithing|Adamant Dagger|62.5|lvl 70
+Smithing|Mithril Plate Body|250|lvl 68|Mithril Platebody|Mith Platebody
+Smithing|Mithril Plate Legs|150|lvl 66|Mithril Platelegs|Mith Platelegs
+Smithing|Mithril Plate Skirt|150|lvl 66|Mithril Plateskirt|Mith Plateskirt
+Smithing|Mithril 2H Sword|150|lvl 64
+Smithing|Mithril Claws|100|lvl 63
+Smithing|Mithril Kite Shield|150|lvl 62|Mithril Kiteshield|Mith Kiteshield
+Smithing|Mithril Chain Body|150|lvl 61|Mithril Chainbody|Mith Chainbody
+Smithing|Mithril Battle Axe|150|lvl 60|Mithril Battleaxe|Mith Battleaxe
+Smithing|Mithril Warhammer|150|lvl 59
+Smithing|Mithril Grapple Tip|50|lvl 59
+Smithing|Mithril Square Shield|100|lvl 58
+Smithing|Mithril Full Helm|100|lvl 57
+Smithing|Mithril Throwing Knives|50|lvl 57
+Smithing|Mithril Long Sword|100|lvl 56
+Smithing|Mithril Crossbow Limbs|50|lvl 56
+Smithing|Mithril Pickaxe|100|lvl 55
+Smithing|Mithril Spear|100|lvl 55
+Smithing|Mithril Scimitar|100|lvl 55
+Smithing|Mithril Hasta|100|lvl 55
+Smithing|Mithril Arrow Heads|50|lvl 55
+Smithing|Mithril Nails|50|lvl 54
+Smithing|Mithril Sword|50|lvl 54
+Smithing|Mithril Dart Tips|50|lvl 54
+Smithing|Mithril Bolts|50|lvl 53
+Smithing|Mithril Medium Helm|50|lvl 53
+Smithing|Mithril Mace|50|lvl 52
+Smithing|Mithril Axe|50|lvl 51
+Smithing|Mithril Dagger|50|lvl 50
+Smithing|Bullseye Lantern|37.5|lvl 49
+Smithing|Steel Plate Body|187.5|lvl 48|Steel Platebody
+Smithing|Steel Plate Legs|112.5|lvl 46|Steel Platelegs
+Smithing|Steel Plate Skirt|112.5|lvl 46|Steel Plateskirt
+Smithing|Steel 2H Sword|112.5|lvl 44
+Smithing|Steel Claws|75|lvl 43
+Smithing|Steel Kite Shield|112.5|lvl 42|Steel Kiteshield
+Smithing|Steel Chain Body|112.5|lvl 41|Steel Chainbody
+Smithing|Steel Battle Axe|112.5|lvl 40|Steel Battleaxe
+Smithing|Steel Warhammer|112.5|lvl 39
+Smithing|Steel Square Shield|75|lvl 38
+Smithing|Steel Full Helm|75|lvl 37
+Smithing|Steel Throwing Knives|37.5|lvl 37
+Smithing|Steel Studs|37.5|lvl 36
+Smithing|Steel Studs|37.5|lvl 36
+Smithing|Steel Crossbow Limbs|37.5|lvl 36
+Smithing|Steel Pickaxe|75|lvl 35
+Smithing|Steel Spear|75|lvl 35
+Smithing|Steel Scimitar|75|lvl 35
+Smithing|Steel Hasta|75|lvl 35
+Smithing|Steel Arrow Heads|37.5|lvl 35
+Smithing|Cannon Ball|25.6|lvl 35
+Smithing|Steel Nails|37.5|lvl 34
+Smithing|Steel Sword|37.5|lvl 34
+Smithing|Steel Dart Tips|37.5|lvl 34
+Smithing|Steel Bolts|37.5|lvl 33
+Smithing|Steel Med Helm|37.5|lvl 33
+Smithing|Steel Mace|37.5|lvl 32
+Smithing|Steel Axe|37.5|lvl 31
+Smithing|Steel Dagger|37.5|lvl 30
+Smithing|Iron Sheet|20|lvl 45
+Smithing|Iron Plate Body|125|lvl 33|Iron Platebody
+Smithing|Iron Plate Legs|75|lvl 31|Iron Platelegs
+Smithing|Iron Plate Skirt|75|lvl 31|Iron Plateskirt
+Smithing|Iron 2h Sword|75|lvl 29
+Smithing|Iron Claws|50|lvl 28
+Smithing|Iron Kite Shield|75|lvl 27|Iron Kiteshield
+Smithing|Iron Chain Body|75|lvl 26|Iron Chainbody
+Smithing|Oil Lantern Frame|25|lvl 26
+Smithing|Iron Battle Axe|75|lvl 25|Iron Battleaxe
+Smithing|Iron Warhammer|75|lvl 24
+Smithing|Iron Square Shield|50|lvl 23
+Smithing|Iron Crossbow Limbs|25|lvl 23
+Smithing|Iron Full Helm|50|lvl 22
+Smithing|Iron Throwing Knives|25|lvl 22
+Smithing|Iron Long Sword|50|lvl 21
+Smithing|Iron Pickaxe|50|lvl 20
+Smithing|Iron Spear|50|lvl 20
+Smithing|Iron Scimitar|50|lvl 20
+Smithing|Iron Hasta|50|lvl 20
+Smithing|Iron Arrow Heads|25|lvl 20
+Smithing|Iron Nails|25|lvl 19
+Smithing|Iron Sword|25|lvl 19
+Smithing|Iron Dart Tips|25|lvl 19
+Smithing|Iron Bolts|25|lvl 18
+Smithing|Iron Med Helm|25|lvl 18
+Smithing|Iron Spit|25|lvl 17
+Smithing|Iron mace|25|lvl 17
+Smithing|Iron Axe|25|lvl 16
+Smithing|Iron Dagger|25|lvl 15
+Smithing|Bronze Plate Body|62.5|lvl 18|Bronze Platebody
+Smithing|Bronze Plate Legs|37.5|lvl 16|Bronze Platelegs
+Smithing|Bronze Plate Skirt|37.5|lvl 16|Bronze Plateskirt
+Smithing|Bronze 2h Sword|37.5|lvl 14
+Smithing|Bronze Claws|25|lvl 13
+Smithing|Bronze Kite Shield|37.5|lvl 12|Bronze Kiteshield
+Smithing|Bronze Chain Body|37.5|lvl 11|Bronze Chainbody
+Smithing|Bronze Battle Axe|37.5|lvl 10|Bronze Battleaxe
+Smithing|Bronze Warhammer|37.5|lvl 9
+Smithing|Bronze Square Shield|25|lvl 8
+Smithing|Bronze Throwing Knives|12.5|lvl 7
+Smithing|Bronze Full Helm|25|lvl 7
+Smithing|Bronze Long Sword|25|lvl 6
+Smithing|Bronze Crossbow Limbs|12.5|lvl 6
+Smithing|Bronze Pickaxe|25|lvl 5
+Smithing|Bronze Spear|25|lvl 5
+Smithing|Bronze Scimitar|25|lvl 5
+Smithing|Bronze hasta|25|lvl 5
+Smithing|Bronze Arrow Heads|12.5|lvl 5
+Smithing|Bronze Nails|12.5|lvl 4
+Smithing|Bronze Dart Tips|12.5|lvl 4
+Smithing|Bronze Wire|12.5|lvl 4
+Smithing|Bronze Sword|12.5|lvl 4
+Smithing|Bronze Bolts|12.5|lvl 3
+Smithing|Bronze Med Helm|12.5|lvl 3
+Smithing|Bronze mace|12.5|lvl 2
+Smithing|Bronze Axe|12.5|lvl 1
+Smithing|Bronze Dagger|12.5|lvl 1
+Summoning|Spirit Wolf|4.8|lvl 1|Gold|7|6|Wolf Bones|359|Combat - Attack|Fights|1
+Summoning|Dreadfowl|9.3|lvl 4|Gold|8|4|Raw Chicken|374|Combat - Magic|Farm Boost(1)|2
+Summoning|Spirit Spider|12.6|lvl 10|Gold|8|15|Spider Carcass|374|Forager - Red Spider Eggs|Fights|3
+Summoning|Thorny Snail|12.6|lvl 13|Gold|9|16|Raw Thin Snail|389|Combat - Ranged|Beast of Burden(3)|4
+Summoning|Granite Crab|21.6|lvl 16|Gold|7|18|Iron Ore|359|Forager - Raw Fish|Fish Boost(1) & Fights|5
+Summoning|Mosquito|46.5|lvl 17|Gold|1|12|Proboscis|-|Combat - Attack|Fights|6
+Summoning|Desert Wyrm|31.2|lvl 18|Green|45|19|Bucket of Sand|929|Forager - Gather Ores|Mine Boost(1) & Fights|7
+Summoning|Spirit Scorpion|83.2|lvl 19|Crimson|57|17|Bronze Claws|1109|Combat - Controlled|Fights|8
+Summoning|Spirit Tz-Koh|96.8|lvl 22|Crimson|64|18|Obsidian Charm|-|Combat - Magic|Fights(Drains Prayer)|9
+Summoning|Albino Rat|202.4|lvl 23|Blue|75|22|Raw Rat Meat|1379|Combat - Attack|Fights|10
+Summoning|Spirit Kalphite|220|lvl 25|Blue|51|22|Potato Cactus|1109|Beast of Burden (6)|Fights|11
+Summoning|Compost Mound|49.8|lvl 28|Green|47|24|Compost|959|Forager - Compost/Seeds|Farm Boost(1+2%) & Fights|12
+Summoning|Giant Chinchompa|255.2|lvl 29|Blue|84|31|Chinchompa|-|Combat - Ranged|Fights(Explodes)|13
+Summoning|Vampire Bat|136|lvl 31|Crimson|84|33|Vampire Dust|1469|Combat - Controlled|Fights & Light Enhancer|14
+Summoning|Honey Badger|140.8|lvl 32|Crimson|81|25|Honeycomb|1514|Combat - Strength|Fights|15
+Summoning|Beaver|57.6|lvl 33|Green|72|27|Willow Logs|1334|Forager - Logs/Planks|WC Boost(2) & Fletch Knife|16
+Summoning|Void Ravager|59.6|lvl 34|Green|74|27|Ravager Charm|-|Forager - Ores|Mine Boost(1) & Fights|17
+Summoning|Void Spinner|59.6|lvl 34|Green|74|27|Spinner Charm|-|Healer (1HP)|Fights|18
+Summoning|Void Shifter|59.6|lvl 34|Green|74|94|Shifter Charm|-|Combat - Attack|Fights & Teleport at 10% HP|19
+Summoning|Void Torcher|59.6|lvl 34|Green|74|94|Torcher Charm|-|Combat - Magic|Fights|20
+Summoning|Bronze Minotaur|316.8|lvl 36|Blue|102|30|Bronze Bar|1784|Combat - Defence|Fights|21
+Summoning|Bull Ant|52.8|lvl 40|Gold|11|30|Marigolds|unknown|Beast of Burden (9)|Fights|22
+Summoning|Macaw|72.4|lvl 41|Green|78|31|Guam|1424|Forager - Herbs|Remote View & Improved Herb Drops|23
+Summoning|Evil Turnip|184.8|lvl 42|Crimson|104|30|Carved Turnip|Unknown|Combat - Ranged|Fights|24
+Summoning|Spirit Cockatrice|75.2|lvl 43|Green|88|36|Cockatrice Egg|1574|Combat - Magic|Fights & Collects Eggs|25
+Summoning|Spirit Guthatrice|75.2|lvl 43|Green|88|36|Guthix Egg|Unknown|Combat - Magic|Fights & Collects Eggs|26
+Summoning|Spirit Saratrice|75.2|lvl 43|Green|88|36|Saradomin Egg|Unknown|Combat - Magic|Fights & Collects Eggs|27
+Summoning|Spirit Zamatrice|75.2|lvl 43|Green|88|36|Zamorak Egg|Unknown|Combat - Magic|Fights & Collects Eggs|28
+Summoning|Spirit Pengatrice|75.2|lvl 43|Green|88|36|Penguin Egg|Unknown|Combat - Magic|Fights & Collects Eggs|29
+Summoning|Spirit Coraxatrice|75.2|lvl 43|Green|88|36|Coraxatrice Egg|Unknown|Combat - Magic|Fights & Collects Eggs|30
+Summoning|Spirit Vulatrice|75.2|lvl 43|Green|88|36|Vulture Egg|Unknown|Combat - Magic|Fights & Collects Eggs|31
+Summoning|Iron Minotaur|404.8|lvl 46|Blue|125|37|Iron Bar|2129|Combat - Defence|Fights|32
+Summoning|Pyrelord|202.4|lvl 46|Crimson|111|32|Tinderbox|-|Combat - Strength|Fights & FM Boost(3) & Tinderbox(+10xp)|33
+Summoning|Magpie|83.2|lvl 47|Green|88|34|Gold Ring|1574|Forager - Jewellery|-|34
+Summoning|Bloated Leech|215.2|lvl 49|Crimson|117|34|Raw Beef|2009|Combat - Attack|Fights|35
+Summoning|Spirit Terrorbird|68.4|lvl 52|Gold|12|36|Raw Bird Meat|434|Beast of Burden (12)|Fights|36
+Summoning|Abyssal Parasite|94.8|lvl 54|Green|106|30|Abyssal Charm|1844|Beast of Burden (7)|Fights|37
+Summoning|Spirit Jelly|484|lvl 55|Blue|151|43|Jug of Water|2519|Combat - Strength|Fights|38
+Summoning|Ibis|98.8|lvl 56|Green|109|38|Harpoon|1889|Forager - Fish|Fish Boost(3)|39
+Summoning|Steel Minotaur|492.8|lvl 56|Blue|141|46|Steel Bar|2369|Combat - Defence|Fights|40
+Summoning|Spirit Graahk|501.6|lvl 57|Blue|154|49|Graahk Fur|-|Combat - Strength|Fights & Hunt Boost(5) & Tele To Graahk Area|41
+Summoning|Spirit Kyatt|501.6|lvl 57|Blue|153|49|Kyatt Fur|-|Combat - Attack|Fights & Hunt Boost(5) & Tele To Piscatoris Area|42
+Summoning|Spirit Larupia|501.6|lvl 57|Blue|154|49|Larupia Fur|-|Combat - Controlled|Fights & Hunt Boost(5) & Tele To Feldip Area|43
+Summoning|Karamthulu Overlord|510.4|lvl 58|Blue|144|44|Empty Fishbowl|2414|Combat - Ranged|Fights(Water Spell)|44
+Summoning|Smoke Devil|268|lvl 61|Crimson|141|48|Goat's Horn Dust|2369|Combat - Magic|Fights|45
+Summoning|Abyssal Lurker|109.6|lvl 62|Green|119|41|Abyssal Charm|2039|Beast of Burden (7)|Fights|46
+Summoning|Spirit Cobra|276.8|lvl 63|Crimson|116|56|Snake Hide|1994|Combat - Attack|Fights|47
+Summoning|Stranger Plant|281.6|lvl 64|Crimson|128|49|Bagged Plant|2174|Combat - Controlled|Fights & Farm Boost(1+4%) & Forage Strange Fruit|48
+Summoning|Barker Toad|87|lvl 66|Gold|11|8|Swamp Toad|419|Combat - Strength|Fight(Cannon)|49
+Summoning|Mithril Minotaur|580.8|lvl 66|Blue|152|16|Mithril Bar|2534|Combat - Defence|Fights|50
+Summoning|War Tortoise|58.6|lvl 67|Gold|1|43|Tortoise Shell|269|Beast of Burden (18)|Fights|51
+Summoning|Bunyip|119.2|lvl 68|Green|110|44|Raw Shark|1904|Healer (2HP)|Fights & Raw Fish => Water Runes|52
+Summoning|Fruit Bat|121.2|lvl 69|Green|130|45|Banana|2204|Forager Fruit/Seeds|Light Enhancer & Forage Fruit(Karamja)|53
+Summoning|Ravenous Locust|132|lvl 70|Crimson|79|24|Pot of Flour|-|Combat - Attack|Fights & Eat opponents Food|54
+Summoning|Arctic Bear|93.2|lvl 71|Gold|14|28|Polar Kebbit Fur|464|Combat - Controlled|Fights & Hunt Boost(7) & Tele to Rellekka Area|55
+Summoning|Phoenix|301.8|lvl 72|Crimson|165|30|Phoenix Quill|-|Combat - Magic|Fights & Spec lowers enemy hit chance & Requires quest In Pyre Need|56
+Summoning|Obsidian Golem|642.4|lvl 73|Blue|195|55|Obsidian charm|-|Combat - Strength|Fights & Mine Boost(7)|57
+Summoning|Granite Lobster|325.6|lvl 74|Crimson|166|47|Granite (500g)|2744|Forager - Fish|Fights & Fish Boost(4)|58
+Summoning|Praying Mantis|329.6|lvl 75|Crimson|168|69|Red Flowers|2774|Combat - Attack|Fights|59
+Summoning|Adamant Minotaur|668.8|lvl 76|Blue|144|66|Adamantite Bar|2414|Combat - Defence|Fights|60
+Summoning|Forge Regent|134|lvl 76|Green|141|45|Ruby Harvest|-|Combat - Ranged|Fights(multispell) & Tinderbox(+10xp)|61
+Summoning|Talon Beast|1015.2|lvl 77|Crimson|174|49|Nail Beast Charm|-|combat - Strength|Fights|62
+Summoning|Giant Ent|136.8|lvl 78|Green|94|49|Willow Branch|2114|Combat - Controlled|Fights & Increased Harvest & Ess => Nat/Earth|63
+Summoning|Fire Titan|695.2|lvl 79|Blue|198|62|Fire Talisman|-|Combat - Magic|Fights|64
+Summoning|Ice Titan|695.2|lvl 79|Blue|198|64|Air & Water Talisman|-|Combat - Attack|Fights|65
+Summoning|Moss Titan|695.2|lvl 79|Blue|202|58|Earth Talisman|-|Combat - Strength|Fights|66
+Summoning|Hydra|140.8|lvl 80|Green|128|49|Water Orb|2174|Combat - Ranged|Fights|67
+Summoning|Spirit Dagannoth|364.8|lvl 83|Crimson|1|57|Dagannoth Hide|269|Combat - Controlled|Fights|68
+Summoning|Lava Titan|730.4|lvl 83|Blue|219|61|Obsidian Charm|-|Combat - Strength|Fights & Mine Boost(10) & FM Boost(10) & Tele to Lava Maze|69
+Summoning|Swamp Titan|373.6|lvl 86|Crimson|150|56|Swamp Lizard|-|Combat - Attack|Fights|70
+Summoning|Rune Minotaur|756.8|lvl 86|Blue|1|151|Runite Bar|269|Combat - Defence|Fights|71
+Summoning|Unicorn Stallion|154.4|lvl 88|Green|140|54|Unicorn Horn|2354|Healer - (Scroll)|Fights & Cures(Poison+Disease)|72
+Summoning|Geyser Titan|783.2|lvl 89|Blue|222|69|Water Talisman|3584|Combat - Ranged|Fights & Range Boost(1+3%) & Recharge Glory|73
+Summoning|Wolpertinger|404.8|lvl 92|Crimson|203|62|Raw Rabbit, Wolf Bones|3299|Combat - Magic|Fights & Hunt Boost(5) & Double Berry Harvest Exp|74
+Summoning|Abyssal Titan|163.2|lvl 93|Green|113|32|Abyssal Charm|-|Beast of Burden (7)|Fights|75
+Summoning|Iron Titan|417.6|lvl 95|Crimson|198|60|Iron Platebody|3224|Combat - Defence|Fights & Defence Bonus|76
+Summoning|Pack Yak|422.4|lvl 96|Crimson|211|58|Yak Hide|3419|Beast of Burden (30)|Fights|77
+Summoning|Steel Titan|435.2|lvl 99|Crimson|178|64|Steel Platebody|-|Combat - Ranged|Fights & Defence Bonus|78
+Summoning|;Gold Charm|Spirit-Wolf(1)|Dreadfowl(4)|Spirit-Spider(10)|Thorny-Snail(13)|Granite-Crab(16)|Mosquito(17)|Bull-Ant(40)|Spirit-Terrorbird(52)|Barker-Toad(66)|War-Tortoise(67)|Arctic-Bear(71)|79
+Summoning|;Green Charm|Desert-Wyrm(18)|Compost-Mound(28)|Beaver(33)|Void Ravager(34)|Macaw(41)|Spirit-Cockatrice(43)|Magpie(47)|Abyssal-Parasite(54)|Ibis(56)|Abyssal-Lurker(62)|Bunyip(68)|Fruit-Bat(69)|Forge Regent(76)|Giant-Ent(78)|Hydra(80)|Unicorn-Stallion(88)|Abyssal Titan(93)|80
+Summoning|;Crimson Charm|Spirit-Scorpion(19)|Spirit Tz-Kih(22)|Vampire-Bat(31)|Honey-Badger(32)|Evil-Turnip(42)|Pyrelord(46)|Bloated-Leech(49)|Smoke-Devil(61)|Spirit-Cobra(63)|Stranger-Plant(64)|Ravenous Locust(70)|Granite-Lobster(74)|Praying-Mantis(75)|Talon Beast(77)|Spirit-Dagannoth(83)|Swamp Titan(85)|Wolpertinger(92)|Iron Titan(95)|Pack-Yak(96)|Steel Titan(99)|81
+Summoning|;Blue Charm|Albino-Rat(23)|Spirit-Kalphite(25)|Giant Chinchompa(29)|Void Shifter(34)|Void Spinner(34)|Void Torcher(34)|Bronze-Minotaur(36)|Iron-Minotaur(46)|Spirit-Jelly(55)|Steel-Minotaur(56)|Spirit Graahk(57)|Spirit Kyatt(57)|Spirit Larupia(57)|Karamthulu-Overlord(58)|Mithril-Minotaur(66)|Obsidian Golem(73)|Adamant-Minotaur(76)|Fire Titan(79)|Ice Titan(79)|Moss Titan(79)|Lava Titan(83)|Rune-Minotaur(86)|Geyser Titan(89)|82
+Thieving|Gem Stall|16|lvl 75
+Thieving|Spice Stall|81.3|lvl 65
+Thieving|Scimitar Stall|160|lvl 65
+Thieving|Magic Stall|100|lvl 65
+Thieving|Silver Stall|54|lvl 50
+Thieving|Crossbow Stall|52|lvl 49
+Thieving|Fish Stall|42|lvl 42
+Thieving|Fur Stall|36|lvl 35
+Thieving|Seed Stall|10|lvl 27
+Thieving|Wine Stall|27|lvl 22
+Thieving|Rock Cake Stall|10|lvl 15	
+Thieving|Monkey Food Stall|16|lvl 5
+Thieving|Crafting Stall|10|lvl 5
+Thieving|Tea Stall|16|lvl 5
+Thieving|General Stall|10|lvl 5
+Thieving|Baker's Stall|16|lvl 5
+Thieving|Vegetable Stall|10|lvl 2
+Thieving|Summer Sq'irk Juice|3000|lvl 65
+Thieving|Autumn Sq'irk Juice|2350|lvl 45
+Thieving|Spring Sq'irk Juice|1350|lvl 25
+Thieving|Winter Sq'irk Juice|350|lvl 1
+Thieving|Elf|353.3|lvl 85
+Thieving|Hero|273.3|lvl 80
+Thieving|Gnome|198.3|lvl 7
+Thieving|Paladin|151.8|lvl 70
+Thieving|Yanille Watchman|137.5|lvl 65
+Thieving|Menaphite Thug|137.5|lvl 65
+Thieving|Pollnivian Bandit|84.3|lvl 55
+Thieving|Desert Bandit|79.4|lvl 53	
+Thieving|Bearded Pollnivian Bandit|65|lvl 45
+Thieving|Fremminik|65|lvl 45
+Thieving|Cave Goblin|40|lvl 36
+Thieving|Rogue|36.5|lvl 32
+Thieving|Warrior|26|lvl 25
+Thieving|Male HAM|22.2|lvl 20
+Thieving|Female HAM|18.5|lvl 15
+Thieving|Farmer|14.5|lvl 10
+Thieving|Ardougne Castle Chest|500|lvl 72
+Thieving|Blood Rune Chest|288|lvl 59
+Thieving|Wall Safe|70|lvl 50
+Thieving|Nature Rune Chest|25|lvl 28
+Thieving|Knight of Ardougne|84.3|lvl 55
+Thieving|Guard|46.8|lvl 40
+Thieving|Master Farmer|43|lvl 38
+Thieving|Silk Stall|24|lvl 20
+Thieving|Man/Woman|8|lvl 1
+Woodcutting|Lumber Magic Tree|256.2|lvl 75
+Woodcutting|Lumber Yew Tree|179.3|lvl 60
+Woodcutting|Lumber Eucalyptus|169.1|lvl 58
+Woodcutting|Lumber Arctic Pine|41|lvl 54
+Woodcutting|Lumber Mahogany Tree|128.1|lvl 50
+Woodcutting|Lumber Maple Tree|102.5|lvl 45
+Woodcutting|Lumber Hollow Tree|84.5|lvl 45
+Woodcutting|Lumber Oak Tree|38.4|lvl 15
+Woodcutting|Lumber Achey Tree|25.6|lvl 1
+Woodcutting|Lumber Normal Tree|25.6|lvl 1
+Woodcutting|Eucalyptus|165|lvl 58
+Woodcutting|Arctic Pine|40|lvl 54
+Woodcutting|Hollow Tree|82.5|lvl 45
+Woodcutting|Oak Tree|37.5|lvl 15
+Woodcutting|Achey Tree|25|lvl 1
+Woodcutting|Normal Tree|25|lvl 1
+Woodcutting|Magic Tree|250|lvl 75
+Woodcutting|Yew Tree|175|lvl 60
+Woodcutting|Mahogany Tree|125|lvl 50
+Woodcutting|Maple Tree|100|lvl 45
+Woodcutting|Lumber Teak Tree|87.1|lvl 35
+Woodcutting|Teak Tree|85|lvl 35
+Woodcutting|Lumber Willow Tree|69.1|lvl 30
+Woodcutting|Willow Tree|67.5|lvl 30
+Combat|spiritual warrior|440|lvl 125
+Combat|spiritual warrior bandos|524|lvl 134
+Combat|spiritual warrior armadyl|392|lvl 123
+Combat|spiritual warrior zamorak|400|lvl 115
+Combat|spiritual warrior saradomin|440|lvl 125
+Combat|spiritual ranger|424|lvl 122
+Combat|spiritual ranger armadyl|356|lvl 127
+Combat|spiritual ranger bandos|524|lvl 115
+Combat|spiritual ranger zamorak|480|lvl 118
+Combat|spiritual ranger saradomin|424|lvl 122
+Combat|spiritual mage|340|lvl 120
+Combat|spiritual mage armadyl|344|lvl 122
+Combat|spiritual mage bandos|424|lvl 121
+Combat|spiritual mage zamorak|300|lvl 121
+Combat|spiritual mage saradomin|340|lvl 120
+Combat|Greater demon|348|94
+Combat|cow|32|2
+Combat|dog|248|63
+Combat|kalphite worker|160|28
+Combat|ankou|280|86
+Combat|icefiend|60|13
+Combat|spider|140|lvl 34
+Combat|zombie|208|lvl 73
+Combat|king scorpian|120|lvl 34
+Combat|gorak|448|lvl 145
+Combat|scorpian|68|lvl 14
+Combat|suqah|432|lvl 111
+Combat|bat|32|lvl 6
+Combat|desert lizard|60|lvl 12
+Combat|cave slime|100|lvl 23
+Combat|elf|420|lvl 108
+Combat|minotaur|40|lvl 12
+Combat|goblin|20|lvl 12
+Combat|brine rat|200|lvl 70
+Combat|black dragon|800|lvl 227
+Combat|iron dragon|692|lvl 189
+Combat|infernal mage|240|lvl 66
+Combat|Black Demon|628|lvl 172
+Combat|hell hound|464|lvl 122
+Combat|dagannoth|280|lvl 74
+Combat|kalphite soldier|360|lvl 85
+Combat|steel dragon|880|lvl 246
+Combat|Dark Beast|900|lvl 182
+Combat|Abyssal Demon|600|lvl 124
+Combat|Nechryael|420|lvl 115
+Combat|Gargoyle|420|lvl 111
+Combat|Kurask|388|lvl 106
+Combat|dust devil|420|lvl 93
+Combat|Aberrant Spectre|360|lvl 96
+Combat|Cave Horror|220|lvl 80
+Combat|zygomite|260|lvl 74
+Combat|turoth|308|lvl 83
+Combat|Jelly|300|lvl 78
+Combat|Infernal Mage|240|lvl 66
+Combat|basilisk|300|lvl 61
+Combat|pyrefiend|180|lvl 43
+Combat|Cockatrice|148|lvl 37
+Combat|banshee|88|lvl 23
+Combat|Monkey|24|lvl 3
+Combat|Rockslug|108|lvl 29
+Combat|Bronze dragon|500|lvl 131
+Combat|Dagannoth|480|lvl 92
+Combat|Bloodveld|480|lvl 76
+Combat|Hellhound|464|lvl 122
+Combat|Fire giant|432|lvl 86
+Combat|Elf|432|lvl 108
+Combat|Blue dragon|428|lvl 111
+Combat|Wall beast|420|lvl 49
+Combat|Werewolf|360|lvl 85
+Combat|Kalphite Soldier|360|lvl 85
+Combat|Troll|360|lvl 69
+Combat|Greater demon|332|lvl 92
+Combat|Lesser demon|316|lvl 82
+Combat|Turoth|304|lvl 83
+Combat|Green dragon|300|lvl 79
+Combat|Dagannoth|280|lvl 74
+Combat|Ice giant|280|lvl 49
+Combat|Shadow warrior|268|lvl 48
+Combat|Otherworldly being|260|lvl 64
+Combat|Wild dog|248|lvl 63
+Combat|Ice warrior|240|lvl 57
+Combat|Moss giant|240|lvl 42
+Combat|Earth Warrior|216|lvl 51
+Combat|Baby blue dragon|200|lvl 48
+Combat|Guard dog|196|lvl 44
+Combat|Pyrefiend|180|lvl 43
+Combat|Vampire|160|lvl 61
+Combat|Kalphite Worker|160|lvl 28
+Combat|Hill giant|140|lvl 28
+Combat|Wolf|136|lvl 25
+Combat|Skeleton|116|lvl 22
+Combat|Bear|108|lvl 21
+Combat|Ghost|100|lvl 19
+Combat|Cave Crawler|80|lvl 23
+Combat|Crawling Hand|76|lvl 12
+Combat|Skeleton|68|lvl 25
+Combat|Dwarf|64|lvl 10
+Combat|Crawling Hand|64|lvl 8
+Combat|Cave bug|20|lvl 5
+Combat|Chicken|12|lvl 1
+Hitpoints|spiritual warrior|146.67|lvl 125
+Hitpoints|spiritual warrior bandos|174.67|lvl 134
+Hitpoints|spiritual warrior armadyl|130.67|lvl 123
+Hitpoints|spiritual warrior zamorak|133.33|lvl 115
+Hitpoints|spiritual warrior saradomin|146.67|lvl 125
+Hitpoints|spiritual ranger|141.33|lvl 122
+Hitpoints|spiritual ranger armadyl|118.67|lvl 127
+Hitpoints|spiritual ranger bandos|174.67|lvl 115
+Hitpoints|spiritual ranger zamorak|160|lvl 118
+Hitpoints|spiritual ranger saradomin|141.33|lvl 122
+Hitpoints|spiritual mage|113.33|lvl 120
+Hitpoints|spiritual mage armadyl|114.67|lvl 122
+Hitpoints|spiritual mage bandos|141.33|lvl 121
+Hitpoints|spiritual mage zamorak|100|lvl 121
+Hitpoints|spiritual mage saradomin|113.33|lvl 120
+Hitpoints|Greater demon|116|94
+Hitpoints|cow|10.67|2
+Hitpoints|dog|82.67|63
+Hitpoints|kalphite worker|53.33|28
+Hitpoints|ankou|93.33|86
+Hitpoints|icefiend|20|13
+Hitpoints|spider|46.67|lvl 34
+Hitpoints|zombie|69.33|lvl 73
+Hitpoints|king scorpian|40|lvl 34
+Hitpoints|gorak|149.33|lvl 145
+Hitpoints|scorpian|22.67|lvl 14
+Hitpoints|suqah|144|lvl 111
+Hitpoints|bat|10.67|lvl 6
+Hitpoints|desert lizard|20|lvl 12
+Hitpoints|cave slime|33.33|lvl 23
+Hitpoints|elf|140|lvl 108
+Hitpoints|minotaur|13.33|lvl 12
+Hitpoints|goblin|6.67|lvl 12
+Hitpoints|brine rat|66.67|lvl 70
+Hitpoints|black dragon|266.67|lvl 227
+Hitpoints|iron dragon|230.67|lvl 189
+Hitpoints|infernal mage|80|lvl 66
+Hitpoints|Black Demon|209.33|lvl 172
+Hitpoints|hell hound|154.67|lvl 122
+Hitpoints|dagannoth|93.33|lvl 74
+Hitpoints|kalphite soldier|120|lvl 85
+Hitpoints|steel dragon|293.33|lvl 246
+Hitpoints|Dark Beast|300|lvl 182
+Hitpoints|Abyssal Demon|200|lvl 124
+Hitpoints|Nechryael|140|lvl 115
+Hitpoints|Gargoyle|140|lvl 111
+Hitpoints|Kurask|129.33|lvl 106
+Hitpoints|dust devil|140|lvl 93
+Hitpoints|Aberrant Spectre|120|lvl 96
+Hitpoints|Cave Horror|73.33|lvl 80
+Hitpoints|zygomite|86.67|lvl 74
+Hitpoints|turoth|102.67|lvl 83
+Hitpoints|Jelly|100|lvl 78
+Hitpoints|Infernal Mage|80|lvl 66
+Hitpoints|basilisk|100|lvl 61
+Hitpoints|pyrefiend|60|lvl 43
+Hitpoints|Cockatrice|49.33|lvl 37
+Hitpoints|banshee|29.33|lvl 23
+Hitpoints|Monkey|8|lvl 3
+Hitpoints|Rockslug|36|lvl 29
+Hitpoints|Bronze dragon|166.67|lvl 131
+Hitpoints|Dagannoth|160|lvl 92
+Hitpoints|Bloodveld|160|lvl 76
+Hitpoints|Hellhound|154.67|lvl 122
+Hitpoints|Fire giant|144|lvl 86
+Hitpoints|Elf|144|lvl 108
+Hitpoints|Blue dragon|142.67|lvl 111
+Hitpoints|Wall beast|140|lvl 49
+Hitpoints|Werewolf|120|lvl 85
+Hitpoints|Kalphite Soldier|120|lvl 85
+Hitpoints|Troll|120|lvl 69
+Hitpoints|Greater demon|110.67|lvl 92
+Hitpoints|Lesser demon|105.33|lvl 82
+Hitpoints|Turoth|101.33|lvl 83
+Hitpoints|Green dragon|100|lvl 79
+Hitpoints|Dagannoth|93.33|lvl 74
+Hitpoints|Ice giant|93.33|lvl 49
+Hitpoints|Shadow warrior|89.33|lvl 48
+Hitpoints|Otherworldly being|86.67|lvl 64
+Hitpoints|Wild dog|82.67|lvl 63
+Hitpoints|Ice warrior|80|lvl 57
+Hitpoints|Moss giant|80|lvl 42
+Hitpoints|Earth Warrior|72|lvl 51
+Hitpoints|Baby blue dragon|66.67|lvl 48
+Hitpoints|Guard dog|65.33|lvl 44
+Hitpoints|Pyrefiend|60|lvl 43
+Hitpoints|Vampire|53.33|lvl 61
+Hitpoints|Kalphite Worker|53.33|lvl 28
+Hitpoints|Hill giant|46.67|lvl 28
+Hitpoints|Wolf|45.33|lvl 25
+Hitpoints|Skeleton|38.67|lvl 22
+Hitpoints|Bear|36|lvl 21
+Hitpoints|Ghost|33.33|lvl 19
+Hitpoints|Cave Crawler|26.67|lvl 23
+Hitpoints|Crawling Hand|25.33|lvl 12
+Hitpoints|Skeleton|22.67|lvl 25
+Hitpoints|Dwarf|21.33|lvl 10
+Hitpoints|Crawling Hand|21.33|lvl 8
+Hitpoints|Cave bug|6.67|lvl 5
+Hitpoints|Chicken|4|lvl 1

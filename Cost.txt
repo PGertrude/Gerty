@@ -1,0 +1,628 @@
+Herblore	3	25	Attack potion(3)	121	Vial of water;Guam;Eye of newt	227+249+221	Attack boost 15%
+Herblore	5	37.5	Antipoison(3)	175	Vial of water;Marrentill;Unicorn horn dust	227+251+235	Cures poison
+Herblore	8	40	Relicym's balm(3)	4844	Vial of water;Rogue's purse;Snake weed	227	Cures disease
+Herblore	12	50	Strength potion(3)	115	Vial of water;Tarromin;Limpwurt root	227+253+225	Strength boost 15%
+Herblore	15	50	Serum 207(3)	0	Vial of water;Tarromin;Ashes	227+253+592	Use on people of Mort'ton talk to let them talk to you
+Herblore	18	59	Guthix rest(3)	4419	Empty cup;Bowl of hot water;2x Guam;Marrentill;Harralander	1980+4456+249+251+255	Reduce some poison effects & Restore some run energy & If you are at full health, temporarily raises your hit points to your maximum +5
+Herblore	22	62.5	Restore potion(3)	127	Vial of water;Harralander;Red spiders' eggs	227+255+223	10-39 restore on Defence, Attack, Strength, Magic and Ranged
+Herblore	22	49.5	Guthix balance(3)	7662	Restore potion(3);Garlic;Silver dust	127+1550+7650	Use on vampyres held with the Retainer to kill them, cure them, or make them angry!
+Herblore	25	80	Blamish oil	0	Vial of water;Harralander;Blamish oil slime	227+255	Used on fishing rod to make an oily rod for catching lava eels
+Herblore	26	67.5	Energy potion(3)	3010	Vial of water;Harralander;Chocolat dust	227+255+1975	Restores energy 10%
+Herblore	30	75	Defence potion(3)	133	Vial of water;Ranarr;White berries	227+257+239	Defence boost 15%
+Herblore	31	55	Super fishing explosive	0	Vial of water;Guam;Rubium	227+249	Lures mogres and causes 15 damage to them
+Herblore	34	80	Agility potion(3)	3034	Vial of water;Toadflax;Toad's legs	227+2998+2152	Agility boost +3
+Herblore	36	84	Combat potion(3)	9741	Vial of water;Harralander;Goat horn dust	227+255+9736	Strength and Attack boost 15%
+Herblore	38	87.5	Prayer potion(3)	139	Vial of water;Ranarr;Snape grass	227+257+231	Restores 7-31 Prayer points(+0-2 holding blessed wrench)
+Herblore	40	92	Summoning potion(3)	12142	Vial of water;Spirit weed;Cockatrice egg	227+12172+12109	Restores 7-31 Summoning points
+Herblore	45	100	Super attack(3)	145	Vial of water;Irit;Eye of newt	227+259+221	Attack boost 20%
+Herblore	48	106.3	Super antipoison(3)	181	Vial of water;Irit;Unicorn horn dust	227+259+235	Cures poison & Temporary immunity
+Herblore	50	112.5	Fishing potion(3)	151	Vial of water;Avantoe;Snape grass	227+261+231	Fishing boost +3
+Herblore	52	117.5	Super energy(3)	3018	Vial of water;Avantoe;Mort myre fungus	227+261+2970	Restores Energy 20%
+Herblore	53	120	Hunter potion(3)	10000	Vial of water;Avantoe;Kebbit teeth dust	227+261+10111	Hunter boost +3
+Herblore	55	125	Super strength(3)	157	Vial of water;Kwuarm;Limpwurt root	227+263+225	Strength boost 20%
+Herblore	57	130	Magic essence potion(3)	0	Vial of water;Star flower;Gorak claw powder	227	Magic boost +3
+Herblore	60	137.5	Weapon poison	187	Vial of water;Kwuarm;Dragon scale dust	227+263+241	Can be used on certain weapons to make them poison enemy when hit(2)
+Herblore	63	142.5	Super restore(3)	3026	Vial of water;Snapdragon;Red spiders' eggs	227+3000+223	8-32 points restored on all stats except Hitpoints
+Herblore	65	160	Sanfew serum(3)	10927	Super restore(3);Unicorn horn dust;Snake weed;Nail beast nails	3026+235+0+10937	Combined effect of Super Restore, Relicym's balm and Antidote potions with a slightly lower effect & Can be used as a weapon against Nail beasts
+Herblore	66	150	Super defence(3)	163	Vial of water;Cadantine;White berries	227+265+239	Defence boost 20%
+Herblore	68	155	Antipoison+(4)	5945	Coconut milk;Toadflax;Yew roots	5935+2998+6049	Cures poison & Longer immunity
+Herblore	69	157.5	Antifire potion(3)	2454	Vial of water;Landadyme;Dragon scale dust	227+2481+241	Gives limited resistance to Dragon fire
+Herblore	72	162.5	Ranging potion(3)	169	Vial of water;Dwarf weed;Wine of zamorak	227+267+245	Ranged boost +3 + 10%
+Herblore	73	165	Weapon poison+	5937	Coconut milk;Cactus spine;Red spiders' eggs	5935+6016+223	Can be used on certain weapons to make them poison enemy when hit(4)
+Herblore	76	172.5	Magic potion(3)	3042	Vial of water;Lantadyme;Potato cactus	227+2481+3138	Magic boost +4
+Herblore	78	175	Zamorak brew(3)	189	Vial of water;Torstol;Jangerberries	227+269+247	2-13 Strength boost, 2-21 Attack boost, 9 Prayer boost, 2-11 Defence loss, 2-11 Hitpoints loss
+Herblore	79	177.5	Antipoison++(4)	5954	Coconut milk;Irit;Magic roots	5935+259+6051	Cures Poison & Long immunity
+Herblore	81	180	Saradomin brew(3)	6687	Vial of water;Toadflax;Crushed nest	227+2998+6693	2-16 Hitpoints boost, 2-21 Defence boost, 2-9 Strength loss, 2-9 Attack loss, 2-9 Magic loss, 2-9 Ranged loss
+Herblore	82	190	Weapon poison++	5940	Coconut milk;Nightshade;Poison ivy berries	5935+6018	Can be used on certain weapons to make them poison enemy when hit(6)
+Herblore	19	30	15x Guam tar	10142	Ground guam;15x Swamp tar	249+1939	Use as bait or ammo for Swamp Lizards
+Herblore	31	42.5	15x Marrentill tar	10143	Ground marrentill;15x Swamp tar	251+1939	Use as bait or ammo for Orange Salamanders
+Herblore	39	55	15x Tarromin tar	10144	Tarromin;15x Swamp tar	253+1939	Use as bait or ammo for Red Salamanders
+Herblore	44	72.5	15x Harralander tar	10145	Harralander;15x Swamp tar	255+1939	Use as bait or ammo for Black Salamanders
+Herblore	4	8	Attack mix(2)	11429	Attack potion(2);Roe	123+11324	An attack potion that also heals 3hp
+Herblore	6	12	Antipoison mix(2)	11433	Antipoison(2);Roe	177+11324	An antipoison that also heals 3hp
+Herblore	9	14	Relicym's mix(2)	11437	Relicym's balm(2);Roe	4846+11324	A relicym's balm that also heals 3hp
+Herblore	14	17	Strength mix(2)	11443	Strength potion(2);Roe	117+11324	A strength potion that also heals 3hp
+Herblore	24	21	Restore mix(2)	11449	Restore potion(2);Roe	129+11324	A restore potion that also heals 3hp
+Herblore	29	23	Energy mix(2)	11453	Energy potion(2);Caviar	3012+11326	An energy potion that also heals 6hp
+Herblore	33	25	Defence mix(2)	11457	Defence potion(2);Caviar	135+11326	A defence potion that also heals 6hp
+Herblore	37	27	Agility mix(2)	11461	Agility potion(2);Caviar	3036+11326	An agility potion that also heals 6hp
+Herblore	40	28	Combat mix(2)	11445	Combat potion(2);Caviar	9743+11326	A combat potion that also heals 6hp
+Herblore	42	29	Prayer mix(2)	11465	Prayer potion(2);Caviar	141+11326	A prayer potion that also heals 6hp
+Herblore	47	33	Superattack mix(2)	11469	Super attack(2);Caviar	147+11326	A super attack that also heals 6hp
+Herblore	51	35	Anti-p supermix(2)	11473	Super antipoison(2);Caviar	183+11326	A super antipoison that also heals 6hp
+Herblore	53	38	Fishing mix(2)	11477	Fishing potion(2);Caviar	153+11326	A fishing potion that also heals 6hp
+Herblore	56	39	Sup. energy mix(2)	11481	Super energy(2);Caviar	3020+11326	A super energy that also heals 6hp
+Herblore	58	40	Hunting mix(2)	11517	Hunter potion(2);Caviar	10002+11326	A hunter potion that also heals 6hp
+Herblore	59	42	Sup. str. mix(2)	11485	Super strength(2);Caviar	159+11326	A super strength that also heals 6hp
+Herblore	61	43	Magic ess. mix(2)	11489	Magic essence potion(2);Caviar	11326	A magic essence potion that also heals 6hp
+Herblore	67	48	Sup. restore mix(2)	11493	Super restore(2);Caviar	3028+11326	A super restore that also heals 6hp
+Herblore	71	50	Sup. def. mix(2)	11497	Super defence(2);Caviar	165+11326	A super defence that also heals 6hp
+Herblore	74	52	Antidote+ mix(2)	11501	Antipoison+(2);Caviar	5947+11326	An antipoison+ that also heals 6hp
+Herblore	75	53	Antifire mix(2)	11505	Antifire potion(2);Caviar	2456+11326	An antifire potion that also heals 6hp
+Herblore	80	54	Ranging mix(2)	11509	Ranging potion(2);Caviar	171+11326	A ranging potion that also heals 6hp
+Herblore	83	57	Magic mix(2)	11513	Magic potion(2);Caviar	3044+11326	A magic potion that also heals 6hp
+Herblore	85	58	Zamorak mix(2)	11521	Zamorak brew(2);Caviar	191+11326	A zamorak brew that also heals 6hp
+Summoning	1	4.8	Spirit Wolf	12047	Wolf Bones	2859	7	359	6	Gold	Attack	Howl (3) - Scares opponent NPC away	-
+Summoning	4	9.3	Dreadfowl	12043	Raw Chicken	2138	8	374	4	Gold	Magic	Deadfowl Strike (3) - Attack with 3 maxhit	Farming boost +1
+Summoning	10	12.6	Spirit Spider	12059	Spider Carcass	6291	8	374	15	Gold	Controlled	Egg Spawn (6) - Spawns a random amount of red spider eggs	Forager - Red spiders' eggs
+Summoning	13	12.6	Thorny Snail	12019	Raw Thin Snail	3363	9	389	16	Gold	Ranged	Slime Spray (3) - Attack with 8 maxhit	Beast of Burden (3)
+Summoning	16	21.6	Granite Crab	12009	Iron Ore	440	7	359	18	Gold	Defence	Stony Shell (12) - Defence boost +4	Fishing boost +1 & Forager fish while fishing
+Summoning	17	46.5	Spirit Mosquito	12778	Proboscis	6319	1	269	12	Gold	Attack	Pester (3) - Commands familiar to attack	-
+Summoning	18	31.2	Desert Wyrm	12049	Bucket of Sand	1783	45	929	19	Green	Strength	Electric Lash (12) - Magic attack with 5 maxhit & Stuns	Mining boost +1 & Interact: Mines ore up to iron (to familiar inventory)
+Summoning	19	83.2	Spirit Scorpion	12055	Bronze Claws	3095	57	1109	17	Crimson	Controlled	Venom Shot (6) - Poisones your ranged attacks	-
+Summoning	22	96.8	Spirit Tz-Koh	12808	Obsidian Charm	0	64	1214	18	Crimson	Magic	Fireball Assault (6) - Attack with 8 maxhit & Multi target (max 2)	Interact: Drains opponents prayer
+Summoning	23	202.4	Albino Rat	12067	Raw Rat Meat	2134	75	1379	22	Blue	Attack	Cheese Feast (6) - Spawns 4 cheese in familiars inventory	-
+Summoning	25	220	Spirit Kalphite	12063	Potato Cactus	3138	51	1019	22	Blue	Defence	Sandstorm (6) - Attack with 8 maxhit & Multi target (max 2)	Beast of Burden (6)
+Summoning	28	49.8	Compost Mound	12091	Compost	6032	47	959	24	Green	Strength	Generate Compost (12) - Fills compost bin with a chance of making supercompost	Farming boost +1 + 2% of farm level & Use bucket on familiar to fill it with compost & Forager Compost & Seeds
+Summoning	29	255.2	Giant Chinchompa	12800	Chinchompa	10033	84	1514	31	Blue	Ranged(explodes, multihit)	Explode (3) - Explodes & Damaging nearby enemies	Randomly explodes during combat damaging nearby
+Summoning	31	136	Vampire Bat	12053	Vampire Dust	3325	84	1469	33	Crimson	Controlled	Vampire Touch (4) - Attack with 12 maxhit & Chance of HP restore	Light enhancer & Heals itself in combat
+Summoning	32	140.8	Honey Badger	12065	Honeycomb	12156	81	1514	25	Crimson	Strength	Insane Ferocity (12) - Reduces its Def & Increases its Att & Str	Chance of immidiately attacking again
+Summoning	33	57.6	Beaver	12021	Willow Logs	1519	72	1334	27	Green	-	Multichop (3) - Cuts up to 3 logs on tree	Wc boost +2 & Can be used as a knife in fletching & Forager logs & planks
+Summoning	34	59.6	Void Ravager	12818	Ravager Charm	0	74	1364	27	Green	Strength	Call to Arms (3) - Teleport to Pest Control	Mining boost +1 & Forager ores
+Summoning	34	59.6	Void Spinner	12780	Spinner Charm	0	74	1364	27	Green	Defence	Call to Arms (3) - Teleport to Pest Control	Heals 1 HP every 15 secs
+Summoning	34	59.6	Void Shifter	12814	Shifter Charm	0	74	1364	94	Green	Attack	Call to Arms (3) - Teleport to Pest Control	Works as Ring of Life - Teleports to Pest Control
+Summoning	34	59.6	Void Torcher	12798	Torcher Charm	0	74	1364	94	Green	Magic	Call to Arms (3) - Teleport to Pest Control	Interact: +1 to its damage for one attack
+Summoning	36	316.8	Bronze Minotaur	12073	Bronze Bar	2349	102	1784	30	Blue	Defence	Bronze Bull Rush (6) - Magic attack with 4 maxhit & Stun chance	-
+Summoning	40	52.8	Bull Ant	12087	Marigolds	6010	11	419	30	Gold	Controlled	Unburden (12) - Restores run energy	Beast of Burden (9)
+Summoning	41	72.4	Macaw	12071	Clean Guam	249	78	1424	31	Green	-	Herbcall (12) - Chance of spawning herbs	Improved herb dropchance & Forager herbs
+Summoning	42	184.8	Evil Turnip	12051	Carved Turnip	12153	104	1814	30	Crimson	Ranged	Evil Flames (6) - Drains opponents Ranged	Heals itself in combat & Forager Evil turnip slices
+Summoning	43	75.2	Spirit Cockatrice	12095	Cockatrice Egg	12109	88	1574	36	Green	Magic	Petrifying Gaze (3) - Attack with 10 maxhit & Reduces combat skill	Interact: Drain, damages and lower combat stats & Forager Cockatrice eggs
+Summoning	43	75.2	Spirit Guthatrice	12097	Guthix Egg	12111	88	1574	36	Green	Magic	Petrifying Gaze (3) - Attack with 10 maxhit & Reduces combat skill	Interact: Drain, damages and lower combat stats & Forager Cockatrice eggs
+Summoning	43	75.2	Spirit Saratrice	12099	Saradomin Egg	12113	88	50	36	Green	Magic	Petrifying Gaze (3) - Attack with 10 maxhit & Reduces combat skill	Interact: Drain, damages and lower combat stats & Forager Cockatrice eggs
+Summoning	43	75.2	Spirit Zamatrice	12101	Zamorak Egg	12115	88	50	36	Green	Magic	Petrifying Gaze (3) - Attack with 10 maxhit & Reduces combat skill	Interact: Drain, damages and lower combat stats & Forager Cockatrice eggs
+Summoning	43	75.2	Spirit Pengatrice	12103	Penguin Egg	12117	88	50	36	Green	Magic	Petrifying Gaze (3) - Attack with 10 maxhit & Reduces combat skill	Interact: Drain, damages and lower combat stats & Forager Cockatrice eggs
+Summoning	43	75.2	Spirit Coraxatrice	12105	Coraxatrice Egg	12119	88	50	36	Green	Magic	Petrifying Gaze (3) - Attack with 10 maxhit & Reduces combat skill	Interact: Drain, damages and lower combat stats & Forager Cockatrice eggs
+Summoning	43	75.2	Spirit Vulatrice	12107	Vulture Egg	12121	88	50	36	Green	Magic	Petrifying Gaze (3) - Attack with 10 maxhit & Reduces combat skill	Interact: Drain, damages and lower combat stats & Forager Cockatrice eggs
+Summoning	46	404.8	Iron Minotaur	12075	Iron Bar	2351	125	2129	37	Blue	Defence	Iron Bull Rush (6) - Magic attack with 6 maxhit & Stunchance	-
+Summoning	46	202.4	Pyrelord	12816	Tinderbox	590	111	1919	32	Crimson	Strength	Immense Heat (6) - Smelt gold bars into jewellery without a furnace	Fm boost +3 & Counts as tinderbox with 10 exp bonus
+Summoning	47	83.2	Magpie	12041	Gold Ring	1635	88	1574	34	Green	-	Thieving Fingers (12) - Thieving boost +2	Forager Jewellery
+Summoning	49	215.2	Bloated Leech	12061	Raw Beef	2132	117	2009	34	Crimson	Attack	Blood Dragin (6) - Heals stat damage, poison and disease & Drains your HP	-
+Summoning	52	68.4	Spirit Terrorbird	12007	Raw Bird Meat	9978	12	434	36	Gold	Controlled	Tireless Run (8) - Restores run energy & Agility boost +2	Beast of Burden (12)
+Summoning	54	94.8	Abyssal Parasite	12035	Abyssal Charm	0	106	1844	30	Green	Magic	Abyssal Dragon (6) - Magic attack that can give prayer points	Beast of Burden (7 - essences) & Prevents abyssal prayer drain
+Summoning	55	484	Spirit Jelly	12027	Jug of Water	1935	151	2519	43	Blue	Strength	Dissolve (6) - Magic attack with 12 maxhit & Drains opponents attack	-
+Summoning	56	98.8	Ibis	12531	Harpoon	311	109	1889	38	Green	-	Fish Rain (12) - Spawns random fish up to Bass	Fishing boost +3 & Counts as harpoon while fishing Swordfish & Forager fish while fishing
+Summoning	56	492.8	Steel Minotaur	12077	Steel Bar	2353	141	2369	46	Blue	Defence	Steel Bull Rush (6) - Magic attack with 9 maxhit & Stunchance	-
+Summoning	57	501.6	Spirit Graahk	12810	Graahk Fur	10099	154	2564	49	Blue	Strength	Goad (3) - Commands familiar to attack	Hunter boost +5 & Trample & Teleports to Graahk hunter spot
+Summoning	57	501.6	Spirit Kyatt	12812	Kyatt Fur	10103	153	2549	49	Blue	Attack	Rending (6) - Ambush (3) - Commands familiar to attack & Instant hit	Hunter boost +5 & Chance of triple damage on first hit & Teleport to Piscatoris
+Summoning	57	501.6	Spirit Larupia	12784	Larupia Fur	10095	154	2579	49	Blue	Controlled	Rending (6) - Magic attack & Drains opponents strength	Hunter boost +5 & Teleports to Feldip
+Summoning	58	510.4	Karamthulu Overlord	12023	Empty Fishbowl	6667	144	2414	44	Blue	Ranged	Doomsphere Device (16) - Attack with 16 maxhit	Interact: Attacks with water spell
+Summoning	61	268	Smoke Devil	12085	Goat's Horn Dust	9736	141	2369	48	Crimson	Magic	Dust Cloud (6) - Attack with 8 maxhit & 6 damage to nearby opponents	Interact: Attacks with fire spell
+Summoning	62	109.6	Abyssal Lurker	12037	Abyssal Charm	0	119	2039	41	Green	Controlled	Abyssal Stealth (20) - Agility & Thieving boost +4	Beast of Burden (7 - essences)
+Summoning	63	276.8	Spirit Cobra	12015	Snake Hide	6287	116	1994	56	Crimson	Attack	Ophidian Incubation (3) - Transforms a normal egg into a Cockatrice egg	-
+Summoning	64	281.6	Stranger Plant	12045	Bagged Plant	8431	128	2174	49	Crimson	Controlled	Attack with 50% poison chance	Farming boost +1 + 4% of farm level & Forager Strange fruit
+Summoning	66	87	Barker Toad	12123	Swamp Toad	2150	11	419	8	Gold	Strength	Toad Bark (6) - Attack with 18 maxhit	Load cannonballs to fire
+Summoning	66	580.8	Mithril Minotaur	12079	Mithril Bar	2359	152	2534	16	Blue	Mithril Bull Rush (6) - Attack with 12 maxhit & Stunchance	-
+Summoning	67	58.6	War Tortoise	12031	Tortoise Shell	7939	1	269	43	Gold	Defence	Testudo (20) - Defence boost +8	Beast of Burden (18)
+Summoning	68	119.2	Bunyip	12029	Raw Shark	383	110	1904	44	Green	Attack	Swallow Whole (3) - Allows you to eat uncooked fish (cooking level needed)	Heals 2 HP every 15 secs
+Summoning	69	121.2	Fruit Bat	12033	Banana	1963	130	2204	45	Green	-	Fruitfall (6) - Spawns random fruit	Light enhancer & Forager Fruit & Seeds
+Summoning	70	132	Ravenous Locust	12820	Pot of Flour	1933	79	1439	24	Crimson	Attack	Famine (12) - Destroys opponent's food	Chance to destroy opponents food & Remote View
+Summoning	71	93.2	Arctic Bear	12057	Polar Kebbit Fur	10117	14	464	28	Gold	Controlled	Arctic Blast (6) - Magic attack with 15 maxhit & Stunchance	Hunter boost +7 & Works as Arctic camouflage & Teleport to Rellekka hunter area
+Summoning	72	301.8	Phoenix	14623	Phoenix Quill	14616	165	2991	30	Crimson	Magic	Rise from ashes (12) - Rerise familiar with full HP & Attacks everyone in a 3x3 grid	Interact: Lower opponents ranged
+Summoning	73	642.4	Obsidian Golem	12792	Obsidian charm	0	195	3179	55	Blue	Strength	Volcanic Strength (12) - Strength boost +9	Mining boost +7
+Summoning	74	325.6	Granite Lobster	12069	Granite (500g)	6979	166	2744	47	Crimson	Defence	Crushing Claw (6) - Damage with 14 maxhit & -5 opponent defence	Fishing boost +4 & Forager fish while fishing
+Summoning	75	329.6	Praying Mantis	12011	Red Flowers	2462	168	2774	69	Crimson	Attack	Defence	Mantis Strike (6) - Binds & Magic damage & Drains prayer	-
+Summoning	76	668.8	Adamant Minotaur	12081	Adamantite Bar	2361	144	2414	66	Blue	Defence	Adamant Bull Rush (6) - Magic attack with 16 maxhit & Stunchance	-
+Summoning	76	134	Forge Regent	12782	Ruby Harvest	10020	141	2369	45	Green	Ranged	Inferno (6) - Chance to unequip opponents weapon or shield	Interact: Multihit attack with 5-6 maxhit & Counts as tinderbox with 10 exp bonus
+Summoning	77	1015.2	Talon Beast	12794	Nail Beast Charm	0	174	2864	49	Crimson	Strength	Deadly Claw (6) - Magic attack with 3 hits	-
+Summoning	78	136.8	Giant Ent	12013	Willow Branch	5933	94	2114	49	Green	Controlled	Attack with 17 maxhit & Multitarget (max 3)	Interact: Turns pure ess into earth or nature runes & Forager Oak logs
+Summoning	79	695.2	Fire Titan	12802	Fire Talisman	1442	198	3224	62	Blue	Magic	Titan's Constitution (20) - Defence & Hitpoints boost	-
+Summoning	79	695.2	Ice Titan	12806	Air Talisman;Water Talisman	1438+1444	198	3224	64	Blue	Attack	Titan's Constitution (20) - Defence & Hitpoints boost	-
+Summoning	79	695.2	Moss Titan	12804	Earth Talisman	1440	202	3224	58	Blue	Strength	Titan's Constitution (20) - Defence & Hitpoints boost	-
+Summoning	80	140.8	Hydra	12025	Water Orb	571	128	2174	49	Green	Ranged	Instantly regrows a farmed tree	-
+Summoning	83	364.8	Spirit Dagannoth	12017	Dagannoth Hide	6155	1	269	57	Crimson	Controlled	Spike Spots (6) - Ranged attack with 18 maxhit & Stuns	Chance of immidiately attacking again
+Summoning	83	730.4	Lava Titan	12788	Obsidian Charm	0	219	3579	61	Blue	Strength	Ebon Thunder (4) - Drains opponents special attack energy	Mining & Fm boost +10 & Interact: Teleport to Lava maze
+Summoning	85	373.6	Swamp Titan	12776	Swamp Lizard	10149	150	2504	56	Crimson	Attack	Poisones multiple targets	-
+Summoning	86	756.8	Rune Minotaur	12083	Runite Bar	2363	1	269	151	Blue	Defence	Rune Bull Rush (6) - Magic attack with 19 maxhit & Stunchance	-
+Summoning	88	154.4	Unicorn Stallion	12039	Unicorn Horn	237	140	2354	54	Green	Controlled	Healing Aura (20) - Heals 15% HP	Interact: Cures poison and disease
+Summoning	89	783.2	Geyser Titan	12786	Water Talisman	1444	222	3584	69	Blue	Ranged	Boil (6) - Damages a player, increases with armour	Interact: Ranged boost +1 + 3% of level & Recharges Glory
+Summoning	92	404.8	Wolpertinger	12089	Raw Rabbit;Wolf Bones	3226+2859	203	3299	62	Crimson	Magic	Magic Focus (20) - Magic boost +7	Hunter boost +5 & Magic defence boost +5% & Double exp harvesting berries
+Summoning	93	163.2	Abyssal Titan	12796	Abyssal Charm	0	113	1934	32	Green	Attack	Essence Shipment (6) - Banks all pure ess from yours and familiar invent	Beast of Burden (7 - essences)
+Summoning	95	417.6	Iron Titan	12822	Iron Platebody	1115	198	3224	60	Crimson	Defence	Iron Within (12) - Attack with 3 hits	Melee defence boost +10%
+Summoning	96	422.4	Pack Yak	12093	Yak Hide	10818	211	3419	58	Crimson	Strength	Winter Storage(12) - Banks one item	Beast of Burden (30)
+Summoning	99	435.2	Steel Titan	12790	Steel Platebody	1119	178	2924	64	Crimson	Ranged	Steel of Legends(12) - Attack with 4 hits	Melee defence boost +15%
+Skill|lvl|exp|Pouch|Pouch ID|Second|Second ID|Shards|Alch|Minutes|Charm|Combat|Scroll|Ability
+Firemaking	1	40	Logs	1511
+Firemaking	15	60	Oak Logs	1521
+Firemaking	30	90	Willow Logs	1519
+Firemaking	35	105	Teak Logs	6333
+Firemaking	42	125	Arctic Pine Logs	10810
+Firemaking	45	135	Maple Logs	1517
+Firemaking	50	157.5	Mahogany Logs	6332
+Firemaking	58	193.5	Eucalyptus Logs	12581
+Firemaking	60	202.5	Yew Logs	1515
+Firemaking	75	303.8	Magic Logs	1513
+Firemaking	5	50	Pyre Logs	3438
+Firemaking	5	70	Oak Pyre Logs	3440
+Firemaking	35	100	WIllow Pyre Logs	3442
+Firemaking	40	120	Teak Pyre Logs	6211
+Firemaking	47	158	Arctic Pyre Logs	10808
+Firemaking	50	175	Maple Pyre Logs	3444
+Firemaking	55	210	Mahogany Pyre Log	6213
+Firemaking	63	246	Eucalyptus Pyre Logs	12583
+Firemaking	65	255	Yew Pyre Logs	3446
+Firemaking	80	404.5	Magic Pyre Logs	3448
+Smithing	1	6.5	Bronze Bar	2349	Ore	438+436	0
+Smithing	15	12.5	Iron Bar	2351	Ore	440	0
+Smithing	20	13.7	Silver Bar	2355	Ore	442	0
+Smithing	30	17.5	Steel Bar	2353	Ore	440+453	2
+Smithing	40	22.5	Gold Bar	2357	Ore	444	0
+Smithing	50	30	Mithril Bar	2357	Ore	447+453	4
+Smithing	70	37.5	Adamant Bar	2361	Ore	449+453	6
+Smithing	85	50	Runite Bar	2363	Ore	451+453	8
+Smithing	1	12.5	Bronze Dagger	1205	Bronze	2349	1	6
+Smithing	1	12.5	Bronze Axe	1351	Bronze	2349	1	9
+Smithing	2	12.5	Bronze Mace	1422	Bronze	2349	1	10
+Smithing	3	12.5	Bronze Medium Helm	1139	Bronze	2349	1	14
+Smithing	3	12	Bronze Bolt	9375	Bronze	2349	1	0
+Smithing	4	12.5	Bronze Sword	1277	Bronze	2349	1	16
+Smithing	4	12.5	Bronze Dart Tip	819	Bronze	2349	1	0
+Smithing	4	12.5	Bronze Nails	4819	Bronze	2349	1	0
+Smithing	5	25	Bronze Scimitar	1321	Bronze	2349	2	18
+Smithing	5	25	Bronze Spear	1237	Bronze+Logs	2349+1511	2	15
+Smithing	5	25	Bronze Hasta	11367	Bronze+Logs	2349+1511	2	15
+Smithing	5	12.5	Bronze Arrowhead	39	Bronze	2349	1	0
+Smithing	5	25	Bronze Pickaxe	1265	Bronze	2349	2	24
+Smithing	6	12.5	Bronze Crossbow Limbs	9420	Bronze	2349	1	12
+Smithing	6	25	Bronze Longsword	1291	Bronze	2349	2	24
+Smithing	7	25	Bronze Full Helm	1155	Bronze	2349	2	26
+Smithing	7	12.5	Bronze Throwing Knife	864	Bronze	2349	1	0
+Smithing	8	25	Bronze Square Shield	1173	Bronze	2349	2	28
+Smithing	9	37.5	Bronze Warhammer	1337	Bronze	2349	3	30
+Smithing	10	37.5	Bronze Battleaxe	1375	Bronze	2349	3	31
+Smithing	11	37.5	Bronze Chainbody	1103	Bronze	2349	3	36
+Smithing	12	37.5	Bronze Kiteshield	1189	Bronze	2349	3	40
+Smithing	13	25	Bronze Claws	3095	Bronze	2349	2	9
+Smithing	14	37.5	Bronze Two-Handed Sword	1307	Bronze	2349	3	48
+Smithing	16	37.5	Bronze Plateskirt	1087	Bronze	2349	3	48
+Smithing	16	37.5	Bronze Platelegs	1075	Bronze	2349	3	48
+Smithing	18	62.5	Bronze Platebody	1117	Bronze	2349	5	96
+Smithing	15	25	Iron Dagger	1203	Iron	2351	1	21
+Smithing	16	25	Iron Axe	1349	Iron	2351	1	33
+Smithing	17	25	Iron Mace	1420	Iron	2351	1	37
+Smithing	17	25	Iron Spit	7225	Iron	2351	1	38
+Smithing	18	25	Iron Medium Helm	1137	Iron	2351	1	50
+Smithing	18	17	Iron Bolt	9377	Iron	2351	1	0
+Smithing	19	25	Iron Sword	1279	Iron	2351	1	54
+Smithing	19	25	Iron Dart Tip	820	Iron	2351	1	0
+Smithing	19	25	Iron Nails	4820	Iron	2351	1	0
+Smithing	20	50	Iron Scimitar	1323	Iron	2351	2	67
+Smithing	20	50	Iron Spear	1239	Iron+Oak Logs	2351+1521	2	54
+Smithing	20	50	Iron Hasta	11369	Iron+Oak Logs	2351+1521	2	54
+Smithing	20	25	Iron Arrowhead	40	Iron	2351	1	0
+Smithing	20	50	Iron Pickaxe	1267	Iron	2351	2	92
+Smithing	21	50	Iron Longsword	1293	Iron	2351	2	84
+Smithing	22	50	Iron Full Helm	1153	Iron	2351	2	92
+Smithing	22	25	Iron Throwing Knife	863	Iron	2351	1	0
+Smithing	23	50	Iron Square Shield	1175	Iron	2351	2	100
+Smithing	23	25	Iron Crossbow Limbs	9423	Iron	2351	1	42
+Smithing	24	75	Iron Warhammer	1335	Iron	2351	3	104
+Smithing	25	75	Iron Battleaxe	1363	Iron	2351	3	109
+Smithing	26	75	Iron Chainbody	1101	Iron	2351	3	126
+Smithing	26	25	Oil Lantern Frame	4540	Iron	2351	1	54
+Smithing	27	75	Iron Kiteshield	1191	Iron	2351	3	138
+Smithing	28	50	Iron Claws	3096	Iron	2351	2	30
+Smithing	29	75	Iron Two-Handed Sword	1309	Iron	2351	3	168
+Smithing	31	75	Iron Platelegs	1067	Iron	2351	3	168
+Smithing	31	75	Iron Plateskirt	1081	Iron	2351	3	168
+Smithing	33	125	Iron Platebody	1115	Iron	2351	5	336
+Smithing	30	37.5	Steel Dagger	1207	Steel	2353	1	75
+Smithing	31	37.5	Steel Axe	1353	Steel	2353	1	120
+Smithing	32	37.5	Steel Mace	1424	Steel	2353	1	135
+Smithing	33	37.5	Steel Medium Helm	1141	Steel	2353	1	180
+Smithing	33	37	Steel Bolt	9378	Steel	2353	1	0
+Smithing	34	37.5	Steel Sword	1281	Steel	2353	1	195
+Smithing	34	37.5	Steel Nails	1539	Steel	2353	1	0
+Smithing	34	37.5	Steel Dart Tip	821	Steel	2353	1	0
+Smithing	35	75	Steel Scimitar	1325	Steel	2353	2	240
+Smithing	35	75	Steel Spear	1241	Steel+Willow Logs	2353+1519	2	195
+Smithing	35	75	Steel Hasta	11371	Steel+Willow Logs	2353+1519	2	195
+Smithing	35	37.5	Steel Arrowhead	41	Steel	2353	1	0
+Smithing	35	25.6	Cannonball	2	Steel	2353	1	0
+Smithing	35	75	Steel Pickaxe	1269	Steel	2353	2	300
+Smithing	36	37.5	Steel Crossbow Limbs	9425	Steel	2353	1	150
+Smithing	36	75	Steel Longsword	1295	Steel	2353	2	300
+Smithing	36	37.5	Steel Studs	2370	Steel	2353	1	90
+Smithing	37	75	Steel Full Helm	1157	Steel	2353	2	330
+Smithing	37	37.5	Steel Throwing Knife	865	Steel	2353	1	0
+Smithing	38	75	Steel Square Shield	1177	Steel	2353	2	360
+Smithing	39	112.5	Steel Warhammer	1339	Steel	2353	3	384
+Smithing	40	112.5	Steel Battleaxe	1365	Steel	2353	3	260
+Smithing	41	112.5	Steel Chainbody	1105	Steel	2353	3	450
+Smithing	42	112.5	Steel Kiteshield	1193	Steel	2353	3	510
+Smithing	43	75	Steel Claws	3097	Steel	2353	2	105
+Smithing	44	112.5	Steel Two-Handed Sword	1311	Steel	2353	3	600
+Smithing	46	112.5	Steel Platelegs	1069	Steel	2353	3	600
+Smithing	46	112.5	Steel Plateskirt	1083	Steel	2353	3	600
+Smithing	48	187.5	Steel Platebody	1119	Steel	2353	5	1200
+Smithing	49	37.5	Bullseye Lantern Frame	4544	Steel	2353	1	180
+Smithing	50	50	Mithril Dagger	1209	Mithril	2359	1	195
+Smithing	51	50	Mithril Axe	1355	Mithril	2359	1	312
+Smithing	52	50	Mithril Mace	1428	Mithril	2359	1	351
+Smithing	53	50	Mithril Medium Helm	1143	Mithril	2359	1	468
+Smithing	53	50	Mithril Bolt	9379	Mithril	2359	1	0
+Smithing	54	50	Mithril Sword	1285	Mithril	2359	1	507
+Smithing	54	50	Mithril Dart Tip	822	Mithril	2359	1	0
+Smithing	54	50	Mithril Nail	4822	Mithril	2359	1	0
+Smithing	55	100	Mithril Scimitar	1329	Mithril	2359	2
+Smithing	55	100	Mithril Spear	1243	Mithril+Maple Logs	2359+1517	2	507
+Smithing	55	100	Mithril Hasta	11373	Mithril+Maple Logs	2359+1517	2	507
+Smithing	55	50	Mithril Arrowhead	42	Mithril	2359	1	0
+Smithing	55	100	Mithril Pickaxe	1273	Mithril	2359	2	789
+Smithing	56	50	Mithril Crossbow Limbs	9427	Mithril	2359	1	390
+Smithing	56	100	Mithril Longsword	1299	Mithril	2359	2	780
+Smithing	57	100	Mithril Full Helm	1159	Mithril	2359	2	858
+Smithing	57	50	Mithril Throwing Knife	866	Mithril	2359	1	0
+Smithing	58	100	Mithril Square Shield	1181	Mithril	2359	2	936
+Smithing	59	150	Mithril Warhammer	1343	Mithril	2359	3	996
+Smithing	59	50	Mithril Grapple Tip	9416	Mithril	2359	1	0
+Smithing	60	150	Mithril Battleaxe	1369	Mithril	2359	3	1014
+Smithing	61	150	Mithril Chainbody	1109	Mithril	2359	3	1170
+Smithing	62	150	Mithril Kiteshield	1197	Mithril	2359	3	1326
+Smithing	63	100	Mithril Claws	3099	Mithril	2359	2	285
+Smithing	64	150	Mithril Two-Handed Sword	1315	Mithril	2359	3	1560
+Smithing	66	150	Mithril Platelegs	1071	Mithril	2359	3	1560
+Smithing	66	150	Mithril Plateskirt	1085	Mithril	2359	3	1560
+Smithing	68	250	Mithril Platebody	1121	Mithril	2359	5	3120
+Smithing	70	62.5	Adamant Dagger	1211	Adamant	2361	1	480
+Smithing	71	62.5	Adamant Axe	1357	Adamant	2361	1	768
+Smithing	72	62.5	Adamant Mace	1430	Adamant	2361	1	864
+Smithing	73	62.5	Adamant Medium Helm	1145	Adamant	2361	1	1152
+Smithing	73	62	Adamant Bolt	9380	Adamant	2361	1	0
+Smithing	74	62.5	Adamant Sword	1287	Adamant	2361	1	1248
+Smithing	74	62.5	Adamant Dart Tip	823	Adamant	2361	1	0
+Smithing	74	62.5	Adamant Nail	4823	Adamant	2361	1	0
+Smithing	75	125	Adamant Scimitar	1331	Adamant	2361	2	1536
+Smithing	75	125	Adamant Spear	1245	Adamant+Yew Logs	2361+1515	2	1248
+Smithing	75	125	Adamant Hasta	11375	Adamant+Yew Logs	2361+1515	2	1248
+Smithing	75	62.5	Adamant Arrowhead	43	Adamant	2361	1	0
+Smithing	75	125	Adamant Pickaxe	1271	Adamant	2361	2	1920
+Smithing	76	62.5	Adamant Crossbow Limbs	9429	Adamant	2361	1	960
+Smithing	76	125	Adamant Longsword	1301	Adamant	2361	2	1920
+Smithing	77	125	Adamant Full Helm	1161	Adamant	2361	2	2112
+Smithing	77	62.5	Adamant Throwing Knife	867	Adamant	2361	1	0
+Smithing	78	125	Adamant Square Shield	1183	Adamant	2361	2	2304
+Smithing	79	187.5	Adamant Warhammer	1345	Adamant	2361	3	2472
+Smithing	80	187.5	Adamant Battleaxe	1371	Adamant	2361	3	2496
+Smithing	81	187.5	Adamant Chainbody	1111	Adamant	2361	3	2080
+Smithing	82	187.5	Adamant Kiteshield	1199	Adamant	2361	3	3264
+Smithing	83	125	Adamant Claws	3100	Adamant	2361	2	720
+Smithing	84	187.5	Adamant Two-Handed Sword	1317	Adamant	2361	3	3840
+Smithing	86	187.5	Adamant Platelegs	1073	Adamant	2361	3	3840
+Smithing	86	187.5	Adamant Plateskirt	1091	Adamant	2361	3	3840
+Smithing	88	312.5	Adamant Platebody	1123	Adamant	2361	5	9984
+Smithing	85	75	Rune Dagger	1213	Runite	2363	1	4800
+Smithing	86	75	Rune Axe	1359	Runite	2363	1	7680
+Smithing	87	75	Rune Mace	1432	Runite	2363	1	8640
+Smithing	88	75	Rune Medium Helm	1147	Runite	2363	1	11520
+Smithing	88	75	Rune Bolt	9381	Runite	2363	1	0
+Smithing	89	75	Rune Sword	1289	Runite	2363	1	8320
+Smithing	89	75	Rune Dart Tip	824	Runite	2363	1	0
+Smithing	89	75	Rune Nails	4824	Runite	2363	1	0
+Smithing	90	150	Rune Scimitar	1333	Runite	2363	2	15360
+Smithing	90	150	Rune Spear	1247	Runite+Magic Logs	2363+1513	2	8320
+Smithing	90	150	Rune Hasta	11377	Runite+Magic Logs	2363+1513	2	8320
+Smithing	90	75	Rune Arrowhead	44	Runite	2363	1	0
+Smithing	90	150	Rune Pickaxe	1275	Runite	2363	2	19200
+Smithing	91	75	Rune Crossbow Limbs	9431	Runite	2363	1	9600
+Smithing	91	150	Rune Longsword	1303	Runite	2363	2	19200
+Smithing	92	150	Rune Full Helm	1163	Runite	2363	2	21120
+Smithing	92	75	Rune Throwing Knife	868	Runite	2363	1	0
+Smithing	93	150	Rune Square Shield	1185	Runite	2363	2	23040
+Smithing	94	225	Rune Warhammer	1347	Runite	2363	3	24900
+Smithing	95	225	Rune Battleaxe	1373	Runite	2363	3	24960
+Smithing	96	225	Rune Chainbody	1113	Runite	2363	3	30000
+Smithing	97	225	Rune Kiteshield	1201	Runite	2363	3	32640
+Smithing	98	150	Rune Claws	3101	Runite	2363	2	7200
+Smithing	99	225	Rune Two-Handed Sword	1319	Runite	2363	3	38400
+Smithing	99	225	Rune Platelegs	1079	Runite	2363	3	38400
+Smithing	99	225	Rune Plateskirt	1093	Runite	2363	3	38400
+Smithing	99	375	Rune Platebody	1127	Runite	2363	5	39000
+Smithing	92	2000	Dragon Platebody	14479	Ruined Dragon Armour Lump+Ruined Dragon Armour Slice+Ruined Dragon Armour Shard	14472+14476+14474	3	850000	Special
+Smithing	90	2000	Dragonfire Shield	11284	Draconic Visage+Anti-Dragon Shield	11286+1540	0	1200000	Special
+Smithing	60	75	Dragon Square Shield	1187	Shield Left Half+Shield Right Half	2366+2368	0	300000	Special
+Smithing	85	1800	Arcane Spirit Shield	13738	Blessed Spirit Shield+Arcane Sigil	13746+13736	0	135000	Special
+Smithing	85	1800	Elysian Spirit Shield	13742	Blessed Spirit Shield+Elysian Sigil	13750+13736	0	1200000	Special
+Smithing	85	1800	Spectral Spirit Shield	13744	Blessed Spirit Shield+Spectral Sigil	13752+13736	0	135000	Special
+Smithing	85	1800	Divine Spirit Shield	13740	Blessed Spirit Shield+Divine Sigil	13748+13736	0	1200000	Special
+Skill|Level|Exp|Item|Item ID
+prayer	1	4.5	Normal Bones	526
+prayer	1	72	Dragon Bones	536
+prayer	1	30	Baby Dragon Bones	534
+prayer	1	4.5	Wolf Bones	2859
+prayer	1	4.5	Burnt Bones	528
+prayer	1	5	Monkey Bones	3183
+prayer	1	5.3	Bat Bones	530
+prayer	1	15	Big Bones	532
+prayer	1	15	Curved Bones	0
+prayer	1	15	Jogre Bones	3125
+prayer	1	15	Long Bones	0
+prayer	1	22.5	Zogre Bones	4812
+prayer	1	25	Shaikahan Bones	3123
+prayer	1	30	Ghast	0
+prayer	1	33	Loar Remains	3396
+prayer	1	46.5	Phrin Remains	3398
+prayer	1	50	Wyvern Bones	6812
+prayer	1	59.5	Riyl Remains	3400
+prayer	1	82.5	Asyn Remains	3402
+prayer	1	84	Fayrg Bones	4830
+prayer	1	96	Raurg Bones	4832
+prayer	1	100	Fiyr Remains	3404
+prayer	1	125	Dagannoth Bones	6729
+prayer	1	140	Ourg Bones	4834
+skill|lvl|exp|item|item-id|(u)-id|ingedient|ingredient-id
+Fletching	1	0.33	Arrow Shaft	52	Log	1511
+Fletching	1	2.63	Bronze Arrow	882	Arrow Shaft+Bronze Arrowtips	52+39
+Fletching	1	1.8	Bronze Dart	806	Bronze Dart Tip+3 Feathers	819
+Fletching	1	1.33	Headless Arrow	53	Arrow Shaft+Feather	52+314
+Fletching	5	1.6	Ogre Arrow Shaft	2864	Achey Tree Log	2862
+Fletching	5	2.5	Flighted Ogre Arrow	2865	Ogre Arrow Shaft+Feathers	2864+314
+Fletching	5	3.5	Ogre Arrow	2866	Flighted Ogre Arrow+Wolf Bone Tips	2865+2861
+Fletching	5	10	Shortbow	841	Logs+Bowstring	1511+1777+50	30
+Fletching	7	3.9	Bronze Brutal Arrow	4773	Flighted Ogre Arrow+Bronze Nails	2864+4819
+Fletching	9	0.5	Bronze Bolt	887	Bronze Bolts(unf)+Feathers	9375+314
+Fletching	9	24	Bronze Crossbow	9174	Crossbow Stock+Bronze Limbs+Crossbow String	9440+9420+9438
+Fletching	10	20	Longbow	839	Logs+Bowstring	1511+1777+48	48
+Fletching	11	2.1	Opal Bolt	879	Bronze Bolts+Opal tips	887+45
+Fletching	15	3.83	Iron Arrow	884	Iron Arrowtips+Arrow Shafts	40+52
+Fletching	18	5.1	Iron Brutal Arrow	0	Flighted Ogre Arrow+Iron Nails	2864+4820
+Fletching	20	33	Oak Shortbow	843	Oak Logs+Bowstring	1521+1777+56	60
+Fletching	22	3.8	Iron Dart	807	Iron Dart Tip+3 Feathers	820
+Fletching	24	1	Blurite Bolt	0	Blurite Bolt(unf)+Feathers	0+314
+Fletching	24	64	Blurite Crossbow	0 Oak Crossbow Stock+Blurite Limbs+Crossbow String	9442+0+9438
+Fletching	25	50	Oak Longbow	845	Oak Logs+Bowstring	1521+56+1777	96
+Fletching	26	3.4	Jade Bolt	0	Blurite Bolts+Jade tips	0+9187
+Fletching	30	90	Composite Ogre Bow	4827	Ogre Bow(u)+Bowstring	4825+1777
+Fletching	30	6.33	Steel Arrow	886	Arrow Shaft+Steel Arrowtips	52+41
+Fletching	32	5.8	Kebbit Bolt	10158	Kebbit Spike+Feathers	10105+314
+Fletching	33	7.6	Steel Brutal Arrow	0	Flighted Ogre Arrow+Steel Nails	2864+1539
+Fletching	35	33.25	Willow Shortbow	849	Willow Logs+Bowstring	1517+1777+60	120
+Fletching	37	7.5	Steel Dart	808	Steel Dart Tip+3 Feathers	821
+Fletching	38	8.9	Black Brutal Arrow	0	Flighted Ogre Arrow+Black Nails	2864+4821
+Fletching	39	1.5	Iron Bolt	9140	Iron Bolts(unf)+Feathers	9377+314
+Fletching	39	88	Iron Crossbow	9177	Willow Crossbow Stock+Iron Limbs+Crossbow String	9444+9423+9438
+Fletching	40	83	Willow Longbow	847	Willow Logs+Bowstring	1517+1777+58	192
+Fletching	41	4.7	Pearl Bolt	880	Iron Bolts+Pearl tips	9140+46
+Fletching	42	7.95	Long Kebbit Bolt	10159	Long Kebbit Spike+3 Feathers	10107
+Fletching	43	2.5	Silver Bolt	9145	Silver Bolts(unf)+Feathers	9382+314
+Fletching	45	8.83	Mithril Arrow	888	Arrow Shaft+Mithril Arrowtips	52+42
+Fletching	46	3.5	Steel Bolt	9141	Steel Bolts(unf)+Feathers	9378+314
+Fletching	46	108	Steel Crossbow	9179	Teak Crossbow Stock+Steel Limbs+Crossbow String	9446+9425+9438
+Fletching	48	7.4	Red Topaz Bolt	9336	Steel Bolts+Red Topaz tips	9141+9188
+Fletching	49	10	Mithril Brutal Arrow	0	Flighted Ogre Arrow+Mithril Nails	2864+4822
+Fletching	50	100	Maple Shortbow	853	Maple Logs+Bowstring	1517+1777+64	240
+Fletching	51	10	Barbed Bolt	881	Barbed Tips+3 Feathers	47
+Fletching	52	15	Broad Arrow	0	Arrow Shaft+Broad Arrow Head	52
+Fletching	52	11.2	Mithril Dart	809	Mithril Dart Tip+3 Feathers	822
+Fletching	54	5	Mithril Bolt	9142	Mithril Bolts(unf)+Feathers	9379+314
+Fletching	54	128	Mithril Crossbow	9181	Maple Crossbow Stock+Mithril Limbs+Crossbow String	9448+9427+9438
+Fletching	55	3	Broad Bolt	0	Broad Bolt Tips+3 Feathers	13279+314
+Fletching	55	116.5	Maple Longbow	851	Maple Logs+Bowstring	1517+1777+62	384
+Fletching	56	9.7	Sapphire Bolt	9337	Mithril Bolts+Sapphire tips	9142+9189
+Fletching	58	10.5	Emerald Bolt	9338	Mithril Bolts+Emerald tips	9142+9190
+Fletching	59	16	Mithril Grapple	9419	Mithril Bolt+Rope+Mithril Grapple Tip	9142+954+9416
+Fletching	60	11.33	Adamant Arrow	890	Arrow Shaft+Adamant Arrowtips	52+43
+Fletching	61	7	Adamant Bolt	9143	Adamant Bolts(unf)+Feathers	9380+314
+Fletching	61	164	Adamant Crossbow	9183	Mahogany Crossbow Stock+Adamant Limbs+Crossbow String	9450+9429+9438
+Fletching	62	12.6	Brutal Adamant Arrow	0	Ogre Flighted Ogre Arrow+Adamant Nails	2864+4823
+Fletching	63	13.3	Ruby Bolt	9339	Adamant Bolts+Ruby tips	9143+9191
+Fletching	65	14	Diamond Bolt	9340	Adamant Bolts+Diamond tips	9143+9192
+Fletching	65	135	Yew Shortbow	857	Yew Logs+Bowstring	1515+1777+68	480
+Fletching	67	15	Adamant Dart	810	Adamant Dart Tip+3 Feathers	823
+Fletching	69	10	Rune Bolt	9144	Rune Bolts(unf)+Feathers	9381+314
+Fletching	69	200	Rune Crossbow	9185	Yew Crossbow Stock+Runite Limbs+Crossbow String	9452+9431+9438
+Fletching	70	150	Yew Longbow	855	Yew Logs+Bowstring	1515+1777+66	768
+Fletching	71	18.3	Dragonstone Bolt	9341 Runite Bolts+Dragonstone tips	9144+9193
+Fletching	73	19.4	Onyx Bolt	9342	Runite Bolts+Onyx tips	9144+194
+Fletching	75	13.83	Rune Arrow	892	Arrow Shaft+Rune Arrowtips	52+44
+Fletching	77	15	Rune Brutal Arrow	0	Flighted Ogre Arrow+Rune Nails	2864+4824
+Fletching	80	166.5	Magic Shortbow	861	Magic Logs+Bowstring	1513+1777+72	960
+Fletching	81	18.8	Rune Dart	811	Rune Dart Tip+3 Feathers	824
+Fletching	85	183	Magic Longbow	859	Magic Logs+Bowstring	1513+1777+70	1536
+Fletching	90	16.33	Dragon Arrow	11212	Arrow Shaft+Dragon Arrowtips	52+11237
+Fletching	95	25	Dragon Dart	11230	Dragon dart tip+3 Feathers	11232
+SKILL|LEVEL|EXP|PLANT|SEED|SEED_ID|PRODUCE|PRODUCE_ID|PATCH|PLANT_EXP|HARVEST_XP|CHECKHEALTH_XP|TIME|PAYMENT|PAYMENT_ID|PAYMENT_AMOUNT|PICK_AMOUNT
+Farming	1	242	Potato	3x Potato seed	5318	26x Potato	1942 	Allotment	8	9	0	40	2x Compost	6032	2	26
+Farming	5	282.5	Onion	3x Onion seed	5319	26x Onion	1957	Allotment	9.5	10.5	0	40	Potatoes(10)	5438	1	26
+Farming	7	309	Cabbage	3x Cabbage seed	5324	26x Cabbage	1965	Allotment	10	11.5	0	40	Onions(10)	5458	1	26
+Farming	12	376.5	Tomato	3x Tomato seed	5322	26x Tomato	1982	Allotment	12.5	14	0	40	2x Cabbages(10)	5478	2	26
+Farming	20	511	Sweetcorn	3x Sweetcorn seed	5320	26x Sweetcorn	5986	Allotment	17	19	0	55	10x Jute fibre	5931	10	26
+Farming	31	780	Strawberry	3x Strawberry seed	5323	26x Strawberry	5504	Allotment	26	29	0	55	Apples(5)	5386	5	26
+Farming	47	1465.5	Watermelon	3x Watermelon seed	5321	26x Watermelon	5982	Allotment	48.5	54.5	0	75	10x Curry leaf	5970	10	26
+Farming	2	55.5	Marigold	Marigold seed	5096	Marigolds	6010	Flower	8.5	47	0	20	-	0	0	0
+Farming	11	78.5	Rosemary	Rosemary seed	5097	Rosemary	6014	Flower	12	66.5	0	20	-	0	0	0
+Farming	24	130.5	Nasturtium	Nasturtium seed	5098	Nasturtiums	6012	Flower	19.5	111	0	20	-	0	0	0
+Farming	25	136	Woad	Woad seed	5099	3x Woad leaf	1793	Flower	20.5	115.5	0	20	-	0	0	3
+Farming	26	141.5	Limpwurt	Limpwurt seed	5100	3x Limpwurt root	225	Flower	21.5	120	0	20	-	0	0	3
+Farming	52	300	White lily	White lily seed	0	Ashes	592	Flower	50	250	0	120	-	0	0	0
+Farming	9	98.5	Guam	Guam seed	5291	7x Grimy guam	199	Herb	11	12.5	0	80	-	0	0	7
+Farming	14	118.5	Marrentill	Marrentill seed	5292	7x Grimy marrentill	201	Herb	13.5	15	0	80	-	0	0	7
+Farming	19	142	Tarromin	Tarromin seed	5293	7x Grimy tarromin	203	Herb	16	18	0	80	-	0	0	7
+Farming	26	189.5	Harralander	Harralander seed	5294	7x Grimy harralander	205	Herb	21.5	24	0	80	-	0	0	7
+Farming	29	420	Goutweed	Gout touber	6311	7x Goutweed	0	Herb	105	45	0	80	-	0	0	7
+Farming	32	240.5	Ranarr	Ranarr seed	5295	7x Grimy ranarr	207	Herb	27	30.5	0	80	-	0	0	7
+Farming	36	284	Spirit weed	Spirit weed seed	12176	7x Grimy spirit weed	12174	Herb	32	36	0	80	-	0	0	7
+Farming	38	303.5	Toadflax	Toadflax seed	5296	7x Grimy toadflax	3049	Herb	34	38.5	0	80	-	0	0	7
+Farming	44	382.5	Irit	Irit seed	5297	7x Grimy irit	209	Herb	43	48.5	0	80	-	0	0	7
+Farming	50	485	Avantoe	Avantoe seed	5298	7x Grimy avantoe	211	Herb	54.5	61.5	0	80	-	0	0	7
+Farming	56	615	Kwuarm	Kwuarm seed	5299	7x Grimy kwuarm	213	Herb	69	78	0	80	-	0	0	7
+Farming	62	777	Snapdragon	Snapdragon seed	5300	7x Grimy snapdragon	3051	Herb	87.5	98.5	0	80	-	0	0	7
+Farming	67	946.5	Cadantine	Cadantine seed	5301	7x Grimy cadantine	215	Herb	106.5	120	0	80	-	0	0	7
+Farming	73	1195	Lantadyme	Lantadyme seed	5302	7x Grimy lantadyme	2485	Herb	134.5	151.5	0	80	-	0	0	7
+Farming	79	1514.5	Dwarf weed	Dwarf weed seed	5303	7x Grimy dwarf weed	217	Herb	170.5	192	0	80	-	0	0	7
+Farming	85	1771	Torstol	Torstol seed	5304	7x Grimy torstol	219	Herb	199.5	224.5	0	80	-	0	0	7
+Farming	3	132	Barley	4x Barley seed	5305	13x Barley	6006	Hop	8.5	9.5	0	40	3x Compost	6032	3	13
+Farming	4	139	Hammerstone	4x Hammerstone seed	5307	13x Hammerstone hops	5994	Hop	9	10	0	40	Marigolds	6010	1	13
+Farming	8	166.5	Asgarnian	4x Asgarnian seed	5308	13x Asgarnian hops	5996	Hop	10.5	12	0	50	Onions(10)	5458	1	13
+Farming	13	201.5	Jute	3x Jute seed	5306	13x Jute fibre	5931	Hop	13	14.5	0	50	6x Barley malt	6008	6	13
+Farming	16	222.5	Yanillian	4x Yanillian seed	5309	13x Yanillian hops	5998	Hop	14.5	16	0	55	Tomatoes(5)	5968	1	13
+Farming	21	271	Krandorian	4x Krandorian seed	5310	13x Krandorian hops	6000	Hop	17.5	19.5	0	65	3x Cabbages(10)	5478	3	13
+Farming	28	361	Wildblood	4x Wildblood seed	5311	13x Wildblood hops	6002	Hop	23	26	0	75	Nasturtiums	6012	1	13
+Farming	10	93.5	Redberry bush	Redberry seed	5101	4x Redberries	1951	Bush	11.5	4.5	64	90	4x Cabbages(10)	5478	4	4
+Farming	22	148.5	Cadavaberry bush	Cadavaberry seed	5102	4x Cadavaberries	753	Bush	18	7	102.5	110	3x Tomatoes(5)	5968	3	4
+Farming	36	257	Dwellberry bush	Dwellberry seed	5103	4x Dwellberries	2126	Bush	31.5	12	177.5	130	3x Strawberries(5)	5406	3	4
+Farming	48	411	Jangerberry bush	Jangerberry seed	5104	4x Jangerberries	247	Bush	50.5	19	284.5	150	6x Watermelon	5982	6	4
+Farming	59	631.5	Whiteberry bush	Whiteberry seed	5105	4x White berries	239	Bush	78	29	437.5	150	8x Mushroom	6004	8	4
+Farming	70	974	Poison ivy bush	Poison ivy seed	5106	4x Poison ivy berries	6018	Bush	120	45	674	150	-	0	0	4
+Farming	27	1272.5	Apple tree	Apple tree seed	5283	6x Cooking apple	1955	Fruit tree	22	8.5	1199.5	880	9x Sweetcorn	5986	9	6
+Farming	33	1841.5	Banana tree	Banana tree seed	5284	6x Banana	1963	Fruit tree	28	10.5	1750.5	880	4x Apples(5)	5386	4	6
+Farming	39	2586.7	Orange tree	Orange tree seed	5285	6x Orange	2108	Fruit tree	35.5	13.5	2470.2	880	3x Strawberries(5)	5406	3	6
+Farming	42	3036.9	Curry tree	Curry tree seed	5286	6x Curry leaf	5970	Fruit tree	40	15	2906.9	880	5x Bananas(5)	5416	5	6
+Farming	51	4791.7	Pineapple	Pineapple seed	5287	6x Pineapple	2114	Fruit tree	57	21.5	4605.7	880	10x Watermelon	5982	10	6
+Farming	57	6380.4	Papaya tree	Papaya tree seed	5288	6x Papaya fruit	5972	Fruit tree	72	27	6146.4	880	10x Pineapple	2114	10	6
+Farming	68	10509.6	Palm tree	Palm tree seed	5289	6x Coconut	5974	Fruit tree	110.5	41.5	10150.1	880	15x Papaya fruit	5972	15	6
+Farming	15	481.3	Oak tree	Acorn	5312	-	0	Tree	14	0	467.3	140	Tomatoes(5)	5968	1	0
+Farming	30	1481.3	Willow tree	Willow seed	5313	-	0	Tree	25	0	1456.3	220	Apples(5)	5386	1	0
+Farming	45	3448.4	Maple tree	Maple seed	5314	-	0	Tree	45	0	3403.4	300	Oranges(5)	5396	1	0
+Farming	60	7150.9	Yew tree	Yew seed	5315	-	0	Tree	81	0	7069.9	380	10x Cactus spine	6016	10	0
+Farming	75	13913.8	Magic tree	Magic seed	5316	-	0	Tree	145.5	0	13768.3	460	25x Coconut	5974	25	0
+Farming	42	87	Evil turnip	Evil turnip seed	12148	Evil turnip	12134	Special	41	46	0	5	-	0	0
+Farming	53	407.7	Bittercap mushroom	Mushroom spore	5282	6x Mushroom	6004	Special	61.5	57.7	0	220	-	0	6
+Farming	53	1550	Jade vine	Jade vine seed	0	Jade vine seed	0	Special	50	0	1500	1200	10x Wildblood hops	6002	10	0
+Farming	55	515.5	Cactus	Cactus seed	5280	3x Cactus spine	6016	Special	66.5	25	374	550	-	0	0	3
+Farming	63	603	Belladonna	Belladonna seed	5281	Nightshade	0	Special	91	512	0	280	-	0	0	0
+Farming	72	12516.5	Calquat tree	Calquat tree seed	5290	6x Calquat fruit	5980	Special	129.5	48.5	12096	1440	8x Poison ivy berries	6018	8	6
+Farming	83	19501.3	Spirit tree	Spirit tree seed	0	-	0	Special	199.5	0	19301.8	3680	5x Monkey nuts + Monkey bar + Ground suqah tooth	0	0	0
+Skill|Level|Exp|Item|GE_ID|Shop
+Construction	1	25	Plank	960	100
+Construction	15	60	Oak plank	8778	250
+Construction	35	90	Teak plank	8780	500
+Construction	40	140	Mahogany plank	8782	1500
+Construction	1	4	Bronze nails	4819
+Construction	1	4	Iron nails	4820
+Construction	1	4	Steel nails	1539
+Construction	1	4	Black nails	4821
+Construction	1	4	Mithril nails	4822
+Construction	1	4	Adamantite nails	4823
+Construction	1	4	Runite nails	4824
+Construction	2	15	Bolt of cloth	8790	650
+Construction	3	10	Soft Clay	1761	-
+Construction	5	20	Limestone brick	3420	45
+Construction	60	500	Marble block	8786	325000
+Construction	44	300	Gold leaf	8786	130000
+Construction	82	1000	Magic stone	8788	975000
+Construction	5	10	Iron bar	2351	-
+Construction	7	20	Steel bar	2353	-
+Construction	1	22	Clockwork	8792	-
+Construction	1	1	Molten glass	1775	-
+Skill|Level|Exp|Item|GE_ID|Ingredients|ING_ID|Heal	-	INGREDIENTS	INGREDIENTS	ING_ID
+Cooking	1	30	Cooked Meat	2142	Raw beef	2132	3
+Cooking	1	30	Cooked Chicken	2140	Raw Chicken	2138	3
+Cooking	1	30	Cooked Rabbit	3228	Raw Rabbit	3226	5
+Cooking	1	30	Anchovies	319	Raw Anchovies	321	1
+Cooking	1	30	Crayfish	13433	Raw Crayfish	13435	1
+Cooking	1	30	Shrimps	315	Raw Shrimps	317	3
+Cooking	1	30	Karambwanji	ID	INGREDIENTS	ING_ID	3
+Cooking	1	40	Sardine	ID	INGREDIENTS	ING_ID	4
+Cooking	1	80	Karambwan	ID	INGREDIENTS	ING_ID	18	Poison
+Cooking	1	40	Bread	ID	INGREDIENTS	ING_ID	5
+Cooking	1	80	Ugthanki Kebab	ID	INGREDIENTS	ING_ID	19
+Cooking	5	50	Herring	ID	INGREDIENTS	ING_ID	-
+Cooking	6	50	Fruit Blast	ID	INGREDIENTS	ING_ID	9
+Cooking	7	15	Baked Potato	ID	INGREDIENTS	ING_ID	4
+Cooking	8	70	Pineapple Punch	ID	INGREDIENTS	ING_ID	9
+Cooking	10	78	Redberry Pie	ID	INGREDIENTS	ING_ID	10
+Cooking	10	100	Toad Crunchies	ID	INGREDIENTS	ING_ID	7
+Cooking	10	60	Mackerel	ID	INGREDIENTS	ING_ID	6
+Cooking	11	63.5	Roast Bird Meat	ID	INGREDIENTS	ING_ID	6
+Cooking	12	70	Thin Snail	ID	INGREDIENTS	ING_ID	5-7
+Cooking	12	00	Spicy Crunchies	ID	INGREDIENTS	ING_ID	7
+Cooking	14	100	Worm Crunchies	ID	INGREDIENTS	ING_ID	8
+Cooking	14	182	Cider	ID	INGREDIENTS	ING_ID	 Boosts: Farming +1, Attack -2, Strength -2
+Cooking	15	70	Trout	ID	INGREDIENTS	ING_ID	7
+Cooking	16	72	Roasted Rabbit	ID	INGREDIENTS	ING_ID	7
+Cooking	16	100	Choc Chip Crunchies	ID	INGREDIENTS	ING_ID	7
+Cooking	16	80	Jungle Spider	ID	INGREDIENTS	ING_ID	7-10
+Cooking	17	80	Lean Snail	ID	INGREDIENTS	ING_ID	6-8
+Cooking	18	75	Cod	ID	INGREDIENTS	ING_ID	7
+Cooking	18	110	Wizard Blizzard	ID	INGREDIENTS	ING_ID	5	Other effects: +5 Strength and -4 Attack
+Cooking	19	215	Dwarven Stout	ID	INGREDIENTS	ING_ID	-	 Boosts: Mining +1, Smithing +1, Attack -2, Strength -2
+Cooking	20	104	Meat Pie	ID	INGREDIENTS	ING_ID	12
+Cooking	20	52	Nettle Tea	ID	INGREDIENTS	ING_ID	3
+Cooking	20	80	Pike	ID	INGREDIENTS	ING_ID	8
+Cooking	20	120	Short Green Guy (SGG)	ID	INGREDIENTS	ING_ID	5	Other Effects: -4 Attack, +5 Strength
+Cooking	21	100	Crab Meat	ID	INGREDIENTS	ING_ID	10
+Cooking	21	18	Pot of Cream	ID	INGREDIENTS	ING_ID	1
+Cooking	21	82	Roast Beast Meat	ID	INGREDIENTS	ING_ID	6
+Cooking	21	104	Sweetcorn	ID	INGREDIENTS	ING_ID	2-10
+Cooking	22	95	Fat Snail	ID	INGREDIENTS	ING_ID	7-9
+Cooking	24	248	Asgarnian Ale	ID	INGREDIENTS	ING_ID	-	Boosts: Strength and Attack +2
+Cooking	25	117	Stew	ID	INGREDIENTS	ING_ID	11
+Cooking	25	90	Salmon	ID	INGREDIENTS	ING_ID	9
+Cooking	25	150	Fruit Batta	ID	INGREDIENTS	ING_ID	11
+Cooking	26	152	Toad Batta	ID	INGREDIENTS	ING_ID	11
+Cooking	27	154	Worm Batta	ID	INGREDIENTS	ING_ID	11
+Cooking	28	156	Vegetable Batta	ID	INGREDIENTS	ING_ID	11
+Cooking	28	95	Slimy Eel	ID	INGREDIENTS	ING_ID	6-10
+Cooking	29	281	Greenman's Ale	ID	INGREDIENTS	ING_ID	-	Boosts: Herblore +1, Attack -2, Strength -2, Defence -2
+Cooking	29	128	Mud Pie	ID	INGREDIENTS	ING_ID	-	Halves run energy of person hit
+Cooking	29	158	Cheese and Tomato Batta	ID	INGREDIENTS	ING_ID	11
+Cooking	30	100	Tuna	ID	INGREDIENTS	ING_ID	10
+Cooking	30	140	Chompy Bird	ID	INGREDIENTS	ING_ID	10
+Cooking	30	130	Apple Pie	ID	INGREDIENTS	ING_ID	14
+Cooking	30	170	Worm Hole	ID	INGREDIENTS	ING_ID	12
+Cooking	31	100	Fishcake	ID	INGREDIENTS	ING_ID	11
+Cooking	32	170	Drunk Dragon	ID	INGREDIENTS	ING_ID	5	Other Effects: +6 Strength, -4 Attack
+Cooking	33	170	Chocolate Saturday	ID	INGREDIENTS	ING_ID	7	Other Effects: +6 Strength, - 4 Attack
+Cooking	34	138	Garden Pie	ID	INGREDIENTS	ING_ID	12	 +3 Farming boost
+Cooking	34	313	Wizard's Mind Bomb	ID	INGREDIENTS	ING_ID	-	Boosts: Magic +2 or +3, Attack -1, Strength -1, Defence -1
+Cooking	35	143	Plain Pizza	ID	INGREDIENTS	ING_ID	14
+Cooking	35	200	Wine	ID	INGREDIENTS	ING_ID	11
+Cooking	35	175	Vegetable Ball	ID	INGREDIENTS	ING_ID	12
+Cooking	35	110	Rainbow Fish	ID	INGREDIENTS	ING_ID	11
+Cooking	37	170	Blurberry Special	ID	INGREDIENTS	ING_ID	7	Other Effects: +6 Strength, -4 Attack
+Cooking	38	40	Pat of Butter	ID	INGREDIENTS	ING_ID	N/A
+Cooking	38	115	Cave Eel	ID	INGREDIENTS	ING_ID	7-11
+Cooking	39	347	Dragon Bitter	ID	INGREDIENTS	ING_ID	-	Strength +2, Attack -1
+Cooking	39	55	Potato with Butter	ID	INGREDIENTS	ING_ID	14
+Cooking	40	120	Lobster	ID	INGREDIENTS	ING_ID	12
+Cooking	40	180	Cake	ID	INGREDIENTS	ING_ID	12
+Cooking	40	185	Tangled Toad Legs	ID	INGREDIENTS	ING_ID	15
+Cooking	41	160	Cooked Jubbly	ID	INGREDIENTS	ING_ID	15
+Cooking	41	136	Chili Potato	ID	INGREDIENTS	ING_ID	14
+Cooking	42	190	Chocolate Bomb	ID	INGREDIENTS	ING_ID	15
+Cooking	43	130	Bass	ID	INGREDIENTS	ING_ID	13
+Cooking	44	380	Moonlight Mead	ID	INGREDIENTS	ING_ID	4
+Cooking	45	169	Meat Pizza	ID	INGREDIENTS	ING_ID	16
+Cooking	45	140	Swordfish	ID	INGREDIENTS	ING_ID	14
+Cooking	47	164	Fish Pie	ID	INGREDIENTS	ING_ID	12	- +3 Fishing boost
+Cooking	47	95	Potato with Cheese	ID	INGREDIENTS	ING_ID	16
+Cooking	48	64	Cheese	ID	INGREDIENTS	ING_ID	2
+Cooking	49	413	Axeman's Folly	ID	INGREDIENTS	ING_ID	-
+Cooking	50	210	Chocolate Cake	ID	INGREDIENTS	ING_ID	-
+Cooking	50	30	Oomlie Wrap	ID	INGREDIENTS	ING_ID	-
+Cooking	51	191	Egg Potato	ID	INGREDIENTS	ING_ID	-
+Cooking	53	140	Lava Eel	ID	INGREDIENTS	ING_ID	-
+Cooking	54	446	Chef's Delight	ID	INGREDIENTS	ING_ID	-
+Cooking	55	182	Anchovy Pizza	ID	INGREDIENTS	ING_ID	-
+Cooking	59	479	Slayer's Respite	ID	INGREDIENTS	ING_ID	-
+Cooking	60	280	Curry	ID	INGREDIENTS	ING_ID	-
+Cooking	62	150	Monkfish	ID	INGREDIENTS	ING_ID	-
+Cooking	64	230	Mushroom Potato	ID	INGREDIENTS	ING_ID	-
+Cooking	65	195	Pineapple Pizza	ID	INGREDIENTS	ING_ID	-
+Cooking	68	310	Tuna Potato	ID	INGREDIENTS	ING_ID	-
+Cooking	70	210	Admiral Pie	ID	INGREDIENTS	ING_ID	- +5 Fishing boost
+Cooking	80	210	Shark	ID	INGREDIENTS	ING_ID	-
+Cooking	82	212	Sea Turtle	ID	INGREDIENTS	ING_ID	-
+Cooking	85	240	Wild Pie	ID	INGREDIENTS	ING_ID	- +5 Slayer and +4 Ranged boost
+Cooking	91	216	Manta Ray	ID	INGREDIENTS	ING_ID	-
+Cooking	95	270	Summer Pie	ID	INGREDIENTS	ING_ID	- +10% Run Energy and +5 agility boost

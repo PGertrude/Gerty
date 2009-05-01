@@ -1,0 +1,14 @@
+Gnome Stronghold	86.5	1
+Penguin Course	540	30
+Agility Pyramid	1014	30
+Barbarian Outpost	139.5	35
+Agility Ticket (1)	240	1
+Agility Ticket (10)	2480	1
+Agility Ticket (25)	6500	1
+Agility Ticket (100)	28000	1
+Agility Ticket (1000)	320000	1
+Werewolf Course	540	60
+Wilderness Course	571	52
+Ape Atoll	580	48
+DorgeshKaan Course	2750	70
+Mouse Catch Attempt	15	1

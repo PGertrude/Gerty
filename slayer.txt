@@ -1,0 +1,109 @@
+Chicken	3	1	-
+Cave bug	5	5	-
+Crawling Hand	16	8	-
+Dwarf	16	10	-
+Skeleton	17	25	-
+Crawling Hand	19	12	-
+Cave Crawler	20	23	-
+Ghost	25	19	-
+Bear	27	21	-
+Skeleton	29	22	-
+Wolf	34	25	-
+Hill giant	35	28	-
+Kalphite Worker	40	28	-
+Vampire	40	61	-
+Pyrefiend	45	43	-
+Guard dog	49	44	-
+Earth Warrior	54	51	-
+Moss giant	60	42	-
+Ice warrior	60	57	-
+Wild dog	62	63	-
+Otherworldly being	65	64	-
+Shadow warrior	67	48	-
+Ice giant	70	49	-
+Dagannoth	70	74	-
+Green dragon	75	79	-
+Turoth	76	83	-
+Lesser demon	79	82	-
+Greater demon	83	92	-
+Troll	90	69	-
+Kalphite Soldier	90	85	-
+Werewolf	90	85	-
+Wall beast	105	49	-
+Blue dragon	107	111	-
+Elf	108	108	-
+Fire giant	108	86	-
+Hellhound	116	122	-
+Bloodveld	120	76	50
+Dagannoth	120	92	-
+Bronze dragon	125	131	-
+Rockslug	27	29	-
+Monkey	6	3	-
+banshee	22	23	15
+Cockatrice	37	37	25
+pyrefiend	45	43	30
+basilisk	75	61	40
+Infernal Mage	60	66	45
+Jelly	75	78	52
+turoth	77	83	55
+zygomite	65	74	57
+Cave Horror	55	80	58
+Aberrant Spectre	90	96	60
+dust devil	105	93	65
+Kurask	97	106	70
+Gargoyle	105	111	75
+Nechryael	105	115	80
+Abyssal Demon	150	124	85
+Dark Beast	225	182	90
+Steel dragon	220	246	-
+Kalphite soldier	90	85	-
+Dagannoth	70	74	-
+Hell hound	116	122	-
+Black Demon	157	172	-
+Infernal mage	60	66	45
+Iron dragon	173	189	-
+Black dragon	199.33	227	-
+Brine rat	50	70	-
+Goblin	5	12	-
+Minotaur	10	12	-
+Elf	105	108	-
+Cave slime	25	23	17
+Desert lizard	15	12	-
+Bat	8	6	-
+Suqah	108	111	-
+Scorpian	17	14	-
+Gorak	112	145	-
+King scorpian	30	34	-
+Zombie	52.5	73	-
+Spider	35	34	-
+Icefiend	15	13	-
+Ankou	70	86	-
+Kalphite worker	40	28	-
+Dog	62	63	-
+Cow	8	2	-
+Greater demon	87	94	-
+Waterfiend	128	115	-
+Spiritual mage saradomin	85	120	83
+Spiritual mage zamorak	75	121	83
+Spiritual mage bandos	106	121	83
+Spiritual mage armadyl	86	122	83
+Spiritual mage	85	120	83
+Spiritual ranger	106	122	63
+Spiritual ranger saradomin	106	122	63
+Spiritual ranger zamorak	120	118	63
+Spiritual ranger bandos	131	115	63
+Spiritual ranger armadyl	89	127	63
+Spiritual warrior	110	125	68
+Spiritual warrior saradomin	110	125	68
+Spiritual warrior zamorak	100	115	68
+Spiritual warrior armadyl	98	123	68
+Spiritual warrior bandos	131	134	68
+Baby blue dragon	50	48	-
+Fever Spider	40	49	42
+Kalphite Queen	255	333	-
+Red Dragon	140	152	-
+Warped Terrorbird	153.6	143	56
+Warped Tortoise	87	96	87
+Mithril Dragon	276	304	-
+Mutated Bloodveld	186	146	-
+Skeletal Wyvern	210	140	72

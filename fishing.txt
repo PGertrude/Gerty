@@ -1,0 +1,30 @@
+Trout	50	20
+Salmon	70	30
+Tuna	80	35
+Lobster	90	40
+Swordfish	100	50
+Monkfish	120	62
+Shark	110	76
+Sea Turtle	38	79
+Manta Ray	46	81
+Shrimp	10	1
+Karambwanji	10	5
+Sardine	20	5
+Herring	30	10
+Anchovy	40	15
+Mackerel	20	16
+Cod	45	23
+Pike	60	25
+Slimey Eel	65	28
+Frog Spawn	75	33
+Cave Eel	80	38
+Rainbowfish	80	38
+Bass	100	46
+Leaping Trout	50	48
+Lava Eel	60	53
+Barbarian Tuna	80	55
+Leaping Salmon	70	58
+Karambwan	105	65
+Leaping Sturgeon	80	70
+Barbarian Swordfish	100	70
+Barbarian Shark	110	96
