@@ -1,0 +1,377 @@
+
+Session Start: Fri May 01 16:36:22 2009
+Session Ident: Status Window
+[16:37:21] Checking for updates...
+[16:37:23] [Updating] clanlookup [1.1] (Clan Search)
+[16:37:29] [Update Complete]
+[16:37:30] [Updating] cmbpercent [2.0] (User Statistics)
+[16:37:36] [Update Complete]
+[16:37:36] [Updating] coinshare [1.1] (split per item(ge))
+[16:37:42] [Update Complete]
+[16:37:42] [Updating] compare [2.2] (User Comparisons)
+[16:37:48] [Update Complete]
+[16:37:48] [Updating] coords [1.2] (TT Co-ordinates)
+[16:37:54] [Update Complete]
+[16:37:54] [Updating] Cost [1.0] (Cost scripts)
+[16:38:01] [Update Complete]
+[16:38:01] [Updating] drops [2.1] (Monster Drop Information)
+[16:38:07] [Update Complete]
+[16:38:07] [Updating] elly [1.7] (status moved back)
+[16:38:13] [Update Complete]
+[16:38:13] [Updating] exp [1.02] (Exp Params)
+[16:38:19] [Update Complete]
+[16:38:20] [Updating] fml [1.05] (fuck my life)
+[16:38:26] [Update Complete]
+[16:38:26] [Updating] geinfo [1.1] (Extended Ge Info)
+[16:38:32] [Update Complete]
+[16:38:33] [Updating] gelink [1.15] (Ge Prices)
+[16:38:39] [Update Complete]
+[16:38:39] [Updating] geupdate [1.4] (Ge Price Change Tracker)
+[16:38:45] [Update Complete]
+[16:38:45] [Updating] google [2.2] (google search)
+[16:38:51] [Update Complete]
+[16:38:52] [Updating] grats [1.11] (Grats Script)
+[16:38:58] [Update Complete]
+[16:38:58] [Updating] hilow [2.0] (Users High/Low Stats)
+[16:39:04] [Update Complete]
+[16:39:04] [Updating] iq [2.0] (Fun Commands)
+[16:39:10] [Update Complete]
+[16:39:10] [Updating] join [1.7] (password updated)
+[16:39:16] [Update Complete]
+[16:39:17] [Updating] non-socket [1.93] (setsite fix)
+[16:39:23] [Update Complete]
+[16:39:23] [Updating] npc [1.0] (NPC Information)
+[16:39:29] [Update Complete]
+[16:39:30] [Updating] qfc [2.0] (RSOF QFC)
+[16:39:36] [Update Complete]
+[16:39:37] [Updating] quests [1.01] (Quest Information)
+[16:39:43] [Update Complete]
+[16:39:44] [Updating] rank [1.16] (Small updates and bug fixes)
+[16:39:50] [Update Complete]
+[16:39:51] [Updating] rccomp [1.0] (RC Competitions)
+[16:39:57] [Update Complete]
+[16:39:58] [Updating] remotemodes [1.0] (Remote Control)
+[16:40:05] [Update Complete]
+[16:40:05] [Updating] shop [1.0] (shop sells wot)
+[16:40:11] [Update Complete]
+[16:40:11] [Updating] shortcommands [1.35] (random commands)
+[16:40:17] [Update Complete]
+[16:40:18] [Updating] skillplan [2.0] (Shows exp from an item)
+[16:40:24] [Update Complete]
+[16:40:24] [Updating] solve [1.18] (Calculator)
+[16:40:30] [Update Complete]
+[16:40:31] [Updating] ssavgcopy [1.0] (Averages From Runehead)
+[16:40:37] [Update Complete]
+[16:40:37] [Updating] ssevent [1.1] (ss next events)
+[16:40:44] [Update Complete]
+[16:40:44] [Updating] ssmonth [1.0] (ss.x10 prompt)
+[16:40:50] [Update Complete]
+[16:40:51] [Updating] spamcontrol [2.2] (updated to nick only, not channel ban)
+[16:40:57] [Update Complete]
+[16:40:57] [Updating] statsfetch [2.6] (User Lookups)
+[16:41:04] [Update Complete]
+[16:41:04] [Updating] table [1.3] (fixed addition of html line on hiscores)
+[16:41:11] [Update Complete]
+[16:41:15] [Updating] task [1.3] (Exp per Slayer Task)
+[16:41:22] [Update Complete]
+[16:41:23] [Updating] test [1.4] (Calculator (no trigger))
+[16:41:30] [Update Complete]
+[16:41:31] [Updating] timer [2.1] (fixed bug in unranked nicks)
+[16:41:38] [Update Complete]
+[16:41:39] [Updating] today-output [1.2] (Todays Exp)
+[16:41:46] [Update Complete]
+[16:41:47] [Updating] today-tracker [1.0] (Tracker Update)
+[16:41:57] [Update Complete]
+[16:41:58] [Updating] track [1.2] (RScripts Tracker Database)
+[16:42:06] [Update Complete]
+[16:42:07] [Updating] urban [1.0] (Urban Dictionary command)
+[16:42:13] [Update Complete]
+[16:42:14] [Updating] world [1.0] (World Script)
+[16:42:20] [Update Complete]
+[16:42:20] [Updating] YesterdayOutput [1.15] (Yesterdays Exp)
+[16:42:27] [Update Complete]
+[16:42:27] [Updating] zybezitem [1.1] (Item Information)
+[16:42:34] [Update Complete]
+[16:42:34] [Updating] aliases [1.61] ($FormatWith added)
+[16:43:14] [Update Complete]
+[16:43:15] [Updating] exp.ini [1.0] (lvltoxp)
+[16:43:21] [Update Complete]
+[16:43:22] [Updating] tracked.ini [1.0] (tracked + admin)
+[16:43:27] [Update Complete]
+[16:43:28] [Updating] agility.txt [2.0] (agil params)
+[16:43:34] [Update Complete]
+[16:43:35] [Updating] anagram.txt [1.0] (anagram list)
+[16:43:40] [Update Complete]
+[16:43:41] [Updating] attack.txt [2.0] (attack params)
+[16:43:47] [Update Complete]
+[16:43:48] [Updating] botlist.txt [1.0] (list of bots)
+[16:43:53] [Update Complete]
+[16:43:55] [Updating] construction.txt [2.0] (cons params)
+[16:44:01] [Update Complete]
+[16:44:02] [Updating] cooking.txt [3.0] (cook params)
+[16:44:07] [Update Complete]
+[16:44:08] [Updating] coords.txt [1.0] (coords list)
+[16:44:13] [Update Complete]
+[16:44:14] [Updating] Cost.txt [1.0] (Cost params)
+[16:44:23] [Update Complete]
+[16:44:48] [Updating] crafting.txt [2.0] (crafting params)
+[16:45:32] [Update Complete]
+[16:46:00] [Updating] defence.txt [2.0] (defence params)
+[16:46:08] [Update Complete]
+[16:46:09] [Updating] fairy.txt [1.0] (fairy ring locations)
+[16:46:14] [Update Complete]
+[16:46:25] [Updating] farming.txt [2.0] (farm params)
+[16:46:50] [Update Complete]
+[16:52:19] [Updating] firemaking.txt [2.0] (fm params)
+[16:52:30] [Update Complete]
+[16:52:31] [Updating] fishing.txt [2.0] (fishing params)
+[16:52:37] [Update Complete]
+[16:52:39] [Updating] fletching.txt [2.0] (fletch params)
+[16:52:44] [Update Complete]
+[16:53:07] [Updating] herblore.txt [2.0] (herb params)
+[16:53:22] [Update Complete]
+[16:53:23] [Updating] hitpoints.txt [2.0] (hp params)
+[16:53:28] [Update Complete]
+[16:53:49] [Updating] hunter.txt [2.0] (hunt params)
+[16:54:01] [Update Complete]
+[16:54:02] [Updating] magic.txt [2.0] (magic params)
+[16:54:07] [Update Complete]
+[16:54:24] [Updating] mining.txt [2.0] (mine params)
+[16:54:40] [Update Complete]
+[16:54:41] [Updating] mirc.ini [1.0] (setup info)
+[16:54:47] [Update Complete]
+[16:55:00] [Updating] param.txt [1.1] (!xp list)
+[16:55:19] [Update Complete]
+[16:55:20] [Updating] Potion.txt [1.0] (!potion command params)
+[16:55:25] [Update Complete]
+[16:55:26] [Updating] prayer.txt [2.0] (pray params)
+[16:55:31] [Update Complete]
+[16:55:32] [Updating] ranged.txt [2.0] (range params)
+[16:55:37] [Update Complete]
+[16:55:39] [Updating] riddles.txt [1.0] (riddle list)
+[16:55:44] [Update Complete]
+[16:55:45] [Updating] rsn.ini [1.0] (rsn file)
+[16:55:50] [Update Complete]
+[16:55:51] [Updating] runecraft.txt [2.0] (rc params)
+[16:55:56] [Update Complete]
+[16:55:57] [Updating] slayer.txt [2.0] (slay params)
+[16:56:02] [Update Complete]
+[16:56:03] [Updating] smithing.txt [2.0] (smith params)
+[16:56:08] [Update Complete]
+[16:56:10] [Updating] strength.txt [2.0] (str params)
+[16:56:15] [Update Complete]
+[16:56:16] [Updating] summoning.txt [2.0] (sum params)
+[16:56:21] [Update Complete]
+[16:56:23] [Updating] thieving.txt [2.0] (thieve params)
+[16:56:28] [Update Complete]
+[16:56:30] [Updating] uri.txt [1.0] (uri clues)
+[16:56:35] [Update Complete]
+[16:56:37] [Updating] woodcutting.txt [2.0] (wc params)
+[16:56:42] [Update Complete]
+[16:56:44] Gerty is up to date.
+-
+[16:56:44] * Connecting to irc.swiftirc.net (6667)
+-
+[16:56:45] -ixion.nl.eu.SwiftIRC.net- *** Looking up your hostname...
+-
+[16:56:45] -ixion.nl.eu.SwiftIRC.net- *** Checking ident...
+-
+[16:56:45] -ixion.nl.eu.SwiftIRC.net- *** Found your hostname
+-
+[16:56:49] -ixion.nl.eu.SwiftIRC.net- *** No ident response; username prefixed with ~
+-
+[16:56:49] Welcome to the SwiftIRC IRC Network GertTest!~Gerty@79-74-96-242.dynamic.dsl.as9105.com
+[16:56:49] Your host is ixion.nl.eu.SwiftIRC.net, running version Unreal3.2.6.SwiftIRC(1)
+[16:56:49] This server was created Mon Apr 6 2009 at 14:59:10 CEST
+-
+[16:56:49] ixion.nl.eu.SwiftIRC.net Unreal3.2.6.SwiftIRC(1) iowghraAsORTVSxNCWqBzvdHtGpfF lvhopsmntikrRcaqOALQbSeIKVfMCuzNTGjHFE
+-
+[16:56:49] CMDS=KNOCK,MAP,DCCALLOW,USERIP NAMESX SAFELIST HCN MAXCHANNELS=30 CHANLIMIT=#:30 MAXLIST=b:100,e:100,I:100 NICKLEN=30 CHANNELLEN=32 TOPICLEN=307 KICKLEN=307 AWAYLEN=307 MAXTARGETS=20 are supported by this server
+[16:56:49] WALLCHOPS WATCH=128 SILENCE=10 MODES=12 CHANTYPES=# PREFIX=(ohv)@%+ CHANMODES=beIqa,kfL,lj,psmntirRcOAQKVCuzNSMTGHFE NETWORK=SwiftIRC CASEMAPPING=ascii EXTBAN=~,cqnr ELIST=MNUCT STATUSMSG=@%+ EXCEPTS are supported by this server
+[16:56:49] INVEX are supported by this server
+-
+[16:56:49] There are 33 users and 7952 invisible on 10 servers
+[16:56:49] 25 operator(s) online
+[16:56:49] 12 unknown connection(s)
+[16:56:49] 5868 channels formed
+[16:56:49] I have 1385 clients and 1 servers
+-
+[16:56:49] Current Local Users: 1385  Max: 1386
+[16:56:49] Current Global Users: 7985  Max: 16341
+-
+[16:56:49] Message of the Day, ixion.nl.eu.SwiftIRC.net
+-
+[16:56:49] - 6/4/2009 15:05
+[16:56:49] - 
+[16:56:49] - ..-------------------- -------- ------- ------ ----- ---- --- -- - - ----
+[16:56:49] - :   Server
+[16:56:49] - ..  Administrator:    cursive        (cursive@swiftirc.net)
+[16:56:49] - .
+[16:56:49] - .   Standard ports:  6666, 6667, 6668, 6669, 7000 and 8080
+[16:56:49] - 
+[16:56:49] - .   SSL port: 6697
+[16:56:49] - .
+[16:56:49] - ::  Server location:  Amsterdam, The Netherlands
+[16:56:49] - .
+[16:56:49] - `---- ----- --- -
+[16:56:49] - 
+[16:56:49] - Short policy:
+[16:56:49] - 
+[16:56:49] - - Do not mass-invite people to your channel or to another network.
+[16:56:49] - - Do not advertise your website, channel, etc.
+[16:56:49] - - Do not flood our servers, channels or users.
+[16:56:49] - - Friendly bots are allowed after approval from server administrator.
+[16:56:49] - - The channel founder is responsible for the channels registered by him
+[16:56:49] -   or her and is therefore responsible for setting the channel rules and
+[16:56:49] -   all the other channel activities. The network staff will *not* settle
+[16:56:49] -   channel disputes, the channel founder has the final say. We will only
+[16:56:49] -   act if network rules are being broken.
+[16:56:49] - - Everyone is allowed to connect a maximum of 3 clients per hostname.
+[16:56:49] - - You may not engage yourself in any illegal activities. This includes
+[16:56:49] -   but is not limited to sharing copyrighted or illegal materials.
+[16:56:49] - 
+[16:56:49] - Also note that upon connecting to our network your machine will undergo
+[16:56:49] - a scan for open proxies, to prevent malicious connections to us.
+[16:56:49] -   
+[16:56:49] - Interesting channels:
+[16:56:49] -   
+[16:56:49] - - #Help - Our main help channel
+[16:56:49] - - #IRCHelp - Our IRC and services related help channel.
+[16:56:49] - - #Support - Our main IRCop support channel.
+[16:56:49] - - Check /list for more interesting channels!
+[16:56:49] -   
+[16:56:49] - Happy chatting!
+[16:56:49] - 
+[16:56:49] - ..-------------------- -------- ------- ------ ----- ---- --- -- - - ----
+[16:56:49] - :
+[16:56:49] - .. Connecting to this server is a privilege, not a right.
+[16:56:49] - ..
+[16:56:49] - :  By connecting to this server you agree to be bound by the rules that
+[16:56:49] - .. can be found at http://www.swiftirc.net/index.php?page=rules
+[16:56:49] - .  If you do not agree to follow these rules, you must disconnect from
+[16:56:49] - .  this server immediately.
+[16:56:49] - ..
+[16:56:49] - :  Please note the network staff reserve the right to deny you access to
+[16:56:49] - .. SwiftIRC at any time for any reason without prior notification.
+[16:56:49] - :
+[16:56:49] - `--- ----- ------------ -----
+[16:56:49] - 
+[16:56:49] - Last modified: Aug 9th 2008
+-
+[16:56:49] End of /MOTD command.
+-
+[16:56:50] * GertTest sets mode: +ix
+-
+[16:56:50] -Global- [Logon News - May 09 2008] Please ignore any portscanning that occurs while connecting to SwiftIRC. This is a passive scan to help us ensure you are not infected with any virii, worms or trojans that might harm our network or our users.
+-
+[16:56:50] -Global- [Logon News - Dec 24 2008] Dear users, it has come to our attention that some abusive users are trying to get your username and password for RuneScape. Please do NOT visit any websites that ask for such information!! ONLY login with your login and password on www.runescape.com. Please report websites that ask for your login credentials in #Support. Offenders will be banned without formal notification.
+-
+[16:56:50] Local host: 79-74-96-242.dynamic.dsl.as9105.com (79.74.96.242)
+-
+[16:56:50] * /hload: unable to open file 'C:\Documents and Settings\Paul\Desktop\Gerty-bot\runeprice.txt' (line 178, elly.mrc)
+-
+[16:56:50] * /hload: unable to open file 'C:\Documents and Settings\Paul\Desktop\Gerty-bot\geupdatebackup.txt' (line 8, geupdate.mrc)
+-
+[16:56:50] -NickServ- Your nick isn't registered.
+-
+[16:56:50] -ixion.nl.eu.SwiftIRC.net- BOTMOTD File not found
+-
+[16:56:50] * GertTest sets mode: +Bp
+-
+[16:56:51] -ixion.nl.eu.SwiftIRC.net- Setting/removing of usermode(s) 'rsvoOiAqagHSCNwhWzt' has been disabled.
+-
+[16:57:09] There are 32 users and 7956 invisible on 10 servers
+[16:57:09] 25 operator(s) online
+[16:57:09] 8 unknown connection(s)
+[16:57:09] 5871 channels formed
+[16:57:09] I have 1388 clients and 1 servers
+-
+[16:57:09] Current Local Users: 1388  Max: 1390
+[16:57:09] Current Global Users: 7988  Max: 16341
+-
+Session Close: Fri May 01 16:57:16 2009
+
+Session Start: Fri May 01 17:32:14 2009
+Session Ident: Status Window
+[17:33:35] Checking for updates...
+[17:33:40] Gerty is up to date.
+-
+[17:33:41] * Connecting to irc.swiftirc.net (6667)
+-
+[17:33:41] -lunar.nl.eu.SwiftIRC.net- *** Looking up your hostname...
+-
+[17:33:41] -lunar.nl.eu.SwiftIRC.net- *** Checking ident...
+-
+[17:33:41] -lunar.nl.eu.SwiftIRC.net- *** Found your hostname
+-
+[17:33:45] -lunar.nl.eu.SwiftIRC.net- *** No ident response; username prefixed with ~
+-
+[17:33:45] Welcome to the SwiftIRC IRC Network GertTest!~Gerty@79-74-96-242.dynamic.dsl.as9105.com
+[17:33:45] Your host is lunar.nl.eu.SwiftIRC.net, running version Unreal3.2.6.SwiftIRC(1)
+[17:33:45] This server was created Sat Apr 5 2008 at 06:45:36 CEST
+-
+[17:33:45] lunar.nl.eu.SwiftIRC.net Unreal3.2.6.SwiftIRC(1) iowghraAsORTVSxNCWqBzvdHtGpfF lvhopsmntikrRcaqOALQbSeIKVfMCuzNTGjHFE
+-
+[17:33:45] CMDS=KNOCK,MAP,DCCALLOW,USERIP NAMESX SAFELIST HCN MAXCHANNELS=30 CHANLIMIT=#:30 MAXLIST=b:100,e:100,I:100 NICKLEN=30 CHANNELLEN=32 TOPICLEN=307 KICKLEN=307 AWAYLEN=307 MAXTARGETS=20 are supported by this server
+[17:33:45] WALLCHOPS WATCH=128 SILENCE=10 MODES=12 CHANTYPES=# PREFIX=(ohv)@%+ CHANMODES=beIqa,kfL,lj,psmntirRcOAQKVCuzNSMTGHFE NETWORK=SwiftIRC CASEMAPPING=ascii EXTBAN=~,cqnr ELIST=MNUCT STATUSMSG=@%+ EXCEPTS are supported by this server
+[17:33:45] INVEX are supported by this server
+-
+[17:33:45] There are 33 users and 8146 invisible on 10 servers
+[17:33:45] 23 operator(s) online
+[17:33:45] 5 unknown connection(s)
+[17:33:45] 5910 channels formed
+[17:33:45] I have 1556 clients and 1 servers
+-
+[17:33:45] Current Local Users: 1556  Max: 1688
+[17:33:45] Current Global Users: 8179  Max: 16341
+-
+[17:33:45] Message of the Day, lunar.nl.eu.SwiftIRC.net
+-
+[17:33:45] - 14/1/2009 21:42
+[17:33:45] - Welcome to lunar.nl.eu.SwiftIRC.net
+[17:33:45] - 
+[17:33:45] - This server has the following ports open for IRC:
+[17:33:45] - 6666, 6667, 6668, 6669, 7000
+[17:33:45] - 
+[17:33:45] - SSL clients can connect on port 6697
+[17:33:45] - 
+[17:33:45] - IPv6 clients can connect to ipv6.lunar.SwiftIRC.net
+[17:33:45] - 
+[17:33:45] - Administrator: Allen (allen@swiftirc.net)
+[17:33:45] - 
+[17:33:45] - Server location: Rotterdam, Netherlands
+[17:33:45] - 
+[17:33:45] - Use of this IRC server is provided free of charge.  However, 
+[17:33:45] - you MUST agree to follow the SwiftIRC rules which can be read
+[17:33:45] - at http://www.swiftirc.net/index.php?page=rules
+[17:33:45] - 
+[17:33:45] - If you do not agree to follow these rules, you must disconnect
+[17:33:45] - from this server immediately.  Please note the network staff
+[17:33:45] - reserve the right to deny you access to SwiftIRC services at
+[17:33:45] - any time for any reason without prior notification.
+[17:33:45] - 
+[17:33:45] - Last modified: Jan 14th 2008
+-
+[17:33:45] End of /MOTD command.
+-
+[17:33:45] * GertTest sets mode: +ix
+-
+[17:33:45] -Global- [Logon News - May 09 2008] Please ignore any portscanning that occurs while connecting to SwiftIRC. This is a passive scan to help us ensure you are not infected with any virii, worms or trojans that might harm our network or our users.
+-
+[17:33:45] -Global- [Logon News - Dec 24 2008] Dear users, it has come to our attention that some abusive users are trying to get your username and password for RuneScape. Please do NOT visit any websites that ask for such information!! ONLY login with your login and password on www.runescape.com. Please report websites that ask for your login credentials in #Support. Offenders will be banned without formal notification.
+-
+[17:33:45] Local host: 79-74-96-242.dynamic.dsl.as9105.com (79.74.96.242)
+-
+[17:33:45] * /hload: unable to open file 'C:\Documents and Settings\Paul\Desktop\Gerty-bot\runeprice.txt' (line 178, elly.mrc)
+-
+[17:33:45] * /hload: unable to open file 'C:\Documents and Settings\Paul\Desktop\Gerty-bot\geupdatebackup.txt' (line 8, geupdate.mrc)
+-
+[17:33:45] -NickServ- Your nick isn't registered.
+-
+[17:33:45] -lunar.nl.eu.SwiftIRC.net- BOTMOTD File not found
+-
+[17:33:46] * GertTest sets mode: +Bp
+-
+[17:33:46] -lunar.nl.eu.SwiftIRC.net- Setting/removing of usermode(s) 'rsvoOiAqagHSCNwhWzt' has been disabled.
+-
+Session Close: Fri May 01 17:39:52 2009
