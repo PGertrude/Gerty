@@ -1,4 +1,4 @@
-on $*:text:/^(\[\w{2}\]Gerty |Gerty |)?[!.@]((pot)(ion)?s?|(po)(uch)?|(farmer|payment)|(\w+)costs?|costs? (\w+))/Si:*:{
+on $*:text:/^(\[\w{2}\]Gerty |Gerty |)?[!.@]((pot)(ion)?s?|(po)(uch)?|(farmer|payment)|(\w+)costs?|costs? (\w+))/Si:*: {
   if (Gerty isin $1) {
     if ($1 == $me) || ($1 == Gerty && Gerty !ison $chan) { tokenize 32 $2- }
     else { halt }
@@ -8,7 +8,7 @@ on $*:text:/^(\[\w{2}\]Gerty |Gerty |)?[!.@]((pot)(ion)?s?|(po)(uch)?|(farmer|pa
   elseif ($regml(3) == farmer || $regml(3) == payment) { var %skill = Farming }
   else { var %skill = $lookups($regml(3)) }
   var %saystyle = $saystyle($left($1,1),$nick,$chan), %ticks = $ticks
-  if (%skill == $blank || %skill == NoMatch || %skill == Overall) { %saystyle No such skill. | halt }
+  if (%skill == $null || %skill == NoMatch || %skill == Overall) { %saystyle No such skill. | halt }
   if ($lookups($2) == %skill) { tokenize 32 $2- }
   if ($regex($2,/\d/S)) { var %num = $litecalc($2) | tokenize 32 $2- }
   else { var %num = 1 }
@@ -425,4 +425,4 @@ alias convertfile {
   msg $chan Done.
   run test.txt
 }
-alias parenthesis return $+(,$chr(40),07,$1-,,$chr(41))
+alias parenthesis return $formatwith(\o(\c07{0}\o),$1-)
