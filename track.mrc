@@ -34,179 +34,74 @@ on $*:TEXT:/^[!@.]track */Si:*: {
     }
     var %nick = $nick
     if ($len($trim(%string)) > 0) {
-      %nick $trim(%string)
+      %nick = $trim(%string)
     }
     %nick = $rsn(%nick)
-    var %skill = all
-    hadd -m %thread nick %nick
-    hadd -m %thread skill %skill
-    hadd -m %thread time %time
-    hadd -m %thread command %command
-    hadd -m %thread out %saystyle
-    sockopen $+(trackall.,%thread) www.rscript.org 80
+    var %socket = %thread
+    var %url = http://www.rscript.org/lookup.php?type=track&user= $+ %nick $+ &skill=all&time= $+ %time
+    noop $download.break(trackAll %saystyle %nick %time %command, %socket, %url)
   }
-}
-;###########################
-;#######Single Skill########
-;###########################
-on *:sockopen:track.*: {
-  sockwrite -n $sockname GET /lookup.php?type=track&user= $+ $hget($gettok($sockname,2,46),nick) $+ &skill= $+ $hget($gettok($sockname,2,46),skill) $+ &time= $+ $hget($gettok($sockname,2,46),time) $+ , $+ %week $+ , $+ %month $+ , $+ %year
-  sockwrite -n $sockname Host: www.rscript.org $+ $crlf $+ $crlf
-}
-on *:sockread:track.*: {
-  if (%row == $null) { set %row 1 }
-  if ($sockerr) {
-    $hget($gettok($sockname,2,46),out) [Socket Error] $sockname $time $script
-    halt
-  }
-  .sockread %rscript
-  if (%row < 1000) {
-    set % [ $+ [ %row ] ] $nohtml(%rscript)
-    if (* $+ $hget($gettok($sockname,2,46),time) $+ * iswm %rscript) { hadd -m $gettok($sockname,2,46) timegain %rscript }
-    if (* $+ %week $+ * iswm %rscript) { hadd -m $gettok($sockname,2,46) weekgain %rscript }
-    if (* $+ %month $+ * iswm %rscript) { hadd -m $gettok($sockname,2,46) monthgain %rscript }
-    if (* $+ %year $+ * iswm %rscript) { hadd -m $gettok($sockname,2,46) yeargain %rscript }
-    inc %row 1
-  }
-  if (*0:-1* iswm %rscript) { $hget($gettok($sockname,2,46),out) $hget($gettok($sockname,2,46),nick) Has not been tracked by Runescript. $hget($gettok($sockname,2,46),nick) is now being Tracked. | unset %* | sockclose $sockname | halt }
-}
-on *:sockclose:track.*: {
-  singletrack2
-  unset %*
-}
-alias singletrack2 {
-  sockopen $+(track2.,$gettok($sockname,2,46)) hiscore.runescape.com 80
-}
-on *:sockopen:track2.*: {
-  .sockwrite -n $sockname GET /index_lite.ws?player= $+ $hget($gettok($sockname,2,46),nick) HTTP/1.1
-  .sockwrite -n $sockname Host: hiscore.runescape.com $+ $crlf $+ $crlf
-}
-on *:sockread:track2.*: {
-  if (%row == $null) { set %row 1 }
-  if ($sockerr) {
-    $right($hget($gettok($sockname,2,46),out),-1) [Socket Error] $sockname $time $script
-    halt
-  }
-  .sockread %stats
-  if (%row < 100 && $regex(%stats,/^-*\d+\x2C-*\d+(\x2C-*\d+)*$/)) {
-    set % [ $+ [ %row ] ] %stats
-    if ($gettok(%stats,2,44) == -1 && %row < 26 && %row > 1) { hadd -m $gettok($sockname,2,46) unranked $hget($gettok($sockname,2,46),unranked) $+ $+(|,%row) }
-    if ($gettok(%stats,2,44) != -1 && %row < 26 && %row > 1) { hadd -m $gettok($sockname,2,46) ranked $hget($gettok($sockname,2,46),ranked) $+ $+(|,%row) }
-    inc %row 1
-  }
-  if (%row == 30) { track2 }
-}
-alias track2 {
-  set %skill $hget($gettok($sockname,2,46),skill)
-  set %lvl $virtual($gettok(% [ $+ [ $statnum(%skill) ] ],3,44))
-  set %alvl $gettok(% [ $+ [ $statnum(%skill) ] ],2,44)
-  set %exp $gettok(% [ $+ [ $statnum(%skill) ] ],3,44)
-  set %rank $gettok(% [ $+ [ $statnum(%skill) ] ],1,44)
-  $hget($gettok($sockname,2,46),out) $hget($gettok($sockname,2,46),nick) 07 $+ %skill | Rank:07 $iif($gettok(% [ $+ [ $statnum(%skill) ] ],1,44) isnum,$bytes($gettok(% [ $+ [ $statnum(%skill) ] ],1,44),db),$gettok(% [ $+ [ $statnum(%skill) ] ],1,44)) | Level: $skill2b(% [ $+ [ $statnum(%skill) ] ],2) (07 $+ $virtual($gettok(% [ $+ [ $statnum(%skill) ] ],3,44)) $+ ) | Exp:07 $bytes($gettok(% [ $+ [ $statnum(%skill) ] ],3,44),db) $xp2lvl(% [ $+ [ $statnum(%skill) ] ],$hget($gettok($sockname,2,46),@),%skill)
-  var %todayxp = $iif(!$gettok($hget($gettok($sockname,2,46),timegain),2,58),-,$bytes($gettok($hget($gettok($sockname,2,46),timegain),2,58),db)),%weekxp = $iif(!$gettok($hget($gettok($sockname,2,46),weekgain),2,58),-,$bytes($gettok($hget($gettok($sockname,2,46),weekgain),2,58),db)),%monthxp = $iif(!$gettok($hget($gettok($sockname,2,46),monthgain),2,58),-,$bytes($gettok($hget($gettok($sockname,2,46),monthgain),2,58),db))
-  var %todaylv = $gettok(% [ $+ [ $statnum(%skill) ] ],2,44) - $iif($virtual($calc($gettok(% [ $+ [ $statnum(%skill) ] ],3,44) - $gettok($hget($gettok($sockname,2,46),timegain),2,58))) > 99,99,$virtual($calc($gettok(% [ $+ [ $statnum(%skill) ] ],3,44) - $gettok($hget($gettok($sockname,2,46),timegain),2,58))))
-  var %weeklv = $gettok(% [ $+ [ $statnum(%skill) ] ],2,44) - $iif($virtual($calc($gettok(% [ $+ [ $statnum(%skill) ] ],3,44) - $gettok($hget($gettok($sockname,2,46),weekgain),2,58))) > 99,99,$virtual($calc($gettok(% [ $+ [ $statnum(%skill) ] ],3,44) - $gettok($hget($gettok($sockname,2,46),weekgain),2,58))))
-  var %monthlv = $gettok(% [ $+ [ $statnum(%skill) ] ],2,44) - $iif($virtual($calc($gettok(% [ $+ [ $statnum(%skill) ] ],3,44) - $gettok($hget($gettok($sockname,2,46),monthgain),2,58))) > 99,99,$virtual($calc($gettok(% [ $+ [ $statnum(%skill) ] ],3,44) - $gettok($hget($gettok($sockname,2,46),monthgain),2,58))))
-  var %yearlv = $gettok(% [ $+ [ $statnum(%skill) ] ],2,44) - $iif($virtual($calc($gettok(% [ $+ [ $statnum(%skill) ] ],3,44) - $gettok($hget($gettok($sockname,2,46),yeargain),2,58))) > 99,99,$virtual($calc($gettok(% [ $+ [ $statnum(%skill) ] ],3,44) - $gettok($hget($gettok($sockname,2,46),yeargain),2,58))))
-  %yearxp = $iif(!$gettok($hget($gettok($sockname,2,46),yeargain),2,58),-,$bytes($gettok($hget($gettok($sockname,2,46),yeargain),2,58),db))
-  $hget($gettok($sockname,2,46),out)  $+ $hget($gettok($sockname,2,46),command) $+ :03 %todayxp xp,03 %todaylv lvls, | Week:03 %weekxp xp,03 %weeklv lvls, | Month:03 %monthxp xp,03 %monthlv lvls, | Year:03 %yearxp xp,03 %yearlv lvls,
-  if (!%1) {
-    $hget($gettok($sockname,2,46),out) User07 $hget($gettok($sockname,2,46),nick) not found on RS Hiscores
-  }
-  :unset
-  hfree $gettok($sockname,2,46)
-  unset %*
 }
 ;#############################
 ;#######!track (today)########
 ;#############################
-on *:sockopen:trackall.*: {
-  sockwrite -n $sockname GET /lookup.php?type=track&user= $+ $hget($gettok($sockname,2,46),nick) $+ &skill=all&time= $+ $hget($gettok($sockname,2,46),time)
-  sockwrite -n $sockname Host: www.rscript.org $+ $crlf $+ $crlf
-}
-on *:sockread:trackall.*: {
-  if ($sockerr) {
-    $hget($gettok($sockname,2,46),out) There was a socket error.
-    halt
-  }
-  .sockread %rscript
-  if (start isin %rscript) {
-    if (*Overall* iswm %rscript) { set %1 $gettok($nohtml(%rscript),3,58) }
-    if (*Attack* iswm %rscript) { set %2 $gettok($nohtml(%rscript),3,58) }
-    if (*Defence* iswm %rscript) { set %3 $gettok($nohtml(%rscript),3,58) }
-    if (*Strength* iswm %rscript) { set %4 $gettok($nohtml(%rscript),3,58) }
-    if (*Hitpoints* iswm %rscript) { set %5 $gettok($nohtml(%rscript),3,58) }
-    if (*Ranged* iswm %rscript) { set %6 $gettok($nohtml(%rscript),3,58) }
-    if (*Prayer* iswm %rscript) { set %7 $gettok($nohtml(%rscript),3,58) }
-    if (*Magic* iswm %rscript) { set %8 $gettok($nohtml(%rscript),3,58) }
-    if (*Cooking* iswm %rscript) { set %9 $gettok($nohtml(%rscript),3,58) }
-    if (*Woodcutting* iswm %rscript) { set %10 $gettok($nohtml(%rscript),3,58) }
-    if (*Fletching* iswm %rscript) { set %11 $gettok($nohtml(%rscript),3,58) }
-    if (*Fishing* iswm %rscript) { set %12 $gettok($nohtml(%rscript),3,58) }
-    if (*Firemaking* iswm %rscript) { set %13 $gettok($nohtml(%rscript),3,58) }
-    if (*Crafting* iswm %rscript) { set %14 $gettok($nohtml(%rscript),3,58) }
-    if (*Smithing* iswm %rscript) { set %15 $gettok($nohtml(%rscript),3,58) }
-    if (*Mining* iswm %rscript) { set %16 $gettok($nohtml(%rscript),3,58) }
-    if (*Herblore* iswm %rscript) { set %17 $gettok($nohtml(%rscript),3,58) }
-    if (*Agility* iswm %rscript) { set %18 $gettok($nohtml(%rscript),3,58) }
-    if (*Thieving* iswm %rscript) { set %19 $gettok($nohtml(%rscript),3,58) }
-    if (*Slayer* iswm %rscript) { set %20 $gettok($nohtml(%rscript),3,58) }
-    if (*Farming* iswm %rscript) { set %21 $gettok($nohtml(%rscript),3,58) }
-    if (*Runecraft* iswm %rscript) { set %22 $gettok($nohtml(%rscript),3,58) }
-    if (*Hunter* iswm %rscript) { set %23 $gettok($nohtml(%rscript),3,58) }
-    if (*Construction* iswm %rscript) { set %24 $gettok($nohtml(%rscript),3,58) }
-    if (*Summoning* iswm %rscript) { set %25 $gettok($nohtml(%rscript),3,58) }
-  }
-  if (gain isin %rscript) {
-    if (*Overall* iswm %rscript) { set %r1 $gettok($nohtml(%rscript),4,58) }
-    if (*Attack* iswm %rscript) { set %r2 $gettok($nohtml(%rscript),4,58) }
-    if (*Defence* iswm %rscript) { set %r3 $gettok($nohtml(%rscript),4,58) }
-    if (*Strength* iswm %rscript) { set %r4 $gettok($nohtml(%rscript),4,58) }
-    if (*Hitpoints* iswm %rscript) { set %r5 $gettok($nohtml(%rscript),4,58) }
-    if (*Ranged* iswm %rscript) { set %r6 $gettok($nohtml(%rscript),4,58) }
-    if (*Prayer* iswm %rscript) { set %r7 $gettok($nohtml(%rscript),4,58) }
-    if (*Magic* iswm %rscript) { set %r8 $gettok($nohtml(%rscript),4,58) }
-    if (*Cooking* iswm %rscript) { set %r9 $gettok($nohtml(%rscript),4,58) }
-    if (*Woodcutting* iswm %rscript) { set %r10 $gettok($nohtml(%rscript),4,58) }
-    if (*Fletching* iswm %rscript) { set %r11 $gettok($nohtml(%rscript),4,58) }
-    if (*Fishing* iswm %rscript) { set %r12 $gettok($nohtml(%rscript),4,58) }
-    if (*Firemaking* iswm %rscript) { set %r13 $gettok($nohtml(%rscript),4,58) }
-    if (*Crafting* iswm %rscript) { set %r14 $gettok($nohtml(%rscript),4,58) }
-    if (*Smithing* iswm %rscript) { set %r15 $gettok($nohtml(%rscript),4,58) }
-    if (*Mining* iswm %rscript) { set %r16 $gettok($nohtml(%rscript),4,58) }
-    if (*Herblore* iswm %rscript) { set %r17 $gettok($nohtml(%rscript),4,58) }
-    if (*Agility* iswm %rscript) { set %r18 $gettok($nohtml(%rscript),4,58) }
-    if (*Thieving* iswm %rscript) { set %r19 $gettok($nohtml(%rscript),4,58) }
-    if (*Slayer* iswm %rscript) { set %r20 $gettok($nohtml(%rscript),4,58) }
-    if (*Farming* iswm %rscript) { set %r21 $gettok($nohtml(%rscript),4,58) }
-    if (*Runecraft* iswm %rscript) { set %r22 $gettok($nohtml(%rscript),4,58) }
-    if (*Hunter* iswm %rscript) { set %r23 $gettok($nohtml(%rscript),4,58) }
-    if (*Construction* iswm %rscript) { set %r24 $gettok($nohtml(%rscript),4,58) }
-    if (*Summoning* iswm %rscript) { set %r25 $gettok($nohtml(%rscript),4,58) }
-  }
-  if ($regex(%rscript,/^0:-1$/)) { $hget($gettok($sockname,2,46),out) $hget($gettok($sockname,2,46),nick) Has not been tracked by Runescript. $hget($gettok($sockname,2,46),nick) is now being Tracked. | unset %* | sockclose $sockname | halt }
-  if (PHP: Invalid argument supplied for foreach isin %rscript) { $hget($gettok($sockname,2,46),out) There is a gap in RScripts Data, data for $hget($gettok($sockname,2,46),nick) could not be found. | unset %* | sockclose $sockname | halt }
-  if (END isin %rscript) { trackall }
-}
 alias trackall {
+  var %saystyle = $1 $2, %nick = $3, %time = $4, %command = $regsubex($5,/(\d)([a-z])/gi,\1$chr(32)\2)
+  if ($voidRscript($6)) {
+    %saystyle Error Occured:07 $v1
+    goto unset
+  }
   .tokenize 32 $timetoday
   var %today = $1, %week = $2, %month = $3, %year = $4
-  var %x = 25
-  while (%x) {
-    ;if (%x = 25 && !%r25 && $hget($gettok($sockname,2,46),time) > $calc(%year -1209600)) { %r25 = %25 }
-    if (!%r [ $+ [ %x ] ]) { %r [ $+ [ %x ] ] = 0 }
-    dec %x
-  }
-  if (%r1 == 0) { $hget($gettok($sockname,2,46),out)  $+ $hget($gettok($sockname,2,46),nick) Skills  $+ $hget($gettok($sockname,2,46),command) $+ : 07Overall $iif(%total > 0,[+ $+ %total $+ ]) 03+ $+ $iif(%r1 > 1000,$bytes($round($calc($v1 /1000),0),db) $+ k,$bytes($v1,db)) exp; | unset %* | sockclose $sockname | halt }
+  if (%r1 == 0) { %saystyle  $+ %nick Skills  $+ %command $+ : 07Overall $iif(%total > 0,[+ $+ %total $+ ]) 03+ $+ $iif(%r1 > 1000,$bytes($round($calc($v1 /1000),0),db) $+ k,$bytes($v1,db)) exp; | unset %* | goto unset }
   var %cmb = $sort(Attack %2 %r2 Defence %3 %r3 Strength %4 %r4 Hitpoints %5 %r5 Range %6 %r6 Pray %7 %r7 Mage %8 %r8 Summon %25 %r25)
-  if (%cmb) { var %out1 = $hget($gettok($sockname,2,46),out)  $+ $hget($gettok($sockname,2,46),nick) Combat  $+ $hget($gettok($sockname,2,46),command) $+ : %cmb }
+  if (%cmb) { var %out1 = %saystyle  $+ %nick Combat  $+ %command $+ : %cmb }
   var %others = $sort(Cook %9 %r9 Woodcut %10 %r10 Fletching %11 %r11 Fishing %12 %r12 Firemake %13 %r13 Crafting %14 %r14 Smithing %15 %r15 Mine %16 %r16 Herblore %17 %r17 Agility %18 %r18 Thieve %19 %r19 Slayer %20 %r20 Farming %21 %r21 Runecraft %22 %r22 Hunter %23 %r23 Construct %24 %r24)
-  if (%others) { var %out2 = $hget($gettok($sockname,2,46),out)  $+ $hget($gettok($sockname,2,46),nick) Others  $+ $hget($gettok($sockname,2,46),command) $+ : %others }
-  $hget($gettok($sockname,2,46),out)  $+ $hget($gettok($sockname,2,46),nick) Skills  $+ $hget($gettok($sockname,2,46),command) $+ : 07Overall $iif(%total > 0,[+ $+ %total $+ ]) 03+ $+ $iif(%r1 > 1000,$bytes($round($calc($v1 /1000),0),db) $+ k,$bytes($v1,db)) exp;
+  if (%others) { var %out2 = %saystyle  $+ %nick Others  $+ %command $+ : %others }
+  %saystyle  $+ %nick Skills  $+ %command $+ : 07Overall $iif(%total > 0,[+ $+ %total $+ ]) 03+ $+ $iif(%r1 > 1000,$bytes($round($calc($v1 /1000),0),db) $+ k,$bytes($v1,db)) exp;
   %out1
   %out2
+  :unset
   unset %*
-  hfree $gettok($sockname,2,46)
+}
+alias voidRscript {
+  var %string = $1-
+  if (PHP isin %string) { return Gap in Database }
+  if ($regex(%string,/\n0:-1\n/)) { return Not Tracked }
+  .tokenize 10 %string
+  var %x = 1, %current, %gain, %line
+  while (%x <= $0) {
+    %line = $($ $+ %x,2)
+    if ($numtok(%line,58) < 3 || $skills($gettok(%line,2,58)) == nomatch) {
+      inc %x
+      continue
+    }
+    if ($gettok(%line,1,58) == start) %current = %current $+ $chr(9) $+ %line
+    else %gain = %gain $+ $chr(9) $+ %line
+    inc %x
+  }
+  ; Exp
+  %x = 1
+  while (%x <= $numtok(%current,9)) {
+    %line = $gettok(%current,%x,9)
+    % [ $+ [ $statnum($gettok(%line,2,58)) ] ] = $gettok(%line,3,58)
+    inc %x
+  }
+  ; Gains
+  %x = 1
+  while (%x <= $numtok(%gain,9)) {
+    %line = $gettok(%gain,%x,9)
+    %r [ $+ [ $statnum($gettok(%line,2,58)) ] ] = $gettok(%line,4,58)
+    inc %x
+  }
+  ; Unranked Skills (no guessing /effort)
+  %x = 1
+  while (%x <= 25) {
+    if (!% [ $+ [ %x ] ]) { var % [ $+ [ %x ] ] 0 }
+    if (!%r [ $+ [ %x ] ]) { var %r [ $+ [ %x ] ] 0 }
+    inc %x
+  }
+  return
 }
 ;###########################
 ;###!yesterday/!lastNdays###
@@ -373,8 +268,6 @@ alias lastNdays {
   var %x = 50
   while (%x) {
     if (!%r [ $+ [ %x ] ]) { %r [ $+ [ %x ] ] = 0 }
-    ;if (%x = 25 && !%r25 && $hget($gettok($sockname,2,46),time) > $calc(%year -1209600)) { %r25 = %25 }
-    ;if (%x = 50 && !%r50 && $hget($gettok($sockname,2,46),time) > $calc(%year -1209600)) { %r50 = %25 }
     dec %x
   }
   var %x = 25
