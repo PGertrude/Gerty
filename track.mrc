@@ -107,73 +107,46 @@ alias voidRscript {
 ;###!yesterday/!lastNdays###
 ;###########################
 on *:TEXT:*:*: {
-  if ($regex($1,/^[!@.]([A-Za-z]+)(\d+)([A-Za-z]+)$/Si)) {
-    if ($last($regml(1)) == last) {
-      if ($duration($time) >= 25200) {
-        %today = $duration($time) - 25200
-      }
-      if ($duration($time) < 25200) {
-        %today = $duration($time) + 61200
-      }
-      set %week $calc($replace($day,Sunday,0,Monday,1,Tuesday,2,Wednesday,3,Thursday,4,Friday,5,Saturday,6) * 86400 + %today )
-      set %month $calc(($gettok($date,1,47) - 1) * 86400 + %today )
-      set %year $calc($ctime($date $time) - $ctime(January 1 $date(yyyy) 00:00:00))
-      var %thread = $+($r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9))
-      if ($2) {
-        var %nick = $caps($regsubex($rsn($replace($2-,$chr(32),_,-,_)),/\W/g,_))
-      }
-      if (!$2) {
-        var %nick = $caps($regsubex($rsn($nick),/\W/g,_))
-      }
-      var %reg = $regex($1,/^[!@.]([A-Za-z]+)(\d+)([A-Za-z]+)$/Si)
-      var %time = $regml(2) $+ $regml(3)
-      var %time = $duration(%time)
-      hadd -m $+(a,%thread) nick %nick
-      hadd -m $+(a,%thread) time %time
-      hadd -m $+(a,%thread) command Last $regsubex($duration($duration($regml(2) $+ $regml(3))),/(\d+)([A-Za-z]+)/g,\1 \2)
-      hadd -m $+(a,%thread) skill $skills($2)
-      hadd -m $+(a,%thread) out $saystyle($left($1,1),$nick,$chan)
-      sockopen $+(trackyes.a,%thread) www.rscript.org 80
-    }
+  var %input = $1-
+  .tokenize 32 $timetoday
+  var %today = $1, %week = $2, %month = $3, %year = $4
+  .tokenize 32 %input
+  var %thread = $+(a,$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9))
+  ; !LastNdays
+  if ($regex($1,/^[!@.](l|last)(\d+)([A-Za-z]+)$/Si)) {
+    var %time = $regml(2) $+ $regml(3)
+    %time = $duration(%time)
+    if ($2) { var %nick = $rsn($2-) }
+    if (!$2) { var %nick = $rsn($nick) }
+    hadd -m %thread nick %nick
+    hadd -m %thread time %time
+    hadd -m %thread command Last $regsubex($duration(%time),/(\d+)([A-Za-z]+)/g,\1 \2)
+    hadd -m %thread skill $skills($2)
+    hadd -m %thread out $saystyle($left($1,1),$nick,$chan)
+    sockopen $+(trackyes.,%thread) www.rscript.org 80
   }
+  ; !Ndaysago
   if ($regex($1,/^[!@.](\d+)([A-Za-z]+)ago$/Si)) {
-    if ($duration($time) >= 25200) {
-      %today = $duration($time) - 25200
-    }
-    if ($duration($time) < 25200) {
-      %today = $duration($time) + 61200
-    }
-    set %week $calc($replace($day,Sunday,0,Monday,1,Tuesday,2,Wednesday,3,Thursday,4,Friday,5,Saturday,6) * 86400 + %today )
-    set %month $calc(($gettok($date,1,47) - 1) * 86400 + %today )
-    set %year $calc($ctime($date $time) - $ctime(January 1 $date(yyyy) 00:00:00))
-    var %thread = $+($r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9))
-    if ($2) {
-      var %nick = $caps($regsubex($rsn($replace($2-,$chr(32),_,-,_)),/\W/g,_))
-    }
-    if (!$2) {
-      var %nick = $caps($regsubex($rsn($nick),/\W/g,_))
-    }
+    if ($2) { var %nick = $rsn($2-) }
+    if (!$2) { var %nick = $rsn($nick) }
     var %reg = $regex($1,/^[!@.](\d+)([A-Za-z]+)ago$/Si)
     var %time = $regml(1) $+ $regml(2)
     var %time = $calc($duration(%time) + %today)
-    hadd -m $+(a,%thread) nick %nick
-    hadd -m $+(a,%thread) time %time
-    hadd -m $+(a,%thread) time2 $calc(%time - 86400)
-    hadd -m $+(a,%thread) command $regsubex($duration($calc(%time - %today)),/(\d+)([A-Za-z]+)/g,\1 \2) ago
-    hadd -m $+(a,%thread) skill $skills($2)
-    hadd -m $+(a,%thread) out $saystyle($left($1,1),$nick,$chan)
-    sockopen $+(trackyes.a,%thread) www.rscript.org 80
+    hadd -m %thread nick %nick
+    hadd -m %thread time %time
+    hadd -m %thread time2 $calc(%time - 86400)
+    hadd -m %thread command $regsubex($duration($calc(%time - %today)),/(\d+)([A-Za-z]+)/g,\1 \2) ago
+    hadd -m %thread skill $skills($2)
+    hadd -m %thread out $saystyle($left($1,1),$nick,$chan)
+    sockopen $+(trackyes.,%thread) www.rscript.org 80
   }
-}
-alias last {
-  if ($regex($1,/^(last|l|la)$/Si)) { return last }
 }
 on *:sockopen:trackyes.*: {
   sockwrite -n $sockname GET /lookup.php?type=track&user= $+ $hget($gettok($sockname,2,46),nick) $+ &skill=all&time= $+ $hget($gettok($sockname,2,46),time) $+ , $+ $hget($gettok($sockname,2,46),time2)
   sockwrite -n $sockname Host: www.rscript.org $+ $crlf $+ $crlf
 }
 on *:sockread:trackyes.*: {
-  if (%row == $null) { set %row 1 }
+  if (!%row) { set %row 1 }
   if ($sockerr) {
     $hget($gettok($sockname,2,46),out) [Socket Error] $sockname $time $script
     halt
@@ -207,31 +180,31 @@ on *:sockread:trackyes.*: {
     if (*Summoning* iswm %rscript) { set %25 $gettok($nohtml(%rscript),3,58) }
   }
   if (* $+ $hget($gettok($sockname,2,46),time) $+ * iswm %rscript && *gain* iswm %rscript) {
-    if (*Overall* iswm %rscript) { set %r1 $gettok($nohtml(%rscript),4,58) }
-    if (*Attack* iswm %rscript) { set %r2 $gettok($nohtml(%rscript),4,58) }
-    if (*Defence* iswm %rscript) { set %r3 $gettok($nohtml(%rscript),4,58) }
-    if (*Strength* iswm %rscript) { set %r4 $gettok($nohtml(%rscript),4,58) }
-    if (*Hitpoints* iswm %rscript) { set %r5 $gettok($nohtml(%rscript),4,58) }
-    if (*Ranged* iswm %rscript) { set %r6 $gettok($nohtml(%rscript),4,58) }
-    if (*Prayer* iswm %rscript) { set %r7 $gettok($nohtml(%rscript),4,58) }
-    if (*Magic* iswm %rscript) { set %r8 $gettok($nohtml(%rscript),4,58) }
-    if (*Cooking* iswm %rscript) { set %r9 $gettok($nohtml(%rscript),4,58) }
-    if (*Woodcutting* iswm %rscript) { set %r10 $gettok($nohtml(%rscript),4,58) }
-    if (*Fletching* iswm %rscript) { set %r11 $gettok($nohtml(%rscript),4,58) }
-    if (*Fishing* iswm %rscript) { set %r12 $gettok($nohtml(%rscript),4,58) }
-    if (*Firemaking* iswm %rscript) { set %r13 $gettok($nohtml(%rscript),4,58) }
-    if (*Crafting* iswm %rscript) { set %r14 $gettok($nohtml(%rscript),4,58) }
-    if (*Smithing* iswm %rscript) { set %r15 $gettok($nohtml(%rscript),4,58) }
-    if (*Mining* iswm %rscript) { set %r16 $gettok($nohtml(%rscript),4,58) }
-    if (*Herblore* iswm %rscript) { set %r17 $gettok($nohtml(%rscript),4,58) }
-    if (*Agility* iswm %rscript) { set %r18 $gettok($nohtml(%rscript),4,58) }
-    if (*Thieving* iswm %rscript) { set %r19 $gettok($nohtml(%rscript),4,58) }
-    if (*Slayer* iswm %rscript) { set %r20 $gettok($nohtml(%rscript),4,58) }
-    if (*Farming* iswm %rscript) { set %r21 $gettok($nohtml(%rscript),4,58) }
-    if (*Runecraft* iswm %rscript) { set %r22 $gettok($nohtml(%rscript),4,58) }
-    if (*Hunter* iswm %rscript) { set %r23 $gettok($nohtml(%rscript),4,58) }
-    if (*Construction* iswm %rscript) { set %r24 $gettok($nohtml(%rscript),4,58) }
-    if (*Summoning* iswm %rscript) { set %r25 $gettok($nohtml(%rscript),4,58) }
+    if (Overall isin %rscript) { set %r1 $gettok($nohtml(%rscript),4,58) }
+    if (Attack isin %rscript) { set %r2 $gettok($nohtml(%rscript),4,58) }
+    if (Defence isin %rscript) { set %r3 $gettok($nohtml(%rscript),4,58) }
+    if (Strength isin %rscript) { set %r4 $gettok($nohtml(%rscript),4,58) }
+    if (Hitpoints isin %rscript) { set %r5 $gettok($nohtml(%rscript),4,58) }
+    if (Ranged isin %rscript) { set %r6 $gettok($nohtml(%rscript),4,58) }
+    if (Prayer isin %rscript) { set %r7 $gettok($nohtml(%rscript),4,58) }
+    if (Magic isin %rscript) { set %r8 $gettok($nohtml(%rscript),4,58) }
+    if (Cooking isin %rscript) { set %r9 $gettok($nohtml(%rscript),4,58) }
+    if (Woodcutting isin %rscript) { set %r10 $gettok($nohtml(%rscript),4,58) }
+    if (Fletching isin %rscript) { set %r11 $gettok($nohtml(%rscript),4,58) }
+    if (Fishing isin %rscript) { set %r12 $gettok($nohtml(%rscript),4,58) }
+    if (Firemaking isin %rscript) { set %r13 $gettok($nohtml(%rscript),4,58) }
+    if (Crafting isin %rscript) { set %r14 $gettok($nohtml(%rscript),4,58) }
+    if (Smithing isin %rscript) { set %r15 $gettok($nohtml(%rscript),4,58) }
+    if (Mining isin %rscript) { set %r16 $gettok($nohtml(%rscript),4,58) }
+    if (Herblore isin %rscript) { set %r17 $gettok($nohtml(%rscript),4,58) }
+    if (Agility isin %rscript) { set %r18 $gettok($nohtml(%rscript),4,58) }
+    if (Thieving isin %rscript) { set %r19 $gettok($nohtml(%rscript),4,58) }
+    if (Slayer isin %rscript) { set %r20 $gettok($nohtml(%rscript),4,58) }
+    if (Farming isin %rscript) { set %r21 $gettok($nohtml(%rscript),4,58) }
+    if (Runecraft isin %rscript) { set %r22 $gettok($nohtml(%rscript),4,58) }
+    if (Hunter isin %rscript) { set %r23 $gettok($nohtml(%rscript),4,58) }
+    if (Construction isin %rscript) { set %r24 $gettok($nohtml(%rscript),4,58) }
+    if (Summoning isin %rscript) { set %r25 $gettok($nohtml(%rscript),4,58) }
   }
   if ($hget($gettok($sockname,2,46),time2) && * $+ $hget($gettok($sockname,2,46),time2) $+ * iswm %rscript && *gain* iswm %rscript) {
     if (*Overall* iswm %rscript) { set %r26 $gettok($nohtml(%rscript),4,58) }
