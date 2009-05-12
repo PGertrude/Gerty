@@ -1,13 +1,9 @@
 on $*:TEXT:/^[!@.]clan */Si:*: {
-  var %class = $+($r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9))
-  hadd -m $+(a,%class) out $saystyle($left($1,1),$nick,$chan)
-  if ($2) {
-    hadd -m $+(a,%class) nick $caps($regsubex($rsn($replace($2-,$chr(32),_)),/\W/g,_))
-  }
-  else if (!$2) {
-    hadd -m $+(a,%class) nick $caps($regsubex($rsn($nick),/\W/g,_))
-  }
-  sockopen $+(clanlookup.a,%class) www5.runehead.com 80
+  var %thread = $+(a,$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9))
+  hadd -m %thread out $saystyle($left($1,1),$nick,$chan)
+  if ($2) { hadd -m %thread nick $rsn($2-) }
+  else if (!$2) { hadd -m %thread nick $rsn($nick) }
+  sockopen $+(clanlookup.,%thread) www5.runehead.com 80
 }
 on *:sockopen:clanlookup.*: {
   var %string = search= $+ $hget($gettok($sockname,2,46),nick) $+ &searchtype=exact&mltype=1&combatType=p2p
@@ -18,17 +14,22 @@ on *:sockopen:clanlookup.*: {
   sockwrite -n $sockname $crlf %string
 }
 on *:sockread:clanlookup.*: {
-  var %bleh = $gettok($sockname,2,46)
+  var %thread = $gettok($sockname,2,46)
+  var %file = %thread $+ .txt
   if ($sockerr) {
-    $hget($gettok($sockname,2,46),out) [Socket Error] $sockname $time $script
+    write ErrorLog.txt $timestamp SocketError[sockread]: $nopath($script) $socket $([,) $+ $hget(%thread,out) $hget(%thread,nick) $+ $(],)
+    echo -at Socket Error: $nopath($script)
+    $hget(%thread,out) Connection Error: Please try again in a few moments.
+    hfree %thread
+    sockclose $sockname
     halt
   }
   else {
     while ($sock($sockname).rq) {
       sockread &runehead
-      bwrite %bleh -1 -1 &runehead
+      bwrite %file -1 -1 &runehead
     }
-    bread %bleh 0 $file(%bleh).size &runehead2
+    bread %file 0 $file(%file).size &runehead2
     if ($bfind(&runehead2,0,</HTML>)) {
       var %start = $bfind(&runehead2,0,'hovertr')
       while ($bfind(&runehead2,%start,Memberlist'>)) {
@@ -38,16 +39,16 @@ on *:sockread:clanlookup.*: {
         var %start = %b
       }
       if ($count(%e,;) > 1) {
-        $hget($gettok($sockname,2,46),out) $hget($gettok($sockname,2,46),nick) is in07 $count(%e,;) Clans; %e
+        $hget(%thread,out) $hget(%thread,nick) is in07 $count(%e,;) Clans; %e
       }
       if ($count(%e,;) == 1) {
-        $hget($gettok($sockname,2,46),out) $hget($gettok($sockname,2,46),nick) is in $left(%e,-1) Clan: (07http://www.runehead.com/clans/ml.php?clan= $+ %mlid $+ )
+        $hget(%thread,out) $hget(%thread,nick) is in $left(%e,-1) Clan: (07http://www.runehead.com/clans/ml.php?clan= $+ %mlid $+ )
       }
       if (!%e) {
-        hadd -m $gettok($sockname,2,46) noclan noclan
+        hadd -m %thread noclan noclan
       }
-      .remove %bleh
-      sockopen $+(clanlookup2.,$gettok($sockname,2,46)) www5.runehead.com 80
+      .remove %file
+      sockopen $+(clanlookup2.,%thread) www5.runehead.com 80
       sockclose $sockname
     }
   }
@@ -61,17 +62,22 @@ on *:sockopen:clanlookup2.*: {
   sockwrite -n $sockname $crlf %string
 }
 on *:sockread:clanlookup2.*: {
-  var %bleh = $gettok($sockname,2,46)
+  var %thread = $gettok($sockname,2,46)
+  var %file = %thread $+ .txt
   if ($sockerr) {
-    $hget($gettok($sockname,2,46),out) [Socket Error] $sockname $time $script
+    write ErrorLog.txt $timestamp SocketError[sockread]: $nopath($script) $socket $([,) $+ $hget(%thread,out) $hget(%thread,nick) $+ $(],)
+    echo -at Socket Error: $nopath($script)
+    $hget(%thread,out) Connection Error: Please try again in a few moments.
+    hfree %thread
+    sockclose $sockname
     halt
   }
   else {
     while ($sock($sockname).rq) {
       sockread &runehead
-      bwrite %bleh -1 -1 &runehead
+      bwrite %file -1 -1 &runehead
     }
-    bread %bleh 0 $file(%bleh).size &runehead2
+    bread %file 0 $file(%file).size &runehead2
     if ($bfind(&runehead2,0,</HTML>)) {
       var %start = $bfind(&runehead2,0,'hovertr')
       while ($bfind(&runehead2,%start,Memberlist'>)) {
@@ -81,16 +87,16 @@ on *:sockread:clanlookup2.*: {
         var %start = %b
       }
       if ($count(%e,;) > 1) {
-        $hget($gettok($sockname,2,46),out) $hget($gettok($sockname,2,46),nick) is in07 $count(%e,;) Non-Clans; %e
+        $hget(%thread,out) $hget(%thread,nick) is in07 $count(%e,;) Non-Clans; %e
       }
       if ($count(%e,;) == 1) {
-        $hget($gettok($sockname,2,46),out) $hget($gettok($sockname,2,46),nick) is in $left(%e,-1) Non-Clan: (07http://www.runehead.com/clans/ml.php?clan= $+ %mlid $+ )
+        $hget(%thread,out) $hget(%thread,nick) is in $left(%e,-1) Non-Clan: (07http://www.runehead.com/clans/ml.php?clan= $+ %mlid $+ )
       }
-      if (!%e && $hget($gettok($sockname,2,46),noclan) == noclan) {
-        $hget($gettok($sockname,2,46),out) No record for07 $hget($gettok($sockname,2,46),nick) found on RuneHead.
+      if (!%e && $hget(%thread,noclan) == noclan) {
+        $hget(%thread,out) No record for07 $hget(%thread,nick) found on RuneHead.
       }
-      .remove %bleh
-      .hfree $gettok($sockname,2,46)
+      .remove %file
+      .hfree %thread
       sockclose $sockname
     }
   }

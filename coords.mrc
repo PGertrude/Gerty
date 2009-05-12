@@ -4,8 +4,8 @@ on $*:TEXT:/^[!@.](co-?ord|co-?ordinate)s? */Si:*: {
   if (!$regex($2-,%regex)) { %saystyle Invalid coordinate search07 $remove($2-,$chr(32)) | halt }
   var %coord = $leadzero($regml(1)) $+ $leadzero($regml(2)) $+ $regml(3) $+ $leadzero($regml(4)) $+ $leadzero($regml(5)) $+ $regml(6)
   var %coord = $read(coords.txt,nw,* $+ %coord $+ *)
-  if (!%coord) { %saystyle Could not locate07 $mid($gettok($remove($2-,$chr(32)),1,124),1,5) /07 $mid($gettok($remove($2-,$chr(32)),1,124),6,5) | halt }
-  %Saystyle Co-ordinates:07 $mid($gettok(%coord,1,124),1,5) /07 $mid($gettok(%coord,1,124),6,5) | Location:07 $gettok(%coord,2,124)
+  if (!%coord) { %saystyle Could not locate07 $mid($gettok($remove($2-,$chr(32)),1,124),1,5) /07 $mid($gettok($remove($2-,$chr(32)),1,124),7,5) | halt }
+  %saystyle Co-ordinates:07 $mid($gettok(%coord,1,124),1,5) /07 $mid($gettok(%coord,1,124),7,5) | Location:07 $gettok(%coord,2,124)
 }
 on $*:TEXT:/^[!@.](ana|anagrams?) */Si:*: {
   var %saystyle = $saystyle($left($1,1),$nick,$chan)

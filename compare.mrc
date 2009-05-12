@@ -85,7 +85,7 @@ on *:sockopen:compare.*: {
   sockwrite -n $sockname Host: hiscore.runescape.com $+ $crlf $+ $crlf
 }
 on *:sockread:compare.*: {
-  if (%row == $null) { !set %row 1 }
+  if (!%row) { !set %row 1 }
   if ($sockerr) {
     write ErrorLog.txt $timestamp SocketError[sockread]: $nopath($script) $socket $([,) $+ $hget($gettok($sockname,2,46),out) $hget($gettok($sockname,2,46),nick) $+ $(],)
     echo -at Socket Error: $nopath($script)

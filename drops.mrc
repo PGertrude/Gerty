@@ -3,18 +3,18 @@ on $*:TEXT:/^[!@.](npc|monster|mdb(info)?|drops?|loot) */Si:*: {
   if (!$2) { %saystyle you must specify a monster to look up. }
   if ($regex($right($1,-1),/(drops?|loot)/i)) %command = drop
   else %command = npc
-  var %thread = $+($r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9))
+  var %thread = $+($a,r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9))
   if ($left($2,1) != $chr(35) && $2 !isnum) {
-    hadd -m $+(a,%thread) npc $replace($2-,$chr(32),+)
-    hadd -m $+(a,%thread) out %saystyle
-    hadd -m $+(a,%thread) command %command
-    sockopen $+(drop.a,%thread) www.zybez.net 80
+    hadd -m %thread npc $replace($2-,$chr(32),+)
+    hadd -m %thread out %saystyle
+    hadd -m %thread command %command
+    sockopen $+(drop.,%thread) www.zybez.net 80
   }
   if ($left($2,1) == $chr(35) || $2 isnum) {
-    hadd -m $+(a,%thread) id $remove($2,$chr(35))
-    hadd -m $+(a,%thread) out %saystyle
-    hadd -m $+(a,%thread) command %command
-    sockopen $+(drop2.a,%thread) www.zybez.net 80
+    hadd -m %thread id $remove($2,$chr(35))
+    hadd -m %thread out %saystyle
+    hadd -m %thread command %command
+    sockopen $+(drop2.,%thread) www.zybez.net 80
   }
 }
 on *:sockopen:drop.*: {
