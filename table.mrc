@@ -45,7 +45,7 @@ alias topout {
     var %x = 1
     while (%x <= 9) {
       var %true = $iif($regsubex($(% $+ $calc(%y + 1),2),/\W/g,_) == $hget(%thread,nick) || $(% $+ %y,2) == $hget(%thread,rank),$true,$false)
-      %out = %out 07# $+ $(% $+ %y,2) $+  $iif(%true,) $+  $(% $+ $calc(%y + 1),2) $+ $iif(%true,) $+(07,$(% $+ $calc(%y + 2),2)) ( $+ $(% $+ $calc(%y + 3),2) $+ )
+      %out = %out 07# $+ $(% $+ %y,2) $+  $iif(%true,) $+ $(% $+ $calc(%y + 1),2) $+ $iif(%true,) $+(07,$(% $+ $calc(%y + 2),2)) ( $+ $(% $+ $calc(%y + 3),2) $+ )
       inc %y 4
       inc %x
     }

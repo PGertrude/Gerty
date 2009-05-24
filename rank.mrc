@@ -48,7 +48,7 @@ var %skill = $hget($gettok($sockname,2,46),skill)
 var %rank = $hget($gettok($sockname,2,46),rank)
 if ($minigames(%skill) == NoMatch) {
 $hget($gettok($sockname,2,46),out)  $+ %nick 07 $+ %skill | Rank:07 $bytes(%rank,db) | Lvl:07 %level $iif(%skill != overall,(07 $+ $virtual(%exp) $+ )) | Exp:07 $bytes(%exp,db) $&
-$iif(%skill != overall,(07 $+ $round($calc(100 * %exp / 13034431 ),1) $+ 07% of 99) | Exp till $calc($virtual(%exp) +1) $+ :07 $bytes($calc($lvltoxp($calc($virtual(%exp) +1)) - exp),db)))
+$iif(%skill != overall,(07 $+ $round($calc(100 * %exp / 13034431 ),1) $+ 07% of 99) | Exp till $calc($virtual(%exp) +1) $+ :07 $bytes($calc($lvltoxp($calc($virtual(%exp) +1)) - %exp),db)))
 rscript.singleskill $sockname $replace(%nick,$chr(32),_) %skill $hget($gettok($sockname,2,46),out)
 }
 if ($minigames(%skill) != NoMatch) {
