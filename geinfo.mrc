@@ -28,21 +28,23 @@ on *:sockopen:geinfo.*: {
 }
 on *:sockread:geinfo.*: {
   var %thread = $gettok($sockname,2,46)
+  var %file = %thread $+ .txt
   if ($sockerr) {
-    write ErrorLog.txt $timestamp SocketError[sockread]: $nopath($script) $socket $([,) $+ $hget(%thread,out) $hget(%thread,nick) $hget(%thread,search) $+ $(],)
-    $hget(%thread,out) Connection Error: please try again in a few moments.
-    .hree %thread
-    .sockclose $sockname
+    write ErrorLog.txt $timestamp SocketError[sockread]: $nopath($script) $socket $([,) $+ $hget(%thread,out) $hget(%thread,nick) $+ $(],)
+    echo -at Socket Error: $nopath($script)
+    $hget(%thread,out) Connection Error: Please try again in a few moments.
+    hfree %thread
+    sockclose $sockname
     halt
   }
   else {
     ; while bytes to receive, write the html to a file, ready to be loaded into a bvar
     while ($sock($sockname).rq) {
       sockread &item
-      bwrite %thread -1 -1 &item
+      bwrite %file -1 -1 &item
     }
     ; buffer empty, so load bvar
-    bread %thread 0 $file(%thread).size &item2
+    bread %file 0 $file(%file).size &item2
     ; check the whole site is loaded into bvar
     if ($bfind(&item2,0,</HTML>)) {
       ; read the matches found line '68 items matched the search term: '<i>cape</i>'.<br>'
@@ -74,7 +76,7 @@ on *:sockread:geinfo.*: {
         .hfree %thread
       }
       ; cleanup
-      .remove %thread
+      .remove %file
       sockclose $sockname
       unset %*
       halt
@@ -90,19 +92,23 @@ on *:sockopen:geinfo2.*: {
   sockwrite -n $sockname $crlf
 }
 on *:sockread:geinfo2.*: {
-  ; new file id, +2 for safety
-  var %bleh = $gettok($sockname,2,46) $+ 2
+  var %thread = $gettok($sockname,2,46)
+  var %file = %thread $+ .txt
   if ($sockerr) {
-    $hget($gettok($sockname,2,46),out) [Socket Error] $sockname $time $script
+    write ErrorLog.txt $timestamp SocketError[sockread]: $nopath($script) $socket $([,) $+ $hget(%thread,out) $hget(%thread,nick) $+ $(],)
+    echo -at Socket Error: $nopath($script)
+    $hget(%thread,out) Connection Error: Please try again in a few moments.
+    hfree %thread
+    sockclose $sockname
     halt
   }
   else {
     ; same as above
     while ($sock($sockname).rq) {
       sockread &item3
-      bwrite %bleh -1 -1 &item3
+      bwrite %file -1 -1 &item3
     }
-    bread %bleh 0 $file(%bleh).size &item4
+    bread %file 0 $file(%file).size &item4
     ; same again...
     if ($bfind(&item4,0,</HTML>)) {
       ; cut out the chunk that we want, ie the 'item_additional' div
@@ -114,14 +120,14 @@ on *:sockread:geinfo2.*: {
         noop $regex(%string,/alt="([^"]+)">\n[^\n<]+\n<br>\n<br>\n<b>Current market price range:<\/b><br>\n<span>\n<b>Minimum price:<\/b> ([0-9\,\.km]+)\s*\n<\/span>\n<span class="spaced_span">\n<b>Market price:<\/b> ([0-9\,\.km]+)\s*\n<\/span>\n<span>\n<b>Maximum price:<\/b> ([0-9\,\.km]+)\s*\n<\/span>\n<br><br>\n<b>Change in price:<\/b><br>\n<span>\n<b>7 Days:<\/b> <span class="\w+">([0-9\,\.\+-]+)%<\/span>\n<\/span>\n<span class="spaced_span">\n<b>30 Days:<\/b> <span class="\w+">([0-9\,\.\+-]+)%<\/span>/i)
         var %item = $regml(1), %min = $regml(2), %avg = $regml(3), %max = $regml(4), %7day = $regml(5), %30day = $regml(6)
         ; output
-        $hget($gettok($sockname,2,46),out)  $+ %item $+  | Min:07 %min Avg:07 %avg Max:07 %max | 7 Days:07 $updo(%7day) | 30 Days:07 $updo(%30day) | 12http://itemdb-rs.runescape.com/viewitem.ws?obj= $+ $hget($gettok($sockname,2,46),id)
+        $hget(%thread,out)  $+ %item $+  | Min:07 %min Avg:07 %avg Max:07 %max | 7 Days:07 $updo(%7day) | 30 Days:07 $updo(%30day) | 12http://itemdb-rs.runescape.com/viewitem.ws?obj= $+ $hget($gettok($sockname,2,46),id)
       }
       ; if no chunk then item doesn't exist or some other fuck up.
       else {
-        $hget($gettok($sockname,2,46),out) No item found for ID07 $hget($gettok($sockname,2,46),id) $+ .
+        $hget(%thread,out) No item found for ID07 $hget(%thread,id) $+ .
       }
       ; cleanup
-      .remove %bleh
+      .remove %file
       .hfree $gettok($sockname,2,46)
       sockclose $sockname
       unset %*

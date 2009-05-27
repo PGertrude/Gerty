@@ -5,7 +5,14 @@ alias listchans {
     var %b %b $chan(%x) $+ $chr(91) $+ $nick($chan(%x),0) $+ $chr(93)
     inc %x
   }
-  return Chans:07 $chan(0) Nicks:07 %a Uptime:07 $swaptime($uptime(server,1)) Chan list: %b
+  var %out = Chans:07 $chan(0) Nicks:07 %a Uptime:07 $swaptime($uptime(server,1)) Chan list: %b
+  if ($isid) {
+    return %out
+  }
+  else {
+    if ($chan) { msg $chan %out }
+    else { msg $nick %out }
+  }
 }
 on $*:TEXT:/^[!@.]status\b/Si:*: {
   var %saystyle = $saystyle($left($1,1),$nick,$chan,no)
