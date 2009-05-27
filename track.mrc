@@ -108,6 +108,7 @@ alias voidRscript {
 ;###########################
 on *:TEXT:*:*: {
   var %input = $1-
+  var %saystyle = $saystyle($left($1,1),$nick,$chan)
   .tokenize 32 $timetoday
   var %today = $1, %week = $2, %month = $3, %year = $4
   .tokenize 32 %input
@@ -122,14 +123,14 @@ on *:TEXT:*:*: {
     hadd -m %thread time %time
     hadd -m %thread command Last $regsubex($duration(%time),/(\d+)([A-Za-z]+)/g,\1 \2)
     hadd -m %thread skill $skills($2)
-    hadd -m %thread out $saystyle($left($1,1),$nick,$chan)
+    hadd -m %thread out %saystyle
     sockopen $+(trackyes.,%thread) www.rscript.org 80
   }
   ; !Ndaysago
   if ($regex($1,/^[!@.](\d+)([A-Za-z]+)ago$/Si)) {
     if ($2) { var %nick = $rsn($2-) }
     if (!$2) { var %nick = $rsn($nick) }
-    var %reg = $regex($1,/^[!@.](\d+)([A-Za-z]+)ago$/Si)
+    noop $regex($1,/^[!@.](\d+)([A-Za-z]+)ago$/Si)
     var %time = $regml(1) $+ $regml(2)
     var %time = $calc($duration(%time) + %today)
     hadd -m %thread nick %nick
@@ -137,7 +138,42 @@ on *:TEXT:*:*: {
     hadd -m %thread time2 $calc(%time - 86400)
     hadd -m %thread command $regsubex($duration($calc(%time - %today)),/(\d+)([A-Za-z]+)/g,\1 \2) ago
     hadd -m %thread skill $skills($2)
-    hadd -m %thread out $saystyle($left($1,1),$nick,$chan)
+    hadd -m %thread out %saystyle
+    sockopen $+(trackyes.,%thread) www.rscript.org 80
+  }
+  ; lastW/e yesterday
+  if ($regex($1,/^[!@.](?:y(?:ester)?(day)|l(?:ast)?(week|month|year))$/Si)) {
+    var %timescale = $regml(1), %time, %time2, %command
+    if ($2) { var %nick = $rsn($2-) }
+    if (!$2) { var %nick = $rsn($nick) }
+    if (%timescale == day) {
+      ; start of yday
+      %time = $calc(%today + 86400)
+      ; start of today
+      %time2 = %today
+      %command = Yesterday
+    }
+    else if (%timescale == week) {
+      %time = $calc(%week + 604800)
+      %time2 = %week
+      %command = Last Week
+    }
+    else if (%timescale == month) {
+      var %lastmonth $replace($date(mmm),Jan,2419200,Feb,2678400,Mar,2592000,Apr,2678400,May,2592000,Jun,2678400,Jul,2678400,Aug,2592000,Sep,2678400,Oct,2592000,Nov,2678400,Dec,2678400)
+      %time = $calc(%month + %lastmonth)
+      %time2 = %month
+      %command = Last Month
+    }
+    else {
+      %time = $calc(%year + 31536000)
+      %time2 = %year
+      %command = %last Year
+    }
+    hadd -m %thread nick %nick
+    hadd -m %thread time %time
+    hadd -m %thread time2 %time2
+    hadd -m %thread command %command
+    hadd -m %thread out %saystyle
     sockopen $+(trackyes.,%thread) www.rscript.org 80
   }
 }
