@@ -1,6 +1,6 @@
 on $*:TEXT:/^[!@.]/Si:*: {
   if ($lookups($right($1,-1)) == nomatch) { halt }
-  var %thread = $+($r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9))
+  var %thread = $+(a,$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9))
   var %saystyle = $saystyle($left($1,1),$nick,$chan)
   var %string = $2-
   var %param = null, %presetparam = yes
@@ -17,13 +17,24 @@ on $*:TEXT:/^[!@.]/Si:*: {
   }
   var %lessthan = 200000001
   if ($regex(%string,/<([0-9]+[mkb]?)/)) {
-    %lessthan = $calculate($regml(1))
+    %lessthan = $litecalc($regml(1))
     %string = $regsubex(%string,/<([nlr0-9]+[mkb]?)/,$null)
   }
   var %morethan = 0
   if ($regex(%string,/>([0-9]+[mkb]?)/)) {
-    %morethan = $calculate($regml(1))
+    %morethan = $litecalc($regml(1))
     %string = $regsubex(%string,/>([nlr0-9]+[mkb]?)/,$null)
+  }
+  if ($regex(eq,%string,/=([0-9]+[mkb]?)/)) {
+    if ($litecalc($regml(eq,1)) < 127) {
+      %morethan = $lvltoxp($v1)
+      %lessthan = $calc($lvltoxp($calc($litecalc($regml(eq,1)) + 1)) + 1)
+    }
+    else {
+      %morethan = $litecalc($regml(eq,1))
+      %lessthan = $litecalc($regml(eq,1) + 1)
+    }
+    %string = $regsubex(%string,/=([nlr0-9]+[mkb]?)/,$null)
   }
   var %nick = $rsn($nick)
   if ($len($trim(%string)) > 0) {
@@ -32,10 +43,10 @@ on $*:TEXT:/^[!@.]/Si:*: {
   }
   %nick = $left($caps(%nick),12)
   if (%param == next) {
-    hadd -m $+(a,%thread) out %saystyle
-    hadd -m $+(a,%thread) nick %nick
-    hadd -m $+(a,%thread) skill next
-    sockopen $+(close.a,%thread) hiscore.runescape.com 80
+    var %command = next
+    var %state = 3
+    var %url = http://hiscore.runescape.com/index_lite.ws?player= $+ %nick
+    noop $download.break(stats. $+ %command %saystyle %nick %state,stats. $+ %thread,%url)
     goto unset
   }
   %param = $replace(%param,$chr(32),~)
@@ -54,7 +65,7 @@ alias stats {
   var %saystyle = $1 $2, %skill = $replace($3,_,$chr(32)), %skillid = $4, %nick = $5, %param = $replace($6,~,$chr(32)), %goal = $7, %morethan = $8, %lessthan = $9, %socket = $10, %presetgoal = $11, %presetparam = $12, %time = $13
   .tokenize 10 $distribute($14)
   if ($1 == unranked) { goto unranked }
-  else if (!$1) { %saystyle Connection Error: Please try again in a few moments. | goto unset }
+  else if (!$1 || !$2) { %saystyle Connection Error: Please try again in a few moments. | goto unset }
   if ($skills(%skill) != nomatch) {
     .tokenize 44 $($ $+ %skillid,2)
     var %endgoal = $iif($3 < 13034431,13034431,200000000)
@@ -125,7 +136,7 @@ alias stats {
     if (%param == null) { %param = lvl }
     var %state = $state(%param)
     var %average = $iif(%state == 4,$round($calc($gettok($1,4,44) /24),1),$regsubex($gettok($1,2,44),/(\d+)/,$round($calc(\1 / 24),1))))
-    if (((%morethan > 99 && %morethan < 200000001) || ($xptolvl(%morethan) > 99 && %morethan < 200000001) || (%lessthan > 99 && %lessthan < 200000001) || ($xptolvl(%lessthan) > 99 && %lessthan < 200000001)) && %state == 2) { %state = 4 }
+    if (((%morethan > 100 && %morethan < 200000001) || ($xptolvl(%morethan) > 100 && %morethan < 200000001) || (%lessthan > 100 && %lessthan < 200000001) || ($xptolvl(%lessthan) > 100 && %lessthan < 200000001)) && %state == 2) { %state = 4 }
     var %info =  $+ %nick $+  07all skills | Rank:07 $regsubex($gettok($1,1,44),/(\d+)/,$bytes(\1,db)) | Level:07 $iif(%state == 4,$bytes($gettok($1,4,44),db),$regsubex($gettok($1,2,44),/(\d+)/,$bytes(\1,db))) (avg lvl:07 %average $+ ) | Exp:07 $regsubex($gettok($1,3,44),/(\d+)/,$bytes(\1,db))
     if (%state == 3) {
       var %combatexp = 0
@@ -198,6 +209,7 @@ alias stats {
   if ($minigames(%skill) != nomatch) {
     .tokenize 44 $($ $+ %skillid,2)
     var %info =  $+ %nick $+ 07 %skill | score:07 $bytes($2,db) | rank:07 $bytes($1,db)
+    if ($bytes($1,db) == 0) { goto unranked }
     :minireply
     %saystyle %info
     rscript.singleminigame %socket %nick $replace(%skill,$chr(32),_) %saystyle
@@ -218,7 +230,7 @@ alias stats {
   %saystyle Syntax Error: !<skill> user @param #goal
   goto unset
   :unranked
-  %saystyle  $+ %nick $+  does not feature hiscores.
+  %saystyle  $+ %nick $+  does not feature07 $replace(%skill,stats,$null,reqs,$null) hiscores.
   :unset
   unset %*
 }
@@ -346,7 +358,7 @@ alias distribute {
 ;############################
 ;######TRACKER DETAILS#######
 ;############################
-;rscript.singleskill %socket %nick %skill %saystyle
+; rscript.singleskill %socket %nick %skill %saystyle
 alias rscript.singleskill {
   var %socket = $1 $+ 2, %nick = $2, %skill = $3,%saystyle = $4 $5, %time = $6
   .tokenize 32 $timetoday
@@ -365,12 +377,13 @@ alias rscript.singleskillreply {
   var %saystyle = $1 $2
   var %skill = $3, %nick = $4
   var %time = $5
-  .tokenize 10 $6
+  .tokenize 10 $6-
   var %x = 1, %data, %start
   while (%x <= $0) {
     if (%x > 10) { break }
     var %regex = / $+ %time $+ :\d+/
     if ($regex($($ $+ %x,2),%regex)) { %extr = $($ $+ %x,2) | inc %x | continue }
+    if (PHP isin $($ $+ %x,2)) { %data = %data PHP:Error | inc %x | continue }
     var %regex = /\d{2,}:\d+/
     if ($regex($($ $+ %x,2),%regex)) { %data = %data $($ $+ %x,2) }
     if ($regex($($ $+ %x,2),/^0:(\d+)$/i)) { %start = $regml(1) }
