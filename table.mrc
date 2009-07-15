@@ -1,6 +1,6 @@
 on $*:TEXT:/^[!@.](table|top) */Si:*: {
   var %thread = $+(a,$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9))
-  hadd -m %thread out $saystyle($left($1,1),$nick,$chan)
+  _fillcommand %thread $left($1,1) $nick $chan top
   if (!$2) { hadd -m %thread skill overall }
   if ($2 && $scores($2) == nomatch) { hadd -m %thread skill overall }
   if ($scores($2) != nomatch) {
@@ -18,9 +18,9 @@ on *:sockread:top.*: {
   var %thread = $gettok($sockname,2,46)
   if (!%row) { %row = 1 }
   if ($sockerr) {
-    write ErrorLog.txt $timestamp SocketError[sockread]: $nopath($script) $socket $([,) $+ $hget(%thread,out) $hget(%thread,nick) $+ $(],)
+    write ErrorLog.txt $timestamp SocketError[sockread]: $nopath($script) $socket $([,) $+ $command(%thread,out) $hget(%thread,nick) $+ $(],)
     echo -at Socket Error: $nopath($script)
-    $hget(%thread,out) Connection Error: Please try again in a few moments.
+    $command(%thread,out) Connection Error: Please try again in a few moments.
     hfree %thread
     sockclose $sockname
     halt
@@ -32,12 +32,12 @@ on *:sockread:top.*: {
       inc %row 1
     }
   }
-  if (</html> isin %top) { topout %thread }
+  if (</html> isin %top) { topout %thread | sockclose $sockname | halt }
 }
 alias topout {
   var %thread = $1
   if ($minigames($hget(%thread,skill)) == nomatch) {
-    var %out = $hget(%thread,out)  $+ $hget(%thread,skill) $+  Ranks
+    var %out = $command(%thread,out)  $+ $hget(%thread,skill) $+  Ranks
     if ($hget(%thread,nick)) { var %y = 118 }
     else { var %y = 118 }
     %out = %out 07# $+ $(% $+ %y,2) $+  $(% $+ $calc(%y + 1),2) $+(07,$(% $+ $calc(%y + 2),2)) ( $+ $(% $+ $calc(%y + 3),2) $+ )
@@ -52,9 +52,9 @@ alias topout {
     %out
   }
   else {
-    var %out = $hget(%thread,out)  $+ $hget(%thread,skill) $+  Ranks
-    if ($hget(%thread,nick)) { var %y = 96 }
-    else { var %y = 96 }
+    var %out = $command(%thread,out)  $+ $hget(%thread,skill) $+  Ranks
+    if ($hget(%thread,nick)) { var %y = 97 }
+    else { var %y = 97 }
     %out = %out 07# $+ $(% $+ %y,2) $+  $(% $+ $calc(%y + 1),2) ( $+ $(% $+ $calc(%y + 2),2) $+ )
     inc %y 3
     var %x = 1
@@ -67,6 +67,6 @@ alias topout {
     %out
   }
   :unset
-  hfree %thread
+  _clearcommand
   unset %*
 }

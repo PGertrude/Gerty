@@ -266,7 +266,7 @@ alias distribute {
   if (<html> isin $1) { return unranked }
   if (-1 !isin $gettok(%string,1-25,10)) {
     var %x = 2,%reply,%voa = 0
-    while (%x <= 29) {
+    while (%x <= 30) {
       if ($gettok($ [ $+ [ %x ] ],2,44) == -1) { var % [ $+ [ %x ] ] NR,NR }
       else {
         var %vlvl = $xptolvl($gettok($ [ $+ [ %x ] ],3,44))
@@ -307,7 +307,7 @@ alias distribute {
       inc %x
     }
     var %reply,%x = 2,%voa,%vlevels
-    while (%x <= 29) {
+    while (%x <= 30) {
       var %vlvl = $xptolvl($gettok($ [ $+ [ %x ] ],3,44))
       if (!% [ $+ [ %x ] ]) {
         var %vlvl = $xptolvl($gettok($ [ $+ [ %x ] ],3,44))
@@ -348,7 +348,7 @@ alias distribute {
   }
   var %1 = NR,~ $+ %total $+ ,~ $+ %exp $+ , $+ %voa
   var %x = 2, %reply = %1
-  while (%x <= 29) {
+  while (%x <= 30) {
     if (!% [ $+ [ %x ] ]) { var % [ $+ [ %x ] ] NR,NR }
     %reply = %reply $+ \n $+ % [ $+ [ %x ] ]
     inc %x

@@ -117,10 +117,10 @@ on *:sockread:geinfo2.*: {
       ; check the chunk is present
       if ($len(%string) > 10) {
         ; extract item name, prices, price tracking
-        noop $regex(%string,/alt="([^"]+)">\n[^\n<]+\n<br>\n<br>\n<b>Current market price range:<\/b><br>\n<span>\n<b>Minimum price:<\/b> ([0-9\,\.km]+)\s*\n<\/span>\n<span class="spaced_span">\n<b>Market price:<\/b> ([0-9\,\.km]+)\s*\n<\/span>\n<span>\n<b>Maximum price:<\/b> ([0-9\,\.km]+)\s*\n<\/span>\n<br><br>\n<b>Change in price:<\/b><br>\n<span>\n<b>7 Days:<\/b> <span class="\w+">([0-9\,\.\+-]+)%<\/span>\n<\/span>\n<span class="spaced_span">\n<b>30 Days:<\/b> <span class="\w+">([0-9\,\.\+-]+)%<\/span>/i)
-        var %item = $regml(1), %min = $regml(2), %avg = $regml(3), %max = $regml(4), %7day = $regml(5), %30day = $regml(6)
+        noop $regex(%string,/id=\d+\" alt=\"(.+?)\">\n.+?\n<br>\n<br>\n<b>Current market price range:<\/b><br>\n<span>\n<b>Minimum price:<\/b> ([^\n]+)\n<\/span>\n<span class=\"spaced_span\">\n<b>Market price:<\/b> ([^\n]+)\n<\/span>\n<span>\n<b>Maximum price:<\/b> ([^\n]+)\n</span>\n<br><br>\n<b>Change in price:<\/b><br>\n<span>\n<b>30 Days:<\/b> <span class="[^"]+">(.+?)%<\/span>\n<\/span>\n<span class="spaced_span">\n<b>90 Days:<\/b> <span class="[^"]+">(.+?)%<\/span>\n<\/span>\n<span class="spaced-span">\n<b>180 Days:<\/b> <span class="[^"]+">(.+?)%<\/span>\n/i)
+        var %item = $regml(1), %min = $regml(2), %avg = $regml(3), %max = $regml(4), %7day = $regml(5), %30day = $regml(6), %90day = $regml(7), %180day = $regml(8)
         ; output
-        $hget(%thread,out)  $+ %item $+  | Min:07 %min Avg:07 %avg Max:07 %max | 7 Days:07 $updo(%7day) | 30 Days:07 $updo(%30day) | 12http://itemdb-rs.runescape.com/viewitem.ws?obj= $+ $hget($gettok($sockname,2,46),id)
+        $hget(%thread,out)  $+ %item $+  | Min:07 %min Avg:07 %avg Max:07 %max | 30 Days:07 $updo(%7day) | 90 Days:07 $updo(%30day) | 180 Days:07 $updo(%90day) | 12http://itemdb-rs.runescape.com/viewitem.ws?obj= $+ $hget($gettok($sockname,2,46),id)
       }
       ; if no chunk then item doesn't exist or some other fuck up.
       else {

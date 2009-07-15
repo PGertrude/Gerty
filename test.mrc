@@ -1,17 +1,20 @@
 on $*:TEXT:/^[^\.] */Si:#: {
-  %eq = $replace($remove($1-,$chr(32),$chr(44)),z,f,pi,z,ans,p)
+  var %eq = $remove($1-,$chr(44))
+  %eq = $regsubex(%eq,/([^\+\-\*\\\^]|)(?:price|ge)\(([^\x29]+)\)/gi,$iif(\1,\1*,1*) $+ $price(\2))
+  %eq = $replace($remove(%eq,$chr(32)),z,f,pi,z,ans,p)
   %eq = $regsubex(%eq,/(\D)(\.\d+)/g,\1 $+ 0\2)
   %eq = $regsubex(%eq,/([0-9\.]+)([kmb])/gi,$calc(\1 $replace(\2,k,*1000,m,*1000000,b,*1000000000)))
   %eq = $regsubex(%eq,/([zpex])([zpexastc])/gi,\1* $+ \2)
   %eq = $regsubex(%eq,/([zpex])([zpexastc])/gi,\1* $+ \2)
-  %eq = $regsubex(%eq,/(sin|asin|acos|atan|cos|tan|log|sqrt|lvl|l)-*([0-9zpex]+)/gi,\1 $+ $chr(40) $+ \2 $+ $chr(41))
+  %eq = $regsubex(%eq,/(sin|asin|acos|atan|cos|tan|log|sqrt|lvl|l|price)-*((?:[zpex]+|\d+(?:\.\d+)?))/gi,\1 $+ $chr(40) $+ \2 $+ $chr(41))
   %eq = $regsubex(%eq,/(\x29|\d)(\x28|[zpexastcls])/gi,\1* $+ \2)
   %eq = $regsubex(%eq,/(\x29)(\d|[zpexastcls])/gi,\1* $+ \2)
   %eq = $regsubex(%eq,/([zpex])(\d|\x28)/gi,\1* $+ \2)
   %eq = $replace(%eq,z,3.141593,e,2.718281,p,$hget($nick,p))
-  %valid = $regex(calc,%eq,/^(((\+|\-)?\x28*(\+|\-)?(\d+(\.\d+)?|x|(a?(sin|cos|tan)|log|sqrt|l(vl)?)\((\+|\-)?(\d+(\.\d+)?|x)\)*|\d+(\!)|\d+\*C\d+)\x29*)(\x29*[\+\-\*\/\^\=]+((\+|\-)?\x28*(\+|\-)?(\d+(\.\d+)?|x|(a?(sin|cos|tan)|log|sqrt|l(vl)?)\((\+|\-)?(\d+(\.\d+)?|x)\)*|\d+(\!)|\d+\*C\d+)\x29*))+|(\+|\-)?((a?(sin|cos|tan)|log|sqrt|l(vl)?)\((\+|\-)?(\d+(\.\d+)?)\)|\d+(\!)|\d+\*C\d+))$/gi)
+  %valid = $regex(calc,%eq,/^(((\+|\-)?\x28*(\+|\-)?(\d+(\.\d+)?|x|(a?(sin|cos|tan)|log|sqrt|l(vl)?|price)\((\+|\-)?(\d+(\.\d+)?|x)\)*|\d+(\!)|\d+\*C\d+)\x29*)(\x29*[\+\-\*\/\^\=]+((\+|\-)?\x28*(\+|\-)?(\d+(\.\d+)?|x|(a?(sin|cos|tan)|log|sqrt|l(vl)?|price)\((\+|\-)?(\d+(\.\d+)?|x)\)*|\d+(\!)|\d+\*C\d+)\x29*))+|(\+|\-)?((a?(sin|cos|tan)|log|sqrt|l(vl)?|price)\((\+|\-)?(\d+(\.\d+)?)\)|\d+(\!)|\d+\*C\d+))$/gi)
   %solve = $regsubex(%eq,/(\d+)(\.?)(\d*)\*c(\d+)(\.?)(\d*)/gi,$calc($fact(\1) / ( $fact($calc(\1 - \4)) * $fact(\4) ) ))
   %sum = $regsubex(%eq,/(\d+)(\.?)(\d*)\*c(\d+)(\.?)(\d*)/gi,\1C\4)
+  %sum = $regsubex(%sum,/^1\*/,$null)
   if (%valid >= 1) {
     if (*=* iswm $1-) {
       if ($numtok($solve($regml(calc,1-)),44) >= 2) {
@@ -37,16 +40,18 @@ on $*:TEXT:/^[^\.] */Si:#: {
 }
 ; always returns the result of a calculation ( may be a single number )
 alias calculate {
-  %eq = $replace($remove($1-,$chr(32),$chr(44)),z,f,pi,z,ans,p)
+  var %eq = $remove($1-,$chr(44))
+  %eq = $regsubex(%eq,/([^\+\-\*\\\^]|)(?:price|ge)\(([^\x29]+)\)/gi,$iif(\1,\1*) $+ $price(\2))
+  %eq = $replace($remove(%eq,$chr(32)),z,f,pi,z,ans,p)
   %eq = $regsubex(%eq,/([0-9\.]+)([kmb])/gi,$calc(\1 $replace(\2,k,*1000,m,*1000000,b,*1000000000)))
   %eq = $regsubex(%eq,/([zpex])([zpexastc])/gi,\1* $+ \2)
   %eq = $regsubex(%eq,/([zpex])([zpexastc])/gi,\1* $+ \2)
-  %eq = $regsubex(%eq,/(sin|asin|acos|atan|cos|tan|log|sqrt|lvl|l)-*([0-9zpex]+)/gi,\1 $+ $chr(40) $+ \2 $+ $chr(41))
+  %eq = $regsubex(%eq,/(sin|asin|acos|atan|cos|tan|log|sqrt|lvl|l|price)-*((?:[zpex]+|\d+(?:\.\d+)?))/gi,\1 $+ $chr(40) $+ \2 $+ $chr(41))
   %eq = $regsubex(%eq,/(\x29|\d)(\x28|[zpexastcls])/gi,\1* $+ \2)
   %eq = $regsubex(%eq,/(\x29)(\d|[zpexastcls])/gi,\1* $+ \2)
   %eq = $regsubex(%eq,/([zpex])(\d|\x28)/gi,\1* $+ \2)
   %eq = $replace(%eq,z,3.141593,e,2.718281,p,$hget($nick,p))
-  %valid = $regex(calc,%eq,/^(((\+|\-)?\x28*(\+|\-)?(\d+(\.\d+)?|x|(a?(sin|cos|tan)|log|sqrt|l(vl)?)\((\+|\-)?(\d+(\.\d+)?|x)\)*|\d+(\!)|\d+\*C\d+)\x29*)(\x29*[\+\-\*\/\^\=]+((\+|\-)?\x28*(\+|\-)?(\d+(\.\d+)?|x|(a?(sin|cos|tan)|log|sqrt|l(vl)?)\((\+|\-)?(\d+(\.\d+)?|x)\)*|\d+(\!)|\d+\*C\d+)\x29*))*|(\+|\-)?((a?(sin|cos|tan)|log|sqrt|l(vl)?)\((\+|\-)?(\d+(\.\d+)?)\)|\d+(\!)|\d+\*C\d+))$/gi)
+  %valid = $regex(calc,%eq,/^(((\+|\-)?\x28*(\+|\-)?(\d+(\.\d+)?|x|(a?(sin|cos|tan)|log|sqrt|l(vl)?)\((\+|\-)?(\d+(\.\d+)?|x)\)*|\d+(\!)|\d+\*C\d+)\x29*)(\x29*[\+\-\*\/\^\=]+((\+|\-)?\x28*(\+|\-)?(\d+(\.\d+)?|x|(a?(sin|cos|tan)|log|sqrt|l(vl)?)\((\+|\-)?(\d+(\.\d+)?|x)\)*|\d+(\!)|\d+\*C\d+)\x29*))+|(\+|\-)?((a?(sin|cos|tan)|log|sqrt|l(vl)?)\((\+|\-)?(\d+(\.\d+)?)\)|\d+(\!)|\d+\*C\d+)|\d+(?:\.\d+)?)$/gi)
   %solve = $regsubex(%eq,/(\d+)(\.?)(\d*)\*c(\d+)(\.?)(\d*)/gi,$calc($fact(\1) / ( $fact($calc(\1 - \4)) * $fact(\4) ) ))
   %sum = $regsubex(%eq,/(\d+)(\.?)(\d*)\*c(\d+)(\.?)(\d*)/gi,\1C\4)
   if (%valid >= 1) {
@@ -70,16 +75,18 @@ alias calculate {
 }
 ; will return $1 if the input is not a calculation
 alias nullcalc {
-  %eq = $replace($remove($1-,$chr(32),$chr(44)),z,f,pi,z,ans,p)
+  var %eq = $remove($1-,$chr(44))
+  %eq = $regsubex(%eq,/([^+-\*\\^]|)(?:price|ge)\(([^\x29]+)\)/gi,$iif(\1,\1*) $+ $price(\2))
+  %eq = $replace($remove(%eq,$chr(32)),z,f,pi,z,ans,p)
   %eq = $regsubex(%eq,/([0-9\.]+)([kmb])/gi,$calc(\1 $replace(\2,k,*1000,m,*1000000,b,*1000000000)))
   %eq = $regsubex(%eq,/([zpex])([zpexastc])/gi,\1* $+ \2)
   %eq = $regsubex(%eq,/([zpex])([zpexastc])/gi,\1* $+ \2)
-  %eq = $regsubex(%eq,/(sin|asin|acos|atan|cos|tan|log|sqrt|lvl|l)-*([0-9zpex]+)/gi,\1 $+ $chr(40) $+ \2 $+ $chr(41))
+  %eq = $regsubex(%eq,/(sin|asin|acos|atan|cos|tan|log|sqrt|lvl|l)-*((?:[zpex]+|\d+(?:\.\d+)?))/gi,\1 $+ $chr(40) $+ \2 $+ $chr(41))
   %eq = $regsubex(%eq,/(\x29|\d)(\x28|[zpexastcls])/gi,\1* $+ \2)
   %eq = $regsubex(%eq,/(\x29)(\d|[zpexastcls])/gi,\1* $+ \2)
   %eq = $regsubex(%eq,/([zpex])(\d|\x28)/gi,\1* $+ \2)
   %eq = $replace(%eq,z,3.141593,e,2.718281,p,$hget($nick,p))
-  %valid = $regex(calc,%eq,/^(((\+|\-)?\x28*(\+|\-)?(\d+(\.\d+)?|x|(a?(sin|cos|tan)|log|sqrt|l(vl)?)\((\+|\-)?(\d+(\.\d+)?|x)\)*|\d+(\!)|\d+\*C\d+)\x29*)(\x29*[\+\-\*\/\^\=]+((\+|\-)?\x28*(\+|\-)?(\d+(\.\d+)?|x|(a?(sin|cos|tan)|log|sqrt|l(vl)?)\((\+|\-)?(\d+(\.\d+)?|x)\)*|\d+(\!)|\d+\*C\d+)\x29*))+|(\+|\-)?((a?(sin|cos|tan)|log|sqrt|l(vl)?)\((\+|\-)?(\d+(\.\d+)?)\)|\d+(\!)|\d+\*C\d+))$/gi)
+  %valid = $regex(calc,%eq,/^(((\+|\-)?\x28*(\+|\-)?(\d+(\.\d+)?|x|(a?(sin|cos|tan)|log|sqrt|l(vl)?)\((\+|\-)?(\d+(\.\d+)?|x)\)*|\d+(\!)|\d+\*C\d+)\x29*)(\x29*[\+\-\*\/\^\=]+((\+|\-)?\x28*(\+|\-)?(\d+(\.\d+)?|x|(a?(sin|cos|tan)|log|sqrt|l(vl)?)\((\+|\-)?(\d+(\.\d+)?|x)\)*|\d+(\!)|\d+\*C\d+)\x29*))+|(\+|\-)?((a?(sin|cos|tan)|log|sqrt|l(vl)?)\((\+|\-)?(\d+(\.\d+)?)\)|\d+(\!)|\d+\*C\d+)|\d+(?:\.\d+)?)$/gi)
   %solve = $regsubex(%eq,/(\d+)(\.?)(\d*)\*c(\d+)(\.?)(\d*)/gi,$calc($fact(\1) / ( $fact($calc(\1 - \4)) * $fact(\4) ) ))
   %sum = $regsubex(%eq,/(\d+)(\.?)(\d*)\*c(\d+)(\.?)(\d*)/gi,\1C\4)
   if (%valid >= 1) {
@@ -104,26 +111,28 @@ alias nullcalc {
 }
 ; will return a nice version of the calculation
 alias calcparse {
-  %eq = $replace($remove($1-,$chr(32),$chr(44)),z,f,pi,z,ans,p)
+  var %eq = $remove($1-,$chr(44))
+  %eq = $regsubex(%eq,/([^\+\-\*\\\^]|)(?:price|ge)\(([^\x29]+)\)/gi,$iif(\1,\1*) $+ $price(\2))
+  %eq = $replace($remove(%eq,$chr(32)),z,f,pi,z,ans,p)
   %eq = $regsubex(%eq,/([0-9\.]+)([kmb])/gi,$calc(\1 $replace(\2,k,*1000,m,*1000000,b,*1000000000)))
   %eq = $regsubex(%eq,/([zpex])([zpexastc])/gi,\1* $+ \2)
   %eq = $regsubex(%eq,/([zpex])([zpexastc])/gi,\1* $+ \2)
-  %eq = $regsubex(%eq,/(sin|asin|acos|atan|cos|tan|log|sqrt|lvl|l)-*([0-9zpex]+)/gi,\1 $+ $chr(40) $+ \2 $+ $chr(41))
+  %eq = $regsubex(%eq,/(sin|asin|acos|atan|cos|tan|log|sqrt|lvl|l)-*((?:[zpex]+|\d+(?:\.\d+)?))/gi,\1 $+ $chr(40) $+ \2 $+ $chr(41))
   %eq = $regsubex(%eq,/(\x29|\d)(\x28|[zpexastcls])/gi,\1* $+ \2)
   %eq = $regsubex(%eq,/(\x29)(\d|[zpexastcls])/gi,\1* $+ \2)
   %eq = $regsubex(%eq,/([zpex])(\d|\x28)/gi,\1* $+ \2)
   %eq = $replace(%eq,z,3.141593,e,2.718281,p,$hget($nick,p))
-  %valid = $regex(calc,%eq,/^(((\+|\-)?\x28*(\+|\-)?(\d+(\.\d+)?|x|(a?(sin|cos|tan)|log|sqrt|l(vl)?)\((\+|\-)?(\d+(\.\d+)?|x)\)*|\d+(\!)|\d+\*C\d+)\x29*)(\x29*[\+\-\*\/\^\=]+((\+|\-)?\x28*(\+|\-)?(\d+(\.\d+)?|x|(a?(sin|cos|tan)|log|sqrt|l(vl)?)\((\+|\-)?(\d+(\.\d+)?|x)\)*|\d+(\!)|\d+\*C\d+)\x29*))+|(\+|\-)?((a?(sin|cos|tan)|log|sqrt|l(vl)?)\((\+|\-)?(\d+(\.\d+)?)\)|\d+(\!)|\d+\*C\d+))$/gi)
-  %solve = $regsubex(%eq,/(\d+)\*C(\d+)/g,$calc($fact(\1) / ( $fact($calc(\1 - \2)) * $fact(\2) ) ))
   return $regsubex(%eq,/(\d+)\*C(\d+)/gi,\1C\2)
 }
 ; will return the result of a calculation ( if not a calc returns null, will not accept single number )
 alias strictcalc {
-  %eq = $replace($remove($1-,$chr(32),$chr(44)),z,f,pi,z,ans,p)
+  var %eq = $remove($1-,$chr(44))
+  %eq = $regsubex(%eq,/([^\+\-\*\\\^]|)(?:price|ge)\(([^\x29]+)\)/gi,$iif(\1,\1*,1*) $+ $price(\2))
+  %eq = $replace($remove(%eq,$chr(32)),z,f,pi,z,ans,p)
   %eq = $regsubex(%eq,/([0-9\.]+)([kmb])/gi,$calc(\1 $replace(\2,k,*1000,m,*1000000,b,*1000000000)))
   %eq = $regsubex(%eq,/([zpex])([zpexastc])/gi,\1* $+ \2)
   %eq = $regsubex(%eq,/([zpex])([zpexastc])/gi,\1* $+ \2)
-  %eq = $regsubex(%eq,/(sin|asin|acos|atan|cos|tan|log|sqrt|lvl|l)-*([0-9zpex]+)/gi,\1 $+ $chr(40) $+ \2 $+ $chr(41))
+  %eq = $regsubex(%eq,/(sin|asin|acos|atan|cos|tan|log|sqrt|lvl|l)-*((?:[zpex]+|\d+(?:\.\d+)?))/gi,\1 $+ $chr(40) $+ \2 $+ $chr(41))
   %eq = $regsubex(%eq,/(\x29|\d)(\x28|[zpexastcls])/gi,\1* $+ \2)
   %eq = $regsubex(%eq,/(\x29)(\d|[zpexastcls])/gi,\1* $+ \2)
   %eq = $regsubex(%eq,/([zpex])(\d|\x28)/gi,\1* $+ \2)
@@ -149,20 +158,21 @@ alias strictcalc {
       }
     }
   }
-  return $null
+  return false
 }
 ; returns calculation, may be single number, will return 0 if error (no x solving!)
 alias litecalc {
+  %eq = $regsubex(%eq,/([^\+\-\*\\\^]|)(?:price|ge)\(([^\x29]+)\)/gi,$iif(\1,\1*) $+ $price(\2))
   %eq = $replace($remove($1-,$chr(32),$chr(44)),z,f,pi,z,ans,p)
   %eq = $regsubex(%eq,/([0-9\.]+)([kmb])/gi,$calc(\1 $replace(\2,k,*1000,m,*1000000,b,*1000000000)))
   %eq = $regsubex(%eq,/([zpex])([zpexastc])/gi,\1* $+ \2)
   %eq = $regsubex(%eq,/([zpex])([zpexastc])/gi,\1* $+ \2)
-  %eq = $regsubex(%eq,/(sin|asin|acos|atan|cos|tan|log|sqrt|lvl|l)-*([0-9zpex]+)/gi,\1 $+ $chr(40) $+ \2 $+ $chr(41))
+  %eq = $regsubex(%eq,/(sin|asin|acos|atan|cos|tan|log|sqrt|lvl|l)-*((?:[zpex]+|\d+(?:\.\d+)?))/gi,\1 $+ $chr(40) $+ \2 $+ $chr(41))
   %eq = $regsubex(%eq,/(\x29|\d)(\x28|[zpexastcls])/gi,\1* $+ \2)
   %eq = $regsubex(%eq,/(\x29)(\d|[zpexastcls])/gi,\1* $+ \2)
   %eq = $regsubex(%eq,/([zpex])(\d|\x28)/gi,\1* $+ \2)
   %eq = $replace(%eq,z,3.141593,e,2.718281,p,$hget($nick,p))
-  %valid = $regex(calc,%eq,/^(((\+|\-)?\x28*(\+|\-)?(\d+(\.\d+)?|x|(a?(sin|cos|tan)|log|sqrt|l(vl)?)\((\+|\-)?(\d+(\.\d+)?|x)\)*|\d+(\!)|\d+\*C\d+)\x29*)(\x29*[\+\-\*\/\^\=]+((\+|\-)?\x28*(\+|\-)?(\d+(\.\d+)?|x|(a?(sin|cos|tan)|log|sqrt|l(vl)?)\((\+|\-)?(\d+(\.\d+)?|x)\)*|\d+(\!)|\d+\*C\d+)\x29*))*|(\+|\-)?((a?(sin|cos|tan)|log|sqrt|l(vl)?)\((\+|\-)?(\d+(\.\d+)?)\)|\d+(\!)|\d+\*C\d+))$/gi)
+  %valid = $regex(calc,%eq,/^(((\+|\-)?\x28*(\+|\-)?(\d+(\.\d+)?|x|(a?(sin|cos|tan)|log|sqrt|l(vl)?)\((\+|\-)?(\d+(\.\d+)?|x)\)*|\d+(\!)|\d+\*C\d+)\x29*)(\x29*[\+\-\*\/\^\=]+((\+|\-)?\x28*(\+|\-)?(\d+(\.\d+)?|x|(a?(sin|cos|tan)|log|sqrt|l(vl)?)\((\+|\-)?(\d+(\.\d+)?|x)\)*|\d+(\!)|\d+\*C\d+)\x29*))*|(\+|\-)?((a?(sin|cos|tan)|log|sqrt|l(vl)?)\((\+|\-)?(\d+(\.\d+)?)\)|\d+(\!)|\d+\*C\d+)|\d+(?:\.\d+)?)$/gi)
   %solve = $regsubex(%eq,/(\d+)(\.?)(\d*)\*c(\d+)(\.?)(\d*)/gi,$calc($fact(\1) / ( $fact($calc(\1 - \4)) * $fact(\4) ) ))
   %sum = $regsubex(%eq,/(\d+)(\.?)(\d*)\*c(\d+)(\.?)(\d*)/gi,\1C\4)
   return $calc($parser(%eq))

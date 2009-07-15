@@ -16,9 +16,15 @@ mode $me +Bp
 if ($network == SwiftIrc) {
 if ($me == Gerty) { join #gert,#howdy,#kingio,#gerty,#Vampiress,#malkav,#melo,#r3al }
 else { join #gerty }
+var %x = 1
+.timer 1 5 writeini -n rsn.ini $!address($me,3) rsn Gerty
+if ($nick(#gerty,Gerty)) { .timer 1 5 writeini -n rsn.ini $!address(Gerty,3) rsn Gerty }
+if ($nick(#gerty,[gz]Gerty)) { .timer 1 5 writeini -n rsn.ini $!address([gz]Gerty,3) rsn Gerty }
+if ($nick(#gerty,Gerttest)) { .timer 1 5 writeini -n rsn.ini $!address(Gerttest,3) rsn Gerty }
+if ($nick(#gerty,P_Gertrude)) { .timer 1 5 writeini -n rsn.ini $!address(P_Gertrude,3) rsn P_Gertrude }
+if ($nick(#gerty,Elessar)) { .timer 1 5 writeini -n rsn.ini $!address(Elessar,3) rsn Tiedemanns }
 }
 .timertim 0 1 .timecount
-writeini rccomp.ini leaders a 1
 }
 on *:INVITE:*: {
 if ($readini(chan.ini,#,blacklist) == yes) { .notice $nick Channel $chan is blacklisted. Speak to an admin to remove the blacklist. | halt }

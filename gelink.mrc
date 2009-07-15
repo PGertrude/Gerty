@@ -1,7 +1,7 @@
 on *:TEXT:*:*: {
   if (!$regex($1,/^[!@.](g(reat|rand)?e(xchange)?|price)$/Si)) { halt }
   var %thread = $+(a,$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9))
-  hadd -m $+(a,%class) out $saystyle($left($1,1),$nick,$chan)
+  hadd -m %thread out $saystyle($left($1,1),$nick,$chan)
   if ($calculate($2)) {
     hadd -m %thread amount $calculate($2)
     hadd -m %thread search " $+ $replace($3-,$chr(32),+) $+ "
@@ -61,7 +61,7 @@ on *:sockread:gelink.*: {
     }
   }
 }
-alias updo {
+alias -l updo {
   var %price = $litecalc($1)
   if (%price > 0) { return 03[ $+ $trim($1) $+ 03] }
   if (%price < 0) { return 04[ $+ $trim($1) $+ 04] }

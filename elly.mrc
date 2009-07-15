@@ -1,11 +1,5 @@
 alias listchans {
-  var %x 1
-  while ($chan(%x)) {
-    var %a $calc(%a + $nick($chan(%x),0))
-    var %b %b $chan(%x) $+ $chr(91) $+ $nick($chan(%x),0) $+ $chr(93)
-    inc %x
-  }
-  var %out = Chans:07 $chan(0) Nicks:07 %a Uptime:07 $swaptime($uptime(server,1)) Chan list: %b
+  var %out = Chans:07 $chan(0) Nicks:07 $bot(users) Uptime:07 $swaptime($uptime(server,1)) Chan list: %b
   if ($isid) {
     return %out
   }
@@ -39,12 +33,7 @@ on $*:TEXT:/^[!@.]status\b/Si:*: {
       return
     }
   }
-  var %x 1
-  while ($chan(%x)) {
-    var %a $calc(%a + $nick($chan(%x),0))
-    inc %x
-  }
-  %saystyle Chans:07 $chan(0) Nicks:07 %a Uptime:07 $swaptime($uptime(server,1))
+  %saystyle Chans:07 $chan(0) Nicks:07 $bot(users) Uptime:07 $swaptime($uptime(server,1))
 }
 alias swaptime {
   var %b = $regex(time,$1,/(\d+)/g)

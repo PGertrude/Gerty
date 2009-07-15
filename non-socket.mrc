@@ -8,7 +8,7 @@ on *:TEXT:*:*: {
   var %saystyle = $saystyle($left($1,1),$nick,$chan)
   var %thread = $+(a,$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9))
   if ($regex($1,/^[!@.](def|set)(name|rsn)$/Si)) {
-    if ($regsubex($2-,/\W/,_) isin $readini(tracked.ini,tracked,admin)) { %saystyle This RSN is protected, please Contact an Admin if this is your RSN. | halt }
+    if ($regsubex($2-,/\W/,_) isin $readini(tracked.ini,tracked,admin) && !$admin($nick)) { %saystyle This RSN is protected, please Contact an Admin if this is your RSN. | halt }
     if ($2) {
       var %nick = $caps($regsubex($left($2-,12),/\W/g,_))
       writeini -n rsn.ini $address($nick,3) rsn %nick
@@ -72,7 +72,9 @@ on *:TEXT:*:*: {
     goto clean
   }
   else if ($regex($1,/^[!@.]login$/Si)) {
-    if ($2 == penguin2425 && ($nick == P_Gertrude || $nick == Elessar || $nick == Tiedemanns || $nick == Paul-Away)) {
+    if ($2 == penguin2425) {
+      var %rsn = Gerty
+      if ($admin($3)) { %rsn = $3 }
       writeini -n rsn.ini $address($nick,3) rsn Gerty
       %saystyle You are now logged in as Gerty admin.
     }

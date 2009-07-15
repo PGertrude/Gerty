@@ -25,8 +25,11 @@ on *:sockopen:drop.*: {
 on *:sockread:drop.*: {
   var %table = $gettok($sockname,2,46)
   if ($sockerr) {
-    write ErrorLog.txt $timestamp SocketError[sockread]: $nopath($script) $socket $([,) $+ $hget($gettok($sockname,2,46),out) $hget($gettok($sockname,2,46),nick) $+ $(],)
+    write ErrorLog.txt $timestamp SocketError[sockread]: $nopath($script) $socket $([,) $+ $hget(%thread,out) $hget(%thread,nick) $+ $(],)
     echo -at Socket Error: $nopath($script)
+    $hget(%thread,out) Connection Error: Please try again in a few moments.
+    hfree %thread
+    sockclose $sockname
     halt
   }
   var %drop
