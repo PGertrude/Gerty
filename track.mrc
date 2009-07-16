@@ -42,9 +42,7 @@ on $*:TEXT:/^[!@.]track */Si:*: {
     noop $download.break(trackAll %saystyle %nick %time %command, %socket, %url)
   }
 }
-;#############################
-;#######!track (today)########
-;#############################
+; Today Output Section
 alias trackall {
   var %saystyle = $1 $2, %nick = $3, %time = $4, %command = $regsubex($5,/(\d)([a-z])/gi,\1$chr(32)\2)
   if ($voidRscript($6)) {
@@ -103,9 +101,9 @@ alias voidRscript {
   }
   return
 }
-;###########################
-;###!yesterday/!lastNdays###
-;###########################
+;#####################################
+;###!yesterday/!lastNdays/!NdaysAgo###
+;#####################################
 on *:TEXT:*:*: {
   var %input = $1-
   var %saystyle = $saystyle($left($1,1),$nick,$chan)
@@ -140,6 +138,21 @@ on *:TEXT:*:*: {
     hadd -m %thread skill $skills($2)
     hadd -m %thread out %saystyle
     sockopen $+(trackyes.,%thread) www.rscript.org 80
+  }
+  ; today/week/month/year
+  if ($regex($1,/^[!@.](today|week|month|year)$/Si)) {
+    var %string = $2-
+    var %command = $right($1,-1)
+    var %time = % [ $+ [ %command ] ]
+    var %nick = $nick
+    if ($len($trim(%string)) > 0) {
+      %nick = $trim(%string)
+    }
+    %nick = $rsn(%nick)
+    var %thread = $+(a,$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9))
+    var %url = http://www.rscript.org/lookup.php?type=track&user= $+ %nick $+ &skill=all&time= $+ %time
+    %saystyle noop download.break(trackAll %saystyle %nick %time %command , %thread , %url )
+    noop $download.break(trackAll %saystyle %nick %time %command, %thread, %url)
   }
   ; lastW/e yesterday
   if ($regex($1,/^[!@.](?:y(?:ester)?(day)|l(?:ast)?(week|month|year))$/Si)) {
