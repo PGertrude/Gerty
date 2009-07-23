@@ -14,7 +14,7 @@ on $*:TEXT:/^[^\.] */Si:#: {
   %valid = $regex(calc,%eq,/^(((\+|\-)?\x28*(\+|\-)?(\d+(\.\d+)?|x|(a?(sin|cos|tan)|log|sqrt|l(vl)?|price)\((\+|\-)?(\d+(\.\d+)?|x)\)*|\d+(\!)|\d+\*C\d+)\x29*)(\x29*[\+\-\*\/\^\=]+((\+|\-)?\x28*(\+|\-)?(\d+(\.\d+)?|x|(a?(sin|cos|tan)|log|sqrt|l(vl)?|price)\((\+|\-)?(\d+(\.\d+)?|x)\)*|\d+(\!)|\d+\*C\d+)\x29*))+|(\+|\-)?((a?(sin|cos|tan)|log|sqrt|l(vl)?|price)\((\+|\-)?(\d+(\.\d+)?)\)|\d+(\!)|\d+\*C\d+))$/gi)
   %solve = $regsubex(%eq,/(\d+)(\.?)(\d*)\*c(\d+)(\.?)(\d*)/gi,$calc($fact(\1) / ( $fact($calc(\1 - \4)) * $fact(\4) ) ))
   %sum = $regsubex(%eq,/(\d+)(\.?)(\d*)\*c(\d+)(\.?)(\d*)/gi,\1C\4)
-  %sum = $regsubex(%sum,/^1\*/,$null)
+  %sum = $regsubex(%sum,/(^|[^\d\.])1\*/g,\1$null)
   if (%valid >= 1) {
     if (*=* iswm $1-) {
       if ($numtok($solve($regml(calc,1-)),44) >= 2) {

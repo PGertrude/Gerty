@@ -1,5 +1,5 @@
 alias listchans {
-  var %out = Chans:07 $chan(0) Nicks:07 $bot(users) Uptime:07 $swaptime($uptime(server,1)) Chan list: %b
+  var %out = Chans:07 $chan(0) Nicks:07 $bot(users) Uptime:07 $swaptime($uptime(server,1)) Chan list: $bot(chanlist)
   if ($isid) {
     return %out
   }
@@ -98,7 +98,7 @@ on $*:sockread:youtube.*:{
 on $*:text:/^(Gerty? )?[!.@]m(ember)?l(ist)?/Si:*:{
   if ($iif($regex($1,/^Gerty?/Si),$3,$2) && $readini(chan.ini,$chan,ml) != off) {
     var %ticks $ticks
-    sockopen ml.a $+ %ticks runehead.com 80
+    sockopen ml.a $+ %ticks www6.runehead.com 80
     hadd -m a $+ %ticks out $saystyle($left($iif($regex($1,/^Gerty?/Si),$2,$1),1),$nick,$chan)
     hadd -m a $+ %ticks ml $caps($regsubex($iif($regex($1,/^Gerty?/Si),$3-,$2-),/(\W)/g,_))
   }
@@ -106,14 +106,14 @@ on $*:text:/^(Gerty? )?[!.@]m(ember)?l(ist)?/Si:*:{
 on $*:notice:/^(Gerty? )?[!.@]m(ember)?l(ist)?/Si:*:{
   if ($iif($regex($1,/^Gerty?/Si),$3,$2)) {
     var %ticks $ticks
-    sockopen ml.a $+ %ticks runehead.com 80
+    sockopen ml.a $+ %ticks www6.runehead.com 80
     hadd -m a $+ %ticks out .notice $nick
     hadd -m a $+ %ticks ml $caps($regsubex($iif($regex($1,/^Gerty?/Si),$3-,$2-),/(\W)/g,_))
   }
 }
-on *:sockopen:ml.*:{
-  sockwrite -nt $sockname GET /feeds/lowtech/searchclan.php?search= $+ $hget($gettok($sockname,2,46),ml) $+ &type=2
-  sockwrite -nt $sockname Host: runehead.com
+on *:sockopen:ml.*: {
+  sockwrite -nt $sockname GET /feeds/lowtech/searchclan.php?search= $+ $hget($gettok($sockname,2,46),ml) $+ &type=2 HTTP/1.0
+  sockwrite -nt $sockname Host: www6.runehead.com
   sockwrite -nt $sockname $crlf
 }
 on *:sockread:ml.*:{
@@ -126,7 +126,7 @@ on *:sockread:ml.*:{
       unset %*
       sockclose $sockname
     }
-    else {
+    else if ($numtok(%ml,124) > 5) {
       tokenize 124 %ml
       $hget($gettok($sockname,2,46),out) $+($chr(91),07,$5,,$chr(93),07) $1 $+(,$chr(40),07,$4,,$chr(41)) Link:12 $2  $+ $chr(124) Members: $+(07,$6,) $chr(124) Avg: P2P-Cmb: $+(07,$7,) F2P-Cmb: $+(07,$16,) Overall: $+(07,$bytes($9,bd),) $chr(124) Based: Region: $+(07,$13,) World: $+(07,$15,) Core: $+(07,$12,) Cape: $+(07,$14,) $chr(124) Runehead Link:12 $3
       unset %*
@@ -164,20 +164,7 @@ alias spell {
   if (%x == 1) { %saystyle 07 $+ $iif(%exact,Exact match $+(07,",%spell,"),%spell) $+  spell not found. }
   .fclose *
 }
-on *:quit:{
-  hsave runeprice runeprice.txt
-  hsave spelluse spelluse.txt
-}
-on *:connect:{
-  if (!$hget(runeprice)) {
-    hmake runeprice
-    hload runeprice runeprice.txt
-  }
-  if (!$hget(spelluse)) {
-    hmake spelluse
-    hload spelluse spelluse.txt
-  }
-}
+
 alias runepriceupdater {
   sockopen runeprice.rune1 itemdb-rs.runescape.com 80
   sockopen runeprice.rune2 itemdb-rs.runescape.com 80

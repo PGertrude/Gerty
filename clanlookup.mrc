@@ -3,12 +3,12 @@ on $*:TEXT:/^[!@.]clan */Si:*: {
   hadd -m %thread out $saystyle($left($1,1),$nick,$chan)
   if ($2) { hadd -m %thread nick $rsn($2-) }
   else if (!$2) { hadd -m %thread nick $rsn($nick) }
-  sockopen $+(clanlookup.,%thread) www5.runehead.com 80
+  sockopen $+(clanlookup.,%thread) www6.runehead.com 80
 }
 on *:sockopen:clanlookup.*: {
   var %string = search= $+ $hget($gettok($sockname,2,46),nick) $+ &searchtype=exact&mltype=1&combatType=p2p
-  sockwrite -n $sockname POST /clans/search.php HTTP/1.2
-  sockwrite -n $sockname Host: www5.runehead.com
+  sockwrite -n $sockname POST /clans/search.php HTTP/1.0
+  sockwrite -n $sockname Host: www6.runehead.com
   sockwrite -n $sockname Content-Length: $len(%string)
   sockwrite -n $sockname Content-Type: application/x-www-form-urlencoded
   sockwrite -n $sockname $crlf %string
@@ -48,7 +48,7 @@ on *:sockread:clanlookup.*: {
         hadd -m %thread noclan noclan
       }
       .remove %file
-      sockopen $+(clanlookup2.,%thread) www5.runehead.com 80
+      sockopen $+(clanlookup2.,%thread) www6.runehead.com 80
       sockclose $sockname
     }
   }
@@ -56,7 +56,7 @@ on *:sockread:clanlookup.*: {
 on *:sockopen:clanlookup2.*: {
   var %string = search= $+ $hget($gettok($sockname,2,46),nick) $+ &searchtype=exact&mltype=2&combatType=p2p
   sockwrite -n $sockname POST /clans/search.php HTTP/1.1
-  sockwrite -n $sockname Host: www5.runehead.com
+  sockwrite -n $sockname Host: www6.runehead.com
   sockwrite -n $sockname Content-Length: $len(%string)
   sockwrite -n $sockname Content-Type: application/x-www-form-urlencoded
   sockwrite -n $sockname $crlf %string

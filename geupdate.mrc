@@ -1,13 +1,3 @@
-on *:QUIT: {
-  hsave ge geupdatebackup.txt
-}
-on *:connect: {
-  .timerge 0 60 .CheckGePrices
-  if (!$hget(ge,1)) {
-    hmake ge
-    hload ge geupdatebackup.txt
-  }
-}
 alias CheckGePrices {
   sockopen CheckGePrices.front itemdb-rs.runescape.com 80
   sockopen CheckGePrices.zam itemdb-rs.runescape.com 80

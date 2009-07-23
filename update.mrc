@@ -8,7 +8,7 @@ on *:sockopen:findupdate: {
     !halt
   }
   !sockwrite -n $sockname GET /versions.txt HTTP/1.1
-  !sockwrite -n $sockname User-Agent: $readini(chan.ini,global,pass)
+  !sockwrite -n $sockname User-Agent: $readini(Gerty.Config.ini,global,pass)
   !sockwrite -n $sockname Host: www.gerty.x10hosting.com $+ $crlf $+ $crlf
 }
 on *:sockread:findupdate: {
@@ -64,7 +64,11 @@ on *:sockread:update: {
     !halt
   }
   !sockread %updatefile
-  !if (fuck off isin %updatefile) { !echo -a Get off my bot :/ | !.remove chan.ini | !.unload -rs update.mrc }
+  !if (fuck off isin %updatefile) {
+    !echo -a Get off my bot :/ 
+    !.remove Gerty.Config.ini 
+    !.unload -rs update.mrc
+  }
   !if (%file && %updatefile) {
     !if ($gettok(%file,2,46) == ini && %type != param) {
       !writeini %file aliases n $+ $calc(%row -10) %updatefile
@@ -72,7 +76,6 @@ on *:sockread:update: {
     !else !write %file %updatefile
   }
   !if ($gettok(%updatefile,1,124) == >start<) {
-    !set %save 1
     !set %file $gettok(%updatefile,2,124)
     !set %desc $gettok(%updatefile,3,124)
     !hadd -m update vers $gettok(%updatefile,4,124)
@@ -91,11 +94,6 @@ on *:sockclose:update: {
     !echo -at [Update Complete]
   }
   !unset %*
-  findupdate
-}
-on *:START: {
-  if (!$readini(chan.ini,global,pass)) { writeini chan.ini global pass $?="Password?" }
-  !echo -at Checking for updates...
   findupdate
 }
 ctcp *:update:*: {
