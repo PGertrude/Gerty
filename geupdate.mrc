@@ -1,3 +1,4 @@
+>start<|geupdate.mrc|fixed spam after timer restarts|1.61|rs
 alias CheckGePrices {
   sockopen CheckGePrices.front itemdb-rs.runescape.com 80
   sockopen CheckGePrices.zam itemdb-rs.runescape.com 80
@@ -39,7 +40,7 @@ alias GeClose {
   else {
     if ($2 != $hget(ge,%page)) {
       if ($hget(ge,update) == 1) {
-        write -il1 geupdate.txt $time $+ $chr(124) $+ $ctime $+ $chr(124) $+ $ord($date(dd)) $date(mmm)
+        write -il1 geupdate.txt $host(time) $+ $chr(124) $+ $ctime $+ $chr(124) $+ $ord($host(date)) $host(month).3
         var %x = $chan(0)
         while (%x) {
           if ($readini(chan.ini,$chan(%x),geupdate) == on) { .msg $chan(%x) GE Database has been updated. }
@@ -75,11 +76,11 @@ alias GeClose {
 on $*:TEXT:/^[!@.]geupdate\b/Si:*: {
   var %saystyle = $saystyle($left($1,1),$nick,$chan)
   var %output, %x = 2, %update
-  %output = Recent Ge Updates (GMT): Today07 $gettok($read(geupdate.txt,1),1,124) $+  ( $+ $duration($calc($ctime($date $time) - $gettok($read(geupdate.txt,1),2,124))) ago);
+  %output = Recent Ge Updates (UK): $gettok($read(geupdate.txt,1),3,124) $+ 07 $gettok($read(geupdate.txt,1),1,124) $+  ( $+ $duration($calc($ctime($date $time) - $gettok($read(geupdate.txt,1),2,124))) ago);
   while (%x <= 7) {
     if (!$read(geupdate.txt,%x)) { break }
     %update = $read(geupdate.txt,%x)
-    %output = %output $iif($gettok(%update,3,124),$v1,$calc(%x -1) days ago) $+ 07 $gettok(%update,1,124) $+ ;
+    %output = %output $gettok(%update,3,124) $+ 07 $gettok(%update,1,124) $+ ;
     inc %x
   }
   %saystyle %output
@@ -87,8 +88,8 @@ on $*:TEXT:/^[!@.]geupdate\b/Si:*: {
 on $*:TEXT:/^[!@.]setgeupdate\b/Si:*: {
   if ($nick isop $chan || $nick ishop $chan || $admin($nick) == admin) {
     if $2 != on && $2 != off halt
-    if $2 == on writeini chan.ini $chan geupdate on
-    if $2 == off writeini chan.ini $chan geupdate off
+    if $2 == on noop $_network(writeini -n chan.ini $chan geupdate on)
+    if $2 == off noop $_network(writeini -n chan.ini $chan geupdate off)
     $saystyle($left($1,1),$nick,$chan) GE Update notification in $chan has been turned $2 $+ .
   }
 }

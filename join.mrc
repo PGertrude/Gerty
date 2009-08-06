@@ -1,3 +1,4 @@
+>start<|join.mrc|admin sorted|2.0|rs
 alias _setAdmin {
   if ($address(P_Gertrude,3)) { writeini -n rsn.ini $v1 rsn P_Gertrude }
   if ($address(Elessar,3)) { writeini -n rsn.ini $v1 rsn Tiedemanns }
@@ -12,12 +13,13 @@ on *:TEXT:*:#: {
   if ($admin($nick) != admin) { halt }
   var %saystyle = $saystyle($left($1,1),$nick,$chan)
   if ($regex($1,/^[!@.]ignore$/Si)) {
-    ignore $2
+    noop $_network(ignore $2)
     %saystyle User $2 added to ignore.
   }
   if ($regex($1,/^[!@.]b(lack)?l(ist)?$/Si)) {
-    writeini chan.ini $2 blacklist yes
+    noop $_network(writeini -n chan.ini $2 blacklist yes)
     %saystyle Channel $2 blacklisted.
+    if ($me ison $2) { part $2 Blacklisted. }
   }
 }
 on *:INVITE:*: {
@@ -37,6 +39,7 @@ on *:INVITE:*: {
 }
 on *:JOIN:*: {
   if ($nick == $me) {
+    who $chan
     var %thread = $+(a,$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9))
     hadd -m %thread chan $chan
     .timer 1 1 .delayedjoin %thread
@@ -44,7 +47,15 @@ on *:JOIN:*: {
 }
 alias delayedjoin {
   var %chan = $hget($1,chan)
-  if (%chan == #gerty) { goto clean }
+  if (%chan == #gerty || %chan == #howdy) { goto clean }
+  var %x = 1
+  while (%x <= $lines(botlist.txt)) {
+    if ($read(botlist.txt,%x) ison %chan && $read(botlist.txt,%x) != $me) {
+      part %chan You already have a Gerty bot.
+      goto clean
+    }
+    inc %x
+  }
   if (!$hget(invite,%chan)) { var %invite = %chan }
   else { var %invite = $hget(invite,%chan) }
   if ($readini(chan.ini,%chan,users)) { var %min = $readini(chan.ini,%chan,users) }
@@ -76,6 +87,9 @@ ctcp *:rawcommand:*: {
   [ [ $2- ] ]
 }
 alias notifybot {
-  if ($hget(join,bot)) ctcp $hget(join,bot) rawcommand join $2
+  if ($hget(join,bot)) {
+    ctcp $hget(join,bot) hadd -m invite $2 $1
+    ctcp $hget(join,bot) rawcommand join $2
+  }
   else .notice $1 Sorry but all bots are currently full.
 }

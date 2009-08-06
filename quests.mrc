@@ -1,4 +1,6 @@
+>start<|quests.mrc|Quest Information|1.01|rs
 on $*:TEXT:/^[!@.]quest */Si:#: {
+  _CheckMain
   var %class = $+($r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9))
   var %saystyle = $saystyle($left($1,1),$nick,$chan)
   if (!$2) { %saystyle Syntax Error: !quest #<id> or !quest [-t] <search> | halt }

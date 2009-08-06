@@ -1,4 +1,6 @@
+>start<|geinfo.mrc|cleaned|1.3|rs
 on $*:TEXT:/^[!@.]g(reat|rand)?e(xchange)?(info)/Si:*: {
+  _CheckMain
   ; normal stuff.
   var %thread = $+(a,$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9))
   var %saystyle = $saystyle($left($1,1),$nick,$chan)

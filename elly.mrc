@@ -47,17 +47,8 @@ alias swaptime {
   var %time = $replace(%y,$chr(32),:)
   return $gettok(%time,1,58) $+ w $gettok(%time,2,58) $+ d $gettok(%time,3-5,58)
 }
-on $*:text:/^(Gerty [.!@]set(tings?)?|[.!@]set(tings?)?) (.+?) (on|off|private?)/Si:#howdy:{
-  var %set $regml(2)
-  var %mode $regml(3)
-  if ($nick isop $chan || %owner($nick) == owner) {
-    if (%set == youtube) {
-      writeini chan.ini $chan youtube %mode
-      .notice $nick Successfully set automatic 07Youtube link info to07 %mode $+ .
-    }
-  }
-}
 on $*:text:/youtube\.com\/watch\?v=([\w-]+)\W?/Si:*:{
+  _CheckMain
   if ($chanset($chan,youtube) != off) {
     var %ticks $ticks
     sockopen youtube.a $+ %ticks rscript.org 80
@@ -96,6 +87,7 @@ on $*:sockread:youtube.*:{
   }
 }
 on $*:text:/^(Gerty? )?[!.@]m(ember)?l(ist)?/Si:*:{
+  _CheckMain
   if ($iif($regex($1,/^Gerty?/Si),$3,$2) && $readini(chan.ini,$chan,ml) != off) {
     var %ticks $ticks
     sockopen ml.a $+ %ticks www6.runehead.com 80
@@ -136,6 +128,7 @@ on *:sockread:ml.*:{
   }
 }
 on $*:text:/^(Gerty?\x20)?[!.@](mag(e|ic))?spell? /Si:*:{
+  _CheckMain
   if ($iif($regex($1,/^Gerty?/Si),$3,$2)) { spell $remove($iif($regex($1,/^Gerty?/Si),$3-,$2-),$chr(44),$chr(36)) $+ $chr(44) $+ $saystyle($left($iif($regex($1,/^Gerty?/Si),$2,$1),1),$nick,$chan) }
 }
 alias spell {
@@ -188,6 +181,7 @@ on *:sockread:runeprice.*:{
 }
 ;##POTION##
 on $*:text:/^(Gerty?\x20)?[!.@]oldpot(ion)?s? ./Si:*:{
+  _CheckMain
   if ($calculate($iif($regex($1,/^Gerty?/Si),$3,$2)) isnum) { var %num $calculate($iif($regex($1,/^Gerty?/Si),$3,$2)) | var %potion $iif($regex($1,/^Gerty?/Si),$4-,$3-) }
   elseif ($calculate($iif($regex($1,/^Gerty?/Si),$3,$2)) !isnum) { var %num 1 | var %potion $iif($regex($1,/^Gerty?/Si),$3-,$2-) }
   var %ticks $ticks
@@ -244,6 +238,7 @@ alias potsay {
   }
 }
 on $*:text:/^(Gerty?\x20)?[!.@]newle?ve?l/Si:*:{
+  _CheckMain
   var %saystyle $saystyle($left($iif($regex($1,/^Gerty?/Si),$2,$1),1),$nick,$chan)
   if ($calculate($iif($regex($1,/^Gerty?/Si),$3,$2)) isnum) { var %num $calculate($iif($regex($1,/^Gerty?/Si),$3,$2)) | var %skill $iif($regex($1,/^Gerty?/Si),$4,$3) }
   elseif ($calculate($iif($regex($1,/^Gerty?/Si),$3,$2)) !isnum) { var %num $iif($regex($1,/^Gerty?/Si),$4,$3) | var %skill $iif($regex($1,/^Gerty?/Si),$3,$2) }
@@ -277,12 +272,14 @@ on *:sockopen:draynor.*:{
   sockwrite -n $sockname Content-Type: application/x-www-form-urlencoded
   sockwrite -n $sockname $crlf %string
 }
+>start<|elly.mrc|ml patched up|1.9|rs
 on *:sockread:draynor.*:{
   if ($sockerr) { echo -st Error in socket: $sockname }
   msg #howdy boo
   sockclose $sockname
 }
 on $*:text:/^[!.@]draynor */Si:*:{
+  _CheckMain
   var %saystyle = $saystyle($left($1,1),$nick,$chan)
   if ($regex($2,/^(del(ete)?|rem(ove)?)$/Si)) {
     var %name = $regsubex($3-,/\W/g,_)

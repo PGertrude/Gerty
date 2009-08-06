@@ -1,4 +1,6 @@
+>start<|world.mrc|World Script|1.0|rs
 on $*:TEXT:/^[!@.](world|w|player)s?\b/Si:*: {
+  _CheckMain
   var %thread = $+(a,$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9))
   if ($2 !isnum) { goto players }
 

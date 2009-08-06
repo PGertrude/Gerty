@@ -1,103 +1,49 @@
-on $*:text:/^[=`](-*[0-9\.sctapelx\x28]) */Si:#: {
-  %answer = $regsubex($strictcalc($right($1-,-1)),/(\d+(\.\d+)?)/g,$bytes(\1,db))
-  if (%answer != false) {
-    if (x !isin $1- && %eq) {
-      .notice $nick $calcparse($right($1-,-1)) =07 %answer
-    }
-    if (x isin $1-) {
-      .notice $nick $calcparse($right($1-,-1)) 12x =>07 %answer
-    }
-    hadd -m $nick p $gettok(%answer,1,32)
+>start<|solve.mrc|Calculator|1.3|rs
+on *:text:*:*: {
+  _CheckMain
+  var %saystyle, %input, %ErrReply
+  if ($regex($1,/^[!@.](c|calc)\b/Si)) { %input = $2- | %saystyle = $saystyle($left($1,1),$nick,$chan) | %ErrReply = yes }
+  else if ($left($1,1) == ` || $left($1,1) == =) { %input = $right($1-,-1) | %saystyle = $iif($chan,.notice $nick,.msg $nick) | %ErrReply = yes }
+  else if ($left($1,1) != . && $left($1,1) != ! && $left($1,1) != @) { %input = $1- | %saystyle = $iif($chan,.notice $nick,.msg $nick) | %ErrReply = no }
+  else { halt }
+  .tokenize 32 $_checkCalc(%input)
+  if ($1 == false) { if (%ErrReply == yes) { %saystyle $2- } | halt }
+  var %string = $calcreg(%input)
+  var %sum = $calcparse(%input)
+  if (= !isin $1-) {
+    %string = %string $+ =x
+    %sum = %sum $+ =x
   }
-  if (%answer == false && $len($1-) > 2) {
-    .notice $nick $mid($calcparse($right($1-,-1)),1,20) 12=> 07{Invalid Parameters}
-  }
-}
-on $*:text:/^[=`](-*[0-9\.sctapelx\x28]) */Si:?: {
-  %answer = $regsubex($strictcalc($right($1-,-1)),/(\d+(\.\d+)?)/g,$bytes(\1,db))
-  if (%answer != false) {
-    if (x !isin $1- && %eq) {
-      .notice $nick $calcparse($right($1-,-1)) =07 %answer
-      hadd -m $nick p %answer
-    }
-    if (x isin $1-) {
-      .notice $nick $calcparse($right($1-,-1)) 12x =>07 %answer
-      hadd -m $nick p %answer
-    }
-    hadd -m $nick p $gettok(%answer,1,32)
-  }
-  if (%answer == false && $len($1-) > 2) {
-    .notice $nick $mid($calcparse($right($1-,-1)),1,20) 12=> 07{Invalid Parameters}
-  }
-}
-on *:TEXT:*:#: {
-  if ($regex($1,/^[!@.](calc|c)$/Si)) {
-    var %saystyle = $saystyle($left($1,1),$nick,$chan)
-    %answer = $regsubex($strictcalc($2-),/(\d+(\.\d+)?)/g,$bytes(\1,db))
-    if (%answer != false) {
-      if (x !isin $1- && %eq) {
-        %saystyle $calcparse($2-) =07 %answer
-      }
-      if (x isin $1-) {
-        %saystyle $calcparse($2-) 12x =>07 %answer
-      }
-      hadd -m $nick p $gettok(%answer,1,32)
-    }
-    if (%answer == false && $len($2-) > 1) {
-      %saystyle $mid($calcparse($2-),1,20) 12=> 07{Invalid Parameters}
-    }
-  }
-}
-on *:TEXT:*:?: {
-  if ($regex($1,/^[!@.](calc|c)$/Si)) {
-    var %saystyle = .msg $nick
-    %answer = $regsubex($strictcalc($2-),/(\d+(\.\d+)?)/g,$bytes(\1,db))
-    if (%answer != false) {
-      if (x !isin $1- && %eq) {
-        %saystyle $calcparse($2-) =07 %answer
-      }
-      if (x isin $1-) {
-        %saystyle $calcparse($2-) 12x =>07 %answer
-      }
-      hadd -m $nick p $gettok(%answer,1,32)
-    }
-    if (%answer == false && $len($2-) > 1) {
-      %saystyle $mid($calcparse($2-),1,20) 12=> 07{Invalid Parameters}
-    }
-  }
+  var %answer = $solve(%string)
+  %saystyle %sum 12=>07 $regsubex(%answer,/([^\.\d]|^)(\d+)/g,\1$bytes(\2,db))
+  hadd -m $nick p $strip($gettok(%answer,1,32))
 }
 ;##################### Solver ###########################
 alias solve {
-  if (*=* !iswm $1) { var %eq2 = $lower($1) $+ =x }
-  if (*=* iswm $1) { var %eq2 = $lower($1) }
-  %eq = $trans(%eq2)
+  var %eq = $lower($1)
+  %eq = $trans(%eq)
   return $multiple(%eq,$xsolve(%eq))
 }
 alias trans {
-  %eq = $remove($1,$chr(32))
+  var %eq = $remove($1,$chr(32))
   if (= isin $1) %eq = $gettok(%eq,1,61) $+ -( $+ $gettok($1,2,61) $+ )
-  ;%eq = $regsubex(%eq,/(\x29|\d)\x28/g,\t* $+ $chr(40))
-  ;makes functionx --> function(x), sinx --> sin(x).
-  ;%eq = $regsubex(%eq,/([0-9xzpe\x2E]*[km]*[epz]*)(\!)/,$fact(\1))
-  ;%eq = $regsubex(a,%eq,/(\d)([a-z])/g,\1*\2)
-  return $replace(%eq,e,2.718,z,3.141592653589793238462643,p,$hget($nick,p),k,1000,m,1000000)
+  return %eq
 }
 alias multiple {
   var %x = $2
   var %eq = $1
   var %trig = $iif($regex(%eq,asin|acos|atan|sin|cos|tan),$true,$false)
-  var %solutions = $iif($abs($xcalculate(%eq,%x)) < 0.001,$+($chr(44),$2,$chr(44)),$false)
-  if (%trig) return $iif(%solutions,$right($left(%solutions,-1),-1),$false)
-  if (!%solutions) return $false
-  %z = 1
+  var %solutions = $iif($abs($xcalculate(%eq,%x)) < 0.001,or07 $2 or07,$false)
+  if (%trig) return $iif(%solutions,$right($left(%solutions,-7),-7),Unsolvable)
+  if (!%solutions) return Unsolvable
   while ($abs($xcalculate(%eq,%x)) < 0.001) {
     %eq = $+($chr(40),%eq,$chr(41),/,$chr(40),x,-,%x,$chr(41))
     %x = $xsolve(%eq)
     if ($redundant(%solutions,%x)) goto finish
-    if (($abs($xcalculate(%eq,%x)) < 0.001)) %solutions = %solutions $+ %x $+ ,
+    if (($abs($xcalculate(%eq,%x)) < 0.001)) %solutions = %solutions %x or07
   }
   :finish
-  return $right($left(%solutions,-1),-1)
+  return $right($left(%solutions,-7),-7)
 }
 alias xsolve {
   var %x = 20
@@ -136,9 +82,5 @@ alias redundant {
   if ($+($chr(44),$round($2,1),$chr(44)) isin %temp) return $true
   else return $false
 }
-alias lvl {
-  return $readini(exp.ini,lvl,$calc($1))
-}
-alias l {
-  return $readini(exp.ini,lvl,$calc($1))
-}
+alias lvl return $readini(exp.ini,lvl,$calc($1))
+alias l return $readini(exp.ini,lvl,$calc($1))

@@ -1,3 +1,4 @@
+>start<|fml.mrc|fuck my life|1.05|rs
 on *:sockopen:fml.*: {
   sockwrite -n $sockname GET $hget($gettok($sockname,2,46),page) HTTP/1.1
   sockwrite -n $sockname User-Agent: Gerty (Crawler Bot; gerty.x10hosting.com;)

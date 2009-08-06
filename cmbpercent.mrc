@@ -1,4 +1,6 @@
+>start<|cmbpercent.mrc|cleaned|2.1|rs
 on $*:TEXT:/^([!@.](%|cmb%|combat%|p2p%|f2p%|sl%|slay%|slayer%|skill%|pc%|pest%|pestcontrol%|skiller%)|%)( |$)/Si:*: {
+  _CheckMain
   var %thread = $+(a,$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9)), %nick, %saystyle
   if ($2) %nick = $rsn($2-)
   if (!$2) %nick = $rsn($nick)

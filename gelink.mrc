@@ -1,9 +1,11 @@
+>start<|gelink.mrc|cleaned + fix|1.3|rs
 on *:TEXT:*:*: {
+  _CheckMain
   if (!$regex($1,/^[!@.](g(reat|rand)?e(xchange)?|price)$/Si)) { halt }
   var %thread = $+(a,$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9))
   hadd -m %thread out $saystyle($left($1,1),$nick,$chan)
-  if ($calculate($2)) {
-    hadd -m %thread amount $calculate($2)
+  if ($litecalc($2)) {
+    hadd -m %thread amount $litecalc($2)
     hadd -m %thread search " $+ $replace($3-,$chr(32),+) $+ "
   }
   else {
@@ -19,11 +21,7 @@ on *:sockread:gelink.*: {
   var %thread = $gettok($sockname,2,46)
   var %file = %thread $+ .txt
   if ($sockerr) {
-    write ErrorLog.txt $timestamp SocketError[sockread]: $nopath($script) $socket $([,) $+ $hget(%thread,out) $hget(%thread,nick) $+ $(],)
-    echo -at Socket Error: $nopath($script)
-    $hget(%thread,out) Connection Error: Please try again in a few moments.
-    hfree %thread
-    sockclose $sockname
+    _throw $nopath($script) %thread
     halt
   }
   else {
@@ -42,10 +40,11 @@ on *:sockread:gelink.*: {
         var %f = $calc($bfind(&gelink2,%e,">)+2), %g = $bfind(&gelink2,%f,<)
         var %h = $calc($bfind(&gelink2,%g,img src=")+10), %i = $bfind(&gelink2,%h,/serverlist/), %k = $bfind(&gelink2,%i,.png)
         var %j = $iif(*member* iswm $bvar(&gelink2,%i,$calc(%k - %i)).text,$+($chr(32),,$chr(40),07M,$chr(41)))
-        var %price = $calculate($bvar(&gelink2,%d,$calc(%e - %d)).text)
+        var %price = $litecalc($bvar(&gelink2,%d,$calc(%e - %d)).text)
         var %z = $iif($len(%z) > 5,%z) | $+ %j $bvar(&gelink2,%b,$calc(%c - %b)).text $+ :07 $iif(%amount,$format_number($calc(%amount * %price)),$format_number(%price)) $+  $updo($bvar(&gelink2,%f,$calc(%g - %f)).text)
         var %start = %c
         dec %limit 1
+        hadd -m prices $replace($bvar(&gelink2,%b,$calc(%c - %b)).text,$chr(32),+) $litecalc(%price)
       }
       if (*your search* iswm $bvar(&gelink2,%number,$calc(%end - %number)).text) {
         var %z = No match found for $replace($hget(%thread,search),+,$chr(32))

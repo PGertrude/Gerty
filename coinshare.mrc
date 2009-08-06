@@ -1,4 +1,6 @@
+>start<|coinshare.mrc|cleaned|1.2|rs
 on $*:TEXT:/^[!@.]c(oin)?s(hare)? */Si:*: {
+  _CheckMain
   var %thread = $+(a,$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9))
   var %saystyle = $saystyle($left($1,1),$nick,$chan)
   if ($chr(35) isin $2-) {
@@ -39,11 +41,7 @@ on *:sockread:coinshare.*: {
   var %thread = $gettok($sockname,2,46)
   var %file = %thread $+ .txt
   if ($sockerr) {
-    write ErrorLog.txt $timestamp SocketError[sockread]: $nopath($script) $socket $([,) $+ $hget(%thread,out) $hget(%thread,nick) $+ $(],)
-    echo -at Socket Error: $nopath($script)
-    $hget(%thread,out) Connection Error: Please try again in a few moments.
-    hfree %thread
-    sockclose $sockname
+    _throw $nopath($script) %thread
     halt
   }
   else {
@@ -82,7 +80,7 @@ on *:sockread:coinshare2.*: {
   var %thread = $gettok($sockname,2,46)
   var %file = %thread $+ .txt
   if ($sockerr) {
-    $hget($gettok($sockname,2,46),out) [Socket Error] $sockname $time $script
+    _throw $nopath($script) %thread
     halt
   }
   else {

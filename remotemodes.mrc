@@ -1,3 +1,4 @@
+>start<|remotemodes.mrc|Remote Control|1.1|rs
 on $*:TEXT:sodomise*:#: {
   if ($nick isop $chan || $nick ishop $chan || $admin($nick) == admin) {
     if ($3) { var %bantime = $3 }
@@ -25,7 +26,7 @@ on *:TEXT:*:#: {
             if (*k* iswm %mode) kick $chan $2 $3-
             halt
           }
-          if (*-* iswm %mode) { 
+          if (*-* iswm %mode) {
             mode $chan -bbbbbbbb $address($2,2) $2 $address($2,3)
             if (*k* iswm %mode) kick $chan $2 $3-
             halt

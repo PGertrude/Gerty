@@ -1,4 +1,6 @@
+>start<|Cost.mrc|Cost scripts|1.0|rs
 on $*:text:/^(\[\w{2}\]Gerty |Gerty |)?[!.@]((pot)(ion)?s?|(po)(uch)?|(farmer|payment)|(\w+)costs?|costs? (\w+))/Si:*: {
+  _CheckMain
   if (Gerty isin $1) {
     if ($1 == $me) || ($1 == Gerty && Gerty !ison $chan) { tokenize 32 $2- }
     else { halt }

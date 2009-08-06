@@ -1,3 +1,4 @@
+>start<|spamcontrol.mrc|more covered|2.3|rs
 on $*:TEXT:/^[!@.]([\w\d]+) */Si:*: {
   if ($skills($right($1,-1)) != nomatch || $minigames($right($1,-1)) != nomatch || $misc($right($1,-1)) != nomatch) { goto spam }
   if ($regex($right($1,-1),/(uptime|track|urban|google|ge|epenis|life|iq|today|week|month|year|yesterday|lastweek|lastmonth|item|npc|drop)/i)) { goto spam }

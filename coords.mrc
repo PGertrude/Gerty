@@ -1,4 +1,6 @@
+>start<|coords.mrc|fixed direction E/W|1.3|rs
 on $*:TEXT:/^[!@.](co-?ord|co-?ordinate)s? */Si:*: {
+  _CheckMain
   var %saystyle = $saystyle($left($1,1),$nick,$chan)
   var %regex = /(\d{1,2})\D*(\d{1,2})[^ns]*([ns])\D*(\d{1,2})\D*(\d{1,2})[^ew]*([ew])/i
   if (!$regex($2-,%regex)) { %saystyle Invalid coordinate search07 $remove($2-,$chr(32)) | halt }
@@ -8,24 +10,28 @@ on $*:TEXT:/^[!@.](co-?ord|co-?ordinate)s? */Si:*: {
   %saystyle Co-ordinates:07 $mid($gettok(%coord,1,124),1,5) /07 $mid($gettok(%coord,1,124),7,5) | Location:07 $gettok(%coord,2,124)
 }
 on $*:TEXT:/^[!@.](ana|anagrams?) */Si:*: {
+  _CheckMain
   var %saystyle = $saystyle($left($1,1),$nick,$chan)
   var %anagram = $read(anagram.txt,nw,* $+ $2- $+ *)
   if (!%anagram) { %saystyle Anagram "07 $+ $2- $+ " not found. | halt }
   %Saystyle Anagram:07 $gettok(%anagram,1,124) | NPC:07 $gettok(%anagram,2,124) | Location:07 $gettok(%anagram,3,124)
 }
 on $*:TEXT:/^[!@.]riddles? */Si:*: {
+  _CheckMain
   var %saystyle = $saystyle($left($1,1),$nick,$chan)
   var %riddle = $read(riddles.txt,nw,* $+ $2- $+ *)
   if (!%riddle) { %saystyle Riddle "07 $+ $2- $+ " not found. | halt }
   %Saystyle Riddle:07 $gettok(%riddle,1,124) | Location:07 $gettok(%riddle,2,124)
 }
 on $*:TEXT:/^[!@.]challenges? */Si:*: {
+  _CheckMain
   var %saystyle = $saystyle($left($1,1),$nick,$chan)
   var %challenge = $read(challenge.txt,nw,* $+ $2- $+ *)
   if (!%challenge) { %saystyle Challenge "07 $+ $2- $+ " not found. | halt }
   %Saystyle Challenge:07 $gettok(%challenge,1,124) | Answer:07 $gettok(%challenge,3,124) (07 $+ $gettok(%challenge,2,124) $+ )
 }
 on $*:TEXT:/^[!@.]uri */Si:*: {
+  _CheckMain
   var %saystyle = $saystyle($left($1,1),$nick,$chan)
   var %uri = $read(uri.txt,nw,* $+ $2- $+ *)
   if (!%uri) { %saystyle Uri clue "07 $+ $2- $+ " not found. | halt }

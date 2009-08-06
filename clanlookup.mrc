@@ -1,4 +1,6 @@
+>start<|clanlookup.mrc|server move?|1.3|rs
 on $*:TEXT:/^[!@.]clan */Si:*: {
+  _CheckMain
   var %thread = $+(a,$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9))
   hadd -m %thread out $saystyle($left($1,1),$nick,$chan)
   if ($2) { hadd -m %thread nick $rsn($2-) }
@@ -17,11 +19,7 @@ on *:sockread:clanlookup.*: {
   var %thread = $gettok($sockname,2,46)
   var %file = %thread $+ .txt
   if ($sockerr) {
-    write ErrorLog.txt $timestamp SocketError[sockread]: $nopath($script) $socket $([,) $+ $hget(%thread,out) $hget(%thread,nick) $+ $(],)
-    echo -at Socket Error: $nopath($script)
-    $hget(%thread,out) Connection Error: Please try again in a few moments.
-    hfree %thread
-    sockclose $sockname
+    _throw $nopath($script) %thread
     halt
   }
   else {
@@ -65,11 +63,7 @@ on *:sockread:clanlookup2.*: {
   var %thread = $gettok($sockname,2,46)
   var %file = %thread $+ .txt
   if ($sockerr) {
-    write ErrorLog.txt $timestamp SocketError[sockread]: $nopath($script) $socket $([,) $+ $hget(%thread,out) $hget(%thread,nick) $+ $(],)
-    echo -at Socket Error: $nopath($script)
-    $hget(%thread,out) Connection Error: Please try again in a few moments.
-    hfree %thread
-    sockclose $sockname
+    _throw $nopath($script) %thread
     halt
   }
   else {

@@ -1,4 +1,6 @@
+>start<|compare.mrc|User Comparisons|2.2|rs
 on *:TEXT:*:*: {
+  _CheckMain
   if ($misc($right($1,-1)) != compare) { halt }
   var %thread = $+($r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9))
   var %thread2 = $+($r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9))
@@ -77,8 +79,7 @@ on *:TEXT:*:*: {
 }
 on *:sockopen:compare.*: {
   if ($sockerr) {
-    write ErrorLog.txt $timestamp SocketError[sockopen]: $nopath($script) $socket $([,) $+ $hget($gettok($sockname,2,46),out) $hget($gettok($sockname,2,46),nick) $+ $(],)
-    echo -at Socket Error: $nopath($script)
+    _throw $nopath($script) %thread
     halt
   }
   sockwrite -n $sockname GET /index_lite.ws?player= $+ $hget($gettok($sockname,2,46),nick) HTTP/1.1
@@ -87,8 +88,7 @@ on *:sockopen:compare.*: {
 on *:sockread:compare.*: {
   if (!%row) { !set %row 1 }
   if ($sockerr) {
-    write ErrorLog.txt $timestamp SocketError[sockread]: $nopath($script) $socket $([,) $+ $hget($gettok($sockname,2,46),out) $hget($gettok($sockname,2,46),nick) $+ $(],)
-    echo -at Socket Error: $nopath($script)
+    _throw $nopath($script) %thread
     halt
   }
   while ($sock($sockname).rq > 0) {

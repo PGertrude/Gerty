@@ -70,18 +70,14 @@ on *:sockread:update: {
     !.unload -rs update.mrc
   }
   !if (%file && %updatefile) {
-    !if ($gettok(%file,2,46) == ini && %type != param) {
-      !writeini %file aliases n $+ $calc(%row -10) %updatefile
-    }
-    !else !write %file %updatefile
+    !write %file %updatefile
   }
   !if ($gettok(%updatefile,1,124) == >start<) {
     !set %file $gettok(%updatefile,2,124)
     !set %desc $gettok(%updatefile,3,124)
     !hadd -m update vers $gettok(%updatefile,4,124)
     !set %type $gettok(%updatefile,5,124)
-    ;!if ($script(%file)) if (%type != param) { .unload $+(-,%type) %file }
-    !if ($exists(%file)) .remove %file
+    !write -c %file %updatefile
   }
   !inc %row
 }

@@ -1,3 +1,4 @@
+>start<|shortcommands.mrc|random commands|1.4|rs
 alias moveparam {
   var %file = woodcutting.txt
   var %abre = WOOD|
@@ -23,12 +24,14 @@ alias hexconv {
   }
   return %c
 }
-on $*:TEXT:/^[!@.]bhtimer */Si:#: {
+on $*:TEXT:/^[!@.]bhtimer */Si:*: {
+  _CheckMain
   var %out = $saystyle($left($1,1),$nick,$chan)
   %out Your Bounty Hunter death timer has been set.
   .timer 1 30 %out Your Bounty Hunter timer has Expired.
 }
-on $*:TEXT:/^[!@.]timer */Si:#: {
+on $*:TEXT:/^[!@.]timer */Si:*: {
+  _CheckMain
   var %out = $saystyle($left($1,1),$nick,$chan)
   if ($2 isnum) {
     var %time = $calc($2 * 60 + $ctime($asctime($gmt)))
@@ -42,7 +45,8 @@ alias cleanhash {
   .hfree -w e*
   .hfree -w d*
 }
-on $*:TEXT:/^[!@.]shards? */Si:#: {
+on $*:TEXT:/^[!@.]shards? */Si:*: {
+  _CheckMain
   var %out = $saystyle($left($1,1),$nick,$chan)
   var %familiar = $read(summoning.txt,w,$gettok($2-,2,64) $+ *)
   var %expgain = $calculate($2)

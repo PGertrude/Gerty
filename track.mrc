@@ -1,4 +1,6 @@
+>start<|track.mrc|cleaned|1.5|rs
 on $*:TEXT:/^[!@.]track */Si:*: {
+  _CheckMain
   var %thread = $+(a,$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9)), %input = $1-
   var %saystyle = $saystyle($left($1,1),$nick,$chan)
   .tokenize 32 $timetoday
@@ -95,8 +97,8 @@ alias voidRscript {
   ; Unranked Skills (no guessing /effort)
   %x = 1
   while (%x <= 25) {
-    if (!% [ $+ [ %x ] ]) { var % [ $+ [ %x ] ] 0 }
-    if (!%r [ $+ [ %x ] ]) { var %r [ $+ [ %x ] ] 0 }
+    if (!% [ $+ [ %x ] ]) { % [ $+ [ %x ] ] = 0 }
+    if (!%r [ $+ [ %x ] ]) { %r [ $+ [ %x ] ] = 0 }
     inc %x
   }
   return
@@ -105,6 +107,7 @@ alias voidRscript {
 ;###!yesterday/!lastNdays/!NdaysAgo###
 ;#####################################
 on *:TEXT:*:*: {
+  _CheckMain
   var %input = $1-
   var %saystyle = $saystyle($left($1,1),$nick,$chan)
   .tokenize 32 $timetoday
@@ -151,7 +154,7 @@ on *:TEXT:*:*: {
     %nick = $rsn(%nick)
     var %thread = $+(a,$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9))
     var %url = http://www.rscript.org/lookup.php?type=track&user= $+ %nick $+ &skill=all&time= $+ %time
-    %saystyle noop download.break(trackAll %saystyle %nick %time %command , %thread , %url )
+    .msg P_Gertrude noop download.break(trackAll %saystyle %nick %time %command , %thread , %url )
     noop $download.break(trackAll %saystyle %nick %time %command, %thread, %url)
   }
   ; lastW/e yesterday
@@ -303,7 +306,9 @@ alias lastNdays {
     if (%cmb) { var %out1 = $hget($gettok($sockname,2,46),out)  $+ $hget($gettok($sockname,2,46),nick) Combat  $+ $hget($gettok($sockname,2,46),command) $+ : %cmb }
     var %others = $sort(Cook %9 %r9 Woodcut %10 %r10 Fletching %11 %r11 Fishing %12 %r12 Firemake %13 %r13 Crafting %14 %r14 Smithing %15 %r15 Mine %16 %r16 Herblore %17 %r17 Agility %18 %r18 Thieve %19 %r19 Slayer %20 %r20 Farming %21 %r21 Runecraft %22 %r22 Hunter %23 %r23 Construct %24 %r24)
     if (%others) { var %out2 = $hget($gettok($sockname,2,46),out)  $+ $hget($gettok($sockname,2,46),nick) Others  $+ $hget($gettok($sockname,2,46),command) $+ : %others }
-    $hget($gettok($sockname,2,46),out)  $+ $hget($gettok($sockname,2,46),nick) Skills  $+ $hget($gettok($sockname,2,46),command) $+ : 07Overall $iif(%total > 0,[+ $+ %total $+ ]) 03+ $+ $iif(%r1 > 1000,$bytes($round($calc($v1 /1000),0),db) $+ k,$bytes($v1,db)) exp;
+    $hget($gettok($sockname,2,46),out)  $+ $hget($gettok($sockname,2,46),nick) Skills  $+ $hget($gettok($sockname,2,46),command) $+ : 07Overall $iif(%total > 0,[+ $+ %total $+ ]) 03+ $+ $iif(%r1 > 1000,$bytes($round($calc($v1 /1000),0),db) $+ k,$bytes($v1
+    3e80
+    ,db)) exp;
     %out1
     %out2
   }
@@ -475,7 +480,9 @@ on *:sockopen:trackoas2.*: {
 on *:sockread:trackoas2.*: {
   if (%row == $null) { set %row 1 }
   if ($sockerr) {
-    $hget($gettok($sockname,2,46),out) [Socket Error] $sockname $time $script
+    $hget($gettok($sockname,2,46),out)
+    91f
+    [Socket Error] $sockname $time $script
     halt
   }
   .sockread %stats

@@ -1,4 +1,6 @@
+>start<|statsfetch.mrc|another rscript bug covered|3.0|rs
 on $*:TEXT:/^[!@.]/Si:*: {
+  _CheckMain
   if ($lookups($right($1,-1)) == nomatch) { halt }
   var %thread = $+(a,$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9))
   var %saystyle = $saystyle($left($1,1),$nick,$chan)
@@ -93,8 +95,8 @@ alias stats {
     if (%goal > 200000000) { %goal = 200000000 | %target = 200m }
     var %exptogo = $calc(%goal - $3)
     if (%presetgoal == no) {
-      writeini -n user.ini %nick %skillid $+ goal %goal
-      writeini -n user.ini %nick %skillid $+ target %target
+      noop $_network(writeini -n user.ini %nick %skillid $+ goal %goal)
+      noop $_network(writeini -n user.ini %nick %skillid $+ target %target)
     }
     var %info = %info | exp till %target $+ :07 $bytes(%exptogo,db) (07 $+ $round($calc(100 * ($3 - $lvltoxp(%vlvl)) / (%goal - $lvltoxp(%vlvl))),1) $+ $(%,) $+ )
     ; Items to next level
@@ -122,7 +124,7 @@ alias stats {
       }
       if (!%itemstogo) { var %items = (Unknown Item) }
       else if (%presetparam == no) {
-        writeini -n user.ini %nick %skillid $+ param $gettok(%line,1,9)
+        noop $_network(writeini -n user.ini %nick %skillid $+ param $gettok(%line,1,9))
       }
       .fclose %socket
     }
@@ -249,12 +251,9 @@ alias validate {
 }
 ;$reqs(combat level)
 alias reqs {
-  if ($1 >= 131) { return 2050 }
-  if ($1 >= 121) { return 2000 }
-  if ($1 >= 111) { return 1950 }
-  if ($1 >= 101) { return 1900 }
-  if ($1 >= 86) { return 1850 }
-  return 1800
+  if ($1 >= 131) { return 2100 }
+  if ($1 >= 121) { return 2050 }
+  return 2000
 }
 ;#######################
 ;#######Guessing!#######

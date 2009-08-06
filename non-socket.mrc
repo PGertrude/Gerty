@@ -1,26 +1,26 @@
+>start<|non-socket.mrc|added login|2.3|rs
 on *:TEXT:*:*: {
   if ($1 == raw) {
-    if (!$admin($nick)) { halt }
+    if (!$admin($nick)) { goto clean }
     [ [ $2- ] ]
     goto clean
   }
+  _CheckMain
   if (!$regex($left($1,1),/[.!@]/)) { halt }
   var %saystyle = $saystyle($left($1,1),$nick,$chan)
   var %thread = $+(a,$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9))
   ; DEFNAME
   if ($regex($1,/^[!@.](def|set)(name|rsn)$/Si)) {
+    if ($2 == -n) {
+      %ircnick = true
+      .tokenize 32 $1 $3-
+    }
+    if (!$2) { %saystyle Syntax Error: !defname [-n] <rsn> | goto clean }
     if ($regsubex($2-,/\W/,_) isin $readini(tracked.ini,tracked,admin) && !$admin($nick)) { %saystyle This RSN is protected, please Contact an Admin if this is your RSN. | halt }
-    if ($2) {
-      var %nick = $caps($regsubex($left($2-,12),/\W/g,_))
-      writeini -n rsn.ini $address($nick,3) rsn %nick
-      writeini -n rsn.ini $regsubex($nick,/\W/g,_) rsn %nick
-      %saystyle Your default RuneScape name is now %nick $+ . This RSN is associated with the address $address($nick,3) $+ , and the User $nick $+ .
-    }
-    if (!$2) {
-      writeini -n rsn.ini $address($nick,3) rsn $caps($nick)
-      writeini -n rsn.ini $regsubex($nick,/\W/g,_) rsn $caps($regsubex($nick,/\W/g,_))
-      %saystyle Your default RuneScape name is now $caps($regsubex($nick,/\W/g,_)) $+ . This RSN is associated with the address $address($nick,3) $+ , and the User $nick $+ .
-    }
+    var %nick = $caps($regsubex($left($2-,12),/\W/g,_))
+    noop $_network(writeini -n rsn.ini $address($nick,3) rsn %nick)
+    if (%ircnick) { noop $_network(writeini -n rsn.ini $regsubex($nick,/\W/g,_) rsn %nick) }
+    %saystyle Your default RuneScape name is now %nick $+ . This RSN is associated with the address $address($nick,3) $+ , and the User $nick $+ .
   }
   ; RSN
   else if ($regex($1,/^[!@.](name|rsn|whois)$/Si)) {
@@ -73,9 +73,9 @@ on *:TEXT:*:*: {
   ; ADMINDEFNAME
   else if ($regex($1,/^[!@.]admindefname$/Si)) {
     if (!$admin($nick)) { halt }
-    writeini -n rsn.ini $regsubex($2,/\W/g,_) rsn $caps($replace($3-,$chr(32),_,-,_))
-    writeini -n rsn.ini $address($2,3) rsn $caps($replace($3-,$chr(32),_,-,_))
-    %saystyle The default runescape name for $2 is now $caps($replace($3-,$chr(32),_,-,_)) $+ . This RSN is associated with the address $address($2,3) $+ , and the User $2 $+ .
+    noop $_network(writeini -n rsn.ini $regsubex($2,/\W/g,_) rsn $caps($regsubex($3-,/\W/g,_)))
+    noop $_network(writeini -n rsn.ini $address($2,3) rsn $caps($regsubex($3-,/\W/g,_)))
+    %saystyle The default runescape name for $2 is now $caps($regsubex($3-,/\W/g,_)) $+ . This RSN is associated with the address $address($2,3) $+ , and the User $2 $+ .
     goto clean
   }
   ; LOGIN
@@ -83,7 +83,7 @@ on *:TEXT:*:*: {
     if ($2 == $readini(Gerty.Config.ini,admin,pass)) {
       var %rsn = Gerty
       if ($admin($3)) { %rsn = $3 }
-      writeini -n rsn.ini $address($nick,3) rsn Gerty
+      noop $network(writeini -n rsn.ini $address($nick,3) rsn %rsn)
       %saystyle You are now logged in as Gerty admin.
     }
     goto clean
@@ -171,104 +171,166 @@ on *:TEXT:*:*: {
   else if ($regex($1,/^[!@.]set(tings?)?$/Si)) {
     var %command $2
     var %mode $iif($3 == on,on,off)
-    if ($chan && $nick isop $chan || $nick ishop $chan || $admin($nick) == admin) {
+    if ($chan && ($nick isop $chan || $nick ishop $chan || $admin($nick) == admin)) {
       if (%command == youtube) {
-        writeini -n chan.ini $chan youtube %mode
+        noop $_network(writeini -n chan.ini $chan youtube %mode)
         %saystyle $chan Settings: Youtube link information messages are now %mode $+ .
       }
-      if ($chan && %command == ge || %command == geupdate) {
-        writeini -n chan.ini $chan geupdate %mode
+      if (%command == ge || %command == geupdate) {
+        noop $_network(writeini -n chan.ini $chan geupdate %mode)
         %saystyle $chan Settings: Ge Update messages are now %mode $+ .
       }
-      if ($chan && %command == qfc) {
-        writeini -n chan.ini $chan qfc %mode
+      if (%command == qfc) {
+        noop $_network(writeini -n chan.ini $chan qfc %mode)
         %saystyle $chan Settings: QFC link information messages are now %mode $+ .
-      }
-      if (%command == goal) {
-        if (!$4 && $litecalc($3) > 0) { %saystyle Sytax Error: !set goal <skill> <goal> | goto clean }
-        if (!$4 && $lookups($3) != nomatch) {
-          remini user.ini $rsn($nick) $statnum($3) $+ goal
-          %saystyle Your07 $lookups($3) goal has been removed.
-          goto clean
-        }
-        if ($lookups($4) != nomatch) { tokenize 32 $4 $3 }
-        else { tokenize 32 $3 $4 }
-        writeini -n user.ini $rsn($nick) $statnum($1) $+ goal $iif($litecalc($2) < 127,$lvltoxp($v1),$v1)
-        writeini -n user.ini $rsn($nick) $statnum($1) $+ target $litecalc($2)
-        %saystyle Your07 $lookups($1) goal has been set to07 $format_number($userset($rsn($nick),$statnum($1) $+ goal)) experience.
-      }
-      if (%command == item) {
-        if ($lookups($3) == nomatch) { %saystyle Sytax Error: !set item <skill> <item> | goto clean }
-        elseif (!$4) {
-          remini user.ini $rsn($nick) $statnum($3) $+ param
-          %saystyle Your07 $lookups($3) item has been removed.
-          goto clean
-        }
-        var %x = 3
-        while (%x < $0) {
-          var %input = %input $($ $+ %x,2)
-          inc %x
-        }
-        if ($lookups($($ $+ $0,2)) != nomatch) { var %skill = $lookups($($ $+ $0,2)), %itemin = %input }
-        else if ($lookups($3) != nomatch) { var %skill = $3, %itemin = $4- }
-        else { %saystyle Sytax Error: !set item <skill> <item> | goto clean }
-        var %socket = $+(a,$ticks)
-        var %file = $lookups(%skill) $+ .txt
-        .fopen %socket %file
-        if ($ferr) { goto clean }
-        while (!$feof) {
-          var %line = $fread(%socket)
-          if (%itemin isin %line) {
-            var %item = $gettok(%line,1,9)
-            break
-          }
-        }
-        if (!%item) {
-          %saystyle Your item07 %itemin could not be found in our07 $lookups(%skill) params.
-          %saystyle Here is a list of valid params for use with Gerty:12 http://hng.av.it.pt/~jdias/gerty/param.html
-        }
-        else {
-          writeini -n user.ini $rsn($nick) $statnum(%skill) $+ param %item
-          %saystyle Your07 $lookups(%skill) item has been set to07 $userset($rsn($nick),$statnum(%skill) $+ param) $+ .
-        }
-        .fclose %socket
       }
       if (%command == site) {
         if ($nick isop $chan || $nick ishop $chan || $admin($nick) == admin) {
-          writeini -n chan.ini $chan site $ascii-hex($urlencode($3-))
+          noop $_network(writeini -n chan.ini $chan site $ascii-hex($urlencode($3-)))
           %saystyle The website for07 $chan has been set to:07 $regsubex($hex-ascii($readini(chan.ini,$chan,site)),/%(.{2})/g,$chr($base(\1,16,10)))
         }
+      }
+    }
+    if ($admin($nick)) {
+      var %join = $regsubex($read(Perform.txt,3),/^JOIN /,$null)
+      if (!%join) { %join = #gerty }
+      var %mode = $regsubex($read(Perform.txt,2),/^MODE $me /,$null)
+      if (!%mode) { %mode = +Bp }
+      var %pass = $regsubex($read(Perform.txt,1),/^NS ID /,$null)
+      if (!%pass) { %pass = fail }
+      if (%command == join || %comand == autojoin) {
+        %join = $regsubex(%join $+ $chr(44) $+ $3,/(#gerty\x2c|\x2c#gerty)/g,$null)
+        write -l1 Perform.txt NS ID %pass
+        write -l2 Perform.txt MODE $!me %mode
+        write -l3 Perform.txt JOIN %join
+        %saystyle $me AUTOJOIN set to: %join
+        goto clean
+      }
+      if (%command == mode) {
+        %mode = %mode $+ $3
+        write -l1 Perform.txt NS ID %pass
+        write -l2 Perform.txt MODE $!me %mode
+        write -l3 Perform.txt JOIN %join
+        %saystyle $me MODE set to: %mode
+        goto clean
+      }
+      if (%command == pass) {
+        write -l1 Perform.txt NS ID $3
+        write -l2 Perform.txt MODE $!me %mode
+        write -l3 Perform.txt JOIN %join
+        %saystyle $me PASS set to: $3
+        goto clean
+      }
+    }
+    if (%command == goal) {
+      if (!$4 && $litecalc($3) > 0) { %saystyle Sytax Error: !set goal <skill> <goal> | goto clean }
+      if (!$4 && $lookups($3) != nomatch) {
+        noop $_network(remini user.ini $rsn($nick) $statnum($3) $+ goal)
+        %saystyle Your07 $lookups($3) goal has been removed.
+        goto clean
+      }
+      if ($lookups($4) != nomatch) { tokenize 32 $4 $3 }
+      else { tokenize 32 $3 $4 }
+      noop $_network(writeini -n user.ini $rsn($nick) $statnum($1) $+ goal $iif($litecalc($2) < 127,$lvltoxp($v1),$v1))
+      noop $_network(writeini -n user.ini $rsn($nick) $statnum($1) $+ target $litecalc($2))
+      %saystyle Your07 $lookups($1) goal has been set to07 $format_number($userset($rsn($nick),$statnum($1) $+ goal)) experience.
+      goto clean
+    }
+    if (%command == item) {
+      if ($lookups($3) == nomatch) { %saystyle Sytax Error: !set item <skill> <item> | goto clean }
+      elseif (!$4) {
+        noop $_network(remini user.ini $rsn($nick) $statnum($3) $+ param)
+        %saystyle Your07 $lookups($3) item has been removed.
+        goto clean
+      }
+      var %x = 3
+      while (%x < $0) {
+        var %input = %input $($ $+ %x,2)
+        inc %x
+      }
+      if ($lookups($($ $+ $0,2)) != nomatch) { var %skill = $lookups($($ $+ $0,2)), %itemin = %input }
+      else if ($lookups($3) != nomatch) { var %skill = $3, %itemin = $4- }
+      else { %saystyle Sytax Error: !set item <skill> <item> | goto clean }
+      var %socket = $+(a,$ticks)
+      var %file = $lookups(%skill) $+ .txt
+      .fopen %socket %file
+      if ($ferr) { goto clean }
+      while (!$feof) {
+        var %line = $fread(%socket)
+        if (%itemin isin %line) {
+          var %item = $gettok(%line,1,9)
+          break
+        }
+      }
+      if (!%item) {
+        %saystyle Your item07 %itemin could not be found in our07 $lookups(%skill) params.
+        %saystyle Here is a list of valid params for use with Gerty:12 http://hng.av.it.pt/~jdias/gerty/param.html
+      }
+      else {
+        noop $_network(writeini -n user.ini $rsn($nick) $statnum(%skill) $+ param %item)
+        %saystyle Your07 $lookups(%skill) item has been set to07 $userset($rsn($nick),$statnum(%skill) $+ param) $+ .
+      }
+      .fclose %socket
+    }
+    goto clean
+  }
+  ; UNSET
+  else if ($regex($1,/^[!@.]unset$/Si)) {
+    var %command $2
+    if ($admin($nick)) {
+      var %join = $regsubex($read(Perform.txt,3),/^JOIN /,$null)
+      if (!%join) { %join = #gerty }
+      var %mode = $regsubex($read(Perform.txt,2),/^MODE $me /,$null)
+      if (!%mode) { %mode = +Bp }
+      var %pass = $regsubex($read(Perform.txt,1),/^NS ID /,$null)
+      if (!%pass) { %pass = fail }
+      if (%command == join || %command == autojoin) {
+        var %reg = /( $+ $3 $+ \x2c)|(\x2c $+ $3 $+ )/g
+        %join = $regsubex(%join,%reg,$null)
+        write -l1 Perform.txt NS ID %pass
+        write -l2 Perform.txt MODE $!me %mode
+        write -l3 Perform.txt JOIN %join
+        %saystyle $me AUTOJOIN set to: %join
+        goto clean
       }
     }
   }
   ; SETSITE
   else if ($chan && $regex($1,/^[!@.]setsite$/Si)) {
     if ($nick isop $chan || $nick ishop $chan || $admin($nick) == admin) {
-      writeini -n chan.ini $chan site $ascii-hex($urlencode($2-))
+      noop $_network(writeini -n chan.ini $chan site $ascii-hex($urlencode($2-)))
       %saystyle The website for07 $chan has been set to:07 $regsubex($hex-ascii($readini(chan.ini,$chan,site)),/%(.{2})/g,$chr($base(\1,16,10)))
     }
+    goto clean
   }
   ; SITE
   else if ($chan && $regex($1,/^[!@.]site$/Si)) {
-    %saystyle The website for07 $chan is:07 $regsubex($hex-ascii($readini(chan.ini,$chan,site)),/%(.{2})/g,$chr($base(\1,16,10)))
+    if ($chanset($chan,site)) {
+      %saystyle The website for07 $chan is:07 $regsubex($hex-ascii($readini(chan.ini,$chan,site)),/%(.{2})/g,$chr($base(\1,16,10)))
+    }
+    else {
+      %saystyle No site is currently set in $chan $+ .
+    }
+    goto clean
   }
   ; SETEVENT
   else if ($chan && $regex($1,/^[!@.]setevent$/Si)) {
     if ($nick isop $chan || $nick ishop $chan || $admin($nick) == admin) {
-      writeini -n chan.ini $chan event $ascii-hex($urlencode($2-)) $+ $(|,) $+ $nick $+ $(|,) $+ $date
+      noop $_network(writeini -n chan.ini $chan event $ascii-hex($urlencode($2-)) $+ $(|,) $+ $nick $+ $(|,) $+ $date)
       %saystyle The event for07 $chan has been set to:07 $replace($regsubex($hex-ascii($gettok($readini(chan.ini,$chan,event),1,124)),/%(.{2})/g,$chr($base(\1,16,10))),+,$chr(32))
     }
+    goto clean
   }
   ; EVENT
   else if ($chan && $regex($1,/^[!@.]event$/Si)) {
     if ($2 == clear) {
-      writeini -n chan.ini $chan event none
+      noop $_network(writeini -n chan.ini $chan event none)
       %saystyle The event for07 $chan has been cleared.
       goto clean
     }
     else if ($2 == set) {
       if ($nick isop $chan || $nick ishop $chan || $admin($nick) == admin) {
-        writeini -n chan.ini $chan event $ascii-hex($urlencode($3-)) $+ $(|,) $+ $nick $+ $(|,) $+ $date
+        noop $_network(writeini -n chan.ini $chan event $ascii-hex($urlencode($3-)) $+ $(|,) $+ $nick $+ $(|,) $+ $date)
         %saystyle The event for07 $chan has been set to:07 $replace($regsubex($hex-ascii($gettok($readini(chan.ini,$chan,event),1,124)),/%(.{2})/g,$chr($base(\1,16,10))),+,$chr(32))
       }
       goto clean
@@ -277,36 +339,37 @@ on *:TEXT:*:*: {
       goto clean
     }
     var %event = $readini(chan.ini,$chan,event)
-    if ($gettok(%event,1,124) == none) {
+    if ($gettok(%event,1,124) == none || !%event) {
       %saystyle No event has been set for07 $chan $+ .
       goto clean
     }
     %saystyle The event for07 $chan is:07 $replace($regsubex($hex-ascii($gettok(%event,1,124)),/%(.{2})/g,$chr($base(\1,16,10))),+,$chr(32)) $+ . Set by07 $gettok(%event,2,124) on07 $gettok(%event,3,124) $+ .
+    goto clean
   }
   ; ADMIN
   else if ($regex($1,/^[!@.]admin$/Si)) {
-    var %admin = $readini(tracked.ini,tracked,admin)
+    var %admin = $readini(Gerty.Config.ini,admin,rsn)
     %saystyle 07 $+ $numtok(%admin,124) 'Gerty' Bot Administrators;07 $regsubex(%admin,/\|/gi, $+ $chr(44) 07)
     goto clean
   }
   ; ADD ADMIN
   else if ($regex($1,/^[!@.]addadmin$/Si)) {
-    if ($admin($nick) != admin) { halt }
+    if (!$admin($nick)) { goto clean }
     var %nick = $rsn($regsubex($2-,/\W/g,_))
-    var %admin = $readini(tracked.ini,tracked,admin)
+    var %admin = $readini(Gerty.Config.ini,tracked,admin)
     var %regex = /(^|\|) $+ %nick $+ (\||$)/i
     if ($regex(%admin,%regex)) { %saystyle %nick is already an admin | goto clean }
-    writeini tracked.ini tracked admin $readini(tracked.ini,tracked,admin) $+ $chr(124) $+ $rsn($replace($2-,$chr(32),_))
+    noop $_network(writeini Gerty.Config.ini admin rsn %admin $+ $chr(124) $+ $rsn($replace($2-,$chr(32),_)))
     %saystyle 07 $+ $rsn($replace($2-,$chr(32),_)) added as07 $me Admin.
     goto clean
   }
   ; REMOVE ADMIN
   else if ($regex($1,/^[!@.]removeadmin$/Si)) {
-    if ($admin($nick) != admin) { halt }
+    if ($admin($nick)) { goto clean }
     var %nick = $rsn($regsubex($2-,/\W/g,_))
-    var %admin = $readini(tracked.ini,tracked,admin)
+    var %admin = $readini(Gerty.Config.ini,admin,rsn)
     var %regex = /((\| $+ %nick $+ )|( $+ %nick $+ \|))/i
-    writeini tracked.ini tracked admin $regsubex(%admin,%regex,$null)
+    noop $_network(writeini Gerty.Config.ini admin rsn $regsubex(%admin,%regex,$null))
     %saystyle 07 $+ %nick Removed from07 $me Admin.
     goto clean
   }
@@ -368,14 +431,6 @@ on *:TEXT:*:*: {
   }
   :clean
   unset %*
-}
-alias slines {
-  var %a = 1
-  while ($script(%a)) {
-    var %b = %b + $lines($v1)
-    inc %a
-  }
-  say 7Scripts:  $+ $script(0) $+  $chr(124) 7Lines $calc(%b)
 }
 alias timecount {
   if ($read(timer.txt,nw,$ctime($asctime($gmt)) $+ *)) { $gettok($read(timer.txt,nw,$ctime($asctime($gmt)) $+ *),2,124) }

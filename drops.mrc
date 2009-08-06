@@ -1,4 +1,6 @@
+>start<|drops.mrc|Monster Drop Information|2.2|rs
 on $*:TEXT:/^[!@.](npc|monster|mdb(info)?|drops?|loot) */Si:*: {
+  _CheckMain
   var %saystyle = $saystyle($left($1,1),$nick,$chan),%command
   if (!$2) { %saystyle you must specify a monster to look up. }
   if ($regex($right($1,-1),/(drops?|loot)/i)) %command = drop
@@ -25,11 +27,7 @@ on *:sockopen:drop.*: {
 on *:sockread:drop.*: {
   var %table = $gettok($sockname,2,46)
   if ($sockerr) {
-    write ErrorLog.txt $timestamp SocketError[sockread]: $nopath($script) $socket $([,) $+ $hget(%thread,out) $hget(%thread,nick) $+ $(],)
-    echo -at Socket Error: $nopath($script)
-    $hget(%thread,out) Connection Error: Please try again in a few moments.
-    hfree %thread
-    sockclose $sockname
+    _throw $nopath($script) %thread
     halt
   }
   var %drop
@@ -68,8 +66,7 @@ on *:sockopen:drop2.*: {
 on *:sockread:drop2.*: {
   var %table = $gettok($sockname,2,46)
   if ($sockerr) {
-    write ErrorLog.txt $timestamp SocketError[sockread]: $nopath($script) $socket $([,) $+ $hget($gettok($sockname,2,46),out) $hget($gettok($sockname,2,46),nick) $+ $(],)
-    echo -at Socket Error: $nopath($script)
+    _throw $nopath($script) %thread
     halt
   }
   while ($sock($sockname).rq) {

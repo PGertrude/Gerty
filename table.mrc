@@ -1,4 +1,6 @@
+>start<|table.mrc|another html update|1.5|rs
 on $*:TEXT:/^[!@.](table|top) */Si:*: {
+  _CheckMain
   var %thread = $+(a,$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9))
   _fillcommand %thread $left($1,1) $nick $chan top
   if (!$2) { hadd -m %thread skill overall }

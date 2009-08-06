@@ -1,11 +1,13 @@
+>start<|exp.mrc|Exp Params|1.1|rs
 on $*:text:/^[!@.](le?ve?l|e?xp)\b/Si:*:{
+  _CheckMain
   var %saystyle = $saystyle($left($1,1),$nick,$chan)
   if (!$2) { %saystyle $formatwith(Syntax Error: \u!xp <level>\u OR \u!xp <xp>\u OR \u!xp <item>\u.) | halt }
   if ($regex(lvl,$2-,/^(\d{1,3})(?:\D(\d{1,3}))?/Si)) {
     if ($regml(lvl,2)) && ($regml(lvl,1) > 126 || $regml(lvl,1) < 1 || $regml(lvl,2) > 126 || $regml(lvl,2) < 1) { %saystyle Please only specify levels between 1 and 126 | halt }
     var %calc $floor($calculate($2-))
     if ($regml(lvl,2)) {
-      if ($regml(lvl,1) > $regml(lvl,2)) { 
+      if ($regml(lvl,1) > $regml(lvl,2)) {
         var %1 = $regml(lvl,2)
         var %2 = $regml(lvl,1)
       }

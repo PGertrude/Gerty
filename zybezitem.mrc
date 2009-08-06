@@ -1,4 +1,6 @@
+>start<|zybezitem.mrc|Item Information|1.2|rs
 on $*:TEXT:/^[!@.](hi(gh)?|low?)?(item|alch|alk) */Si:#: {
+  _CheckMain
   var %class = $+($r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9))
   hadd -m $+(a,%class) out $saystyle($left($1,1),$nick,$chan)
   if (!$2) { $hget($+(a,%class),out) Syntax: !item <item> | halt }
@@ -96,71 +98,8 @@ on *:sockread:zybez2.*: {
     }
   }
 }
-$+(item_,$hget($gettok($sockname,2,46),id),$chr(32),">)
 alias yesno {
   if $1 = yes return 03Yes
   if $1 = no return 04No
   else return $1
 }
-$remove($bvar(&item4,%r,$calc(%s - %r)).text,gp) $+ / $+ $remove($bvar(&item4,%t,$calc(%u - %t)).text,gp) gp
-on $*:TEXT:/^[!@.]look */Si:#: {
-  var %class = $+($r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9))
-  if (!$readini(chan.ini,$chan,public)) { hadd -m $+(a,%class) out $iif($left($1,1) == @,.msg $chan,.notice $nick) }
-  if ($readini(chan.ini,$chan,public) == on) { hadd -m $+(a,%class) out $iif($left($1,1) == @,.msg $chan,.notice $nick) }
-  if ($readini(chan.ini,$chan,public) == off) { hadd -m $+(a,%class) out .notice $nick }
-  if ($readini(chan.ini,$chan,public) == voice) { hadd -m $+(a,%class) out $iif($nick isvoice $chan || $nick ishop $chan || $nick isop $chan,$iif($left($1,1) == @,.msg $chan,.notice $nick),.notice $nick) }
-  if ($readini(chan.ini,$chan,public) == half) { hadd -m $+(a,%class) out $iif($nick ishop $chan || $nick isop $chan,$iif($left($1,1) == @,.msg $chan,.notice $nick),.notice $nick) }
-  if (!$2) { $hget($+(a,%class),out) Syntax: !item <item> | halt }
-  if ($left($2,1) != $chr(35)) {
-    hadd -m $+(a,%class) search $replace($2-,$chr(32),+)
-    sockopen $+(zybez3.a,%class) www.zybez.net 80
-  }
-}
-on *:sockopen:zybez3.*: {
-  .sockwrite -n $sockname GET /items.php?search_area=name&search_term= $+ $hget($gettok($sockname,2,46),search) HTTP/1.0
-  .sockwrite -n $sockname Host: www.zybez.net $+ $crlf $+ $crlf
-}
-on *:sockread:zybez3.*: {
-  var %bleh = $gettok($sockname,2,46)
-  if (!%row) { set %row 1 }
-  if ($sockerr) {
-    $hget($gettok($sockname,2,46),out) [Socket Error] $sockname $time $script
-    halt
-  }
-  sockread %zybez
-  set %line [ $+ [ %row ] ] %zybez
-  inc %row
-}
-on $*:TEXT:/^[!@.]loook */Si:#: {
-  var %class = $+($r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9))
-  if (!$readini(chan.ini,$chan,public)) { hadd -m $+(a,%class) out $iif($left($1,1) == @,.msg $chan,.notice $nick) }
-  if ($readini(chan.ini,$chan,public) == on) { hadd -m $+(a,%class) out $iif($left($1,1) == @,.msg $chan,.notice $nick) }
-  if ($readini(chan.ini,$chan,public) == off) { hadd -m $+(a,%class) out .notice $nick }
-  if ($readini(chan.ini,$chan,public) == voice) { hadd -m $+(a,%class) out $iif($nick isvoice $chan || $nick ishop $chan || $nick isop $chan,$iif($left($1,1) == @,.msg $chan,.notice $nick),.notice $nick) }
-  if ($readini(chan.ini,$chan,public) == half) { hadd -m $+(a,%class) out $iif($nick ishop $chan || $nick isop $chan,$iif($left($1,1) == @,.msg $chan,.notice $nick),.notice $nick) }
-  if (!$2) { $hget($+(a,%class),out) Syntax: !item <item> | halt }
-  if ($left($2,1) != $chr(35)) {
-    hadd -m $+(a,%class) search $replace($2-,$chr(32),+)
-    sockopen $+(zybez4.a,%class) www.zybez.net 80
-  }
-  if ($left($2,1) == $chr(35)) {
-    hadd -m $+(a,%class) id $right($2,-1)
-    sockopen $+(zybez4.a,%class) www.zybez.net 80
-  }
-}
-on *:sockopen:zybez4.*: {
-  .sockwrite -n $sockname GET /items.php?id= $+ $hget($gettok($sockname,2,46),id) HTTP/1.0
-  .sockwrite -n $sockname Host: www.zybez.net $+ $crlf $+ $crlf
-}
-on *:sockread:zybez4.*: {
-  var %bleh = $gettok($sockname,2,46)
-  if (!%row) { set %row 1 }
-  if ($sockerr) {
-    $hget($gettok($sockname,2,46),out) [Socket Error] $sockname $time $script
-    halt
-  }
-  sockread %zybez
-  set %line [ $+ [ %row ] ] %zybez
-  inc %row
-}
-:END

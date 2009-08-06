@@ -1,4 +1,6 @@
+>start<|task.mrc|Exp per Slayer Task|1.3|rs
 on $*:TEXT:/^[!@.]Task */Si:*: {
+  _CheckMain
   var %saystyle = $saystyle($left($1,1),$nick,$chan)
   if (!$2) { %saystyle Invalid Syntax: !task <number> <monster> | halt }
   var %class = $+(a,$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9))

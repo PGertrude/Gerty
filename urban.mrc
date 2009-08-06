@@ -1,4 +1,6 @@
+>start<|urban.mrc|Urban Dictionary command|1.0|rs
 on $*:TEXT:/^[!@.]urban */Si:#: {
+  _CheckMain
   var %thread = $+($r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9))
   hadd -m $+(a,%thread) out $saystyle($left($1,1),$nick,$chan)
   hadd -m $+(a,%thread) search $replace($2-,$chr(32),+)

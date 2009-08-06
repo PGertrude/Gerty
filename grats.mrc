@@ -1,5 +1,6 @@
-on $*:TEXT:/^[!@.](g|gratz|grats|lvl|level) */Si:#: {
-  if (!$regex($right($1,-1),/^(g|gratz|grats|lvl|level)$/Si)) { halt }
+>start<|grats.mrc|Grats Script|1.11|rs
+on $*:TEXT:/^[!@.](g|gratz|grats|lvl|level)\b/Si:#: {
+  _CheckMain
   var %grat.out = $iif($left($1,1) == @,.msg $chan,.notice $nick)
   if (!$3) { halt }
   if ($right($1,-1) == google) { halt }

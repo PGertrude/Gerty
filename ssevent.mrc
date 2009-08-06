@@ -1,4 +1,6 @@
+>start<|ssevent.mrc|ss next events|1.1|rs
 on $*:TEXT:/^[!@.](ssevent) */Si:#: {
+  _CheckMain
   hadd -m out out $saystyle($left($1,1),$nick,$chan)
   ssforum POST /Supreme_Skillers/index.php?act=Login&CODE=01 UserName=P_Gertrude&PassWord=penguin&CookieDate=1&submit=Log me in
 }

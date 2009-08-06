@@ -1,4 +1,6 @@
+>start<|ssavgcopy.mrc|Averages From Runehead|1.0|rs
 on $*:TEXT:/^[!@.](ms|ss)avg */Si:#: {
+  _CheckMain
   var %class = $+($r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9))
   hadd -m $+(a,%class) out $saystyle($left($1,1),$nick,$chan)
   if ($right($1,-1) == ssavg) {
