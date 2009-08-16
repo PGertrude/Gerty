@@ -1,11 +1,11 @@
->start<|iq.mrc|Fun Commands|2.0|rs
+>start<|iq.mrc|Fun Commands|2.01|rs
 on $*:TEXT:/^[!@.](iq|life|e-?penis)/Si:*: {
   _CheckMain
   var %thread = $+(a,$ticks)
   var %nick, %saystyle, %command = $remove($right($1,-1),-)
   if (!$2) %nick = $rsn($nick)
   if ($2) %nick = $caps($rsn($regsubex($2-,/\W/g,_)))
-  %saystyle = $saystyle($left(1,1),$nick,$chan)
+  %saystyle = $saystyle($left($1,1),$nick,$chan)
   var %socket = stats. $+ %thread
   var %url = http://hiscore.runescape.com/index_lite.ws?player= $+ %nick
   noop $download.break(spam. $+ %command %saystyle %nick %socket,%socket,%url)

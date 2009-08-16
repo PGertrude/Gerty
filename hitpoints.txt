@@ -1,3 +1,4 @@
+>start<|hitpoints.txt|hp params|2.01|param
 Chicken	4	1
 Cave bug	6.66	5
 Crawling Hand	21.328	8
@@ -98,3 +99,4 @@ spiritual warrior saradomin	146.63	125
 spiritual warrior zamorak	133.3	115
 spiritual warrior armadyl	130.634	123
 spiritual warrior bandos	174.623	134
+Aquanite 166.25 114

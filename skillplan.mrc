@@ -1,4 +1,4 @@
->start<|skillplan.mrc|Shows exp from an item|2.0|rs
+>start<|skillplan.mrc|Shows exp from an item|2.1|rs
 on *:TEXT:*:*: {
   _CheckMain
   if (!$regex($1,/^[!@.]([a-z]+)-*plan$/i)) halt
@@ -95,7 +95,7 @@ alias skillplan.out {
   var %iteminfo = $read(%file, w, * $+ %item $+ *)
   var %itemname = $gettok(%iteminfo,1,9)
   var %itemexpe = $gettok(%iteminfo,2,9)
-  if (!%iteminfo) { %saystyle Invalid item07 %item $+ . If you think this is a valid item please contact an admin. | goto unset }
+  if (!%iteminfo) { %saystyle Invalid item07 %item $+ . List of valid items available at12 http://p-gertrude.rsportugal.org/gerty/commands.html | goto unset }
   %saystyle  $+ %nick Current  $+ %skill $+  level:07 %lev ( $+ $bytes(%exp,db) $+ ) $chr(124) experience for %amount %itemname $+ 's:07 $bytes($calc( %amount * %itemexpe ),db) $&
     ( $+ %itemexpe each) $chr(124) resulting level:07 $virtual($calc( %exp + ( %amount * %itemexpe ) )) ( $+ $bytes($calc( %exp + ( %amount * %itemexpe ) ),db) $+ )
   :unset

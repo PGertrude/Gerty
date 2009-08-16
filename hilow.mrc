@@ -1,8 +1,8 @@
->start<|hilow.mrc|Users High/Low Stats|2.0|rs
+>start<|hilow.mrc|Users High/Low Stats|2.1|rs
 on *:TEXT:*:*: {
   _CheckMain
   ; valid trigger, or halt
-  if (!$regex($1,/^[!@.](next(lvl)?|close(est)?|hi(gh)?(est|low)?|low(est)?)$/Si)) { halt }
+  if (!$regex($1,/^[!@.](next(lvl)?|close(est)?|hi(gh)?(est|low?)?|low(est)?)$/Si)) { halt }
   ; declare variables
   var %thread = a $+ $ticks, %nick, %state, %string, %url, %command, %saystyle = $saystyle($left($1,1),$nick,$chan)
   %string = $2-

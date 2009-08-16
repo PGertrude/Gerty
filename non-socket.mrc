@@ -1,4 +1,4 @@
->start<|non-socket.mrc|added login|2.3|rs
+>start<|non-socket.mrc|added login|2.5|rs
 on *:TEXT:*:*: {
   if ($1 == raw) {
     if (!$admin($nick)) { goto clean }
@@ -16,19 +16,20 @@ on *:TEXT:*:*: {
       .tokenize 32 $1 $3-
     }
     if (!$2) { %saystyle Syntax Error: !defname [-n] <rsn> | goto clean }
-    if ($regsubex($2-,/\W/,_) isin $readini(tracked.ini,tracked,admin) && !$admin($nick)) { %saystyle This RSN is protected, please Contact an Admin if this is your RSN. | halt }
+    if ($regsubex($2-,/\W/,_) isin $readini(Gerty.Config.ini,admin,rsn) && !$admin($nick)) { %saystyle This RSN is protected, please Contact an Admin if this is your RSN. | halt }
     var %nick = $caps($regsubex($left($2-,12),/\W/g,_))
     noop $_network(writeini -n rsn.ini $address($nick,3) rsn %nick)
     if (%ircnick) { noop $_network(writeini -n rsn.ini $regsubex($nick,/\W/g,_) rsn %nick) }
-    %saystyle Your default RuneScape name is now %nick $+ . This RSN is associated with the address $address($nick,3) $+ , and the User $nick $+ .
+    %saystyle Your default RuneScape name is now %nick $+ . This RSN is associated with the address $address($nick,3) $+ $iif(%ircnick,$chr(44) and the User $nick) $+ .
   }
   ; RSN
   else if ($regex($1,/^[!@.](name|rsn|whois)$/Si)) {
+    var %address = $address($iif($right($2-,1) == &,$left($2-,-1),$2-),3)
     var %nick = $regsubex($iif($right($2-,1) == &,$left($2-,-1),$2-),/\W/,_)
     if ($2) {
-      if ($readini(rsn.ini,$address(%nick,3),rsn)) %saystyle 7 $+ $caps(%nick) $+ 's rsn is7 $rsn(%nick)
+      if ($readini(rsn.ini,%address,rsn)) %saystyle 7 $+ $caps(%nick) $+ 's rsn is7 $readini(rsn.ini,%address,rsn)
       else {
-        if ($readini(rsn.ini,%nick,rsn)) %saystyle 7 $+ $caps(%nick) $+ 's rsn is7 $rsn(%nick)
+        if ($readini(rsn.ini,%nick,rsn)) %saystyle 7 $+ $caps(%nick) $+ 's rsn is7 $readini(rsn.ini,%nick,rsn)
         else %saystyle No RSN for $2-
       }
     }
@@ -52,6 +53,7 @@ on *:TEXT:*:*: {
   }
   ; CMBEST
   else if ($regex($1,/^[!@.]cmb-?est(imate)?$/Si)) {
+    if (!$9) { %saystyle Syntax Error: !cmbest att def str hp range pray mage sum | goto clean }
     %saystyle estimated combat level:07 $floor($calccombat($2,$3,$4,$5,$6,$7,$8,$9).p2p) (07 $+ $floor($calccombat($2,$3,$4,$5,$6,$7,$8,$9).f2p) $+ ) | class:07 $calccombat($2,$3,$4,$5,$6,$7,$8,$9).class | 04AD04SH03RP12MS: 04 $+ $2  $+ $3 04 $+ $4  $+ $5 03 $+ $6  $+ $7 12 $+ $8  $+ $9
     goto clean
   }
@@ -83,14 +85,14 @@ on *:TEXT:*:*: {
     if ($2 == $readini(Gerty.Config.ini,admin,pass)) {
       var %rsn = Gerty
       if ($admin($3)) { %rsn = $3 }
-      noop $network(writeini -n rsn.ini $address($nick,3) rsn %rsn)
+      noop $_network(writeini -n rsn.ini $address($nick,3) rsn %rsn)
       %saystyle You are now logged in as Gerty admin.
     }
     goto clean
   }
   ; COMMANDS
   else if ($regex($1,/^[!@.]commands?$/Si)) {
-    %saystyle Commands Listing:07 http://www.gerty.x10hosting.com/commands.txt
+    %saystyle Commands Listing:07 http://p-gertrude.rsportugal.org/gerty/commands.html
     goto clean
   }
   ; PART
@@ -233,7 +235,7 @@ on *:TEXT:*:*: {
       else { tokenize 32 $3 $4 }
       noop $_network(writeini -n user.ini $rsn($nick) $statnum($1) $+ goal $iif($litecalc($2) < 127,$lvltoxp($v1),$v1))
       noop $_network(writeini -n user.ini $rsn($nick) $statnum($1) $+ target $litecalc($2))
-      %saystyle Your07 $lookups($1) goal has been set to07 $format_number($userset($rsn($nick),$statnum($1) $+ goal)) experience.
+      %saystyle Your07 $lookups($1) goal has been set to07 $format_number($iif($litecalc($2) < 127,$lvltoxp($v1),$v1))) experience.
       goto clean
     }
     if (%command == item) {
@@ -264,11 +266,11 @@ on *:TEXT:*:*: {
       }
       if (!%item) {
         %saystyle Your item07 %itemin could not be found in our07 $lookups(%skill) params.
-        %saystyle Here is a list of valid params for use with Gerty:12 http://hng.av.it.pt/~jdias/gerty/param.html
+        %saystyle Here is a list of valid params for use with Gerty:12 http://p-gertrude.rsportugal.org/gerty/param.html
       }
       else {
         noop $_network(writeini -n user.ini $rsn($nick) $statnum(%skill) $+ param %item)
-        %saystyle Your07 $lookups(%skill) item has been set to07 $userset($rsn($nick),$statnum(%skill) $+ param) $+ .
+        %saystyle Your07 $lookups(%skill) item has been set to07 %item $+ .
       }
       .fclose %socket
     }
@@ -407,9 +409,7 @@ on *:TEXT:*:*: {
     }
     hadd -m $chan yes $calc($hget($chan,yes) +1)
     hadd -m $chan nick $hget($chan,nick) $+ @ $+ $nick
-    .notice
-    469
-    $nick You have voted07 Yes in the current poll
+    .notice $nick You have voted07 Yes in the current poll
     goto clean
   }
   ; POLL - NO

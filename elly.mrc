@@ -1,3 +1,4 @@
+>start<|elly.mrc|ml patched up|2.0|rs
 alias listchans {
   var %out = Chans:07 $chan(0) Nicks:07 $bot(users) Uptime:07 $swaptime($uptime(server,1)) Chan list: $bot(chanlist)
   if ($isid) {
@@ -157,7 +158,6 @@ alias spell {
   if (%x == 1) { %saystyle 07 $+ $iif(%exact,Exact match $+(07,",%spell,"),%spell) $+  spell not found. }
   .fclose *
 }
-
 alias runepriceupdater {
   sockopen runeprice.rune1 itemdb-rs.runescape.com 80
   sockopen runeprice.rune2 itemdb-rs.runescape.com 80
@@ -271,31 +271,4 @@ on *:sockopen:draynor.*:{
   sockwrite -n $sockname Content-Length: $len(%string)
   sockwrite -n $sockname Content-Type: application/x-www-form-urlencoded
   sockwrite -n $sockname $crlf %string
-}
->start<|elly.mrc|ml patched up|1.9|rs
-on *:sockread:draynor.*:{
-  if ($sockerr) { echo -st Error in socket: $sockname }
-  msg #howdy boo
-  sockclose $sockname
-}
-on $*:text:/^[!.@]draynor */Si:*:{
-  _CheckMain
-  var %saystyle = $saystyle($left($1,1),$nick,$chan)
-  if ($regex($2,/^(del(ete)?|rem(ove)?)$/Si)) {
-    var %name = $regsubex($3-,/\W/g,_)
-    if ($read(draynor.txt,w,%name)) {
-      write -dl $+ $readn draynor.txt
-      %saystyle Removed 07 $+ %name $+ $chr(15) from automatic draynor sig update list.
-    }
-    else { %saystyle Couldn't find 07 $+ %name $+ $chr(15) on automatic draynor sig udpate list }
-  }
-  else {
-    var %name = $regsubex($2-,/\W/g,_)
-    if (!$read(draynor.txt,w,%name)) {
-      write draynor.txt %name
-      %saystyle Added 07 $+ %name $+ $chr(15) to automatic daynor sig update list.
-      draynor %name
-    }
-    else { %saystyle 07 $+ %name $+ $chr(15) is already on automatic draynor sig update list. !draynor REMOVE <name> to remove. }
-  }
 }

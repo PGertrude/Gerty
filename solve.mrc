@@ -1,4 +1,4 @@
->start<|solve.mrc|Calculator|1.3|rs
+>start<|solve.mrc|Calculator|1.45|rs
 on *:text:*:*: {
   _CheckMain
   var %saystyle, %input, %ErrReply
@@ -6,11 +6,11 @@ on *:text:*:*: {
   else if ($left($1,1) == ` || $left($1,1) == =) { %input = $right($1-,-1) | %saystyle = $iif($chan,.notice $nick,.msg $nick) | %ErrReply = yes }
   else if ($left($1,1) != . && $left($1,1) != ! && $left($1,1) != @) { %input = $1- | %saystyle = $iif($chan,.notice $nick,.msg $nick) | %ErrReply = no }
   else { halt }
-  .tokenize 32 $_checkCalc(%input)
+  .tokenize 32 $_checkCalc(%input,%ErrReply)
   if ($1 == false) { if (%ErrReply == yes) { %saystyle $2- } | halt }
   var %string = $calcreg(%input)
   var %sum = $calcparse(%input)
-  if (= !isin $1-) {
+  if ($chr(61) !isin %sum) {
     %string = %string $+ =x
     %sum = %sum $+ =x
   }

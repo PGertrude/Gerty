@@ -1,3 +1,4 @@
+>start<|param.txt|!xp list|1.12|param
 Cooking|Cooked Meat|30|1
 Cooking|Cooked Chicken|30|1
 Cooking|Cooked Rabbit|30|1
@@ -821,6 +822,7 @@ Slayer|Dog|62|63|lvl -
 Slayer|Cow|8|2|lvl -
 Slayer|Greater demon|87|94|lvl -
 Slayer|Waterfiend|128|115|lvl -
+Slayer|Aquanite|125|114|78
 Slayer|Spiritual mage saradomin|85|120|lvl 83
 Slayer|Spiritual mage zamorak|75|121|lvl 83
 Slayer|Spiritual mage bandos|106|121|lvl 83
@@ -1104,7 +1106,7 @@ Summoning|Moss Titan|695.2|lvl 79|Blue|202|58|Earth Talisman|-|Combat - Strength
 Summoning|Hydra|140.8|lvl 80|Green|128|49|Water Orb|2174|Combat - Ranged|Fights|67
 Summoning|Spirit Dagannoth|364.8|lvl 83|Crimson|1|57|Dagannoth Hide|269|Combat - Controlled|Fights|68
 Summoning|Lava Titan|730.4|lvl 83|Blue|219|61|Obsidian Charm|-|Combat - Strength|Fights & Mine Boost(10) & FM Boost(10) & Tele to Lava Maze|69
-Summoning|Swamp Titan|373.6|lvl 86|Crimson|150|56|Swamp Lizard|-|Combat - Attack|Fights|70
+Summoning|Swamp Titan|373.6|lvl 85|Crimson|150|56|Swamp Lizard|-|Combat - Attack|Fights|70
 Summoning|Rune Minotaur|756.8|lvl 86|Blue|1|151|Runite Bar|269|Combat - Defence|Fights|71
 Summoning|Unicorn Stallion|154.4|lvl 88|Green|140|54|Unicorn Horn|2354|Healer - (Scroll)|Fights & Cures(Poison+Disease)|72
 Summoning|Geyser Titan|783.2|lvl 89|Blue|222|69|Water Talisman|3584|Combat - Ranged|Fights & Range Boost(1+3%) & Recharge Glory|73
@@ -1287,6 +1289,8 @@ Combat|Dwarf|64|lvl 10
 Combat|Crawling Hand|64|lvl 8
 Combat|Cave bug|20|lvl 5
 Combat|Chicken|12|lvl 1
+Combat|Aquanite|500|114
+Hitpoints|Aquanite|166.25|114
 Hitpoints|spiritual warrior|146.67|lvl 125
 Hitpoints|spiritual warrior bandos|174.67|lvl 134
 Hitpoints|spiritual warrior armadyl|130.67|lvl 123

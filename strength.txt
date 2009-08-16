@@ -1,3 +1,4 @@
+>start<|strength.txt|str params|2.01|param
 Chicken	12	1
 Cave bug	20	5
 Crawling Hand	64	8
@@ -98,3 +99,4 @@ spiritual warrior zamorak	400	115
 spiritual warrior armadyl	392	123
 spiritual warrior bandos	524	134
 spiritual warrior	440	125
+Aquanite 500 114

@@ -1,4 +1,4 @@
->start<|Cost.mrc|Cost scripts|1.0|rs
+>start<|Cost.mrc|Cost scripts|1.01|rs
 on $*:text:/^(\[\w{2}\]Gerty |Gerty |)?[!.@]((pot)(ion)?s?|(po)(uch)?|(farmer|payment)|(\w+)costs?|costs? (\w+))/Si:*: {
   _CheckMain
   if (Gerty isin $1) {
@@ -185,7 +185,9 @@ alias costherblore {
 ;## FIREMAKING ##
 alias costfiremaking {
   if ($hget(cost,$gettok($hget(a $+ $1,cost),5,9))) {
-    $hget(a $+ $1,out) $gettok($hget(a $+ $1,cost),1,9) cost params07 $iif($hget(a $+ $1,num) > 1,$bytes($v1,bd)) $gettok($hget(a $+ $1,cost),4,9) $+(,$chr(40),07,$bytes($hget(cost,$gettok($hget(a $+ $1,cost),5,9)),bd),gp,,$chr(41)) | Level:07 $gettok($hget(a $+ $1,cost),2,9) | Exp:07 $bytes($calc( $hget(a $+ $1,num) * $gettok($hget(a $+ $1,cost),3,9) ),bd) | Cost:07 $bytes($calc( $hget(a $+ $1,num) * $hget(cost,$gettok($hget(a $+ $1,cost),5,9)) ),bd) $+(,$chr(40),07,$round($calc($hget(cost,$gettok($hget(a $+ $1,cost),5,9)) / $gettok($hget(a $+ $1,cost),3,9)),1),gp/xp,,$chr(41),.)
+    var %exp = $calc( $hget(a $+ $1,num) * $gettok($hget(a $+ $1,cost),3,9) )
+    var %price = $calc( $hget(a $+ $1,num) * $hget(cost,$gettok($hget(a $+ $1,cost),5,9)) )
+    $hget(a $+ $1,out) $gettok($hget(a $+ $1,cost),1,9) cost params07 $iif($hget(a $+ $1,num) > 1,$bytes($v1,bd)) $gettok($hget(a $+ $1,cost),4,9) $+(,$chr(40),07,$bytes($hget(cost,$gettok($hget(a $+ $1,cost),5,9)),bd),gp,,$chr(41)) | Level:07 $gettok($hget(a $+ $1,cost),2,9) | Exp:07 $bytes(%exp,bd) $formatwith(\o(\w Gloves/ring:\c07 $bytes($calc(%exp * 1.05),bd) $+ \o)) | Cost:07 $bytes(%price,bd) $parenthesis($round($calc(%price / %exp),1) $+ gp/xp) $formatwith(\o(\w Gloves/ring:\c07 $round($calc(%price / (%exp * 1.05)),1) $+ gp/xp\o).)
     hfree a $+ $1
   }
 }

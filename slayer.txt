@@ -1,3 +1,4 @@
+>start<|slayer.txt|slay params|2.01|param
 Chicken	3	1	-
 Cave bug	5	5	-
 Crawling Hand	16	8	-
@@ -107,3 +108,4 @@ Warped Tortoise	87	96	87
 Mithril Dragon	276	304	-
 Mutated Bloodveld	186	146	-
 Skeletal Wyvern	210	140	72
+Aquanite 125 114 78

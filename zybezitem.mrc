@@ -1,16 +1,16 @@
 >start<|zybezitem.mrc|Item Information|1.2|rs
-on $*:TEXT:/^[!@.](hi(gh)?|low?)?(item|alch|alk) */Si:#: {
+on $*:TEXT:/^[!@.](hi(gh)?|low?)?(item|alch|alk)\b/Si:*: {
   _CheckMain
-  var %class = $+($r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9))
-  hadd -m $+(a,%class) out $saystyle($left($1,1),$nick,$chan)
-  if (!$2) { $hget($+(a,%class),out) Syntax: !item <item> | halt }
-  if ($left($2,1) != $chr(35) && $calculate($2) !isnum) {
-    hadd -m $+(a,%class) search $replace($2-,$chr(32),+)
-    sockopen $+(zybez.a,%class) www.zybez.net 80
+  var %thread = $+(a,$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9))
+  hadd -m %thread out $saystyle($left($1,1),$nick,$chan)
+  if (!$2) { $hget(%thread,out) Syntax: !item <item> | halt }
+  if ($left($2,1) != $chr(35) && $nullcalc($2) !isnum) {
+    hadd -m %thread search $replace($2-,$chr(32),+)
+    sockopen $+(zybez.,%thread) www.zybez.net 80
   }
-  if ($left($2,1) == $chr(35) || $calculate($2) isnum) {
-    hadd -m $+(a,%class) id $calculate($remove($2,$chr(35)))
-    sockopen $+(zybez2.a,%class) www.zybez.net 80
+  if ($left($2,1) == $chr(35) || $nullcalc($2) isnum) {
+    hadd -m %thread id $litecalc($remove($2,$chr(35)))
+    sockopen $+(zybez2.,%thread) www.zybez.net 80
   }
 }
 on *:sockopen:zybez.*: {
@@ -18,17 +18,17 @@ on *:sockopen:zybez.*: {
   .sockwrite -n $sockname Host: www.zybez.net $+ $crlf $+ $crlf
 }
 on *:sockread:zybez.*: {
-  var %bleh = $gettok($sockname,2,46)
+  var %thread = $gettok($sockname,2,46)
   if ($sockerr) {
-    $hget($gettok($sockname,2,46),out) [Socket Error] $sockname $time $script
+    _throw $nopath($script) %thread
     halt
   }
   else {
     while ($sock($sockname).rq) {
       sockread &item
-      bwrite %bleh -1 -1 &item
+      bwrite %thread -1 -1 &item
     }
-    bread %bleh 0 $file(%bleh).size &item2
+    bread %thread 0 $file(%thread).size &item2
     if ($bfind(&item2,0,</HTML>)) {
       if ($bfind(&item2,0,location:) < 1) {
         var %start = $bfind(&item2,0,>Submit Missing Item<)
@@ -41,15 +41,15 @@ on *:sockread:zybez.*: {
         var %e = $gettok(%e,1-8,124)
         $hget($gettok($sockname,2,46),out) Matches found07 $count(%e,$chr(35)) %e
         :unset
-        .remove %bleh
+        .remove %thread
         sockclose $sockname
         halt
       }
       if ($bfind(&item2,0,location:) > 1) {
         var %start = $calc($bfind(&item2,0,?id=)+4)
-        hadd -m $gettok($sockname,2,46) id $iif($bvar(&item2,%start,4).text isnum,$bvar(&item2,%start,4).text,$iif($bvar(&item2,%start,3).text isnum,$bvar(&item2,%start,3).text,$iif($bvar(&item2,%start,2).text isnum,$bvar(&item2,%start,2).text,$iif($bvar(&item2,%start,1).text isnum,$bvar(&item2,%start,1).text))))
+        hadd -m %thread id $iif($bvar(&item2,%start,4).text isnum,$bvar(&item2,%start,4).text,$iif($bvar(&item2,%start,3).text isnum,$bvar(&item2,%start,3).text,$iif($bvar(&item2,%start,2).text isnum,$bvar(&item2,%start,2).text,$iif($bvar(&item2,%start,1).text isnum,$bvar(&item2,%start,1).text))))
         sockopen $+(zybez2.,$gettok($sockname,2,46)) www.zybez.net 80
-        .remove %bleh
+        .remove %thread
         sockclose $sockname
       }
     }
@@ -60,17 +60,17 @@ on *:sockopen:zybez2.*: {
   .sockwrite -n $sockname Host: www.zybez.net $+ $crlf $+ $crlf
 }
 on *:sockread:zybez2.*: {
-  var %bleh = $gettok($sockname,2,46) $+ 2
+  var %thread = $gettok($sockname,2,46) $+ 2
   if ($sockerr) {
-    $hget($gettok($sockname,2,46),out) [Socket Error] $sockname $time $script
+    _throw $nopath($script) %thread
     halt
   }
   else {
     while ($sock($sockname).rq) {
       sockread &item3
-      bwrite %bleh -1 -1 &item3
+      bwrite %thread -1 -1 &item3
     }
-    bread %bleh 0 $file(%bleh).size &item4
+    bread %thread 0 $file(%thread).size &item4
     if ($bfind(&item4,0,</HTML>)) {
       var %start = $calc($bfind(&item4,0,"border-right:none">)+20), %a = $bfind(&item4,%start,<), %b = $calc($bfind(&item4,%a,members:)+17), %c = $bfind(&item4,%b,<), %d = $calc($bfind(&item4,%c,Tradable:)+18), %e = $bfind(&item4,%d,<)
       if (%start < 21) { $hget($gettok($sockname,2,46),out) Item not found | goto unset }
@@ -91,7 +91,7 @@ on *:sockread:zybez2.*: {
       $hget($gettok($sockname,2,46),out) Members? $yesno($bvar(&item4,%b,$calc(%c - %b)).text) | Tradeable? $yesno($bvar(&item4,%d,$calc(%e - %d)).text) | Equipable: $yesno($bvar(&item4,%f,$calc(%g - %f)).text) | Stackable? $yesno($bvar(&item4,%h,$calc(%i - %h)).text) $&
         | Weight:07 $regsubex($bvar(&item4,%j,$calc(%k - %j)).text,/^kg$/i,0Kg) | Quest?07 $yesno($nohtml($bvar(&item4,%l,$calc(%m - %l)).text)) | Examine:07 $nohtml($bvar(&item4,%n,$calc(%o - %n)).text)
       :unset
-      .remove %bleh
+      .remove %thread
       sockclose $sockname
       unset %*
       halt

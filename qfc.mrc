@@ -1,4 +1,4 @@
->start<|qfc.mrc|RSOF QFC|2.1|rs
+>start<|qfc.mrc|RSOF QFC|2.11|rs
 on $*:TEXT:/^[!@.]qfc/Si:*: {
   _CheckMain
   var %saystyle = $saystyle($left($1,1),$nick,$chan)
@@ -14,6 +14,7 @@ on $*:TEXT:/^[!@.]qfc/Si:*: {
 }
 on $*:text:/forum\.runescape\.com\/forums\.ws\?(\d{1,3}\W\d{1,3}\W\d+\W\d+)/Si:#: {
   if (Runescript isin $nick || Vectra isin $nick || $chanset($chan,qfc) == off) { halt }
+  _CheckMain
   var %qfc = $regml(1)
   var %ticks = %ticks
   hadd -m a $+ %ticks out msg $chan
@@ -58,7 +59,8 @@ on *:sockread:qfc.*: {
     var %start = $bfind(&qfc2,%cutD,class="msgcontents"), %cutE = $bfind(&qfc2,%start,</div>)
     var %strContent = $bvar(&qfc2,%start,$calc(%cutE - %start)).text
     %strContent = $remove($nohtml(%strContent),$chr(10))
-    $hget(%thread,out) $formatwith(\c12\uhttp://forum.runescape.com/forums.ws?{0}\o $| Forum:\c07 %strForum \o| By:\c07 %strPoster \o| Title:\c07 %strTitle \o| Posted at:\c07 %strTime, $replace($hget(%thread,qfc),-,$chr(44)))
+    if ($hget(%thread,link)) $hget(%thread,out) $formatwith(\c12\uhttp://forum.runescape.com/forums.ws?{0}\o $| Forum:\c07 %strForum \o| By:\c07 %strPoster \o| Title:\c07 %strTitle \o| Posted at:\c07 %strTime, $replace($hget(%thread,qfc),-,$chr(44)))
+    else $hget(%thread,out) $formatwith(Forum:\c07 %strForum \o| By:\c07 %strPoster \o| Title:\c07 %strTitle \o| Posted at:\c07 %strTime, $replace($hget(%thread,qfc),-,$chr(44)))
     $hget(%thread,out) $formatwith(\uThread Content:\u) $mid(%strContent,1,150) $+ $iif($len(%strContent) > 150,...)
     goto unset
     :error

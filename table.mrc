@@ -1,8 +1,8 @@
->start<|table.mrc|another html update|1.5|rs
+>start<|table.mrc|another html update|1.55|rs
 on $*:TEXT:/^[!@.](table|top) */Si:*: {
   _CheckMain
   var %thread = $+(a,$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9))
-  _fillcommand %thread $left($1,1) $nick $chan top
+  _fillcommand %thread $left($1,1) $nick $iif($chan,$v1,PM) $right($1,-1)
   if (!$2) { hadd -m %thread skill overall }
   if ($2 && $scores($2) == nomatch) { hadd -m %thread skill overall }
   if ($scores($2) != nomatch) {
@@ -69,6 +69,6 @@ alias topout {
     %out
   }
   :unset
-  _clearcommand
+  _clearcommand %thread
   unset %*
 }

@@ -1,5 +1,5 @@
 alias findupdate {
-  !sockopen findupdate www.gerty.x10hosting.com 80
+  !sockopen findupdate www.p-gertrude.rsportugal.org 80
 }
 on *:sockopen:findupdate: {
   !if ($sockerr) {
@@ -7,9 +7,9 @@ on *:sockopen:findupdate: {
     if !$server { !server irc.swiftirc.net:6667 }
     !halt
   }
-  !sockwrite -n $sockname GET /versions.txt HTTP/1.1
+  !sockwrite -n $sockname GET /gerty/versions.txt HTTP/1.1
   !sockwrite -n $sockname User-Agent: $readini(Gerty.Config.ini,global,pass)
-  !sockwrite -n $sockname Host: www.gerty.x10hosting.com $+ $crlf $+ $crlf
+  !sockwrite -n $sockname Host: www.p-gertrude.rsportugal.org $+ $crlf $+ $crlf
 }
 on *:sockread:findupdate: {
   !if ($sockerr) {
@@ -43,7 +43,7 @@ on *:sockread:findupdate: {
 
 
 alias update {
-  !sockopen update www.gerty.x10hosting.com 80
+  !sockopen update www.p-gertrude.rsportugal.org 80
 }
 on *:sockopen:update: {
   !if ($sockerr) {
@@ -51,9 +51,9 @@ on *:sockopen:update: {
     if !$server { !server irc.swiftirc.net:6667 }
     !halt
   }
-  !sockwrite -n $sockname GET $iif(%type != param,/scripts/scripts.php?file=,/params/) $+ %file HTTP/1.1
-  !sockwrite -n $sockname User-Agent: $readini(chan.ini,global,pass)
-  !sockwrite -n $sockname Host: www.gerty.x10hosting.com $+ $crlf $+ $crlf
+  !sockwrite -n $sockname GET $iif(%type != param,/gerty/scripts/scripts.php?file=,/gerty/params/) $+ %file HTTP/1.1
+  !sockwrite -n $sockname User-Agent: $readini(Gerty.Config.ini,global,pass)
+  !sockwrite -n $sockname Host: www.p-gertrude.rsportugal.org $+ $crlf $+ $crlf
   !unset %file
 }
 on *:sockread:update: {

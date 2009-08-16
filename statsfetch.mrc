@@ -1,4 +1,4 @@
->start<|statsfetch.mrc|another rscript bug covered|3.0|rs
+>start<|statsfetch.mrc|another rscript bug covered|3.05|rs
 on $*:TEXT:/^[!@.]/Si:*: {
   _CheckMain
   if ($lookups($right($1,-1)) == nomatch) { halt }

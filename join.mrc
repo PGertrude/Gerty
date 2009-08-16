@@ -1,10 +1,13 @@
->start<|join.mrc|admin sorted|2.0|rs
+>start<|join.mrc|admin sorted|2.1|rs
 alias _setAdmin {
   if ($address(P_Gertrude,3)) { writeini -n rsn.ini $v1 rsn P_Gertrude }
   if ($address(Elessar,3)) { writeini -n rsn.ini $v1 rsn Tiedemanns }
+  .hfree botlist
+  .hmake botlist
   var %x = 1
   while (%x <= $lines(botlist.txt)) {
     var %bot = $read(botlist.txt,%x)
+    hadd -m botlist %x %bot
     if ($nick(#gerty,%bot)) writeini -n rsn.ini $address(%bot,3) rsn Gerty
     inc %x
   }
