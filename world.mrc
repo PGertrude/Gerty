@@ -19,7 +19,7 @@ on $*:TEXT:/^[!@.](world|w|player)s?\b/Si:*: {
     var %world Mundo
   }
 
-  _fillcommand %thread $left($1,1) $nick $iif($chan,$v1,PM) World %lang %world $2
+  _fillCommand %thread $left($1,1) $nick $iif($chan,$v1,PM) World %lang %world $2
   sockopen $+(world.,%thread) www.runescape.com 80
   return
 
@@ -35,8 +35,7 @@ on *:sockopen:world.*:{
 on *:sockread:world.*: {
   var %thread = $gettok($sockname,2,46)
   if ($sockerr) {
-    write ErrorLog.txt $timestamp SocketError[sockread]: $nopath($script) $socket $([,) $+ $command(%thread,out) $command(%thread,from.RSN) $+ $(],)
-    echo -at Socket Error: $nopath($script)
+    _throw $nopath($script) %thread
     $command(%thread,out) Connection Error: Please try again in a few moments.
     hfree %thread
     sockclose $sockname
@@ -63,23 +62,27 @@ on *:sockread:world.*: {
         var %start = $bfind(&world2,0,Tipo)
       }
       var %world = $command(%thread,arg2) $+ $iif(%world != Mundo,$chr(32)) $+ $command(%thread,arg3)
+      ; Get the amount of players.
       var %a = $calc($bfind(&world2,%start,%world) +4), %b = $calc($bfind(&world2,%a,<td>)+4), %c = $bfind(&world2,%b,</td>)
-      var %d = $calc($bfind(&world2,%c,class=") +7), %e = $bfind(&world2,%d,")
-      var %f = $calc($bfind(&world2,%e,<t) +4), %g = $bfind(&world2,%f,<)
-      .tokenize 32 $regsubex($remove($bvar(&world2,$calc(%g +5),600).text,$chr(10),$chr(13)),/^<[^>]+><[^>]+title="(\w)"><[^>]+>\n*\r*<[^>]+><[^>]+title="(\w)"><[^>]+>\n*\r*<[^>]+><[^>]+title="(\w)"><[^>]+><[^>]+>([^<]+)<[^>]+>(.+?)$/,\1 \2 \3 \4)
+      ; Get the worlds activity
+      var %d = $calc($bfind(&world2,%c,class=") +7), %e = $bfind(&world2,%d,<)
+      ; Get lootshare? and f2p/p2p
+      noop $regex($remove($bvar(&world2,%e),300).text,$chr(10),$chr(13)),/title=\"(\w)\"/i)
+      var %lootshare = $regml(1)
+      echo -a $remove($bvar(&world2,%e,300).text,$chr(10),$chr(13))
+      echo -a $regex($remove($bvar(&world2,%e,300).text,$chr(10),$chr(13)),/(Free|Members)/)
 
-      var %region = $remove($bvar(&world2,%d,$calc(%e - %d)).text,$crlf)
-      var %players = $remove($gettok($bvar(&world2,%b,$calc(%c - %b)).text,1,32),$crlf)
-      var %type = $4
-      var %activity = $nohtml($remove($bvar(&world2,%f,$calc(%g - %f)).text,$crlf))
+      var %type = $regml(1)
+      var %activity = $nohtml($bvar(&world2,%d,$calc(%e - %d)).text)
+      var %players = $nohtml($bvar(&world2,%b,$calc(%c - %b)).text)
 
 
       if (%a == 4) { $command(%thread,out) World07 $command(%thread,arg3) Not Found. }
-      else { $command(%thread,out) World07 $command(%thread,arg3) (07 $+ %region $+ ) | Players:07 %players | Type:07 %type | Activity:07 %activity $iif($1 == N,04,03) Lootshare $iif($2 == N,04,03) Quickchat $iif($3 == N,04,03) PVP }
+      else { $command(%thread,out) World07 $command(%thread,arg3) (07 $+ %activity $+ ) | Players:07 %players | Type:07 %type | Lootshare:07 $iif(%lootshare == N,04No,03Yes) | Link: 12http://world $+ $command(%thread,arg3) $+ .runescape.com/a2,m0,j0,o0 }
 
       .remove %thread
       sockclose $sockname
-      _clearcommand %thread
+      _clearCommand %thread
     }
   }
 }
@@ -90,8 +93,7 @@ on *:sockopen:world2.*:{
 on *:sockread:world2.*: {
   var %thread = $gettok($sockname,2,46)
   if ($sockerr) {
-    write ErrorLog.txt $timestamp SocketError[sockread]: $nopath($script) $socket $([,) $+ $hget(%thread,out) $hget(%thread,nick) $+ $(],)
-    echo -at Socket Error: $nopath($script)
+    _throw $nopath($script) %thread
     $command(%thread,out) Connection Error: Please try again in a few moments.
     hfree %thread
     sockclose $sockname
@@ -108,7 +110,7 @@ on *:sockread:world2.*: {
       $command(%thread,out) There are currently 07 $+ $bytes($bvar(&world2,%a,$calc(%b - %a)).text,db) People Playing across 171 servers. Runescape at07 $round($calc(100* $bvar(&world2,%a,$calc(%b - %a)).text / 338000),2) $+ 07% Capacity.
       .remove %thread
       sockclose $sockname
-      _clearcommand %thread
+      _clearCommand %thread
     }
   }
 }

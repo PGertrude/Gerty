@@ -1,4 +1,4 @@
->start<|aliases.mrc|$TimeToday added|1.91|a
+>start<|aliases.mrc|$TimeToday added|1.92|a
 # return $chr(35)
 $ return $chr(36)
 % return $chr(37)
@@ -7,6 +7,7 @@ _CheckMain {
   if ($me != Gerty && $chan == #gerty) { halt }
   return
 }
+; _throw $nopath($script) %thread
 _throw {
   var %script = $1
   if ($sockname) {
@@ -39,7 +40,7 @@ _networkMsg {
   var %x = 1
   while (%x <= $hget(botlist,0).item) {
     var %bot = $hget(botlist,%x)
-    if $comchan(%bot,#gerty) { .ctcp %bot rawcommand $1- }
+    if ($comchan(%bot,#gerty)) { .ctcp %bot rawcommand $1- }
     inc %x
   }
 }
@@ -209,9 +210,9 @@ cmd {
   if (!$2) { return }
   return $hget($1,$2)
 }
-; _fillcommand %thread[Command ID] trigger nick chan command
+; _fillCommand %thread[Command ID] trigger nick chan command
 ; creates command info
-_fillcommand {
+_fillCommand {
   if (!$5) { return }
   var %thread = $1
   hadd -m %thread out $saystyle($2,$3,$4)
@@ -228,9 +229,9 @@ _fillcommand {
     }
   }
 }
-; _clearcommand %thread[command ID]
+; _clearCommand %thread[command ID]
 ; removes command info
-_clearcommand {
+_clearCommand {
   if (!$1) { return }
   var %thread = $1
   hfree %thread
@@ -819,7 +820,7 @@ format_number {
   if ($1 > 9500) {
     return $round($calc( $1 / 1000 ),2) $+ k
   }
-  return $1
+  return $bytes($1,bd)
 }
 ;$calccombat(att, def, str, hp, range, pray, mage, sum)
 calccombat {
