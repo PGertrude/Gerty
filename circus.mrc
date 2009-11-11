@@ -10,16 +10,22 @@ on *:sockopen:circus.*:{
   sockwrite -nt $sockname Host: runescape.wikia.com $+ $crlf $+ $crlf
 }
 on *:sockread:circus.*:{
-  var %thread = $gettok($sockname,2,46)
+  var %thread = $gettok($sockname,2,46), %x
   if ($sockerr) {
     _throw $nopath($script) %thread
     halt
   }
-  sockread %circus
-  if ($regex(%circus,/The circus is currently in: (.+?)\./i)) {
-    $hget($gettok($sockname,2,46),out) The circus is currently found in:07 $nohtml($regml(1)) $+ . 12runescape.wikia.com
-    unset %*
-    hfree $gettok($sockname,2,46)
-    sockclose $sockname
+  while ($sock($sockname).rq > 0) {
+    .dll WhileFix.dll WhileFix .
+    var %circus
+    sockread %circus
+    if ($regex(%circus,/The circus is currently in: (.+?)\./i)) {
+      $hget(%thread,out) The circus is currently found in:07 $nohtml($regml(1)) $+ . 12runescape.wikia.com
+      hfree %thread
+      sockclose $sockname
+      halt
+    }
+    if (%x == 100) { break }
+    inc %x
   }
 }
