@@ -28,14 +28,6 @@ on *:START: {
   if ($exists(spelluse.txt)) { .hload spelluse spelluse.txt }
   if !$hget(ge) { .hmake ge }
   if ($exists(geupdatebackup.txt)) { .hload ge geupdatebackup.txt }
-  if !$hget(botlist) { .hmake botlist }
-  var %x = 1
-  while (%x <= $lines(botlist.txt)) {
-    var %bot = $read(botlist.txt,%x)
-    hadd -m botlist %x %bot
-    inc %x
-  }
-
 }
 on *:QUIT: {
 
