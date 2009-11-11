@@ -69,8 +69,6 @@ on *:sockread:world.*: {
       ; Get lootshare? and f2p/p2p
       noop $regex($remove($bvar(&world2,%e),300).text,$chr(10),$chr(13)),/title=\"(\w)\"/i)
       var %lootshare = $regml(1)
-      echo -a $remove($bvar(&world2,%e,300).text,$chr(10),$chr(13))
-      echo -a $regex($remove($bvar(&world2,%e,300).text,$chr(10),$chr(13)),/(Free|Members)/)
 
       var %type = $regml(1)
       var %activity = $nohtml($bvar(&world2,%d,$calc(%e - %d)).text)
