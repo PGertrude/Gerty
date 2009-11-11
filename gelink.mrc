@@ -1,4 +1,4 @@
->start<|gelink.mrc|cleaned + fix|1.32|rs
+>start<|gelink.mrc|cleaned + fix|1.33|rs
 on *:TEXT:*:*: {
   _CheckMain
   if (!$regex($1,/^[!@.](g(reat|rand)?e(xchange)?|price)$/Si)) { halt }
@@ -43,8 +43,7 @@ on *:sockread:gelink.*: {
         var %f = $calc($bfind(&gelink2,%e,">)+2), %g = $bfind(&gelink2,%f,<)
         var %h = $calc($bfind(&gelink2,%g,img src=")+10), %i = $bfind(&gelink2,%h,/serverlist/), %k = $bfind(&gelink2,%i,.png)
         var %j = $iif(*member* iswm $bvar(&gelink2,%i,$calc(%k - %i)).text,$+($chr(32),,$chr(40),07M,$chr(41)))
-        var %price = $bvar(&gelink2,%d,$calc(%e - %d)).text
-        if ($chr(44) !isin %price) var %price = $calculate(%price)
+        var %price = $litecalc($bvar(&gelink2,%d,$calc(%e - %d)).text)
         var %z = $iif($len(%z) > 5,%z) | $+ %j $bvar(&gelink2,%b,$calc(%c - %b)).text $+ :07 $iif(%amount,$format_number($calc(%amount * %price)),$format_number(%price)) $+  $updo($bvar(&gelink2,%f,$calc(%g - %f)).text)
         var %start = %c
         dec %limit 1
