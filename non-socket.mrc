@@ -1,4 +1,4 @@
->start<|non-socket.mrc|added login|2.5|rs
+>start<|non-socket.mrc|added login|2.6|rs
 on *:TEXT:*:*: {
   if ($1 == raw) {
     if (!$admin($nick)) { goto clean }
@@ -92,7 +92,7 @@ on *:TEXT:*:*: {
   }
   ; COMMANDS
   else if ($regex($1,/^[!@.]commands?$/Si)) {
-    %saystyle Commands Listing:07 http://p-gertrude.rsportugal.org/gerty/commands.html
+    %saystyle Commands Listing:07 http://gerty.rsportugal.org/commands.html
     goto clean
   }
   ; PART
@@ -358,16 +358,16 @@ on *:TEXT:*:*: {
   else if ($regex($1,/^[!@.]addadmin$/Si)) {
     if (!$admin($nick)) { goto clean }
     var %nick = $rsn($regsubex($2-,/\W/g,_))
-    var %admin = $readini(Gerty.Config.ini,tracked,admin)
+    var %admin = $readini(Gerty.Config.ini,admin,rsn)
     var %regex = /(^|\|) $+ %nick $+ (\||$)/i
     if ($regex(%admin,%regex)) { %saystyle %nick is already an admin | goto clean }
     noop $_network(writeini Gerty.Config.ini admin rsn %admin $+ $chr(124) $+ $rsn($replace($2-,$chr(32),_)))
-    %saystyle 07 $+ $rsn($replace($2-,$chr(32),_)) added as07 $me Admin.
+    %saystyle 07 $+ $rsn($2-) added as07 Gerty Admin.
     goto clean
   }
   ; REMOVE ADMIN
   else if ($regex($1,/^[!@.]removeadmin$/Si)) {
-    if ($admin($nick)) { goto clean }
+    if (!$admin($nick)) { goto clean }
     var %nick = $rsn($regsubex($2-,/\W/g,_))
     var %admin = $readini(Gerty.Config.ini,admin,rsn)
     var %regex = /((\| $+ %nick $+ )|( $+ %nick $+ \|))/i
