@@ -154,7 +154,6 @@ on *:TEXT:*:*: {
     %nick = $rsn(%nick)
     var %thread = $+(a,$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9))
     var %url = http://www.rscript.org/lookup.php?type=track&user= $+ %nick $+ &skill=all&time= $+ %time
-    .msg P_Gertrude noop download.break(trackAll %saystyle %nick %time %command , %thread , %url )
     noop $download.break(trackAll %saystyle %nick %time %command, %thread, %url)
   }
   ; lastW/e yesterday
