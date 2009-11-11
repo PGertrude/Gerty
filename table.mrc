@@ -20,11 +20,7 @@ on *:sockread:top.*: {
   var %thread = $gettok($sockname,2,46)
   if (!%row) { %row = 1 }
   if ($sockerr) {
-    write ErrorLog.txt $timestamp SocketError[sockread]: $nopath($script) $socket $([,) $+ $command(%thread,out) $hget(%thread,nick) $+ $(],)
-    echo -at Socket Error: $nopath($script)
-    $command(%thread,out) Connection Error: Please try again in a few moments.
-    hfree %thread
-    sockclose $sockname
+    _throw $nopath($script) %thread
     halt
   }
   .sockread %top
@@ -40,8 +36,8 @@ alias topout {
   var %thread = $1
   if ($minigames($hget(%thread,skill)) == nomatch) {
     var %out = $command(%thread,out)  $+ $hget(%thread,skill) $+  Ranks
-    if ($hget(%thread,nick)) { var %y = 118 }
-    else { var %y = 118 }
+    if ($hget(%thread,nick)) { var %y = 117 }
+    else { var %y = 117 }
     %out = %out 07# $+ $(% $+ %y,2) $+  $(% $+ $calc(%y + 1),2) $+(07,$(% $+ $calc(%y + 2),2)) ( $+ $(% $+ $calc(%y + 3),2) $+ )
     inc %y 4
     var %x = 1
@@ -55,8 +51,8 @@ alias topout {
   }
   else {
     var %out = $command(%thread,out)  $+ $hget(%thread,skill) $+  Ranks
-    if ($hget(%thread,nick)) { var %y = 97 }
-    else { var %y = 97 }
+    if ($hget(%thread,nick)) { var %y = 96 }
+    else { var %y = 96 }
     %out = %out 07# $+ $(% $+ %y,2) $+  $(% $+ $calc(%y + 1),2) ( $+ $(% $+ $calc(%y + 2),2) $+ )
     inc %y 3
     var %x = 1
