@@ -1,4 +1,4 @@
->start<|elly.mrc|ml patched up|2.0|rs
+>start<|elly.mrc|ml patched up|2.01|rs
 alias listchans {
   var %out = Chans:07 $chan(0) Nicks:07 $bot(users) Uptime:07 $swaptime($uptime(server,1)) Chan list: $bot(chanlist)
   if ($isid) {
@@ -133,8 +133,8 @@ on $*:text:/^(Gerty?\x20)?[!.@](mag(e|ic))?spell? /Si:*:{
   if ($iif($regex($1,/^Gerty?/Si),$3,$2)) { spell $remove($iif($regex($1,/^Gerty?/Si),$3-,$2-),$chr(44),$chr(36)) $+ $chr(44) $+ $saystyle($left($iif($regex($1,/^Gerty?/Si),$2,$1),1),$nick,$chan) }
 }
 alias spell {
-  if ($calculate($1) isnum) { var %num $calculate($1) | var %spell $gettok($2-,1,44) }
-  elseif ($calculate($1) !isnum) { var %num 1 | var %spell $gettok($1-,1,44) }
+  if ($litecalc($1)) { var %num $calculate($1) | var %spell $gettok($2-,1,44) }
+  else { var %num 1 | var %spell $gettok($1-,1,44) }
   if ($chr(34) isin %spell) { var %spell $remove(%spell,$chr(34)) | var %exact yes }
   var %saystyle $gettok($1-,2,44)
   .fopen spells magic.txt
@@ -162,6 +162,7 @@ alias runepriceupdater {
   sockopen runeprice.rune1 itemdb-rs.runescape.com 80
   sockopen runeprice.rune2 itemdb-rs.runescape.com 80
   if ($hget(potprice)) { hfree potprice }
+  if ($hget(cost)) { hfree cost }
 }
 on *:sockopen:runeprice.rune1:{
   sockwrite -nt $sockname GET /results.ws?query="+Rune"&price=0-500&members= HTTP/1.1
