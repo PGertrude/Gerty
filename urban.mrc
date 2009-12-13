@@ -1,34 +1,24 @@
->start<|urban.mrc|Urban Dictionary command|1.0|rs
-on $*:TEXT:/^[!@.]urban */Si:#: {
+>start<|urban.mrc|Urban Dictionary command|1.1|rs
+on $*:TEXT:/^[!@.]urban\b/Si:*: {
   _CheckMain
-  var %thread = $+($r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9))
-  hadd -m $+(a,%thread) out $saystyle($left($1,1),$nick,$chan)
-  hadd -m $+(a,%thread) search $replace($2-,$chr(32),+)
-  sockopen $+(urban.a,%thread) www.rscript.org 80
+  var %thread = $+(a,$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9))
+  _fillCommand %thread $left($1,1) $nick $iif($chan,$v1,PM) urban $replace($2-,$chr(32),+)
+  var %url = http://www.rscript.org/lookup.php?type=urban&id=1&search= $+ $cmd(%thread,arg1)
+  noop $download.break(urban %thread,urban. $+ %thread, %url)
 }
-on *:sockopen:urban.*: {
-  sockwrite -n $sockname GET /lookup.php?type=urban&search= $+ $hget($gettok($sockname,2,46),search) HTTP/1.0
-  sockwrite -n $sockname HOST: www.rscript.org $+ $crlf $+ $crlf
-}
-on *:sockread:urban.*: {
-  if ($sockerr) {
-    $right($hget($gettok($sockname,2,46),out),-1) [Socket Error] $sockname $time $script
+alias urban {
+  var %thread = $1, %urban = $2-
+  .tokenize 10 %urban
+  if (MATCHES: 0 isin $3) {
+    $cmd(%thread,out) Urban Dictionary has no entry for ' $+ $cmd(%thread,arg1) $+ '.
+    _clearCommand %thread
     halt
   }
-  while ($sock($sockname).rq > 0) {
-    var %urban
-    sockread %urban
-    if (DEFINED: isin %urban) {
-      $hget($gettok($sockname,2,46),out) Urban Dictionary: ' $+ $hget($gettok($sockname,2,46),search) $+ ' $regsubex($gettok(%urban,2,58),/(^|\s)(\d+\.)\s/g,$+($chr(32),07\2,$chr(32)))
-    }
-    if (EXAMPLE: isin %urban) {
-      $hget($gettok($sockname,2,46),out) Example: $regsubex($nohtml($gettok(%urban,2,58)),/(^|\s)(\d+\.)\s/g,$+($chr(32),07\2,$chr(32)))
-    }
-    if (MATCHES: 0 isin %urban) {
-      $hget($gettok($sockname,2,46),out) Urban Dictionary has no entry for ' $+ $hget($gettok($sockname,2,46),search) $+ '.
-      sockclose $sockname
-      unset %*
-      halt
-    }
+  if (DEFINED: isin $4) {
+    $cmd(%thread,out) Urban Dictionary: ' $+ $cmd(%thread,arg1) $+ ' $regsubex($gettok($4,2,58),/(^|\s)(\d+\.)\s/g,$+($chr(32),07\2,$chr(32)))
   }
+  if (EXAMPLE: isin $5) {
+    $cmd(%thread,out) Example: $regsubex($gettok($5,2,58),/(^|\s)(\d+\.)\s/g,$+($chr(32),07\2,$chr(32)))
+  }
+  _clearCommand %thread
 }

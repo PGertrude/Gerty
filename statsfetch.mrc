@@ -1,4 +1,4 @@
->start<|statsfetch.mrc|another rscript bug covered|3.06|rs
+>start<|statsfetch.mrc|another rscript bug covered|3.2|rs
 on $*:TEXT:/^[!@.]/Si:*: {
   _CheckMain
   if ($lookups($right($1,-1)) == nomatch) { halt }
@@ -110,7 +110,7 @@ alias stats {
       var %itemstogo = $ceil($calc( %exptogo / %param ))
       var %items = (07 $+ $bytes(%itemstogo,db) items to go.)
     }
-    else if (%param) {
+    else if (%param != null) {
       var %file = %skill $+ .txt
       .fopen %socket %file
       if ($ferr) { goto skillreply }
