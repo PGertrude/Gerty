@@ -1,7 +1,7 @@
 >start<|statsfetch.mrc|another rscript bug covered|3.2|rs
 on $*:TEXT:/^[!@.]/Si:*: {
   _CheckMain
-  if ($lookups($right($1,-1)) == nomatch) { halt }
+  if (!$lookups($right($1,-1))) { halt }
   var %thread = $+(a,$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9))
   var %saystyle = $saystyle($left($1,1),$nick,$chan)
   var %string = $2-
@@ -68,7 +68,7 @@ alias stats {
   .tokenize 10 $distribute($14)
   if ($1 == unranked) { goto unranked }
   else if (!$1 || !$2) { %saystyle Connection Error: Please try again in a few moments. | goto unset }
-  if ($skills(%skill) != nomatch) {
+  if ($skills(%skill)) {
     .tokenize 44 $($ $+ %skillid,2)
     var %endgoal = $iif($3 < 13034431,13034431,200000000)
     var %endgoalname = $iif($3 < 13034431,99,max)
@@ -79,29 +79,33 @@ alias stats {
     var %info = %info (07 $+ $round($calc( 100 * $3 / %endgoal),1) $+ % of %endgoalname $+ )
     ; Exp to goal
     if (%presetgoal == yes) {
-      if ($userset(%nick,%skillid $+ goal)) {
+      var %userAddress $iif($aLfAddress(%nick), $v1, %nick)
+      var %boolRsn $iif($aLfAddress(%nick), $false, $true)
+      if ($getStringParameter(%userAddress,%skill,goals, %boolRsn)) {
         %goal = $v1
-        %target = $userset(%nick,%skillid $+ target)
+        %target = $xptolvl(%goal)
       }
     }
     if ((%goal > 126 && %goal <= $3) || (%goal < 127 && %goal <= $2)) { %goal = nl | unset %target }
     if (%goal == nl) { %goal = $calc(%vlvl + 1) }
     if (%goal == 127) { %goal = 200000000 }
-    if ($calculate(%goal) < 127 && !%target) { var %target = %goal | %goal = $lvltoxp(%goal) }
-    else if (!%target) { var %target = $format_number(%goal) }
-    %goal = $calculate(%goal)
+    if ($litecalc(%goal) < 127 && !%target) { var %target = %goal | %goal = $lvltoxp(%goal) }
+    else if (!%target) { var %target = $format_number($litecalc(%goal)) }
+    %goal = $litecalc(%goal)
     if (%goal <= $3 && $3 < 188884740) { %target = $calc(%vlvl + 1) | %goal = $lvltoxp(%target) }
     else if (%goal <= $3) { %target = 200m | %goal = 200000000 }
     if (%goal > 200000000) { %goal = 200000000 | %target = 200m }
     var %exptogo = $calc(%goal - $3)
-    if (%presetgoal == no) {
-      noop $_network(writeini -n user.ini %nick %skillid $+ goal %goal)
-      noop $_network(writeini -n user.ini %nick %skillid $+ target %target)
+    if (%presetgoal == no && $aLfAddress(%nick)) {
+      if (!$rowExists(users, fingerprint, $aLfAddress(%nick))) { noop $_network(noop $!sqlite_query(INSERT INTO users (fingerprint, rsn) VALUES (' $+ $aLfAddress(%nick) $+ ',' $+ %nick $+ ');)) }
+      noop $_network(noop $!setStringParameter( $aLfAddress(%nick) , %skill , goals , %goal , $false ))
     }
     var %info = %info | exp till %target $+ :07 $bytes(%exptogo,db) (07 $+ $round($calc(100 * ($3 - $lvltoxp(%vlvl)) / (%goal - $lvltoxp(%vlvl))),1) $+ $(%,) $+ )
     ; Items to next level
     if (%presetparam == yes) {
-      if ($userset(%nick,%skillid $+ param)) {
+      var %userAddress $iif($aLfAddress(%nick), $v1, %nick)
+      var %boolRsn $iif($aLfAddress(%nick), $false, $true)
+      if ($getStringParameter(%userAddress,%skill,items, %boolRsn)) {
         %param = $v1
       }
     }
@@ -118,13 +122,15 @@ alias stats {
         var %line = $fread(%socket)
         if (%param isin %line) {
           var %itemstogo = $ceil($calc( %exptogo / $gettok(%line,2,9) ))
+          %param = $gettok(%line,1,9)
           var %items = (07 $+ $bytes(%itemstogo,db) $gettok(%line,1,9) $+ )
           break
         }
       }
       if (!%itemstogo) { var %items = (Unknown Item) }
-      else if (%presetparam == no) {
-        noop $_network(writeini -n user.ini %nick %skillid $+ param $gettok(%line,1,9))
+      else if (%presetparam == no && $aLfAddress(%nick)) {
+        if (!$rowExists(users, fingerprint, $aLfAddress(%nick))) { noop $_network(noop $!sqlite_query(INSERT INTO users (fingerprint, rsn) VALUES (' $+ $aLfAddress(%nick) $+ ',' $+ %nick $+ ');)) }
+        noop $_network(noop $!setStringParameter( $aLfAddress(%nick) , %skill , items , %param , $false ))
       }
       .fclose %socket
     }
@@ -208,7 +214,7 @@ alias stats {
     %saystyle Skills: %combat
     goto unset
   }
-  if ($minigames(%skill) != nomatch) {
+  if ($minigames(%skill)) {
     .tokenize 44 $($ $+ %skillid,2)
     var %info =  $+ %nick $+ 07 %skill | score:07 $bytes($2,db) | rank:07 $bytes($1,db)
     if ($bytes($1,db) == 0) { goto unranked }
@@ -441,4 +447,3 @@ alias rscript.singleminigamereply {
   if (%out) { %saystyle  $+ %nick $+  %out 12www.rscript.org }
   else { %saystyle No Record for %nick found at12 www.rscript.org this year }
 }
-alias die return

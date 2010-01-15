@@ -1,4 +1,4 @@
->start<|exp.mrc|Exp Params|1.1|rs
+>start<|exp.mrc|Exp Params|1.15|rs
 on $*:text:/^[!@.](le?ve?l|e?xp)\b/Si:*:{
   _CheckMain
   var %saystyle = $saystyle($left($1,1),$nick,$chan)
@@ -27,7 +27,7 @@ on $*:text:/^[!@.](le?ve?l|e?xp)\b/Si:*:{
   }
   else {
     var %ticks = $ticks, %x = 1
-    if ($lookups($2) != NoMatch && $lookups($2)) && ($3) {
+    if ($lookups($2)) && ($3) {
       var %skill = $lookups($2)
       if (%skill == Attack || %skill == Strength || %skill == Defence || %skill == Ranged) { var %skill = Combat }
       var %item $3-

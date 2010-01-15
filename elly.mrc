@@ -1,4 +1,4 @@
->start<|elly.mrc|ml patched up|2.01|rs
+>start<|elly.mrc|ml patched up|2.07|rs
 alias listchans {
   var %out = Chans:07 $chan(0) Nicks:07 $bot(users) Uptime:07 $swaptime($uptime(server,1)) Chan list: $bot(chanlist)
   if ($isid) {
@@ -9,32 +9,19 @@ alias listchans {
     else { msg $nick %out }
   }
 }
-on $*:TEXT:/^[!@.]status\b/Si:*: {
-  var %saystyle = $saystyle($left($1,1),$nick,$chan,no)
-  if ($admin($nick) != admin) { halt }
-  if ($2) {
-    if ($left($2,1) == $#) {
-      var %minusers = $chanset($2,users)
-      var %curusers = $nick($2,0)
-      var %blacklist = $chanset($2,blacklist)
-      var %youtube = $chanset($2,youtube)
-      var %site = $chanset($2,site)
-      var %event = $chanset($2,event)
-      var %public = $chanset($2,public)
-      if (%blacklist) { %blacklist = Blacklist:07 %blacklist }
-      if (%youtube) { %youtube = Youtube:07 $caps(%youtube) }
-      else { %youtube = Youtube:07 On }
-      if (%public) { %public = Public:07 %public }
-      else { %public = Public:07 On }
-      if (%site) { %site = Site:07 Yes }
-      else { %site = Site:07 No }
-      if (%event) { %event = Event:07 Yes }
-      else { %event = Event:07 No }
-      %saystyle Channel info:07 $2 $iif(%curusers,Users:07 %curusers $+ $chr(32)) $+ %public %blacklist %youtube %site %event
-      return
-    }
+alias botstats {
+  var %x = 1,%lines = 0,%names,%size = 0,%long = 0,%big,%cur
+  while ($script(%x)) {
+    %cur = $v1
+    inc %lines $lines(%cur)
+    if ($lines(%cur) > $lines(%long)) %long = %cur
+    inc %size $file(%cur).size
+    if (!$exists(%big)) || ($file(%cur).size > $file(%big).size) %big = %cur
+    %names = %names $nopath(%cur)
+    inc %x
   }
-  %saystyle Chans:07 $chan(0) Nicks:07 $bot(users) Uptime:07 $swaptime($uptime(server,1))
+  $iif(m isin $1,msg $active,echo -a) I have $+($chr(2),$script(0),$chr(2)) remote script files loaded $+ $iif(n isin $1,$+($chr(32),$chr(40),$chr(2),%names,$chr(2),$chr(41))) $+ , for a total of $+($chr(2),%lines,$chr(2)) lines and $+($chr(2),$round($calc(%size / 1024),2),$chr(2)) $+ KB.
+  $iif(t isin $1,$iif(m isin $1,msg $active,echo -a),return) Longest file: $+($chr(2),$nopath(%long),$chr(2)) at $+($chr(2),$lines(%long),$chr(2)) lines. Largest file: $+($chr(2),$nopath(%big),$chr(2)) at $+($chr(2),$round($calc($file(%big).size / 1024),2),$chr(2)) $+ KB.
 }
 alias swaptime {
   var %b = $regex(time,$1,/(\d+)/g)
@@ -82,50 +69,18 @@ on $*:sockread:youtube.*:{
   if ($regex(rating,%youtube,/^RATING: \d+ \d+ (\d+) (\d+(\.\d+)?)/i)) { hadd -m $gettok($sockname,2,46) rating $regml(rating,2) | hadd -m $gettok($sockname,2,46) ratings $regml(rating,1) }
   if (%youtube == END) {
     if (!$hget($gettok($sockname,2,46),title)) { $hget($gettok($sockname,2,46),out) The URL contained a malformed video ID. (ID: $hget($gettok($sockname,2,46),link) $+ ) | hfree $gettok($sockname,2,46) | sockclose $sockname | halt }
-    $hget($gettok($sockname,2,46),out) Youtube link code "07 $+ $hget($gettok($sockname,2,46),link) $+ " $chr(124) Title:7 $hget($gettok($sockname,2,46),title)  $+ $chr(124) Duration: $regsubex($duration($hget($gettok($sockname,2,46),duration),1),/(\d+)/g,07\1)  $+ $chr(124) Views:7 $bytes($hget($gettok($sockname,2,46),views),bd)  $+ $chr(124) Rating:7 $+($hget($gettok($sockname,2,46),rating),$chr(3),$chr(40),$chr(3),07,$bytes($hget($gettok($sockname,2,46),ratings),bd)) votes $+ $chr(41)
+    $hget($gettok($sockname,2,46),out) Youtube link code "07 $+ $hget($gettok($sockname,2,46),link) $+ " $chr(124) Title:7 $hget($gettok($sockname,2,46),title)  $+ $chr(124) Duration: $regsubex($duration($hget($gettok($sockname,2,46),duration),1),/(\d+)/g,07\1)  $+ $chr(124) Views:7 $iif($bytes($hget($gettok($sockname,2,46),views),bd),$v1,N/A)  $+ $chr(124) Rating:7 $+($iif($hget($gettok($sockname,2,46),rating),$v1,N/A), $chr(40),07,$bytes($iif($hget($gettok($sockname,2,46),ratings),$v1,0),bd)) votes $+ $chr(41) | Download:12 http://www.xaaa.co.uk/youtube.php?yturl= $+ $hget($gettok($sockname,2,46),link)
     hfree $gettok($sockname,2,46)
     sockclose $sockname
   }
 }
 on $*:text:/^(Gerty? )?[!.@]m(ember)?l(ist)?/Si:*:{
   _CheckMain
-  if ($iif($regex($1,/^Gerty?/Si),$3,$2) && $readini(chan.ini,$chan,ml) != off) {
+  if ($iif($regex($1,/^Gerty?/Si),$3,$2) && $chanset($chan,ml) != off) {
     var %ticks $ticks
     sockopen ml.a $+ %ticks www6.runehead.com 80
     hadd -m a $+ %ticks out $saystyle($left($iif($regex($1,/^Gerty?/Si),$2,$1),1),$nick,$chan)
     hadd -m a $+ %ticks ml $caps($regsubex($iif($regex($1,/^Gerty?/Si),$3-,$2-),/(\W)/g,_))
-  }
-}
-on $*:notice:/^(Gerty? )?[!.@]m(ember)?l(ist)?/Si:*:{
-  if ($iif($regex($1,/^Gerty?/Si),$3,$2)) {
-    var %ticks $ticks
-    sockopen ml.a $+ %ticks www6.runehead.com 80
-    hadd -m a $+ %ticks out .notice $nick
-    hadd -m a $+ %ticks ml $caps($regsubex($iif($regex($1,/^Gerty?/Si),$3-,$2-),/(\W)/g,_))
-  }
-}
-on *:sockopen:ml.*: {
-  sockwrite -nt $sockname GET /feeds/lowtech/searchclan.php?search= $+ $hget($gettok($sockname,2,46),ml) $+ &type=2 HTTP/1.0
-  sockwrite -nt $sockname Host: www6.runehead.com
-  sockwrite -nt $sockname $crlf
-}
-on *:sockread:ml.*:{
-  if ($sockerr) { echo -st Error in socket: $sockname }
-  sockread %ml
-  if (@@start !isin %ml) {
-    if (@@not isin %ml) {
-      $hget($gettok($sockname,2,46),out) $+(,$hget($gettok($sockname,2,46),ml),) clan not found. $+($chr(15),$chr(40),$chr(3),07,RuneHead.com,$chr(15),$chr(41))
-      hfree $gettok($sockname,2,46)
-      unset %*
-      sockclose $sockname
-    }
-    else if ($numtok(%ml,124) > 5) {
-      tokenize 124 %ml
-      $hget($gettok($sockname,2,46),out) $+($chr(91),07,$5,,$chr(93),07) $1 $+(,$chr(40),07,$4,,$chr(41)) Link:12 $2  $+ $chr(124) Members: $+(07,$6,) $chr(124) Avg: P2P-Cmb: $+(07,$7,) F2P-Cmb: $+(07,$16,) Overall: $+(07,$bytes($9,bd),) $chr(124) Based: Region: $+(07,$13,) World: $+(07,$15,) Core: $+(07,$12,) Cape: $+(07,$14,) $chr(124) Runehead Link:12 $3
-      unset %*
-      hfree $gettok($sockname,2,46)
-      sockclose $sockname
-    }
   }
 }
 on $*:text:/^(Gerty?\x20)?[!.@](mag(e|ic))?spell? /Si:*:{
@@ -133,7 +88,7 @@ on $*:text:/^(Gerty?\x20)?[!.@](mag(e|ic))?spell? /Si:*:{
   if ($iif($regex($1,/^Gerty?/Si),$3,$2)) { spell $remove($iif($regex($1,/^Gerty?/Si),$3-,$2-),$chr(44),$chr(36)) $+ $chr(44) $+ $saystyle($left($iif($regex($1,/^Gerty?/Si),$2,$1),1),$nick,$chan) }
 }
 alias spell {
-  if ($litecalc($1)) { var %num $calculate($1) | var %spell $gettok($2-,1,44) }
+  if ($litecalc($1)) { var %num $litecalc($1) | var %spell $gettok($2-,1,44) }
   else { var %num 1 | var %spell $gettok($1-,1,44) }
   if ($chr(34) isin %spell) { var %spell $remove(%spell,$chr(34)) | var %exact yes }
   var %saystyle $gettok($1-,2,44)
@@ -162,24 +117,8 @@ alias runepriceupdater {
   sockopen runeprice.rune1 itemdb-rs.runescape.com 80
   sockopen runeprice.rune2 itemdb-rs.runescape.com 80
   if ($hget(potprice)) { hfree potprice }
-  if ($hget(cost)) { hfree cost }
 }
-on *:sockopen:runeprice.rune1:{
-  sockwrite -nt $sockname GET /results.ws?query="+Rune"&price=0-500&members= HTTP/1.1
-  sockwrite -nt $sockname Host: itemdb-rs.runescape.com
-  sockwrite -nt $sockname $crlf
-}
-on *:sockopen:runeprice.rune2:{
-  sockwrite -nt $sockname GET /results.ws?query="%20rune"&sup=All&cat=All&sub=All&page=2&vis=1&order=1&sortby=name&price=0-500&members= HTTP/1.1
-  sockwrite -nt $sockname Host: itemdb-rs.runescape.com
-  sockwrite -nt $sockname $crlf
-}
-on *:sockread:runeprice.*:{
-  if ($sockerr) { echo -st Error in socket: $sockname }
-  sockread %rune
-  if ($regex(rune,%rune,/^<\w+><.+?> (\w+) rune<\/\w><\/\w+>$/i)) { hadd -m temp rune $regml(rune,1) }
-  if ($regex(price,%rune,/^<\w+>(\d+)<\/\w+>$/i) && $hget(temp,rune)) { hadd -m runeprice $hget(temp,rune) $+ _Rune $regml(price,1) | hfree temp }
-}
+
 ;##POTION##
 on $*:text:/^(Gerty?\x20)?[!.@]oldpot(ion)?s? ./Si:*:{
   _CheckMain
@@ -210,20 +149,8 @@ on $*:text:/^(Gerty?\x20)?[!.@]oldpot(ion)?s? ./Si:*:{
   if %x = 1 $saystyle($left($iif($regex($1,/^Gerty?/Si),$2,$1),1),$nick,$chan) 07 $+ %potion potion not found.
   .fclose *
 }
-on *:sockopen:potion.*:{
-  sockwrite -nt $sockname GET /viewitem.ws?obj= $+ $gettok($sockname,3,46) HTTP/1.1
-  sockwrite -nt $sockname Host: itemdb-rs.runescape.com $+ $crlf $+ $crlf
-}
-on *:sockread:potion.*:{
-  if ($sockerr) { echo -st Error in socket: $sockname }
-  sockread %pots
-  if ($regex(pots,%pots,/^<\w>Market Price:<\/\w> ([\d\W]+)/Si)) {
-    hadd -m potprice p $+ $gettok($sockname,3,46) $remove($regml(pots,1),$chr(44))
-    potsay $hget($gettok($sockname,2-,46),out)
-    hfree $gettok($sockname,2-,46)
-    sockclose $sockname
-  }
-}
+
+
 alias potsay {
   tokenize 44 $1-
   var %a %a $iif($hget(potprice,p $+ $7),y,n)
@@ -244,7 +171,7 @@ on $*:text:/^(Gerty?\x20)?[!.@]newle?ve?l/Si:*:{
   if ($calculate($iif($regex($1,/^Gerty?/Si),$3,$2)) isnum) { var %num $calculate($iif($regex($1,/^Gerty?/Si),$3,$2)) | var %skill $iif($regex($1,/^Gerty?/Si),$4,$3) }
   elseif ($calculate($iif($regex($1,/^Gerty?/Si),$3,$2)) !isnum) { var %num $iif($regex($1,/^Gerty?/Si),$4,$3) | var %skill $iif($regex($1,/^Gerty?/Si),$3,$2) }
   if (!$regex($1-,/\d/) || !%skill || !%num || %num > 99 || %num < 1) { %saystyle Syntax: !newlvl level skill | halt }
-  var %skill $smart(%skill)
+  var %skill $skills(%skill)
   var %ticks $ticks
   var %tok 3
   if (%skill = Slayer) { var %tok 4 }
@@ -265,11 +192,8 @@ on $*:text:/^(Gerty?\x20)?[!.@]newle?ve?l/Si:*:{
 alias draynor {
   if ($read(draynor.txt,w,$1)) sockopen draynor. $+ $1 www.draynor.net 80
 }
-on *:sockopen:draynor.*:{
-  var %string = username= $+ $gettok($sockname,2,46) $+ &user_submit=Update%20Signatures!
-  sockwrite -n $sockname POST /signature_updater.php HTTP/1.1
-  sockwrite -n $sockname Host: www.draynor.net
-  sockwrite -n $sockname Content-Length: $len(%string)
-  sockwrite -n $sockname Content-Type: application/x-www-form-urlencoded
-  sockwrite -n $sockname $crlf %string
+alias EscapeURL return $regsubex($1-,/([\[\]@\+\x20<>&~#$%\^|=?}{\\/:`.])/g,$+(%,$base($asc(\1),10,16)))
+alias pastebin {
+  hadd -m $2- out $1
+  sockopen pastebin. $+ $2- pastebin.com 80
 }

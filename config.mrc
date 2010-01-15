@@ -17,11 +17,9 @@ on *:START: {
 
   ; Set off update check
   !echo -at Checking for updates...
-  findupdate
+  ;findupdate
 
   ; Load Data Files
-  if !$hget(prices) { .hmake prices }
-  if ($exists(price.txt)) { .hload prices price.txt }
   if !$hget(runeprice) { .hmake runeprice }
   if ($exists(runeprice.txt)) { .hload runeprice runeprice.txt }
   if !$hget(spelluse) { .hmake spelluse }
@@ -30,16 +28,15 @@ on *:START: {
   if ($exists(geupdatebackup.txt)) { .hload ge geupdatebackup.txt }
 }
 on *:QUIT: {
-
+  if ($nick != $me) return
   ; Save Data Files
-  .hsave prices price.txt
   .hsave runeprice runeprice.txt
   .hsave spelluse spelluse.txt
   .hsave ge geupdatebackup.txt
 
 }
 on *:DISCONNECT: {
-
+  if ($nick != $me) return
   ; Save Data Files
   .hsave prices price.txt
   .hsave runeprice runeprice.txt
@@ -50,7 +47,7 @@ on *:DISCONNECT: {
 on *:CONNECT: {
   if ($network == SwiftIrc) {
 
-    ; Join Gerty and Load Addressess
+    ; Join #Gerty and Load Addressess
     join #gerty
     who #gerty
 
@@ -66,8 +63,7 @@ on *:CONNECT: {
 
   }
 
-  ; Start up timers
-  .timertim 0 1 .timecount
-  .timerge 0 60 .CheckGePrices
+  ; Start up main timer
+  .timertim -o 0 1 .timecount
 
 }

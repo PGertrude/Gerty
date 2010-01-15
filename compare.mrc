@@ -1,4 +1,5 @@
->start<|compare.mrc|User Comparisons|2.2|rs
+>start<|compare.mrc|User Comparisons|2.25|rs
+; - NEEDS REWRITING
 on *:TEXT:*:*: {
   _CheckMain
   if ($misc($right($1,-1)) != compare) { halt }
@@ -62,7 +63,7 @@ on *:TEXT:*:*: {
       }
     }
   }
-  if (%time == nomatch || !%time) { var %time = Today }
+  if (!%time) { var %time = Today }
   if (!%nick1 || !%nick2 || !%skill) { %saystyle Syntax Error: !compare <skill> <nick1> <nick2> @<time> | unset %* | halt }
   hadd -m $+(a,%thread) out %saystyle
   hadd -m $+(a,%thread2) out %saystyle
@@ -76,14 +77,6 @@ on *:TEXT:*:*: {
   hadd -m $+(a,%thread2) partner %thread
   sockopen $+(compare.a,%thread) hiscore.runescape.com 80
   sockopen $+(compare.a,%thread2) hiscore.runescape.com 80
-}
-on *:sockopen:compare.*: {
-  if ($sockerr) {
-    _throw $nopath($script) %thread
-    halt
-  }
-  sockwrite -n $sockname GET /index_lite.ws?player= $+ $hget($gettok($sockname,2,46),nick) HTTP/1.1
-  sockwrite -n $sockname Host: hiscore.runescape.com $+ $crlf $+ $crlf
 }
 on *:sockread:compare.*: {
   if (!%row) { !set %row 1 }
@@ -138,14 +131,14 @@ alias comp.out {
     set %1 Unranked, $+ $calc(%w) $+ , $+ $calc(%y)
   }
   var %partner = a $+ $hget($gettok($sockname,2,46),partner)
-  if ($skills($hget($gettok($sockname,2,46),skill)) != nomatch) {
+  if ($skills($hget($gettok($sockname,2,46),skill))) {
     hadd -m $gettok($sockname,2,46) exp $(% $+ $statnum($hget($gettok($sockname,2,46),skill)),2)
   }
   if ($hget($gettok($sockname,2,46),skill) == Combat) {
     hadd -m $gettok($sockname,2,46) exp NR, $+ $floor($calccombat($gettok(%2,2,44),$gettok(%3,2,44),$gettok(%4,2,44),$gettok(%5,2,44),$gettok(%6,2,44),$gettok(%7,2,44),$gettok(%8,2,44),$gettok(%25,2,44)).p2p) $+ , $&
       $+ $calc($gettok(%2,3,44) + $gettok(%3,3,44) + $gettok(%4,3,44) + $gettok(%5,3,44) + $gettok(%6,3,44) + $gettok(%7,3,44) + $gettok(%8,3,44) + $gettok(%25,3,44)).exp
   }
-  if ($minigames($hget($gettok($sockname,2,46),skill)) != nomatch) {
+  if ($minigames($hget($gettok($sockname,2,46),skill))) {
     if ($gettok($(% $+ $statnum($hget($gettok($sockname,2,46),skill)),2),1,44) == -1) {
       $hget($gettok($sockname,2,46),out)  $+ $hget($gettok($sockname,2,46),nick) does not feature minigame hiscores.
       hadd -m %partner skill pass
@@ -161,7 +154,7 @@ alias comp.out {
     var %current = $hget($gettok($sockname,2,46),exp)
     var %out
     ; for the 25 skills (and combat)
-    if ($skills($hget($gettok($sockname,2,46),skill)) != nomatch || $hget($gettok($sockname,2,46),skill) == combat) {
+    if ($skills($hget($gettok($sockname,2,46),skill)) || $hget($gettok($sockname,2,46),skill) == combat) {
       ; compare levels
       if ($gettok(%current,2,44) > $gettok(%compared,2,44)) {
         %out =  $+ $hget($gettok($sockname,2,46),nick) (07 $+ $gettok(%current,2,44) $+ ) is07 $bytes($calc($gettok(%current,2,44) - $gettok(%compared,2,44)),db) $+  $hget($gettok($sockname,2,46),skill) $&
@@ -186,7 +179,7 @@ alias comp.out {
       }
     }
     ; for minigames
-    if ($minigames($hget($gettok($sockname,2,46),skill)) != nomatch) {
+    if ($minigames($hget($gettok($sockname,2,46),skill))) {
       if ($gettok(%current,2,44) > $gettok(%compared,2,44)) {
         %out =  $+ $hget($gettok($sockname,2,46),nick) (07 $+ $gettok(%current,2,44) $+ ) is07 $bytes($calc($gettok(%current,2,44) - $gettok(%compared,2,44)),db) $+  $hget($gettok($sockname,2,46),skill) $&
           levels higher than $hget(%partner,nick) (07 $+ $gettok(%compared,2,44) $+ ).
@@ -201,7 +194,7 @@ alias comp.out {
     }
     $hget($gettok($sockname,2,46),out) %out
     ; tracking
-    if ($skills($hget($gettok($sockname,2,46),skill)) != nomatch) {
+    if ($skills($hget($gettok($sockname,2,46),skill))) {
       sockopen $+(rsccomp.,$gettok($sockname,2,46)) www.rscript.org 80
       sockopen $+(rsccomp.,%partner) www.rscript.org 80
     }
@@ -213,36 +206,15 @@ alias comp.out {
   hadd -m $gettok($sockname,2,46) complete %partner
   unset %*
 }
-on *:sockopen:rsccomp.*: {
-  if ($duration($time) >= 25200) {
-    %today = $calc($duration($time) - 25200)
-  }
-  if ($duration($time) < 25200) {
-    %today = $calc($duration($time) + 61200)
-  }
-  if ($duration($time) < 25200 && $date(ddd) == sun) {
-    %week = $calc(579600 + %today)
-  }
-  if ($duration($time) >= 25200) {
-    %week = $calc($replace($day,Sunday,0,Monday,1,Tuesday,2,Wednesday,3,Thursday,4,Friday,5,Saturday,6) * 86400 + %today )
-  }
-  if ($duration($time) < 25200 && $date(dd) == 01) {
-    %month = $calc($replace($date(mmm),Jan,2394000,Feb,2653200,Mar,2566800,Apr,2653200,May,2566800,Jun,2653200,Jul,2653200,Aug,2566800,Sep,2653200,Oct,2566800,Nov,2653200,Dec,2653200) + %today)
-  }
-  else {
-    %month = $calc(($gettok($date,1,47) - 1) * 86400 + %today )
-  }
-  %year = $calc($ctime($date $time) - $ctime(January 1 $date(yyyy) 07:00:00))
-  sockwrite -n $sockname GET /lookup.php?type=track&user= $+ $hget($gettok($sockname,2,46),nick) $+ &skill= $+ $calc($statnum($hget($gettok($sockname,2,46),skill)) -1) $+ &time= $+ $(% $+ $hget($gettok($sockname,2,46),time),2)
-  sockwrite -n $sockname Host: www.rscript.org $+ $crlf $+ $crlf
-}
 on *:sockread:rsccomp.*: {
+  var %thread = $gettok($sockname,2,46)
   if (!%row) { !set %row 1 }
   if ($sockerr) {
-    write ErrorLog.txt $timestamp SocketError[sockread-RSc]: $nopath($script) $socket $([,) $+ $hget($gettok($sockname,2,46),out) $hget($gettok($sockname,2,46),nick) $+ $(],)
-    echo -at Socket Error: $nopath($script)
+    _throw compare %thread
     halt
   }
+  .tokenize 32 $timeToday
+  var %today = $1, %week = $2, %month = $3, %year = $4
   while ($sock($sockname).rq > 0) {
     var %stats
     sockread %stats

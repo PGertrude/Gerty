@@ -1,4 +1,4 @@
->start<|Cost.mrc|Cost scripts|1.01|rs
+>start<|Cost.mrc|Cost scripts|1.07|rs
 on $*:text:/^(\[\w{2}\]Gerty |Gerty |)?[!.@]((pot)(ion)?s?|(po)(uch)?|(farmer|payment)|(\w+)costs?|costs? (\w+))/Si:*: {
   _CheckMain
   if (Gerty isin $1) {
@@ -8,9 +8,9 @@ on $*:text:/^(\[\w{2}\]Gerty |Gerty |)?[!.@]((pot)(ion)?s?|(po)(uch)?|(farmer|pa
   if ($regml(3) == pot) { var %skill = Herblore }
   elseif ($regml(3) == po) { var %skill = Summoning, %short = yes }
   elseif ($regml(3) == farmer || $regml(3) == payment) { var %skill = Farming }
-  else { var %skill = $lookups($regml(3)) }
-  var %saystyle = $saystyle($left($1,1),$nick,$chan), %ticks = $ticks
-  if (%skill == $null || %skill == NoMatch || %skill == Overall) { %saystyle No such skill. | halt }
+  else { var %skill = $skills($regml(3)) }
+  var %saystyle = $saystyle($left($1,1),$nick,$chan), %ticks = $ran
+  if (!%skill || %skill == Overall) { %saystyle No such skill. | halt }
   if ($lookups($2) == %skill) { tokenize 32 $2- }
   if ($regex($2,/\d/S)) { var %num = $litecalc($2) | tokenize 32 $2- }
   else { var %num = 1 }
@@ -27,10 +27,10 @@ on $*:text:/^(\[\w{2}\]Gerty |Gerty |)?[!.@]((pot)(ion)?s?|(po)(uch)?|(farmer|pa
         hadd -m a $+ %ticks cost %cost
         hadd -m a $+ %ticks out %saystyle
         hadd -m a $+ %ticks num %num
-        if (!$hget(cost,$gettok(%cost,5,9))) { sockopen cost.a $+ %ticks $+ . $+ $gettok(%cost,5,9) itemdb-rs.runescape.com 80 }
+        if (!$hget(cost,$gettok(%cost,5,9)) && $gettok(%cost,5,9)) { sockopen cost.a $+ %ticks $+ . $+ $gettok(%cost,5,9) itemdb-rs.runescape.com 80 }
         var %x = 1
-        while ($gettok($gettok(%cost,7,9),%x,43) && %x <= 5) {
-          if (!$hget(cost,$gettok($gettok(%cost,7,9),%x,43))) { sockopen cost.a $+ %ticks $+ . $+ $gettok($gettok(%cost,7,9),%x,43) itemdb-rs.runescape.com 80 }
+        while ($gettok($gettok(%cost,7,9),%x,43) != $blank && %x <= 10) {
+          if (!$hget(cost,$gettok($gettok(%cost,7,9),%x,43)) && $gettok($gettok(%cost,7,9),%x,43)) { sockopen cost.a $+ %ticks $+ . $+ $gettok($gettok(%cost,7,9),%x,43) itemdb-rs.runescape.com 80 }
           inc %x
         }
         costherblore %ticks
@@ -159,6 +159,50 @@ on $*:text:/^(\[\w{2}\]Gerty |Gerty |)?[!.@]((pot)(ion)?s?|(po)(uch)?|(farmer|pa
         goto close
       }
     }
+    ;## COOKING ##
+    if (%skill == Cooking) {
+      var %hit = yes
+      if ($+(*,%item,*) iswm $gettok(%cost,4,9)) {
+        hadd -m a $+ %ticks cost %cost
+        hadd -m a $+ %ticks out %saystyle
+        hadd -m a $+ %ticks num %num
+        if (!$hget(cost,$gettok(%cost,5,9)) && $gettok(%cost,5,9)) { sockopen cost.a $+ %ticks $+ . $+ $gettok(%cost,5,9) itemdb-rs.runescape.com 80 }
+        if (pie isin $gettok(%cost,4,9)) {
+          if (!$hget(cost,9075)) { sockopen cost.a $+ %ticks $+ .9075 itemdb-rs.runescape.com 80 }
+          if (!$hget(cost,$gettok(%cost,9,9))) { sockopen cost.a $+ %ticks $+ . $+ $gettok(%cost,9,9) itemdb-rs.runescape.com 80 }
+        }
+        var %x = 1
+        while ($gettok($gettok(%cost,7,9),%x,43)) {
+          if (!$hget(cost,$gettok($gettok(%cost,7,9),%x,43)) && $gettok($gettok(%cost,7,9),%x,43)) {
+            sockopen cost.a $+ %ticks $+ . $+ $gettok($gettok(%cost,7,9),%x,43) itemdb-rs.runescape.com 80
+          }
+          inc %x
+        }
+        costcooking %ticks
+        goto close
+      }
+    }
+    ;## CRAFTING ##
+    if (%skill == Crafting) {
+      var %hit = yes
+      var %item = $replace(%item,d'hide,dragonhide,dhide,dragonhide)
+      if ($+(*,%item,*) iswm $gettok(%cost,4,9)) {
+        hadd -m a $+ %ticks cost %cost
+        hadd -m a $+ %ticks out %saystyle
+        hadd -m a $+ %ticks num %num
+        if (!$hget(cost,$gettok(%cost,5,9)) && $gettok(%cost,5,9)) { sockopen cost.a $+ %ticks $+ . $+ $gettok(%cost,5,9) itemdb-rs.runescape.com 80 }
+        if (!$hget(cost,561)) sockopen cost.a $+ %ticks $+ .561 itemdb-rs.runescape.com 80
+        var %x = 1
+        while ($gettok($gettok(%cost,7,9),%x,59)) {
+          if (!$hget(cost,$gettok($gettok(%cost,7,9),%x,59)) && $gettok($gettok(%cost,7,9),%x,59)) {
+            sockopen cost.a $+ %ticks $+ . $+ $gettok($gettok(%cost,7,9),%x,59) itemdb-rs.runescape.com 80
+          }
+          inc %x
+        }
+        costcrafting %ticks
+        goto close
+      }
+    }
     :skip
   }
   .fclose cost $+ %ticks
@@ -169,12 +213,14 @@ on $*:text:/^(\[\w{2}\]Gerty |Gerty |)?[!.@]((pot)(ion)?s?|(po)(uch)?|(farmer|pa
 }
 ;## HERBLORE ##
 alias costherblore {
-  if (!$hget(cost,$gettok($hget(a $+ $1,cost),5,9))) { goto skip }
+  if (!$hget(cost,$gettok($hget(a $+ $1,cost),5,9)) && $gettok($hget(a $+ $1,cost),5,9)) { goto skip }
   else { var %potcost = $calc($hget(a $+ $1,num) * $hget(cost,$gettok($hget(a $+ $1,cost),5,9))) }
+  echo -st hi there
   var %x = 1
-  while ($gettok($gettok($hget(a $+ $1,cost),7,9),%x,43) && %x <= 5) {
-    if (!$hget(cost,$gettok($gettok($hget(a $+ $1,cost),7,9),%x,43))) { goto skip }
+  while ($gettok($gettok($hget(a $+ $1,cost),7,9),%x,43) != $blank && %x <= 10) {
+    if (!$hget(cost,$gettok($gettok($hget(a $+ $1,cost),7,9),%x,43)) && $gettok($gettok($hget(a $+ $1,cost),7,9),%x,43)) { goto skip }
     else { var %items = $calc(%items + ($hget(a $+ $1,num) * $hget(cost,$gettok($gettok($hget(a $+ $1,cost),7,9),%x,43))) ) }
+    echo -st hi $gettok($gettok($hget(a $+ $1,cost),7,9),%x,43)
     inc %x
   }
   var %loss = $calc(%items - %potcost), %exp = $calc($hget(a $+ $1,num) * $gettok($hget(a $+ $1,cost),3,9))
@@ -241,6 +287,7 @@ alias costsmithing {
     if ($gettok($hget(a $+ $1,cost),8,9) != $null) {
       var %nr = Coal:07 $bytes($calc($hget(a $+ $1,num) * $v1),bd) |
     }
+    var %alch = $calc(%alch - $hget(cost,$gettok($hget(a $+ $1,cost),5,9)) * $hget(a $+ $1,num))
     var %alchout = Superheat cost(incl. nat):07 $bytes(%alch,bd) $+(,$chr(40),07,$round($calc(%alch / ($gettok($hget(a $+ $1,cost),3,9) * $hget(a $+ $1,num))),1),gp/xp,,$chr(41))
   }
   else {
@@ -402,20 +449,69 @@ alias costconstruction {
   hfree %hash
   :skip
 }
-on *:sockopen:cost.*:{
-  sockwrite -nt $sockname GET /viewitem.ws?obj= $+ $gettok($sockname,3,46) HTTP/1.1
-  sockwrite -nt $sockname Host: itemdb-rs.runescape.com $+ $crlf $+ $crlf
-}
-on *:sockread:cost.*:{
-  if ($sockerr) { echo -st Error in socket: $sockname }
-  sockread %sockcost
-  if ($regex(cost,%sockcost,/^<\w>Market Price:<\/\w> ([\d\Wmk]+)/Si)) {
-    hadd -m cost $gettok($sockname,3,46) $litecalc($remove($regml(cost,1),$chr(44)))
-    cost $+ $gettok($hget($gettok($sockname,2,46),cost),1,9) $remove($gettok($sockname,2,46),a)
-    unset %*
-    sockclose $sockname
+;## COOKING ##
+alias costcooking {
+  var %hash = a $+ $1
+  var %num = $hget(%hash,num)
+  tokenize 9 $hget(%hash,cost)
+  if (!$hget(cost,$5) && $5) { goto skip }
+  if (pie isin $4) {
+    if (!$hget(cost,9075)) { goto skip }
+    if (!$hget(cost,$9)) { goto skip }
   }
+  var %y = 1
+  while ($gettok($7,%y,43)) {
+    if (!$hget(cost,$gettok($7,%y,43)) && $gettok($7,%y,43)) { goto skip }
+    else {
+      var %iprice = $hget(cost,$gettok($7,%y,43))
+      if ($regex($gettok($6,%y,59),/^(\d+)x/)) var %iprice = $calc(%iprice * $regml(1))
+      var %total = $calc(%total + (%num * %iprice))
+      var %ing = $+(%ing,$iif(%ing, $+ $chr(44) $+ $chr(32)),07,$gettok($6,%y,59), $chr(40),07,$bytes(%iprice,bd),gp,$chr(41))
+    }
+    inc %y
+  }
+  var %exp = $calc($3 * %num)
+  var %geprice = $calc(%total - ($hget(cost,$5) * %num))
+  var %gepriceout = GE sell cost:07 $bytes(%geprice,bd) $+(,$chr(40),07,$bytes($round($calc(%geprice / %exp),2),bd),gp/xp,$chr(41))
+  var %item = $+(07,$4, $chr(40),07,$bytes($hget(cost,$5),bd),gp,$chr(41))
+  $hget(%hash,out) Cooking cost params %item | Level:07 $2 | Exp:07 $bytes(%exp,bd) | Ingredients: %ing | Cost:07 $bytes(%total,bd) | %gepriceout | Heal&Effect:07 $8 $+ .
+  if (pie isin $4) {
+    var %piecost $calc(($hget(cost,$9) * %num) + ($hget(cost,9075) * %num) - ($hget(cost,$5) * %num))
+    $hget(%hash,out) Cooking cost params %item | Raw pie cost:07 $bytes($calc($hget(cost,$9) * %num),bd) | Bake pie(spell) cost(buy raw):07 $bytes(%piecost,bd) $+(,$chr(40),07,$bytes($round($calc(%piecost / %exp),2),bd),gp/xp,$chr(41))
+  }
+  hfree %hash
+  :skip
 }
+;## CRAFTING ##
+alias costcrafting {
+  var %hash = a $+ $1
+  var %num = $hget(%hash,num)
+  echo -st hi $hget(%hash,cost)
+  tokenize 9 $hget(%hash,cost)
+  if (!$hget(cost,$5) && $5) { goto skip }
+  if (!$hget(cost,561)) goto skip
+  var %y = 1
+  while ($gettok($7,%y,59)) {
+    if (!$hget(cost,$gettok($7,%y,59)) && $gettok($7,%y,59)) { goto skip }
+    else {
+      var %iprice = $hget(cost,$gettok($7,%y,59))
+      if ($regex($gettok($6,%y,59),/^(\d+)x/)) var %iprice = $calc(%iprice * $regml(1))
+      var %total = $calc(%total + (%num * %iprice))
+      var %ing = $+(%ing,$iif(%ing, $+ $chr(44) $+ $chr(32)),07,$gettok($6,%y,59), $chr(40),07,$bytes(%iprice,bd),gp,$chr(41))
+    }
+    inc %y
+  }
+  var %exp = $calc($3 * %num)
+  var %geprice = $calc(%total - ($hget(cost,$5) * %num))
+  var %gepriceout = GE sell cost:07 $bytes(%geprice,bd) $+(,$chr(40),07,$bytes($round($calc(%geprice / %exp),2),bd),gp/xp,$chr(41))
+  var %alch = $calc(%total + ($hget(cost,561) * %num) - ($8 * %num))
+  var %alchout = Alch value:07 $+($bytes($8,bd),$iif(%num > 1,$+($chr(32),,$chr(40),07,$bytes($calc($8 * %num),bd),,$chr(41)))) | Hi alch cost:07 $bytes(%alch,bd) $+(,$chr(40),07,$round($bytes($calc(%alch / %exp),bd),2),gp/xp,$chr(41))
+  var %item = $+(07,$4, $chr(40),07,$bytes($hget(cost,$5),bd),gp,$chr(41))
+  $hget(%hash,out) Crafting cost params %item | Level:07 $2 | Exp:07 $bytes(%exp,bd) | Materials: %ing | Cost:07 $bytes(%total,bd) | %gepriceout | %alchout
+  hfree %hash
+  :skip
+}
+
 alias convertfile {
   var %skill $lookups($1)
   var %x = 1, %y = $lines(test.txt)

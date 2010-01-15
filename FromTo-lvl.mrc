@@ -1,4 +1,4 @@
->start<|FromTo-lvl.mrc|~skill estimation|1.11|rs
+>start<|FromTo-lvl.mrc|~skill estimation|1.15|rs
 on $*:text:/^([^ ]+ )?@?~/Si:*:{
   if ($regml(1)) $botid($1,$2-)
   if ($left($1,1) == @) {
@@ -9,7 +9,7 @@ on $*:text:/^([^ ]+ )?@?~/Si:*:{
     var %saystyle = $saystyle(!,$nick,$chan)
     var %skill = $skills($right($1,-1))
   }
-  if (%skill == NoMatch && %skill != Combat) || (%skill == Overall) { halt }
+  if (!%skill) || (%skill == Overall) { halt }
   elseif ($istok(Ranged.Attack.Strength.Defence,%skill,46)) var %skill = Combat
   if ($regex(string,$remove($2-,$chr(44)),/^(?:(?:l|lvl|)([\dmk]+)[- ](?:l|lvl|)([\dmk]+)()|()()(\d[\d.mk]+))(?: @?(.*))?/Si)) {
     var %1 = $litecalc($regml(string,1)), %2 = $litecalc($regml(string,2)), %3 = $regml(string,3), %item = $regml(string,4)
@@ -33,7 +33,9 @@ on $*:text:/^([^ ]+ )?@?~/Si:*:{
       }
       else { goto syntax }
     }
-    var %useritem = $readini(user.ini,$rsn($nick),$statnum(%skill) $+ param)
+    var %userAddress $iif($aLfAddress(%nick), $v1, %nick)
+    var %boolRsn $iif($aLfAddress(%nick), $false, $true)
+    var %useritem = $getStringParameter(%userAddress, %skill, items, %boolRsn)
     if (!%item && !%useritem) { goto syntax }
     var %fname = param $+ $ran, %counter = 0
     .fopen %fname param.txt

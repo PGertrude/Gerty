@@ -1,32 +1,6 @@
->start<|join.mrc|admin sorted|2.2|rs
-alias _setAdmin {
-  if ($address(P_Gertrude,3)) { writeini -n rsn.ini $v1 rsn P_Gertrude }
-  if ($address(Elessar,3)) { writeini -n rsn.ini $v1 rsn Tiedemanns }
-  if ($hget(botlist)) { .hfree botlist }
-  .hmake botlist
-  var %x = 1
-  while (%x <= $lines(botlist.txt)) {
-    var %bot = $read(botlist.txt,%x)
-    hadd -m botlist %x %bot
-    if ($nick(#gerty,%bot)) writeini -n rsn.ini $address(%bot,3) rsn Gerty
-    inc %x
-  }
-}
-on *:TEXT:*:#: {
-  if ($admin($nick) != admin) { halt }
-  var %saystyle = $saystyle($left($1,1),$nick,$chan)
-  if ($regex($1,/^[!@.]ignore$/Si)) {
-    noop $_network(ignore $2)
-    %saystyle User $2 added to ignore.
-  }
-  if ($regex($1,/^[!@.]b(lack)?l(ist)?$/Si)) {
-    noop $_network(writeini -n chan.ini $2 blacklist yes)
-    %saystyle Channel $2 blacklisted.
-    if ($me ison $2) { part $2 Blacklisted. }
-  }
-}
+>start<|join.mrc|admin sorted|2.25|rs
 on *:INVITE:*: {
-  if ($readini(chan.ini,#,blacklist) == yes) { .notice $nick Channel $chan is blacklisted. Speak to an admin to remove the blacklist. | halt }
+  if ($chanset(#,blacklist) == yes) { .notice $nick Channel $chan is blacklisted. Speak to an admin to remove the blacklist. | halt }
   if ($hget(join)) { hfree join }
   hadd -m invite $chan $nick
   if ($chan(0) < 30) {
@@ -44,6 +18,7 @@ on *:JOIN:*: {
   if ($nick == $me) {
     who $chan
     var %thread = $+(a,$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9))
+    if (!$rowExists(channel, channel, $chan)) { noop $_network(noop $!sqlite_query(INSERT INTO channel (channel) VALUES (' $+ $chan $+ ');)) }
     hadd -m %thread chan $chan
     .timer 1 1 .delayedjoin %thread
   }
@@ -61,7 +36,7 @@ alias delayedjoin {
   }
   if (!$hget(invite,%chan)) { var %invite = %chan }
   else { var %invite = $hget(invite,%chan) }
-  if ($readini(chan.ini,%chan,users)) { var %min = $readini(chan.ini,%chan,users) }
+  if ($chanset(%chan,users)) { var %min = $chanset(%chan,users) }
   if (!%min) { var %min = 5 }
   if ($nick(%chan,0) < %min) {
     .msg %chan You do not have the required minimum users to keep me here. (Minimum users for this channel is07 %min $+ ).
