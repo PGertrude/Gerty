@@ -187,7 +187,7 @@ alias downloadGe {
     _clearCommand %thread
   }
 
-  if (!$error) goto end
+  goto end
   :error
   reseterror
   _throw geLink %thread
