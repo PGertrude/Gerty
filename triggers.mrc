@@ -1120,7 +1120,7 @@ on *:TEXT:*:*: {
   else if ($left($1,1) != . && $left($1,1) != ! && $left($1,1) != @) { %input = $1- | %saystyle = $iif($chan,.notice $nick,.msg $nick) | %ErrReply = no }
   else goto exit
   .tokenize 32 $_checkCalc(%input,%ErrReply)
-  if ($1 == false) { if (%ErrReply == yes) { %saystyle $2- } | halt }
+  if ($1 == false) { if (%ErrReply == yes) { %saystyle $2- } | goto exit }
   var %string = $calcreg(%input)
   var %sum = $calcparse(%input)
   if ($chr(61) !isin %sum) {

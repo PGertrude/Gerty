@@ -157,7 +157,7 @@ alias spam.epenis {
 ; GELINK
 alias downloadGe {
   if (!$2) {
-    _throw downloadGe $1
+    if ($cmd(%thread)) _throw downloadGe $1 <no ge page>
     return
   }
   var %thread $1
@@ -189,8 +189,8 @@ alias downloadGe {
 
   goto end
   :error
+  _throw geLink %thread { $+ $error $+ }
   reseterror
-  _throw geLink %thread
   halt
   :end
 }
