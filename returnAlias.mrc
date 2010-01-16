@@ -87,23 +87,11 @@ tracked {
   if ($regex($1,$+(/^,$chr(40),$readini(tracked.ini,tracked,nick),$chr(41),/i))) { return _tracked }
 }
 admin {
-  if ($regex($closedrsn($1),$+(/^,$chr(40),$readini(Gerty.Config.ini,admin,rsn),$chr(41),/i))) { return admin }
-}
-closedrsn {
-  var %inputnick = $replace($strip($1),$chr(32),_)
-  %inputnick = $iif($right(%inputnick,1) == &,$left(%inputnick,-1),%inputnick)
-  if ($readini(rsn.ini,$address(%inputnick,3),rsn)) { return $readini(rsn.ini,$address(%inputnick,3),rsn) }
+  if ($regex($rsn($1),$+(/^,$chr(40),$readini(Gerty.Config.ini,admin,rsn),$chr(41),/i))) { return admin }
 }
 rsn {
-  var %inputnick = $replace($strip($1),$chr(32),_)
-  %inputnick = $iif($right(%inputnick,1) == &,$left(%inputnick,-1),%inputnick)
-  var %rsn
-  if ($readini(rsn.ini,$address(%inputnick,3),rsn)) { %rsn = $readini(rsn.ini,$address(%inputnick,3),rsn) }
-  else {
-    if ($readini(rsn.ini,$regsubex(%inputnick,/\W/Sg,_),rsn)) { %rsn = $readini(rsn.ini,$regsubex(%inputnick,/\W/Sg,_),rsn) }
-    else { %rsn = $regsubex(%inputnick,/\W/Sg,_) }
-  }
-  return $caps($regsubex(%rsn,/\W/g,_))
+  if ($getDefname($1)) return $v1
+  return $caps($regsubex($1-,/\W/g,_))
 }
 capwords {
   var %t

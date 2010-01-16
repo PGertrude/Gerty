@@ -47,35 +47,25 @@ on *:TEXT:*:*: {
   }
   ; DEFNAME
   else if ($regex($1,/^[!@.](def|set)(name|rsn)$/Si)) {
-    if ($2 == -n) {
-      %ircnick = true
-      .tokenize 32 $1 $3-
-    }
-    if (!$2) { %saystyle Syntax Error: !defname [-n] <rsn> | goto clean }
-    if ($regsubex($2-,/\W/,_) isin $readini(Gerty.Config.ini,admin,rsn) && !$admin($nick)) { %saystyle This RSN is protected, please Contact an Admin if this is your RSN. | halt }
-    var %nick = $caps($regsubex($left($2-,12),/\W/g,_))
-    noop $_network(writeini -n rsn.ini $address($nick,3) rsn %nick)
-    if (%ircnick) { noop $_network(writeini -n rsn.ini $regsubex($nick,/\W/g,_) rsn %nick) }
-    %saystyle Your default RuneScape name is now %nick $+ . This RSN is associated with the address $address($nick,3) $+ $iif(%ircnick,$chr(44) and the User $nick) $+ .
-    goto clean 
+    if (!$2) { %saystyle Syntax Error: !defname <rsn> | goto clean }
+    if ($regsubex($2-,/\W/,_) isin $readini(Gerty.Config.ini,admin,rsn) && !$admin($nick)) { %saystyle This RSN is protected, please Contact an Admin if this is your RSN. | goto clean }
+    var %nick $caps($regsubex($left($2-,12),/\W/g,_))
+    noop $_network(noop $!setDefname( $aLfAddress($nick) , %nick ))
+    %saystyle Your default RuneScape name is now07 %nick $+ . This RSN is associated with the address07 $aLfAddress($nick,3) $+ .
+    goto clean
   }
   ; RSN
   else if ($regex($1,/^[!@.](name|rsn|whois)$/Si)) {
-    var %address = $address($iif($right($2-,1) == &,$left($2-,-1),$2-),3)
     var %nick = $regsubex($iif($right($2-,1) == &,$left($2-,-1),$2-),/\W/,_)
+    var %address = $aLfAddress(%nick)
+    if ($3) .tokenize 32 $1 $replace($2-,$chr(32),_)
     if ($2) {
-      if ($readini(rsn.ini,%address,rsn)) %saystyle 7 $+ $caps(%nick) $+ 's rsn is7 $readini(rsn.ini,%address,rsn)
-      else {
-        if ($readini(rsn.ini,%nick,rsn)) %saystyle 7 $+ $caps(%nick) $+ 's rsn is7 $readini(rsn.ini,%nick,rsn)
-        else %saystyle No RSN for $2-
-      }
+      if ($getDefname($2)) %saystyle 07 $+ $caps($2) $+ 's rsn is07 [ $v1 ]
+      else %saystyle We have no rsn saved for07 $2
     }
-    if (!$2) {
-      if ($readini(rsn.ini,$address($nick,3),rsn)) %saystyle 7 $+ $caps($nick) $+ 's rsn is7 $rsn($nick)
-      else {
-        if ($readini(rsn.ini,$nick,rsn)) %saystyle 7 $+ $caps($nick) $+ 's rsn is7 $rsn($nick)
-        else %saystyle No RSN for $nick
-      }
+    else {
+      if ($getDefname($nick)) %saystyle 07 $+ $caps($nick) $+ 's rsn is07 [ $v1 ]
+      else %saystyle We have no rsn saved for07 $nick
     }
     goto clean
   }
@@ -728,7 +718,7 @@ on *:TEXT:*:*: {
     if ($2 == $readini(Gerty.Config.ini,admin,pass)) {
       var %rsn = Gerty
       if ($admin($3)) { %rsn = $3 }
-      noop $_network(writeini -n rsn.ini $address($nick,3) rsn %rsn)
+      noop $_network(noop $!setDefname( $aLfAddress($nick) , %rsn ))
       %saystyle You are now logged in as Gerty admin.
     }
     goto clean
@@ -1116,9 +1106,8 @@ on *:TEXT:*:*: {
     }
     ; ADMINDEFNAME
     else if ($regex($1,/^[!@.]admindefname$/Si)) {
-      noop $_network(writeini -n rsn.ini $regsubex($2,/\W/g,_) rsn $caps($regsubex($3-,/\W/g,_)))
-      noop $_network(writeini -n rsn.ini $address($2,3) rsn $caps($regsubex($3-,/\W/g,_)))
-      %saystyle The default runescape name for $2 is now $caps($regsubex($3-,/\W/g,_)) $+ . This RSN is associated with the address $address($2,3) $+ , and the User $2 $+ .
+      noop $_network(noop $!setDefname( $aLfAddress($2) , $caps($regsubex($3-,/\W/g,_)) ))
+      %saystyle The default runescape name for07 $2 is now07 $caps($regsubex($3-,/\W/g,_)) $+ . This RSN is associated with the address $aLfAddress($2) $+ .
       goto clean
     }
   }

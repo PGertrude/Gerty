@@ -108,6 +108,14 @@ alias getDefname {
   return $false
 }
 
+;@SYNTAX setDefname(string aLfAddress, string rsn)
+;@SUMMARY sets the defname for a user, checks for existence of fingerprint in the table before insertion.
+;@NOTE existence is only checked on this client. only call this alias from the $_network command.
+alias setDefname {
+  if (!$rowExists(users, fingerprint, $1)) { noop $sqlite_query(1, INSERT INTO users (fingerprint, rsn) VALUES (' $+ $1 $+ ',' $+ $2 $+ ');) | return }
+  noop $dbUpdate(users, `fingerprint`=' $+ $1 $+ ', rsn, $2)
+}
+
 ;@SYNTAX getChanSetting(string channel, string setting)
 ;@SUMMARY returns the value of a channel setting.
 alias getChanSetting return $iif($dbSelect(channel, $2, channel, $1), $v1, $false)

@@ -15,15 +15,15 @@ CheckGePrices {
   sockopen CheckGePrices.zam. $+ $r(0,9999) itemdb-rs.runescape.com 80
 }
 _setAdmin {
-  if ($address(P_Gertrude,3)) { writeini -n rsn.ini $v1 rsn P_Gertrude }
-  if ($address(Elessar,3)) { writeini -n rsn.ini $v1 rsn Tiedemanns }
+  if ($aLfAddress(P_Gertrude)) { noop $setDefname( $v1 , P_Gertrude ) }
+  if ($aLfAddress(Elessar)) { noop $setDefname( $v1 , Tiedemanns ) }
   if ($hget(botlist)) { .hfree botlist }
   .hmake botlist
   var %x = 2
   while (%x <= $lines(botlist.txt)) {
     var %bot = $read(botlist.txt,%x)
     hadd -m botlist $calc(%x - 1) %bot
-    if ($nick(#gerty,%bot)) writeini -n rsn.ini $address(%bot,3) rsn Gerty
+    if ($nick(#gerty,%bot)) { noop $setDefname( $aLfAddress(%bot) , Gerty ) }
     inc %x
   }
 }
