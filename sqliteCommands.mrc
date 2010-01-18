@@ -139,7 +139,7 @@ alias getPrice {
   }
   else {
     if ($prop == sql) return $dbSelectWhere(prices, name;price;change, name LIKE $+('%,$1,$%,') ORDER BY price DESC).sql
-    %price = $dbSelectWhere(prices, name;price;change, name LIKE $+('%,$1,$%,') AND price>0 ORDER BY price DESC)
+    %price = $dbSelectWhere(prices, name;price;change, name LIKE $+("%,$1,$%,") AND price>0 ORDER BY price DESC)
     if (%price == $null) return $null
     else if ($trim($gettok(%price,2,59)) == 0) return $false
     return %price
@@ -152,7 +152,7 @@ alias getPrice {
 alias getPriceId {
   if ($0 != 1) fatalError sqliteCommands > getPrice > No overload for getPrice takes $0 arguments, best match takes 1 argument: getPrice(string item)
   var %id
-  %id = $dbSelectWhere(prices, id;name, name LIKE '% $+ $1 $+ $% $+ ')
+  %id = $dbSelectWhere(prices, id;name, name LIKE "% $+ $1 $+ $% $+ ")
   if (%id == $null) return $null
   return %id
 }
@@ -239,8 +239,9 @@ alias -l sql_query {
 
   ; catch an error in variable size
   :error
-  reseterror
+  if (%sqlite_errno != 0) fatalError sql_query > %sqlite_errstr $+ : %sql
   warnError sqliteCommands > sql_query > Too many results returned by the command $+(",%sql,")
+  reseterror
   return $false
 }
 
@@ -248,13 +249,13 @@ alias -l sql_query {
 ; echos hopefully useful information about where and why the error has occured.
 alias -l fatalError {
   linesep
-  echo $color(info) * $1-
+  echo $color(info) $timestamp * $1-
   linesep
   halt
 }
 ; Throw a non-fatal error
 alias -l warnError {
   linesep
-  echo $color(info) * $1-
+  echo $color(info) $timestamp * $1-
   linesep
 }
