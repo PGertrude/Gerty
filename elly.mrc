@@ -76,7 +76,9 @@ on $*:sockread:youtube.*:{
 }
 on $*:text:/^(Gerty? )?[!.@]m(ember)?l(ist)?/Si:*:{
   _CheckMain
-  if ($iif($regex($1,/^Gerty?/Si),$3,$2) && $chanset($chan,ml) != off) {
+  var %chan on
+  if ($chan) %chan = $chanset($chan,ml)
+  if ($iif($regex($1,/^Gerty?/Si),$3,$2) && %chan != off) {
     var %ticks $ticks
     sockopen ml.a $+ %ticks www6.runehead.com 80
     hadd -m a $+ %ticks out $saystyle($left($iif($regex($1,/^Gerty?/Si),$2,$1),1),$nick,$chan)
