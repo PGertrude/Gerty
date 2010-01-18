@@ -215,12 +215,10 @@ on $*:text:/^(\[\w{2}\]Gerty |Gerty |)?[!.@]((pot)(ion)?s?|(po)(uch)?|(farmer|pa
 alias costherblore {
   if (!$hget(cost,$gettok($hget(a $+ $1,cost),5,9)) && $gettok($hget(a $+ $1,cost),5,9)) { goto skip }
   else { var %potcost = $calc($hget(a $+ $1,num) * $hget(cost,$gettok($hget(a $+ $1,cost),5,9))) }
-  echo -st hi there
   var %x = 1
   while ($gettok($gettok($hget(a $+ $1,cost),7,9),%x,43) != $blank && %x <= 10) {
     if (!$hget(cost,$gettok($gettok($hget(a $+ $1,cost),7,9),%x,43)) && $gettok($gettok($hget(a $+ $1,cost),7,9),%x,43)) { goto skip }
     else { var %items = $calc(%items + ($hget(a $+ $1,num) * $hget(cost,$gettok($gettok($hget(a $+ $1,cost),7,9),%x,43))) ) }
-    echo -st hi $gettok($gettok($hget(a $+ $1,cost),7,9),%x,43)
     inc %x
   }
   var %loss = $calc(%items - %potcost), %exp = $calc($hget(a $+ $1,num) * $gettok($hget(a $+ $1,cost),3,9))
