@@ -119,7 +119,7 @@ multiple {
   var %x = $2
   var %eq = $1
   var %solutions = $iif($abs($xcalculate(%eq,%x)) < 0.001,or07 $2 or07,$false)
-  if ($regex(%eq,asin|acos|atan|sin|cos|tan) && %solutions) return $mid(%solutions,7,-7)
+  if ($regex(%eq,asin|acos|atan|sin|cos|tan) && %solutions) { return $mid(%solutions,7,-7) }
   if (!%solutions) return Unsolvable
   while ($abs($xcalculate(%eq,%x)) < 0.001) {
     %eq = $+($chr(40),%eq,$chr(41),/,$chr(40),x,-,%x,$chr(41))
