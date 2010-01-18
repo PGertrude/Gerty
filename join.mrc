@@ -18,7 +18,7 @@ on *:JOIN:*: {
   if ($nick == $me) {
     who $chan
     var %thread = $+(a,$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9))
-    if (!$rowExists(channel, channel, $chan)) { noop $_network(noop $!sqlite_query(INSERT INTO channel (channel) VALUES (' $+ $chan $+ ');)) }
+    if (!$rowExists(channel, channel, $chan)) { noop $_network(noop $!sqlite_query(1, INSERT INTO channel (channel) VALUES (' $+ $chan $+ ');)) }
     hadd -m %thread chan $chan
     .timer 1 1 .delayedjoin %thread
   }
@@ -66,7 +66,7 @@ ctcp *:rawcommand:*: {
 }
 alias notifybot {
   if ($hget(join,bot)) {
-    ctcp $hget(join,bot) hadd -m invite $2 $1
+    ctcp $hget(join,bot) rawcommand hadd -m invite $2 $1
     ctcp $hget(join,bot) rawcommand join $2
   }
   else .notice $1 Sorry but all bots are currently full.
