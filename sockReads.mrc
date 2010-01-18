@@ -2,7 +2,7 @@ on *:sockread:*: {
   var %thread = $gettok($sockname,2,46)
   var %file = %thread $+ .txt
   if ($sockerr) {
-    _throw $nopath($script) %thread
+    _throw $sockname %thread
     halt
   }
   ; COINSHARE - BROKEN
@@ -49,7 +49,7 @@ on *:sockread:*: {
       goto unset
     }
   }
-  ;COST
+  ; COST
   else if (cost.* iswm $sockname) {
     var %sockcost
     sockread %sockcost
@@ -66,13 +66,14 @@ on *:sockread:*: {
     sockread %ml
     if (@@start !isin %ml) {
       if (@@not isin %ml) {
-        $hget($gettok($sockname,2,46),out) $+(,$hget($gettok($sockname,2,46),ml),) clan not found. $+($chr(15),$chr(40),$chr(3),07,RuneHead.com,$chr(15),$chr(41))
+        $hget(%thread,out) $+(,$hget(%thread,ml),) clan not found. $+($chr(15),$chr(40),$chr(3),07,RuneHead.com,$chr(15),$chr(41))
+        goto unset
       }
       else if ($numtok(%ml,124) > 5) {
         tokenize 124 %ml
-        $hget($gettok($sockname,2,46),out) $+($chr(91),07,$5,,$chr(93),07) $1 $+(,$chr(40),07,$4,,$chr(41)) Link:12 $2  $+ $chr(124) Members: $+(07,$6,) $chr(124) Avg: P2P-Cmb: $+(07,$7,) F2P-Cmb: $+(07,$16,) Overall: $+(07,$bytes($9,bd),) $chr(124) Based: Region: $+(07,$13,) World: $+(07,$15,) Core: $+(07,$12,) Cape: $+(07,$14,) $chr(124) Runehead Link:12 $3
+        $hget(%thread,out) $+($chr(91),07,$5,,$chr(93),07) $1 $+(,$chr(40),07,$4,,$chr(41)) Link:12 $2 | Members: $+(07,$6,) | Avg: P2P-Cmb: $+(07,$7,) F2P-Cmb: $+(07,$16,) Overall: $+(07,$bytes($9,bd),) | Based: Region: $+(07,$13,) World: $+(07,$15,) Core: $+(07,$12,) Cape: $+(07,$14) | Runehead Link:12 $3
+        goto unset
       }
-      goto unset
     }
   }
   ; RUNEPRICE
@@ -460,9 +461,9 @@ on *:sockread:*: {
   else if (zybez.* iswm $sockname) {
     while ($sock($sockname).rq) {
       sockread &item
-      bwrite %thread -1 -1 &item
+      bwrite %file -1 -1 &item
     }
-    bread %thread 0 $file(%thread).size &item2
+    bread %file 0 $file(%file).size &item2
     if ($bfind(&item2,0,</HTML>)) {
       if ($bfind(&item2,0,location:) < 1) {
         var %start = $bfind(&item2,0,>Submit Missing Item<)
@@ -480,7 +481,7 @@ on *:sockread:*: {
         var %start = $calc($bfind(&item2,0,?id=)+4)
         hadd -m %thread id $iif($bvar(&item2,%start,4).text isnum,$bvar(&item2,%start,4).text,$iif($bvar(&item2,%start,3).text isnum,$bvar(&item2,%start,3).text,$iif($bvar(&item2,%start,2).text isnum,$bvar(&item2,%start,2).text,$iif($bvar(&item2,%start,1).text isnum,$bvar(&item2,%start,1).text))))
         sockopen $+(zybez2.,$gettok($sockname,2,46)) www.zybez.net 80
-        .remove %thread
+        .remove %file
         sockclose $sockname
       }
     }
@@ -488,9 +489,9 @@ on *:sockread:*: {
   else if (zybez2.* iswm $sockname) {
     while ($sock($sockname).rq) {
       sockread &item3
-      bwrite %thread -1 -1 &item3
+      bwrite %file -1 -1 &item3
     }
-    bread %thread 0 $file(%thread).size &item4
+    bread %file 0 $file(%file).size &item4
     if ($bfind(&item4,0,</HTML>)) {
       var %start = $calc($bfind(&item4,0,"border-right:none">)+20), %a = $bfind(&item4,%start,<), %b = $calc($bfind(&item4,%a,members:)+17), %c = $bfind(&item4,%b,<), %d = $calc($bfind(&item4,%c,Tradable:)+18), %e = $bfind(&item4,%d,<)
       if (%start < 21) { $hget($gettok($sockname,2,46),out) Item not found | goto unset }
