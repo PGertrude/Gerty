@@ -294,7 +294,7 @@ on *:TEXT:*:*: {
 
     var %dbPrices $getPrice(%search)
     if (!%dbPrices) {
-      _fillCommand %thread $left($1,1) $nick $iif($chan,$v1,PM) gelink %num %search
+      _fillCommand %thread $left($1,1) $nick $iif($chan,$v1,PM) gelink %num $replace(%search, $chr(32), _)
       var %url http://gerty.rsportugal.org/parsers/ge.php?item= $+ $replace(%search,$chr(32),+)
       noop $download.break(downloadGe %thread,%thread,%url)
       halt
@@ -303,7 +303,7 @@ on *:TEXT:*:*: {
     var %numberOfResults = $countResults($getPrice(%search).sql)
     .tokenize 44 %dbPrices
     var %x = 1, %results
-    while (%x <= $0) {
+    while (%x <= $0 && $len(%results) < 350) {
       var %name = $gettok($($ $+ %x,2),1,59), %price = $gettok($($ $+ %x,2),2,59), %change = $gettok($($ $+ %x,2),3,59)
       %results = %results | %name $+ 07 $format_number(%price) $updo(%change) 
       inc %x
@@ -886,7 +886,7 @@ on *:TEXT:*:*: {
       }
     }
     if (%command == goal) {
-      if (!$rowExists(users, rsn, $rsn($nick))) { noop $_network(noop $!sqlite_query(INSERT INTO users (rsn, fingerprint) VALUES (' $+ $rsn($nick) $+ ',' $+ $aLfAddress($nick) $+ ');)) }
+      if (!$rowExists(users, rsn, $rsn($nick))) { noop $_network(noop $!sqlite_query(1, INSERT INTO users (rsn, fingerprint) VALUES (' $+ $rsn($nick) $+ ',' $+ $aLfAddress($nick) $+ ');)) }
       if (!$4 && $litecalc($3) > 0) { %saystyle Sytax Error: !set goal <skill> <goal> | goto clean }
       if (!$4 && $lookups($3)) {
         noop $_network(noop $!setStringParameter( $aLfAddress($nick) , $lookups($3) , goals , nl , $false ))
@@ -901,7 +901,7 @@ on *:TEXT:*:*: {
       goto clean
     }
     if (%command == item) {
-      if (!$rowExists(users, fingerprint, $aLfAddress($nick))) { noop $_network(noop $!sqlite_query(INSERT INTO users (rsn, fingerprint) VALUES (' $+ $rsn($nick) $+ ',' $+ $aLfAddress($nick) $+ ');)) }
+      if (!$rowExists(users, fingerprint, $aLfAddress($nick))) { noop $_network(noop $!sqlite_query(1, INSERT INTO users (rsn, fingerprint) VALUES (' $+ $rsn($nick) $+ ',' $+ $aLfAddress($nick) $+ ');)) }
       if (!$lookups($3)) { %saystyle Sytax Error: !set item <skill> <item> | goto clean }
       elseif (!$4) {
         noop $_network(noop $!setStringParameter( $aLfAddress($nick) , $lookups($3) , items , $false , $false ))
