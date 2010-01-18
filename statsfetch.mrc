@@ -97,7 +97,7 @@ alias stats {
     if (%goal > 200000000) { %goal = 200000000 | %target = 200m }
     var %exptogo = $calc(%goal - $3)
     if (%presetgoal == no && $aLfAddress(%nick)) {
-      if (!$rowExists(users, fingerprint, $aLfAddress(%nick))) { noop $_network(noop $!sqlite_query(INSERT INTO users (fingerprint, rsn) VALUES (' $+ $aLfAddress(%nick) $+ ',' $+ %nick $+ ');)) }
+      if (!$rowExists(users, fingerprint, $aLfAddress(%nick))) { noop $_network(noop $!sqlite_query(1, INSERT INTO users (fingerprint, rsn) VALUES (' $+ $aLfAddress(%nick) $+ ',' $+ %nick $+ ');)) }
       noop $_network(noop $!setStringParameter( $aLfAddress(%nick) , %skill , goals , %goal , $false ))
     }
     var %info = %info | exp till %target $+ :07 $bytes(%exptogo,db) (07 $+ $round($calc(100 * ($3 - $lvltoxp(%vlvl)) / (%goal - $lvltoxp(%vlvl))),1) $+ $(%,) $+ )
@@ -129,7 +129,7 @@ alias stats {
       }
       if (!%itemstogo) { var %items = (Unknown Item) }
       else if (%presetparam == no && $aLfAddress(%nick)) {
-        if (!$rowExists(users, fingerprint, $aLfAddress(%nick))) { noop $_network(noop $!sqlite_query(INSERT INTO users (fingerprint, rsn) VALUES (' $+ $aLfAddress(%nick) $+ ',' $+ %nick $+ ');)) }
+        if (!$rowExists(users, fingerprint, $aLfAddress(%nick))) { noop $_network(noop $!sqlite_query(1, INSERT INTO users (fingerprint, rsn) VALUES (' $+ $aLfAddress(%nick) $+ ',' $+ %nick $+ ');)) }
         noop $_network(noop $!setStringParameter( $aLfAddress(%nick) , %skill , items , %param , $false ))
       }
       .fclose %socket
