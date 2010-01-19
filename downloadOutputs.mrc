@@ -173,19 +173,21 @@ alias downloadGe {
     inc %x
   }
   if ($cmd(%thread, out)) {
-    var %num $cmd(%thread,arg1), %search $cmd(%thread,arg2)
+    var %num $cmd(%thread,arg1), %search $replace($cmd(%thread,arg2), _,  $chr(32))
     var %numberOfResults $countResults($getPrice(%search).sql)
     var %dbPrices $getPrice(%search)
     .tokenize 44 %dbPrices
     var %x = 1, %results
-    while (%x <= $0) {
+    while (%x <= $0 && %dbPrices && $len(%results) < 350) {
       var %name = $gettok($($ $+ %x,2),1,59), %price = $gettok($($ $+ %x,2),2,59), %change = $gettok($($ $+ %x,2),3,59)
       %results = %results | %name $+ 07 $format_number(%price) $updo(%change) 
       inc %x
     }
+    if (!%dbPrices) %results = error occured retrieving prices for %search $+ .
     $cmd(%thread,out) Results:07 %numberOfResults %results
     _clearCommand %thread
   }
+
 
   goto end
   :error

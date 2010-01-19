@@ -80,15 +80,7 @@ fact {
     }
   }
 }
-rccom {
-  if ($regex($1,$+(/^,$chr(40),$readini(rccomp.ini,member,nick),$chr(41),/i))) { return tracked }
-}
-tracked {
-  if ($regex($1,$+(/^,$chr(40),$readini(tracked.ini,tracked,nick),$chr(41),/i))) { return _tracked }
-}
-admin {
-  if ($regex($rsn($1),$+(/^,$chr(40),$readini(Gerty.Config.ini,admin,rsn),$chr(41),/i))) { return admin }
-}
+admin if ($regex($getDefname($1),$+(/^,$chr(40),$readini(Gerty.Config.ini,admin,rsn),$chr(41),/i))) { return admin }
 rsn {
   if ($getDefname($1)) return $v1
   return $caps($regsubex($1-,/\W/g,_))
