@@ -2,9 +2,9 @@
 timeCount {
   if ($read(timer.txt,nw,$ctime($asctime($gmt)) $+ *) && $server) { $gettok($read(timer.txt,nw,$ctime($asctime($gmt)) $+ *),2,124) }
   if ($calc($ctime % 60) == 0) { CheckGePrices }
-  if ($calc($ctime % 300) == 0) {
+  if ($calc($ctime % 30) == 0) {
     var %thread = $+(a,$r(0,999))
-    var %search = $dbSelectWhere(prices, name, `price`='0' LIMIT 1)
+    var %search = $dbSelectWhere(prices, name, `price`='0' AND `id` != 195 LIMIT 1)
     var %url http://gerty.rsportugal.org/parsers/ge.php?item= $+ $replace(%search,$chr(32),+)
     noop $download.break(downloadGe %thread,%thread,%url)
   }
@@ -19,11 +19,14 @@ _setAdmin {
   if ($aLfAddress(Elessar)) { noop $setDefname( $v1 , Tiedemanns ) }
   if ($hget(botlist)) { .hfree botlist }
   .hmake botlist
-  var %x = 2
+  var %x = 2, %y = 1
   while (%x <= $lines(botlist.txt)) {
     var %bot = $read(botlist.txt,%x)
-    hadd -m botlist $calc(%x - 1) %bot
-    if ($nick(#gerty,%bot)) { noop $setDefname( $aLfAddress(%bot) , Gerty ) }
+    if ($nick(#gerty,%bot)) {
+      hadd -m botlist %y %bot
+      noop $setDefname( $aLfAddress(%bot) , Gerty )
+      inc %y
+    }
     inc %x
   }
 }
@@ -187,8 +190,11 @@ download.break {
 }
 cleanhash {
   .hfree -w a*
-  .hfree -w e*
-  .hfree -w d*
+  var %x 1, %y = $com(0)
+  while (%x <= %y) {
+    .comclose $com(1)
+    inc %x
+  }
 }
 removeSpam if ($hget($1)) hfree $1
 spamCheck {
