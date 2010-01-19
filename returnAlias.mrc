@@ -4,7 +4,7 @@ $ return $chr(36)
 % return $chr(37)
 | return $chr(124)
 aLfAddress {
-  if ($right($address($1,3), -3)) return $v1
+  if ($right($address($1,3), -3)) return $iif($left($v1,1) == ~, $right( [ $v1 ] ,-1), [ $v1 ] )
   return $false
 }
 price {
@@ -256,7 +256,7 @@ yesno {
   if $1 = no return 04No
   else return $1
 }
-alias grouper {
+grouper {
   var %x = 1
   while ($gettok($1-,%x,124)) {
     var %item = $replace($gettok($1-,%x,124),$chr(32),:space:)
