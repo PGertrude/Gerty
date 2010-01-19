@@ -840,7 +840,7 @@ on *:TEXT:*:*: {
         %saystyle $chan Settings: Youtube link information messages are now %mode $+ .
       }
       if (%command == ge || %command == geupdate) {
-        noop $_network(noop $!dbUpdate(channel, `channel`=' $+ $chan $+ ', geupdate, mode))
+        noop $_network(noop $!dbUpdate(channel, `channel`=' $+ $chan $+ ', geupdate, %mode))
         %saystyle $chan Settings: Ge Update messages are now %mode $+ .
       }
       if (%command == qfc) {
