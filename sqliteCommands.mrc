@@ -18,14 +18,15 @@ alias dbSelect {
   var %sql = SELECT %fields FROM %table
   ; CONDITIONS
   ; Check for null tokens
-  var %x = 1
+  var %x = 1, %tokens
   while (%x <= $0) {
-    if ($($ $+ %x,2) == $null) fatalError sqliteCommands > dbSelect > params > There is a null parameter @ $($ $+ %x $+ .,1)
+    %tokens = %tokens %x $+ : $($ $+ %x,2)
+    if ($($ $+ %x,2) == $null) fatalError sqliteCommands > dbSelect > params > There is a null parameter @ $($ $+ %x $+ .,1) => %tokens
     inc %x
   }
   .tokenize 32 %conditions
   ; Check conditions
-  if ($calc($0 % 2) != 0) fatalError sqliteCommands > dbSelect > conditions > Mismatch in field/value assossiation.
+  if ($calc($0 % 2) != 0) fatalError sqliteCommands > dbSelect > conditions > Mismatch in field/value assossiation. => %tokens => %conditions
   ; Form WHERE
   var %where, %x = 1
   while (%x <= $0) {
@@ -50,9 +51,10 @@ alias dbSelectWhere {
   var %sql = SELECT %fields FROM %table WHERE %condition
 
   ; Check for null tokens
-  var %x = 1
+  var %x = 1, %tokens
   while (%x <= $0) {
-    if ($($ $+ %x,2) == $null) fatalError sqliteCommands > dbSelectWhere > params > There is a null parameter @ $($ $+ %x $+ .,1)
+    %tokens = %tokens %x $+ : $($ $+ %x,2)
+    if ($($ $+ %x,2) == $null) fatalError sqliteCommands > dbSelectWhere > params > There is a null parameter @ $($ $+ %x $+ .,1) => %tokens
     inc %x
   }
   if ($prop == sql) return %sql
@@ -102,7 +104,7 @@ alias getDefname {
   if ($0 != 1) fatalError sqliteCommands > getDefname > No overload for getDefname takes $0 arguments, best match takes 1 argument: getDefname(string ircNick)
   var %fingerPrint = $iif($left($1,1) == $chr(42), $right($1,-3), $1), %rsn = $false
   if (@ !isin $1) %fingerprint = $right($address($1,3),-3)
-  if (%fingerPrint) %rsn = $dbSelect(users, rsn, fingerprint, %fingerprint)
+  if (%fingerPrint) %rsn = $dbSelect(users, rsn, fingerprint, $remove(%fingerprint,$chr(32)))
   if (%rsn) return %rsn
   return $false
 }

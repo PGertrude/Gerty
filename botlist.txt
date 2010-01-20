@@ -1,1 +1,9 @@
+>start<|botlist.txt|list of bots|1.01|param
 Gerty
+[GZ]Gerty
+[SL]Gerty
+[TL]Gerty
+[FF]Gerty
+[GS]Gerty
+GertTest
+[TEST]Gerty

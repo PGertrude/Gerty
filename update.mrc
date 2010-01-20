@@ -1,6 +1,6 @@
-alias findupdate {
-  !sockopen findupdate www.p-gertrude.rsportugal.org 80
-}
+;alias findupdate {
+;  !sockopen findupdate www.p-gertrude.rsportugal.org 80
+;}
 on *:sockopen:findupdate: {
   !if ($sockerr) {
     !echo -t [Update Connection Error]
