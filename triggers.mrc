@@ -869,19 +869,21 @@ on *:TEXT:*:*: {
         noop $_network(noop $!dbUpdate(channel, `channel`=' $+ $chan $+ ', youtube, %mode))
         %saystyle $chan Settings: Youtube link information messages are now %mode $+ .
       }
-      if (%command == ge || %command == geupdate) {
+      else if (%command == ge || %command == geupdate) {
         noop $_network(noop $!dbUpdate(channel, `channel`=' $+ $chan $+ ', geupdate, %mode))
         %saystyle $chan Settings: Ge Update messages are now %mode $+ .
       }
-      if (%command == qfc) {
+      else if (%command == qfc) {
         noop $_network(noop $!dbUpdate(channel, `channel`=' $+ $chan $+ ', qfc, %mode))
         %saystyle $chan Settings: QFC link information messages are now %mode $+ .
       }
-      if (%command == site) {
-        if ($nick isop $chan || $nick ishop $chan || $admin($nick) == admin) {
-          noop $_network(noop $!dbUpdate(channel, `channel`=' $+ $chan $+ ', site, $3-))
-          %saystyle The website for07 $chan has been set to:07 $3-
-        }
+      else if (%command == site) {
+        noop $_network(noop $!dbUpdate(channel, `channel`=' $+ $chan $+ ', site, $3- ))
+        %saystyle The website for07 $chan has been set to:07 $3-
+      }
+      else if (%command == autocalc) {
+        noop $_network(noop $!dbUpdate(channel, `channel`=' $+ $chan $+ ', autocalc, %mode ))
+        %saystyle The no-trigger calculator has been turned07 %mode for07 $chan $+ .
       }
     }
     if ($admin($nick)) {
@@ -1147,7 +1149,7 @@ on *:TEXT:*:*: {
   var %input, %ErrReply
   if ($regex($1,/^[!@.](c|calc)\b/Si)) { %input = $2- | %ErrReply = yes }
   else if ($left($1,1) == `) { %input = $right($1-,-1) | %saystyle = $iif($chan,.notice $nick,.msg $nick) | %ErrReply = yes }
-  else if ($left($1,1) != . && $left($1,1) != ! && $left($1,1) != @) { %input = $1- | %saystyle = $iif($chan,.notice $nick,.msg $nick) | %ErrReply = no }
+  else if ($left($1,1) != . && $left($1,1) != ! && $left($1,1) != @ && $chanset(#,autocalc) == on) { %input = $1- | %saystyle = $iif($chan,.notice $nick,.msg $nick) | %ErrReply = no }
   else goto exit
   .tokenize 32 $_checkCalc(%input,%ErrReply)
   if ($1 == false) { if (%ErrReply == yes) { %saystyle $2- } | goto exit }
