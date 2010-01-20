@@ -209,4 +209,19 @@ spamCheck {
   }
   return $false
 }
+;@SYNTAX /die
+;@SUMMARY used as a callback to a threaded com call, when the data recieved is not required.
 die return
+
+;@SYNTAX shuffleHash(string commandLine)
+;@SUMMARY manages the store of recent commands. (up to 5)
+shuffleHash {
+  var %newLine $1
+  if (!$hget(commands)) hmake commands
+  var %x 4
+  while (%x) {
+    hadd -m commands $calc(%x + 1) $hget(commands, %x))
+    dec %x
+  }
+  hadd -m commands 1 %newLine
+}

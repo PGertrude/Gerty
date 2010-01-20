@@ -520,4 +520,10 @@ alias rscriptCompareOut {
   $cmd(%thread,out)  $+ $caps($cmd(%thread,arg4)) $+ : $cmd(%thread,arg3) gained07 $bytes($gettok($5,2,58),db) $+  %unit $+ , $cmd(%thread2,arg3) gained07 $bytes($cmd(%thread2,arg6),db)  $+ %unit $+ .
   _clearCommand %thread
   _clearCommand %thread2
+  return
+  :error
+  _clearCommand %thread
+  _clearCommand %thread2
+  .msg #gertyDev ERROR:07 compare:07 $error
+  reseterror
 }

@@ -5,7 +5,7 @@ on *:TEXT:*:*: {
     [ [ $2- ] ]
     goto clean
   }
-  var %thread = $+(a,$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9)), %saystyle
+  var %thread $+(a,$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9)), %saystyle, %shuffleInput $nick > $iif($chan,$v1,PM) > $1-
   if ($left($1,1) isin .!@) %saystyle = $saystyle($left($1,1),$nick,$chan)
   ; STATUS
   if ($regex($1,/^[!@.]status$/Si)) {
@@ -1177,9 +1177,11 @@ on *:TEXT:*:*: {
   var %spam $spamcheck($nick)
   if ($window($nick)) { window -c $nick }
   .timer 1 5 removeSpam $nick
+  noop $shuffleHash(%shuffleInput)
   unset %*
   return
   :error
+  noop $shuffleHash(%shuffleInput)
   .msg #gertyDev ERROR:07 $error
   reseterror
 }

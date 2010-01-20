@@ -67,4 +67,11 @@ on *:CONNECT: {
   .timertim -o 0 1 .timecount
 
 }
-raw 421:*: .msg #gertyDev ERROR:07 $2- Recent commands:07 ...
+raw 421:*: {
+  var %string, %x 1
+  while (%x <= 5) {
+    %string = %string $hget(commands, %x) $+ ,07
+    inc %x
+  }
+  .msg #gertyDev ERROR:07 $2- Recent commands:07 $left(%string, -4)
+}
