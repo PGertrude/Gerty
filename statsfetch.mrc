@@ -173,7 +173,7 @@ alias stats {
     }
     inc %x
     var %minigames
-    while (%x <= 29) {
+    while (%x <= 33) {
       if (%state > 2) { %state = 2 }
       if ($gettok($($ $+ %x,2),%state,44) != NR) { %minigames = %minigames 03 $+ $bytes($gettok($($ $+ %x,2),%state,44),db) $+  $statnum(%x) $+ ; }
       inc %x
@@ -271,7 +271,7 @@ alias distribute {
   if (<html> isin $1) { return unranked }
   if (-1 !isin $gettok(%string,1-25,10)) {
     var %x = 2,%reply,%voa = 0
-    while (%x <= 30) {
+    while (%x <= 34) {
       if ($gettok($ [ $+ [ %x ] ],2,44) == -1) { var % [ $+ [ %x ] ] NR,NR }
       else {
         var %vlvl = $xptolvl($gettok($ [ $+ [ %x ] ],3,44))

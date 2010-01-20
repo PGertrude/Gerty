@@ -30,6 +30,10 @@ compares {
   if ($regex($1,/^(fog|fist|fisting|fistofguth|guth|guthix|fistofguthix|fist of guthix)$/Si)) { return Fist of Guthix }
   if ($regex($1,/^(du|duel|tournament)$/Si)) { return Duel }
   if ($regex($1,/^(mob?|mobilise|mobilising)(ar|army|armies|armys)?$/Si)) { return Mobilising Armies }
+  if ($regex($1,/^(baat|baatt|baattack|baattacker|baattackers|ba attackers)$/Si)) { return BA Attackers }
+  if ($regex($1,/^(bade|badef|badefend|badefender|badefenders| ba defenders)$/Si)) { return BA Defenders }
+  if ($regex($1,/^(baco|bacol|bacollect|bacollector|bacollectors|ba collectors)$/Si)) { return BA Collectors }
+  if ($regex($1,/^(bahe|baheal|bahealer|bahealers|ba healers)$/Si)) { return BA Healers }
   if ($regex($1,/^(st|sk|all|skill|skills|stat|stats|statistics)$/Si)) { return Stats }
   if ($regex($1,/^(cb|cmb|comb|combat|warrior)$/Si)) { return Combat }
   if ($regex($1,/^(cmb%|combat%)$/Si)) { return combat% }
@@ -70,6 +74,10 @@ lookups {
   if ($regex($1,/^(fog|fist|fisting|fistofguth|guth|guthix|fistofguthix|fist of guthix)$/Si)) { return Fist of Guthix }
   if ($regex($1,/^(du|duel|tournament)$/Si)) { return Duel }
   if ($regex($1,/^(mob?|mobilise|mobilising)(ar|army|armies|armys)?$/Si)) { return Mobilising Armies }
+  if ($regex($1,/^(baat|baatt|baattack|baattacker|baattackers|ba attackers)$/Si)) { return BA Attackers }
+  if ($regex($1,/^(bade|badef|badefend|badefender|badefenders| ba defenders)$/Si)) { return BA Defenders }
+  if ($regex($1,/^(baco|bacol|bacollect|bacollector|bacollectors|ba collectors)$/Si)) { return BA Collectors }
+  if ($regex($1,/^(bahe|baheal|bahealer|bahealers|ba healers)$/Si)) { return BA Healers }
   if ($regex($1,/^(st|sk|all|skill|skills|stat|stats|statistics)$/Si)) { return Stats }
   if ($regex($1,/^(cb|cmb|comb|combat|warrior)$/Si)) { return Combat }
   if ($regex($1,/^(ncb|noncmb|non-cmb|non-comb|noncomb|non-combat|noncombat|non-warrior)$/Si)) { return Noncmb }
@@ -109,6 +117,10 @@ scores {
   if ($regex($1,/^(fog|fist|fisting|fistofguth|guth|guthix|fistofguthix|fist of guthix)$/Si)) { return Fist of Guthix }
   if ($regex($1,/^(du|duel|tournament)$/Si)) { return Duel }
   if ($regex($1,/^(mob?|mobilise|mobilising)(ar|army|armies|armys)?$/Si)) { return Mobilising Armies }
+  if ($regex($1,/^(baat|baatt|baattack|baattacker|baattackers|ba attackers)$/Si)) { return BA Attackers }
+  if ($regex($1,/^(bade|badef|badefend|badefender|badefenders| ba defenders)$/Si)) { return BA Defenders }
+  if ($regex($1,/^(baco|bacol|bacollect|bacollector|bacollectors|ba collectors)$/Si)) { return BA Collectors }
+  if ($regex($1,/^(bahe|baheal|bahealer|bahealers|ba healers)$/Si)) { return BA Healers }
 }
 skills {
   if ($regex($1,/^(at|att|attack)$/Si)) { return Attack }
@@ -143,6 +155,10 @@ minigames {
   if ($regex($1,/^(fog|fist|fisting|fistofguth|guth|guthix|fistofguthix|fist of guthix)$/Si)) { return Fist of Guthix }
   if ($regex($1,/^(du|duel|tournament)$/Si)) { return Duel }
   if ($regex($1,/^(mob?|mobilise|mobilising) ?(ar|army|armies|armys)?$/Si)) { return Mobilising Armies }
+  if ($regex($1,/^(baat|baatt|baattack|baattacker|baattackers|ba attackers)$/Si)) { return BA Attackers }
+  if ($regex($1,/^(bade|badef|badefend|badefender|badefenders| ba defenders)$/Si)) { return BA Defenders }
+  if ($regex($1,/^(baco|bacol|bacollect|bacollector|bacollectors|ba collectors)$/Si)) { return BA Collectors }
+  if ($regex($1,/^(bahe|baheal|bahealer|bahealers|ba healers)$/Si)) { return BA Healers }
 }
 misc {
   if ($regex($1,/^(st|sk|all|skill|skills|stat|stats|statistics)$/Si)) { return Stats }
@@ -204,6 +220,10 @@ statnum {
   if ($minigames($1) == Bounty Hunter Rogues) { return 28 }
   if ($minigames($1) == Fist Of Guthix) { return 29 }
   if ($minigames($1) == Mobilising Armies) { return 30 }
+  if ($minigames($1) == BA Attackers) { return 31 }
+  if ($minigames($1) == BA Defenders) { return 32 }
+  if ($minigames($1) == BA Collectors) { return 33 }
+  if ($minigames($1) == BA Healers) { return 34 }
   if ($1 == 1) { return overall }
   if ($1 == 2) { return attack }
   if ($1 == 3) { return defence }
@@ -234,9 +254,13 @@ statnum {
   if ($1 == 28) { return bounty hunter rogues }
   if ($1 == 29) { return fist of guthix }
   if ($1 == 30) { return mobilising armies }
+  if ($1 == 31) { return ba attackers }
+  if ($1 == 32) { return ba defenders }
+  if ($1 == 33) { return ba collectors }
+  if ($1 == 34) { return ba healers }
 }
 catno {
-  if ($1 != duel && $1 != bounty hunter && $1 != bounty hunter rogues && $1 != fist of guthix && $1 != mobilising armies) { return 0 }
+  if ($minigames($1)) { return 0 }
   return 1
 }
 smartno {
@@ -270,4 +294,8 @@ smartno {
   if ($1 == bounty hunter Rogues) { return 2 }
   if ($1 == fist of guthix) { return 3 }
   if ($1 == mobilising armies) { return 4 }
+  if ($1 == ba attackers) { return 5 }
+  if ($1 == ba defenders) { return 6 }
+  if ($1 == ba collectors) { return 7 }
+  if ($1 == ba healers) { return 8 }
 }
