@@ -19,7 +19,7 @@ calcparse {
   %eq = $regsubex(%eq,/(\x29|\d)(\x28|[zpexastcls])/gi,\1* $+ \2)
   %eq = $regsubex(%eq,/(\x29)(\d|[zpexastcls])/gi,\1* $+ \2)
   %eq = $regsubex(%eq,/([zpex])(\d|\x28)/gi,\1* $+ \2)
-  %eq = $replace(%eq,z,pi,p,ans)
+  %eq = $replace(%eq,p,ans,z,pi)
   return %eq
 }
 ; always returns the result of a calculation
@@ -58,7 +58,7 @@ litecalc {
   return $calc($parser(%string))
 }
 _checkCalc {
-  var %string = $replace($1,xp,A,ge,T,price,T,pi,~,ans,p)
+  var %string = $replace($1,xp,A,T,£,ge,T,price,T,pi,~,ans,p)
   %string = $regsubex(%string,/([TA])\x28(.+?)\x29/g,\1(1))
   %string = $regsubex(%string,/(?:([\dep~kmbx\x29])([\x28])|([\x29])([\dep~xastcl])|([ep~])([ep~xastcl])|(x)([e~ctsxl])|(\d)([ep~xastcl]))/gi,\1*\2)
   %string = $regsubex(%string,/(?:([\dep~kmbx\x29])([\x28])|([\x29])([\dep~xastcl])|([ep~])([ep~xastcl])|(x)([e~ctsxl])|(\d)([ep~xastcl]))/gi,\1*\2)

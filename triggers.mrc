@@ -1146,10 +1146,10 @@ on *:TEXT:*:*: {
 
 
   ; CALCULATOR
-  var %input, %ErrReply
+  var %input, %ErrReply, %chanset $iif($chan, $chanset(#,autocalc), on)
   if ($regex($1,/^[!@.](c|calc)\b/Si)) { %input = $2- | %ErrReply = yes }
   else if ($left($1,1) == `) { %input = $right($1-,-1) | %saystyle = $iif($chan,.notice $nick,.msg $nick) | %ErrReply = yes }
-  else if ($left($1,1) != . && $left($1,1) != ! && $left($1,1) != @ && $chanset(#,autocalc) == on) { %input = $1- | %saystyle = $iif($chan,.notice $nick,.msg $nick) | %ErrReply = no }
+  else if ($left($1,1) != . && $left($1,1) != ! && $left($1,1) != @ && %chanset == on) { %input = $1- | %saystyle = $iif($chan,.notice $nick,.msg $nick) | %ErrReply = no }
   else goto exit
   .tokenize 32 $_checkCalc(%input,%ErrReply)
   if ($1 == false) { if (%ErrReply == yes) { %saystyle $2- } | goto exit }
