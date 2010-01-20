@@ -19,7 +19,7 @@ calcparse {
   %eq = $regsubex(%eq,/(\x29|\d)(\x28|[zpexastcls])/gi,\1* $+ \2)
   %eq = $regsubex(%eq,/(\x29)(\d|[zpexastcls])/gi,\1* $+ \2)
   %eq = $regsubex(%eq,/([zpex])(\d|\x28)/gi,\1* $+ \2)
-  %eq = $replace(%eq,z,pi,p,ans)
+  %eq = $replace(%eq,p,ans,z,pi)
   return %eq
 }
 ; always returns the result of a calculation
