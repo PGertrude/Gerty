@@ -713,6 +713,36 @@ on *:TEXT:*:*: {
       noop $download.break(trackAll %saystyle %nick %time $replace(%command, $chr(32), _), %socket, %url)
     }
   }
+  ; COMPARE
+  else if ($misc($right($1,-1)) == compare) {
+    if (!$2) { %saystyle Syntax Error: !compare [skill] <nick1> [nick2] [@time period] | goto clean }
+    var %skill $compares($2)
+    if (!%skill) { %skill = overall | .tokenize 32 $2- }
+    else .tokenize 32 $3-
+    var %string $1-
+    var %time Today
+    if ($regex($1-,/@([^ ]+)\b/Si)) {
+      var %time $regml(1)
+      .tokenize 32 $regsubex(%string,/@([^ ]+)\b/Si,$null)
+    }
+    if ($0 == 0) { %saystyle Syntax Error: !compare [skill] 04<nick1> [nick2] [@(today|week|month|year)] | goto clean }
+    var %nick1, %nick2
+    if ($0 == 1) {
+      %nick1 = $rsn($nick)
+      %nick2 = $rsn($1)
+    }
+    else {
+      %nick1 = $rsn($1)
+      %nick2 = $rsn($2-)
+    }
+    var %thread2 $+(a,$r(0,99999))
+    _fillCommand %thread $left($1,1) $nick $iif($chan,$v1,PM) compare %thread2 $replace(%skill,$chr(32),_) %nick1 %time
+    _fillCommand %thread2 $left($1,1) $nick $iif($chan,$v1,PM) compare %thread $replace(%skill,$chr(32),_) %nick2 %time
+    var %url http://hiscore.runescape.com/index_lite.ws?player=
+    noop $download.break(compareOut %thread, %thread, %url $+ %nick1)
+    noop $download.break(compareOut %thread2, %thread2, %url $+ %nick2)
+    goto clean
+  }
   ; LOGIN
   else if ($regex($1,/^[!@.]login$/Si)) {
     if ($2 == $readini(Gerty.Config.ini,admin,pass)) {

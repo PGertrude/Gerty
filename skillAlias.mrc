@@ -30,10 +30,10 @@ compares {
   if ($regex($1,/^(fog|fist|fisting|fistofguth|guth|guthix|fistofguthix|fist of guthix)$/Si)) { return Fist of Guthix }
   if ($regex($1,/^(du|duel|tournament)$/Si)) { return Duel }
   if ($regex($1,/^(mob?|mobilise|mobilising)(ar|army|armies|armys)?$/Si)) { return Mobilising Armies }
-  if ($regex($1,/^(baat|baatt|baattack|baattacker|baattackers|ba attackers)$/Si)) { return BA Attackers }
-  if ($regex($1,/^(bade|badef|badefend|badefender|badefenders| ba defenders)$/Si)) { return BA Defenders }
-  if ($regex($1,/^(baco|bacol|bacollect|bacollector|bacollectors|ba collectors)$/Si)) { return BA Collectors }
-  if ($regex($1,/^(bahe|baheal|bahealer|bahealers|ba healers)$/Si)) { return BA Healers }
+  if ($regex($1,/^(baat|baatt|baattack|baattacker|baattackers|ba attackers|ba_attackers)$/Si)) { return BA Attackers }
+  if ($regex($1,/^(bade|badef|badefend|badefender|badefenders|ba defenders|ba_defenders)$/Si)) { return BA Defenders }
+  if ($regex($1,/^(baco|bacol|bacollect|bacollector|bacollectors|ba collectors|ba_collectors)$/Si)) { return BA Collectors }
+  if ($regex($1,/^(bahe|baheal|bahealer|bahealers|ba healers|ba_healers)$/Si)) { return BA Healers }
   if ($regex($1,/^(st|sk|all|skill|skills|stat|stats|statistics)$/Si)) { return Stats }
   if ($regex($1,/^(cb|cmb|comb|combat|warrior)$/Si)) { return Combat }
   if ($regex($1,/^(cmb%|combat%)$/Si)) { return combat% }
@@ -74,10 +74,10 @@ lookups {
   if ($regex($1,/^(fog|fist|fisting|fistofguth|guth|guthix|fistofguthix|fist of guthix)$/Si)) { return Fist of Guthix }
   if ($regex($1,/^(du|duel|tournament)$/Si)) { return Duel }
   if ($regex($1,/^(mob?|mobilise|mobilising)(ar|army|armies|armys)?$/Si)) { return Mobilising Armies }
-  if ($regex($1,/^(baat|baatt|baattack|baattacker|baattackers|ba attackers)$/Si)) { return BA Attackers }
-  if ($regex($1,/^(bade|badef|badefend|badefender|badefenders| ba defenders)$/Si)) { return BA Defenders }
-  if ($regex($1,/^(baco|bacol|bacollect|bacollector|bacollectors|ba collectors)$/Si)) { return BA Collectors }
-  if ($regex($1,/^(bahe|baheal|bahealer|bahealers|ba healers)$/Si)) { return BA Healers }
+  if ($regex($1,/^(baat|baatt|baattack|baattacker|baattackers|ba attackers|ba_attackers)$/Si)) { return BA Attackers }
+  if ($regex($1,/^(bade|badef|badefend|badefender|badefenders|ba defenders|ba_defenders)$/Si)) { return BA Defenders }
+  if ($regex($1,/^(baco|bacol|bacollect|bacollector|bacollectors|ba collectors|ba_collectors)$/Si)) { return BA Collectors }
+  if ($regex($1,/^(bahe|baheal|bahealer|bahealers|ba healers|ba_healers)$/Si)) { return BA Healers }
   if ($regex($1,/^(st|sk|all|skill|skills|stat|stats|statistics)$/Si)) { return Stats }
   if ($regex($1,/^(cb|cmb|comb|combat|warrior)$/Si)) { return Combat }
   if ($regex($1,/^(ncb|noncmb|non-cmb|non-comb|noncomb|non-combat|noncombat|non-warrior)$/Si)) { return Noncmb }
@@ -117,10 +117,10 @@ scores {
   if ($regex($1,/^(fog|fist|fisting|fistofguth|guth|guthix|fistofguthix|fist of guthix)$/Si)) { return Fist of Guthix }
   if ($regex($1,/^(du|duel|tournament)$/Si)) { return Duel }
   if ($regex($1,/^(mob?|mobilise|mobilising)(ar|army|armies|armys)?$/Si)) { return Mobilising Armies }
-  if ($regex($1,/^(baat|baatt|baattack|baattacker|baattackers|ba attackers)$/Si)) { return BA Attackers }
-  if ($regex($1,/^(bade|badef|badefend|badefender|badefenders| ba defenders)$/Si)) { return BA Defenders }
-  if ($regex($1,/^(baco|bacol|bacollect|bacollector|bacollectors|ba collectors)$/Si)) { return BA Collectors }
-  if ($regex($1,/^(bahe|baheal|bahealer|bahealers|ba healers)$/Si)) { return BA Healers }
+  if ($regex($1,/^(baat|baatt|baattack|baattacker|baattackers|ba attackers|ba_attackers)$/Si)) { return BA Attackers }
+  if ($regex($1,/^(bade|badef|badefend|badefender|badefenders|ba defenders|ba_defenders)$/Si)) { return BA Defenders }
+  if ($regex($1,/^(baco|bacol|bacollect|bacollector|bacollectors|ba collectors|ba_collectors)$/Si)) { return BA Collectors }
+  if ($regex($1,/^(bahe|baheal|bahealer|bahealers|ba healers|ba_healers)$/Si)) { return BA Healers }
 }
 skills {
   if ($regex($1,/^(at|att|attack)$/Si)) { return Attack }
@@ -155,10 +155,10 @@ minigames {
   if ($regex($1,/^(fog|fist|fisting|fistofguth|guth|guthix|fistofguthix|fist of guthix)$/Si)) { return Fist of Guthix }
   if ($regex($1,/^(du|duel|tournament)$/Si)) { return Duel }
   if ($regex($1,/^(mob?|mobilise|mobilising) ?(ar|army|armies|armys)?$/Si)) { return Mobilising Armies }
-  if ($regex($1,/^(baat|baatt|baattack|baattacker|baattackers|ba attackers)$/Si)) { return BA Attackers }
-  if ($regex($1,/^(bade|badef|badefend|badefender|badefenders| ba defenders)$/Si)) { return BA Defenders }
-  if ($regex($1,/^(baco|bacol|bacollect|bacollector|bacollectors|ba collectors)$/Si)) { return BA Collectors }
-  if ($regex($1,/^(bahe|baheal|bahealer|bahealers|ba healers)$/Si)) { return BA Healers }
+  if ($regex($1,/^(baat|baatt|baattack|baattacker|baattackers|ba attackers|ba_attackers)$/Si)) { return BA Attackers }
+  if ($regex($1,/^(bade|badef|badefend|badefender|badefenders|ba defenders|ba_defenders)$/Si)) { return BA Defenders }
+  if ($regex($1,/^(baco|bacol|bacollect|bacollector|bacollectors|ba collectors|ba_collectors)$/Si)) { return BA Collectors }
+  if ($regex($1,/^(bahe|baheal|bahealer|bahealers|ba healers|ba_healers)$/Si)) { return BA Healers }
 }
 misc {
   if ($regex($1,/^(st|sk|all|skill|skills|stat|stats|statistics)$/Si)) { return Stats }

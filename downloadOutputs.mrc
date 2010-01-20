@@ -476,3 +476,48 @@ alias lastNdays {
   hfree $gettok($sockname,2,46)
   unset %*
 }
+; COMPARE
+alias compareOut {
+  var %thread $1, %thread2 $cmd(%thread,arg1), %hiscores $2
+  .tokenize 10 $distribute($2)
+  var %hiscoreLine $($ $+ $statnum($cmd(%thread,arg2)),2)
+  if (!$cmd(%thread2,arg5)) {
+    hadd -m %thread arg5 %hiscoreLine
+    return
+  }
+  var %unit levels, %skillBool $iif($skills($cmd(%thread,arg2)), $true, $false), %output
+  if (!%skillBool) %unit = score
+  var %level $gettok(%hiscoreLine,2,44), %alienLevel $gettok($cmd(%thread2,arg5),2,44)
+  if (%alienLevel > %level) %output = $cmd(%thread2,arg3) (07 $+ %alienLevel $+ ) is07 $bytes($calc(%alienLevel - %level),db)  $+ %unit higher than $cmd(%thread,arg3) (07 $+ %level $+ ) $+ 
+  else if (%level > %alienLevel) %output = $cmd(%thread,arg3) (07 $+ %Level $+ ) is07 $bytes($calc(%level - %alienLevel),db)  $+ %unit higher than $cmd(%thread2,arg3) (07 $+ %alienLevel $+ ) $+ 
+  else %output = $cmd(%thread,arg3) and $cmd(%thread2,arg3) both have %unit $+ 07 %level $cmd(%thread,arg2) $+ 
+  if (%skillBool) {
+    var %exp $gettok(%hiscoreLine,3,44), %alienExp $gettok($cmd(%thread2,arg5),3,44)
+    if (%alienExp > %exp) %output = %output $+ , $cmd(%thread2,arg3) has07 $bytes($calc(%alienExp - %exp),db) more experience
+    else if (%exp > %alienExp) %output = %output $+ , $cmd(%thread,arg3) has07 $bytes($calc(%exp - %alienExp),db) more experience
+    else %output = %output $+ , $cmd(%thread,arg3) and $cmd(%thread2,arg3) both have07 $bytes(%exp,db) experience
+  }
+  $cmd(%thread,out) %output $+ .
+  ; RSCRIPT COMPARE
+  .tokenize 32 $timeToday
+  var %today $1, %week $2, %month $3, %year $4, %time $(% $+ $cmd(%thread,arg4),2), %skill $smartno($cmd(%thread,arg2))
+  if (!%skillBool) %skill = 0. $+ $smartno($replace($cmd(%thread,arg2),_,$chr(32)))
+  if (!%time) %time = $duration($cmd(%thread,arg4))
+  var %url http://www.rscript.org/lookup.php?type=track&skill= $+ %skill $+ &time= $+ %time $+ &user=
+  noop $download.break(rscriptCompareOut %thread, %thread $+ 2, %url $+ $cmd(%thread,arg3))
+  noop $download.break(rscriptCompareOut %thread2, %thread2 $+ 2, %url $+ $cmd(%thread2,arg3))
+}
+alias rscriptCompareOut {
+  var %thread $1, %thread2 $cmd(%thread,arg1), %tracker $2
+  .tokenize 10 $2
+  if (PHP isin %tracker) .tokenize 32 1 1 1 1 1:0 1
+  if ($cmd(%thread2,arg6) == $null) {
+    hadd -m %thread arg6 $gettok($5,2,58)
+    return
+  }
+  var %unit experience, %skillBool $iif($skills($cmd(%thread,arg2)), $true, $false)
+  if (!%skillBool) %unit = score
+  $cmd(%thread,out)  $+ $caps($cmd(%thread,arg4)) $+ : $cmd(%thread,arg3) gained07 $bytes($gettok($5,2,58),db) $+  %unit $+ , $cmd(%thread2,arg3) gained07 $bytes($cmd(%thread2,arg6),db)  $+ %unit $+ .
+  _clearCommand %thread
+  _clearCommand %thread2
+}
