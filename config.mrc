@@ -74,4 +74,5 @@ raw 421:*: {
     inc %x
   }
   .msg #gertyDev ERROR:07 $2- Recent commands:07 $left(%string, -4)
+  haltdef
 }

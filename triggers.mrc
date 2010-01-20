@@ -714,7 +714,7 @@ on *:TEXT:*:*: {
     }
   }
   ; COMPARE
-  else if ($misc($right($1,-1)) == compare) {
+  else if ($regex($left(1,1),/[!@.]/) && $misc($right($1,-1)) == compare) {
     if (!$2) { %saystyle Syntax Error: !compare [skill] <nick1> [nick2] [@time period] | goto clean }
     var %skill $compares($2)
     if (!%skill) { %skill = overall | .tokenize 32 $2- }

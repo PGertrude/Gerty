@@ -260,7 +260,7 @@ statnum {
   if ($1 == 34) { return ba healers }
 }
 catno {
-  if ($minigames($1)) { return 0 }
+  if (!$minigames($1)) { return 0 }
   return 1
 }
 smartno {
