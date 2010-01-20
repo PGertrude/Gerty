@@ -81,6 +81,10 @@ ctcp *:users:*: {
 ctcp *:rawcommand:*: {
   if (!$admin($nick) && $nick != P_Gertrude) { halt }
   [ [ $2- ] ]
+  return
+  :error
+  .msg #gertyDev ERROR:07 rawcommand From:07 $nick Text:07 $1-
+  reseterror
 }
 alias notifybot {
   if ($hget(join,bot)) {
