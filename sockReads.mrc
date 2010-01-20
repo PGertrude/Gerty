@@ -551,7 +551,7 @@ on *:sockread:*: {
       }
       elseif ($regex(%title,/Quest complete\W (.+)/i)) {
         var %old = $hget(%thread,done)
-        hadd -m %thread done %old $+ $regml(1) $+ $chr(124)
+        hadd -m %thread done %old $+ $nohtml($regml(1)) $+ $chr(124)
         if ($len($alogout(%thread)) > 350) hadd -m %thread done %old
       }
       elseif (recent event !isin %title) {

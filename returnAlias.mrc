@@ -100,6 +100,7 @@ caps {
 nohtml {
   var %x, %i = $regsub($1-,/(^[^<]*>|<[^>]*>|<[^>]*$)/g,$null,%x)
   %x = $replace($remove(%x,&nbsp;,$chr(9)),&quot;,$chr(34),&amp;,&,&lt;,<,&gt;,>,&#8242;,:,&quot;,")
+  %x = $replace(%x,&apos;,')
   return %x
 }
 urlencode {
