@@ -16,7 +16,6 @@ on *:START:{
 alias dbSelect {
   var %table = $1, %fields = $replace($2,;,$chr(44)), %conditions = $3-
   var %sql = SELECT %fields FROM %table
-
   ; CONDITIONS
   ; Check for null tokens
   var %x = 1
@@ -251,6 +250,7 @@ alias -l fatalError {
   linesep
   echo $color(info) $timestamp * $1-
   linesep
+  .msg #gertyDev Fatal Error:07 $1-
   halt
 }
 ; Throw a non-fatal error
@@ -258,4 +258,5 @@ alias -l warnError {
   linesep
   echo $color(info) $timestamp * $1-
   linesep
+  .msg #gertyDev Warning:07 $1-
 }
