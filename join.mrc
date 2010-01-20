@@ -90,6 +90,7 @@ alias notifybot {
   if ($hget(join,bot)) {
     ctcp $hget(join,bot) rawcommand hadd -m invite $2 $1
     ctcp $hget(join,bot) rawcommand join $2
+    return
   }
-  else .notice $1 Sorry but all bots are currently full.
+  .notice $1 Sorry but all bots are currently full.
 }
