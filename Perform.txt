@@ -1,2 +1,0 @@
-NS ID penguin2425
-MODE $me +Bp
