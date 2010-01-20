@@ -22,7 +22,7 @@ _setAdmin {
   var %x = 2, %y = 1
   while (%x <= $lines(botlist.txt)) {
     var %bot = $read(botlist.txt,%x)
-    if ($nick(#gerty,%bot)) {
+    if ($nick(#gerty,%bot) || $nick(#gertyDev,%bot)) {
       hadd -m botlist %y %bot
       noop $setDefname( $aLfAddress(%bot) , Gerty )
       inc %y
@@ -44,8 +44,9 @@ _throw {
       %info = %info $hget(%thread,$hget(%thread,%x).item)
       inc %x
     }
-    write ErrorLog.txt $date $timestamp SocketError: %script %thread $([,) $+ %info $3- $+ $(],)
+    write ErrorLog.txt $date $timestamp Error: %script %thread $([,) $+ %info $+ $(],) $3-
     $cmd(%thread,out) Connection Error: Please try again in a few moments.
+    .msg #gertyDev Error: %script %thread $([,) $+ %info $+ $(],) $3-
     .hfree %thread
     sockclose $sockname
     return
@@ -59,6 +60,7 @@ _throw {
     .tokenize 32 $3-
   }
   write ErrorLog.txt $date $timestamp Error: %script $([,) $+ %info $2- $+ $(],)
+  .msg #gertyDev $date $timestamp Error: %script %thread $([,) $+ %info $+ $(],) $3-
 }
 _network {
   .timer 1 0 noop $_networkMsg($1)
@@ -201,7 +203,8 @@ spamCheck {
   if ($hget($1,spam) >= 5) {
     ignore -pcntikdu18000 $1
     if ($address($1,3)) { ignore -pcntikdu18000 $address($1,3) }
-    msg $1 $1 Blacklisted for 5 hours for spamming. (5 commands in 5 seconds).
+    .msg $1 $1 Blacklisted for 5 hours for spamming. (5 commands in 5 seconds).
+    .msg #gertyDev SPAM:07 $1 detected spamming.
     return $true
   }
   return $false

@@ -1,18 +1,33 @@
 >start<|join.mrc|admin sorted|2.25|rs
 on *:INVITE:*: {
-  if ($chanset(#,blacklist) == yes) { .notice $nick Channel $chan is blacklisted. Speak to an admin to remove the blacklist. | halt }
+  .msg #gertyDev Invite:07 # Invited by:07 $nick
+  if ($chanset(#,blacklist) == yes) {
+    .notice $nick Channel $chan is blacklisted. Speak to an admin to remove the blacklist.
+    .msg #gertyDev Failed Join:07 # Reason:07 Channel is blacklisted.
+    halt
+  }
   if ($hget(join)) { hfree join }
   hadd -m invite $chan $nick
   if ($chan(0) < 30) {
     hadd -m join top $chan(0)
     hadd -m join bot $me
   }
-  var %x = $lines(botlist.txt)
+  var %x = $hget(botlist,0).item
   while (%x) {
-    if ($read(botlist.txt,%x) != $me) ctcp $read(botlist.txt,%x) join
+    if ($hget(botlist,%x) != $me) ctcp $v1 join
     dec %x
   }
   .timer 1 3 .notifybot $nick $chan
+}
+on *:KICK:*: {
+  if ($knick == $me) {
+    .msg #gertyDev KICKED:07 $chan by:07 $nick Reason:07 $1-
+  }
+}
+on *:PART:*: {
+  if ($nick == $me) {
+    .msg #gertyDev PARTED:07 $chan
+  }
 }
 on *:JOIN:*: {
   if ($nick == $me) {
@@ -25,11 +40,12 @@ on *:JOIN:*: {
 }
 alias delayedjoin {
   var %chan = $hget($1,chan)
-  if (%chan == #gerty || %chan == #howdy) { goto clean }
+  if (%chan == #gerty || %chan == #howdy || %chan == #gertyDev) { goto clean }
   var %x = 1
   while (%x <= $lines(botlist.txt)) {
     if ($read(botlist.txt,%x) ison %chan && $read(botlist.txt,%x) != $me) {
       part %chan You already have a Gerty bot.
+      .msg #gertyDev Failed Join:07 %chan Reason:07 Channel below user requirement.
       goto clean
     }
     inc %x
@@ -41,10 +57,12 @@ alias delayedjoin {
   if ($nick(%chan,0) < %min) {
     .msg %chan You do not have the required minimum users to keep me here. (Minimum users for this channel is07 %min $+ ).
     .msg %chan Contact a bot admin if you wish to have the user minimum lowered for this channel.
+    .msg #gertyDev Failed Join:07 %chan Reason:07 Channel below user requirement.
     part %chan
     goto clean
   }
   .msg %chan RScape Stats Bot Gerty ~ Invited by %invite ~ Please report Bugs/Suggestions to P_Gertrude.
+  .msg #gertyDev JOIN:07 %chan Invited by07 %invite Modes:07 $chan(%chan).mode Users:07 $nick(%chan,0) Total Chans:07 $chan(0)
   :clean
   if ($hget(invite)) { hfree invite }
   if ($hget($1)) { hfree $1 }

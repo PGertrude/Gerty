@@ -48,8 +48,8 @@ on *:CONNECT: {
   if ($network == SwiftIrc) {
 
     ; Join #Gerty and Load Addressess
-    join #gerty
-    who #gerty
+    join #gerty,#gertyDev
+    who #gertyDev
 
     ; Get other startup commands (Unique to each bot.)
     var %x = 1
@@ -67,3 +67,4 @@ on *:CONNECT: {
   .timertim -o 0 1 .timecount
 
 }
+raw 421:*: .msg #gertyDev ERROR:07 $2- Recent commands:07 ...
