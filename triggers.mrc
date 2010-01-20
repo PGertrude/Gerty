@@ -1178,4 +1178,8 @@ on *:TEXT:*:*: {
   if ($window($nick)) { window -c $nick }
   .timer 1 5 removeSpam $nick
   unset %*
+  return
+  :error
+  .msg #gertyDev ERROR:07 $error
+  reseterror
 }
