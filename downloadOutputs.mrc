@@ -210,6 +210,7 @@ alias geInfo {
   if ($0 == 1) { _throw geInfo %thread | halt }
   if (!$getPrice($1)) noop $setPrice($1,$4)
   $cmd(%thread,out)  $+ $2 $+  | Min:07 $format_number($3) Avg:07 $format_number($4) Max:07 $format_number($5) | 30 Days:07 $6 $+ $% | 90 Days:07 $7 $+ $% | 180 Days:07 $8 $+ $% | 12http://itemdb-rs.runescape.com/viewitem.ws?obj= $+ $1
+  _clearCommand %thread
 }
 ; SKILLPLAN
 alias skillplan.out {
