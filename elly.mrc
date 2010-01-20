@@ -24,16 +24,10 @@ alias botstats {
   $iif(t isin $1,$iif(m isin $1,msg $active,echo -a),return) Longest file: $+($chr(2),$nopath(%long),$chr(2)) at $+($chr(2),$lines(%long),$chr(2)) lines. Largest file: $+($chr(2),$nopath(%big),$chr(2)) at $+($chr(2),$round($calc($file(%big).size / 1024),2),$chr(2)) $+ KB.
 }
 alias swaptime {
-  var %b = $regex(time,$1,/(\d+)/g)
-  var %x = 0
-  while (%x < $calc(5 - $regml(time,0))) { var %y = %y 00 | inc %x }
-  var %x = 1
-  while (%x <= 5) {
-    var %y = %y $iif($regml(time,%x) < 10,0) $+ $regml(time,%x)
-    inc %x
-  }
-  var %time = $replace(%y,$chr(32),:)
-  return $gettok(%time,1,58) $+ w $gettok(%time,2,58) $+ d $gettok(%time,3-5,58)
+  noop $regex($1,/(?:(\d+)wks?|())(?: (\d+)days?|())(.+?)$/g)
+  var %days $calc($regml(1) * 7 + $regml(2))
+  var %time $duration($duration($regml(3)),3)
+  return %days $+ d %time
 }
 on $*:text:/youtube\.com\/watch\?v=([\w-]+)\W?/Si:*:{
   _CheckMain
