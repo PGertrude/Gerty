@@ -217,11 +217,12 @@ die return
 ;@SUMMARY manages the store of recent commands. (up to 5)
 shuffleHash {
   var %newLine $1
-  if (!$hget(commands)) hmake commands
+  if (!$hget(commands)) { hmake commands | hadd -m commands amount 1 }
   var %x 4
   while (%x) {
     hadd -m commands $calc(%x + 1) $hget(commands, %x))
     dec %x
   }
   hadd -m commands 1 %newLine
+  hinc commands amount
 }
