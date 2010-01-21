@@ -214,7 +214,7 @@ alias rowExists {
 
 ; 'PRIVATE' METHODS
 
-;@SYNTAX sql_query(string sqlQuery)
+;@SYNTAX sql_query(string sqlQuery, string fields)
 ;@SUMMARY Performs the sqlQuery on the gerty database. Will return an array if necessary, respective of the fields input.
 ;@NOTE return type $null = no results, return type $false = error occured
 alias -l sql_query {

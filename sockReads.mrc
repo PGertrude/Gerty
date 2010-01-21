@@ -5,52 +5,8 @@ on *:sockread:*: {
     _throw $sockname %thread
     halt
   }
-  ; COINSHARE - BROKEN
-  if (coinshare.* iswm $sockname) {
-    while ($sock($sockname).rq) {
-      sockread &item
-      bwrite %file -1 -1 &item
-    }
-    bread %file 0 $file(%file).size &item2
-    if ($bfind(&item2,0,</HTML>)) {
-      var %start = $bfind(&item2,0,>Item<)
-      while ($bfind(&item2,%start,item.ws?obj=)) {
-        var %a = $calc($bfind(&item2,%start,item.ws?obj=)+12), %b = $bfind(&item2,%a,"), %c = $calc($bfind(&item2,%b,>)+1), %d = $bfind(&item2,%c,<)
-        var %e = %e | $bvar(&item2,%c,$calc(%d - %c)).text 07 $+ $chr(35) $+ $bvar(&item2,%a,$calc(%b - %a)).text
-        var %start = %d
-      }
-      var %e = $gettok(%e,1-8,124)
-      if ($count(%e,$chr(35)) != 1) {
-        $hget(%thread,out) Matches found07 $count(%e,$chr(35)) %e
-      }
-      if ($count(%e,$chr(35)) == 1) {
-        hadd -m %thread id $gettok(%e,2,35)
-        sockopen $+(coinshare2.,%thread) itemdb-rs.runescape.com 80
-      }
-    }
-  }
-  else if (coinshare2.* iswm $sockname) {
-    while ($sock($sockname).rq) {
-      sockread &item3
-      bwrite %file -1 -1 &item3
-    }
-    bread %file 0 $file(%file).size &item4
-    if ($bfind(&item4,0,</HTML>)) {
-      var %start = $calc($bfind(&item4,0,>Browse<)+3)
-      var %a = $calc($bfind(&item4,%start,alt=")+5), %b = $bfind(&item4,%a,")
-      if ($calc(%a + 5) == %b) {
-        $hget(%thread,out) Item not found on 12itemdb-rs.runescape.com
-        goto unset
-      }
-      var %c = $calc($bfind(&item4,%b,price:)+11), %d = $bfind(&item4,%c,<)
-      var %minprice = $remove($bvar(&item4,%c,$calc(%d - %c)).text,$chr(10))
-      var %loot = $bytes($floor($calculate( %minprice / $hget(%thread,players) )),db)
-      $hget(%thread,out)  $+ $caps($bvar(&item4,%a,$calc(%b - %a)).text) $+  Minimum price:07 %minprice (Loot per players ( $+ $hget(%thread,players) $+ ):07 %loot $+ gp) 12http://itemdb-rs.runescape.com/viewitem.ws?obj= $+ $hget(%thread,id)
-      goto unset
-    }
-  }
   ; COST
-  else if (cost.* iswm $sockname) {
+  if (cost.* iswm $sockname) {
     var %sockcost
     sockread %sockcost
     if ($regex(cost,%sockcost,/^<\w>Market Price:<\/\w> ([\d\Wmk]+)/Si)) {
@@ -448,9 +404,9 @@ on *:sockread:*: {
   else if (world2.* iswm $sockname) {
     while ($sock($sockname).rq) {
       sockread &world
-      bwrite %thread -1 -1 &world
+      bwrite %file -1 -1 &world
     }
-    bread %thread 0 $file(%thread).size &world2
+    bread %file 0 $file(%file).size &world2
     if ($bfind(&world2,0,</HTML>)) {
       var %a = $calc($bfind(&world2,0,There are currently)+20), %b = $calc($bfind(&world2,%a,playing)-8)
       $cmd(%thread,out) There are currently 07 $+ $bytes($bvar(&world2,%a,$calc(%b - %a)).text,db) People Playing across 171 servers. Runescape at07 $round($calc(100* $bvar(&world2,%a,$calc(%b - %a)).text / 338000),2) $+ 07% Capacity.

@@ -18,16 +18,6 @@ on *:sockopen:*: {
     sockwrite -n $sockname Host: runescape.wikia.com
     sockwrite -n $sockname $crlf
   }
-  else if (coinshare.* iswm $sockname) {
-    sockwrite -n $sockname GET /results.ws?query= $+ $hget(%thread,search) $+ &price=all&members= HTTP/1.0
-    sockwrite -n $sockname Host: itemdb-rs.runescape.com
-    sockwrite -n $sockname $crlf
-  }
-  else if (coinshare2.* iswm $sockname) {
-    sockwrite -n $sockname GET /viewitem.ws?obj= $+ $hget(%thread,id) HTTP/1.0
-    sockwrite -n $sockname Host: itemdb-rs.runescape.com
-    sockwrite -n $sockname $crlf
-  }
   else if (compare.* iswm $sockname) {
     sockwrite -n $sockname GET /index_lite.ws?player= $+ $hget(%thread,nick) HTTP/1.1
     sockwrite -n $sockname Host: hiscore.runescape.com

@@ -128,9 +128,9 @@ _fillCommand {
   if (!$5) { return }
   var %thread = $1
   hadd -m %thread out $saystyle($2,$3,$4)
-  hadd -m %thread from $3
-  hadd -m %thread from.RSN $rsn($3)
-  hadd -m %thread from.IsAdmin $admin($3)
+  ;hadd -m %thread from $3
+  ;hadd -m %thread from.RSN $rsn($3)
+  ;hadd -m %thread from.IsAdmin $admin($3)
   hadd -m %thread command $5
   if ($6) {
     .tokenize 32 $6-

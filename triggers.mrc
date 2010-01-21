@@ -377,37 +377,42 @@ on *:TEXT:*:*: {
     sockopen $+(google.,%thread) ajax.googleapis.com 80
     goto clean
   }
-  ; COINSHARE - REWRITE
+  ; COINSHARE
   else if ($regex($1,/^[!@.]c(oin)?s(hare)?$/Si)) {
-    if ($chr(35) isin $2-) {
-      if ($chr(35) isin $2) {
-        hadd -m %thread id $remove($2,$chr(35))
-        hadd -m %thread players $calculate($3)
-      }
-      else {
-        hadd -m %thread id $remove($3,$chr(35))
-        hadd -m %thread players $calculate($2)
-      }
-      hadd -m %thread out %saystyle
-      sockopen $+(coinshare2.,%thread) itemdb-rs.runescape.com 80
-      halt
+    var %people, %search = $remove($3-,$#)
+    if ($2 isnum) %people = $2
+    else goto csSyntax
+    if (%search isnum) {
+      _fillCommand %thread $left($1,1) $nick $iif($chan,$v1,PM) coinshare %people
+      var %url http://gerty.rsportugal.org/parsers/geinfo.php?id= $+ %search
+      noop $download.break(csOut %thread, %thread, %url)
+      goto clean
     }
-    if ($chr(35) !isin $2- && $3) {
-      if ($calculate($2) isnum) {
-        var %players = $calculate($2)
-        var %search = " $+ $replace($3-,$chr(32),+) $+ "
-      }
-      else if ($regex(coinshare,$2-,/^(.+) (\d+[kmb]?)/Si)) {
-        var %search = " $+ $regml(coinshare,1) $+ "
-        var %players = $calculate($regml(coinshare,2))
-      }
-      hadd -m %thread players %players
-      hadd -m %thread search %search
-      hadd -m %thread out %saystyle
-      sockopen $+(coinshare.,%thread) itemdb-rs.runescape.com 80
-      halt
+    var %sql $dbSelectWhere(prices, id;name, name LIKE "% $+ %search $+ $% $+ ").sql
+    var %results $countResults(%sql)
+    if (!%results) {
+      %saystyle No results for07 %search found. If you think this is a valid item, please report it at #gerty
+      goto clean
     }
-    %saystyle Syntax Error: !coinshare <number of people> <item>
+    var %items $getPriceId(%search)
+    if (%results == 1) {
+      _fillCommand %thread $left($1,1) $nick $iif($chan,$v1,PM) coinshare %people
+      var %url http://gerty.rsportugal.org/parsers/geinfo.php?id= $+ $gettok(%items, 1, 59)
+      noop $download.break(csOut %thread, %thread, %url)
+    }
+    else {
+      .tokenize 44 %items
+      var %x 1, %itemList, %item
+      while (%x <= %results && %x <= 10) {
+        %item = $($ $+ %x,2)
+        %itemList = %itemList $gettok(%item,2,59) 07 $+ $# $+ $trim($gettok(%item,1,59)) $+ ;
+        inc %x
+      }
+      %saystyle Results:07 %results | %itemList
+    }
+    goto clean
+    :csSyntax
+    %saystyle Syntax Error: !coinshare <number of people> <item|#itemId>
     goto clean
   }
   ; QUEST
@@ -516,7 +521,7 @@ on *:TEXT:*:*: {
   else if ($regex($1,/^[!@.](hi(gh)?|low?)?(item|alch|alk)$/Si)) {
     if (!$2) %saystyle Syntax Error: !item <item|#item id>
 
-    var %search $remove($2,$#)
+    var %search $remove($2-,$#)
     if ($litecalc(%search) > 0) {
       var %url http://www.zybez.net/exResults.aspx?type=1&id= $+ $v1
       _fillCommand %thread $left($1,1) $nick $iif($chan,$v1,PM) item
