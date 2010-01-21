@@ -393,7 +393,7 @@ alias trackAll {
   }
   .tokenize 32 $timetoday
   var %today = $1, %week = $2, %month = $3, %year = $4
-  if (%r1 == 0) { %saystyle  $+ %nick Skills  $+ %command $+ : 07Overall $iif(%total > 0,[+ $+ %total $+ ]) 03+ $+ $iif(%r1 > 1000,$bytes($round($calc($v1 /1000),0),db) $+ k,$bytes($v1,db)) exp; | unset %* | goto unset }
+  if (%r1 == 0) { %saystyle  $+ %nick Skills  $+ %command $+ : 07Overall 03+0 exp; | unset %* | goto unset }
   var %cmb = $sort(Attack %2 %r2 Defence %3 %r3 Strength %4 %r4 Hitpoints %5 %r5 Range %6 %r6 Pray %7 %r7 Mage %8 %r8 Summon %25 %r25)
   if (%cmb) { var %out1 = %saystyle  $+ %nick Combat  $+ %command $+ : %cmb }
   var %others = $sort(Cook %9 %r9 Woodcut %10 %r10 Fletching %11 %r11 Fishing %12 %r12 Firemake %13 %r13 Crafting %14 %r14 Smithing %15 %r15 Mine %16 %r16 Herblore %17 %r17 Agility %18 %r18 Thieve %19 %r19 Slayer %20 %r20 Farming %21 %r21 Runecraft %22 %r22 Hunter %23 %r23 Construct %24 %r24)
@@ -406,7 +406,7 @@ alias trackAll {
 }
 alias voidRscript {
   var %string = $1-
-  if (PHP isin %string) { return Gap in Database }
+  ;if (PHP isin %string) { return Gap in Database }
   if ($regex(%string,/\n0:-1\n/)) { return Not Tracked }
   .tokenize 10 %string
   var %x = 1, %current, %gain, %line
