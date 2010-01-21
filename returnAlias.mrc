@@ -253,8 +253,8 @@ sorthilow {
   return %out
 }
 yesno {
-  if $1 = yes return 03Yes
-  if $1 = no return 04No
+  if $1 == yes return 03Yes
+  if $1 == no return 04No
   else return $1
 }
 grouper {
@@ -281,4 +281,12 @@ alogout {
   if ($hget($1,done)) %out = %out $+ $chr(44) Completed07 $left($replace($v1,$chr(124),$+(,$chr(44),07,$chr(32))),-6) $+ 
   if ($hget($1,other) != $blank) var %out = %out $+ $chr(44) Other:07 $left($replace($v1,$chr(124),$+(,$chr(44),07,$chr(32))),-6) $+ 
   return $right(%out,-2)
+}
+;@SYNTAX regget(string text, string regex)
+;@SUMMARY returns the text matched in the regular expression
+;@NOTE if no parenthesis in the expression, the alias returns $false.
+regget {
+  noop $regex($1, $2)
+  if ($regml(1) != $null) return $v1
+  return $false
 }

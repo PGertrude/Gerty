@@ -387,7 +387,7 @@ alias urban {
 ; TRACK
 alias trackAll {
   var %saystyle = $1 $2, %nick = $3, %time = $4, %command = $regsubex($5,/(\d)([a-z])/gi,\1$chr(32)\2)
-  if ($voidRscript($6)) {
+  if ($voidRscript($6-)) {
     %saystyle Error Occured:07 $v1
     goto unset
   }
@@ -527,4 +527,31 @@ alias rscriptCompareOut {
   _clearCommand %thread2
   .msg #gertyDev ERROR:07 compare:07 $error
   reseterror
+}
+; ITEM
+alias itemOut {
+  var %thread = $1, %itemPage = $2-
+  ; line 1
+  var %id $regget(%itemPage, /"id":"(\d+)"/)
+  var %name $regget(%itemPage, /"name":"([^"]+)"/)
+  var %market $regget(%itemPage, /"price":([^\x2c]+)/)
+  var %lowAlch $regget(%itemPage, /"item_price_alchemy_min": "(\d+)"/)
+  var %highAlch $regget(%itemPage, /"item_price_alchemy_max": "(\d+)"/)
+  var %location $regget(%itemPage, /"item_source_text_en": "([^"]+)"/)
+  ; line 2
+  var %members $regget(%itemPage, /"members":(true|false)/)
+  var %quest $regget(%itemPage, /"item_quests": "(Yes|No)"/)
+  var %trade $regget(%itemPage, /"item_tradable": "(True|False)"/)
+  var %stack $regget(%itemPage, /"item_stackable": "(True|False)"/)
+  var %weight $regget(%itemPage, /"item_weight": "([^"]+)"/)
+  var %examine $regget(%itemPage, /"item_examine_text_en": "([^"]+)"/)
+  $cmd(%thread, out) 07 $+ %name | Alch:07 $format_number(%highAlch) $+ / $+ $format_number(%lowAlch) | MarketPrice:07 $format_number(%market) | Location:07 %location |12 www.zybez.net/item.aspx?id= $+ %id
+  $cmd(%thread, out) Members: $normaliseItem(%members) | Quest: $normaliseItem(%quest) | Tradeable: $normaliseItem(%trade) | Stackable: $normaliseItem(%stack) | Weight:07 %weight $+ Kg | Examine:07 %examine
+}
+alias normaliseItem {
+  if $1 == yes return 03Yes
+  if $1 == no return 04No
+  if $1 == true return 03Yes
+  if $1 == false return 04No
+  return 07 $+ $1
 }

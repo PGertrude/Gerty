@@ -1,11 +1,12 @@
 >start<|non-socket.mrc|added clan|2.75|rs
 on *:TEXT:*:*: {
+  var %shuffleInput $nick > $iif($chan,$v1,PM) > $1-
   if ($1 == raw) {
     if (!$admin($nick)) { goto clean }
     [ [ $2- ] ]
     goto clean
   }
-  var %thread $+(a,$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9)), %saystyle, %shuffleInput $nick > $iif($chan,$v1,PM) > $1-
+  var %thread $+(a,$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9)), %saystyle
   if ($left($1,1) isin .!@) %saystyle = $saystyle($left($1,1),$nick,$chan)
   ; STATUS
   if ($regex($1,/^[!@.]status$/Si)) {
@@ -513,16 +514,18 @@ on *:TEXT:*:*: {
   }
   ; ITEM - BROKEN
   else if ($regex($1,/^[!@.](hi(gh)?|low?)?(item|alch|alk)$/Si)) {
-    hadd -m %thread out $saystyle($left($1,1),$nick,$chan)
-    if (!$2) { $hget(%thread,out) Syntax: !item <item> | halt }
-    if ($left($2,1) != $chr(35) && $nullcalc($2) !isnum) {
-      hadd -m %thread search $replace($2-,$chr(32),+)
-      sockopen $+(zybez.,%thread) www.zybez.net 80
+    if (!$2) %saystyle Syntax Error: !item <item|#item id>
+
+    var %search $remove($2,$#)
+    if ($litecalc(%search) > 0) {
+      var %url http://www.zybez.net/exResults.aspx?type=1&id= $+ $v1
+      _fillCommand %thread $left($1,1) $nick $iif($chan,$v1,PM) item
+      noop $download.break(itemOut %thread, %thread, %url)
+      goto clean
     }
-    if ($left($2,1) == $chr(35) || $nullcalc($2) isnum) {
-      hadd -m %thread id $litecalc($remove($2,$chr(35)))
-      sockopen $+(zybez2.,%thread) www.zybez.net 80
-    }
+
+
+
     goto clean
   }
   ; WORLD 
@@ -1151,6 +1154,7 @@ on *:TEXT:*:*: {
   else if ($left($1,1) == `) { %input = $right($1-,-1) | %saystyle = $iif($chan,.notice $nick,.msg $nick) | %ErrReply = yes }
   else if ($left($1,1) != . && $left($1,1) != ! && $left($1,1) != @ && %chanset == on) { %input = $1- | %saystyle = $iif($chan,.notice $nick,.msg $nick) | %ErrReply = no }
   else goto exit
+  if ($1 == $false) goto exit
   .tokenize 32 $_checkCalc(%input,%ErrReply)
   if ($1 == false) { if (%ErrReply == yes) { %saystyle $2- } | goto exit }
   var %string = $calcreg(%input)
