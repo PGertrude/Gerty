@@ -185,7 +185,7 @@ calccombat {
   if ($prop == gf2p) { return %gf2p }
   if ($prop == gp2p) { return %gp2p }
 }
-alias sort {
+sort {
   var %string = $1-
   %exps = $sorttok($regsubex(%string,/((\w+) (\d+) (\d+))/g,\4),32,nr)
   var %x = $numtok(%exps,32)
@@ -289,4 +289,15 @@ regget {
   noop $regex($1, $2)
   if ($regml(1) != $null) return $v1
   return $false
+}
+;@SYNTAX swapTime(string durationOutput)
+;@SYNTAX turns a duration output (52wks 31days 4hrs 32mins 3secs) into a string (395d 04:32:03)
+swapTime {
+  noop $regex($1,/(?:(\d+)wks?|())(?: (\d+)days?|())(.+?)$/g)
+  var %days $calc($regml(1) * 7 + $regml(2))
+  var %time $duration($duration($regml(3)),3)
+  var %inc $floor($calc($gettok(%time,1,58) / 24))
+  %time = $calc($gettok(%time,1,58) % 24) $+ : $+ $gettok(%time,2-,58)
+  inc %days %inc
+  return %days $+ d %time
 }

@@ -23,12 +23,6 @@ alias botstats {
   $iif(m isin $1,msg $active,echo -a) I have $+($chr(2),$script(0),$chr(2)) remote script files loaded $+ $iif(n isin $1,$+($chr(32),$chr(40),$chr(2),%names,$chr(2),$chr(41))) $+ , for a total of $+($chr(2),%lines,$chr(2)) lines and $+($chr(2),$round($calc(%size / 1024),2),$chr(2)) $+ KB.
   $iif(t isin $1,$iif(m isin $1,msg $active,echo -a),return) Longest file: $+($chr(2),$nopath(%long),$chr(2)) at $+($chr(2),$lines(%long),$chr(2)) lines. Largest file: $+($chr(2),$nopath(%big),$chr(2)) at $+($chr(2),$round($calc($file(%big).size / 1024),2),$chr(2)) $+ KB.
 }
-alias swaptime {
-  noop $regex($1,/(?:(\d+)wks?|())(?: (\d+)days?|())(.+?)$/g)
-  var %days $calc($regml(1) * 7 + $regml(2))
-  var %time $duration($duration($regml(3)),3)
-  return %days $+ d %time
-}
 on $*:text:/youtube\.com\/watch\?v=([\w-]+)\W?/Si:*:{
   _CheckMain
   if ($chanset($chan,youtube) != off) {
