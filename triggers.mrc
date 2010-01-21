@@ -1000,7 +1000,7 @@ on *:TEXT:*:*: {
   ; SETEVENT
   else if ($chan && $regex($1,/^[!@.]setevent$/Si)) {
     if ($nick isop $chan || $nick ishop $chan || $admin($nick)) {
-      noop $_network(noop $!dbUpdate(channel, `channel`=' $+ $chan $+ ', event, $2- $+ $(|,) $+ $nick $+ $(|,) $+ $date))
+      noop $_network(noop $!dbUpdate(channel, `channel`=' $+ $chan $+ ', event, $2- $+ $(|,) $+ $nick $+ $(|,) $+ $date ))
       %saystyle The event for07 $chan has been set to:07 $2-
     }
     goto clean
