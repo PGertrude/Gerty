@@ -26,6 +26,8 @@ on *:START: {
   if ($exists(spelluse.txt)) { .hload spelluse spelluse.txt }
   if !$hget(ge) { .hmake ge }
   if ($exists(geupdatebackup.txt)) { .hload ge geupdatebackup.txt }
+  if !$hget(commands) { .hmake commands }
+  if ($exists(commands.txt)) { .hload commands commands.txt }
 }
 on *:QUIT: {
   if ($nick != $me) return
@@ -33,7 +35,7 @@ on *:QUIT: {
   .hsave runeprice runeprice.txt
   .hsave spelluse spelluse.txt
   .hsave ge geupdatebackup.txt
-
+  .hsave commands commands.txt
 }
 on *:DISCONNECT: {
   if ($nick != $me) return
