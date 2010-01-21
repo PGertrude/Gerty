@@ -547,6 +547,7 @@ alias itemOut {
   var %examine $regget(%itemPage, /"item_examine_text_en": "([^"]+)"/)
   $cmd(%thread, out) 07 $+ %name | Alch:07 $format_number(%highAlch) $+ / $+ $format_number(%lowAlch) | MarketPrice:07 $format_number(%market) | Location:07 %location |12 www.zybez.net/item.aspx?id= $+ %id
   $cmd(%thread, out) Members: $normaliseItem(%members) | Quest: $normaliseItem(%quest) | Tradeable: $normaliseItem(%trade) | Stackable: $normaliseItem(%stack) | Weight:07 %weight $+ Kg | Examine:07 %examine
+  _clearCommand %thread
 }
 alias normaliseItem {
   if $1 == yes return 03Yes
