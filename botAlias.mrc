@@ -8,7 +8,7 @@ timeCount {
     var %url http://gerty.rsportugal.org/parsers/ge.php?item= $+ $replace(%search,$chr(32),+)
     noop $download.break(downloadGe %thread,%thread,%url)
   }
-  if (!$server) server irc.swiftirc.net
+  if ($calc($ctime % 10) == 0 && !$server) { server irc.swiftirc.net }
 }
 CheckGePrices {
   sockopen CheckGePrices.front. $+ $r(0,9999) itemdb-rs.runescape.com 80
