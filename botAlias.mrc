@@ -228,7 +228,7 @@ shuffleHash {
 sendToDev {
   if (!$1) return
   linesep
-  echo $color(info) * $1-
+  echo $color(info) $timestamp * $1-
   linesep
   .msg #gertyDev $1-
 }
