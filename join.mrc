@@ -28,6 +28,9 @@ on *:PART:*: {
   if ($nick == $me) {
     .msg #gertyDev PARTED:07 $chan
   }
+  else if ($nick(#,0) < 5) {
+    part # Channel has fallen below the user limit (07 $+ $chanset(#,users) $+ ).
+  }
 }
 on *:JOIN:*: {
   if ($nick == $me) {
@@ -93,4 +96,5 @@ alias notifybot {
     return
   }
   .notice $1 Sorry but all bots are currently full.
+  if ($hget(join)) hfree join
 }

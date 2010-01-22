@@ -36,6 +36,9 @@ on *:QUIT: {
   .hsave spelluse spelluse.txt
   .hsave ge geupdatebackup.txt
   .hsave commands commands.txt
+  if ($nick != $me && $nick(#,0) < 5) {
+    part # Channel has fallen below the user limit (07 $+ $chanset(#,users) $+ ).
+  }
 }
 on *:DISCONNECT: {
   if ($nick != $me) return
