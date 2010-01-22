@@ -16,17 +16,17 @@ on *:START:{
 alias dbSelect {
   var %table = $1, %fields = $replace($2,;,$chr(44)), %conditions = $3-
   var %sql = SELECT %fields FROM %table
+
   ; CONDITIONS
   ; Check for null tokens
-  var %x = 1, %tokens
+  var %x = 1
   while (%x <= $0) {
-    %tokens = %tokens %x $+ : $($ $+ %x,2)
-    if ($($ $+ %x,2) == $null) fatalError sqliteCommands > dbSelect > params > There is a null parameter @ $($ $+ %x $+ .,1) => %tokens
+    if ($($ $+ %x,2) == $null) fatalError sqliteCommands > dbSelect > params > There is a null parameter @ $($ $+ %x $+ .,1)
     inc %x
   }
   .tokenize 32 %conditions
   ; Check conditions
-  if ($calc($0 % 2) != 0) fatalError sqliteCommands > dbSelect > conditions > Mismatch in field/value assossiation. => %tokens => %conditions
+  if ($calc($0 % 2) != 0) fatalError sqliteCommands > dbSelect > conditions > Mismatch in field/value assossiation.
   ; Form WHERE
   var %where, %x = 1
   while (%x <= $0) {
@@ -51,10 +51,9 @@ alias dbSelectWhere {
   var %sql = SELECT %fields FROM %table WHERE %condition
 
   ; Check for null tokens
-  var %x = 1, %tokens
+  var %x = 1
   while (%x <= $0) {
-    %tokens = %tokens %x $+ : $($ $+ %x,2)
-    if ($($ $+ %x,2) == $null) fatalError sqliteCommands > dbSelectWhere > params > There is a null parameter @ $($ $+ %x $+ .,1) => %tokens
+    if ($($ $+ %x,2) == $null) fatalError sqliteCommands > dbSelectWhere > params > There is a null parameter @ $($ $+ %x $+ .,1)
     inc %x
   }
   if ($prop == sql) return %sql
@@ -76,7 +75,7 @@ alias dbUpdate {
   ; Check for null tokens
   var %x = 1
   while (%x <= $0) {
-    if (!$($ $+ %x,2)) fatalError sqliteCommands > dbUpdate > params > There is a null parameter @ $($ $+ %x $+ .,1)
+    if (!$($ $+ %x,2) ) fatalError sqliteCommands > dbUpdate > params > There is a null parameter @ $($ $+ %x $+ .,1)
     inc %x
   }
 
@@ -104,7 +103,7 @@ alias getDefname {
   if ($0 != 1) fatalError sqliteCommands > getDefname > No overload for getDefname takes $0 arguments, best match takes 1 argument: getDefname(string ircNick)
   var %fingerPrint = $iif($left($1,1) == $chr(42), $right($1,-3), $1), %rsn = $false
   if (@ !isin $1) %fingerprint = $right($address($1,3),-3)
-  if (%fingerPrint) %rsn = $dbSelect(users, rsn, fingerprint, $remove(%fingerprint,$chr(32)))
+  if (%fingerPrint) %rsn = $dbSelect(users, rsn, fingerprint, %fingerprint)
   if (%rsn) return %rsn
   return $false
 }
@@ -252,7 +251,6 @@ alias -l fatalError {
   linesep
   echo $color(info) $timestamp * $1-
   linesep
-  .msg #gertyDev Fatal Error:07 $1-
   halt
 }
 ; Throw a non-fatal error
@@ -260,5 +258,4 @@ alias -l warnError {
   linesep
   echo $color(info) $timestamp * $1-
   linesep
-  .msg #gertyDev Warning:07 $1-
 }

@@ -16,7 +16,7 @@ on $*:text:/^(\[\w{2}\]Gerty |Gerty |)?[!.@]((pot)(ion)?s?|(po)(uch)?|(farmer|pa
   else { var %num = 1 }
   if ($2 == $blank) { %saystyle Cost param syntax: !cost <skill> [amount] <item>. | halt }
   var %item = $regsubex($2-,/(.*?)\x20@/Si,\1)
-  .fopen cost $+ %ticks cost.txt
+  .fopen cost $+ %ticks param.txt
   while (!$feof) {
     var %cost = $fread(cost $+ %ticks)
     if ($gettok(%cost,1,9) != %skill) { goto skip }
@@ -511,12 +511,13 @@ alias costcrafting {
 }
 
 alias convertfile {
-  var %skill $lookups($1)
-  var %x = 1, %y = $lines(test.txt)
+  ;var %skill $lookups($1)
+  var %x = 1, %y = $lines(agility.txt)
   while (%x <= %y) {
-    var %convert = $read(test.txt,n,%x)
+    var %convert = $read(agility.txt,n,%x)
+    tokenize 9 %convert
     ;write -l $+ %x test.txt $+(Cooking|,$gettok(%convert,4,9),|,$gettok(%convert,3,9),|,$gettok(%convert,2,9))
-    write -l $+ %x test.txt Crafting| $+ $replace(%convert,$chr(9),$chr(124))
+    write test.txt $+(Agility,$chr(9),$3,$chr(9),$2,$chr(9),$1)
     inc %x
   }
   ;write test.txt $+(SKILL,$chr(9),LEVEL,$chr(9),EXP,$chr(9),NAME,$chr(9),POUCH ID,$chr(9),INGREDIENT,$chr(9),INGREDIENT ID,$chr(9),SHARDS,$chr(9),ALCH,$chr(9),MINUTES,$chr(9),SKILL FOCUS,$chr(9),OTHER)

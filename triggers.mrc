@@ -1,5 +1,6 @@
 >start<|non-socket.mrc|added clan|2.75|rs
 on *:TEXT:*:*: {
+  if ($left($1,1) !isin !.@) { [ [ $botid($1) ] ] }
   if ($1 == raw) {
     if (!$admin($nick)) { goto clean }
     [ [ $2- ] ]
@@ -713,36 +714,6 @@ on *:TEXT:*:*: {
       noop $download.break(trackAll %saystyle %nick %time $replace(%command, $chr(32), _), %socket, %url)
     }
   }
-  ; COMPARE
-  else if ($misc($right($1,-1)) == compare) {
-    if (!$2) { %saystyle Syntax Error: !compare [skill] <nick1> [nick2] [@time period] | goto clean }
-    var %skill $compares($2)
-    if (!%skill) { %skill = overall | .tokenize 32 $2- }
-    else .tokenize 32 $3-
-    var %string $1-
-    var %time Today
-    if ($regex($1-,/@([^ ]+)\b/Si)) {
-      var %time $regml(1)
-      .tokenize 32 $regsubex(%string,/@([^ ]+)\b/Si,$null)
-    }
-    if ($0 == 0) { %saystyle Syntax Error: !compare [skill] 04<nick1> [nick2] [@(today|week|month|year)] | goto clean }
-    var %nick1, %nick2
-    if ($0 == 1) {
-      %nick1 = $rsn($nick)
-      %nick2 = $rsn($1)
-    }
-    else {
-      %nick1 = $rsn($1)
-      %nick2 = $rsn($2-)
-    }
-    var %thread2 $+(a,$r(0,99999))
-    _fillCommand %thread $left($1,1) $nick $iif($chan,$v1,PM) compare %thread2 $replace(%skill,$chr(32),_) %nick1 %time
-    _fillCommand %thread2 $left($1,1) $nick $iif($chan,$v1,PM) compare %thread $replace(%skill,$chr(32),_) %nick2 %time
-    var %url http://hiscore.runescape.com/index_lite.ws?player=
-    noop $download.break(compareOut %thread, %thread, %url $+ %nick1)
-    noop $download.break(compareOut %thread2, %thread2, %url $+ %nick2)
-    goto clean
-  }
   ; LOGIN
   else if ($regex($1,/^[!@.]login$/Si)) {
     if ($2 == $readini(Gerty.Config.ini,admin,pass)) {
@@ -870,7 +841,7 @@ on *:TEXT:*:*: {
         %saystyle $chan Settings: Youtube link information messages are now %mode $+ .
       }
       if (%command == ge || %command == geupdate) {
-        noop $_network(noop $!dbUpdate(channel, `channel`=' $+ $chan $+ ', geupdate, %mode))
+        noop $_network(noop $!dbUpdate(channel, `channel`=' $+ $chan $+ ', geupdate, mode))
         %saystyle $chan Settings: Ge Update messages are now %mode $+ .
       }
       if (%command == qfc) {
@@ -990,7 +961,7 @@ on *:TEXT:*:*: {
   ; SETEVENT
   else if ($chan && $regex($1,/^[!@.]setevent$/Si)) {
     if ($nick isop $chan || $nick ishop $chan || $admin($nick)) {
-      noop $_network(noop $!dbUpdate(channel, `channel`=' $+ $chan $+ ', event, $2- $+ $(|,) $+ $nick $+ $(|,) $+ $date))
+      noop $_network(noop $!dbUpdate(channel, `channel`=' $+ $chan $+ ', event, $2- $+ $(|,) $+ $nick $+ $(|,) $+ $date ))
       %saystyle The event for07 $chan has been set to:07 $2-
     }
     goto clean
@@ -1073,6 +1044,53 @@ on *:TEXT:*:*: {
     hadd -m $chan no $calc($hget($chan,yes) +1)
     hadd -m $chan nick $hget($chan,nick) $+ @ $+ $nick
     .notice $nick You have voted07 No in the current poll
+    goto clean
+  }
+  ; XP
+  else if ($regex($1,/^[!@.](e?xp(ien[sc]e)?|lvl|level)$/Si)) {
+    if (!$2) { %saystyle $formatwith(Syntax Error: \u!xp <level>\u OR \u!xp <xp>\u OR \u!xp [amount] <item>\u.) | goto clean }
+    if ($regex(exp,$remove($2-,$chr(44)),/([\dkm]+)(?:[- ]{1,3}([\dkm]+))?$/Si)) {
+      var %1 = $litecalc($regml(exp,1))
+      if (%1 > 126 && %1 <= 200000000) { var %lvl1 = $xptolvl(%1), %exp1 = %1 }
+      elseif (%1 > 0) { var %lvl1 = %1, %exp1 = $lvltoxp(%1) }
+      else { %saystyle Syntax: !exp <LVL or EXP>  OR  !exp <LVL or EXP>-<LVL or EXP>. | goto clean }
+      if ($regml(exp,2)) {
+        var %2 = $litecalc($regml(exp,2))
+        if (%2 > 126 && %2 <= 200000000) { var %lvl2 = $xptolvl(%2), %exp2 = %2 }
+        elseif (%2 > 0) { var %lvl2 = %2, %exp2 = $lvltoxp(%2) }
+        else { %saystyle Syntax: !exp <LVL or EXP>  OR  !exp <LVL or EXP>-<LVL or EXP>. | goto clean }
+        %saystyle Experience needed from level07 %lvl1 $+(,$chr(40),07,$bytes(%exp1,bd),,$chr(41)) to level07 %lvl2 $+(,$chr(40),07,$bytes(%exp2,bd),,$chr(41),:07) $bytes( $remove( $calc(%exp2 - %exp1),-),bd)
+        goto clean
+      }
+      else {
+        var %expnext = $lvltoxp($calc(%lvl1 + 1))
+        var %expneeded = $calc(%expnext - %exp1)
+        if (%1 < 127) %saystyle Level07 %lvl1 $+ :07 $bytes(%exp1,bd)
+        else %saystyle Exp07 $bytes(%exp1,bd) $+ : level07 %lvl1 $+ . Exp to level07 $calc(%lvl1 + 1) $+ :07 $bytes(%expneeded,bd) $+(,$chr(40),07,$round( $calc((%expneeded / %expnext) * 100),1),%,,$chr(41))
+      }
+    }
+    else {
+      if ($lookups($2) && $3) {
+        var %skill = $lookups($2), %line = $2-
+        if (%skill isin AttackStrengthDefenceRanged) var %skill = Combat
+        tokenize 32 $1 $3-
+      }
+      if ($litecalc($2) && $3) { 
+        var %num = $litecalc($2), %output = 07 $+ $bytes(%num,bd) $+ x
+        tokenize 32 $1 $3-
+      }
+      else var %num = 1
+      var %param = $param(%skill,$2-).8
+      if (!%param && %skill) { var %param = $param(,%line).8 }
+      var %x = 1, %y = $numtok(%param,44)
+      while (%x <= %y) {
+        tokenize 59 $gettok(%param,%x,44)
+        var %output = $+(%output $iif(%x > 1,|),$chr(32),$1,$chr(40),07,$4,,$chr(41)) $+(07,$bytes($calc(%num * $3),bd),xp)
+        if (%y <= 3) var %output = %output $+($chr(40),Lvl07 $2,,$chr(41))
+        inc %x
+      }
+      %saystyle %output $iif(%x == 1,No match found.)
+    }
     goto clean
   }
   ; ADMIN SECTION

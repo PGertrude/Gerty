@@ -31,7 +31,6 @@ on *:PART:*: {
 }
 on *:JOIN:*: {
   if ($nick == $me) {
-    who $chan
     var %thread = $+(a,$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9))
     if (!$rowExists(channel, channel, $chan)) { noop $_network(noop $!sqlite_query(1, INSERT INTO channel (channel) VALUES (' $+ $chan $+ ');)) }
     hadd -m %thread chan $chan
@@ -61,8 +60,11 @@ alias delayedjoin {
     part %chan
     goto clean
   }
-  .msg %chan RScape Stats Bot Gerty ~ Invited by %invite ~ Please report Bugs/Suggestions to P_Gertrude.
-  .msg #gertyDev JOIN:07 %chan Invited by07 %invite Modes:07 $chan(%chan).mode Users:07 $nick(%chan,0) Total Chans:07 $chan(0)
+  if ($uptime(server,3) > 20) {
+    .msg %chan RScape Stats Bot Gerty ~ Invited by %invite ~ Please report Bugs/Suggestions to P_Gertrude.
+    .msg #gertyDev JOIN:07 %chan Invited by07 %invite Modes:07 $chan(%chan).mode Users:07 $nick(%chan,0) Total Chans:07 $chan(0)
+  }
+  who %chan
   :clean
   if ($hget(invite)) { hfree invite }
   if ($hget($1)) { hfree $1 }

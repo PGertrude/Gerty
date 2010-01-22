@@ -2,13 +2,13 @@
 timeCount {
   if ($read(timer.txt,nw,$ctime($asctime($gmt)) $+ *) && $server) { $gettok($read(timer.txt,nw,$ctime($asctime($gmt)) $+ *),2,124) }
   if ($calc($ctime % 60) == 0) { CheckGePrices }
-  if ($calc($ctime % 30) == 0) {
+  if ($calc($ctime % 300) == 0) {
     var %thread = $+(a,$r(0,999))
-    var %search = $dbSelectWhere(prices, name, `price`='0' AND `id` != 195 LIMIT 1)
+    var %search = $dbSelectWhere(prices, name, `price`='0' LIMIT 1)
     var %url http://gerty.rsportugal.org/parsers/ge.php?item= $+ $replace(%search,$chr(32),+)
     noop $download.break(downloadGe %thread,%thread,%url)
   }
-  if (!$server) server irc.swiftirc.net
+  if ($calc($ctime % 10) == 0 && !$server) { server irc.swiftirc.net }
 }
 CheckGePrices {
   sockopen CheckGePrices.front. $+ $r(0,9999) itemdb-rs.runescape.com 80
@@ -19,14 +19,11 @@ _setAdmin {
   if ($aLfAddress(Elessar)) { noop $setDefname( $v1 , Tiedemanns ) }
   if ($hget(botlist)) { .hfree botlist }
   .hmake botlist
-  var %x = 2, %y = 1
+  var %x = 2
   while (%x <= $lines(botlist.txt)) {
     var %bot = $read(botlist.txt,%x)
-    if ($nick(#gerty,%bot) || $nick(#gertyDev,%bot)) {
-      hadd -m botlist %y %bot
-      noop $setDefname( $aLfAddress(%bot) , Gerty )
-      inc %y
-    }
+    hadd -m botlist $calc(%x - 1) %bot
+    if ($nick(#gerty,%bot)) { noop $setDefname( $aLfAddress(%bot) , Gerty ) }
     inc %x
   }
 }
@@ -44,9 +41,8 @@ _throw {
       %info = %info $hget(%thread,$hget(%thread,%x).item)
       inc %x
     }
-    write ErrorLog.txt $date $timestamp Error: %script %thread $([,) $+ %info $+ $(],) $3-
+    write ErrorLog.txt $date $timestamp SocketError: %script %thread $([,) $+ %info $3- $+ $(],)
     $cmd(%thread,out) Connection Error: Please try again in a few moments.
-    .msg #gertyDev Error: %script %thread $([,) $+ %info $+ $(],) $3-
     .hfree %thread
     sockclose $sockname
     return
@@ -60,7 +56,6 @@ _throw {
     .tokenize 32 $3-
   }
   write ErrorLog.txt $date $timestamp Error: %script $([,) $+ %info $2- $+ $(],)
-  .msg #gertyDev $date $timestamp Error: %script %thread $([,) $+ %info $+ $(],) $3-
 }
 _network {
   .timer 1 0 noop $_networkMsg($1)
@@ -89,7 +84,7 @@ host {
 bot {
   ; bot ID
   if ($1 == id) {
-    noop $regex($me,/(\[.{2}\]|)/i)
+    noop $regex($me,/(\[.{2})\]|)/i)
     return $iif($regml(1),$v1,[00])
   }
   ; Current Users
@@ -192,21 +187,51 @@ download.break {
 }
 cleanhash {
   .hfree -w a*
-  var %x 1, %y = $com(0)
-  while (%x <= %y) {
-    .comclose $com(1)
-    inc %x
-  }
+  .hfree -w e*
+  .hfree -w d*
 }
 removeSpam if ($hget($1)) hfree $1
 spamCheck {
   if ($hget($1,spam) >= 5) {
     ignore -pcntikdu18000 $1
     if ($address($1,3)) { ignore -pcntikdu18000 $address($1,3) }
-    .msg $1 $1 Blacklisted for 5 hours for spamming. (5 commands in 5 seconds).
-    .msg #gertyDev SPAM:07 $1 detected spamming.
+    msg $1 $1 Blacklisted for 5 hours for spamming. (5 commands in 5 seconds).
     return $true
   }
   return $false
 }
 die return
+botid {
+  var %id = $bot(id)
+  if ($1 == $me) return tokenize 32 $!2-
+  elseif ($istok($1-,%id,44) || $+([,$1,]) == %id) { return tokenize 32 $!2- }
+  elseif ($1 == Gerty && Gerty !ison $chan) { return tokenize 32 $!2- }
+  elseif ($+([,$1,]Gerty) ison #gertyDev) { return goto clean }
+  tokenize 44 $1-
+  var %x = 1
+  while (%x <= $0) {
+    if ($regsubex($($ $+ %x,2),/^\[(\w{2})\](?:Gerty)?$/Si,[ $+ \1 $+ ]Gerty) ison #gertyDev) { return goto clean }
+    inc %x
+  }
+}
+RealCount {
+  var %x = 1, %n = 0, %m = 0, %u
+  while ($chan(%x)) {
+    var %chan = $chan(%x), %a = 1, %b = 0
+    while ($nick(%chan,%a)) {
+      if (!$istok(BanHammer Captain_Falcon ClanWars Client Coder Machine milk mIRC Noobs Q RuneScape snoozles Unknown W Warcraft X Y Rudolph Spam,$nick(%chan,%a),32) && !$regex($nick(%chan,%a),/(BigSister$|Gerty$|RuneScript$|\bVectra|\bBabylon|Noobwegian|\bOnzichtbaar|\bChanStat)/Si)) {
+        inc %b
+        inc %n
+        if (!$istok(%u,$nick(%chan,%a),32)) var %u = %u $nick(%chan,%a)
+      }
+      inc %a
+      inc %m
+    }
+    var %y = $+(%y,$iif(%y,$chr(44)),$chr(32),%chan,[,%b,/,$nick(%chan,0)])
+    inc %x
+  }
+  if ($1 == total) return %n
+  if ($1 == faketotal) return %m
+  if ($1 == names) return $numtok(%u,32)
+  return %y
+}
