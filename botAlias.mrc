@@ -89,7 +89,7 @@ host {
 bot {
   ; bot ID
   if ($1 == id) {
-    noop $regex($me,/(\[.{2})\]|)/i)
+    noop $regex($me,/(\[.{2}\])|)/i)
     return $iif($regml(1),$v1,[00])
   }
   ; Current Users
