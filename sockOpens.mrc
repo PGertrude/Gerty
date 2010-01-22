@@ -18,18 +18,6 @@ on *:sockopen:*: {
     sockwrite -n $sockname Host: runescape.wikia.com
     sockwrite -n $sockname $crlf
   }
-  else if (compare.* iswm $sockname) {
-    sockwrite -n $sockname GET /index_lite.ws?player= $+ $hget(%thread,nick) HTTP/1.1
-    sockwrite -n $sockname Host: hiscore.runescape.com
-    sockwrite -n $sockname $crlf
-  }
-  else if (rsccomp.* iswm $sockname) {
-    .tokenize 32 $timeToday
-    var %today = $1, %week = $2, %month = $3, %year = $4
-    sockwrite -n $sockname GET /lookup.php?type=track&user= $+ $cmd(%thread,nick) $+ &skill= $+ $calc($statnum($hget(%thread,skill)) -1) $+ &time= $+ $(% $+ $hget(%thread,time),2) HTTP/1.1
-    sockwrite -n $sockname Host: www.rscript.org
-    sockwrite -n $sockname $crlf
-  }
   else if (cost.* iswm $sockname) {
     sockwrite -nt $sockname GET /viewitem.ws?obj= $+ $gettok($sockname,3,46) HTTP/1.1
     sockwrite -nt $sockname Host: itemdb-rs.runescape.com
