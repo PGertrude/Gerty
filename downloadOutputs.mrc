@@ -565,3 +565,24 @@ alias normaliseItem {
   if $1 == false return 04No
   return 07 $+ $1
 }
+alias itemsOut {
+  var %thread $1, %items = $2-
+  .tokenize 10 $2-
+  if ($0 == 0) {
+    $cmd(%thread, out) No results found for07 $cmd(%thread, arg1) at12 www.zybez.net
+    _clearCommand %thread
+    return
+  }
+  else if ($0 == 1) {
+    var %url http://www.zybez.net/exResults.aspx?type=1&id= $+ $gettok($1,1,58)
+    noop $download.break(itemOut %thread, %thread $+ 2, %url)
+    return
+  }
+  var %x 1, %output
+  while (%x <= $0 && $len(%output) < 350) {
+    %output = %output $gettok($($ $+ %x,2),2,58) 07# $+ $gettok($($ $+ %x,2),1,58) $+ ;
+    inc %x
+  }
+  $cmd(%thread,out) results:07 $0 | %output
+  _clearCommand %thread
+}

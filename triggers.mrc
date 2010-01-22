@@ -322,26 +322,24 @@ on *:TEXT:*:*: {
       _fillCommand %thread $left($1,1) $nick $iif($chan,$v1,PM) geinfo
       var %url http://gerty.rsportugal.org/parsers/geinfo.php?id= $+ %id
       noop $download.break(geInfo %thread,%thread,%url)
+      goto clean
     }
-    else {
-      var %items $getPriceId($2-)
-      .tokenize 44 %items
-      if ($0 == 1) {
-        var %id = $gettok(%items,1,59)
-        _fillCommand %thread $left($1,1) $nick $iif($chan,$v1,PM) geinfo
-        var %url http://gerty.rsportugal.org/parsers/geinfo.php?id= $+ %id
-        noop $download.break(geInfo %thread,%thread,%url)
-      }
-      else {
-        var %x 1, %itemList = |
-        while (%x <= $0) {
-          %itemList = %itemList $trim($gettok($($ $+ %x,2),2,59)) 07 $+ $# $+ $trim($gettok($($ $+ %x,2),1,59)) $+ ;
-          if ($len(%itemList) > 400) break
-          inc %x
-        }
-        %saystyle Results:07 $0 $iif($0 > 1,%itemList)
-      }
+    var %items $getPriceId($2-), %left $left($1,1)
+    .tokenize 44 %items
+    if ($0 == 1) {
+      var %id = $gettok(%items,1,59)
+      _fillCommand %thread %left $nick $iif($chan,$v1,PM) geinfo
+      var %url http://gerty.rsportugal.org/parsers/geinfo.php?id= $+ %id
+      noop $download.break(geInfo %thread,%thread,%url)
+      goto clean
     }
+    var %x 1, %itemList = |
+    while (%x <= $0) {
+      %itemList = %itemList $trim($gettok($($ $+ %x,2),2,59)) 07 $+ $# $+ $trim($gettok($($ $+ %x,2),1,59)) $+ ;
+      if ($len(%itemList) > 400) break
+      inc %x
+    }
+    %saystyle Results:07 $0 $iif($0 > 1,%itemList)
     goto clean
   }
   ; GOOGLE
@@ -518,7 +516,7 @@ on *:TEXT:*:*: {
     var %url = http://www.rscript.org/lookup.php?type=urban&id=1&search= $+ $cmd(%thread,arg1)
     noop $download.break(urban %thread,urban. $+ %thread, %url)
   }
-  ; ITEM - BROKEN
+  ; ITEM
   else if ($regex($1,/^[!@.](hi(gh)?|low?)?(item|alch|alk)$/Si)) {
     if (!$2) %saystyle Syntax Error: !item <item|#item id>
 
@@ -530,7 +528,9 @@ on *:TEXT:*:*: {
       goto clean
     }
 
-
+    var %url http://gerty.rsportugal.org/parsers/items.php?item= $+ $urlencode(%search)
+    _fillCommand %thread $left($1,1) $nick $iif($chan,$v1,PM) item %search
+    noop $download.break(itemsOut %thread, %thread, %url)
 
     goto clean
   }
