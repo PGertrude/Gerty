@@ -1,5 +1,6 @@
 >start<|exp.mrc|Exp Params|1.15|rs
 on $*:text:/^[!@.](le?ve?l|e?xp)\b/Si:*:{
+  halt
   _CheckMain
   var %saystyle = $saystyle($left($1,1),$nick,$chan)
   if (!$2) { %saystyle $formatwith(Syntax Error: \u!xp <level>\u OR \u!xp <xp>\u OR \u!xp <item>\u.) | halt }

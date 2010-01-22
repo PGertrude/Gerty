@@ -2,9 +2,9 @@
 timeCount {
   if ($read(timer.txt,nw,$ctime($asctime($gmt)) $+ *) && $server) { $gettok($read(timer.txt,nw,$ctime($asctime($gmt)) $+ *),2,124) }
   if ($calc($ctime % 60) == 0) { CheckGePrices }
-  if ($calc($ctime % 30) == 0) {
+  if ($calc($ctime % 300) == 0) {
     var %thread = $+(a,$r(0,999))
-    var %search = $dbSelectWhere(prices, name, `price`='0' AND `id` != 195 LIMIT 1)
+    var %search = $dbSelectWhere(prices, name, `price`='0' LIMIT 1)
     var %url http://gerty.rsportugal.org/parsers/ge.php?item= $+ $replace(%search,$chr(32),+)
     noop $download.break(downloadGe %thread,%thread,%url)
   }
@@ -44,7 +44,7 @@ _throw {
       %info = %info $hget(%thread,$hget(%thread,%x).item)
       inc %x
     }
-    write ErrorLog.txt $date $timestamp Error: %script %thread $([,) $+ %info $+ $(],) $3-
+    write ErrorLog.txt $date $timestamp SocketError: %script %thread $([,) $+ %info $3- $+ $(],)
     $cmd(%thread,out) Connection Error: Please try again in a few moments.
     .msg #gertyDev Error: %script %thread $([,) $+ %info $+ $(],) $3-
     .hfree %thread
@@ -89,7 +89,7 @@ host {
 bot {
   ; bot ID
   if ($1 == id) {
-    noop $regex($me,/(\[.{2}\]|)/i)
+    noop $regex($me,/(\[.{2})\]|)/i)
     return $iif($regml(1),$v1,[00])
   }
   ; Current Users
@@ -224,6 +224,18 @@ shuffleHash {
   }
   hadd -m commands 1 %newLine
   hinc commands amount
+botid {
+  var %id = $bot(id)
+  if ($1 == $me) return tokenize 32 $!2-
+  elseif ($istok($1-,%id,44) || $+([,$1,]) == %id) { return tokenize 32 $!2- }
+  elseif ($1 == Gerty && Gerty !ison $chan) { return tokenize 32 $!2- }
+  elseif ($+([,$1,]Gerty) ison #gertyDev) { return goto clean }
+  tokenize 44 $1-
+  var %x = 1
+  while (%x <= $0) {
+    if ($regsubex($($ $+ %x,2),/^\[(\w{2})\](?:Gerty)?$/Si,[ $+ \1 $+ ]Gerty) ison #gertyDev) { return goto clean }
+    inc %x
+  }
 }
 ;@SYNTAX /sendToDev errorMessage
 ;@SUMMARY sends an error message to the developers channel, also echos to the status window.
@@ -237,3 +249,24 @@ sendToDev {
 ;@SYNTAX /sendToDevOnly errorMessage
 ;@SUMMARY sends an error message to the developers channel only.
 sendToDevOnly .msg #gertyDev $1-
+RealCount {
+  var %x = 1, %n = 0, %m = 0, %u
+  while ($chan(%x)) {
+    var %chan = $chan(%x), %a = 1, %b = 0
+    while ($nick(%chan,%a)) {
+      if (!$istok(BanHammer Captain_Falcon ClanWars Client Coder Machine milk mIRC Noobs Q RuneScape snoozles Unknown W Warcraft X Y Rudolph Spam,$nick(%chan,%a),32) && !$regex($nick(%chan,%a),/(BigSister$|Gerty$|RuneScript$|\bVectra|\bBabylon|Noobwegian|\bOnzichtbaar|\bChanStat)/Si)) {
+        inc %b
+        inc %n
+        if (!$istok(%u,$nick(%chan,%a),32)) var %u = %u $nick(%chan,%a)
+      }
+      inc %a
+      inc %m
+    }
+    var %y = $+(%y,$iif(%y,$chr(44)),$chr(32),%chan,[,%b,/,$nick(%chan,0)])
+    inc %x
+  }
+  if ($1 == total) return %n
+  if ($1 == faketotal) return %m
+  if ($1 == names) return $numtok(%u,32)
+  return %y
+}

@@ -4,7 +4,7 @@ $ return $chr(36)
 % return $chr(37)
 | return $chr(124)
 aLfAddress {
-  if ($right($address($1,3), -3)) return $iif($left($v1,1) == ~, $right( [ $v1 ] ,-1), [ $v1 ] )
+  if ($right($address($1,3), -3)) return $v1
   return $false
 }
 price {
@@ -80,7 +80,15 @@ fact {
     }
   }
 }
-admin if ($regex($getDefname($1),$+(/^,$chr(40),$readini(Gerty.Config.ini,admin,rsn),$chr(41),/i))) { return admin }
+rccom {
+  if ($regex($1,$+(/^,$chr(40),$readini(rccomp.ini,member,nick),$chr(41),/i))) { return tracked }
+}
+tracked {
+  if ($regex($1,$+(/^,$chr(40),$readini(tracked.ini,tracked,nick),$chr(41),/i))) { return _tracked }
+}
+admin {
+  if ($regex($rsn($1),$+(/^,$chr(40),$readini(Gerty.Config.ini,admin,rsn),$chr(41),/i))) { return admin }
+}
 rsn {
   if ($getDefname($1)) return $v1
   return $caps($regsubex($1-,/\W/g,_))
@@ -257,6 +265,7 @@ yesno {
   if $1 == no return 04No
   else return $1
 }
+;SYNTAX: $grouper(ITEM|ITEM|ITEM)
 grouper {
   var %x = 1
   while ($gettok($1-,%x,124)) {
@@ -300,4 +309,31 @@ swapTime {
   %time = $calc($gettok(%time,1,58) % 24) $+ : $+ $gettok(%time,2-,58)
   inc %days %inc
   return %days $+ d %time
+;@SYNTAX $param([skill],<item>)[.prop]
+;@SUMMERY No $prop specified or number 1-20: Output: Skill;lvl;exp;item,Skill;lvl;exp;item, etc - Max 20 or whichever $prop nr specified.
+;@PARAM $prop: .skill .lvl .exp .item - Outputs specified item on first match.
+;@NOTE Skill and $prop optional.
+param {
+  if ($prop >= 1 && $prop <= 20) { var %num = $prop }
+  elseif ($prop isnum || !$prop) { var %num = 20 }
+  var %ran = $ran, %skill = $1, %item = $2
+  .fopen param $+ %ran param.txt
+  while (!$feof) {
+    var %param = $fread(param $+ %ran)
+    tokenize 9 %param
+    if (!%num) {
+      if (!%skill || %skill == $1) && ($+(*,%item,*) iswm $4) {
+        var %output = $($+($chr(36),$replace($prop,skill,1,lvl,2,exp,3,xp,3,item,4)),2)
+        break
+      }
+    }
+    else {
+      if (!%skill || %skill == $1) && ($+(*,%item,*) iswm $4) {
+        var %output = $+(%output,$iif(%output,$chr(44)),$1,;,$2,;,$3,;,$4)
+      }
+      if (%num <= $calc($count(%output,$chr(44)) + 1)) break
+    }
+  }
+  .fclose param $+ %ran
+  return %output
 }

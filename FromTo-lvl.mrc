@@ -68,7 +68,7 @@ on $*:text:/^([^ ]+ )?@?~/Si:*:{
     %saystyle Level estimation syntax: ~skill <from lvl> <to lvl> @<item> or ~skill <exp> @<item>. You can use !set item <skill> <item> as replacement for item.
   }
 }
-alias botid {
+alias oldbotid {
   if ($1 == $me) return tokenize 32 $2-
   if ($regex(botid,$1,/^\[?(.{2})\]?$/S)) {
     if ($bot(id) == $regml(botid,1)) return tokenize 32 $2-

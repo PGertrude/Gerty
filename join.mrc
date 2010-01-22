@@ -64,8 +64,11 @@ alias delayedjoin {
     part %chan
     goto clean
   }
-  .msg %chan RScape Stats Bot Gerty ~ Invited by %invite ~ Please report Bugs/Suggestions to P_Gertrude.
+  if ($uptime(server,3) > 20) {
+    .msg %chan RScape Stats Bot Gerty ~ Invited by %invite ~ Please report Bugs/Suggestions to P_Gertrude.
   sendToDevOnly JOIN:07 %chan Invited by07 %invite Modes:07 $chan(%chan).mode Users:07 $nick(%chan,0) Total Chans:07 $chan(0)
+  }
+  who %chan
   :clean
   if ($hget(invite)) { hfree invite }
   if ($hget($1)) { hfree $1 }
