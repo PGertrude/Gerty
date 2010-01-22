@@ -139,8 +139,8 @@ alias getPrice {
     return %price
   }
   else {
-    if ($prop == sql) return $dbSelectWhere(prices, name;price;change, name LIKE $+('%,$1,$%,') ORDER BY price DESC).sql
-    %price = $dbSelectWhere(prices, name;price;change, name LIKE $+("%,$1,$%,") AND price>0 ORDER BY price DESC)
+    if ($prop == sql) return $dbSelectWhere(prices, name;price;change, name LIKE $+('%,$remove($1,"),$%,') ORDER BY price DESC).sql
+    %price = $dbSelectWhere(prices, name;price;change, name LIKE $+("%,$remove($1,"),$%,") AND price>0 ORDER BY price DESC)
     if (%price == $null) return $null
     else if ($trim($gettok(%price,2,59)) == 0) return $false
     return %price
@@ -153,7 +153,7 @@ alias getPrice {
 alias getPriceId {
   if ($0 != 1) fatalError sqliteCommands > getPrice > No overload for getPrice takes $0 arguments, best match takes 1 argument: getPrice(string item)
   var %id
-  %id = $dbSelectWhere(prices, id;name, name LIKE "% $+ $1 $+ $% $+ ")
+  %id = $dbSelectWhere(prices, id;name, name LIKE "% $+ $remove($1,") $+ $% $+ ")
   if (%id == $null) return $null
   return %id
 }

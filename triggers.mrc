@@ -75,7 +75,7 @@ on *:TEXT:*:*: {
     var %skill, %nick
     if ($3) { %nick = $rsn($replace($3-,$chr(32),_)) }
     else { %nick = $rsn($nick) }
-    if ($2) { %skill = $statnum($2) }
+    if ($2) { %skill = $scores($2) }
     else { %skill = overall }
     %saystyle $formatwith({0} 07{1} graph | 12http://t.rscript.org/graph-{0}.{2}.lvl.png | exp: 12http://t.rscript.org/graph-{0}.{2}.png | rank: 12http://t.rscript.org/graph-{0}.{2}.rank.png, %nick, %skill, $calc($statnum(%skill) -1))
     goto clean

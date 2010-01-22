@@ -190,40 +190,40 @@ tracks {
   if ($regex($remove($1,@),/^(year)$/Si)) { return Year }
 }
 statnum {
-  if ($skills($1) == overall) { return 1 }
-  if ($skills($1) == attack) { return 2 }
-  if ($skills($1) == strength) { return 4 }
-  if ($skills($1) == defence) { return 3 }
-  if ($skills($1) == hitpoints) { return 5 }
-  if ($skills($1) == ranged) { return 6 }
-  if ($skills($1) == prayer) { return 7 }
-  if ($skills($1) == magic) { return 8 }
-  if ($skills($1) == cooking) { return 9 }
-  if ($skills($1) == woodcutting) { return 10 }
-  if ($skills($1) == fletching) { return 11 }
-  if ($skills($1) == fishing) { return 12 }
-  if ($skills($1) == firemaking) { return 13 }
-  if ($skills($1) == crafting) { return 14 }
-  if ($skills($1) == smithing) { return 15 }
-  if ($skills($1) == mining) { return 16 }
-  if ($skills($1) == herblore) { return 17 }
-  if ($skills($1) == agility) { return 18 }
-  if ($skills($1) == thieving) { return 19 }
-  if ($skills($1) == slayer) { return 20 }
-  if ($skills($1) == farming) { return 21 }
-  if ($skills($1) == runecraft) { return 22 }
-  if ($skills($1) == hunter) { return 23 }
-  if ($skills($1) == construction) { return 24 }
-  if ($skills($1) == summoning) { return 25 }
-  if ($minigames($1) == Duel) { return 26 }
-  if ($minigames($1) == Bounty Hunter) { return 27 }
-  if ($minigames($1) == Bounty Hunter Rogues) { return 28 }
-  if ($minigames($1) == Fist Of Guthix) { return 29 }
-  if ($minigames($1) == Mobilising Armies) { return 30 }
-  if ($minigames($1) == BA Attackers) { return 31 }
-  if ($minigames($1) == BA Defenders) { return 32 }
-  if ($minigames($1) == BA Collectors) { return 33 }
-  if ($minigames($1) == BA Healers) { return 34 }
+  if ($1 == overall) { return 1 }
+  if ($1 == attack) { return 2 }
+  if ($1 == defence) { return 3 }
+  if ($1 == strength) { return 4 }
+  if ($1 == hitpoints) { return 5 }
+  if ($1 == ranged) { return 6 }
+  if ($1 == prayer) { return 7 }
+  if ($1 == magic) { return 8 }
+  if ($1 == cooking) { return 9 }
+  if ($1 == woodcutting) { return 10 }
+  if ($1 == fletching) { return 11 }
+  if ($1 == fishing) { return 12 }
+  if ($1 == firemaking) { return 13 }
+  if ($1 == crafting) { return 14 }
+  if ($1 == smithing) { return 15 }
+  if ($1 == mining) { return 16 }
+  if ($1 == herblore) { return 17 }
+  if ($1 == agility) { return 18 }
+  if ($1 == thieving) { return 19 }
+  if ($1 == slayer) { return 20 }
+  if ($1 == farming) { return 21 }
+  if ($1 == runecraft) { return 22 }
+  if ($1 == hunter) { return 23 }
+  if ($1 == construction) { return 24 }
+  if ($1 == summoning) { return 25 }
+  if ($1 == duel || $1 == dueling) { return 26 }
+  if ($1 == bounty hunter) { return 27 }
+  if ($1 == bounty hunter rogues) { return 28 }
+  if ($1 == fist of guthix) { return 29 }
+  if ($1 == mobilising armies) { return 30 }
+  if ($1 == ba attackers) { return 31 }
+  if ($1 == ba defenders) { return 32 }
+  if ($1 == ba collectors) { return 33 }
+  if ($1 == ba healers) { return 34 }
   if ($1 == 1) { return overall }
   if ($1 == 2) { return attack }
   if ($1 == 3) { return defence }
