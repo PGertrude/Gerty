@@ -30,7 +30,7 @@ on *:TEXT:*:*: {
         if (%event) { %event = Event:07 Yes }
         else { %event = Event:07 No }
         %saystyle Channel info:07 $2 $iif(%curusers,Users:07 %curusers $+ $chr(32)) $+ %public %blacklist %youtube %site %event
-        return
+        goto clean
       }
     }
     %saystyle Chans:07 $chan(0) Nicks:07 $bot(users) Uptime:07 $swaptime($uptime(server,1)) Total Commands:07 $hget(commands,amount)
@@ -168,9 +168,10 @@ on *:TEXT:*:*: {
     noop $download.break(getClans %user %saystyle non-clan %thread, a $+ $r(0,99999), http://runehead.com/feeds/lowtech/searchuser.php?type=1&user= $+ %user)
     goto clean
   }
-  ; STATISTICS
+  ; STATISTICS ; % ; CMBPERCENT
   else if ($regex($1,/^([!@.](%|cmb%|combat%|p2p%|f2p%|sl%|slay%|slayer%|skill%|pc%|pest%|pestcontrol%|skiller%)|%)$/Si)) {
     var %nick
+    if (!%saystyle) %saystyle = $iif($chan,.notice $nick,.msg $nick)
     if ($2) %nick = $rsn($2-)
     else %nick = $rsn($nick)
     var %socket = spam. $+ %thread
@@ -638,7 +639,7 @@ on *:TEXT:*:*: {
     var %url = http://www.rscript.org/lookup.php?type=track&user= $+ %nick $+ &skill=all&time= $+ %time
     noop $download.break(trackAll %saystyle %nick %time %command, %thread, %url)
   }
-  ; LASTWEEK/LASTMONTH/LASTYEAR/YESTERDAY
+  ; LASTWEEK ; LASTMONTH ; LASTYEAR ; YESTERDAY
   else if ($regex($1,/^[!@.](?:y(?:ester)?(day)|l(?:ast)?(week|month|year))$/Si)) {
     var %timescale = $regml(1), %time, %time2, %command
     var %input = $1-
