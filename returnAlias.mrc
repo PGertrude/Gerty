@@ -87,7 +87,7 @@ tracked {
   if ($regex($1,$+(/^,$chr(40),$readini(tracked.ini,tracked,nick),$chr(41),/i))) { return _tracked }
 }
 admin {
-  if ($regex($rsn($1),$+(/^,$chr(40),$readini(Gerty.Config.ini,admin,rsn),$chr(41),/i))) { return admin }
+  if ($regex($getDefname($1),$+(/^,$chr(40),$readini(Gerty.Config.ini,admin,rsn),$chr(41),/i))) { return admin }
 }
 rsn {
   if ($getDefname($1)) return $v1
@@ -309,6 +309,7 @@ swapTime {
   %time = $calc($gettok(%time,1,58) % 24) $+ : $+ $gettok(%time,2-,58)
   inc %days %inc
   return %days $+ d %time
+}
 ;@SYNTAX $param([skill],<item>)[.prop]
 ;@SUMMERY No $prop specified or number 1-20: Output: Skill;lvl;exp;item,Skill;lvl;exp;item, etc - Max 20 or whichever $prop nr specified.
 ;@PARAM $prop: .skill .lvl .exp .item - Outputs specified item on first match.

@@ -224,6 +224,7 @@ shuffleHash {
   }
   hadd -m commands 1 %newLine
   hinc commands amount
+}
 botid {
   var %id = $bot(id)
   if ($1 == $me) return tokenize 32 $!2-
