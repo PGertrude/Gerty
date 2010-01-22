@@ -15,12 +15,12 @@ on *:TEXT:*:*: {
       if ($left($2,1) == $#) {
         var %minusers = $chanset($2,users)
         var %curusers = $nick($2,0)
-        var %blacklist = $chanset($2,blacklist)
+        var %blacklistsetting = $chanset($2,blacklist)
         var %youtube = $chanset($2,youtube)
         var %site = $chanset($2,site)
         var %event = $chanset($2,event)
         var %public = $chanset($2,public)
-        if (%blacklist) { %blacklist = Blacklist:07 %blacklist }
+        if (%blacklistsetting) { %blacklist = Blacklist:07 %blacklist }
         if (%youtube) { %youtube = Youtube:07 $caps(%youtube) }
         else { %youtube = Youtube:07 On }
         if (%public) { %public = Public:07 %public }
