@@ -225,6 +225,8 @@ shuffleHash {
   hadd -m commands 1 %newLine
   hinc commands amount
 }
+;@SYNTAX /sendToDev errorMessage
+;@SUMMARY sends an error message to the developers channel, also echos to the status window.
 sendToDev {
   if (!$1) return
   linesep
@@ -232,4 +234,6 @@ sendToDev {
   linesep
   .msg #gertyDev $1-
 }
+;@SYNTAX /sendToDevOnly errorMessage
+;@SUMMARY sends an error message to the developers channel only.
 sendToDevOnly .msg #gertyDev $1-
