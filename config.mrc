@@ -78,7 +78,7 @@ raw 421:*: {
     %string = %string $hget(commands, %x) $+ ,07
     inc %x
   }
-  .msg #gertyDev ERROR:07 $2- Recent commands:07 $left(%string, -4)
+  sendToDev ERROR:07 $2- Recent commands:07 $left(%string, -4)
   haltdef
 }
 raw 352:*:haltdef

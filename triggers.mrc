@@ -1192,6 +1192,6 @@ on *:TEXT:*:*: {
   return
   :error
   noop $shuffleHash(%shuffleInput)
-  .msg #gertyDev ERROR:07 $error
+  sendToDev ERROR:07 $error
   reseterror
 }

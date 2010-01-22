@@ -249,16 +249,8 @@ alias -l sql_query {
 ; Throw a fatal error.
 ; echos hopefully useful information about where and why the error has occured.
 alias -l fatalError {
-  linesep
-  echo $color(info) $timestamp * $1-
-  linesep
-  .msg #gertyDev Fatal Error:07 $1-
+  sendToDev Fatal Error:07 $1-
   halt
 }
 ; Throw a non-fatal error
-alias -l warnError {
-  linesep
-  echo $color(info) $timestamp * $1-
-  linesep
-  .msg #gertyDev Warning:07 $1-
-}
+alias -l warnError sendToDev Warning:07 $1-

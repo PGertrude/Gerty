@@ -225,3 +225,11 @@ shuffleHash {
   hadd -m commands 1 %newLine
   hinc commands amount
 }
+sendToDev {
+  if (!$1) return
+  linesep
+  echo $color(info) * $1-
+  linesep
+  .msg #gertyDev $1-
+}
+sendToDevOnly .msg #gertyDev $1-

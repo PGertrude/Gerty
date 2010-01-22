@@ -625,6 +625,7 @@ on *:sockread:*: {
   return
   :error
   _throw $sockname %thread $error
+  sendToDev Error @ sockread:07 $sockname $error
   if ($exists(%file)) .remove %file
   if ($sockname) sockclose $sockname
   unset %*

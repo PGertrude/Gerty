@@ -194,6 +194,7 @@ on *:sockopen:*: {
 
   return
   :error
-  reseterror
   _throw $sockname %thread
+  sendToDev Error @ sockopen:07 $sockname $error
+  reseterror
 }

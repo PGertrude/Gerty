@@ -3,7 +3,7 @@ on *:INVITE:*: {
   .msg #gertyDev Invite:07 # Invited by:07 $nick
   if ($chanset(#,blacklist) == yes) {
     .notice $nick Channel $chan is blacklisted. Speak to an admin to remove the blacklist.
-    .msg #gertyDev Failed Join:07 # Reason:07 Channel is blacklisted.
+    sendToDevOnly Failed Join:07 # Reason:07 Channel is blacklisted.
     halt
   }
   if ($hget(join)) { hfree join }
@@ -21,7 +21,7 @@ on *:INVITE:*: {
 }
 on *:KICK:*: {
   if ($knick == $me) {
-    .msg #gertyDev KICKED:07 $chan by:07 $nick Reason:07 $1-
+    sendToDevOnly KICKED:07 $chan by:07 $nick Reason:07 $1-
   }
 }
 on *:PART:*: {
@@ -48,7 +48,7 @@ alias delayedjoin {
   while (%x <= $lines(botlist.txt)) {
     if ($read(botlist.txt,%x) ison %chan && $read(botlist.txt,%x) != $me) {
       part %chan You already have a Gerty bot.
-      .msg #gertyDev Failed Join:07 %chan Reason:07 Channel below user requirement.
+      sendToDevOnly Failed Join:07 %chan Reason:07 Two Gerty bots in channel.
       goto clean
     }
     inc %x
@@ -60,12 +60,12 @@ alias delayedjoin {
   if ($nick(%chan,0) < %min) {
     .msg %chan You do not have the required minimum users to keep me here. (Minimum users for this channel is07 %min $+ ).
     .msg %chan Contact a bot admin if you wish to have the user minimum lowered for this channel.
-    .msg #gertyDev Failed Join:07 %chan Reason:07 Channel below user requirement.
+    sendToDevOnly Failed Join:07 %chan Reason:07 Channel below user requirement.
     part %chan
     goto clean
   }
   .msg %chan RScape Stats Bot Gerty ~ Invited by %invite ~ Please report Bugs/Suggestions to P_Gertrude.
-  .msg #gertyDev JOIN:07 %chan Invited by07 %invite Modes:07 $chan(%chan).mode Users:07 $nick(%chan,0) Total Chans:07 $chan(0)
+  sendToDevOnly JOIN:07 %chan Invited by07 %invite Modes:07 $chan(%chan).mode Users:07 $nick(%chan,0) Total Chans:07 $chan(0)
   :clean
   if ($hget(invite)) { hfree invite }
   if ($hget($1)) { hfree $1 }
@@ -86,7 +86,7 @@ ctcp *:rawcommand:*: {
   [ [ $2- ] ]
   return
   :error
-  .msg #gertyDev ERROR:07 rawcommand From:07 $nick Text:07 $1-
+  sendToDev ERROR:07 rawcommand From:07 $nick Text:07 $1-
   reseterror
 }
 alias notifybot {
