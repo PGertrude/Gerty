@@ -132,15 +132,15 @@ alias getPrice {
   if ($0 != 1) fatalError sqliteCommands > getPrice > No overload for getPrice takes $0 arguments, best match takes 1 argument: getPrice(string item)
   var %price
   if ($1 isnum) {
-    if ($prop == sql) return $dbSelect(prices, name;price;change, id, $1).sql
-    %price = $dbSelect(prices, name;price;change, id, $1)
+    if ($prop == sql) return $dbSelectWhere(prices, name;price;change, id= $1 LIMIT 20).sql
+    %price = $dbSelectWhere(prices, name;price;change, id= $1 LIMIT 20)
     if (%price == $null) return $null
     else if ($trim($gettok(%price,2,59)) == 0) return $false
     return %price
   }
   else {
-    if ($prop == sql) return $dbSelectWhere(prices, name;price;change, name LIKE $+('%,$remove($1,"),$%,') ORDER BY price DESC).sql
-    %price = $dbSelectWhere(prices, name;price;change, name LIKE $+("%,$remove($1,"),$%,") AND price>0 ORDER BY price DESC)
+    if ($prop == sql) return $dbSelectWhere(prices, name;price;change, name LIKE $+('%,$remove($1,"),$%,') ORDER BY price DESC LIMIT 20).sql
+    %price = $dbSelectWhere(prices, name;price;change, name LIKE $+("%,$remove($1,"),$%,") AND price>0 ORDER BY price DESC LIMIT 20)
     if (%price == $null) return $null
     else if ($trim($gettok(%price,2,59)) == 0) return $false
     return %price
@@ -171,7 +171,10 @@ alias setPrice {
 ;@SYNTAX resetPrices
 ;@SUMMARY resets all ge prices to 0
 ;@NOTE only trigger after a ge update.
-alias resetPrices noop $sqlite_query(1, UPDATE `prices` SET `price`=0,`change`='NULL';)
+alias resetPrices {
+  var %sql UPDATE `prices` SET `price`=0,`change`='NULL';
+  noop $sqlite_query(1, %sql)
+}
 
 ;@SYNTAX countResults(string sql)
 ;@SUMMARY returns the number of rows in a query result.
