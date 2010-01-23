@@ -15,8 +15,8 @@ timeCount {
     else {
       server irc.swiftirc.net
     }
-  }
-}
+  } 
+} 
 CheckGePrices {
   sockopen CheckGePrices.front. $+ $r(0,9999) itemdb-rs.runescape.com 80
   sockopen CheckGePrices.zam. $+ $r(0,9999) itemdb-rs.runescape.com 80
@@ -270,7 +270,7 @@ RealCount {
       inc %a
       inc %m
     }
-    var %y = $+(%y,$iif(%y,$chr(44)),$chr(32),%chan,[,%b,/,$nick(%chan,0)])
+    var %y = $+(%y,$iif(%y,$chr(44)),$chr(32),%chan,[,%b,/,$nick(%chan,0),])
     inc %x
   }
   if ($1 == total) return %n
