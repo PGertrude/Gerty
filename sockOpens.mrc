@@ -108,7 +108,7 @@ on *:sockopen:*: {
   }
   else if (qfc.* iswm $sockname) {
     hadd -m %thread count 1
-    sockwrite -n $sockname GET /forums.ws? $+ $replace(%thread,qfc),-,$chr(44)) HTTP/1.1
+    sockwrite -n $sockname GET /forums.ws? $+ $replace($hget(%thread,qfc),-,$chr(44)) HTTP/1.1
     sockwrite -n $sockname Host: forum.runescape.com
     sockwrite -n $sockname $crlf
   }
