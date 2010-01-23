@@ -30,7 +30,7 @@ alias dbSelect {
   ; Form WHERE
   var %where, %x = 1
   while (%x <= $0) {
-    %where = %where $($ $+ %x,2) = ' $+ $($ $+ $calc(%x + 1),2) $+ ' AND
+    %where = %where $($ $+ %x,2) = " $+ $($ $+ $calc(%x + 1),2) $+ " AND
     inc %x 2
   }
   if (%where) %sql = %sql WHERE $left(%where, -4)

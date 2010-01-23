@@ -307,7 +307,7 @@ alias plural {
   if ($right($1,1) == s) return $left($1,-1)
   return $1
 }
-; SKILL TIMER
+; SKILL TIMER ; TIMER
 alias timer.start {
   var %saystyle = $1 $2, %skill = $3, %skillid = $4, %nick = $caps($5)
   .tokenize 10 $distribute($6)
@@ -316,7 +316,7 @@ alias timer.start {
   .tokenize 44 $($ $+ %skillid,2)
   ; save start
   ; output
-  if ($3 == NR) goto unranked
+  if ($3 == NR || !$3) goto unranked
   %saystyle  $+ %nick $+ 's starting experience of07 $bytes($3,db) in  $+ %skill $+  has been saved.
   goto unset
   :unranked
