@@ -8,9 +8,13 @@ timeCount {
     var %url http://gerty.rsportugal.org/parsers/ge.php?item= $+ $replace(%search,$chr(32),+)
     noop $download.break(downloadGe %thread,%thread,%url)
   }
-  if ($calc($ctime % 10) == 0 && !$server) {
-    server irc.swiftirc.net
-    if ($hget(botlist,0).item == 0) _setAdmin
+  if ($calc($ctime % 10) == 0) {
+    if ($server) {
+      _setAdmin
+    }
+    else {
+      server irc.swiftirc.net
+    }
   } 
 } 
 CheckGePrices {

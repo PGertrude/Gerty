@@ -876,15 +876,15 @@ on *:TEXT:*:*: {
     var %mode $iif($3 == on,on,off)
     if ($chan && ($nick isop $chan || $nick ishop $chan || $admin($nick) == admin)) {
       if (%command == youtube) {
-        noop $_network(noop $!dbUpdate(channel, `channel`=' $+ $chan $+ ', youtube, %mode))
+        noop $_network(noop $!dbUpdate(channel, `channel`=' $+ $chan $+ ', youtube, %mode ))
         %saystyle $chan Settings: Youtube link information messages are now %mode $+ .
       }
       else if (%command == ge || %command == geupdate) {
-        noop $_network(noop $!dbUpdate(channel, `channel`=' $+ $chan $+ ', geupdate, mode))
+        noop $_network(noop $!dbUpdate(channel, `channel`=' $+ $chan $+ ', geupdate, %mode ))
         %saystyle $chan Settings: Ge Update messages are now %mode $+ .
       }
       else if (%command == qfc) {
-        noop $_network(noop $!dbUpdate(channel, `channel`=' $+ $chan $+ ', qfc, %mode))
+        noop $_network(noop $!dbUpdate(channel, `channel`=' $+ $chan $+ ', qfc, %mode ))
         %saystyle $chan Settings: QFC link information messages are now %mode $+ .
       }
       else if (%command == site) {
