@@ -30,15 +30,18 @@ on *:START: {
   if ($exists(commands.txt)) { .hload commands commands.txt }
 }
 on *:QUIT: {
-  if ($nick != $me) return
-  ; Save Data Files
-  .hsave runeprice runeprice.txt
-  .hsave spelluse spelluse.txt
-  .hsave ge geupdatebackup.txt
-  .hsave commands commands.txt
-  if ($nick != $me && $nick(#,0) < 5) {
+  if ($nick == $me) {
+    ; Save Data Files
+    .hsave runeprice runeprice.txt
+    .hsave spelluse spelluse.txt
+    .hsave ge geupdatebackup.txt
+    .hsave commands commands.txt
+  }
+  /* looping through channels needed
+  else if ($nick(#,0) < 5) {
     part # Channel has fallen below the user limit (07 $+ $chanset(#,users) $+ ).
   }
+  */
 }
 on *:DISCONNECT: {
   if ($nick != $me) return
