@@ -316,10 +316,12 @@ alias timer.start {
   .tokenize 44 $($ $+ %skillid,2)
   ; save start
   ; output
+  if ($3 == NR) goto unranked
   %saystyle  $+ %nick $+ 's starting experience of07 $bytes($3,db) in  $+ %skill $+  has been saved.
   goto unset
   :unranked
-  %saystyle  $+ %nick $+  does not feature Hiscores.
+  %saystyle  $+ %nick $+  does not feature %skill Hiscores.
+  return
   :unset
   noop $_network(writeini -n timer.ini %nick skill %skill)
   noop $_network(writeini -n timer.ini %nick start $3)
