@@ -316,7 +316,7 @@ alias timer.start {
   .tokenize 44 $($ $+ %skillid,2)
   ; save start
   ; output
-  if ($3 == NR || !$3) goto unranked
+  if ($3 == NR || !$3)  { goto unranked }
   %saystyle  $+ %nick $+ 's starting experience of07 $bytes($3,db) in  $+ %skill $+  has been saved.
   goto unset
   :unranked
