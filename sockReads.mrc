@@ -278,7 +278,7 @@ on *:sockread:*: {
     if (!%row) { set %row 1 }
     var %rscript
     .sockread %rscript
-    if (*start* iswm %rscript) {
+    if (start isin %rscript) {
       if (*Overall* iswm %rscript) { set %1 $gettok($nohtml(%rscript),3,58) }
       if (*Attack* iswm %rscript) { set %2 $gettok($nohtml(%rscript),3,58) }
       if (*Defence* iswm %rscript) { set %3 $gettok($nohtml(%rscript),3,58) }
@@ -306,11 +306,11 @@ on *:sockread:*: {
       if (*Summoning* iswm %rscript) { set %25 $gettok($nohtml(%rscript),3,58) }
     }
     if (* $+ $hget($gettok($sockname,2,46),time) $+ * iswm %rscript && *gain* iswm %rscript) {
-      if (Overall isin %rscript) { set %r1 $gettok($nohtml(%rscript),4,58) }
-      if (Attack isin %rscript) { set %r2 $gettok($nohtml(%rscript),4,58) }
-      if (Defence isin %rscript) { set %r3 $gettok($nohtml(%rscript),4,58) }
-      if (Strength isin %rscript) { set %r4 $gettok($nohtml(%rscript),4,58) }
-      if (Hitpoints isin %rscript) { set %r5 $gettok($nohtml(%rscript),4,58) }
+      if (Overall isin %rscript) { set %r1 $gettok(%rscript,4,58) }
+      if (Attack isin %rscript) { set %r2 $gettok(%rscript,4,58) }
+      if (Defence isin %rscript) { set %r3 $gettok(%rscript,4,58) }
+      if (Strength isin %rscript) { set %r4 $gettok(%rscript,4,58) }
+      if (Hitpoints isin %rscript) { set %r5 $gettok(%rscript,4,58) }
       if (Ranged isin %rscript) { set %r6 $gettok($nohtml(%rscript),4,58) }
       if (Prayer isin %rscript) { set %r7 $gettok($nohtml(%rscript),4,58) }
       if (Magic isin %rscript) { set %r8 $gettok($nohtml(%rscript),4,58) }
@@ -361,7 +361,7 @@ on *:sockread:*: {
     }
     if ($regex(%rscript,/^0:-1$/)) { $hget(%thread,out) $hget(%thread,nick) Has not been tracked by Runescript. $hget(%thread,nick) is now being Tracked. | goto unset }
     if (*PHP: Invalid argument supplied for foreach* iswm %rscript) { $hget(%thread,out) There is a gap in RScripts Data, data for $hget(%thread,nick) could not be found. | goto unset }
-    if (*END* iswm %rscript) { lastNdays }
+    if (%rscript == end) { lastNdays %thread }
   }
   ; WORLD
   else if (world.* iswm $sockname) {
