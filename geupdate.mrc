@@ -30,7 +30,7 @@ alias GeClose {
     goto unset
   }
   else {
-    if ($2 != $hget(ge,%page)) {
+    if ($2 != $hget(ge,%page) && $calc($ctime - $gettok($read(geupdate.txt,1),2,124)) > 1200) {
       if ($hget(ge,update) == 1) {
         write -il1 geupdate.txt $host(time) $+ $chr(124) $+ $ctime $+ $chr(124) $+ $ord($host(date)) $host(month).3
         var %x = $chan(0)

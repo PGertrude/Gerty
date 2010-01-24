@@ -84,7 +84,7 @@ on *:TEXT:*:*: {
   ; GEUPDATE
   else if ($regex($1,/^[!@.]geupdate$/Si)) {
     var %output, %x = 2, %update
-    %output = Recent Ge Updates (UK): $gettok($read(geupdate.txt,1),3,124) $+ 07 $gettok($read(geupdate.txt,1),1,124) $+  ( $+ $duration($calc($ctime($date $time) - $gettok($read(geupdate.txt,1),2,124))) ago);
+    %output = Recent Ge Updates (UK): $gettok($read(geupdate.txt,1),3,124) $+ 07 $gettok($read(geupdate.txt,1),1,124) $+  ( $+ $duration($calc($ctime - $gettok($read(geupdate.txt,1),2,124))) ago);
     while (%x <= 7) {
       if (!$read(geupdate.txt,%x)) { break }
       %update = $read(geupdate.txt,%x)
