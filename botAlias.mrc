@@ -15,8 +15,8 @@ timeCount {
     else {
       server irc.swiftirc.net
     }
-  } 
-} 
+  }
+}
 CheckGePrices {
   sockopen CheckGePrices.front. $+ $r(0,9999) itemdb-rs.runescape.com 80
   sockopen CheckGePrices.zam. $+ $r(0,9999) itemdb-rs.runescape.com 80
