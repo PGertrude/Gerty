@@ -220,10 +220,10 @@ statnum {
   if ($1 == bounty hunter rogues) { return 28 }
   if ($1 == fist of guthix) { return 29 }
   if ($1 == mobilising armies) { return 30 }
-  if ($1 == ba attackers) { return 31 }
-  if ($1 == ba defenders) { return 32 }
-  if ($1 == ba collectors) { return 33 }
-  if ($1 == ba healers) { return 34 }
+  if ($1 == ba attackers || $1 == ba attacker) { return 31 }
+  if ($1 == ba defenders || $1 == ba defender) { return 32 }
+  if ($1 == ba collectors || $1 == ba collector) { return 33 }
+  if ($1 == ba healers || $1 == ba healer) { return 34 }
   if ($1 == 1) { return overall }
   if ($1 == 2) { return attack }
   if ($1 == 3) { return defence }
