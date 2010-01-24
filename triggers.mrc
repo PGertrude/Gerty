@@ -435,7 +435,7 @@ on *:TEXT:*:*: {
     goto clean
   }
   ; TOP
-  else if ($regex($1,/^[!@.](table|top)$/Si)) {
+  else if ($regex($1,/^[!@.](table|top|top10)$/Si)) {
     var %skill overall
     if ($scores($2)) {
       %skill = $v1
@@ -751,6 +751,67 @@ on *:TEXT:*:*: {
     var %url http://hiscore.runescape.com/index_lite.ws?player=
     noop $download.break(compareOut %thread, %thread, %url $+ %nick1)
     noop $download.break(compareOut %thread2, %thread2, %url $+ %nick2)
+    goto clean
+  }
+  ; STATS
+  if ($left($1,1) isin .@! && $lookups($right($1,-1))) {
+    var %string = $2-
+    var %param = null, %presetparam = yes
+    if ($regex(%string,/@([^@#]+)/)) {
+      %param = $regml(1)
+      %presetparam = no
+      %string = $regsubex(%string,/@([^@#]+)/,$null)
+    }
+    var %goal = nl, %presetgoal = yes
+    if ($regex(%string,/(?:#|goal=)([nl0-9]+[mkb]?)/)) {
+      %goal = $regml(1)
+      %presetgoal = no
+      %string = $regsubex(%string,/(?:#|goal=)([nl0-9]+[mkb]?)/,$null)
+    }
+    var %lessthan = 200000001
+    if ($regex(%string,/<([0-9]+[mkb]?)/)) {
+      %lessthan = $litecalc($regml(1))
+      %string = $regsubex(%string,/<([nlr0-9]+[mkb]?)/,$null)
+    }
+    var %morethan = 0
+    if ($regex(%string,/>([0-9]+[mkb]?)/)) {
+      %morethan = $litecalc($regml(1))
+      %string = $regsubex(%string,/>([nlr0-9]+[mkb]?)/,$null)
+    }
+    if ($regex(eq,%string,/=([0-9]+[mkb]?)/)) {
+      if ($litecalc($regml(eq,1)) < 127) {
+        %morethan = $lvltoxp($v1)
+        %lessthan = $calc($lvltoxp($calc($litecalc($regml(eq,1)) + 1)) + 1)
+      }
+      else {
+        %morethan = $litecalc($regml(eq,1))
+        %lessthan = $litecalc($regml(eq,1) + 1)
+      }
+      %string = $regsubex(%string,/=([nlr0-9]+[mkb]?)/,$null)
+    }
+    var %nick = $rsn($nick)
+    if ($len($trim(%string)) > 0) {
+      %nick = $trim(%string)
+      %nick = $rsn(%nick)
+    }
+    %nick = $left($caps(%nick),12)
+    if (%param == next) {
+      var %command = next
+      var %state = 3
+      var %url = http://hiscore.runescape.com/index_lite.ws?player= $+ %nick
+      noop $download.break(stats. $+ %command %saystyle %nick %state,stats. $+ %thread,%url)
+      goto unset
+    }
+    %param = $replace(%param,$chr(32),~)
+    var %skill = $lookups($right($1,-1))
+    var %skillid = null
+    if ($statnum(%skill)) { %skillid = $v1 }
+    var %socket = stats. $+ %thread
+    var %url = http://www.rscript.org/lookup.php?type=track&user= $+ %nick $+ &skill=all&time=10000
+    noop $download.break(die,%socket $+ 1,%url)
+    var %url = http://hiscore.runescape.com/index_lite.ws?player= $+ %nick
+    noop $download.break(stats %saystyle $replace(%skill,$chr(32),_) %skillid %nick %param %goal %morethan %lessthan %socket %presetgoal %presetparam null,%socket,%url)
+    :unset
     goto clean
   }
   ; LOGIN

@@ -254,6 +254,10 @@ statnum {
   if ($1 == 28) { return bounty hunter rogues }
   if ($1 == 29) { return fist of guthix }
   if ($1 == 30) { return mobilising armies }
+  if ($1 == 31) { return ba attackers }
+  if ($1 == 32) { return ba defenders }
+  if ($1 == 33) { return ba collectors }
+  if ($1 == 34) { return ba healers }
 }
 catno {
   if (!$minigames($1)) { return 0 }
