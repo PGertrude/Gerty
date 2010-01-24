@@ -50,7 +50,7 @@ on *:DISCONNECT: {
   .hsave runeprice runeprice.txt
   .hsave spelluse spelluse.txt
   .hsave ge geupdatebackup.txt
-
+  .hsave commands commands.txt
 }
 on *:CONNECT: {
   if ($network == SwiftIrc) {
