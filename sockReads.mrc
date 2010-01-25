@@ -361,7 +361,7 @@ on *:sockread:*: {
     }
     if ($regex(%rscript,/^0:-1$/)) { $hget(%thread,out) $hget(%thread,nick) Has not been tracked by Runescript. $hget(%thread,nick) is now being Tracked. | goto unset }
     if (*PHP: Invalid argument supplied for foreach* iswm %rscript) { $hget(%thread,out) There is a gap in RScripts Data, data for $hget(%thread,nick) could not be found. | goto unset }
-    if (*END* iswm %rscript) { lastNdays }
+    if (%rscript === END) { lastNdays }
   }
   ; WORLD
   else if (world.* iswm $sockname) {

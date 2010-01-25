@@ -612,6 +612,7 @@ on *:TEXT:*:*: {
     hadd -m %thread skill $skills($2)
     hadd -m %thread out %saystyle
     sockopen $+(trackyes.,%thread) www.rscript.org 80
+    goto clean
   }
   ; NDAYSAGO
   else if ($regex($1,/^[!@.](\d+)([A-Za-z]+)ago$/Si)) {
@@ -630,6 +631,7 @@ on *:TEXT:*:*: {
     hadd -m %thread skill $skills($2)
     hadd -m %thread out %saystyle
     sockopen $+(trackyes.,%thread) www.rscript.org 80
+    goto clean
   }
   ; TODAY/WEEK/MONTH/YEAR
   else if ($regex($1,/^[!@.](today|week|month|year)$/Si)) {
@@ -647,6 +649,7 @@ on *:TEXT:*:*: {
     %nick = $rsn(%nick)
     var %url = http://www.rscript.org/lookup.php?type=track&user= $+ %nick $+ &skill=all&time= $+ %time
     noop $download.break(trackAll %saystyle %nick %time %command, %thread, %url)
+    goto clean
   }
   ; LASTWEEK ; LASTMONTH ; LASTYEAR ; YESTERDAY
   else if ($regex($1,/^[!@.](?:y(?:ester)?(day)|l(?:ast)?(week|month|year))$/Si)) {
@@ -686,6 +689,7 @@ on *:TEXT:*:*: {
     hadd -m %thread command %command
     hadd -m %thread out %saystyle
     sockopen $+(trackyes.,%thread) www.rscript.org 80
+    goto clean
   }
   ; TRACK
   else if ($regex($1,/^[!@.]track$/Si)) {
@@ -730,6 +734,7 @@ on *:TEXT:*:*: {
       var %url = http://www.rscript.org/lookup.php?type=track&user= $+ %nick $+ &skill=all&time= $+ %time
       noop $download.break(trackAll %saystyle %nick %time $replace(%command, $chr(32), _), %socket, %url)
     }
+    goto clean
   }
   ; COMPARE
   else if ($regex($left($1,1),/[!@.]/) && $misc($right($1,-1)) == compare) {
