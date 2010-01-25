@@ -119,6 +119,7 @@ on *:INVITE:*: {
     hadd -m invite # $nick
     join #
   }
+  halt
   if ($chanset(#,blacklist) == yes) {
     .notice $nick Channel $chan is blacklisted. Speak to an admin to remove the blacklist.
     sendToDevOnly Failed Join:07 # Reason:07 Channel is blacklisted.
@@ -251,6 +252,7 @@ alias notifybot {
 alias JoinQueueStart {
   if ($me == Gerty) .msg #gertyDev !!users
   ctcp Gerty USERS $chan(0)
+  noop $_network(ctcp Gerty USERS $chan(0))
 }
 alias JoinQueue {
   if ($hget(joinqueue)) hfree joinqueue
