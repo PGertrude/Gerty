@@ -119,24 +119,6 @@ on *:INVITE:*: {
     hadd -m invite # $nick
     join #
   }
-  halt
-  if ($chanset(#,blacklist) == yes) {
-    .notice $nick Channel $chan is blacklisted. Speak to an admin to remove the blacklist.
-    sendToDevOnly Failed Join:07 # Reason:07 Channel is blacklisted.
-    halt
-  }
-  if ($hget(join)) { hfree join }
-  hadd -m invite $chan $nick
-  if ($chan(0) < 30) {
-    hadd -m join top $chan(0)
-    hadd -m join bot $me
-  }
-  var %x = $hget(botlist,0).item
-  while (%x) {
-    if ($hget(botlist,%x) != $me) ctcp $v1 join
-    dec %x
-  }
-  .timer 1 3 .notifybot $nick $chan
 }
 on *:KICK:*: {
   if ($knick == $me) {
@@ -156,7 +138,6 @@ on *:JOIN:*: {
     who $chan
     var %thread = $+(a,$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9))
     if (!$rowExists(channel, channel, $chan)) { noop $_network(noop $!sqlite_query(1, INSERT INTO channel (channel) VALUES (' $+ $chan $+ ');)) }
-    if ($uptime(server,3) < 120) { halt }
     hadd -m %thread chan $chan
     .timer 1 1 .delayedjoin %thread
   }
@@ -188,21 +169,13 @@ alias delayedjoin {
     .msg %chan RScape Stats Bot Gerty ~ Invited by %invite ~ Please report Bugs/Suggestions to P_Gertrude.
     sendToDevOnly JOIN:07 %chan Invited by07 %invite Modes:07 $chan(%chan).mode Users:07 $nick(%chan,0) Total Chans:07 $chan(0)
   }
-  who %chan
   :clean
   if ($hget(invite)) { hfree invite }
   if ($hget($1)) { hfree $1 }
 }
-ctcp *:join:*: {
-  ctcp $nick users $chan(0)
-}
 ctcp *:users:*: {
-  if ($2 < $hget(join,top) || !$hget(join,top)) {
-    hadd -m join top $2
-    hadd -m join bot $nick
-  }
   hadd -m bot $nick $2
-  if ($hget(bot,0).item == $nick(#gertyDev,0,h)) { JoinQueue }
+  if ($hget(bot,0).item = $nick(#gertyDev,0,h)) { JoinQueue }
 }
 ctcp *:invite:*:{
   if ($hget(buffer,$3)) halt
@@ -241,19 +214,9 @@ ctcp *:rawcommand:*: {
   sendToDev ERROR:07 rawcommand From:07 $nick Text:07 $1-
   reseterror
 }
-alias notifybot {
-  if ($hget(join,bot)) {
-    ctcp $hget(join,bot) rawcommand hadd -m invite $2 $1
-    ctcp $hget(join,bot) rawcommand join $2
-    return
-  }
-  .notice $1 Sorry but all bots are currently full.
-  if ($hget(join)) hfree join
-}
 alias JoinQueueStart {
   if ($me == Gerty) .msg #gertyDev !!users
-  .ctcp Gerty USERS $chan(0)
-  noop $_network(.ctcp Gerty USERS $!chan(0) )
+  ctcp Gerty USERS $chan(0)
 }
 alias JoinQueue {
   if ($hget(joinqueue)) hfree joinqueue
@@ -288,7 +251,8 @@ alias JoinQueue {
   msg #gertyDev Join queue generated: %b $+ . Channels: $+(07,$bytes(%total,bd),/07,$bytes(%max,bd)) $parenthesis($round($calc(%total / %max * 100),2) $+ $%)
 }
 alias OnInvite {
-  if ($hget(joinqueue,list)) {
+  if ($hget(joinqueue,list) == Full) { .notice $1 Sorry but all bots are currently full. }
+  elseif ($hget(joinqueue,list)) {
     var %bot = $gettok($v1,1,124)
     hadd -m joinqueue list $gettok($v1,2-,124)
     ctcp %bot rawcommand hadd -m invite $2 $1
@@ -304,3 +268,4 @@ on *:text:!!users:#gertyDev:{
   if ($nick !ishop $chan && $nick !isop $chan) { halt }
   else { .ctcp Gerty users $chan(0) }
 }
+on *:quit:{ if (%* iswm $nick(#gertyDev,$nick).pnick && $me == Gerty) { JoinQueueStart } }
