@@ -16,6 +16,11 @@ timeCount {
       server irc.swiftirc.net
     }
   }
+  if ($calc($ctime % 15) == 0 && $me == Gerty) {
+    if (!$hget(joinqueue,list) || $ctime > $hget(joinqueue,time) || $nick(gertyDev,0,h) != $hget(joinqueue,num)) {
+      JoinQueueStart
+    }
+  }
 }
 CheckGePrices {
   sockopen CheckGePrices.front. $+ $r(0,9999) itemdb-rs.runescape.com 80

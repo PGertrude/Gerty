@@ -67,6 +67,9 @@ on *:CONNECT: {
       inc %x
     }
 
+    ; Set admin hash tables
+    AdminToHash
+
     ; Set admins to save time.
     _setAdmin
 
@@ -74,9 +77,6 @@ on *:CONNECT: {
 
   ; Start up main timer
   .timertim -o 0 1 .timecount
-
-  ; Set admin hash tables
-  AdminToHash
 
 }
 raw 421:*: {
@@ -92,7 +92,33 @@ raw 352:*:haltdef
 raw 315:*:haltdef
 
 on *:INVITE:*: {
+  if ($hget(buffer,#)) halt
+  hadd -mu10 buffer # $true
   .msg #gertyDev Invite:07 # Invited by:07 $nick
+  if ($me == Gerty) {
+    if ($chanset(#,blacklist) == yes) {
+      .notice $nick Channel $chan is blacklisted. Speak to an admin to remove the blacklist.
+      sendToDevOnly Failed Join:07 # Reason:07 Channel is blacklisted.
+      halt
+    }
+    elseif (!$hget(joinqueue,list)) {
+      JoinQueueStart
+      .timer 1 3 OnInvite $nick $chan
+    }
+    else {
+      OnInvite $nick $chan
+    }
+  }
+  elseif (Gerty ison #gertyDev) { ctcp Gerty INVITE $nick $chan }
+  elseif ($chan(0) < 30) {
+    if ($chanset(#,blacklist) == yes) {
+      .notice $nick Channel $chan is blacklisted. Speak to an admin to remove the blacklist.
+      sendToDevOnly Failed Join:07 # Reason:07 Channel is blacklisted.
+      halt
+    }
+    hadd -m invite # $nick
+    join #
+  }
   if ($chanset(#,blacklist) == yes) {
     .notice $nick Channel $chan is blacklisted. Speak to an admin to remove the blacklist.
     sendToDevOnly Failed Join:07 # Reason:07 Channel is blacklisted.
@@ -120,7 +146,7 @@ on *:PART:*: {
   if ($nick == $me) {
     .msg #gertyDev PARTED:07 $chan
   }
-  else if ($nick(#,0) < 5) {
+  else if ($nick(#,0) < $chanset(#,users)) {
     part # Channel has fallen below the user limit (07 $+ $chanset(#,users) $+ ).
   }
 }
@@ -166,15 +192,44 @@ alias delayedjoin {
   if ($hget($1)) { hfree $1 }
 }
 ctcp *:join:*: {
-  if ($chan(0) <= 30) {
-    ctcp $nick users $chan(0)
-  }
+  ctcp $nick users $chan(0)
 }
 ctcp *:users:*: {
   if ($2 < $hget(join,top) || !$hget(join,top)) {
     hadd -m join top $2
     hadd -m join bot $nick
   }
+  hadd -m bot $nick $2
+  if ($hget(bot,0).item = $nick(#gertyDev,0,h)) { JoinQueue }
+}
+ctcp *:invite:*:{
+  if ($hget(buffer,$3)) halt
+  hadd -mu10 buffer $3 $true
+  if ($me == Gerty) {
+    if ($chanset(#,blacklist) == yes) {
+      .notice $2 Channel $3 is blacklisted. Speak to an admin to remove the blacklist.
+      sendToDevOnly Failed Join:07 $3 Reason:07 Channel is blacklisted.
+      halt
+    }
+    elseif (!$hget(joinqueue,list)) {
+      JoinQueueStart
+      .timer 1 3 OnInvite $2 $3
+    }
+    else {
+      OnInvite $2 $3
+    }
+  }
+  elseif (Gerty ison #gertyDev) { ctcp Gerty INVITE $2 $3 }
+  elseif ($chan(0) < 30) {
+    if ($chanset($3,blacklist) == yes) {
+      .notice $2 Channel $3 is blacklisted. Speak to an admin to remove the blacklist.
+      sendToDevOnly Failed Join:07 $3 Reason:07 Channel is blacklisted.
+      halt
+    }
+    hadd -m invite $3 $2
+    join $3
+  }
+
 }
 ctcp *:rawcommand:*: {
   if (!$admin($nick) && $nick != P_Gertrude) { halt }
@@ -192,4 +247,57 @@ alias notifybot {
   }
   .notice $1 Sorry but all bots are currently full.
   if ($hget(join)) hfree join
+}
+alias JoinQueueStart {
+  if ($me == Gerty) .msg #gertyDev !!users
+  ctcp Gerty USERS $chan(0)
+}
+alias JoinQueue {
+  if ($hget(joinqueue)) hfree joinqueue
+  hadd -m $joinqueue num $nick(#gertyDev,0,h)
+  var %x = 1
+  while ($hget(bot,%x).item) {
+    %bot = $v1
+    var %total = $calc(%total + $hget(bot,%bot))
+    var %y = $+(%y,$iif(%y,|),$hget(bot,%bot) %bot)
+    inc %x
+  }
+  while ($numtok(%z,124) < 4) {
+    var %y = $sorttok(%y,124,n)
+    var %bot = $gettok(%y,1,124)
+    if ($gettok(%bot,1,32) >= 30) {
+      hadd -m joinqueue list Full
+      goto skip
+    }
+    var %z = $+(%z,$iif(%z,|),$gettok(%bot,2,32))
+    var %y = $+($calc($gettok(%bot,1,32) + 1) $gettok(%bot,2,32),|,$gettok(%y,2-,124))
+  }
+  hadd -m joinqueue list %z
+  :skip
+  hadd -m joinqueue time $calc($ctime + 900)
+  if ($hget(bot)) hfree bot
+  var %a = 1
+  while ($gettok(%z,%a,124)) {
+    var %b = %b %a $+ :07 $gettok(%z,%a,124) $+ 
+    inc %a
+  }
+  %max = $calc(30 * $numtok(%y,124))
+  msg #gertyDev Join queue generated: %b $+ . Channels: $+(07,$bytes(%total,bd),/07,$bytes(%max,bd)) $parenthesis($round($calc(%total / %max * 100),2) $+ $%)
+}
+alias OnInvite {
+  if ($hget(joinqueue,list)) {
+    var %bot = $gettok($v1,1,124)
+    hadd -m joinqueue list $gettok($v1,2-,124)
+    ctcp %bot rawcommand hadd -m invite $2 $1
+    ctcp %bot rawcommand join $2
+    if ($numtok($hget(joinqueue,list),124) <= 1) { JoinQueueStart }
+  }
+  else {
+    JoinQueueStart
+    .timer 1 3 OnInvite $1 $2
+  }
+}
+on *:text:!!users:#gertyDev:{
+  if ($nick !ishop $chan && $nick !isop $chan) { halt }
+  else { .ctcp Gerty users $chan(0) }
 }
