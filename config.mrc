@@ -156,6 +156,7 @@ on *:JOIN:*: {
     who $chan
     var %thread = $+(a,$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9))
     if (!$rowExists(channel, channel, $chan)) { noop $_network(noop $!sqlite_query(1, INSERT INTO channel (channel) VALUES (' $+ $chan $+ ');)) }
+    if ($uptime(server,3) < 120) { halt }
     hadd -m %thread chan $chan
     .timer 1 1 .delayedjoin %thread
   }
