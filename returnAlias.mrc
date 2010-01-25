@@ -340,3 +340,5 @@ param {
   .fclose param $+ %ran
   return %output
 }
+parenthesis return $+(,$chr(40),07,$1-,,$chr(41))
+ran return $+($r(1,9),$r(1,9),$r(1,9),$r(1,9),$r(1,9),$r(1,9),$r(1,9),$r(1,9),$r(1,9),$r(1,9))

@@ -1,5 +1,5 @@
 >start<|FromTo-lvl.mrc|~skill estimation|1.15|rs
-on $*:text:/^([^ ]+ )?@?~/Si:*:{
+on $*:text:/^([^ ]+ )?@?~old/Si:*:{
   if ($regml(1)) $botid($1,$2-)
   if ($left($1,1) == @) {
     var %saystyle = $saystyle(@,$nick,$chan)
@@ -76,4 +76,3 @@ alias oldbotid {
   if ($1 == Gerty && Gerty !ison $chan) { return tokenize 32 $2- }
   return halt
 }
-alias ran return $+($r(1,9),$r(1,9),$r(1,9),$r(1,9),$r(1,9),$r(1,9),$r(1,9),$r(1,9),$r(1,9),$r(1,9))

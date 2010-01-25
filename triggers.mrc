@@ -1189,6 +1189,64 @@ on *:TEXT:*:*: {
     }
     goto clean
   }
+  else if ($regex($1,/^@?~(\w*)$/Si)) {
+    _fillCommand %thread $iif($left($1,1) == @,@,!) $nick $iif($chan,$v1,PM) LvlEstimation
+    var %skill = $skills($regml(1)), %saystyle = $saystyle($replace($left($1,1),~,!),$nick,$chan)
+    if (!%skill || %skill == Overall) { goto clean }
+    elseif (%skill isin Ranged.Attack.Strength.Defence) var %skill = Combat
+    if ($regex(string,$remove($2-,$chr(44)),/^(?:(?:l|lvl|)([\dmk]+)[- ](?:l|lvl|)([\dmk]+)()|()()(\d[\d.mk]+))(?: @?(.*))?/Si)) {
+      var %1 = $litecalc($regml(string,1)), %2 = $litecalc($regml(string,2)), %3 = $regml(string,3), %item = $regml(string,4)
+      if (%1 && %2) {
+        if (%1 >= 1 && %2 >= 1) {
+          if (%1 <= 126) var %1lvl = %1, %1exp = $lvltoxp(%1)
+          elseif (%1 <= 200000000) var %1lvl = $xptolvl(%1), %1exp = %1
+          else goto syntax
+          if (%2 <= 126) var %2lvl = %2, %2exp = $lvltoxp(%2)
+          elseif (%2 <= 200000000) var %2lvl = $xptolvl(%2), %2exp = %2
+          else goto syntax
+          var %exp = $remove($calc(%2exp - %1exp),-)
+          var %show = Level $+(07,%1lvl to07 %2lvl,) $parenthesis($bytes(%exp,bd) exp)
+        }
+        else { goto syntax }
+      }
+      else {
+        var %exp = $remove($litecalc(%3),-)
+        if (%exp >= 1 && %exp <= 200000000) {
+          var %show = 07 $+ $bytes(%exp,bd) exp
+        }
+        else { goto syntax }
+      }
+      var %userAddress $iif($aLfAddress($nick), $v1, %nick)
+      var %boolRsn $iif($aLfAddress($nick), $false, $true)
+      ;var %useritem = $getStringParameter(%userAddress, %skill, items, %boolRsn)
+      if (!%item && !%useritem) { goto syntax }
+      var %fname = param. $+ %thread, %counter = 0
+      .fopen %fname param.txt
+      while (!$feof && %counter < 6) {
+        var %string = $fread(%fname)
+        if ($gettok(%string,1,9) != %skill) goto skip
+        tokenize 9 %string
+        if (%useritem == $4) {
+          var %itemout $+(; $4,:07 $bytes($ceil($calc( %exp / $3 )),bd) $parenthesis(lvl $2),%itemout)
+          inc %counter
+        }
+        if (%item isin $4 && %counter < 5) {
+          var %itemout $+(%itemout,; $4,:07 $bytes($ceil($calc( %exp / $3 )),bd) $parenthesis(lvl $2))
+          inc %counter
+        }
+        :skip
+      }
+      .fclose %fname
+      if (!%itemout) var %itemout No items found matching $qt(%item) $+ .
+      else var %itemout $right(%itemout,-2)
+      %saystyle 07 $+ %skill estimation %show $+ : %itemout
+    }
+    else goto syntax
+    goto clean
+    :syntax
+    %saystyle Level estimation syntax: ~skill <from lvl> <to lvl> @<item> or ~skill <exp> @<item>. You can use !set item <skill> <item> as replacement for item.
+    goto clean
+  }
   ; ADMIN SECTION
   if ($admin($nick)) {
     ; IGNORE

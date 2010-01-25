@@ -429,31 +429,33 @@ Thieving	55	84.3	Knight of Ardougne
 Thieving	40	46.8	Guard	
 Thieving	38	43	Master Farmer	
 Thieving	20	24	Silk Stall	
-Thieving	1	8	Man/Woman	
-Woodcutting	75	256.2	Lumber Magic Tree	
-Woodcutting	60	179.3	Lumber Yew Tree	
-Woodcutting	58	169.1	Lumber Eucalyptus	
-Woodcutting	54	41	Lumber Arctic Pine	
-Woodcutting	50	128.1	Lumber Mahogany Tree	
-Woodcutting	45	102.5	Lumber Maple Tree	
-Woodcutting	45	84.5	Lumber Hollow Tree	
-Woodcutting	15	38.4	Lumber Oak Tree	
-Woodcutting	1	25.6	Lumber Achey Tree	
-Woodcutting	1	25.6	Lumber Normal Tree	
-Woodcutting	58	165	Eucalyptus	
-Woodcutting	54	40	Arctic Pine	
-Woodcutting	45	82.5	Hollow Tree	
-Woodcutting	15	37.5	Oak Tree	
-Woodcutting	1	25	Achey Tree	
-Woodcutting	1	25	Normal Tree	
-Woodcutting	75	250	Magic Tree	
-Woodcutting	60	175	Yew Tree	
-Woodcutting	50	125	Mahogany Tree	
+Thieving	1	8	Man/Woman
+Woodcutting	58	165	Eucalyptus
+Woodcutting	54	40	Arctic Pine
+Woodcutting	45	82.5	Hollow Tree
+Woodcutting	15	37.5	Oak Tree
+Woodcutting	1	25	Achey Tree
+Woodcutting	1	25	Normal Tree
+Woodcutting	75	250	Magic Tree
+Woodcutting	60	175	Yew Tree
+Woodcutting	50	125	Mahogany Tree
 Woodcutting	45	100	Maple Tree	
-Woodcutting	35	87.1	Lumber Teak Tree	
-Woodcutting	35	85	Teak Tree	
-Woodcutting	30	69.1	Lumber Willow Tree	
-Woodcutting	30	67.5	Willow Tree	
+Woodcutting	35	85	Teak Tree		
+Woodcutting	30	67.5	Willow Tree
+Woodcutting	68	332.5	Ivy	
+Woodcutting	1	25.6	Lumberjack Normal Tree
+Woodcutting	1	25.6	Lumberjack Achey Tree
+Woodcutting	15	38.4	Lumberjack Oak Tree
+Woodcutting	30	69.1	Lumberjack Willow Tree
+Woodcutting	35	87.1	Lumberjack Teak Tree
+Woodcutting	45	84.5	Lumberjack Hollow Tree
+Woodcutting	45	102.5	Lumberjack Maple Tree
+Woodcutting	50	128.1	Lumberjack Mahogany Tree
+Woodcutting	54	41	Lumberjack Arctic Pine
+Woodcutting	58	169.1	Lumberjack Eucalyptus
+Woodcutting	60	179.3	Lumberjack Yew Tree
+Woodcutting	68	340.8	Lumberjack Ivy
+Woodcutting	75	256.2	Lumberjack Magic Tree
 Combat	125	440	spiritual warrior	
 Combat	134	524	spiritual warrior bandos	
 Combat	123	392	spiritual warrior armadyl	
