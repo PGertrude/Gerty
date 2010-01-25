@@ -51,8 +51,16 @@ on *:TEXT:*:*: {
   else if ($regex(spotify,$1-,/open\.spotify\.com\/track/(\w+)/Si)) {
     _fillCommand %thread @ $nick $iif($chan,$v1,PM) Spotify link
     var %url = http://sselessar.net/parser/spotify.php?id= $+ $regml(spotify,1)
-    noop $download.break(spotify $iif($chan,$chan,$nick),%thread,%url)
+    noop $download.break(spotify msg $iif($chan,$chan,$nick),%thread,%url)
     goto clean
+  }
+  ; YOUTUBE link
+  else if ($regex(yt,$1-,/youtube\.com\/watch\?v=([\w-]+)\W?/Si)) {
+    _fillCommand %thread @ $nick $iif($chan,$v1,PM) Youtube link
+    if ($chanset($chan,youtube) != off) {
+      var %url = http://rscript.org/lookup.php?type=youtubeinfo&id= $+ $regml(yt,1)
+      noop $download.break(youtube msg $iif($chan,$chan,$nick) $regml(yt,1),%thread,%url)
+    }
   }
   ; DEFNAME
   else if ($regex($1,/^[!@.](def|set)(name|rsn)$/Si)) {

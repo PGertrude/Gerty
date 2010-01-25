@@ -973,7 +973,29 @@ alias stats {
 }
 ; SPOTIFY
 alias spotify {
-  var %saystyle = msg $1
-  tokenize 58 $2-
+  var %saystyle = $1-2
+  tokenize 58 $3-
   %saystyle Spotify id $qt(07 $+ $1 $+ ) $| Artist:07 $2 | Song:07 $3
+}
+; YOUTUBE
+alias youtube {
+  var %saystyle $1-2, %id = $3
+  if (Undefined index: isin $4-) %saystyle No videos found with id $qt(07 $+ %id $+ )
+  else {
+    tokenize 10 $3-
+    var %x = 1
+    while ($($ $+ %x,2) != END) {
+      var %string = $($ $+ %x,2)
+      if (TITLE:* iswm %string) var %title = Title:07 $gettok(%string,2-,32)
+      if (DURATION:* iswm %string) var %dur = Duration: $regsubex($duration($gettok(%string,2,32),1),/(\d+)/g,$+(07,\1,))
+      if (VIEWS:* iswm %string) var %views = Views:07 $bytes($gettok(%string,2,32),bd)
+      if (RATING:* iswm %string) {
+        var %rating = Rating:07 $round($gettok(%string,5,32),2)
+        var %rating = %rating $+(,$chr(40),07,$bytes($gettok(%string,4,32),bd), votes,$chr(41))
+      }
+      inc %x
+    }
+    var %dl = Download:12 http://www.xaaa.co.uk/youtube.php?yturl= $+ %id
+    %saystyle Youtube id $qt(07 $+ %id $+ ) $| %title | %dur | %views | %rating | %dl
+  }
 }

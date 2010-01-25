@@ -23,45 +23,6 @@ alias botstats {
   $iif(m isin $1,msg $active,echo -a) I have $+($chr(2),$script(0),$chr(2)) remote script files loaded $+ $iif(n isin $1,$+($chr(32),$chr(40),$chr(2),%names,$chr(2),$chr(41))) $+ , for a total of $+($chr(2),%lines,$chr(2)) lines and $+($chr(2),$round($calc(%size / 1024),2),$chr(2)) $+ KB.
   $iif(t isin $1,$iif(m isin $1,msg $active,echo -a),return) Longest file: $+($chr(2),$nopath(%long),$chr(2)) at $+($chr(2),$lines(%long),$chr(2)) lines. Largest file: $+($chr(2),$nopath(%big),$chr(2)) at $+($chr(2),$round($calc($file(%big).size / 1024),2),$chr(2)) $+ KB.
 }
-on $*:text:/youtube\.com\/watch\?v=([\w-]+)\W?/Si:*:{
-  _CheckMain
-  if ($chanset($chan,youtube) != off) {
-    var %ticks $ticks
-    sockopen youtube.a $+ %ticks rscript.org 80
-    hadd -m a $+ %ticks out $saystyle(@,$nick,$chan)
-    hadd -m a $+ %ticks link $regml(1)
-  }
-}
-on $*:notice:/youtube\.com\/watch\?v=([\w-]+)\W?/Si:*:{
-  var %ticks $ticks
-  sockopen youtube.a $+ %ticks rscript.org 80
-  hadd -m a $+ %ticks out .notice $nick
-  hadd -m a $+ %ticks link $regml(1)
-}
-on $*:sockopen:youtube.*:{
-  sockwrite -nt $sockname GET /lookup.php?type=youtubeinfo&id= $+ $hget($gettok($sockname,2,46),link) HTTP/1.1
-  sockwrite -nt $sockname Host: rscript.org
-  sockwrite -nt $sockname $crlf
-}
-on $*:sockread:youtube.*:{
-  if ($sockerr) {
-    write ErrorLog.txt $timestamp SocketError[sockread]: $nopath($script) $socket $([,) $+ $hget($gettok($sockname,2,46),out) $hget($gettok($sockname,2,46),nick) $+ $(],)
-    echo -at Socket Error: $nopath($script)
-    $hget($sockname,out) The URL contained a malformed video ID.
-    halt
-  }
-  sockread %youtube
-  if ($regex(title,%youtube,/^TITLE: (.+?)$/i)) { hadd -m $gettok($sockname,2,46) title $regml(title,1) }
-  if ($regex(duration,%youtube,/^DURATION: (.+?)$/i)) { hadd -m $gettok($sockname,2,46) duration $regml(duration,1) }
-  if ($regex(views,%youtube,/^VIEWS: (.+?)$/i)) { hadd -m $gettok($sockname,2,46) views $regml(views,1) }
-  if ($regex(rating,%youtube,/^RATING: \d+ \d+ (\d+) (\d+(\.\d+)?)/i)) { hadd -m $gettok($sockname,2,46) rating $regml(rating,2) | hadd -m $gettok($sockname,2,46) ratings $regml(rating,1) }
-  if (%youtube == END) {
-    if (!$hget($gettok($sockname,2,46),title)) { $hget($gettok($sockname,2,46),out) The URL contained a malformed video ID. (ID: $hget($gettok($sockname,2,46),link) $+ ) | hfree $gettok($sockname,2,46) | sockclose $sockname | halt }
-    $hget($gettok($sockname,2,46),out) Youtube link code "07 $+ $hget($gettok($sockname,2,46),link) $+ " $chr(124) Title:7 $hget($gettok($sockname,2,46),title)  $+ $chr(124) Duration: $regsubex($duration($hget($gettok($sockname,2,46),duration),1),/(\d+)/g,07\1)  $+ $chr(124) Views:7 $iif($bytes($hget($gettok($sockname,2,46),views),bd),$v1,N/A)  $+ $chr(124) Rating:7 $+($iif($hget($gettok($sockname,2,46),rating),$v1,N/A), $chr(40),07,$bytes($iif($hget($gettok($sockname,2,46),ratings),$v1,0),bd)) votes $+ $chr(41) | Download:12 http://www.xaaa.co.uk/youtube.php?yturl= $+ $hget($gettok($sockname,2,46),link)
-    hfree $gettok($sockname,2,46)
-    sockclose $sockname
-  }
-}
 on $*:text:/^(Gerty? )?[!.@]m(ember)?l(ist)?/Si:*:{
   _CheckMain
   var %chan on
