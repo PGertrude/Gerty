@@ -175,7 +175,7 @@ alias delayedjoin {
 }
 ctcp *:users:*: {
   hadd -m bot $nick $2
-  if ($hget(bot,0).item = $nick(#gertyDev,0,h)) { JoinQueue }
+  if ($hget(bot,0).item == $nick(#gertyDev,0,h)) { JoinQueue }
 }
 ctcp *:invite:*:{
   if ($hget(buffer,$3)) halt
@@ -244,7 +244,7 @@ alias JoinQueue {
   if ($hget(bot)) hfree bot
   var %a = 1
   while ($gettok(%z,%a,124)) {
-    var %b = %b %a $+ :07 $gettok(%z,%a,124) $+ 
+    var %b = %b %a $+ :07 $remove($gettok(%z,%a,124),Gerty) $+ 
     inc %a
   }
   %max = $calc(30 * $numtok(%y,124))
