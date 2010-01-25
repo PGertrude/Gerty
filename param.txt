@@ -430,19 +430,20 @@ Thieving	40	46.8	Guard
 Thieving	38	43	Master Farmer	
 Thieving	20	24	Silk Stall	
 Thieving	1	8	Man/Woman
-Woodcutting	58	165	Eucalyptus
-Woodcutting	54	40	Arctic Pine
-Woodcutting	45	82.5	Hollow Tree
-Woodcutting	15	37.5	Oak Tree
-Woodcutting	1	25	Achey Tree
 Woodcutting	1	25	Normal Tree
-Woodcutting	75	250	Magic Tree
-Woodcutting	60	175	Yew Tree
-Woodcutting	50	125	Mahogany Tree
-Woodcutting	45	100	Maple Tree	
-Woodcutting	35	85	Teak Tree		
+Woodcutting	1	25	Logs
+Woodcutting	1	25	Achey Tree
+Woodcutting	15	37.5	Oak Tree
 Woodcutting	30	67.5	Willow Tree
-Woodcutting	68	332.5	Ivy	
+Woodcutting	35	85	Teak Tree
+Woodcutting	45	82.5	Hollow Tree
+Woodcutting	45	100	Maple Tree
+Woodcutting	50	125	Mahogany Tree
+Woodcutting	54	40	Arctic Pine
+Woodcutting	58	165	Eucalyptus
+Woodcutting	60	175	Yew Tree
+Woodcutting	68	332.5	Ivy
+Woodcutting	75	250	Magic Tree
 Woodcutting	1	25.6	Lumberjack Normal Tree
 Woodcutting	1	25.6	Lumberjack Achey Tree
 Woodcutting	15	38.4	Lumberjack Oak Tree
