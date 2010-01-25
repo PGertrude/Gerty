@@ -201,7 +201,7 @@ ctcp *:users:*: {
     hadd -m join bot $nick
   }
   hadd -m bot $nick $2
-  if ($hget(bot,0).item = $nick(#gertyDev,0,h)) { JoinQueue }
+  if ($hget(bot,0).item == $nick(#gertyDev,0,h)) { JoinQueue }
 }
 ctcp *:invite:*:{
   if ($hget(buffer,$3)) halt
@@ -251,8 +251,8 @@ alias notifybot {
 }
 alias JoinQueueStart {
   if ($me == Gerty) .msg #gertyDev !!users
-  ctcp Gerty USERS $chan(0)
-  noop $_network(ctcp Gerty USERS $chan(0))
+  .ctcp Gerty USERS $chan(0)
+  noop $_network(.ctcp Gerty USERS $!chan(0) )
 }
 alias JoinQueue {
   if ($hget(joinqueue)) hfree joinqueue
