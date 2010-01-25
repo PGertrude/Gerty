@@ -49,6 +49,7 @@ on *:TEXT:*:*: {
   }
   ; SPOTIFY link
   else if ($regex(spotify,$1-,/open\.spotify\.com\/track/(\w+)/Si)) {
+    _fillCommand %thread @ $nick $iif($chan,$v1,PM) Spotify link
     var %url = http://sselessar.net/parser/spotify.php?id= $+ $regml(spotify,1)
     noop $download.break(spotify $iif($chan,$chan,$nick),%thread,%url)
     goto clean
@@ -1142,6 +1143,7 @@ on *:TEXT:*:*: {
   }
   ; XP
   else if ($regex($1,/^[!@.](e?xp(ien[sc]e)?|lvl|level)$/Si)) {
+    _fillCommand %thread $left($1,1) $nick $iif($chan,$v1,PM) EXP
     if (!$2) { %saystyle $formatwith(Syntax Error: \u!xp <level>\u OR \u!xp <xp>\u OR \u!xp [amount] <item>\u.) | goto clean }
     if ($regex(exp,$remove($2-,$chr(44)),/([\dkm]+)(?:[- ]{1,3}([\dkm]+))?$/Si)) {
       var %1 = $litecalc($regml(exp,1))
