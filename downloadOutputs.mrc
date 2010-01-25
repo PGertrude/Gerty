@@ -180,11 +180,11 @@ alias downloadGe {
     var %x = 1, %results
     while (%x <= $0 && %dbPrices && $len(%results) < 350) {
       var %name = $gettok($($ $+ %x,2),1,59), %price = $gettok($($ $+ %x,2),2,59), %change = $gettok($($ $+ %x,2),3,59)
-      %results = %results | %name $+ 07 $format_number(%price) $updo(%change) 
+      %results = %results | %name $+ 07 $format_number($calc(%price * $cmd(%thread,arg1))) $updo(%change)
       inc %x
     }
     if (!%dbPrices) %results = error occured retrieving prices for %search $+ .
-    $cmd(%thread,out) Results:07 %numberOfResults %results
+    $cmd(%thread,out) Results:07 %numberOfResults (07x $+ $cmd(%thread,arg1) $+ ) %results
     _clearCommand %thread
   }
 

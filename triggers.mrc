@@ -316,10 +316,10 @@ on *:TEXT:*:*: {
     var %x = 1, %results
     while (%x <= $0 && $len(%results) < 350) {
       var %name = $gettok($($ $+ %x,2),1,59), %price = $gettok($($ $+ %x,2),2,59), %change = $gettok($($ $+ %x,2),3,59)
-      %results = %results | %name $+ 07 $format_number(%price) $updo(%change) 
+      %results = %results | %name $+ 07 $format_number($calc(%price * %num)) $updo(%change)
       inc %x
     }
-    %saystyle Results:07 %numberOfResults %results
+    %saystyle Results:07 %numberOfResults (07x $+ %num $+ ) %results
     goto clean
   }
   ; GEINFO
