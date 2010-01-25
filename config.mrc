@@ -51,6 +51,7 @@ on *:DISCONNECT: {
   .hsave spelluse spelluse.txt
   .hsave ge geupdatebackup.txt
   .hsave commands commands.txt
+
 }
 on *:CONNECT: {
   if ($network == SwiftIrc) {
@@ -73,6 +74,9 @@ on *:CONNECT: {
 
   ; Start up main timer
   .timertim -o 0 1 .timecount
+
+  ; Set admin hash tables
+  AdminToHash
 
 }
 raw 421:*: {

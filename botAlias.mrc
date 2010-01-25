@@ -36,6 +36,7 @@ _setAdmin {
     }
     inc %x
   }
+  AdminToHash
 }
 _CheckMain {
   if ($me != Gerty && $chan == #gerty) { halt }
@@ -257,7 +258,7 @@ sendToDev {
 ;@SYNTAX /sendToDevOnly errorMessage
 ;@SUMMARY sends an error message to the developers channel only.
 sendToDevOnly .msg #gertyDev $1-
-RealCount {
+UserCount {
   var %x = 1, %n = 0, %m = 0, %u
   while ($chan(%x)) {
     var %chan = $chan(%x), %a = 1, %b = 0
@@ -270,6 +271,7 @@ RealCount {
       inc %a
       inc %m
     }
+    if ($1 == %chan) return %b
     var %y = $+(%y,$iif(%y,$chr(44)),$chr(32),%chan,[,%b,/,$nick(%chan,0),])
     inc %x
   }
@@ -277,4 +279,12 @@ RealCount {
   if ($1 == faketotal) return %m
   if ($1 == names) return $numtok(%u,32)
   return %y
+}
+AdminToHash {
+  if ($hget(admin)) hfree admin
+  var %admins = $readini(gerty.config.ini,admin,rsn), %x = $numtok(%admins,124), %string
+  while (%x) { %string = %string rsn=" $+ $gettok(%admins,%x,124) $+ " OR | dec %x }
+  tokenize 44 $dbSelectWhere(users, fingerprint;rsn, $left(%string,-3) )
+  var %a = $0
+  while ($($ $+ %a,2)) { hadd -m admin $gettok($($ $+ %a,2),1,59) $gettok($($ $+ %a,2),2,59) | dec %a }
 }

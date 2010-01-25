@@ -852,6 +852,7 @@ Smithing	15	12.5	Iron Bar	2351	Ore	440	0
 Smithing	20	13.7	Silver Bar	2355	Ore	442	0
 Smithing	30	17.5	Steel Bar	2353	Ore	440+453	2
 Smithing	40	22.5	Gold Bar	2357	Ore	444	0
+Smithing	40	56.2	Gold gaunts
 Smithing	50	30	Mithril Bar	2357	Ore	447+453	4
 Smithing	70	37.5	Adamant Bar	2361	Ore	449+453	6
 Smithing	85	50	Runite Bar	2363	Ore	451+453	8

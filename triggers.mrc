@@ -38,13 +38,19 @@ on *:TEXT:*:*: {
     goto clean
   }
   _CheckMain
-  if ($regex($1-,/forum\.runescape\.com\/forums\.ws\?(\d{1,3}\W\d{1,3}\W\d+\W\d+)/Si)) {
-    if (Runescript isin $nick || Vectra isin $nick || $chanset($chan,qfc) == off || !$chan) { halt }
-    var %qfc = $regml(1)
-    var %ticks = %ticks
-    hadd -m a $+ %ticks out msg $chan
-    hadd -m a $+ %ticks qfc $replace(%qfc,$chr(44),-)
-    sockopen qfc.a $+ %ticks forum.runescape.com 80
+  ; RS forum link
+  if ($regex(qfc,$1-,/forum\.runescape\.com\/forums\.ws\?(\d{1,3}\W\d{1,3}\W\d+\W\d+)/Si)) {
+    if (Runescript isin $nick || Vectra isin $nick || $chanset($chan,qfc) == off) { goto clean }
+    var %qfc = $regml(qfc,1), %ticks = %thread
+    hadd -m %ticks out msg $iif($chan,$chan,$nick)
+    hadd -m %ticks qfc $replace(%qfc,$chr(44),-)
+    sockopen qfc. $+ %ticks forum.runescape.com 80
+    goto clean
+  }
+  ; SPOTIFY link
+  else if ($regex(spotify,$1-,/open\.spotify\.com\/track/(\w+)/Si)) {
+    var %url = http://sselessar.net/parser/spotify.php?id= $+ $regml(spotify,1)
+    noop $download.break(spotify $iif($chan,$chan,$nick),%thread,%url)
     goto clean
   }
   ; DEFNAME
@@ -84,7 +90,7 @@ on *:TEXT:*:*: {
   ; GEUPDATE
   else if ($regex($1,/^[!@.]geupdate$/Si)) {
     var %output, %x = 2, %update
-    %output = Recent Ge Updates (UK): $gettok($read(geupdate.txt,1),3,124) $+ 07 $gettok($read(geupdate.txt,1),1,124) $+  ( $+ $duration($calc($ctime - $gettok($read(geupdate.txt,1),2,124))) ago);
+    %output = Recent Ge Updates (UK): $gettok($read(geupdate.txt,1),3,124) $+ 07 $gettok($read(geupdate.txt,1),1,124) $+  ( $+ $duration($calc($ctime($date $time) - $gettok($read(geupdate.txt,1),2,124))) ago);
     while (%x <= 7) {
       if (!$read(geupdate.txt,%x)) { break }
       %update = $read(geupdate.txt,%x)
@@ -108,13 +114,6 @@ on *:TEXT:*:*: {
   else if ($regex($1,/^[!@.]cmb-?est(imate)?$/Si)) {
     if (!$9) { %saystyle Syntax Error: !cmbest att def str hp range pray mage sum | goto clean }
     %saystyle estimated combat level:07 $floor($calccombat($2,$3,$4,$5,$6,$7,$8,$9).p2p) (07 $+ $floor($calccombat($2,$3,$4,$5,$6,$7,$8,$9).f2p) $+ ) | class:07 $calccombat($2,$3,$4,$5,$6,$7,$8,$9).class | 04AD04SH03RP12MS: 04 $+ $2  $+ $3 04 $+ $4  $+ $5 03 $+ $6  $+ $7 12 $+ $8  $+ $9
-    goto clean
-  }
-  ; FARMER
-  else if ($regex($1,/^[!@.]old(farmer|payment)$/Si)) {
-    var %param = $2-
-    var %info = $read(farming.txt, w,* $+ %param $+ *)
-    if ($2) { %saystyle Farming params07 $gettok(%info,1,9) | level Required:07 $gettok($gettok(%info,3,9),2,32) | experience:07 $gettok(%info,2,9) | payment:07 $gettok(%info,4,9) }
     goto clean
   }
   ; COORDS
@@ -900,13 +899,6 @@ on *:TEXT:*:*: {
     if (!$2) {
       %saystyle All Valid Fairy Codes: 07AJQ | 07AKQ | 07AJS | 07CIP | 07DKS | 07AJR | 07CJR | 07DJR | 07ALS | 07BLR | 07BIS | 07DJP | 07CIQ | 07CLS | 07BKP | 07AKS | 07ALR | 07DKR | 07DIS | 07DIR | 07BKQ | 07CKP | 07AIQ | 07BJR | 07BLP | 07DKP | 07CKR | 07DLS | 07CKS | 07BKR | 07BIQ | 07DLQ | 07AIR | 07BIP | 07CLP | 07DLR
     }
-    goto clean
-  }
-  ; OLD POUCH (?)
-  else if ($regex($1,/^[!@.]oldpo(uch)?$/Si)) {
-    var %info = $read(summoning.txt, nw, * $+ $2- $+ *)
-    if (!%info) { %saystyle No match found for07 $2- $+ . | halt }
-    %saystyle Summoning Params07 $gettok(%info,1,9) | Level Required:07 $gettok(%info,3,9) | Exp:07 $gettok(%info,2,9) | Charm:07 $gettok(%info,4,9) | Shards:07 $gettok(%info,5,9) | Second:07 $gettok(%info,7,9) | Time (mins):07 $gettok(%info,6,9) | High Alch:07 $gettok(%info,8,9) | Skill Focus:07 $gettok(%info,9,9) | Other:07 $gettok(%info,10,9)
     goto clean
   }
   ; LOOTSHARE WORLDS [ACTIVITY]
