@@ -492,6 +492,12 @@ alias lastNdays {
 alias compareOut {
   var %thread $1, %thread2 $cmd(%thread,arg1), %hiscores $2
   .tokenize 10 $distribute($2)
+  if ($1 == unranked) {
+    $cmd(%thread, out)  $+ $cmd(%thread, arg3) does not feature07 $cmd(%thread,arg2) hiscores.
+    _clearCommand %thread
+    _clearCommand %thread2
+    halt
+  }
   var %hiscoreLine $($ $+ $statnum($cmd(%thread,arg2)),2)
   if (!$cmd(%thread2,arg5)) {
     hadd -m %thread arg5 %hiscoreLine
