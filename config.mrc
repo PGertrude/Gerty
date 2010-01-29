@@ -244,7 +244,7 @@ alias JoinQueue {
   if ($hget(bot)) hfree bot
   var %a = 1
   while ($gettok(%z,%a,124)) {
-    var %b = %b %a $+ :07 $remove($gettok(%z,%a,124),Gerty) $+ 
+    var %b = %b %a $+ :07 $iif($remove($gettok(%z,%a,124),Gerty),$v1,[00]) $+ 
     inc %a
   }
   %max = $calc(30 * $numtok(%y,124))
