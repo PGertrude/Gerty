@@ -50,6 +50,7 @@ on *:TEXT:*:*: {
   ; SPOTIFY link
   else if ($regex(spotify,$1-,/open\.spotify\.com\/track/(\w+)/Si)) {
     _fillCommand %thread @ $nick $iif($chan,$v1,PM) Spotify link
+    if ($chanset($chan,spotify) == off) goto clean
     var %url = http://sselessar.net/parser/spotify.php?id= $+ $regml(spotify,1)
     noop $download.break(spotify msg $iif($chan,$chan,$nick),%thread,%url)
     goto clean
@@ -57,10 +58,9 @@ on *:TEXT:*:*: {
   ; YOUTUBE link
   else if ($regex(yt,$1-,/youtube\.com\/watch\?v=([\w-]+)\W?/Si)) {
     _fillCommand %thread @ $nick $iif($chan,$v1,PM) Youtube link
-    if ($chanset($chan,youtube) != off) {
-      var %url = http://rscript.org/lookup.php?type=youtubeinfo&id= $+ $regml(yt,1)
-      noop $download.break(youtube msg $iif($chan,$chan,$nick) $regml(yt,1),%thread,%url)
-    }
+    if ($chanset($chan,youtube) == off) goto clean
+    var %url = http://rscript.org/lookup.php?type=youtubeinfo&id= $+ $regml(yt,1)
+    noop $download.break(youtube msg $iif($chan,$chan,$nick) $regml(yt,1),%thread,%url)
   }
   ; DEFNAME
   else if ($regex($1,/^[!@.](def|set)(name|rsn)$/Si)) {
@@ -316,10 +316,10 @@ on *:TEXT:*:*: {
     var %x = 1, %results
     while (%x <= $0 && $len(%results) < 350) {
       var %name = $gettok($($ $+ %x,2),1,59), %price = $gettok($($ $+ %x,2),2,59), %change = $gettok($($ $+ %x,2),3,59)
-      %results = %results | %name $+ 07 $format_number($calc(%price * %num)) $updo(%change)
+      %results = %results | %name $+ 07 $format_number(%price) $updo(%change) 
       inc %x
     }
-    %saystyle Results:07 %numberOfResults (07x $+ %num $+ ) %results
+    %saystyle Results:07 %numberOfResults %results
     goto clean
   }
   ; GEINFO
@@ -612,7 +612,6 @@ on *:TEXT:*:*: {
     hadd -m %thread skill $skills($2)
     hadd -m %thread out %saystyle
     sockopen $+(trackyes.,%thread) www.rscript.org 80
-    goto clean
   }
   ; NDAYSAGO
   else if ($regex($1,/^[!@.](\d+)([A-Za-z]+)ago$/Si)) {
@@ -631,7 +630,6 @@ on *:TEXT:*:*: {
     hadd -m %thread skill $skills($2)
     hadd -m %thread out %saystyle
     sockopen $+(trackyes.,%thread) www.rscript.org 80
-    goto clean
   }
   ; TODAY/WEEK/MONTH/YEAR
   else if ($regex($1,/^[!@.](today|week|month|year)$/Si)) {
@@ -649,7 +647,6 @@ on *:TEXT:*:*: {
     %nick = $rsn(%nick)
     var %url = http://www.rscript.org/lookup.php?type=track&user= $+ %nick $+ &skill=all&time= $+ %time
     noop $download.break(trackAll %saystyle %nick %time %command, %thread, %url)
-    goto clean
   }
   ; LASTWEEK ; LASTMONTH ; LASTYEAR ; YESTERDAY
   else if ($regex($1,/^[!@.](?:y(?:ester)?(day)|l(?:ast)?(week|month|year))$/Si)) {
@@ -689,7 +686,6 @@ on *:TEXT:*:*: {
     hadd -m %thread command %command
     hadd -m %thread out %saystyle
     sockopen $+(trackyes.,%thread) www.rscript.org 80
-    goto clean
   }
   ; TRACK
   else if ($regex($1,/^[!@.]track$/Si)) {
@@ -734,7 +730,6 @@ on *:TEXT:*:*: {
       var %url = http://www.rscript.org/lookup.php?type=track&user= $+ %nick $+ &skill=all&time= $+ %time
       noop $download.break(trackAll %saystyle %nick %time $replace(%command, $chr(32), _), %socket, %url)
     }
-    goto clean
   }
   ; COMPARE
   else if ($regex($left($1,1),/[!@.]/) && $misc($right($1,-1)) == compare) {
@@ -961,6 +956,10 @@ on *:TEXT:*:*: {
       else if (%command == autocalc) {
         noop $_network(noop $!dbUpdate(channel, `channel`=' $+ $chan $+ ', autocalc, %mode ))
         %saystyle The no-trigger calculator has been turned07 %mode for07 $chan $+ .
+      }
+      else if (%command == spotify) {
+        noop $_network(noop $!dbUpdate(channel, `channel`=' $+ $chan $+ ', spotify, %mode ))
+        %saystyle $chan Settings: Spotify link information messages are now %mode $+ .
       }
     }
     if ($admin($nick)) {
