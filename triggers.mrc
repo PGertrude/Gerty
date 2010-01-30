@@ -49,8 +49,8 @@ on *:TEXT:*:*: {
   }
   ; SPOTIFY link
   else if ($regex(spotify,$1-,/open\.spotify\.com\/track/(\w+)/Si)) {
-    _fillCommand %thread @ $nick $iif($chan,$v1,PM) Spotify link
     if ($chanset($chan,spotify) == off) goto clean
+    _fillCommand %thread @ $nick $iif($chan,$v1,PM) Spotify link
     var %url = http://sselessar.net/parser/spotify.php?id= $+ $regml(spotify,1)
     noop $download.break(spotify msg $iif($chan,$chan,$nick),%thread,%url)
     goto clean
@@ -316,10 +316,10 @@ on *:TEXT:*:*: {
     var %x = 1, %results
     while (%x <= $0 && $len(%results) < 350) {
       var %name = $gettok($($ $+ %x,2),1,59), %price = $gettok($($ $+ %x,2),2,59), %change = $gettok($($ $+ %x,2),3,59)
-      %results = %results | %name $+ 07 $format_number(%price) $updo(%change) 
+      %results = %results | %name $+ 07 $format_number($calc(%price * %num)) $updo(%change)
       inc %x
     }
-    %saystyle Results:07 %numberOfResults %results
+    %saystyle Results:07 %numberOfResults (07x $+ %num $+ ) %results
     goto clean
   }
   ; GEINFO
@@ -612,6 +612,7 @@ on *:TEXT:*:*: {
     hadd -m %thread skill $skills($2)
     hadd -m %thread out %saystyle
     sockopen $+(trackyes.,%thread) www.rscript.org 80
+    goto clean
   }
   ; NDAYSAGO
   else if ($regex($1,/^[!@.](\d+)([A-Za-z]+)ago$/Si)) {
@@ -630,6 +631,7 @@ on *:TEXT:*:*: {
     hadd -m %thread skill $skills($2)
     hadd -m %thread out %saystyle
     sockopen $+(trackyes.,%thread) www.rscript.org 80
+    goto clean
   }
   ; TODAY/WEEK/MONTH/YEAR
   else if ($regex($1,/^[!@.](today|week|month|year)$/Si)) {
@@ -647,6 +649,7 @@ on *:TEXT:*:*: {
     %nick = $rsn(%nick)
     var %url = http://www.rscript.org/lookup.php?type=track&user= $+ %nick $+ &skill=all&time= $+ %time
     noop $download.break(trackAll %saystyle %nick %time %command, %thread, %url)
+    goto clean
   }
   ; LASTWEEK ; LASTMONTH ; LASTYEAR ; YESTERDAY
   else if ($regex($1,/^[!@.](?:y(?:ester)?(day)|l(?:ast)?(week|month|year))$/Si)) {
@@ -686,6 +689,7 @@ on *:TEXT:*:*: {
     hadd -m %thread command %command
     hadd -m %thread out %saystyle
     sockopen $+(trackyes.,%thread) www.rscript.org 80
+    goto clean
   }
   ; TRACK
   else if ($regex($1,/^[!@.]track$/Si)) {
@@ -730,11 +734,12 @@ on *:TEXT:*:*: {
       var %url = http://www.rscript.org/lookup.php?type=track&user= $+ %nick $+ &skill=all&time= $+ %time
       noop $download.break(trackAll %saystyle %nick %time $replace(%command, $chr(32), _), %socket, %url)
     }
+    goto clean
   }
   ; COMPARE
   else if ($regex($left($1,1),/[!@.]/) && $misc($right($1,-1)) == compare) {
     if (!$2) { %saystyle Syntax Error: !compare [skill] <nick1> [nick2] [@time period] | goto clean }
-    var %skill $compares($2)
+    var %skill $compares($2), %left $left($1,1)
     if (!%skill) { %skill = overall | .tokenize 32 $2- }
     else .tokenize 32 $3-
     var %string $1-
@@ -754,8 +759,8 @@ on *:TEXT:*:*: {
       %nick2 = $rsn($2-)
     }
     var %thread2 $+(a,$r(0,99999))
-    _fillCommand %thread $left($1,1) $nick $iif($chan,$v1,PM) compare %thread2 $replace(%skill,$chr(32),_) %nick1 %time
-    _fillCommand %thread2 $left($1,1) $nick $iif($chan,$v1,PM) compare %thread $replace(%skill,$chr(32),_) %nick2 %time
+    _fillCommand %thread %left $nick $iif($chan,$v1,PM) compare %thread2 $replace(%skill,$chr(32),_) %nick1 %time
+    _fillCommand %thread2 %left $nick $iif($chan,$v1,PM) compare %thread $replace(%skill,$chr(32),_) %nick2 %time
     var %url http://hiscore.runescape.com/index_lite.ws?player=
     noop $download.break(compareOut %thread, %thread, %url $+ %nick1)
     noop $download.break(compareOut %thread2, %thread2, %url $+ %nick2)
@@ -938,27 +943,27 @@ on *:TEXT:*:*: {
     var %mode $iif($3 == on,on,off)
     if ($chan && ($nick isop $chan || $nick ishop $chan || $admin($nick) == admin)) {
       if (%command == youtube) {
-        noop $_network(noop $!dbUpdate(channel, `channel`=' $+ $chan $+ ', youtube, %mode ))
+        noop $_network(noop $!dbUpdate(channel, `channel`=" $+ $chan $+ ", youtube, %mode ))
         %saystyle $chan Settings: Youtube link information messages are now %mode $+ .
       }
       else if (%command == ge || %command == geupdate) {
-        noop $_network(noop $!dbUpdate(channel, `channel`=' $+ $chan $+ ', geupdate, %mode ))
+        noop $_network(noop $!dbUpdate(channel, `channel`=" $+ $chan $+ ", geupdate, %mode ))
         %saystyle $chan Settings: Ge Update messages are now %mode $+ .
       }
       else if (%command == qfc) {
-        noop $_network(noop $!dbUpdate(channel, `channel`=' $+ $chan $+ ', qfc, %mode ))
+        noop $_network(noop $!dbUpdate(channel, `channel`=" $+ $chan $+ ", qfc, %mode ))
         %saystyle $chan Settings: QFC link information messages are now %mode $+ .
       }
       else if (%command == site) {
-        noop $_network(noop $!dbUpdate(channel, `channel`=' $+ $chan $+ ', site, $3- ))
+        noop $_network(noop $!dbUpdate(channel, `channel`=" $+ $chan $+ ", site, $3- ))
         %saystyle The website for07 $chan has been set to:07 $3-
       }
       else if (%command == autocalc) {
-        noop $_network(noop $!dbUpdate(channel, `channel`=' $+ $chan $+ ', autocalc, %mode ))
+        noop $_network(noop $!dbUpdate(channel, `channel`=" $+ $chan $+ ", autocalc, %mode ))
         %saystyle The no-trigger calculator has been turned07 %mode for07 $chan $+ .
       }
       else if (%command == spotify) {
-        noop $_network(noop $!dbUpdate(channel, `channel`=' $+ $chan $+ ', spotify, %mode ))
+        noop $_network(noop $!dbUpdate(channel, `channel`=" $+ $chan $+ ", spotify, %mode ))
         %saystyle $chan Settings: Spotify link information messages are now %mode $+ .
       }
     }
