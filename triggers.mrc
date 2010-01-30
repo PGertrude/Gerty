@@ -739,7 +739,7 @@ on *:TEXT:*:*: {
   ; COMPARE
   else if ($regex($left($1,1),/[!@.]/) && $misc($right($1,-1)) == compare) {
     if (!$2) { %saystyle Syntax Error: !compare [skill] <nick1> [nick2] [@time period] | goto clean }
-    var %skill $compares($2)
+    var %skill $compares($2), %left $left($1,1)
     if (!%skill) { %skill = overall | .tokenize 32 $2- }
     else .tokenize 32 $3-
     var %string $1-
@@ -759,8 +759,8 @@ on *:TEXT:*:*: {
       %nick2 = $rsn($2-)
     }
     var %thread2 $+(a,$r(0,99999))
-    _fillCommand %thread $left($1,1) $nick $iif($chan,$v1,PM) compare %thread2 $replace(%skill,$chr(32),_) %nick1 %time
-    _fillCommand %thread2 $left($1,1) $nick $iif($chan,$v1,PM) compare %thread $replace(%skill,$chr(32),_) %nick2 %time
+    _fillCommand %thread %left $nick $iif($chan,$v1,PM) compare %thread2 $replace(%skill,$chr(32),_) %nick1 %time
+    _fillCommand %thread2 %left $nick $iif($chan,$v1,PM) compare %thread $replace(%skill,$chr(32),_) %nick2 %time
     var %url http://hiscore.runescape.com/index_lite.ws?player=
     noop $download.break(compareOut %thread, %thread, %url $+ %nick1)
     noop $download.break(compareOut %thread2, %thread2, %url $+ %nick2)
