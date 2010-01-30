@@ -1,13 +1,8 @@
 >start<|botAlias.mrc|new|1.0|a
 timeCount {
+  ; 1 second timer
   if ($read(timer.txt,nw,$ctime($asctime($gmt)) $+ *) && $server) { $gettok($read(timer.txt,nw,$ctime($asctime($gmt)) $+ *),2,124) }
-  if ($calc($ctime % 60) == 0) { CheckGePrices }
-  if ($calc($ctime % 300) == 0) {
-    var %thread = $+(a,$r(0,999))
-    var %search = $dbSelectWhere(prices, name, `price`='0' LIMIT 1)
-    var %url http://gerty.rsportugal.org/parsers/ge.php?item= $+ $replace(%search,$chr(32),+)
-    noop $download.break(downloadGe %thread,%thread,%url)
-  }
+  ; 10 second timer
   if ($calc($ctime % 10) == 0) {
     if ($server) {
       _setAdmin
@@ -16,10 +11,23 @@ timeCount {
       server irc.swiftirc.net
     }
   }
-  if ($calc($ctime % 15) == 0 && $me == Gerty) {
-    if (!$hget(joinqueue,list) || $ctime > $hget(joinqueue,time) || $nick(gertyDev,0,h) != $hget(joinqueue,num)) {
+  ; 15 second timer
+  if ($calc($ctime % 15) == 0) {
+    if ((!$hget(joinqueue,list) || $ctime > $hget(joinqueue,time) || $nick(gertyDev,0,h) != $hget(joinqueue,num)) && $me == Gerty) {
       JoinQueueStart
     }
+  }
+  ; 1 minute timer
+  if ($calc($ctime % 60) == 0) { CheckGePrices }
+  ; 5 minute timer
+  if ($calc($ctime % 300) == 0) {
+    ; ge price updates
+    var %thread = $+(a,$r(0,999))
+    var %search = $dbSelectWhere(prices, name, `price`='0' LIMIT 1)
+    var %url http://gerty.rsportugal.org/parsers/ge.php?item= $+ $replace(%search,$chr(32),+)
+    noop $download.break(downloadGe %thread,%thread,%url)
+    ; save command count
+    hsave commands commands.txt
   }
 }
 CheckGePrices {

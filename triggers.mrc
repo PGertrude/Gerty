@@ -57,8 +57,8 @@ on *:TEXT:*:*: {
   }
   ; YOUTUBE link
   else if ($regex(yt,$1-,/youtube\.com\/watch\?v=([\w-]+)\W?/Si)) {
-    _fillCommand %thread @ $nick $iif($chan,$v1,PM) Youtube link
     if ($chanset($chan,youtube) == off) goto clean
+    _fillCommand %thread @ $nick $iif($chan,$v1,PM) Youtube link
     var %url = http://rscript.org/lookup.php?type=youtubeinfo&id= $+ $regml(yt,1)
     noop $download.break(youtube msg $iif($chan,$chan,$nick) $regml(yt,1),%thread,%url)
   }
