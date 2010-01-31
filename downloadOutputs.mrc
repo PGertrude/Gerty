@@ -316,7 +316,7 @@ alias timer.start {
   .tokenize 44 $($ $+ %skillid,2)
   ; save start
   ; output
-  if ($3 == NR || !$3) goto unranked
+  if ($3 == NR || !$3) { goto unranked }
   %saystyle  $+ %nick $+ 's starting experience of07 $bytes($3,db) in  $+ %skill $+  has been saved.
   goto unset
   :unranked
@@ -491,6 +491,7 @@ alias lastNdays {
 ; COMPARE
 alias compareOut {
   var %thread $1, %thread2 $cmd(%thread,arg1), %hiscores $2
+  if (!$hget(%thread)) { halt }
   .tokenize 10 $distribute($2)
   if ($1 == unranked) {
     $cmd(%thread, out)  $+ $cmd(%thread, arg3) does not feature07 $cmd(%thread,arg2) hiscores.
@@ -505,12 +506,12 @@ alias compareOut {
   }
   var %unit levels, %skillBool $iif($skills($cmd(%thread,arg2)), $true, $false), %output
   if (!%skillBool) %unit = score
-  var %level $gettok(%hiscoreLine,2,44), %alienLevel $gettok($cmd(%thread2,arg5),2,44)
-  if (%alienLevel > %level) %output = $cmd(%thread2,arg3) (07 $+ %alienLevel $+ ) is07 $bytes($calc(%alienLevel - %level),db)  $+ %unit higher than $cmd(%thread,arg3) (07 $+ %level $+ ) $+ 
-  else if (%level > %alienLevel) %output = $cmd(%thread,arg3) (07 $+ %Level $+ ) is07 $bytes($calc(%level - %alienLevel),db)  $+ %unit higher than $cmd(%thread2,arg3) (07 $+ %alienLevel $+ ) $+ 
-  else %output = $cmd(%thread,arg3) and $cmd(%thread2,arg3) both have %unit $+ 07 %level $cmd(%thread,arg2) $+ 
+  var %level $remove($gettok(%hiscoreLine,2,44),~), %alienLevel $remove($gettok($cmd(%thread2,arg5),2,44),~)
+  if (%alienLevel > %level) %output = $cmd(%thread2,arg3) (07 $+ $gettok($cmd(%thread2,arg5),2,44) $+ ) is07 $bytes($calc(%alienLevel - %level),db)  $+ %unit higher than $cmd(%thread,arg3) (07 $+ $gettok(%hiscoreLine,2,44) $+ ) $+ 
+  else if (%level > %alienLevel) %output = $cmd(%thread,arg3) (07 $+ $gettok(%hiscoreLine,2,44) $+ ) is07 $bytes($calc(%level - %alienLevel),db)  $+ %unit higher than $cmd(%thread2,arg3) (07 $+ $gettok($cmd(%thread2,arg5),2,44) $+ ) $+ 
+  else %output = $cmd(%thread,arg3) and $cmd(%thread2,arg3) both have %unit $+ 07 $gettok(%hiscoreLine,2,44) $cmd(%thread,arg2) $+ 
   if (%skillBool) {
-    var %exp $gettok(%hiscoreLine,3,44), %alienExp $gettok($cmd(%thread2,arg5),3,44)
+    var %exp $remove($gettok(%hiscoreLine,3,44),~), %alienExp $remove($gettok($cmd(%thread2,arg5),3,44),~)
     if (%alienExp > %exp) %output = %output $+ , $cmd(%thread2,arg3) has07 $bytes($calc(%alienExp - %exp),db) more experience
     else if (%exp > %alienExp) %output = %output $+ , $cmd(%thread,arg3) has07 $bytes($calc(%exp - %alienExp),db) more experience
     else %output = %output $+ , $cmd(%thread,arg3) and $cmd(%thread2,arg3) both have07 $bytes(%exp,db) experience
@@ -985,10 +986,10 @@ alias spotify {
 }
 ; YOUTUBE
 alias youtube {
-  var %saystyle $1-2, %id = $3
-  if (Undefined index: isin $4-) %saystyle No videos found with id $qt(07 $+ %id $+ )
+  var %thread $1, %id = $2
+  if (Undefined index: isin $3-) { $cmd(%thread,out) No videos found with id $qt(07 $+ %id $+ ) }
   else {
-    tokenize 10 $3-
+    tokenize 10 $2-
     var %x = 1
     while ($($ $+ %x,2) != END) {
       var %string = $($ $+ %x,2)
@@ -1002,6 +1003,7 @@ alias youtube {
       inc %x
     }
     var %dl = Download:12 http://www.xaaa.co.uk/youtube.php?yturl= $+ %id
-    %saystyle Youtube id $qt(07 $+ %id $+ ) $| %title | %dur | %views | %rating | %dl
+    $cmd(%thread,out) Youtube id $qt(07 $+ %id $+ ) $| %title | %dur | %views | %rating | %dl
   }
+  _clearCommand %thread
 }

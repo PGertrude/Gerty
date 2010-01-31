@@ -51,8 +51,22 @@ _setAdmin {
   }
   AdminToHash
 }
+bots {
+  var %x 2, %bots
+  while (%x <= $lines(botlist.txt)) {
+    %bots = %bots $read(botlist.txt,%x)
+    inc %x
+  }
+  return %bots
+}
 _CheckMain {
-  if ($me != Gerty && $chan == #gerty) { halt }
+  tokenize 32 $bots
+  var %x 1
+  while (%x <= $0) {
+    if ($($ $+ %x,2) ison $chan && $me != $($ $+ %x,2)) { halt }
+    else if ($me == $($ $+ %x,2)) { return }
+    inc %x
+  }
   return
 }
 ; _throw $nopath($script) %thread
