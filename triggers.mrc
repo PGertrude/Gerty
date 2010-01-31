@@ -60,13 +60,13 @@ on *:TEXT:*:*: {
     if ($chanset($chan,youtube) == off) goto clean
     _fillCommand %thread @ $nick $iif($chan,$v1,PM) Youtube link
     var %url = http://rscript.org/lookup.php?type=youtubeinfo&id= $+ $regml(yt,1)
-    noop $download.break(youtube msg $iif($chan,$chan,$nick) $regml(yt,1),%thread,%url)
+    noop $download.break(youtube %thread $regml(yt,1),%thread,%url)
   }
   ; DEFNAME
   else if ($regex($1,/^[!@.](def|set)(name|rsn)$/Si)) {
     if (!$2) { %saystyle Syntax Error: !defname <rsn> | goto clean }
     if ($regsubex($2-,/\W/,_) isin $readini(Gerty.Config.ini,admin,rsn) && !$admin($nick)) { %saystyle This RSN is protected, please Contact an Admin if this is your RSN. | goto clean }
-    var %nick $caps($regsubex($left($2-,12),/\W/g,_))
+    var %nick $caps($left($2-,12))
     noop $_network(noop $!setDefname( $aLfAddress($nick) , %nick ))
     %saystyle Your default RuneScape name is now07 %nick $+ . This RSN is associated with the address07 $aLfAddress($nick,3) $+ .
     goto clean
@@ -97,7 +97,7 @@ on *:TEXT:*:*: {
     goto clean
   }
   ; GEUPDATE
-  else if ($regex($1,/^[!@.]geupdate$/Si)) {
+  else if ($regex($1,/^[!@.]ge?u(pdate)?$/Si)) {
     var %output, %x = 2, %update
     %output = Recent Ge Updates (UK): $gettok($read(geupdate.txt,1),3,124) $+ 07 $gettok($read(geupdate.txt,1),1,124) $+  ( $+ $duration($calc($ctime($date $time) - $gettok($read(geupdate.txt,1),2,124))) ago);
     while (%x <= 7) {
