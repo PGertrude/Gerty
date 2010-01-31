@@ -220,7 +220,7 @@ alias JoinQueueStart {
 }
 alias JoinQueue {
   if ($hget(joinqueue)) hfree joinqueue
-  hadd -m $joinqueue num $nick(#gertyDev,0,h)
+  hadd -m joinqueue num $nick(#gertyDev,0,h)
   var %x = 1
   while ($hget(bot,%x).item) {
     %bot = $v1
@@ -231,9 +231,12 @@ alias JoinQueue {
   while ($numtok(%z,124) < 4) {
     var %y = $sorttok(%y,124,n)
     var %bot = $gettok(%y,1,124)
-    if ($gettok(%bot,1,32) >= 30) {
+    if ($gettok(%bot,1,32) >= 30 && !%z) {
       hadd -m joinqueue list Full
       goto skip
+    }
+    else if ($gettok(%bot,1,32) >= 30) {
+      break
     }
     var %z = $+(%z,$iif(%z,|),$gettok(%bot,2,32))
     var %y = $+($calc($gettok(%bot,1,32) + 1) $gettok(%bot,2,32),|,$gettok(%y,2-,124))
@@ -248,7 +251,12 @@ alias JoinQueue {
     inc %a
   }
   %max = $calc(30 * $numtok(%y,124))
-  msg #gertyDev Join queue generated: %b $+ . Channels: $+(07,$bytes(%total,bd),/07,$bytes(%max,bd)) $parenthesis($round($calc(%total / %max * 100),2) $+ $%)
+  if (%b) {
+    sendToDevOnly Join queue generated: %b $+ . Channels: $+(07,$bytes(%total,bd),/07,$bytes(%max,bd)) $parenthesis($round($calc(%total / %max * 100),2) $+ $%)
+  }
+  else {
+    sendToDevOnly All bots are currently full.
+  }
 }
 alias OnInvite {
   if ($hget(joinqueue,list) == Full) { .notice $1 Sorry but all bots are currently full. }

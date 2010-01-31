@@ -13,7 +13,7 @@ timeCount {
   }
   ; 15 second timer
   if ($calc($ctime % 15) == 0) {
-    if ((!$hget(joinqueue,list) || $ctime > $hget(joinqueue,time) || $nick(gertyDev,0,h) != $hget(joinqueue,num)) && $me == Gerty) {
+    if ((!$hget(joinqueue,list) || $ctime > $hget(joinqueue,time) || $nick(#gertyDev,0,h) != $hget(joinqueue,num)) && $me == Gerty) {
       JoinQueueStart
     }
   }
