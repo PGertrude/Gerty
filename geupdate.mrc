@@ -1,4 +1,4 @@
->start<|geupdate.mrc|fixed spam after timer restarts|1.65|rs
+>start<|geupdate.mrc|geupdate - still needs rewriting|3.0|rs
 ; - NEEDS REWRITING
 on *:sockread:CheckGePrices.*: {
   if ($sockerr) {

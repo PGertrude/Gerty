@@ -1,3 +1,4 @@
+>start<|sockreads.mrc|compiled sockreads|3.0|rs
 on *:sockread:*: {
   var %thread = $gettok($sockname,2,46)
   var %file = %thread $+ .txt

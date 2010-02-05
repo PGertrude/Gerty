@@ -1,4 +1,4 @@
->start<|exp.mrc|Exp Params|1.15|rs
+>start<|exp.mrc|exp still here...|3.0|rs
 on $*:text:/^[!@.](le?ve?l|e?xp)\b/Si:*:{
   halt
   _CheckMain

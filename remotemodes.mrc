@@ -1,4 +1,4 @@
->start<|remotemodes.mrc|Remote Control|1.15|rs
+>start<|remotemodes.mrc|weird thing tbh|3.0|rs
 on $*:TEXT:/^[\+\-][A-Za-z ]+$/Si:#: {
   if ($admin($rsn($nick)) || $nick isop $chan) {
     var %mode = $1

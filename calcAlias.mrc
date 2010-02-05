@@ -1,3 +1,4 @@
+>start<|calcAlias.mrc|Calculator|3.0|a
 calcreg {
   var %string = $replace($1,xp,A,ge,T,price,T,pi,~,ans,p)
   %string = $regsubex(%string,/(?:([\dep~kmbx\x29])([\x28])|([\x29])([\dep~xastcl])|([ep~])([ep~xastcl])|(x)([e~ctsxl])|(\d)([ep~xastcl]))/gi,\1*\2)

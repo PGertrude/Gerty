@@ -1,4 +1,4 @@
->start<|botAlias.mrc|new|1.0|a
+>start<|botAlias.mrc|new|3.0|a
 timeCount {
   ; 1 second timer
   if ($read(timer.txt,nw,$ctime($asctime($gmt)) $+ *) && $server) { $gettok($read(timer.txt,nw,$ctime($asctime($gmt)) $+ *),2,124) }

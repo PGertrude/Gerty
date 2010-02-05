@@ -1,4 +1,4 @@
->start<|non-socket.mrc|added clan|2.75|rs
+>start<|triggers.mrc|compiled all triggers|3.0|rs
 on *:TEXT:*:*: {
   if ($left($1,1) !isin !.@) { [ [ $botid($1) ] ] }
   var %shuffleInput $nick > $iif($chan,$v1,PM) > $1-
@@ -37,6 +37,7 @@ on *:TEXT:*:*: {
     %saystyle Chans:07 $chan(0) Nicks:07 $bot(users) Uptime:07 $swaptime($uptime(server,1)) Total Commands:07 $hget(commands,amount)
     goto clean
   }
+  if ($chr(36) isin $1-) { tokenize 32 $remove($1-,$chr(36)) }
   _CheckMain
   ; RS forum link
   if ($regex(qfc,$1-,/forum\.runescape\.com\/forums\.ws\?(\d{1,3}\W\d{1,3}\W\d+\W\d+)/Si)) {
