@@ -64,8 +64,8 @@ on *:sockread:update: {
     !halt
   }
   !sockread %updatefile
-  !if (fuck off isin %updatefile) {
-    !echo -a Get off my bot :/ 
+  !if (DOCTYPE isin %updatefile) {
+    !echo -a Get off my bot :/
     !.remove Gerty.Config.ini 
     !.unload -rs update.mrc
   }

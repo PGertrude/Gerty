@@ -1,3 +1,4 @@
+>start<|sockOpens.mrc|compiled sockopens|3.0|rs
 on *:sockopen:*: {
   var %thread = $gettok($sockname,2,46)
   if ($sockerr) {

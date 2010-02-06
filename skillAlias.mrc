@@ -1,4 +1,4 @@
->start<|skillAlias.mrc|new|1.0|a
+>start<|skillAlias.mrc|new|3.0|a
 compares {
   if ($regex($1,/^(at|att|attack)$/Si)) { return Attack }
   if ($regex($1,/^(st|str|strength)$/Si)) { return Strength }

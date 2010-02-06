@@ -1,4 +1,4 @@
->start<|returnAlias.mrc|new|1.0|a
+>start<|returnAlias.mrc|new|3.0|a
 # return $chr(35)
 $ return $chr(36)
 % return $chr(37)
@@ -92,7 +92,7 @@ admin {
   ;if ($regex($getDefname($1),$+(/^,$chr(40),$readini(Gerty.Config.ini,admin,rsn),$chr(41),/i))) { return admin }
 }
 rsn {
-  if ($getDefname($1)) return $v1
+  if ($getDefname($1)) return $caps($regsubex($v1,/\W/g,_))
   return $caps($regsubex($1-,/\W/g,_))
 }
 capwords {

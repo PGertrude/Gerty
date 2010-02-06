@@ -1,3 +1,4 @@
+>start<|config.mrc|config and join merged|3.0|rs
 on *:START: {
 
   ; Authenticate Host

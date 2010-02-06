@@ -1,4 +1,4 @@
->start<|non-socket.mrc|added clan|2.75|rs
+>start<|triggers.mrc|compiled all triggers|3.0|rs
 on *:TEXT:*:*: {
   if ($left($1,1) !isin !.@) { [ [ $botid($1) ] ] }
   var %shuffleInput $nick > $iif($chan,$v1,PM) > $1-

@@ -1,4 +1,4 @@
->start<|elly.mrc|ml patched up|2.07|rs
+>start<|elly.mrc|elly still here...|3.0|rs
 alias listchans {
   var %out = Chans:07 $chan(0) Nicks:07 $bot(users) Uptime:07 $swaptime($uptime(server,1)) Chan list: $bot(chanlist)
   if ($isid) {

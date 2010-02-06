@@ -1,4 +1,4 @@
->start<|Cost.mrc|Cost scripts|1.07|rs
+>start<|Cost.mrc|Cost script still here...|3.0|rs
 on $*:text:/^(\[\w{2}\]Gerty |Gerty |)?[!.@]((pot)(ion)?s?|(po)(uch)?|(farmer|payment)|(\w+)costs?|costs? (\w+))/Si:*: {
   _CheckMain
   if (Gerty isin $1) {

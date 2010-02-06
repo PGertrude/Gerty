@@ -1,4 +1,4 @@
->start<|grats.mrc|Grats Script|1.15|rs
+>start<|grats.mrc|Grats Script - too long|3.0|rs
 on $*:TEXT:/^[!@.](g|gratz|grats|lvl|level)\b/Si:#: {
   _CheckMain
   var %grat.out = $iif($left($1,1) == @,.msg $chan,.notice $nick)
