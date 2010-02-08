@@ -97,7 +97,7 @@ on *:sockread:*: {
         var %id = $regml(1)
         if (%id) {
           var %url = http://rscript.org/lookup.php?type=youtubeinfo&id= $+ %id
-          noop $download.break(youtube $hget(%thread,out) %id,%thread,%url)
+          noop $download.break(youtube %thread %id,%thread,%url)
         }
         else {
           .hfree %thread
