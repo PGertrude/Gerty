@@ -45,7 +45,7 @@ Hex-Ascii {
   return %output
 }
 versions return $readini(versions.ini,versions,$1)
-chanset return $getChanSetting($1,$2)
+chanset return $hget($1,$2)
 userset return $getUserSetting($1,$2,$3)
 trim {
   .tokenize 10 $1-
@@ -80,16 +80,9 @@ fact {
     }
   }
 }
-rccom {
-  if ($regex($1,$+(/^,$chr(40),$readini(rccomp.ini,member,nick),$chr(41),/i))) { return tracked }
-}
-tracked {
-  if ($regex($1,$+(/^,$chr(40),$readini(tracked.ini,tracked,nick),$chr(41),/i))) { return _tracked }
-}
 admin {
   if ($hget(admin,$aLfAddress($1))) return admin
   else return $false
-  ;if ($regex($getDefname($1),$+(/^,$chr(40),$readini(Gerty.Config.ini,admin,rsn),$chr(41),/i))) { return admin }
 }
 rsn {
   if ($getDefname($1)) return $caps($regsubex($v1,/\W/g,_))

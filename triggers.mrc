@@ -954,27 +954,27 @@ on *:TEXT:*:*: {
     var %mode $iif($3 == on,on,off)
     if ($chan && ($nick isop $chan || $nick ishop $chan || $admin($nick) == admin)) {
       if (%command == youtube) {
-        noop $_network(noop $!dbUpdate(channel, `channel`=' $+ $chan $+ ', youtube, %mode ))
+        noop $_network(noop $!setStringParameter(channel, [ $chan ] , youtube, setting, %mode , $false ))
         %saystyle $chan Settings: Youtube link information messages are now %mode $+ .
       }
       else if (%command == ge || %command == geupdate) {
-        noop $_network(noop $!dbUpdate(channel, `channel`=' $+ $chan $+ ', geupdate, %mode ))
+        noop $_network(noop $!setStringParameter(channel, [ $chan ] , geupdate, setting, %mode , $false ))
         %saystyle $chan Settings: Ge Update messages are now %mode $+ .
       }
       else if (%command == qfc) {
-        noop $_network(noop $!dbUpdate(channel, `channel`=' $+ $chan $+ ', qfc, %mode ))
+        noop $_network(noop $!setStringParameter(channel, [ $chan ] , qfc, setting, %mode , $false ))
         %saystyle $chan Settings: QFC link information messages are now %mode $+ .
       }
       else if (%command == site) {
-        noop $_network(noop $!dbUpdate(channel, `channel`=' $+ $chan $+ ', site, $3- ))
+        noop $_network(noop $!dbUpdate(channel, `channel`LIKE" $+ $chan $+ ", site, $3- ))
         %saystyle The website for07 $chan has been set to:07 $3-
       }
       else if (%command == autocalc) {
-        noop $_network(noop $!dbUpdate(channel, `channel`=' $+ $chan $+ ', autocalc, %mode ))
+        noop $_network(noop $!setStringParameter(channel, [ $chan ] , autocalc, setting, %mode , $false ))
         %saystyle The no-trigger calculator has been turned07 %mode for07 $chan $+ .
       }
       else if (%command == spotify) {
-        noop $_network(noop $!dbUpdate(channel, `channel`=' $+ $chan $+ ', spotify, %mode ))
+        noop $_network(noop $!setStringParameter(channel, [ $chan ] , spotify, setting, %mode , $false ))
         %saystyle $chan Settings: Spotify link information messages are now %mode $+ .
       }
     }
@@ -1013,14 +1013,14 @@ on *:TEXT:*:*: {
       if (!$rowExists(users, rsn, $rsn($nick))) { noop $_network(noop $!sqlite_query(1, INSERT INTO users (rsn, fingerprint) VALUES (' $+ $rsn($nick) $+ ',' $+ $aLfAddress($nick) $+ ');)) }
       if (!$4 && $litecalc($3) > 0) { %saystyle Sytax Error: !set goal <skill> <goal> | goto clean }
       if (!$4 && $lookups($3)) {
-        noop $_network(noop $!setStringParameter( $aLfAddress($nick) , $lookups($3) , goals , nl , $false ))
+        noop $_network(noop $!setStringParameter( users , $aLfAddress($nick) , $lookups($3) , goals , nl , $false ))
         %saystyle Your07 $lookups($3) goal has been removed.
         goto clean
       }
       if ($lookups($4)) { tokenize 32 $4 $3 }
       else { tokenize 32 $3 $4 }
       var %goal $iif($litecalc($2) < 127,$lvltoxp($v1),$v1)
-      noop $_network(noop $!setStringParameter( $aLfAddress($nick) , $lookups($1) , goals , %goal , $false ))
+      noop $_network(noop $!setStringParameter( users , $aLfAddress($nick) , $lookups($1) , goals , %goal , $false ))
       %saystyle Your07 $lookups($1) goal has been set to07 $format_number($iif($litecalc($2) < 127,$lvltoxp($v1),$v1))) experience.
       goto clean
     }
@@ -1028,7 +1028,7 @@ on *:TEXT:*:*: {
       if (!$rowExists(users, fingerprint, $aLfAddress($nick))) { noop $_network(noop $!sqlite_query(1, INSERT INTO users (rsn, fingerprint) VALUES (' $+ $rsn($nick) $+ ',' $+ $aLfAddress($nick) $+ ');)) }
       if (!$lookups($3)) { %saystyle Sytax Error: !set item <skill> <item> | goto clean }
       elseif (!$4) {
-        noop $_network(noop $!setStringParameter( $aLfAddress($nick) , $lookups($3) , items , $false , $false ))
+        noop $_network(noop $!setStringParameter( users , $aLfAddress($nick) , $lookups($3) , items , $false , $false ))
         %saystyle Your07 $lookups($3) item has been removed.
         goto clean
       }
@@ -1056,7 +1056,7 @@ on *:TEXT:*:*: {
         %saystyle Here is a list of valid params for use with Gerty:12 http://p-gertrude.rsportugal.org/gerty/param.html
       }
       else {
-        noop $_network(noop $!setStringParameter( $aLfAddress($nick) , $lookups($3) , items , %item , $false ))
+        noop $_network(noop $!setStringParameter( users , $aLfAddress($nick) , $lookups($3) , items , %item , $false ))
         %saystyle Your07 $lookups(%skill) item has been set to07 %item $+ .
       }
       .fclose %socket

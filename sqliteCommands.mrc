@@ -9,10 +9,75 @@ on *:START:{
   echo 3 -a gerty.db Loaded
 }
 
+;@SYNTAX /loadChans
+;@SUMMARY loads the channel table into a hash object for faster querying.
+alias loadChans {
+  var %sql SELECT * FROM channel;
+  var %query $sqlite_query(1, %sql)
+  while ($sqlite_fetch_row(%query, row, $SQLITE_ASSOC)) {
+    hadd -m $hget(row, channel) users $hget(row, users)
+    hadd -m $hget(row, channel) blacklist $hget(row, blacklist)
+    hadd -m $hget(row, channel) public $hget(row, public)
+    hadd -m $hget(row, channel) site $hget(row, site)
+    hadd -m $hget(row, channel) event $hget(row, event)
+    fillChan $hget(row, channel) $hget(row, setting)
+  }
+  hfree row
+}
+
+
+alias reloadChannel {
+  var %sql SELECT * FROM channel WHERE `channel`LIKE" $+ $1 $+ ";
+  var %query $sqlite_query(1, %sql)
+  while ($sqlite_fetch_row(%query, row, $SQLITE_ASSOC)) {
+    hadd -m $hget(row, channel) users $hget(row, users)
+    hadd -m $hget(row, channel) blacklist $hget(row, blacklist)
+    hadd -m $hget(row, channel) public $hget(row, public)
+    hadd -m $hget(row, channel) site $hget(row, site)
+    hadd -m $hget(row, channel) event $hget(row, event)
+    fillChan $hget(row, channel) $hget(row, setting)
+  }
+  hfree row
+}
+
+;@SYNTAX /fillChan <channel> <string values>
+;@SUMMARY fills up the channel info table dynamically, (unlimited options without code/db changes.)
+;@NOTE The string is of the usual entry:value;entry:value; format.
+alias fillChan {
+  var %objName $1, %values $2-, %x 1
+  tokenize 59 %values
+  while (%x <= $0) {
+    hadd -m %objName $gettok($($ $+ %x,2),1,58) $gettok($($ $+ %x,2),2,58)
+    inc %x
+  }
+}
+
+;@SYNTAX /createObj <Object name> <entry title> <string of values>
+;@SUMMARY creates an object to be accessed by $obj
+;@NOTE creates lots of hash tables! The string is of the usual entry:value;entry:value; format.
+alias createObj {
+  var %objName $1, %title $2, %values $3-, %x 1
+  tokenize 59 %values
+  while (%x <= $0) {
+    hadd -m %objName $+ . $+ $gettok($($ $+ %x,2),1,58) %title $gettok($($ $+ %x,2),2,58)
+    inc %x
+  }
+}
+
+;@SYNTAX $obj(<object name>, <entry title>).<entry>
+;@SUMMARY returns a value -> basically a 4-levelled hash table
+alias obj {
+  if (!$prop) {
+    return $hget($1, $2)
+  }
+  return $hget($+($1,.,$prop),$2)
+}
+
+
 ; 'PUBLIC' METHODS
 
 ;@SYNTAX dbSelect(string table, string[] fields, params string[] conditions)
-;@SUMMARY returns an 'array' of the results for an msl SELECT query on the gerty database.
+;@SUMMARY returns an 'array' of the results for an sql SELECT query on the gerty database.
 ;@NOTE beware of entering conditions with spaces: use $dbSelectWhere
 alias dbSelect {
   var %table = $1, %fields = $replace($2,;,$chr(44)), %conditions = $3-
@@ -82,7 +147,7 @@ alias dbUpdate {
 
   var %x = 3, %fields
   while (%x <= $0) {
-    %fields = %fields $+(`,$($ $+ %x,2),`,=,',$($ $+ $calc(%x + 1),2),',$chr(44))
+    %fields = %fields $+(`,$($ $+ %x,2),`,=,",$($ $+ $calc(%x + 1),2),",$chr(44))
     inc %x 2
   }
   %fields = $left(%fields, -1)
@@ -90,6 +155,7 @@ alias dbUpdate {
   if ($prop == sql) return %sql
   ; Perform Query
   var %query $sqlite_query(1, %sql)
+  if (%table == channel) { reloadChannel $regget(%condition,/["'](#[^'"]+)["']/) }
   return $true
 
   :error
@@ -194,16 +260,18 @@ alias getStringParameter {
   return $false
 }
 
-;@SYNTAX setStringParameter(string fingerprint, string skill, string field, string value, bool rsn)
+;@SYNTAX setStringParameter(string table, [string fingerprint], string skill, string field, string value, [bool rsn])
 ;@SUMMARY inserts a parameter into a field on the `users` table, saves as skill:value;skill:value
 alias setStringParameter {
-  if (!$5) .tokenize 32 $1 $replace($2,$chr(32),_) $3 $replace($4,$chr(32),_) $false
-  var %fieldValue $userSet($1, $3, $5)
-  var %regex /( $+ $2 $+ :[^;]+;)/i
-  var %replace $replace($2,_,$chr(32)) $+ : $+ $replace($4,_,$chr(32)) $+ ;
-  var %newField $regsubex(%fieldValue, %regex, %replace)
-  if ($2 !isin %newField) %newField = %newField $+ %replace
-  noop $dbUpdate(users,` $+ $iif($5,rsn,fingerprint) $+ `=' $+ $1 $+ ', $3, %newField)
+  if (!$6) .tokenize 32 $1 $2 $replace($3,$chr(32),_) $4 $replace($5,$chr(32),_) $false
+  var %fieldValue
+  if ($1 == users) { %fieldValue = $userSet($2, $4, $6) }
+  else if ($1 == channel) { %fieldValue = $getChanSetting($2, $4) }
+  var %regex /( $+ $3 $+ :[^;]+;)/i
+  var %replace $replace($3,_,$chr(32)) $+ : $+ $replace($5,_,$chr(32)) $+ ;
+  var %newField $remove($regsubex(%fieldValue, %regex, %replace),$false)
+  if ($3 !isin %newField) %newField = %newField $+ %replace
+  noop $dbUpdate($1,` $+ $iif($1 == users,$iif($6,rsn,fingerprint),channel) $+ `=' $+ $2 $+ ', $4, %newField)
 }
 
 ;@SYNTAX rowExists(string table, string field, string value)
