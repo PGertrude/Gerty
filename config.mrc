@@ -76,6 +76,8 @@ on *:CONNECT: {
 
   }
 
+  loadChans
+
   ; Start up main timer
   .timertim -o 0 1 .timecount
 
@@ -136,6 +138,7 @@ on *:PART:*: {
 }
 on *:JOIN:*: {
   if ($nick == $me) {
+    reloadChannel $chan
     who $chan
     var %thread = $+(a,$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9))
     if (!$rowExists(channel, channel, $chan)) { noop $_network(noop $!sqlite_query(1, INSERT INTO channel (channel) VALUES (" $+ $chan $+ ");)) }
