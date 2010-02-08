@@ -377,6 +377,7 @@ on *:TEXT:*:*: {
     else {
       %saystyle Syntax Error: !youtube <search term>
     }
+    goto clean
   }
   else if ($regex($1,/^[!@.]google$/Si)) {
     hadd -m %thread out %saystyle
