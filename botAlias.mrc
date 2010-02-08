@@ -60,6 +60,7 @@ bots {
   return %bots
 }
 _CheckMain {
+  if (!$chan) { return }
   tokenize 32 $bots
   var %x 1
   while (%x <= $0) {
