@@ -1008,3 +1008,62 @@ alias youtube {
   }
   _clearCommand %thread
 }
+; ALOG
+alias alog {
+  var %string = $2-, %x = 1, %y = $numtok(%string,10), %thread = $1
+  while (%x <= %y) {
+    tokenize 58 $gettok(%string,%x,10)
+    if ($1 == N/A) { %out = No events found for07 $hget(%thread,arg1) $+ . Please check spelling and that user profile is publicly available. | break }
+    elseif ($1 == ITEM) {
+      var %old = $hget(%thread,item)
+      hadd -m %thread item %old $+ $2 $+ $chr(124)
+      if ($len($alogout(%thread)) > 350) hadd -m %thread item %old
+    }
+    elseif ($1 == EXP) {
+      var %old = $hget(%thread,exp)
+      if ($gettok($2,2,32) !isin %old) hadd -m %thread exp $+(%old,$chr(44) 07,$bytes($gettok($2,1,32),bd), $gettok($2,2,32) exp)
+      if ($len($alogout(%thread)) > 350) hadd -m %thread exp %old
+    }
+    elseif ($1 == KILL) {
+      var %old = $hget(%thread,kill)
+      hadd -m %thread kill %old $+ $2 $+ $chr(124)
+      if ($len($alogout(%thread)) > 350) hadd -m %thread kill %old
+    }
+    elseif ($1 == QUEST) {
+      var %old = $hget(%thread,done)
+      hadd -m %thread done %old $+ $2 $+ $chr(124)
+      if ($len($alogout(%thread)) > 350) hadd -m %thread done %old
+    }
+    elseif ($1 == OTHER) {
+      var %old = $hget(%thread,other)
+      hadd -m %thread other %old $+ $2 $+ $chr(124)
+      if ($len($alogout(%thread)) > 350) hadd -m %thread other %old
+    }
+    elseif ($1 == LEVEL) {
+      var %old = $hget(%thread,lvl), %lvl = $gettok($2,1,32), %skill = $gettok($2,2,32)
+      if (!$hget(%thread,%skill)) { 
+        hadd -m %thread %skill 0
+        hadd -m %thread %skill $+ high %lvl
+      }
+      hinc %thread %skill
+      if (!$istok($hget(%thread,lvl),%skill,124)) hadd -m %thread lvl $+($hget(%thread,lvl),|,%skill)
+      if ($len($alogout(%thread)) > 350) hadd -m %thread lvl %old
+    }
+    inc %x
+  }
+  $hget(%thread,out) Achievements Log for07 $hget(%thread,arg1) $+ : $iif(%out,%out,$alogout(%thread))
+  _clearCommand %thread
+}
+alias alog-r {
+  var %thread = $1, %out, %text, %time, %string = $2-, %x = 1, %y = $numtok(%string,10)
+  while (%x <= %y && $len(%out) < 320) {
+    tokenize 58 $gettok(%string,%x,10)
+    if ($1 == N/A) { %out = No events found for07 $hget(%thread,arg1) $+ . Please check spelling and that user profile is publicly available. | break }
+    if ($1 isin KILL|QUEST|LEVEL) %text = $replace($1,KILL,Killed07 $2,QUEST,Completed07 $2,LEVEL,Gained level07 $2)
+    else %text = $replace($1,EXP,Reached07 $bytes($gettok($2,1,32),bd) $gettok($2,2,32) exp,OTHER,07 $+ $2,ITEM,Found07 $2)
+    %out = $+(%out,$iif(%out,$chr(32) $+ |),$chr(32),%text $parenthesis($asctime($3,mm.07dd.07yy)))
+    inc %x
+  }
+  $hget(%thread,out) Recent events for07 $hget(%thread,arg1) $+ : %out
+  _clearCommand %thread
+}

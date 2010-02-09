@@ -607,13 +607,13 @@ on *:TEXT:*:*: {
   ; ALOG
   else if ($regex($1,/^[!.@]a(chievements?)?log$/Si)) {
     if ($2 == -r) {
-      tokenize 32 $1 $3-
-      var %recent = yes
+      _fillCommand %thread $left($1,1) $nick $iif($chan,$v1,PM) alog-r $rsn($iif($3,$regsubex($3-,/[\W_]/Sg,_),$nick))
+      noop $download.break(alog-r %thread ,%thread,http://sselessar.net/parser/alog-rss.php?rsn= $+ $hget(%thread,arg1) )
     }
-    hadd -m %thread out %saystyle
-    hadd -m %thread rsn $rsn($iif($2,$regsubex($2-,/[\W_]/Sg,_),$nick))
-    if (%recent) sockopen alog-r. $+ %thread sselessar.net 80
-    else sockopen alog. $+ %thread services.runescape.com 80
+    else {
+      _fillCommand %thread $left($1,1) $nick $iif($chan,$v1,PM) alog $rsn($iif($2,$regsubex($2-,/[\W_]/Sg,_),$nick))
+      noop $download.break(alog %thread ,%thread,http://sselessar.net/parser/alog-rss.php?rsn= $+ $hget(%thread,arg1) )
+    }
     goto clean
   }
   ; LASTNDAYS
