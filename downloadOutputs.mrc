@@ -215,12 +215,7 @@ alias geInfo {
 }
 ; COINSHARE ; CS
 alias csOut {
-  var %thread $1, %gePage $2-
-  if (!%gePage) {
-    $cmd(%thread, out) Error retrieving price for this item. Please try again in a few moments.
-    _clearCommand %thread
-    halt
-  }
+  var %thread $1, %gePage = $2-
   .tokenize 44 %gePage
 
   $cmd(%thread, out)  $+ $2 Minimum price:07 $format_number($3) (Loot per player (07 $+ $cmd(%thread, arg1) $+ ):07 ~ $+ $format_number($calc($3 / $cmd(%thread, arg1))) $+ )12 http://itemdb-rs.runescape.com/viewitem.ws?obj= $+ $1
@@ -1072,3 +1067,14 @@ alias alog-r {
   $hget(%thread,out) Recent events for07 $hget(%thread,arg1) $+ : %out
   _clearCommand %thread
 }
+; GeUpdate
+alias startGeUpdate noop $download.break(checkGeUpdate,a $+ $ticks,http://SSElessar.net/parser/gulist.php)
+alias checkGeUpdate {
+  tokenize 10 $1
+  if ($1 != $readini(gerty.config.ini,GeUpdate,Rise) && $1) { writeini gerty.config.ini GeUpdate Rise $1 | if (!hget(GeUpdate,Rise)) hadd -mu1200 GeUpdate Rise $true }
+  if ($2 != $readini(gerty.config.ini,GeUpdate,Drop) && $2) { writeini gerty.config.ini GeUpdate Drop $2 | if (!hget(GeUpdate,Drop)) hadd -mu1200 GeUpdate Drop $true }
+  if ($hget(GeUpdate,Rise) && $hget(GeUpdate,Drop) && $calc($ctime - $gettok($read(GeUpdate.txt,1),2,124)) > 1200) { 
+    var %x = 1 | while ($chan(%x)) { if ($chanset($chan(%x)) == on && $_checkMainReturn($chan(%x))) { .msg $chan(%x) GeUpdate in progress. Lookup update will be completed within 15 minutes and ingame within 5. } | inc %x }
+    write -il1 geupdate.txt $host(time) $+ $chr(124) $+ $ctime $+ $chr(124) $+ $ord($host(date)) $host(month).3
+    resetPrices | .timer 1 1000 resetPrices | runepriceupdater
+} }
