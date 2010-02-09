@@ -179,6 +179,7 @@ alias delayedjoin {
 }
 ctcp *:users:*: {
   hadd -m bot $nick $2
+  hadd -m botcount $nick $3
   if ($hget(bot,0).item == $nick(#gertyDev,0,h)) { JoinQueue }
 }
 ctcp *:invite:*:{
@@ -229,6 +230,7 @@ alias JoinQueue {
   while ($hget(bot,%x).item) {
     %bot = $v1
     var %total = $calc(%total + $hget(bot,%bot))
+    var %totalcount = $calc(%totalcount + $hget(botcount,%bot))
     var %y = $+(%y,$iif(%y,|),$hget(bot,%bot) %bot)
     inc %x
   }
@@ -256,7 +258,7 @@ alias JoinQueue {
   }
   %max = $calc(30 * $numtok(%y,124))
   if (%b) {
-    sendToDevOnly Join queue generated: %b $+ . Channels: $+(07,$bytes(%total,bd),/07,$bytes(%max,bd)) $parenthesis($round($calc(%total / %max * 100),2) $+ $%)
+    sendToDevOnly Join queue generated: %b $+ . Channels: $+(07,$bytes(%total,bd),/07,$bytes(%max,bd)) $parenthesis($round($calc(%total / %max * 100),2) $+ $%) and07 $bytes(%totalcount,bd) users.
   }
   else {
     sendToDevOnly All bots are currently full.
@@ -278,6 +280,8 @@ alias OnInvite {
 }
 on *:text:!!users:#gertyDev:{
   if ($nick !ishop $chan && $nick !isop $chan) { halt }
-  else { .ctcp Gerty users $chan(0) }
+  var %x = 1, %y
+  while ($chan(%x)) { %y = $calc(%y + $nick($chan(%x),0)) | inc %x }
+  .ctcp Gerty users $chan(0) %y
 }
 on *:quit:{ if (%* iswm $nick(#gertyDev,$nick).pnick && $me == Gerty) { JoinQueueStart } }
