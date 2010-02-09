@@ -96,3 +96,5 @@ ctcp *:update:*: {
   !echo -at Checking for updates...
   findupdate
 }
+alias _reload noop $findfile($scriptdir,*.mrc,0,1,_reloadout $1)
+alias _reloadout if (*update.mrc !iswm $1) load $iif(*Alias.mrc iswmcs $1,-a,-rs) $1

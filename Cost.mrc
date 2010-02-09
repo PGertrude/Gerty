@@ -484,7 +484,6 @@ alias costcooking {
 alias costcrafting {
   var %hash = a $+ $1
   var %num = $hget(%hash,num)
-  echo -st hi $hget(%hash,cost)
   tokenize 9 $hget(%hash,cost)
   if (!$hget(cost,$5) && $5) { goto skip }
   if (!$hget(cost,561)) goto skip
@@ -509,19 +508,3 @@ alias costcrafting {
   hfree %hash
   :skip
 }
-
-alias convertfile {
-  ;var %skill $lookups($1)
-  var %x = 1, %y = $lines(agility.txt)
-  while (%x <= %y) {
-    var %convert = $read(agility.txt,n,%x)
-    tokenize 9 %convert
-    ;write -l $+ %x test.txt $+(Cooking|,$gettok(%convert,4,9),|,$gettok(%convert,3,9),|,$gettok(%convert,2,9))
-    write test.txt $+(Agility,$chr(9),$3,$chr(9),$2,$chr(9),$1)
-    inc %x
-  }
-  ;write test.txt $+(SKILL,$chr(9),LEVEL,$chr(9),EXP,$chr(9),NAME,$chr(9),POUCH ID,$chr(9),INGREDIENT,$chr(9),INGREDIENT ID,$chr(9),SHARDS,$chr(9),ALCH,$chr(9),MINUTES,$chr(9),SKILL FOCUS,$chr(9),OTHER)
-  msg $chan Done.
-  run test.txt
-}
-alias parenthesis return $formatwith(\o(\c07{0}\o),$1-)

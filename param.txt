@@ -384,6 +384,9 @@ Slayer	87	87	Warped Tortoise	96
 Slayer	-	276	Mithril Dragon	304
 Slayer	-	186	Mutated Bloodveld	146
 Slayer	72	210	Skeletal Wyvern	140
+Slayer	73	110	Jungle strykewyrm	110
+Slayer	77	120	Jungle strykewyrm	130
+Slayer	93	300	Ice strykewyrm	300
 Thieving	75	16	Gem Stall	
 Thieving	65	81.3	Spice Stall	
 Thieving	65	160	Scimitar Stall	
@@ -557,7 +560,10 @@ Combat	10	64	Dwarf
 Combat	8	64	Crawling Hand	
 Combat	5	20	Cave bug	
 Combat	1	12	Chicken	
-Combat	114	500	Aquanite	
+Combat	114	500	Aquanite
+Combat	73	440	Jungle strykewyrm
+Combat	77	480	Jungle strykewyrm
+Combat	93	300	Ice strykewyrm	
 Hitpoints	114	166.25	Aquanite	
 Hitpoints	125	146.67	spiritual warrior	
 Hitpoints	134	174.67	spiritual warrior bandos	
@@ -659,6 +665,9 @@ Hitpoints	10	21.33	Dwarf
 Hitpoints	8	21.33	Crawling Hand	
 Hitpoints	5	6.67	Cave bug	
 Hitpoints	1	4	Chicken
+Hitpoints	73	146.68	Jungle strykewyrm
+Hitpoints	77	160	Jungle strykewyrm
+Hitpoints	93	400	Ice strykewyrm
 Herblore	3	2.5	Guam	249	Grimy guam	199	-
 Herblore	3	2.5	Rogue's purse	0	Grimy rogue's purse	0	-
 Herblore	3	2.5	Snake weed	0	Grimy snake weed	0	-
