@@ -22,7 +22,7 @@ alias loadChans {
     hadd -m $hget(row, channel) event $hget(row, event)
     fillChan $hget(row, channel) $hget(row, setting)
   }
-  hfree row
+  if ($hget(row)) { hfree row }
 }
 
 
@@ -37,7 +37,7 @@ alias reloadChannel {
     hadd -m $hget(row, channel) event $hget(row, event)
     fillChan $hget(row, channel) $hget(row, setting)
   }
-  hfree row
+  if ($hget(row)) { hfree row }
 }
 
 ;@SYNTAX /fillChan <channel> <string values>
