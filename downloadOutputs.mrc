@@ -217,7 +217,12 @@ alias geInfo {
 alias csOut {
   var %thread $1, %gePage = $2-
   .tokenize 44 %gePage
-
+  if (!%gePage) {
+    $cmd(%thread, out) Error retrieving price for this item. Please try again in a few moments.
+    _clearCommand %thread
+    halt
+  }
+  .tokenize 44 %gePage
   $cmd(%thread, out)  $+ $2 Minimum price:07 $format_number($3) (Loot per player (07 $+ $cmd(%thread, arg1) $+ ):07 ~ $+ $format_number($calc($3 / $cmd(%thread, arg1))) $+ )12 http://itemdb-rs.runescape.com/viewitem.ws?obj= $+ $1
 
   _clearCommand %thread
