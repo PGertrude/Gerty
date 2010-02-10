@@ -220,9 +220,9 @@ downloadstring {
 }
 download.break {
   .comopen $2 msxml2.xmlhttp
-  var %Url = $3 $+ $iif($numtok($gettok($3, $numtok($3,47), 47),63) == 1,?,&) $+ DontCachePlease= $+ $ctime
-  noop $com($2 , open, 1, bstr, get, bstr, %Url, bool, 0)
-  noop $comcall($2 ,noop $!com($1,responseText,2) $(|,) $1 $!com($1).result $(|,) .comclose $!1,send,1)
+  var %url = $3 $+ $iif($numtok($gettok($3, $numtok($3,47), 47), 63) == 1, ?, &) $+ DontCachePlease= $+ $ctime
+  noop $com($2, open, 1, bstr, get, bstr, %url, bool, 0)
+  noop $comcall($2, noop $!com($1, responseText, 2) $(|,) $1 $!com($1).result $(|,) .comclose $!1, send, 1)
 }
 cleanhash {
   .hfree -w a*

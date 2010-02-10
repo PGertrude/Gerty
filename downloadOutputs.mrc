@@ -942,8 +942,8 @@ alias stats {
     var %combatexp = $calc(%combatexp + $gettok($25,3,44))
     var %info =  $+ %nick $+  07combat | level:07 $floor(%p2p) $+ (07~ $+ $floor(%gp2p) $+ ) (f2p:07 $floor(%f2p) $+ ) | exp:07 $bytes(%combatexp,db) | class:07 %class
     var %average = $round($calc($gettok($1,2,44) / 24),1)
-    if (%param == null) { %param = 2 }
     var %state = $state(%param)
+    if (!%state) { %state = 2 }
     var %combat
     var %x = 2
     while (%x <= 8) {
