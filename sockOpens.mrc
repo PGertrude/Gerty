@@ -80,11 +80,6 @@ on *:sockopen:*: {
     sockwrite -n $sockname Accept: */*
     sockwrite -n $sockname $crlf
   }
-  else if (ml.* iswm $sockname) {
-    sockwrite -n $sockname GET /feeds/lowtech/searchclan.php?search= $+ $hget(%thread,ml) $+ &type=2 HTTP/1.0
-    sockwrite -n $sockname Host: www6.runehead.com
-    sockwrite -n $sockname $crlf
-  }
   else if (pastebin.* iswm $sockname) {
     var %hash = $gettok($sockname,2-,46)
     var %string = format=text&poster=Gerty&expiry=m&paste=Send&code2=

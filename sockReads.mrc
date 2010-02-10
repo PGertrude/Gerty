@@ -17,22 +17,6 @@ on *:sockread:*: {
       sockclose $sockname
     }
   }
-  ; ML / MEMBERLIST
-  else if (ml.* iswm $sockname) {
-    var %ml
-    sockread %ml
-    if (@@start !isin %ml) {
-      if (@@not isin %ml) {
-        $hget(%thread,out) $+(,$hget(%thread,ml),) clan not found. $+($chr(15),$chr(40),$chr(3),07,RuneHead.com,$chr(15),$chr(41))
-        goto unset
-      }
-      else if ($numtok(%ml,124) > 5) {
-        tokenize 124 %ml
-        $hget(%thread,out) $+($chr(91),07,$5,,$chr(93),07) $1 $+(,$chr(40),07,$4,,$chr(41)) Link:12 $2 | Members: $+(07,$6,) | Avg: P2P-Cmb: $+(07,$7,) F2P-Cmb: $+(07,$16,) Overall: $+(07,$bytes($9,bd),) | Based: Region: $+(07,$13,) World: $+(07,$15,) Core: $+(07,$12,) Cape: $+(07,$14) | Runehead Link:12 $3
-        goto unset
-      }
-    }
-  }
   ; RUNEPRICE
   else if (runeprice.* iswm $sockname) {
     var %rune

@@ -52,7 +52,7 @@ on *:TEXT:*:*: {
   ; SPOTIFY link
   else if ($regex(spotify,$1-,/open\.spotify\.com\/track/(\w+)/Si)) {
     if ($chanset($chan,spotify) == off) goto clean
-    _fillCommand %thread @ $nick $iif($chan,$v1,PM) Spotify link
+    _fillCommand %thread @ $nick $iif($chan,$v1,PM) Spotifylink
     var %url = http://sselessar.net/parser/spotify.php?id= $+ $regml(spotify,1)
     noop $download.break(spotify msg $iif($chan,$chan,$nick),%thread,%url)
     goto clean
@@ -60,7 +60,7 @@ on *:TEXT:*:*: {
   ; YOUTUBE link
   else if ($regex(yt,$1-,/youtube\.com\/watch\?v=([\w-]+)\W?/Si)) {
     if ($chanset($chan,youtube) == off) goto clean
-    _fillCommand %thread @ $nick $iif($chan,$v1,PM) Youtube link
+    _fillCommand %thread @ $nick $iif($chan,$v1,PM) Youtubelink
     var %url = http://rscript.org/lookup.php?type=youtubeinfo&id= $+ $regml(yt,1)
     noop $download.break(youtube %thread $regml(yt,1),%thread,%url)
   }
@@ -1281,6 +1281,12 @@ on *:TEXT:*:*: {
     :syntax
     %saystyle Level estimation syntax: ~skill <from lvl> <to lvl> @<item> or ~skill <exp> @<item>. You can use !set item <skill> <item> as replacement for item.
     goto clean
+  }
+  ; ml
+  else if ($regex($1,/^[!@.]m(ember)?l(ist)?$/Si)) {
+    if ($chanset($chan,ml) == off || !$2) { goto clean }
+    _fillCommand %thread $left($1,1) $nick $iif($chan, $v1, PM) ml $urlencode($2-)
+    noop $download.break(memberlist %thread,%thread,http://www6.runehead.com/feeds/lowtech/searchclan.php?search= $+ $hget(%thread,arg1) $+ &type=2)
   }
   ; ADMIN SECTION
   if ($admin($nick)) {

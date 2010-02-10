@@ -335,3 +335,29 @@ param {
 }
 parenthesis return $+(,$chr(40),07,$1-,,$chr(41))
 ran return $+($r(1,9),$r(1,9),$r(1,9),$r(1,9),$r(1,9),$r(1,9),$r(1,9),$r(1,9),$r(1,9),$r(1,9))
+TotalScripts {
+  var %x = 1
+  while ($script(%x)) {
+    var %l = $lines($script(%x)), %b = $file($script(%x))
+    var %lines = $calc(%lines + %l)
+    var %byte = $calc(%byte + %b)
+    if (%long < %l || !%long) { var %long = %l, %longname = $script(%x) }
+    if (%big < %b || !%big) { var %big = %b, %bigname = $script(%x) }
+    inc %x
+  }
+  var %x = 1
+  while ($alias(%x)) {
+    var %l = $lines($alias(%x)), %b = $file($alias(%x))
+    var %lines = $calc(%lines + %l)
+    var %byte = $calc(%byte + %b)
+    if (%long < %l || !%long) { var %long = %l, %longname = $alias(%x) }
+    if (%big < %b || !%big) { var %big = %b, %bigname = $alias(%x) }
+    inc %x
+  }
+  return I currently have07 $script(0) script files,07 $alias(0) alias files and a total of07 $bytes(%lines,bd) lines and07 $bytes(%byte,bd) byte loaded. My longest file is07 $nopath(%longname) with07 $bytes(%long,bd) lines and my largest is07 $nopath(%bigname) at07 $bytes(%big,bd) byte!
+}
+EscapeURL return $regsubex($1-,/([\[\]@\+\x20<>&~#$%\^|=?}{\\/:`.])/g,$+(%,$base($asc(\1),10,16)))
+pastebin {
+  hadd -m $2- out $1
+  sockopen pastebin. $+ $2- pastebin.com 80
+}

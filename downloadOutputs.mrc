@@ -1083,3 +1083,13 @@ alias checkGeUpdate {
     write -il1 geupdate.txt $host(time) $+ $chr(124) $+ $ctime $+ $chr(124) $+ $ord($host(date)) $host(month).3
     resetPrices | .timer 1 1000 resetPrices | runepriceupdater
 } }
+; ml
+alias memberlist {
+  var %thread = $1
+  if (@@Not found isin $1-) $hget(%thread,out)  $+ $hget(%thread,arg1) $+  clan not found (12Runehead.com)
+  else {
+    tokenize 124 $gettok($1-,2,10)
+    $hget(%thread,out) $+([07,$5,]07) $1 $parenthesis($4) Link:12 $2 | Members:07 $6 | Avg: P2P-Cmb:07 $7 F2P-Cmb:07 $16 Overall:07 $bytes($9,bd) Based: Region:07 $13 World:07 $15 Core:07 $12 Cape:07 $14 | Runehead link:12 $3 
+  }
+  _clearCommand %thread
+}

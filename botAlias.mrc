@@ -314,3 +314,8 @@ AdminToHash {
   var %a = $0
   while ($($ $+ %a,2)) { hadd -m admin $gettok($($ $+ %a,2),1,59) $gettok($($ $+ %a,2),2,59) | dec %a }
 }
+runepriceupdater {
+  sockopen runeprice.rune1 itemdb-rs.runescape.com 80
+  sockopen runeprice.rune2 itemdb-rs.runescape.com 80
+  if ($hget(potprice)) { hfree potprice }
+}
