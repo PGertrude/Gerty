@@ -18,7 +18,7 @@ timeCount {
     }
   }
   ; 1 minute timer
-  if ($calc($ctime % 60) == 0) { CheckGePrices }
+  if ($calc($ctime % 60) == 0) { startGeUpdate }
   ; 5 minute timer
   if ($calc($ctime % 300) == 0) {
     ; ge price updates
@@ -29,10 +29,6 @@ timeCount {
     ; save command count
     hsave commands commands.txt
   }
-}
-CheckGePrices {
-  sockopen CheckGePrices.front. $+ $r(0,9999) itemdb-rs.runescape.com 80
-  sockopen CheckGePrices.zam. $+ $r(0,9999) itemdb-rs.runescape.com 80
 }
 _setAdmin {
   if ($aLfAddress(P_Gertrude)) { noop $setDefname( $v1 , P_Gertrude ) }
@@ -59,7 +55,7 @@ bots {
   }
   return %bots
 }
-_CheckMain {
+_checkMain {
   if (!$chan) { return }
   tokenize 32 $bots
   var %x 1
@@ -69,6 +65,18 @@ _CheckMain {
     inc %x
   }
   return
+}
+; $_checkMain(#chan)
+_checkMainReturn {
+  if (!$1) { return $true }
+  tokenize 32 $bots
+  var %x 1
+  while (%x <= $0) {
+    if ($($ $+ %x,2) ison $chan && $me != $($ $+ %x,2)) { return $false }
+    else if ($me == $($ $+ %x,2)) { return $true }
+    inc %x
+  }
+  return $true
 }
 ; _throw $nopath($script) %thread
 _throw {

@@ -1,5 +1,9 @@
 >start<|geupdate.mrc|geupdate - still needs rewriting|3.0|rs
 ; - NEEDS REWRITING
+CheckGePrices {
+  sockopen CheckGePrices.front. $+ $r(0,9999) itemdb-rs.runescape.com 80
+  sockopen CheckGePrices.zam. $+ $r(0,9999) itemdb-rs.runescape.com 80
+}
 on *:sockread:CheckGePrices.*: {
   if ($sockerr) {
     echo -a Ge Update Connection Error.

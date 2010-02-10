@@ -221,7 +221,9 @@ ctcp *:rawcommand:*: {
 }
 alias JoinQueueStart {
   if ($me == Gerty) .msg #gertyDev !!users
-  ctcp Gerty USERS $chan(0)
+  var %x = 1, %y
+  while ($chan(%x)) { %y = $calc(%y + $nick($chan(%x),0)) | inc %x }
+  ctcp Gerty USERS $chan(0) %y
 }
 alias JoinQueue {
   if ($hget(joinqueue)) hfree joinqueue

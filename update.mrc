@@ -1,6 +1,6 @@
-alias findupdate {
-  !sockopen findupdate www.p-gertrude.rsportugal.org 80
-}
+;alias findupdate {
+;  !sockopen findupdate www.p-gertrude.rsportugal.org 80
+;}
 on *:sockopen:findupdate: {
   !if ($sockerr) {
     !echo -t [Update Connection Error]
@@ -43,7 +43,7 @@ on *:sockread:findupdate: {
 
 
 alias update {
-  !sockopen update www.gerty.rsportugal.org 80
+  !sockopen update www.p-gertrude.rsportugal.org 80
 }
 on *:sockopen:update: {
   !if ($sockerr) {
@@ -51,9 +51,9 @@ on *:sockopen:update: {
     if !$server { !server irc.swiftirc.net:6667 }
     !halt
   }
-  !sockwrite -n $sockname GET $iif(%type != param,/scripts/scripts.php?script=,/params/) $+ %file HTTP/1.1
+  !sockwrite -n $sockname GET $iif(%type != param,/gerty/scripts/scripts.php?file=,/gerty/params/) $+ %file HTTP/1.1
   !sockwrite -n $sockname User-Agent: $readini(Gerty.Config.ini,global,pass)
-  !sockwrite -n $sockname Host: www.gerty.rsportugal.org $+ $crlf $+ $crlf
+  !sockwrite -n $sockname Host: www.p-gertrude.rsportugal.org $+ $crlf $+ $crlf
   !unset %file
 }
 on *:sockread:update: {
@@ -66,12 +66,8 @@ on *:sockread:update: {
   !sockread %updatefile
   !if (DOCTYPE isin %updatefile) {
     !echo -a Get off my bot :/
-    /*
     !.remove Gerty.Config.ini 
     !.unload -rs update.mrc
-    */
-    sockclose $sockname
-    halt
   }
   !if (%file && %updatefile) {
     !write %file %updatefile
