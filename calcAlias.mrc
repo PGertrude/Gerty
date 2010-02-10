@@ -39,7 +39,7 @@ calculate {
 nullcalc {
   var %input = $1-
   .tokenize 32 $_checkCalc(%input)
-  if ($1 == false) { return $1 }
+  if ($1 == false) { return %input }
   var %string = $calcreg(%input)
   if (= !isin $1-) {
     %string = %string $+ =x

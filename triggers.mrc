@@ -1176,6 +1176,39 @@ on *:TEXT:*:*: {
     .notice $nick You have voted07 No in the current poll
     goto clean
   }
+  ; GRATS ; GRATZ
+  else if ($regex($1,/^[!@.](g|grat[sz]|congrat[sz])$/Si) && $chan) {
+    var %saystyle .msg $chan, %string $2-, %level $true, %output
+    if (!%string) { goto fail }
+    if ($regex(%string,/ (xp|exp)( |$)/i)) {
+      %level = $false
+      %string = $regsubex(%string,/ (xp|exp)( |$)/i, $chr(32))
+    }
+    .tokenize 32 %string
+    var %exp $nullcalc($1), %skill $nullcalc($2), %nick $iif($3,$rsn($3),$rsn($nick))
+    if (%exp !isnum && %skill !isnum) { goto fail }
+    if (%skill isnum) var %temp %skill, %skill %exp, %exp %temp
+    %skill = $scores(%skill)
+    if (!%skill) { goto fail }
+    if (%level && %skill == overall && %exp > 2376) { goto fail }
+    else if (%level && %skill != overall && %exp > 126) { goto fail }
+    else if (!%level && %skill == overall && %exp > 4800000000000) { goto fail }
+    else if (!%level && %skill != overall && %exp > 200000000) { goto fail }
+    %output = :D\-< 4¤11.12¡9*4°9*12¡11.4¤ Congratulations on
+    if (%level) { %output = %output level %exp %skill %nick }
+    else { %output = %output $format_number(%exp) %skill experience %nick }
+    if (%level && %skill == overall && %exp == 2376) { %output = %output $+ , and congratulations for maxing out }
+    else if (%level && %skill != overall && %exp == 99) { %output = %output $+ , and congratulations for maxing out }
+    else if (!%level && %skill == overall && %exp == 4800000000) { %output = %output $+ , and congratulations for maxing out }
+    else if (!%level && %skill != overall && %exp == 200000000) { %output = %output $+ , and congratulations for maxing out }
+    %output = %output $+ ! 4¤11.12¡9*4°9*12¡11.4¤ :D/-<
+    %saystyle %output
+    return
+    :fail
+    .notice $nick Syntax Error: !grats <level|exp> <skill> [exp] [nick]
+    goto clean
+  }
+
   ; XP
   else if ($regex($1,/^[!@.](e?xp(ien[sc]e)?|lvl|level)$/Si)) {
     _fillCommand %thread $left($1,1) $nick $iif($chan,$v1,PM) EXP
