@@ -1,4 +1,4 @@
->start<|triggers.mrc|compiled all triggers|3.0|rs
+>start<|triggers.mrc|compiled all triggers|3.1|rs
 on *:TEXT:*:*: {
   if ($left($1,1) !isin !.@) { [ [ $botid($1) ] ] }
   var %shuffleInput $nick > $iif($chan,$v1,PM) > $1-
@@ -629,6 +629,7 @@ on *:TEXT:*:*: {
     hadd -m %thread skill $skills($2)
     hadd -m %thread out %saystyle
     sockopen $+(trackyes.,%thread) www.rscript.org 80
+    goto clean
   }
   ; NDAYSAGO
   else if ($regex($1,/^[!@.](\d+)([A-Za-z]+)ago$/Si)) {
@@ -647,6 +648,7 @@ on *:TEXT:*:*: {
     hadd -m %thread skill $skills($2)
     hadd -m %thread out %saystyle
     sockopen $+(trackyes.,%thread) www.rscript.org 80
+    goto clean
   }
   ; TODAY/WEEK/MONTH/YEAR
   else if ($regex($1,/^[!@.](today|week|month|year)$/Si)) {
@@ -664,6 +666,7 @@ on *:TEXT:*:*: {
     %nick = $rsn(%nick)
     var %url = http://www.rscript.org/lookup.php?type=track&user= $+ %nick $+ &skill=all&time= $+ %time
     noop $download.break(trackAll %saystyle %nick %time %command, %thread, %url)
+    goto clean
   }
   ; LASTWEEK ; LASTMONTH ; LASTYEAR ; YESTERDAY
   else if ($regex($1,/^[!@.](?:y(?:ester)?(day)|l(?:ast)?(week|month|year))$/Si)) {
@@ -703,6 +706,7 @@ on *:TEXT:*:*: {
     hadd -m %thread command %command
     hadd -m %thread out %saystyle
     sockopen $+(trackyes.,%thread) www.rscript.org 80
+    goto clean
   }
   ; TRACK
   else if ($regex($1,/^[!@.]track$/Si)) {
@@ -747,11 +751,12 @@ on *:TEXT:*:*: {
       var %url = http://www.rscript.org/lookup.php?type=track&user= $+ %nick $+ &skill=all&time= $+ %time
       noop $download.break(trackAll %saystyle %nick %time $replace(%command, $chr(32), _), %socket, %url)
     }
+    goto clean
   }
   ; COMPARE
   else if ($regex($left($1,1),/[!@.]/) && $misc($right($1,-1)) == compare) {
     if (!$2) { %saystyle Syntax Error: !compare [skill] <nick1> [nick2] [@time period] | goto clean }
-    var %skill $compares($2)
+    var %skill $compares($2), %left $left($1,1)
     if (!%skill) { %skill = overall | .tokenize 32 $2- }
     else .tokenize 32 $3-
     var %string $1-
@@ -771,8 +776,8 @@ on *:TEXT:*:*: {
       %nick2 = $rsn($2-)
     }
     var %thread2 $+(a,$r(0,99999))
-    _fillCommand %thread $left($1,1) $nick $iif($chan,$v1,PM) compare %thread2 $replace(%skill,$chr(32),_) %nick1 %time
-    _fillCommand %thread2 $left($1,1) $nick $iif($chan,$v1,PM) compare %thread $replace(%skill,$chr(32),_) %nick2 %time
+    _fillCommand %thread %left $nick $iif($chan,$v1,PM) compare %thread2 $replace(%skill,$chr(32),_) %nick1 %time
+    _fillCommand %thread2 %left $nick $iif($chan,$v1,PM) compare %thread $replace(%skill,$chr(32),_) %nick2 %time
     var %url http://hiscore.runescape.com/index_lite.ws?player=
     noop $download.break(compareOut %thread, %thread, %url $+ %nick1)
     noop $download.break(compareOut %thread2, %thread2, %url $+ %nick2)
@@ -980,11 +985,12 @@ on *:TEXT:*:*: {
       }
     }
     if ($admin($nick)) {
-      var %join = $regsubex($read(Perform.txt,3),/^JOIN /,$null)
+      var %join = $regsubex($read(Perform.txt,3), /^JOIN /, $null)
       if (!%join) { %join = #gerty }
-      var %mode = $regsubex($read(Perform.txt,2),/^MODE $me /,$null)
+      var %reg /^MODE $me $+ /
+      var %mode = $regsubex($read(Perform.txt,2), %reg, $null)
       if (!%mode) { %mode = +Bp }
-      var %pass = $regsubex($read(Perform.txt,1),/^NS ID /,$null)
+      var %pass = $regsubex($read(Perform.txt,1), /^NS ID /, $null)
       if (!%pass) { %pass = fail }
       if (%command == join || %comand == autojoin) {
         %join = $regsubex(%join $+ $chr(44) $+ $3,/(#gerty\x2c|\x2c#gerty)/g,$null)
