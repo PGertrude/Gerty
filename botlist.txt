@@ -5,5 +5,4 @@ Gerty
 [TL]Gerty
 [FF]Gerty
 [GS]Gerty
-GertTest
-[TEST]Gerty
+[IZ]Gerty

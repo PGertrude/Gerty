@@ -98,17 +98,7 @@ _throw {
   write ErrorLog.txt $date $timestamp Error: %script $([,) $+ %info $2- $+ $(],)
   .msg #gertyDev $date $timestamp Error: %script %thread $([,) $+ %info $+ $(],) $3-
 }
-_network {
-  .timer 1 0 noop $_networkMsg($1)
-}
-_networkMsg {
-  var %x = 1
-  while (%x <= $hget(botlist,0).item) {
-    var %bot = $hget(botlist,%x)
-    if ($comchan(%bot,#gerty)) { .ctcp %bot rawcommand $1- }
-    inc %x
-  }
-}
+_network sendToDevOnly raw $1
 host {
   if ($1 == timezone) return $readini(Gerty.Config.ini,host,tzone)
   if ($1 == offset) return $asctime(z)

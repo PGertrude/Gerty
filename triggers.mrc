@@ -1,4 +1,4 @@
->start<|triggers.mrc|compiled all triggers|3.1|rs
+>start<|triggers.mrc|compiled all triggers|3.0|rs
 on *:TEXT:*:*: {
   if ($left($1,1) !isin !.@) { [ [ $botid($1) ] ] }
   var %shuffleInput $nick > $iif($chan,$v1,PM) > $1-
@@ -68,7 +68,7 @@ on *:TEXT:*:*: {
   else if ($regex($1,/^[!@.](def|set)(name|rsn)$/Si)) {
     if (!$2) { %saystyle Syntax Error: !defname <rsn> | goto clean }
     if ($regsubex($2-,/\W/,_) isin $readini(Gerty.Config.ini,admin,rsn) && !$admin($nick)) { %saystyle This RSN is protected, please Contact an Admin if this is your RSN. | goto clean }
-    var %nick $caps($left($2-,12))
+    var %nick $regsubex($caps($left($2-,12)),/\W/g,_)
     noop $_network(noop $!setDefname( $aLfAddress($nick) , %nick ))
     %saystyle Your default RuneScape name is now07 %nick $+ . This RSN is associated with the address07 $aLfAddress($nick,3) $+ .
     goto clean
