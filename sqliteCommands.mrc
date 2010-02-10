@@ -1,4 +1,4 @@
->start<|sqlitecommands.mrc|gerty sql functions|3.0|rs
+>start<|sqlitecommands.mrc|gerty sql functions|3.1|rs
 ; Connects to the database on startup
 on *:START:{
   var %db $sqlite_open(gerty.db)

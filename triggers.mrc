@@ -1,4 +1,4 @@
->start<|triggers.mrc|compiled all triggers|3.0|rs
+>start<|triggers.mrc|compiled all triggers|3.1|rs
 on *:TEXT:*:*: {
   if ($left($1,1) !isin !.@) { [ [ $botid($1) ] ] }
   var %shuffleInput $nick > $iif($chan,$v1,PM) > $1-
@@ -7,6 +7,7 @@ on *:TEXT:*:*: {
     [ [ $2- ] ]
     goto clean
   }
+  tokenize 32 $strip($1-)
   var %thread $+(a,$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9)), %saystyle
   if ($left($1,1) isin .!@) %saystyle = $saystyle($left($1,1),$nick,$chan)
   ; STATUS
