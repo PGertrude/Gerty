@@ -51,16 +51,16 @@ on *:TEXT:*:*: {
   }
   ; SPOTIFY link
   else if ($regex(spotify,$1-,/open\.spotify\.com\/track/(\w+)/Si)) {
-    _fillCommand %thread @ $nick $iif($chan,$v1,PM) Spotify link
     if ($chanset($chan,spotify) == off) goto clean
+    _fillCommand %thread @ $nick $iif($chan,$v1,PM) Spotify link
     var %url = http://sselessar.net/parser/spotify.php?id= $+ $regml(spotify,1)
     noop $download.break(spotify msg $iif($chan,$chan,$nick),%thread,%url)
     goto clean
   }
   ; YOUTUBE link
   else if ($regex(yt,$1-,/youtube\.com\/watch\?v=([\w-]+)\W?/Si)) {
-    _fillCommand %thread @ $nick $iif($chan,$v1,PM) Youtube link
     if ($chanset($chan,youtube) == off) goto clean
+    _fillCommand %thread @ $nick $iif($chan,$v1,PM) Youtube link
     var %url = http://rscript.org/lookup.php?type=youtubeinfo&id= $+ $regml(yt,1)
     noop $download.break(youtube %thread $regml(yt,1),%thread,%url)
   }
@@ -332,10 +332,10 @@ on *:TEXT:*:*: {
     var %x = 1, %results
     while (%x <= $0 && $len(%results) < 350) {
       var %name = $gettok($($ $+ %x,2),1,59), %price = $gettok($($ $+ %x,2),2,59), %change = $gettok($($ $+ %x,2),3,59)
-      %results = %results | %name $+ 07 $format_number(%price) $updo(%change) 
+      %results = %results | %name $+ 07 $format_number($calc(%price * %num)) $updo(%change)
       inc %x
     }
-    %saystyle Results:07 %numberOfResults %results
+    %saystyle Results:07 %numberOfResults (07x $+ %num $+ ) %results
     goto clean
   }
   ; GEINFO
