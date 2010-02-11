@@ -1073,7 +1073,7 @@ on *:TEXT:*:*: {
   ; SETSITE
   else if ($chan && $regex($1,/^[!@.]setsite$/Si)) {
     if ($nick isop $chan || $nick ishop $chan || $admin($nick)) {
-      noop $_network(noop $!dbUpdate(channel, `channel`=' $+ $chan $+ ', site, $2- ))
+      noop $_network(noop $!dbUpdate(channel, `channel`=' $+ $chan $+ ', site, $2-))
       %saystyle The website for07 $chan has been set to:07 $2-
     }
     goto clean

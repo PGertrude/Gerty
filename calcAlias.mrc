@@ -1,11 +1,11 @@
 >start<|calcAlias.mrc|Calculator|3.0|a
 calcreg {
-  var %string = $replace($1,Q,£,xp,A,ge,Q,price,Q,pi,~,ans,p)
+  var %string = $replace($1,xp,A,ge,T,price,T,pi,~,ans,p)
   %string = $regsubex(%string,/(?:([\dep~kmbx\x29])([\x28])|([\x29])([\dep~xastcl])|([ep~])([ep~xastcl])|(x)([e~ctsxl])|(\d)([ep~xastcl]))/gi,\1*\2)
   %string = $regsubex(%string,/(?:([\dep~kmbx\x29])([\x28])|([\x29])([\dep~xastcl])|([ep~])([ep~xastcl])|(x)([e~ctsxl])|(\d)([ep~xastcl]))/gi,\1*\2)
-  %string = $regsubex(%string,/([^\+\-\*\\\^]|)Q\(([^\x29]+)\)/gi,$iif(\1,\1*,1*) $+ $price(\2))
+  %string = $regsubex(%string,/([^\+\-\*\\\^]|)T\(([^\x29]+)\)/gi,$iif(\1,\1*,1*) $+ $price(\2))
   %string = $regsubex(%string,/(\d+(?:\.\d+)?)([kmb])/gi,$calc(\1 $replace(\2,k,*1000,m,*1000000,b,*1000000000)))
-  %string = $regsubex(%string,/(a?(?:sin|cos|tan|log|sqrt|l(?:vl)?|A|Q))((?:\+|\-)?(?:[ep~x]|\d+(?:\.\d+)?))/gi,\1 $+ $chr(40) $+ \2 $+ $chr(41))
+  %string = $regsubex(%string,/(a?(?:sin|cos|tan|log|sqrt|l(?:vl)?|A|T))((?:\+|\-)?(?:[ep~x]|\d+(?:\.\d+)?))/gi,\1 $+ $chr(40) $+ \2 $+ $chr(41))
   return $replace(%string,~,3.141593,e,2.718281,p,$hget($nick,p),$chr(44),$null)
 }
 ; will return a nice version of the calculation
@@ -59,8 +59,8 @@ litecalc {
   return $calc($parser(%string))
 }
 _checkCalc {
-  var %string = $replace($1,xp,A,Q,£,ge,Q,price,Q,pi,~,ans,p)
-  %string = $regsubex(%string,/([QA])\x28(.+?)\x29/g,\1(1))
+  var %string = $replace($1,xp,A,T,£,ge,T,price,T,pi,~,ans,p)
+  %string = $regsubex(%string,/([TA])\x28(.+?)\x29/g,\1(1))
   %string = $regsubex(%string,/(?:([\dep~kmbx\x29])([\x28])|([\x29])([\dep~xastcl])|([ep~])([ep~xastcl])|(x)([e~ctsxl])|(\d)([ep~xastcl]))/gi,\1*\2)
   %string = $regsubex(%string,/(?:([\dep~kmbx\x29])([\x28])|([\x29])([\dep~xastcl])|([ep~])([ep~xastcl])|(x)([e~ctsxl])|(\d)([ep~xastcl]))/gi,\1*\2)
   if ($_checkParen(%string)) { return false Unbalanced Parenthesis:07 $v1 }
@@ -79,7 +79,7 @@ _checkParen {
 }
 _checkFunct {
   var %string = $remove($1,$chr(44)), %x = 1, %ErrReply = $2
-  %string = $regsubex(%string,/(a?(?:sin|cos|tan|log|sqrt|l(?:vl)?|A|Q))((?:\+|\-)?(?:[ep~x]|\d+(?:\.\d+)?))/gi,\1 \2 $+ $chr(32))
+  %string = $regsubex(%string,/(a?(?:sin|cos|tan|log|sqrt|l(?:vl)?|A|T))((?:\+|\-)?(?:[ep~x]|\d+(?:\.\d+)?))/gi,\1 \2 $+ $chr(32))
   %string = $replace(%string,+,$chr(32),-,$chr(32),*,$chr(32),/,$chr(32),\,$chr(32),^,$chr(32),$chr(40),$chr(32),$chr(41),$chr(32),=,$chr(32))
   .tokenize 32 %string
   ; if (!$2) return Not enough parameters
@@ -106,7 +106,7 @@ func {
   if ($1 == l) { return l( $+ $2 $+ ) }
   if ($1 == lvl) { return l( $+ $2 $+ ) }
   if ($1 == sqrt) { return sqrt( $+ $2 $+ ) }
-  if ($1 == Q) { return ge( $+ $2 $+ ) }
+  if ($1 == T) { return ge( $+ $2 $+ ) }
   if ($1 == A) { return xp( $+ $2 $+ ) }
   return $false
 }
