@@ -312,11 +312,12 @@ swapTime {
 param {
   if ($prop >= 1 && $prop <= 20) { var %num = $prop }
   elseif ($prop isnum || !$prop) { var %num = 20 }
-  var %ran = $ran, %skill = $1, %item = $2
+  var %ran = $ran
+  if ($2) { var %skill = $1, %item = $2 }
+  else var %item $1
   .fopen param $+ %ran param.txt
   while (!$feof) {
-    var %param = $fread(param $+ %ran)
-    tokenize 9 %param
+    tokenize 9 $fread(param $+ %ran)
     if (!%num) {
       if (!%skill || %skill == $1) && ($+(*,%item,*) iswm $4) {
         var %output = $($+($chr(36),$replace($prop,skill,1,lvl,2,exp,3,xp,3,item,4)),2)

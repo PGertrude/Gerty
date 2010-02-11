@@ -1226,7 +1226,7 @@ on *:TEXT:*:*: {
   else if ($regex($1,/^[!@.](e?xp(ien[sc]e)?|lvl|level)$/Si)) {
     _fillCommand %thread $left($1,1) $nick $iif($chan,$v1,PM) EXP
     if (!$2) { %saystyle $formatwith(Syntax Error: \u!xp <level>\u OR \u!xp <xp>\u OR \u!xp [amount] <item>\u.) | goto clean }
-    if ($regex(exp,$remove($2-,$chr(44)),/([\dkm]+)(?:[- ]{1,3}([\dkm]+))?$/Si)) {
+    if ($regex(exp,$remove($2-,$chr(44)),/^([\dkm]+)(?:[- ]{1,3}([\dkm]+))?$/Si)) {
       var %1 = $litecalc($regml(exp,1))
       if (%1 > 126 && %1 <= 200000000) { var %lvl1 = $xptolvl(%1), %exp1 = %1 }
       elseif (%1 > 0) { var %lvl1 = %1, %exp1 = $lvltoxp(%1) }
@@ -1268,6 +1268,7 @@ on *:TEXT:*:*: {
       }
       %saystyle %output $iif(%x == 1,No match found.)
     }
+    _clearCommand %thread
     goto clean
   }
   else if ($regex($1,/^@?~(\w*)$/Si)) {

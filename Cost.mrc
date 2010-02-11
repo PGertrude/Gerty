@@ -10,7 +10,7 @@ on $*:text:/^(\[\w{2}\]Gerty |Gerty |)?[!.@]((pot)(ion)?s?|(po)(uch)?|(farmer|pa
   elseif ($regml(3) == farmer || $regml(3) == payment) { var %skill = Farming }
   else { var %skill = $skills($regml(3)) }
   var %saystyle = $saystyle($left($1,1),$nick,$chan), %ticks = $ran
-  if (!%skill || %skill == Overall) { %saystyle No such skill. | halt }
+  if (!%skill || %skill == Overall) { %saystyle Cost param syntax: !cost <skill> [amount] <item>. | halt }
   if ($lookups($2) == %skill) { tokenize 32 $2- }
   if ($regex($2,/\d/S)) { var %num = $litecalc($2) | tokenize 32 $2- }
   else { var %num = 1 }
@@ -115,6 +115,7 @@ on $*:text:/^(\[\w{2}\]Gerty |Gerty |)?[!.@]((pot)(ion)?s?|(po)(uch)?|(farmer|pa
     }
     ;## FLETCHING ##
     if (%skill == Fletching) {
+      var %hit = yes
       if ($+(*,%item,*) iswm $gettok(%cost,4,9)) {
         hadd -m a $+ %ticks cost %cost
         hadd -m a $+ %ticks out %saystyle
