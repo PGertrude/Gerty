@@ -361,3 +361,9 @@ pastebin {
   hadd -m $2- out $1
   sockopen pastebin. $+ $2- pastebin.com 80
 }
+getStat {
+  if (!$1 || !$2) { return 0 }
+  var %sk = $statnum($2), %thread = a $+ $ran
+  var %stat = $downloadstring(%thread,http://hiscore.runescape.com/index_lite.ws?player= $+ $1 )
+  return $gettok($gettok(%stat,%sk,10),3,44)
+}

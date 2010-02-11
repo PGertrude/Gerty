@@ -7,6 +7,11 @@ on *:TEXT:*:*: {
     [ [ $2- ] ]
     goto clean
   }
+  if ($1- == ^) {
+    var %save = $userSet($alfaddress($nick) ,save ,$false)
+    if (%save) tokenize 32 %save
+    else goto clean
+  }
   tokenize 32 $strip($1-)
   var %thread $+(a,$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9)), %saystyle
   if ($left($1,1) isin .!@) %saystyle = $saystyle($left($1,1),$nick,$chan)
@@ -40,6 +45,14 @@ on *:TEXT:*:*: {
   }
   if ($chr(36) isin $1-) { tokenize 32 $remove($1-,$chr(36)) }
   _CheckMain
+  ; Save
+  if ($regex($1-,/^[!.@~].+@save$/Si)) {
+    if (!$rowExists(users, rsn, $rsn($nick))) { noop $sqlite_query(1, INSERT INTO users (rsn, fingerprint) VALUES (' $+ $rsn($nick) $+ ',' $+ $aLfAddress($nick) $+ ');) }
+    var %save = $remove($1-,@save)
+    noop $_network(noop $!sqlite_query(1, update users set save=' $+ %save $+ ' WHERE fingerprint=' $+ $alfaddress($nick) $+ ';))
+    $iif($chan,.notice,.msg) $nick Saved $qt(%save)
+    tokenize 32 %save
+  }
   ; RS forum link
   if ($regex(qfc,$1-,/forum\.runescape\.com\/forums\.ws\?(\d{1,3}\W\d{1,3}\W\d+\W\d+)/Si)) {
     if (Runescript isin $nick || Vectra isin $nick || $chanset($chan,qfc) == off) { goto clean }
