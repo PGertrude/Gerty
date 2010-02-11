@@ -4,10 +4,7 @@ timeCount {
   if ($read(timer.txt,nw,$ctime($asctime($gmt)) $+ *) && $server) { $gettok($read(timer.txt,nw,$ctime($asctime($gmt)) $+ *),2,124) }
   ; 10 second timer
   if ($calc($ctime % 10) == 0) {
-    if ($server) {
-      _setAdmin
-    }
-    else {
+    if (!$server) {
       server irc.swiftirc.net
     }
   }
@@ -21,6 +18,9 @@ timeCount {
   if ($calc($ctime % 60) == 0) { startGeUpdate }
   ; 5 minute timer
   if ($calc($ctime % 300) == 0) {
+    if ($server) {
+      _setAdmin
+    }
     ; ge price updates
     var %thread = $+(a,$r(0,999))
     var %search = $dbSelectWhere(prices, name, `price`='0' LIMIT 1)
@@ -106,7 +106,11 @@ _throw {
   write ErrorLog.txt $date $timestamp Error: %script $([,) $+ %info $2- $+ $(],)
   .msg #gertyDev $date $timestamp Error: %script %thread $([,) $+ %info $+ $(],) $3-
 }
-_network sendToDevOnly raw $1
+_network {
+  echo -a $1
+  [ [ $1 ] ]
+  sendToDevOnly raw $1
+}
 host {
   if ($1 == timezone) return $readini(Gerty.Config.ini,host,tzone)
   if ($1 == offset) return $asctime(z)
