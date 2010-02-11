@@ -1,4 +1,4 @@
->start<|downloadoutputs.mrc|compiled parser outputs|3.1|rs
+>start<|downloadoutputs.mrc|compiled parser outputs|3.25|rs
 ; CLAN
 alias getClans {
   var %user = $1, %out = $2 $3, %clan = $4, %thread = $5
@@ -292,7 +292,7 @@ alias topOut {
     %output = %output $+(07#,$gettok(%user,1,58),) %u $+ $gettok(%user,2,58) $+ %u $+(07,$gettok(%user,3,58),) $+ $iif($gettok(%user,4,58),$chr(32) $+ ( $+ $v1 $+ );,;)
     unset %u
     inc %x
-  }  
+  }
   $cmd(%thread,out) %output
   _clearcommand %thread
 }
@@ -513,8 +513,8 @@ alias compareOut {
   var %unit levels, %skillBool $iif($skills($cmd(%thread,arg2)), $true, $false), %output
   if (!%skillBool) %unit = score
   var %level $remove($gettok(%hiscoreLine,2,44),~), %alienLevel $remove($gettok($cmd(%thread2,arg5),2,44),~)
-  if (%alienLevel > %level) %output = $cmd(%thread2,arg3) (07 $+ $gettok($cmd(%thread2,arg5),2,44) $+ ) is07 $bytes($calc(%alienLevel - %level),db)  $+ %unit higher than $cmd(%thread,arg3) (07 $+ $gettok(%hiscoreLine,2,44) $+ ) $+ 
-  else if (%level > %alienLevel) %output = $cmd(%thread,arg3) (07 $+ $gettok(%hiscoreLine,2,44) $+ ) is07 $bytes($calc(%level - %alienLevel),db)  $+ %unit higher than $cmd(%thread2,arg3) (07 $+ $gettok($cmd(%thread2,arg5),2,44) $+ ) $+ 
+  if (%alienLevel > %level) %output = $cmd(%thread2,arg3) (07 $+ $gettok($cmd(%thread2,arg5),2,44) $+ ) is07 $bytes($calc(%alienLevel - %level),db)  $+ %unit higher than $cmd(%thread,arg3) (07 $+ $gettok(%hiscoreLine,2,44) $+ ) $+
+  else if (%level > %alienLevel) %output = $cmd(%thread,arg3) (07 $+ $gettok(%hiscoreLine,2,44) $+ ) is07 $bytes($calc(%level - %alienLevel),db)  $+ %unit higher than $cmd(%thread2,arg3) (07 $+ $gettok($cmd(%thread2,arg5),2,44) $+ ) $+
   else %output = $cmd(%thread,arg3) and $cmd(%thread2,arg3) both have %unit $+ 07 $gettok(%hiscoreLine,2,44) $cmd(%thread,arg2) $+ 
   if (%skillBool) {
     var %exp $remove($gettok(%hiscoreLine,3,44),~), %alienExp $remove($gettok($cmd(%thread2,arg5),3,44),~)
@@ -1046,7 +1046,7 @@ alias alog {
     }
     elseif ($1 == LEVEL) {
       var %old = $hget(%thread,lvl), %lvl = $gettok($2,1,32), %skill = $gettok($2,2,32)
-      if (!$hget(%thread,%skill)) { 
+      if (!$hget(%thread,%skill)) {
         hadd -m %thread %skill 0
         hadd -m %thread %skill $+ high %lvl
       }
@@ -1078,7 +1078,7 @@ alias checkGeUpdate {
   tokenize 10 $1
   if ($1 != $readini(gerty.config.ini,GeUpdate,Rise) && $1) { writeini gerty.config.ini GeUpdate Rise $1 | if (!hget(GeUpdate,Rise)) hadd -mu1200 GeUpdate Rise $true }
   if ($2 != $readini(gerty.config.ini,GeUpdate,Drop) && $2) { writeini gerty.config.ini GeUpdate Drop $2 | if (!hget(GeUpdate,Drop)) hadd -mu1200 GeUpdate Drop $true }
-  if ($hget(GeUpdate,Rise) && $hget(GeUpdate,Drop) && $calc($ctime - $gettok($read(GeUpdate.txt,1),2,124)) > 1200) { 
+  if ($hget(GeUpdate,Rise) && $hget(GeUpdate,Drop) && $calc($ctime - $gettok($read(GeUpdate.txt,1),2,124)) > 1200) {
     var %x = 1 | while ($chan(%x)) { if ($chanset($chan(%x)) == on && $_checkMainReturn($chan(%x))) { .msg $chan(%x) GeUpdate in progress. Lookup update will be completed within 15 minutes and ingame within 5. } | inc %x }
     write -il1 geupdate.txt $host(time) $+ $chr(124) $+ $ctime $+ $chr(124) $+ $ord($host(date)) $host(month).3
     resetPrices | .timer 1 1000 resetPrices | runepriceupdater
@@ -1089,7 +1089,7 @@ alias memberlist {
   if (@@Not found isin $1-) $hget(%thread,out)  $+ $hget(%thread,arg1) $+  clan not found (12Runehead.com)
   else {
     tokenize 124 $gettok($1-,2,10)
-    $hget(%thread,out) $+([07,$5,]07) $1 $parenthesis($4) Link:12 $2 | Members:07 $6 | Avg: P2P-Cmb:07 $7 F2P-Cmb:07 $16 Overall:07 $bytes($9,bd) Based: Region:07 $13 World:07 $15 Core:07 $12 Cape:07 $14 | Runehead link:12 $3 
+    $hget(%thread,out) $+([07,$5,]07) $1 $parenthesis($4) Link:12 $2 | Members:07 $6 | Avg: P2P-Cmb:07 $7 F2P-Cmb:07 $16 Overall:07 $bytes($9,bd) Based: Region:07 $13 World:07 $15 Core:07 $12 Cape:07 $14 | Runehead link:12 $3
   }
   _clearCommand %thread
 }
