@@ -1,3 +1,4 @@
+>start<|magic.txt|magic params|3.0|param
 Wind Strike	5.5	1	1 Air, 1 Mind	2	Normal	-
 Confuse	12	3	3 Water, 2 Earth, 1 Body	-	Normal	Reduces attack 5%
 Crossbow Bolt Enchant	-	4	-	-	Normal	Specify with writing Crossbow Bolt Enchant(gem type)

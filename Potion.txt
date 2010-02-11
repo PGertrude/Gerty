@@ -1,3 +1,4 @@
+>start<|Potion.txt|!potion command params|3.0|param
 Herblore	3	25	Attack potion(3)	121	Vial of water;Guam;Eye of newt	227+249+221	Attack boost 15%
 Herblore	5	37.5	Antipoison(3)	175	Vial of water;Marrentill;Unicorn horn dust	227+251+235	Cures poison
 Herblore	8	40	Relicym's balm(3)	4844	Vial of water;Rogue's purse;Snake weed	227	Cures disease

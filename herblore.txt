@@ -1,3 +1,8 @@
+>start<|herblore.txt|herb params|3.0|param
+Prayer Potion	87.5	38
+Ranged Potion	162.5	72
+Magic Potion	172.5	76
+Saradomin Brew	180	81
 Prayer Potion	87.5	38
 Ranged Potion	162.5	72
 Magic Potion	172.5	76

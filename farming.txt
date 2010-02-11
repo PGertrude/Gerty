@@ -1,3 +1,4 @@
+>start<|farming.txt|farm params|3.0|param
 Potatoe	9	1	2 Buckets of Compost
 Barley Hops	9.5	3	3 Buckets of compost
 Hammerstone Hops	10	4	1 Marigold

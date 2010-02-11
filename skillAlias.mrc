@@ -178,8 +178,8 @@ misc {
   if ($regex($1,/^(pc%|pest%|pestcontrol%|pest control%)$/Si)) { return pest control% }
 }
 state {
-  if ($regex($remove($1,@),/^(r|ra|ran|rank|ranking)$/Si)) { return 1 }
-  if ($regex($remove($1,@),/^(l|lv|lvl|level)$/Si)) { return 2 }
+  if ($regex($remove($1,@),/^(r|ra|ran|rank|ranking)s?$/Si)) { return 1 }
+  if ($regex($remove($1,@),/^(l|lv|lvl|level)s?$/Si)) { return 2 }
   if ($regex($remove($1,@),/^(x|xp|ex|exp|experience)$/Si)) { return 3 }
   if ($regex($remove($1,@),/^(v|vi|vir|virt|virtual)$/Si)) { return 4 }
 }

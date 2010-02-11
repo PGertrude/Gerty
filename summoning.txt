@@ -1,3 +1,4 @@
+>start<|summoning.txt|sum params|3.0|param
 Spirit Wolf	4.8	1	Gold	7	6	Wolf Bones	359	Combat - Attack	Fights
 Dreadfowl	9.3	4	Gold	8	4	Raw Chicken	374	Combat - Magic	Farm Boost(1)
 Spirit Spider	12.6	10	Gold	8	15	Spider Carcass	374	Forager - Red Spider Eggs	Fights

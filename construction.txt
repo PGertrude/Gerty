@@ -1,3 +1,4 @@
+>start<|construction.txt|cons params|3.0|param
 Normal Plank	29	1
 Oak Plank	60	15
 Teak Plank	90	35
@@ -48,7 +49,7 @@ God Symbol	120	48
 Shuttered Window	228	49
 Small Statues	40	49
 Windchimes	323	49
-Wooden Torches	58	49	
+Wooden Torches	58	49
 Teak Altar	360	50
 Steel Candlesticks	124	53
 Cloth Covered Altar	390	56

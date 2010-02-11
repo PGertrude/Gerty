@@ -1,3 +1,4 @@
+>start<|thieving.txt|thieve params|3.0|param
 Man/Woman	8	1
 Silk Stall	24	20
 Master Farmer	43	38
@@ -15,7 +16,7 @@ Rogue	36.5	32
 Cave Goblin	40	36
 Fremminik	65	45
 Bearded Pollnivian Bandit	65	45
-Desert Bandit	79.4	53	
+Desert Bandit	79.4	53
 Pollnivian Bandit	84.3	55
 Menaphite Thug	137.5	65
 Yanille Watchman	137.5	65
@@ -33,7 +34,7 @@ General Stall	10	5
 Tea Stall	16	5
 Crafting Stall	10	5
 Monkey Food Stall	16	5
-Rock Cake Stall	10	15	
+Rock Cake Stall	10	15
 Wine Stall	27	22
 Seed Stall	10	27
 Fur Stall	36	35

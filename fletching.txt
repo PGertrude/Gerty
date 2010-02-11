@@ -1,3 +1,4 @@
+>start<|fletching.txt|fletch params|3.0|param
 Arrow Shaft	0.33	1
 Oak Longbow	50	25
 Willow Longbow	83	40

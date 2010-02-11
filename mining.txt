@@ -1,3 +1,4 @@
+>start<|mining.txt|mine params|3.0|param
 Iron Ore	35	15
 Silver Ore	40	20
 Coal	50	30

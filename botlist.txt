@@ -1,4 +1,4 @@
->start<|botlist.txt|list of bots|1.01|param
+>start<|botlist.txt|list of bots|3.0|param
 Gerty
 [GZ]Gerty
 [SL]Gerty

@@ -1,3 +1,4 @@
+>start<|agility.txt|agil params|3.0|param
 Gnome Stronghold	86.5	1
 Penguin Course	540	30
 Agility Pyramid	1014	30

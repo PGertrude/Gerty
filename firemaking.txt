@@ -1,3 +1,4 @@
+>start<|firemaking.txt|fm params|3.0|param
 Normal Log	40	1
 Oak Log	60	15
 Willow Log	90	30

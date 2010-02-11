@@ -1,3 +1,4 @@
+>start<|fishing.txt|fishing params|3.0|param
 Trout	50	20
 Salmon	70	30
 Tuna	80	35

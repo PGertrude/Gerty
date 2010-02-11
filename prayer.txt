@@ -1,3 +1,4 @@
+>start<|prayer.txt|prayer params|3.0|param
 Normal Bone	4.5	1
 Alter Dragon Bone	252	1
 Ecto Dragon Bone	288	1

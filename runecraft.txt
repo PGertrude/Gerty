@@ -1,3 +1,4 @@
+>start<|runecraft.txt|rc params|3.0|param
 Air Rune	5	1
 Mind Rune	5.5	2
 Water Rune	6	5

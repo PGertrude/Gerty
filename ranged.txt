@@ -1,4 +1,4 @@
->start<|ranged.txt|range params|2.02|param
+>start<|ranged.txt|range params|3.0|param
 Chicken	12	1
 Cave bug	20	5
 Crawling Hand	64	8

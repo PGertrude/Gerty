@@ -1,4 +1,4 @@
->start<|slayer.txt|slay params|2.02|param
+>start<|slayer.txt|slay params|3.0|param
 Chicken	3	1	-
 Cave bug	5	5	-
 Crawling Hand	16	8	-

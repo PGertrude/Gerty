@@ -1,4 +1,4 @@
->start<|param.txt|!xp list|1.12|param
+>start<|param.txt|!xp list|3.1|param
 Agility	1	86.5	Gnome Stronghold
 Agility	30	540	Penguin Course
 Agility	30	1014	Agility Pyramid
@@ -13,78 +13,78 @@ Agility	52	571	Wilderness Course
 Agility	48	580	Ape Atoll
 Agility	70	2750	DorgeshKaan Course
 Agility	1	15	Mouse Catch Attempt
-Fishing	96	110	Barbarian Shark	
-Fishing	70	100	Barbarian Swordfish	
-Fishing	70	80	Leaping Sturgeon	
-Fishing	65	105	Karambwan	
-Fishing	58	70	Leaping Salmon	
-Fishing	55	80	Barbarian Tuna	
-Fishing	53	60	Lava Eel	
-Fishing	48	50	Leaping Trout	
-Fishing	46	100	Bass	
-Fishing	38	80	Rainbowfish	
-Fishing	38	80	Cave Eel	
-Fishing	33	75	Frog Spawn	
-Fishing	28	65	Slimey Eel	
-Fishing	25	60	Pike	
-Fishing	23	45	Cod	
-Fishing	16	20	Mackerel	
-Fishing	15	40	Anchovy	
-Fishing	10	30	Herring	
-Fishing	5	20	Sardine	
-Fishing	5	10	Karambwanji	
-Fishing	1	10	Shrimp	
-Fishing	81	46	Manta Ray	
-Fishing	79	38	Sea Turtle	
-Fishing	76	110	Shark	
-Fishing	62	120	Monkfish	
-Fishing	50	100	Swordfish	
-Fishing	40	90	Lobster	
-Fishing	35	80	Tuna	
-Fishing	30	70	Salmon	
-Fishing	20	50	Trout	
-Hunter	77	1100	Grenwall	
-Hunter	69	156	Dashing Kebbit	
-Hunter	67	304	Black Salamander	
-Hunter	66	400	Pawya	
-Hunter	57	132	Dark Kebbit	
-Hunter	55	300	Sabre toothed Kyatt	
-Hunter	53	198.5	Chinchompa	
-Hunter	51	200	Sabre toothed Kebbit	
-Hunter	49	348	Razor backed Kebbit	
-Hunter	48	205	Platypus	
-Hunter	44	225	Diseased Kebbit	
-Hunter	43	104.2	Spotted Kebbit	
-Hunter	41	240	Horned Graahk	
-Hunter	39	167	Wimpy Bird	
-Hunter	37	204	Prickly Kebbit	
-Hunter	33		168	Barb tailed Kebbit	
-Hunter	31	180	Spined Larupia	
-Hunter	29	152	Swamp Lizard	
-Hunter	29	152	Baby Squirrel	
-Hunter	27	144	Rabbit	
-Hunter	27	115.2	Ferret	
-Hunter	27	100	Baby Raccoon	
-Hunter	27	100	Baby Monkey	
-Hunter	27	100	Baby Gecko	
-Hunter	23	128	Wild Kebbit	
-Hunter	19	95.2	Tropical Wagtail	
-Hunter	13	66	Desert Devil	
-Hunter	11	64.6	Cerulean Twitch	
-Hunter	9	61.2	Copper Longtail	
-Hunter	7	48	Feldip Weasel	
-Hunter	5	47.6	Golden Warbler	
-Hunter	3	36	Common Kebbit	
-Hunter	1	34	Crimson Swift	
-Hunter	1	30	Polar Kebbit	
-Hunter	71	450	Magic Imp	
-Hunter	59	272	Red Salamander	
-Hunter	47	224	Orange Salamander	
-Hunter	63	265	Red Chinchompa	
-Hunter	45	54	Black Warlock	
-Hunter	35	44	Snowy White	
-Hunter	25	34	Sapphire Glacialis	
-Hunter	15	24	Ruby Harvest	
+Fishing	96	110	Barbarian Shark
+Fishing	70	100	Barbarian Swordfish
+Fishing	70	80	Leaping Sturgeon
+Fishing	65	105	Karambwan
+Fishing	58	70	Leaping Salmon
+Fishing	55	80	Barbarian Tuna
+Fishing	53	60	Lava Eel
+Fishing	48	50	Leaping Trout
+Fishing	46	100	Bass
+Fishing	38	80	Rainbowfish
+Fishing	38	80	Cave Eel
+Fishing	33	75	Frog Spawn
+Fishing	28	65	Slimey Eel
+Fishing	25	60	Pike
+Fishing	23	45	Cod
+Fishing	16	20	Mackerel
+Fishing	15	40	Anchovy
+Fishing	10	30	Herring
+Fishing	5	20	Sardine
+Fishing	5	10	Karambwanji
+Fishing	1	10	Shrimp
+Fishing	81	46	Manta Ray
+Fishing	79	38	Sea Turtle
+Fishing	76	110	Shark
+Fishing	62	120	Monkfish
+Fishing	50	100	Swordfish
+Fishing	40	90	Lobster
+Fishing	35	80	Tuna
+Fishing	30	70	Salmon
+Fishing	20	50	Trout
+Hunter	77	1100	Grenwall
+Hunter	69	156	Dashing Kebbit
+Hunter	67	304	Black Salamander
+Hunter	66	400	Pawya
+Hunter	57	132	Dark Kebbit
+Hunter	55	300	Sabre toothed Kyatt
+Hunter	53	198.5	Chinchompa
+Hunter	51	200	Sabre toothed Kebbit
+Hunter	49	348	Razor backed Kebbit
+Hunter	48	205	Platypus
+Hunter	44	225	Diseased Kebbit
+Hunter	43	104.2	Spotted Kebbit
+Hunter	41	240	Horned Graahk
+Hunter	39	167	Wimpy Bird
+Hunter	37	204	Prickly Kebbit
+Hunter	33		168	Barb tailed Kebbit
+Hunter	31	180	Spined Larupia
+Hunter	29	152	Swamp Lizard
+Hunter	29	152	Baby Squirrel
+Hunter	27	144	Rabbit
+Hunter	27	115.2	Ferret
+Hunter	27	100	Baby Raccoon
+Hunter	27	100	Baby Monkey
+Hunter	27	100	Baby Gecko
+Hunter	23	128	Wild Kebbit
+Hunter	19	95.2	Tropical Wagtail
+Hunter	13	66	Desert Devil
+Hunter	11	64.6	Cerulean Twitch
+Hunter	9	61.2	Copper Longtail
+Hunter	7	48	Feldip Weasel
+Hunter	5	47.6	Golden Warbler
+Hunter	3	36	Common Kebbit
+Hunter	1	34	Crimson Swift
+Hunter	1	30	Polar Kebbit
+Hunter	71	450	Magic Imp
+Hunter	59	272	Red Salamander
+Hunter	47	224	Orange Salamander
+Hunter	63	265	Red Chinchompa
+Hunter	45	54	Black Warlock
+Hunter	35	44	Snowy White
+Hunter	25	34	Sapphire Glacialis
+Hunter	15	24	Ruby Harvest
 Magic	96	130	Spellbook Swap	3 Astral, 2 Cosmic, 1 Law	-	Lunar	Requires quest Dream Mentor & Allows you to swap spellbooks(Normal or Ancient) for one cast & Spellbook will return to Lunar after 2 minutes if no spells were cast
 Magic	95	124	Heal Group	4 Astral, 6 Law, 3 Blood	-	Lunar	Transfer up to 75% of your current Hitpoints to nearby players, starting with the most injured
 Magic	94	112	Vengeance	4 Astral, 10 Earth, 2 Death	-	Lunar	You will recoil up to 75% of the damage on the next hit over 0 you receive	Vengencevengancevengeance
@@ -222,58 +222,58 @@ Magic	4	9	Crossbow Bolt Enchant(Opal)	1 Cosmic, 2 Air	-	Normal	Enchants Opal tip
 Magic	4	-	Crossbow Bolt Enchant	-	-	Normal	Specify with writing Crossbow Bolt Enchant(gem type)
 Magic	3	12	Confuse	3 Water, 2 Earth, 1 Body	-	Normal	Reduces attack 5%
 Magic	1	5.5	Wind Strike	1 Air, 1 Mind	2	Normal	-
-Mining	40	65	Gem Rock	
-Mining	35	60	Sandstone	
-Mining	30	5	Pure Essence	
-Mining	20	40	Silver	
-Mining	15	35	Iron	
-Mining	1	26.5	Limestone	
-Mining	1	17.5	Tin	
-Mining	1	17.5	Copper	
-Mining	1	5	Clay	
-Mining	1	5	Rune Essence	
-Mining	85	125	Runite Ore	
-Mining	70	95	Adamantite Ore	
-Mining	55	80	Mithril Ore	
-Mining	45	56.2	Average Granite exp	
-Mining	40	65	Gold Ore	
-Mining	35	60	SandStone	
-Mining	30	50	Coal	
-Mining	20	40	Silver Ore	
-Mining	15	35	Iron Ore	
-Runecraft	1	5	Air Rune	
-Runecraft	2	5.5	Mind Rune	
-Runecraft	5	6	Water Rune	
-Runecraft	9	6.5	Earth Rune	
-Runecraft	14	7	Fire Rune	
-Runecraft	20	7.5	Body Rune	
-Runecraft	27	8	Cosmic Rune	
-Runecraft	35	8.5	Chaos Rune	
-Runecraft	40	8.7	Astral Rune	
-Runecraft	44	9	Nature Rune	
-Runecraft	54	9.5	Law Rune	
-Runecraft	65	10	Death Rune	
-Runecraft	77	10.5	Blood Rune	
-Runecraft	90	11	Soul Rune	
-Runecraft	6	8	Mist Rune	
-Runecraft	10	8.3	Dust Rune	
-Runecraft	13	9.3	Mud Rune	
-Runecraft	15	8.5	Smoke Rune	
-Runecraft	19	9.3	Steam Rune	
-Runecraft	23	10	Lava Rune	
-Runecraft	1	25	Air Tiara	
-Runecraft	1	27.5	Mind Tiara	
-Runecraft	1	30	Water Tiara	
-Runecraft	1	32.5	Earth Tiara	
-Runecraft	1	35	Fire Tiara	
-Runecraft	1	37.5	Body Tiara	
-Runecraft	1	40	Cosmic Tiara	
-Runecraft	1	42.5	Chaos Tiara	
-Runecraft	1	45	Nature Tiara	
-Runecraft	1	47.5	Law Tiara	
-Runecraft	1	50	Death Tiara	
-Runecraft	1	52.5	Blood Tiara	
-Runecraft	1	55	Soul Tiara	
+Mining	40	65	Gem Rock
+Mining	35	60	Sandstone
+Mining	30	5	Pure Essence
+Mining	20	40	Silver
+Mining	15	35	Iron
+Mining	1	26.5	Limestone
+Mining	1	17.5	Tin
+Mining	1	17.5	Copper
+Mining	1	5	Clay
+Mining	1	5	Rune Essence
+Mining	85	125	Runite Ore
+Mining	70	95	Adamantite Ore
+Mining	55	80	Mithril Ore
+Mining	45	56.2	Average Granite exp
+Mining	40	65	Gold Ore
+Mining	35	60	SandStone
+Mining	30	50	Coal
+Mining	20	40	Silver Ore
+Mining	15	35	Iron Ore
+Runecraft	1	5	Air Rune
+Runecraft	2	5.5	Mind Rune
+Runecraft	5	6	Water Rune
+Runecraft	9	6.5	Earth Rune
+Runecraft	14	7	Fire Rune
+Runecraft	20	7.5	Body Rune
+Runecraft	27	8	Cosmic Rune
+Runecraft	35	8.5	Chaos Rune
+Runecraft	40	8.7	Astral Rune
+Runecraft	44	9	Nature Rune
+Runecraft	54	9.5	Law Rune
+Runecraft	65	10	Death Rune
+Runecraft	77	10.5	Blood Rune
+Runecraft	90	11	Soul Rune
+Runecraft	6	8	Mist Rune
+Runecraft	10	8.3	Dust Rune
+Runecraft	13	9.3	Mud Rune
+Runecraft	15	8.5	Smoke Rune
+Runecraft	19	9.3	Steam Rune
+Runecraft	23	10	Lava Rune
+Runecraft	1	25	Air Tiara
+Runecraft	1	27.5	Mind Tiara
+Runecraft	1	30	Water Tiara
+Runecraft	1	32.5	Earth Tiara
+Runecraft	1	35	Fire Tiara
+Runecraft	1	37.5	Body Tiara
+Runecraft	1	40	Cosmic Tiara
+Runecraft	1	42.5	Chaos Tiara
+Runecraft	1	45	Nature Tiara
+Runecraft	1	47.5	Law Tiara
+Runecraft	1	50	Death Tiara
+Runecraft	1	52.5	Blood Tiara
+Runecraft	1	55	Soul Tiara
 Slayer	-	3	Chicken	1
 Slayer	-	5	Cave bug	5
 Slayer	-	16	Crawling Hand	8
@@ -387,51 +387,51 @@ Slayer	72	210	Skeletal Wyvern	140
 Slayer	73	110	Jungle strykewyrm	110
 Slayer	77	120	Desert strykewyrm	130
 Slayer	93	300	Ice strykewyrm	300
-Thieving	75	16	Gem Stall	
-Thieving	65	81.3	Spice Stall	
-Thieving	65	160	Scimitar Stall	
-Thieving	65	100	Magic Stall	
-Thieving	50	54	Silver Stall	
-Thieving	49	52	Crossbow Stall	
-Thieving	42	42	Fish Stall	
-Thieving	35	36	Fur Stall	
-Thieving	27	10	Seed Stall	
-Thieving	22	27	Wine Stall	
-Thieving	15		10	Rock Cake Stall	
-Thieving	5	16	Monkey Food Stall	
-Thieving	5	10	Crafting Stall	
-Thieving	5	16	Tea Stall	
-Thieving	5	10	General Stall	
-Thieving	5	16	Baker's Stall	
-Thieving	2	10	Vegetable Stall	
-Thieving	65	3000	Summer Sq'irk Juice	
-Thieving	45	2350	Autumn Sq'irk Juice	
-Thieving	25	1350	Spring Sq'irk Juice	
-Thieving	1	350	Winter Sq'irk Juice	
-Thieving	85	353.3	Elf	
-Thieving	80	273.3	Hero	
-Thieving	7	198.3	Gnome	
-Thieving	70	151.8	Paladin	
-Thieving	65	137.5	Yanille Watchman	
-Thieving	65	137.5	Menaphite Thug	
-Thieving	55	84.3	Pollnivian Bandit	
-Thieving	53		79.4	Desert Bandit	
-Thieving	45	65	Bearded Pollnivian Bandit	
-Thieving	45	65	Fremminik	
-Thieving	36	40	Cave Goblin	
-Thieving	32	36.5	Rogue	
-Thieving	25	26	Warrior	
-Thieving	20	22.2	Male HAM	
-Thieving	15	18.5	Female HAM	
-Thieving	10	14.5	Farmer	
-Thieving	72	500	Ardougne Castle Chest	
-Thieving	59	288	Blood Rune Chest	
-Thieving	50	70	Wall Safe	
-Thieving	28	25	Nature Rune Chest	
-Thieving	55	84.3	Knight of Ardougne	
-Thieving	40	46.8	Guard	
-Thieving	38	43	Master Farmer	
-Thieving	20	24	Silk Stall	
+Thieving	75	16	Gem Stall
+Thieving	65	81.3	Spice Stall
+Thieving	65	160	Scimitar Stall
+Thieving	65	100	Magic Stall
+Thieving	50	54	Silver Stall
+Thieving	49	52	Crossbow Stall
+Thieving	42	42	Fish Stall
+Thieving	35	36	Fur Stall
+Thieving	27	10	Seed Stall
+Thieving	22	27	Wine Stall
+Thieving	15		10	Rock Cake Stall
+Thieving	5	16	Monkey Food Stall
+Thieving	5	10	Crafting Stall
+Thieving	5	16	Tea Stall
+Thieving	5	10	General Stall
+Thieving	5	16	Baker's Stall
+Thieving	2	10	Vegetable Stall
+Thieving	65	3000	Summer Sq'irk Juice
+Thieving	45	2350	Autumn Sq'irk Juice
+Thieving	25	1350	Spring Sq'irk Juice
+Thieving	1	350	Winter Sq'irk Juice
+Thieving	85	353.3	Elf
+Thieving	80	273.3	Hero
+Thieving	7	198.3	Gnome
+Thieving	70	151.8	Paladin
+Thieving	65	137.5	Yanille Watchman
+Thieving	65	137.5	Menaphite Thug
+Thieving	55	84.3	Pollnivian Bandit
+Thieving	53		79.4	Desert Bandit
+Thieving	45	65	Bearded Pollnivian Bandit
+Thieving	45	65	Fremminik
+Thieving	36	40	Cave Goblin
+Thieving	32	36.5	Rogue
+Thieving	25	26	Warrior
+Thieving	20	22.2	Male HAM
+Thieving	15	18.5	Female HAM
+Thieving	10	14.5	Farmer
+Thieving	72	500	Ardougne Castle Chest
+Thieving	59	288	Blood Rune Chest
+Thieving	50	70	Wall Safe
+Thieving	28	25	Nature Rune Chest
+Thieving	55	84.3	Knight of Ardougne
+Thieving	40	46.8	Guard
+Thieving	38	43	Master Farmer
+Thieving	20	24	Silk Stall
 Thieving	1	8	Man/Woman
 Woodcutting	1	25	Normal Tree
 Woodcutting	1	25	Logs
@@ -460,210 +460,210 @@ Woodcutting	58	169.1	Lumberjack Eucalyptus
 Woodcutting	60	179.3	Lumberjack Yew Tree
 Woodcutting	68	340.8	Lumberjack Ivy
 Woodcutting	75	256.2	Lumberjack Magic Tree
-Combat	125	440	spiritual warrior	
-Combat	134	524	spiritual warrior bandos	
-Combat	123	392	spiritual warrior armadyl	
-Combat	115	400	spiritual warrior zamorak	
-Combat	125	440	spiritual warrior saradomin	
-Combat	122	424	spiritual ranger	
-Combat	127	356	spiritual ranger armadyl	
-Combat	115	524	spiritual ranger bandos	
-Combat	118	480	spiritual ranger zamorak	
-Combat	122	424	spiritual ranger saradomin	
-Combat	120	340	spiritual mage	
-Combat	122	344	spiritual mage armadyl	
-Combat	121	424	spiritual mage bandos	
-Combat	121	300	spiritual mage zamorak	
-Combat	120	340	spiritual mage saradomin	
-Combat	94	348	Greater demon	
-Combat	2	32	cow	
-Combat	63	248	dog	
-Combat	28	160	kalphite worker	
-Combat	86	280	ankou	
-Combat	13	60	icefiend	
-Combat	34	140	spider	
-Combat	73	208	zombie	
-Combat	34	120	king scorpian	
-Combat	145	448	gorak	
-Combat	14	68	scorpian	
-Combat	111	432	suqah	
-Combat	6	32	bat	
-Combat	12	60	desert lizard	
-Combat	23	100	cave slime	
-Combat	108	420	elf	
-Combat	12	40	minotaur	
-Combat	12	20	goblin	
-Combat	70	200	brine rat	
-Combat	227	800	black dragon	
-Combat	189	692	iron dragon	
-Combat	66	240	infernal mage	
-Combat	172	628	Black Demon	
-Combat	122	464	hell hound	
-Combat	74	280	dagannoth	
-Combat	85	360	kalphite soldier	
-Combat	246	880	steel dragon	
-Combat	182	900	Dark Beast	
-Combat	124	600	Abyssal Demon	
-Combat	115	420	Nechryael	
-Combat	111	420	Gargoyle	
-Combat	106	388	Kurask	
-Combat	93	420	dust devil	
-Combat	96	360	Aberrant Spectre	
-Combat	80	220	Cave Horror	
-Combat	74	260	zygomite	
-Combat	83	308	turoth	
-Combat	78	300	Jelly	
-Combat	66	240	Infernal Mage	
-Combat	61	300	basilisk	
-Combat	43	180	pyrefiend	
-Combat	37	148	Cockatrice	
-Combat	23	88	banshee	
-Combat	3	24	Monkey	
-Combat	29	108	Rockslug	
-Combat	131	500	Bronze dragon	
-Combat	92	480	Dagannoth	
-Combat	76	480	Bloodveld	
-Combat	122	464	Hellhound	
-Combat	86	432	Fire giant	
-Combat	108	432	Elf	
-Combat	111	428	Blue dragon	
-Combat	49	420	Wall beast	
-Combat	85	360	Werewolf	
-Combat	85	360	Kalphite Soldier	
-Combat	69	360	Troll	
-Combat	92	332	Greater demon	
-Combat	82	316	Lesser demon	
-Combat	83	304	Turoth	
-Combat	79	300	Green dragon	
-Combat	74	280	Dagannoth	
-Combat	49	280	Ice giant	
-Combat	48	268	Shadow warrior	
-Combat	64	260	Otherworldly being	
-Combat	63	248	Wild dog	
-Combat	57	240	Ice warrior	
-Combat	42	240	Moss giant	
-Combat	51	216	Earth Warrior	
-Combat	48	200	Baby blue dragon	
-Combat	44	196	Guard dog	
-Combat	43	180	Pyrefiend	
-Combat	61	160	Vampire	
-Combat	28	160	Kalphite Worker	
-Combat	28	140	Hill giant	
-Combat	25	136	Wolf	
-Combat	22	116	Skeleton	
-Combat	21	108	Bear	
-Combat	19	100	Ghost	
-Combat	23	80	Cave Crawler	
-Combat	12	76	Crawling Hand	
-Combat	25	68	Skeleton	
-Combat	10	64	Dwarf	
-Combat	8	64	Crawling Hand	
-Combat	5	20	Cave bug	
-Combat	1	12	Chicken	
+Combat	125	440	spiritual warrior
+Combat	134	524	spiritual warrior bandos
+Combat	123	392	spiritual warrior armadyl
+Combat	115	400	spiritual warrior zamorak
+Combat	125	440	spiritual warrior saradomin
+Combat	122	424	spiritual ranger
+Combat	127	356	spiritual ranger armadyl
+Combat	115	524	spiritual ranger bandos
+Combat	118	480	spiritual ranger zamorak
+Combat	122	424	spiritual ranger saradomin
+Combat	120	340	spiritual mage
+Combat	122	344	spiritual mage armadyl
+Combat	121	424	spiritual mage bandos
+Combat	121	300	spiritual mage zamorak
+Combat	120	340	spiritual mage saradomin
+Combat	94	348	Greater demon
+Combat	2	32	cow
+Combat	63	248	dog
+Combat	28	160	kalphite worker
+Combat	86	280	ankou
+Combat	13	60	icefiend
+Combat	34	140	spider
+Combat	73	208	zombie
+Combat	34	120	king scorpian
+Combat	145	448	gorak
+Combat	14	68	scorpian
+Combat	111	432	suqah
+Combat	6	32	bat
+Combat	12	60	desert lizard
+Combat	23	100	cave slime
+Combat	108	420	elf
+Combat	12	40	minotaur
+Combat	12	20	goblin
+Combat	70	200	brine rat
+Combat	227	800	black dragon
+Combat	189	692	iron dragon
+Combat	66	240	infernal mage
+Combat	172	628	Black Demon
+Combat	122	464	hell hound
+Combat	74	280	dagannoth
+Combat	85	360	kalphite soldier
+Combat	246	880	steel dragon
+Combat	182	900	Dark Beast
+Combat	124	600	Abyssal Demon
+Combat	115	420	Nechryael
+Combat	111	420	Gargoyle
+Combat	106	388	Kurask
+Combat	93	420	dust devil
+Combat	96	360	Aberrant Spectre
+Combat	80	220	Cave Horror
+Combat	74	260	zygomite
+Combat	83	308	turoth
+Combat	78	300	Jelly
+Combat	66	240	Infernal Mage
+Combat	61	300	basilisk
+Combat	43	180	pyrefiend
+Combat	37	148	Cockatrice
+Combat	23	88	banshee
+Combat	3	24	Monkey
+Combat	29	108	Rockslug
+Combat	131	500	Bronze dragon
+Combat	92	480	Dagannoth
+Combat	76	480	Bloodveld
+Combat	122	464	Hellhound
+Combat	86	432	Fire giant
+Combat	108	432	Elf
+Combat	111	428	Blue dragon
+Combat	49	420	Wall beast
+Combat	85	360	Werewolf
+Combat	85	360	Kalphite Soldier
+Combat	69	360	Troll
+Combat	92	332	Greater demon
+Combat	82	316	Lesser demon
+Combat	83	304	Turoth
+Combat	79	300	Green dragon
+Combat	74	280	Dagannoth
+Combat	49	280	Ice giant
+Combat	48	268	Shadow warrior
+Combat	64	260	Otherworldly being
+Combat	63	248	Wild dog
+Combat	57	240	Ice warrior
+Combat	42	240	Moss giant
+Combat	51	216	Earth Warrior
+Combat	48	200	Baby blue dragon
+Combat	44	196	Guard dog
+Combat	43	180	Pyrefiend
+Combat	61	160	Vampire
+Combat	28	160	Kalphite Worker
+Combat	28	140	Hill giant
+Combat	25	136	Wolf
+Combat	22	116	Skeleton
+Combat	21	108	Bear
+Combat	19	100	Ghost
+Combat	23	80	Cave Crawler
+Combat	12	76	Crawling Hand
+Combat	25	68	Skeleton
+Combat	10	64	Dwarf
+Combat	8	64	Crawling Hand
+Combat	5	20	Cave bug
+Combat	1	12	Chicken
 Combat	114	500	Aquanite
 Combat	73	440	Jungle strykewyrm
 Combat	77	480	Desert strykewyrm
-Combat	93	1200	Ice strykewyrm	
-Hitpoints	114	166.25	Aquanite	
-Hitpoints	125	146.67	spiritual warrior	
-Hitpoints	134	174.67	spiritual warrior bandos	
-Hitpoints	123	130.67	spiritual warrior armadyl	
-Hitpoints	115	133.33	spiritual warrior zamorak	
-Hitpoints	125	146.67	spiritual warrior saradomin	
-Hitpoints	122	141.33	spiritual ranger	
-Hitpoints	127	118.67	spiritual ranger armadyl	
-Hitpoints	115	174.67	spiritual ranger bandos	
-Hitpoints	118	160	spiritual ranger zamorak	
-Hitpoints	122	141.33	spiritual ranger saradomin	
-Hitpoints	120	113.33	spiritual mage	
-Hitpoints	122	114.67	spiritual mage armadyl	
-Hitpoints	121	141.33	spiritual mage bandos	
-Hitpoints	121	100	spiritual mage zamorak	
-Hitpoints	120	113.33	spiritual mage saradomin	
-Hitpoints	94	116	Greater demon	
-Hitpoints	2	10.67	cow	
-Hitpoints	63	82.67	dog	
-Hitpoints	28	53.33	kalphite worker	
-Hitpoints	86	93.33	ankou	
-Hitpoints	13	20	icefiend	
-Hitpoints	34	46.67	spider	
-Hitpoints	73	69.33	zombie	
-Hitpoints	34	40	king scorpian	
-Hitpoints	145	149.33	gorak	
-Hitpoints	14	22.67	scorpian	
-Hitpoints	111	144	suqah	
-Hitpoints	6	10.67	bat	
-Hitpoints	12	20	desert lizard	
-Hitpoints	23	33.33	cave slime	
-Hitpoints	108	140	elf	
-Hitpoints	12	13.33	minotaur	
-Hitpoints	12	6.67	goblin	
-Hitpoints	70	66.67	brine rat	
-Hitpoints	227	266.67	black dragon	
-Hitpoints	189	230.67	iron dragon	
-Hitpoints	66	80	infernal mage	
-Hitpoints	172	209.33	Black Demon	
-Hitpoints	122	154.67	hell hound	
-Hitpoints	74	93.33	dagannoth	
-Hitpoints	85	120	kalphite soldier	
-Hitpoints	246	293.33	steel dragon	
-Hitpoints	182	300	Dark Beast	
-Hitpoints	124	200	Abyssal Demon	
-Hitpoints	115	140	Nechryael	
-Hitpoints	111	140	Gargoyle	
-Hitpoints	106	129.33	Kurask	
-Hitpoints	93	140	dust devil	
-Hitpoints	96	120	Aberrant Spectre	
-Hitpoints	80	73.33	Cave Horror	
-Hitpoints	74	86.67	zygomite	
-Hitpoints	83	102.67	turoth	
-Hitpoints	78	100	Jelly	
-Hitpoints	66	80	Infernal Mage	
-Hitpoints	61	100	basilisk	
-Hitpoints	43	60	pyrefiend	
-Hitpoints	37	49.33	Cockatrice	
-Hitpoints	23	29.33	banshee	
-Hitpoints	3	8	Monkey	
-Hitpoints	29	36	Rockslug	
-Hitpoints	131	166.67	Bronze dragon	
-Hitpoints	92	160	Dagannoth	
-Hitpoints	76	160	Bloodveld	
-Hitpoints	122	154.67	Hellhound	
-Hitpoints	86	144	Fire giant	
-Hitpoints	108	144	Elf	
-Hitpoints	111	142.67	Blue dragon	
-Hitpoints	49	140	Wall beast	
-Hitpoints	85	120	Werewolf	
-Hitpoints	85	120	Kalphite Soldier	
-Hitpoints	69	120	Troll	
-Hitpoints	92	110.67	Greater demon	
-Hitpoints	82	105.33	Lesser demon	
-Hitpoints	83	101.33	Turoth	
-Hitpoints	79	100	Green dragon	
-Hitpoints	74	93.33	Dagannoth	
-Hitpoints	49	93.33	Ice giant	
-Hitpoints	48	89.33	Shadow warrior	
-Hitpoints	64	86.67	Otherworldly being	
-Hitpoints	63	82.67	Wild dog	
-Hitpoints	57	80	Ice warrior	
-Hitpoints	42	80	Moss giant	
-Hitpoints	51	72	Earth Warrior	
-Hitpoints	48	66.67	Baby blue dragon	
-Hitpoints	44	65.33	Guard dog	
-Hitpoints	43	60	Pyrefiend	
-Hitpoints	61	53.33	Vampire	
-Hitpoints	28	53.33	Kalphite Worker	
-Hitpoints	28	46.67	Hill giant	
-Hitpoints	25	45.33	Wolf	
-Hitpoints	22	38.67	Skeleton	
-Hitpoints	21	36	Bear	
-Hitpoints	19	33.33	Ghost	
-Hitpoints	23	26.67	Cave Crawler	
-Hitpoints	12	25.33	Crawling Hand	
-Hitpoints	25	22.67	Skeleton	
-Hitpoints	10	21.33	Dwarf	
-Hitpoints	8	21.33	Crawling Hand	
-Hitpoints	5	6.67	Cave bug	
+Combat	93	1200	Ice strykewyrm
+Hitpoints	114	166.25	Aquanite
+Hitpoints	125	146.67	spiritual warrior
+Hitpoints	134	174.67	spiritual warrior bandos
+Hitpoints	123	130.67	spiritual warrior armadyl
+Hitpoints	115	133.33	spiritual warrior zamorak
+Hitpoints	125	146.67	spiritual warrior saradomin
+Hitpoints	122	141.33	spiritual ranger
+Hitpoints	127	118.67	spiritual ranger armadyl
+Hitpoints	115	174.67	spiritual ranger bandos
+Hitpoints	118	160	spiritual ranger zamorak
+Hitpoints	122	141.33	spiritual ranger saradomin
+Hitpoints	120	113.33	spiritual mage
+Hitpoints	122	114.67	spiritual mage armadyl
+Hitpoints	121	141.33	spiritual mage bandos
+Hitpoints	121	100	spiritual mage zamorak
+Hitpoints	120	113.33	spiritual mage saradomin
+Hitpoints	94	116	Greater demon
+Hitpoints	2	10.67	cow
+Hitpoints	63	82.67	dog
+Hitpoints	28	53.33	kalphite worker
+Hitpoints	86	93.33	ankou
+Hitpoints	13	20	icefiend
+Hitpoints	34	46.67	spider
+Hitpoints	73	69.33	zombie
+Hitpoints	34	40	king scorpian
+Hitpoints	145	149.33	gorak
+Hitpoints	14	22.67	scorpian
+Hitpoints	111	144	suqah
+Hitpoints	6	10.67	bat
+Hitpoints	12	20	desert lizard
+Hitpoints	23	33.33	cave slime
+Hitpoints	108	140	elf
+Hitpoints	12	13.33	minotaur
+Hitpoints	12	6.67	goblin
+Hitpoints	70	66.67	brine rat
+Hitpoints	227	266.67	black dragon
+Hitpoints	189	230.67	iron dragon
+Hitpoints	66	80	infernal mage
+Hitpoints	172	209.33	Black Demon
+Hitpoints	122	154.67	hell hound
+Hitpoints	74	93.33	dagannoth
+Hitpoints	85	120	kalphite soldier
+Hitpoints	246	293.33	steel dragon
+Hitpoints	182	300	Dark Beast
+Hitpoints	124	200	Abyssal Demon
+Hitpoints	115	140	Nechryael
+Hitpoints	111	140	Gargoyle
+Hitpoints	106	129.33	Kurask
+Hitpoints	93	140	dust devil
+Hitpoints	96	120	Aberrant Spectre
+Hitpoints	80	73.33	Cave Horror
+Hitpoints	74	86.67	zygomite
+Hitpoints	83	102.67	turoth
+Hitpoints	78	100	Jelly
+Hitpoints	66	80	Infernal Mage
+Hitpoints	61	100	basilisk
+Hitpoints	43	60	pyrefiend
+Hitpoints	37	49.33	Cockatrice
+Hitpoints	23	29.33	banshee
+Hitpoints	3	8	Monkey
+Hitpoints	29	36	Rockslug
+Hitpoints	131	166.67	Bronze dragon
+Hitpoints	92	160	Dagannoth
+Hitpoints	76	160	Bloodveld
+Hitpoints	122	154.67	Hellhound
+Hitpoints	86	144	Fire giant
+Hitpoints	108	144	Elf
+Hitpoints	111	142.67	Blue dragon
+Hitpoints	49	140	Wall beast
+Hitpoints	85	120	Werewolf
+Hitpoints	85	120	Kalphite Soldier
+Hitpoints	69	120	Troll
+Hitpoints	92	110.67	Greater demon
+Hitpoints	82	105.33	Lesser demon
+Hitpoints	83	101.33	Turoth
+Hitpoints	79	100	Green dragon
+Hitpoints	74	93.33	Dagannoth
+Hitpoints	49	93.33	Ice giant
+Hitpoints	48	89.33	Shadow warrior
+Hitpoints	64	86.67	Otherworldly being
+Hitpoints	63	82.67	Wild dog
+Hitpoints	57	80	Ice warrior
+Hitpoints	42	80	Moss giant
+Hitpoints	51	72	Earth Warrior
+Hitpoints	48	66.67	Baby blue dragon
+Hitpoints	44	65.33	Guard dog
+Hitpoints	43	60	Pyrefiend
+Hitpoints	61	53.33	Vampire
+Hitpoints	28	53.33	Kalphite Worker
+Hitpoints	28	46.67	Hill giant
+Hitpoints	25	45.33	Wolf
+Hitpoints	22	38.67	Skeleton
+Hitpoints	21	36	Bear
+Hitpoints	19	33.33	Ghost
+Hitpoints	23	26.67	Cave Crawler
+Hitpoints	12	25.33	Crawling Hand
+Hitpoints	25	22.67	Skeleton
+Hitpoints	10	21.33	Dwarf
+Hitpoints	8	21.33	Crawling Hand
+Hitpoints	5	6.67	Cave bug
 Hitpoints	1	4	Chicken
 Hitpoints	73	146.68	Jungle strykewyrm
 Hitpoints	77	160	Desert strykewyrm

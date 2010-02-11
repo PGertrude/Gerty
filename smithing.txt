@@ -1,3 +1,4 @@
+>start<|smithing.txt|smith params|3.0|param
 Bronze Dagger	12.5	1
 Bronze Axe	12.5	1
 Bronze mace	12.5	2

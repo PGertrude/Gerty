@@ -1,4 +1,4 @@
->start<|hitpoints.txt|hp params|2.02|param
+>start<|hitpoints.txt|hp params|3.0|param
 Chicken	4	1
 Cave bug	6.66	5
 Crawling Hand	21.328	8

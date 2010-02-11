@@ -1,4 +1,4 @@
->start<|strength.txt|str params|2.02|param
+>start<|strength.txt|str params|3.0|param
 Chicken	12	1
 Cave bug	20	5
 Crawling Hand	64	8

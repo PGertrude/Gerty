@@ -1,3 +1,4 @@
+>start<|woodcutting.txt|wc params|3.0|param
 Willow Tree	67.5	30
 Lumber Willow Tree	69.1	30
 Teak Tree	85	35

@@ -1,3 +1,4 @@
+>start<|hunter.txt|hunt params|3.0|param
 Ruby Harvest	24	15
 Sapphire Glacialis	34	25
 Snowy White	44	35
@@ -24,7 +25,7 @@ Rabbit	144	27
 Baby Squirrel	152	29
 Swamp Lizard	152	29
 Spined Larupia	180	31
-Barb tailed Kebbit	168	33	
+Barb tailed Kebbit	168	33
 Prickly Kebbit	204	37
 Wimpy Bird	167	39
 Horned Graahk	240	41

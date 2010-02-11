@@ -1,3 +1,4 @@
+>start<|crafting.txt|crafting params|3.0|param
 Green Dragonhide	62	57
 Blue Dragonhide	70	66
 Red Dragonhide	78	73
@@ -95,7 +96,7 @@ Silver Sickle	50	18
 Lightning Conductor	50	20
 Silver Crossbow Bolts	50	21
 Tiara	52.5	23
-Silvthrill Rod	55	25	
+Silvthrill Rod	55	25
 Demonic Sigil	50	30
 Crossbow String	15	10
 Magic String	30	19
