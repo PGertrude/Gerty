@@ -14,7 +14,7 @@ calcreg {
 getStats {
   var %x 1, %input $1, %reg /\b( $+ $skillNames $+ )\b/Si
   if ($regex(%input, %reg) > 0) {
-    .tokenize 10 $downloadstring(a $+ $ran, http://hiscore.runescape.com/index_lite.ws?player= $+ $2 )
+    .tokenize 10 $replace($downloadstring(a $+ $ran, http://hiscore.runescape.com/index_lite.ws?player= $+ $2 ),-1,0)
     if (!$2) { $iif($chan,.notice,.msg) $nick Your RSN does not appear to be ranked for this skill. | return %input }
     while (%x <= 100 && $regex(%input, %reg)) {
       %input = $regsubex( %input , %reg , $chr(32) $+ $!gettok( $ $+ $statnum($scores(\1)) ,3,44) $+ $chr(32) )
