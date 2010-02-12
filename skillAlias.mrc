@@ -1,4 +1,32 @@
 >start<|skillAlias.mrc|new|3.15|a
+skillNames {
+  var %skills at|att|attack
+  %skills = %skills $+ |strength|str|st
+  %skills = %skills $+ |defen[cs]e|def|de
+  %skills = %skills $+ |hitpoints|hitpoint|hits|hp
+  %skills = %skills $+ |prayer|pray|pr
+  %skills = %skills $+ |ranging|ranged|range|ra
+  %skills = %skills $+ |magic|mage|ma
+  %skills = %skills $+ |runecrafting|runecraft|rune|rc
+  %skills = %skills $+ |construction|constr|const|cons|con
+  %skills = %skills $+ |agility|agil|agi|ag
+  %skills = %skills $+ |herblore|herb|he
+  %skills = %skills $+ |thieving|theiving|thieve|theive|thief|theif|th
+  %skills = %skills $+ |cr|craft|crafting
+  %skills = %skills $+ |sm|smd|smith|smithing
+  %skills = %skills $+ |hu|hunt|hunter|hunting
+  %skills = %skills $+ |fa|farm|farming
+  %skills = %skills $+ |sl|slay|slayer|slaying
+  %skills = %skills $+ |mi|mine|mining
+  %skills = %skills $+ |fm|fming|firemake|firemaking
+  %skills = %skills $+ |fi|fish|fishing
+  %skills = %skills $+ |fl|fletch|fletching
+  %skills = %skills $+ |wc|wcing|wood|woodcutting|woodcut
+  %skills = %skills $+ |cok|cook|cooking|coo
+  %skills = %skills $+ |su|sum|summy|summon|summoning
+  %skills = %skills $+ |oa|overall|total
+  return %skills
+}
 compares {
   if ($regex($1,/^(at|att|attack)$/Si)) { return Attack }
   if ($regex($1,/^(st|str|strength)$/Si)) { return Strength }

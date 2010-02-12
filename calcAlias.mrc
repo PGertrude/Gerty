@@ -1,18 +1,45 @@
 >start<|calcAlias.mrc|Calculator|3.0|a
 calcreg {
-  var %string = $replace($1,Q,£,xp,A,ge,Q,price,Q,pi,~,ans,p)
+  var %string = $1
+  %string = $getStats($1, $rsn($nick))
+  %string = $replace(%string,Q,£,xp,A,ge,Q,price,Q,pi,~,p,&,ans,p)
   %string = $regsubex(%string,/(?:([\dep~kmbx\x29])([\x28])|([\x29])([\dep~xastcl])|([ep~])([ep~xastcl])|(x)([e~ctsxl])|(\d)([ep~xastcl]))/gi,\1*\2)
   %string = $regsubex(%string,/(?:([\dep~kmbx\x29])([\x28])|([\x29])([\dep~xastcl])|([ep~])([ep~xastcl])|(x)([e~ctsxl])|(\d)([ep~xastcl]))/gi,\1*\2)
-  %string = $regsubex(%string,/([^\+\-\*\\\^]|)Q\(([^\x29]+)\)/gi,$iif(\1,\1*,1*) $+ $price(\2))
+  %string = $regsubex(%string,/([^\+\-\*\/\^]|)Q\(([^\x29]+)\)/g,$chr(40) $+ $iif(\1,\1*,1*) $+ $price($replace(\2,&,p,~,pi,q,ge,£,q)) $+ $chr(41))
+  %string = $regsubex(%string,/([^\+\-\*\^\/]|)A\(([^\x29]+)\)/g,$chr(40) $+ $iif(\1,\1*,1*) $+ $gettok($param($replace(\2,&,p,~,pi,q,ge,£,q)),3,59) $+ $chr(41))
   %string = $regsubex(%string,/(\d+(?:\.\d+)?)([kmb])/gi,$calc(\1 $replace(\2,k,*1000,m,*1000000,b,*1000000000)))
   %string = $regsubex(%string,/(a?(?:sin|cos|tan|log|sqrt|l(?:vl)?|A|Q))((?:\+|\-)?(?:[ep~x]|\d+(?:\.\d+)?))/gi,\1 $+ $chr(40) $+ \2 $+ $chr(41))
   return $replace(%string,~,3.141593,e,2.718281,p,$hget($nick,p),$chr(44),$null)
 }
+getStats {
+  var %x 1, %input $1, %reg /\b( $+ $skillNames $+ )\b/Si
+  if ($regex(%input, %reg) > 0) {
+    .tokenize 10 $downloadstring(a $+ $ran, http://hiscore.runescape.com/index_lite.ws?player= $+ $2 )
+    if (!$2) { $iif($chan,.notice,.msg) $nick Your RSN does not appear to be ranked for this skill. | return %input }
+    while (%x <= 100 && $regex(%input, %reg)) {
+      %input = $regsubex( %input , %reg , $chr(32) $+ $!gettok( $ $+ $statnum($scores(\1)) ,3,44) $+ $chr(32) )
+      inc %x
+    }
+    %input = [ [ %input ] ]
+    return %input
+  }
+  return %input
+}
+preg_replace_all_skills {
+  var %x 1, %input $1, %reg /\b( $+ $skillNames $+ )\b/Sig
+  if ($regex(skills, %input, %reg) > 0) {
+    while (%x <= $regml(skills, 0)) {
+      %input = $replace( %input , $regml(skills, %x) , $scores($regml(skills, %x)) )
+      inc %x
+    }
+  }
+  return %input
+}
 ; will return a nice version of the calculation
 calcparse {
   var %eq = $remove($1-,$chr(44))
-  %eq = $regsubex(%eq,/([^\+\-\*\\\^]|)(?:price|ge)\(([^\x29]+)\)/gi,$iif(\1,\1*) $+ $price(\2))
-  %eq = $replace($remove(%eq,$chr(32)),z,f,pi,z,ans,p)
+  %eq = $regsubex(%eq,/([^\+\-\*\/\^]|)(?:price|ge)\(([^\x29]+)\)/gi,$iif(\1,\1*) $+ ge( $+ \2 $+ ))
+  %eq = $replace($remove(%eq,$chr(32)),Q,£,xp,A,ge,Q,price,Q,pi,~,p,&,ans,p)
   %eq = $regsubex(%eq,/([0-9\.]+)([kmb])/gi,$calc(\1 $replace(\2,k,*1000,m,*1000000,b,*1000000000)))
   %eq = $regsubex(%eq,/([zpex])([zpexastc])/gi,\1* $+ \2)
   %eq = $regsubex(%eq,/([zpex])([zpexastc])/gi,\1* $+ \2)
@@ -20,7 +47,8 @@ calcparse {
   %eq = $regsubex(%eq,/(\x29|\d)(\x28|[zpexastcls])/gi,\1* $+ \2)
   %eq = $regsubex(%eq,/(\x29)(\d|[zpexastcls])/gi,\1* $+ \2)
   %eq = $regsubex(%eq,/([zpex])(\d|\x28)/gi,\1* $+ \2)
-  %eq = $replace(%eq,p,ans,z,pi)
+  %eq = $replace(%eq,p,ans,z,pi,&,p,q,ge,£,q,~,pi,A $+ $chr(40),xp $+ $chr(40))
+  %eq = $preg_replace_all_skills(%eq)
   return %eq
 }
 ; always returns the result of a calculation
@@ -59,7 +87,9 @@ litecalc {
   return $calc($parser(%string))
 }
 _checkCalc {
-  var %string = $replace($1,xp,A,Q,£,ge,Q,price,Q,pi,~,ans,p)
+  var %reg /\b( $+ $skillNames $+ )\b/Sig
+  var %string = $regsubex($1, %reg, 1)
+  %string = $replace(%string,Q,£,xp,A,ge,Q,price,Q,pi,~,p,&,ans,p)
   %string = $regsubex(%string,/([QA])\x28(.+?)\x29/g,\1(1))
   %string = $regsubex(%string,/(?:([\dep~kmbx\x29])([\x28])|([\x29])([\dep~xastcl])|([ep~])([ep~xastcl])|(x)([e~ctsxl])|(\d)([ep~xastcl]))/gi,\1*\2)
   %string = $regsubex(%string,/(?:([\dep~kmbx\x29])([\x28])|([\x29])([\dep~xastcl])|([ep~])([ep~xastcl])|(x)([e~ctsxl])|(\d)([ep~xastcl]))/gi,\1*\2)

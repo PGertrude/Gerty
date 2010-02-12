@@ -107,7 +107,6 @@ _throw {
   .msg #gertyDev $date $timestamp Error: %script %thread $([,) $+ %info $+ $(],) $3-
 }
 _network {
-  echo -a $1
   [ [ $1 ] ]
   sendToDevOnly raw $1
 }

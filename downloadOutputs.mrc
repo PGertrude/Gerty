@@ -1,4 +1,4 @@
->start<|downloadoutputs.mrc|compiled parser outputs|3.25|rs
+>start<|downloadoutputs.mrc|compiled parser outputs|3.26|rs
 ; CLAN
 alias getClans {
   var %user = $1, %out = $2 $3, %clan = $4, %thread = $5
@@ -174,7 +174,7 @@ alias downloadGe {
     inc %x
   }
   if ($cmd(%thread, out)) {
-    var %num $cmd(%thread,arg1), %search $replace($cmd(%thread,arg2), _,  $chr(32))
+    var %num $cmd(%thread,arg1), %search $replace($cmd(%thread,arg2), _, $chr(32))
     var %numberOfResults $countResults($getPrice(%search).sql)
     var %dbPrices $getPrice(%search)
     .tokenize 44 %dbPrices
@@ -188,8 +188,6 @@ alias downloadGe {
     $cmd(%thread,out) Results:07 %numberOfResults (07x $+ $cmd(%thread,arg1) $+ ) %results
     _clearCommand %thread
   }
-
-
   goto end
   :error
   _throw geLink %thread { $+ $error $+ }
@@ -224,7 +222,6 @@ alias csOut {
   }
   .tokenize 44 %gePage
   $cmd(%thread, out)  $+ $2 Minimum price:07 $format_number($3) (Loot per player (07 $+ $cmd(%thread, arg1) $+ ):07 ~ $+ $format_number($calc($3 / $cmd(%thread, arg1))) $+ )12 http://itemdb-rs.runescape.com/viewitem.ws?obj= $+ $1
-
   _clearCommand %thread
 }
 ; SKILLPLAN
@@ -301,7 +298,6 @@ alias taskOut {
   var %thread $1, %hiscores $2-
   .tokenize 10 %hiscores
   .tokenize 44 $20
-
   var %info = $read(slayer.txt,w,* $+ $replace($hget(%thread,arg3),_,$chr(32)) $+ *)
   var %taskxp = $calc( $gettok(%info,2,9) * $hget(%thread,arg2) )
   $hget(%thread,out) Next Task:07 $bytes($hget(%thread,arg2),db) $gettok(%info,1,9) | Current Exp:07 $bytes($3,db) (07 $+ $virtual($3) $+ ) | Exp this Task:07 $bytes(%taskxp,db) $&
