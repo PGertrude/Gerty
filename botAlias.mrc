@@ -326,13 +326,16 @@ runepriceupdater {
 ; /gertyQuit - Will move all channels with 5 or more (real) users to another bot, then quit automatically when done
 gertyQuit {
   if ($me == Gerty) { .notice $nick Don't quit main bot. Tag me and set one of the others as main first. | halt }
+  if ($chan) { .notice $nick This alias can only be used in PM. | halt }
+  if ($me ison #gertyDev) part #gertyDev Quitting
   if (!$1) var %x = 1, %chanlist = $bot(chanlist)
   else var %x = $1, %chanlist = $2-
+  ; Checks what the next channel on the list is, parts that, then 3sec timer to run this alias again.
   while ($usercount($gettok(%chanlist,%x,44)) < 5 && %x <= $numtok(%chanlist,44)) { inc %x }
   if (%x <= $numtok(%chanlist,44)) {
     part $gettok(%chanlist,%x,44) Switching bot, brb!
     .ctcp Gerty invite Gerty $gettok(%chanlist,%x,44)
-    .timer 1 3 gertyQuit $calc(%x + 1) %chanlist
+    .timerQuit 1 3 gertyQuit $calc(%x + 1) %chanlist
   }
   else {
     timertim off
