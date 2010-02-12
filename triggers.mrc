@@ -1334,6 +1334,7 @@ on *:TEXT:*:*: {
     if ($chanset($chan,ml) == off || !$2) { goto clean }
     _fillCommand %thread $left($1,1) $nick $iif($chan, $v1, PM) ml $urlencode($2-)
     noop $download.break(memberlist %thread,%thread,http://www6.runehead.com/feeds/lowtech/searchclan.php?search= $+ $hget(%thread,arg1) $+ &type=2)
+    goto clean
   }
   ; ADMIN SECTION
   if ($admin($nick)) {
