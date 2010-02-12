@@ -323,3 +323,19 @@ runepriceupdater {
   sockopen runeprice.rune2 itemdb-rs.runescape.com 80
   if ($hget(potprice)) { hfree potprice }
 }
+; /gertyQuit - Will move all channels with 5 or more (real) users to another bot, then quit automatically when done
+gertyQuit {
+  if ($me == Gerty) { .notice $nick Don't quit main bot. Tag me and set one of the others as main first. | halt }
+  if (!$1) var %x = 1, %chanlist = $bot(chanlist)
+  else var %x = $1, %chanlist = $2-
+  while ($usercount($gettok(%chanlist,%x,44)) < 5 && %x <= $numtok(%chanlist,44)) { inc %x }
+  if (%x <= $numtok(%chanlist,44)) {
+    part $gettok(%chanlist,%x,44) Switching bot, brb!
+    .ctcp Gerty invite Gerty $gettok(%chanlist,%x,44)
+    .timer 1 3 gertyQuit $calc(%x + 1) %chanlist
+  }
+  else {
+    timertim off
+    quit Gerty shutting down. Please /invite Gerty or /join #gerty 
+  }
+}
