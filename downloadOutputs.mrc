@@ -574,6 +574,8 @@ alias normaliseItem {
   if $1 == no return 04No
   if $1 == true return 03Yes
   if $1 == false return 04No
+  if $1 == $true return 03Yes
+  if $1 == $false return 04No
   return 07 $+ $1
 }
 alias itemsOut {
