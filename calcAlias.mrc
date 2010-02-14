@@ -1,4 +1,4 @@
->start<|calcAlias.mrc|Calculator|3.0|a
+>start<|calcAlias.mrc|Calculator|3.3|a
 calcreg {
   var %string = $1
   %string = $getStats($1, $rsn($nick))
@@ -34,6 +34,16 @@ preg_replace_all_skills {
     }
   }
   return %input
+}
+fixInt {
+  var %string $1
+  %string = $replace(%string,pi,~,p,&,ans,p)
+  %string = $regsubex(%string,/(?:([\dep~kmb\x29])([\x28])|([\x29])([\dep~astcl])|([ep~])([ep~astcl])|(\d)([ep~astcl]))/gi,\1*\2)
+  %string = $regsubex(%string,/(?:([\dep~kmb\x29])([\x28])|([\x29])([\dep~astcl])|([ep~])([ep~astcl])|(\d)([ep~astcl]))/gi,\1*\2)
+  %string = $regsubex(%string,/(\d+(?:\.\d+)?)([kmb])/gi,$calc(\1 $replace(\2,k,*1000,m,*1000000,b,*1000000000)))
+  %string = $regsubex(%string,/(a?(?:sin|cos|tan|log|sqrt|l(?:vl)?))((?:\+|\-)?(?:[ep~]|\d+(?:\.\d+)?))/gi,\1 $+ $chr(40) $+ \2 $+ $chr(41))
+  %string = $replace(%string,~,3.141593,e,2.718281,p,$hget($nick,p),$chr(44),$null)
+  return $calc($parser(%string))
 }
 ; will return a nice version of the calculation
 calcparse {
