@@ -323,7 +323,7 @@ on *:TEXT:*:*: {
   else if ($regex($1,/^[!@.](g(reat|rand)?e(xchange)?|price)$/Si)) {
     if (!$2) { %saystyle Syntax: !ge [number] <item> | halt }
     var %num = 1, %search = $2-
-    if ($litecalc($2) >= 1) {
+    if ($fixInt($2) >= 1) {
       %num = $v1
       %search = $3-
     }
@@ -348,7 +348,7 @@ on *:TEXT:*:*: {
   ; GEINFO
   else if ($regex($1,/^[!@.]g(reat|rand)?e(xchange)?(info)$/Si)) {
     if (!$2) { %saystyle Syntax: !geinfo <item> | halt }
-    var %id $litecalc($remove($2-,$chr(35)))
+    var %id $fixInt($remove($2-,$chr(35)))
     if (%id > 0) {
       var %id = $regsubex($2-,/(\D+)/g,$null)
       _fillCommand %thread $left($1,1) $nick $iif($chan,$v1,PM) geinfo
@@ -475,7 +475,7 @@ on *:TEXT:*:*: {
     }
     var %rank $false, %string $2-, %nick $false
     if ($regex($2-,/(?:#|^)(\d+[km]?)( |$)/S)) {
-      %rank = $litecalc($regml(1))
+      %rank = $fixInt($regml(1))
       %string = $regsubex($2-,/(?:#|^)(\d+[km]?)( |$)/S,$null)
     }
     if ($trim(%string)) %nick = %string
@@ -507,7 +507,7 @@ on *:TEXT:*:*: {
       %input = %input $($ $+ %x,2)
       inc %x
     }
-    if ($skills($2) && $skills($2) && $3) { %skill = $skills($2) | %nick = $regsubex($3-,/\W/g,_) }
+    if ($skills($2) && $3) { %skill = $skills($2) | %nick = $regsubex($3-,/\W/g,_) }
     else if ($skills($($ $+ $0,2)) && $skills($($ $+ $0,2)) && $3) { %skill = $skills($($ $+ $0,2)) | %nick = $regsubex(%input,/\W/g,_) }
     else if ($2 && (!$skills($($ $+ $0,2)))) { %nick = $regsubex($2-,/\W/g,_) | %skill = Overall }
     else if ($2) { %nick = $regsubex($nick,/\W/g,_) | %skill = $skills($2) }
@@ -553,7 +553,7 @@ on *:TEXT:*:*: {
   else if ($regex($1,/^[!@.](hi(gh)?|low?)?(item|alch|alk)$/Si)) {
     if (!$2) %saystyle Syntax Error: !item <item|#item id>
     var %search $remove($2-,$#)
-    if ($litecalc(%search) > 0) {
+    if ($fixInt(%search) > 0) {
       var %url http://www.zybez.net/exResults.aspx?type=1&id= $+ $v1
       _fillCommand %thread $left($1,1) $nick $iif($chan,$v1,PM) item
       noop $download.break(itemOut %thread, %thread, %url)
@@ -804,22 +804,22 @@ on *:TEXT:*:*: {
     }
     var %lessthan = 200000001
     if ($regex(%string,/<([0-9]+[mkb]?)/)) {
-      %lessthan = $litecalc($regml(1))
+      %lessthan = $fixInt($regml(1))
       %string = $regsubex(%string,/<([nlr0-9]+[mkb]?)/,$null)
     }
     var %morethan = 0
     if ($regex(%string,/>([0-9]+[mkb]?)/)) {
-      %morethan = $litecalc($regml(1))
+      %morethan = $fixInt($regml(1))
       %string = $regsubex(%string,/>([nlr0-9]+[mkb]?)/,$null)
     }
     if ($regex(eq,%string,/=([0-9]+[mkb]?)/)) {
-      if ($litecalc($regml(eq,1)) < 127) {
+      if ($fixInt($regml(eq,1)) < 127) {
         %morethan = $lvltoxp($v1)
-        %lessthan = $calc($lvltoxp($calc($litecalc($regml(eq,1)) + 1)) + 1)
+        %lessthan = $calc($lvltoxp($fixInt($regml(eq,1) + 1)) + 1)
       }
       else {
-        %morethan = $litecalc($regml(eq,1))
-        %lessthan = $litecalc($regml(eq,1) + 1)
+        %morethan = $fixInt($regml(eq,1))
+        %lessthan = $fixInt($regml(eq,1) + 1)
       }
       %string = $regsubex(%string,/=([nlr0-9]+[mkb]?)/,$null)
     }
@@ -1022,7 +1022,7 @@ on *:TEXT:*:*: {
     }
     if (%command == goal) {
       if (!$rowExists(users, rsn, $rsn($nick))) { noop $_network(noop $!sqlite_query(1, INSERT INTO users (rsn, fingerprint) VALUES (' $+ $rsn($nick) $+ ',' $+ $aLfAddress($nick) $+ ');)) }
-      if (!$4 && $litecalc($3) > 0) { %saystyle Sytax Error: !set goal <skill> <goal> | goto clean }
+      if (!$4 && $fixInt($3) > 0) { %saystyle Sytax Error: !set goal <skill> <goal> | goto clean }
       if (!$4 && $lookups($3)) {
         noop $_network(noop $!setStringParameter( users , $aLfAddress($nick) , $lookups($3) , goals , nl , $false ))
         %saystyle Your07 $lookups($3) goal has been removed.
@@ -1030,9 +1030,9 @@ on *:TEXT:*:*: {
       }
       if ($lookups($4)) { tokenize 32 $4 $3 }
       else { tokenize 32 $3 $4 }
-      var %goal $iif($litecalc($2) < 127,$lvltoxp($v1),$v1)
+      var %goal $iif($fixInt($2) < 127,$lvltoxp($v1),$v1)
       noop $_network(noop $!setStringParameter( users , $aLfAddress($nick) , $lookups($1) , goals , %goal , $false ))
-      %saystyle Your07 $lookups($1) goal has been set to07 $format_number($iif($litecalc($2) < 127,$lvltoxp($v1),$v1))) experience.
+      %saystyle Your07 $lookups($1) goal has been set to07 $format_number($iif($fixInt($2) < 127,$lvltoxp($v1),$v1))) experience.
       goto clean
     }
     if (%command == item) {
@@ -1191,8 +1191,8 @@ on *:TEXT:*:*: {
     .tokenize 32 %string
     var %exp $scores($1), %skill $scores($2), %nick $iif($3,$rsn($3),$rsn($nick))
     if (!%exp && !%skill) { goto fail }
-    if (!%skill) var %temp %skill, %skill %exp, %exp $litecalc($2)
-    else %exp = $litecalc($1)
+    if (!%skill) var %temp %skill, %skill %exp, %exp $fixInt($2)
+    else %exp = $fixInt($1)
     if (!%exp) { goto fail }
     if (%level && %skill == overall && %exp > 2376) { goto fail }
     else if (%level && %skill != overall && %exp > 126) { goto fail }
@@ -1217,12 +1217,12 @@ on *:TEXT:*:*: {
     _fillCommand %thread $left($1,1) $nick $iif($chan,$v1,PM) EXP
     if (!$2) { %saystyle $formatwith(Syntax Error: \u!xp <level>\u OR \u!xp <xp>\u OR \u!xp [amount] <item>\u.) | goto clean }
     if ($regex(exp,$remove($2-,$chr(44)),/^([\dkm]+)(?:[- ]{1,3}([\dkm]+))?$/Si)) {
-      var %1 = $litecalc($regml(exp,1))
+      var %1 = $fixInt($regml(exp,1))
       if (%1 > 126 && %1 <= 200000000) { var %lvl1 = $xptolvl(%1), %exp1 = %1 }
       elseif (%1 > 0) { var %lvl1 = %1, %exp1 = $lvltoxp(%1) }
       else { %saystyle Syntax: !exp <LVL or EXP> OR !exp <LVL or EXP>-<LVL or EXP>. | goto clean }
       if ($regml(exp,2)) {
-        var %2 = $litecalc($regml(exp,2))
+        var %2 = $fixInt($regml(exp,2))
         if (%2 > 126 && %2 <= 200000000) { var %lvl2 = $xptolvl(%2), %exp2 = %2 }
         elseif (%2 > 0) { var %lvl2 = %2, %exp2 = $lvltoxp(%2) }
         else { %saystyle Syntax: !exp <LVL or EXP> OR !exp <LVL or EXP>-<LVL or EXP>. | goto clean }
@@ -1242,8 +1242,8 @@ on *:TEXT:*:*: {
         if (%skill isin AttackStrengthDefenceRanged) var %skill = Combat
         tokenize 32 $1 $3-
       }
-      if ($litecalc($2) && $3) {
-        var %num = $litecalc($2), %output = 07 $+ $bytes(%num,bd) $+ x
+      if ($fixInt($2) && $3) {
+        var %num = $fixInt($2), %output = 07 $+ $bytes(%num,bd) $+ x
         tokenize 32 $1 $3-
       }
       else var %num = 1
