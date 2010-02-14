@@ -1209,7 +1209,6 @@ on *:TEXT:*:*: {
     %saystyle %output
     goto clean
     :fail
-    .notice P_Gertrude nick %nick skill %skill exp %exp 
     .notice $nick Syntax Error: !grats <level|exp> <skill> [exp] [nick]
     goto clean
   }
