@@ -1,4 +1,4 @@
->start<|triggers.mrc|compiled all triggers|3.25|rs
+>start<|triggers.mrc|compiled all triggers|3.3|rs
 on *:TEXT:*:*: {
   if ($left($1,1) !isin !.@) { [ [ $botid($1) ] ] }
   var %shuffleInput $nick > $iif($chan,$v1,PM) > $1-

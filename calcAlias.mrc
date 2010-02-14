@@ -1,4 +1,4 @@
->start<|calcAlias.mrc|Calculator|3.0|a
+>start<|calcAlias.mrc|Calculator|3.3|a
 calcreg {
   var %string = $1
   %string = $getStats($1, $rsn($nick))

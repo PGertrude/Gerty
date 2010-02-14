@@ -1,4 +1,4 @@
->start<|elly.mrc|elly still here...|3.0|rs
+>start<|elly.mrc|elly still here...|3.1|rs
 on $*:text:/^(Gerty?\x20)?[!.@](mag(e|ic))?spell? /Si:*:{
   _CheckMain
   if ($iif($regex($1,/^Gerty?/Si),$3,$2)) { spell $remove($iif($regex($1,/^Gerty?/Si),$3-,$2-),$chr(44),$chr(36)) $+ $chr(44) $+ $saystyle($left($iif($regex($1,/^Gerty?/Si),$2,$1),1),$nick,$chan) }
@@ -29,7 +29,6 @@ alias spell {
   if (%x == 1) { %saystyle 07 $+ $iif(%exact,Exact match $+(07,",%spell,"),%spell) $+  spell not found. }
   .fclose *
 }
-
 on $*:text:/^(Gerty?\x20)?[!.@]newle?ve?l/Si:*:{
   _CheckMain
   var %saystyle $saystyle($left($iif($regex($1,/^Gerty?/Si),$2,$1),1),$nick,$chan)
