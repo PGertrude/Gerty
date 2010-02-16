@@ -574,6 +574,8 @@ alias normaliseItem {
   if $1 == no return 04No
   if $1 == true return 03Yes
   if $1 == false return 04No
+  if $1 == on return 03On
+  if $1 == off return 04Off
   return 07 $+ $1
 }
 alias itemsOut {
@@ -1073,9 +1075,11 @@ alias alog-r {
 alias startGeUpdate noop $download.break(checkGeUpdate,a $+ $ticks,http://SSElessar.net/parser/gulist.php)
 alias checkGeUpdate {
   tokenize 10 $1
+  write geDebug.txt $1-
   if ($1 != $readini(gerty.config.ini,GeUpdate,Rise) && $1) { writeini gerty.config.ini GeUpdate Rise $1 | if (!hget(GeUpdate,Rise)) hadd -mu1200 GeUpdate Rise $true }
   if ($2 != $readini(gerty.config.ini,GeUpdate,Drop) && $2) { writeini gerty.config.ini GeUpdate Drop $2 | if (!hget(GeUpdate,Drop)) hadd -mu1200 GeUpdate Drop $true }
   if ($hget(GeUpdate,Rise) && $hget(GeUpdate,Drop) && $calc($ctime - $gettok($read(GeUpdate.txt,1),2,124)) > 1200) {
+    write geDebug.txt UPDATE
     var %x = 1 | while ($chan(%x)) { if ($chanset($chan(%x)) == on && $_checkMainReturn($chan(%x))) { .msg $chan(%x) GeUpdate in progress. Lookup update will be completed within 15 minutes and ingame within 5. } | inc %x }
     write -il1 geupdate.txt $host(time) $+ $chr(124) $+ $ctime $+ $chr(124) $+ $ord($host(date)) $host(month).3
     resetPrices | .timer 1 1000 resetPrices | runepriceupdater
