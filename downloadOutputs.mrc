@@ -1029,8 +1029,10 @@ alias alog {
       if ($len($alogout(%thread)) > 350) hadd -m %thread exp %old
     }
     elseif ($1 == KILL) {
+      echo -st $2
       var %old = $hget(%thread,kill)
-      hadd -m %thread kill %old $+ $2 $+ $chr(124)
+      if ($regex($2,/^(\d+ |)?(.+?)s?$/)) { var %rep = $iif($regml(1),$v1,1), %item = $regml(2) }
+      hadd -m %thread kill %old $+ $str(%item $+ |,%rep)
       if ($len($alogout(%thread)) > 350) hadd -m %thread kill %old
     }
     elseif ($1 == QUEST) {
