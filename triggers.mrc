@@ -17,31 +17,34 @@ on *:TEXT:*:*: {
   if ($left($1,1) isin .!@) %saystyle = $saystyle($left($1,1),$nick,$chan)
   ; STATUS
   if ($regex($1,/^[!@.]status$/Si)) {
-    if (!$admin($nick)) { goto clean }
-    if ($2) {
-      if ($left($2,1) == $#) {
-        var %minusers = $chanset($2,users)
-        var %curusers = $nick($2,0)
-        var %blacklistsetting = $chanset($2,blacklist)
-        var %youtube = $chanset($2,youtube)
-        var %site = $chanset($2,site)
-        var %event = $chanset($2,event)
-        var %public = $chanset($2,public)
-        if (%blacklistsetting) { %blacklist = Blacklist:07 %blacklist }
-        if (%youtube) { %youtube = Youtube:07 $caps(%youtube) }
-        else { %youtube = Youtube:07 On }
-        if (%public) { %public = Public:07 %public }
-        else { %public = Public:07 On }
-        if (%site) { %site = Site:07 Yes }
-        else { %site = Site:07 No }
-        if (%event) { %event = Event:07 Yes }
-        else { %event = Event:07 No }
-        %saystyle Channel info:07 $2 $iif(%curusers,Users:07 %curusers $+ $chr(32)) $+ %public %blacklist %youtube %site %event
-        goto clean
+    if (!$admin($nick)) {
+      var %output Channel Info for07 $chan $+ 
+      var %x 1
+      while (%x <= $hget($chan,0).item) {
+        if ($hget($chan,%x).item != site && $v1 != event && $v1 != users && $hget($chan,$v1)) {
+          %output = %output $hget($chan,%x).item $+ : $normaliseItem($hget($chan,$hget($chan,%x).item)) $+ ;
+        }
+        inc %x
       }
+      %saystyle %output
     }
-    hadd -m %thread out %saystyle
-    hadd -m %thread ticks $ticks
+    else {
+      if ($2) {
+        if ($left($2,1) == $#) {
+          var %output Channel Info for07 $chan $+ 
+          var %x 1
+          while (%x <= $hget($chan,0).item) {
+            if ($hget($chan,%x).item != site && $v1 != event && $v1 != users && $hget($chan,$v1)) {
+              %output = %output $hget($chan,%x).item $+ : $normaliseItem($hget($chan,$hget($chan,%x).item)) $+ ;
+            }
+            inc %x
+          }
+          %saystyle %output
+          goto clean
+        }
+      }
+      %saystyle Chans:07 $chan(0) Nicks:07 $bot(users) Uptime:07 $swaptime($uptime(server,1)) Total Commands:07 $hget(commands,amount)
+    }
     .raw status. $+ %thread
     goto clean
   }
