@@ -43,9 +43,10 @@ on *:TEXT:*:*: {
           goto clean
         }
       }
-      %saystyle Chans:07 $chan(0) Nicks:07 $bot(users) Uptime:07 $swaptime($uptime(server,1)) Total Commands:07 $hget(commands,amount)
+      hadd -m %thread out %saystyle
+      hadd -m %thread ticks $ticks
+      .raw status. $+ %thread
     }
-    .raw status. $+ %thread
     goto clean
   }
   if ($chr(36) isin $1-) { tokenize 32 $remove($1-,$chr(36)) }
