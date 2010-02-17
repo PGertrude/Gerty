@@ -83,12 +83,17 @@ on *:CONNECT: {
 
 }
 raw 421:*: {
-  var %string, %x 1
-  while (%x <= 5) {
-    %string = %string $hget(commands, %x) $+ ,07
-    inc %x
+  if (status.* iswm $2) { 
+    statusOut $gettok($2,2,46)
   }
-  sendToDev ERROR:07 $2- Recent commands:07 $left(%string, -4)
+  else {
+    var %string, %x 1
+    while (%x <= 5) {
+      %string = %string $hget(commands, %x) $+ ,07
+      inc %x
+    }
+    sendToDev ERROR:07 $2- Recent commands:07 $left(%string, -4)
+  }
   haltdef
 }
 raw 352:*:haltdef

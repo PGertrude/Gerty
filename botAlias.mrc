@@ -341,3 +341,8 @@ gertyQuit {
     quit Gerty shutting down. Please /invite Gerty or /join #gerty 
   }
 }
+statusOut {
+  var %thread = $1, %ping = $calc($ticks - $hget(%thread,ticks)), %saystyle = $hget(%thread,out)
+  %saystyle Chans:07 $chan(0) | Nicks:07 $bot(users) | Uptime:07 $swaptime($uptime(server,1)) | Total Commands:07 $bytes($hget(commands,amount),bd) | Server ping:07 $bytes(%ping,bd)
+  hfree %thread
+}
