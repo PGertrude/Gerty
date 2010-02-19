@@ -1021,7 +1021,7 @@ alias alog {
     elseif ($1 == ITEM) {
       var %old = $hget(%thread,item)
       hadd -m %thread item %old $+ $2 $+ $chr(124)
-      if ($len($alogout(%thread)) > 350) hadd -m %thread item %old
+      if ($len($alogout(%thread)) > 400) hadd -m %thread item %old
     }
     elseif ($1 == EXP) {
       var %old = $hget(%thread,exp)

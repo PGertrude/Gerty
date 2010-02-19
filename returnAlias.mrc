@@ -280,7 +280,24 @@ alogout {
   var %ticks = $1, %out
   if ($hget($1,lvl)) %out = $chr(44) Gained $right($regsubex($v1,/\|(\w+)/g,$chr(44) 07 $+ $hget(%ticks,\1) \1 $+(level,$iif($hget(%ticks,\1) > 1,s),$chr(40),->,07,$hget(%ticks,\1 $+ high),,$chr(41))),-2)
   if ($hget($1,exp)) %out = %out $+ $chr(44) Reached $right($v1,-2)
-  if ($hget($1,item)) %out = %out $+ $chr(44) Found $grouper($v1)
+  if ($hget($1,item)) {
+    var %items = $v1, %x = 1
+    while ($gettok(%items,%x,124)) {
+      var %item = $replace($gettok(%items,%x,124),$chr(32),:space:)
+      inc %item. $+ %item
+      if ($hget(alogitem,%item) == $blank) hadd -mu30 alogitem %item $price($gettok(%items,%x,124))
+      inc %x
+    }
+    var %y = 1
+    while ($var(%item.*,%y)) {
+      hinc teller teller
+      var %price = $parenthesis($format_number($calc($var(%item.*,%y).value * $hget(alogitem,$gettok($var(%item.*,%y),2,46)))))
+      var %itemout = $+(%itemout,$iif(%itemout,$+(,$chr(44),$chr(32))),07,$iif($var(%item.*,%y).value > 1,$v1 $+ x 07),$replace($gettok($var(%item.*,%y).item,2,46) $+ %price,:space:,$chr(32)))
+      inc %y
+    }
+    %out = %out $+ $chr(44) Found %itemout
+    unset %item*
+  }
   if ($hget($1,kill)) %out = %out $+ $chr(44) Killed $grouper($v1)
   if ($hget($1,done)) %out = %out $+ $chr(44) Completed07 $left($replace($v1,$chr(124),$+(,$chr(44),07,$chr(32))),-6) $+ 
   if ($hget($1,other) != $blank) var %out = %out $+ $chr(44) Other:07 $left($replace($v1,$chr(124),$+(,$chr(44),07,$chr(32))),-6) $+ 
