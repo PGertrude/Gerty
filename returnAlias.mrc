@@ -290,7 +290,6 @@ alogout {
     }
     var %y = 1
     while ($var(%item.*,%y)) {
-      hinc teller teller
       var %price = $parenthesis($format_number($calc($var(%item.*,%y).value * $hget(alogitem,$gettok($var(%item.*,%y),2,46)))))
       var %itemout = $+(%itemout,$iif(%itemout,$+(,$chr(44),$chr(32))),07,$iif($var(%item.*,%y).value > 1,$v1 $+ x 07),$replace($gettok($var(%item.*,%y).item,2,46) $+ %price,:space:,$chr(32)))
       inc %y
