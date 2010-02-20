@@ -13,12 +13,11 @@ Agility	52	571	Wilderness Course
 Agility	48	580	Ape Atoll
 Agility	70	2750	DorgeshKaan Course
 Agility	1	15	Mouse Catch Attempt
-Fishing	96	110	Barbarian Shark
-Fishing	70	100	Barbarian Swordfish
+Fishing	90	380	Rocktail
+Fishing	85	300	Cavefish
 Fishing	70	80	Leaping Sturgeon
 Fishing	65	105	Karambwan
 Fishing	58	70	Leaping Salmon
-Fishing	55	80	Barbarian Tuna
 Fishing	53	60	Lava Eel
 Fishing	48	50	Leaping Trout
 Fishing	46	100	Bass
@@ -43,6 +42,9 @@ Fishing	40	90	Lobster
 Fishing	35	80	Tuna
 Fishing	30	70	Salmon
 Fishing	20	50	Trout
+Fishing	96	110	Barbarian Shark
+Fishing	70	100	Barbarian Swordfish
+Fishing	55	80	Barbarian Tuna
 Hunter	77	1100	Grenwall
 Hunter	69	156	Dashing Kebbit
 Hunter	67	304	Black Salamander
@@ -151,6 +153,10 @@ Magic	56	33	Blood Rush	2 Chaos, 2 Death, 1 Blood	17	Ancient Magick	Heals 25% of 
 Magic	54	64	Paddewwa Teleport	2 Law, 1 Fire, 1 Air	Ancient Magick	Teleport to Edgeville dungeon
 Magic	52	31	Shadow Rush	2 Chaos, 2 Death, 1 Air, 1 Soul	16	Ancient Magick	Reduces targets attack 10%
 Magic	50	30	Smoke Rush	2 Chaos, 2 Death, 1 Fire, 1 Air	15	Ancient Magick	Poisons(2)
+Magic	95	90	Fire Surge	1 Blood, 1 Death, 10 Fire, 7 Air	28	Normal	-
+Magic	90	85	Earth Surge	1 Blood, 1 Death, 10 Earth, 7 Air	26	Normal	-
+Magic	85	80	Water Surge	1 Blood, 1 Death, 10 Water, 7 Air	24	Normal	-
+Magic	81	75	Air Surge	1 Blood, 1 Death, 7 Air	22	Normal	-
 Magic	90	100	Teleother Camelot	2 Soul, 1 Law	-	Normal	Teleports target player to Camelot
 Magic	87	97	Lvl-6 Enchant	20 Earth, 20 Fire, 1 Cosmic	-	Normal	Enchants Onyx jewellery
 Magic	85	80	Teleport Block	1 Death, 1 Chaos, 1 Law	-	Normal	Prevents target from teleporting for 5 minutes
@@ -387,6 +393,10 @@ Slayer	72	210	Skeletal Wyvern	140
 Slayer	73	110	Jungle strykewyrm	110
 Slayer	77	120	Desert strykewyrm	130
 Slayer	93	300	Ice strykewyrm	300
+Slayer	1	250	Avg Living rock creatures
+Slayer	1	225	Living rock protector
+Slayer	1	275	Living rock striker
+Slayer	1	530	Living rock patriarch
 Thieving	75	16	Gem Stall
 Thieving	65	81.3	Spice Stall
 Thieving	65	160	Scimitar Stall
@@ -564,6 +574,10 @@ Combat	114	500	Aquanite
 Combat	73	440	Jungle strykewyrm
 Combat	77	480	Desert strykewyrm
 Combat	93	1200	Ice strykewyrm
+Combat	1	1000	Avg Living rock creatures
+Combat	1	900	Living rock protector
+Combat	1	1100	Living rock striker
+Combat	1	1600	Living rock patriarch
 Hitpoints	114	166.25	Aquanite
 Hitpoints	125	146.67	spiritual warrior
 Hitpoints	134	174.67	spiritual warrior bandos
@@ -668,6 +682,10 @@ Hitpoints	1	4	Chicken
 Hitpoints	73	146.68	Jungle strykewyrm
 Hitpoints	77	160	Desert strykewyrm
 Hitpoints	93	400	Ice strykewyrm
+Hitpoints	1	333.33	Avg Living rock creatures
+Hitpoints	1	300	Living rock protector
+Hitpoints	1	366.67	Living rock striker
+Hitpoints	1	433.33	Living rock patriarch
 Herblore	3	2.5	Guam	249	Grimy guam	199	-
 Herblore	3	2.5	Rogue's purse	0	Grimy rogue's purse	0	-
 Herblore	3	2.5	Snake weed	0	Grimy snake weed	0	-

@@ -6,3 +6,4 @@ Gerty
 [FF]Gerty
 [GS]Gerty
 [IZ]Gerty
+[ZZ]Gerty
