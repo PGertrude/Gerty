@@ -1,11 +1,12 @@
 >start<|triggers.mrc|compiled all triggers|3.3|rs
 on *:TEXT:*:*: {
-  if ($left($1,1) !isin !.@) { 
-    if ($botid($1)) {
+  if ($left($1,1) !isin !.@) {
+    var %botCheck = $botid($1) 
+    if (%botCheck) {
       tokenize 32 $2-
       var %botid = $true
     }
-    else goto clean
+    elseif (%botCheck == $false) goto clean
   }
   var %shuffleInput $nick > $iif($chan,$v1,PM) > $1-
   if ($1 == raw) {
