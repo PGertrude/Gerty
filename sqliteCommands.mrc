@@ -115,7 +115,6 @@ alias dbSelect {
 alias dbSelectWhere {
   var %table = $1, %fields = $replace($2,;,$chr(44)), %condition = $3
   var %sql = SELECT %fields FROM %table WHERE %condition
-
   ; Check for null tokens
   var %x = 1
   while (%x <= $0) {
@@ -206,7 +205,8 @@ alias getPrice {
   }
   else {
     if ($prop == sql) return $dbSelectWhere(prices, name;price;change, name LIKE $+('%,$remove($1,"),$%,') ORDER BY price DESC LIMIT 20).sql
-    %price = $dbSelectWhere(prices, name;price;change, name LIKE $+("%,$remove($1,"),$%,") AND price>0 ORDER BY price DESC LIMIT 20)
+    if ($prop == exact) %price = $dbSelectWhere(prices, name;price;change, name LIKE $+(",$remove($1,"),") AND price>0)
+    else %price = $dbSelectWhere(prices, name;price;change, name LIKE $+("%,$remove($1,"),$%,") AND price>0 ORDER BY price DESC LIMIT 20)
     if (%price == $null) return $null
     else if ($trim($gettok(%price,2,59)) == 0) return $false
     return %price
