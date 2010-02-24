@@ -264,14 +264,14 @@ shuffleHash {
 }
 botid {
   var %id = $bot(id)
-  if ($1 == $me) return tokenize 32 $!2-
-  elseif ($istok($1-,%id,44) || $+([,$1,]) == %id) { return tokenize 32 $!2- }
-  elseif ($1 == Gerty && Gerty !ison $chan) { return tokenize 32 $!2- }
-  elseif ($+([,$1,]Gerty) ison #gertyDev) { return goto clean }
+  if ($1 == $me) return $true
+  elseif ($istok($1-,%id,44) || $+([,$1,]) == %id) { return $true }
+  elseif ($1 == Gerty && Gerty !ison $chan) { return $true }
+  elseif ($+([,$1,]Gerty) ison #gertyDev) { return $false }
   tokenize 44 $1-
   var %x = 1
   while (%x <= $0) {
-    if ($regsubex($($ $+ %x,2),/^\[(\w{2})\](?:Gerty)?$/Si,[ $+ \1 $+ ]Gerty) ison #gertyDev) { return goto clean }
+    if ($regsubex($($ $+ %x,2),/^\[(\w{2})\](?:Gerty)?$/Si,[ $+ \1 $+ ]Gerty) ison #gertyDev) { return $false }
     inc %x
   }
 }
