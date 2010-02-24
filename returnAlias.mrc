@@ -9,7 +9,7 @@ aLfAddress {
 }
 price {
   var %item $remove($1,$chr(42))
-  if ($getPrice(%item)) return $trim($gettok($v1,2,59))
+  if ($getPrice(%item). [ $+ [ $prop ] ]) return $trim($gettok($v1,2,59))
   var %thread $+(a,$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9))
   var %url http://gerty.rsportugal.org/parsers/ge.php?item= $+ $replace(%item,$chr(32),+)
   var %string = $downloadstring(%thread, %url)
@@ -285,7 +285,7 @@ alogout {
     while ($gettok(%items,%x,124)) {
       var %item = $replace($gettok(%items,%x,124),$chr(32),:space:)
       inc %item. $+ %item
-      if ($hget(alogitem,%item) == $blank) hadd -mu30 alogitem %item $price($gettok(%items,%x,124))
+      if ($hget(alogitem,%item) == $blank) hadd -mu30 alogitem %item $price($gettok(%items,%x,124)).exact
       inc %x
     }
     var %y = 1
@@ -352,7 +352,7 @@ param {
 }
 parenthesis return $+(,$chr(40),07,$1-,,$chr(41))
 ran return $+($r(1,9),$r(1,9),$r(1,9),$r(1,9),$r(1,9),$r(1,9),$r(1,9),$r(1,9),$r(1,9),$r(1,9))
-TotalScripts {
+totalScripts {
   var %x = 1
   while ($script(%x)) {
     var %l = $lines($script(%x)), %b = $file($script(%x))
@@ -383,4 +383,16 @@ getStat {
   var %sk = $statnum($scores($2)), %thread = a $+ $ran
   var %stat = $downloadstring(%thread,http://hiscore.runescape.com/index_lite.ws?player= $+ $1 )
   return $gettok($gettok(%stat,%sk,10),3,44)
+}
+get_multiple_prices {
+  var %x = 1, %out, %price, %item, %regex, %thread = a $+ $ran, %url = http://gerty.rsportugal.org/parsers/ge.php?item=
+  while (%x <= $0) {
+    %item = $($ $+ %x,2)
+    %string = $downloadstring(%thread, $+(%url,",%item,"))
+    %regex = /.+\x2c( $+ %item $+ \x2c\d+).+/i
+    %price = $regsubex($remove(%string,$chr(10)),%regex,\1)
+    %out = $addtok(%out,%price,59)
+    inc %x
+  }
+  return %out
 }

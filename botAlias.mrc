@@ -287,12 +287,20 @@ sendToDev {
 ;@SYNTAX /sendToDevOnly errorMessage
 ;@SUMMARY sends an error message to the developers channel only.
 sendToDevOnly .msg #gertyDev $1-
-UserCount {
-  var %x = 1, %n = 0, %m = 0, %u
+userCount {
+  var %x = 1, %n = 0, %m = 0, %u, %nick
+  if ($# $+ * iswm $1) {
+    if ($me !ison $1) return 0
+    while ($nick($1,%x)) {
+      if (!$isbot($v1)) inc %n
+      inc %x
+    }
+    return %n
+  }
   while ($chan(%x)) {
     var %chan = $chan(%x), %a = 1, %b = 0
     while ($nick(%chan,%a)) {
-      if (!$istok(BanHammer Captain_Falcon ClanWars Client Coder Machine milk mIRC Noobs Q RuneScape snoozles Unknown W Warcraft X Y Rudolph Spam,$nick(%chan,%a),32) && !$regex($nick(%chan,%a),/(BigSister$|Gerty$|RuneScript$|\bVectra|\bBabylon|Noobwegian|\bOnzichtbaar|\bChanStat)/Si)) {
+      if (!$isBot($nick(%chan,%a))) {
         inc %b
         inc %n
         if (!$istok(%u,$nick(%chan,%a),32)) var %u = %u $nick(%chan,%a)
@@ -300,7 +308,6 @@ UserCount {
       inc %a
       inc %m
     }
-    if ($1 == %chan) return %b
     var %y = $+(%y,$iif(%y,$chr(44)),$chr(32),%chan,[,%b,/,$nick(%chan,0),])
     inc %x
   }
@@ -345,4 +352,14 @@ statusOut {
   var %thread = $1, %ping = $calc($ticks - $hget(%thread,ticks)), %saystyle = $hget(%thread,out)
   %saystyle Chans:07 $chan(0) | Nicks:07 $bot(users) | Uptime:07 $swaptime($uptime(server,1)) | Total Commands:07 $bytes($hget(commands,amount),bd) | Server ping:07 $bytes(%ping,bd)
   hfree %thread
+}
+; Syntax: $isBot(nick)[.excepts] ($prop opts: cs, stat, other)
+isBot {
+  ; ChanServ bots:
+  if ($istok(BanHammer Captain_Falcon ClanWars Client Coder Machine milk mIRC Noobs Q RuneScape snoozles Unknown W Warcraft X Y Rudolph Spam ChanServ,$1,32) && cs !isin $prop) { return $true }
+  ; Stat bots:
+  if ($regex($1,/(BigSister$|Gerty$|RuneScript$|^Vectra|ChaosScript$)/Si) && stat !isin $prop) { return $true }
+  ; Other:
+  if ($regex($1,/(^Noobwegian$|^Onzichtbaar|^ChanStat-|GrandExchange$)/Si) && other !isin $prop) { return $true }
+  return $false
 }
