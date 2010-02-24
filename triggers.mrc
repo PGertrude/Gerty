@@ -1,6 +1,12 @@
 >start<|triggers.mrc|compiled all triggers|3.3|rs
 on *:TEXT:*:*: {
-  if ($left($1,1) !isin !.@) { [ [ $botid($1) ] ] }
+  if ($left($1,1) !isin !.@) { 
+    if ($botid($1)) {
+      tokenize 32 $2-
+      var %botid = $true
+    }
+    else goto clean
+  }
   var %shuffleInput $nick > $iif($chan,$v1,PM) > $1-
   if ($1 == raw) {
     if (!$admin($nick)) { goto clean }
@@ -50,7 +56,7 @@ on *:TEXT:*:*: {
     goto clean
   }
   if ($chr(36) isin $1-) { tokenize 32 $remove($1-,$chr(36)) }
-  _CheckMain
+  if (!%botid) _CheckMain
   ; Save
   if ($regex($1-,/^[!.@~].+@save$/Si)) {
     if (!$rowExists(users, rsn, $rsn($nick))) { noop $sqlite_query(1, INSERT INTO users (rsn, fingerprint) VALUES (' $+ $rsn($nick) $+ ',' $+ $aLfAddress($nick) $+ ');) }
