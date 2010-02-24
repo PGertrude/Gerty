@@ -309,6 +309,17 @@ UserCount {
   if ($1 == names) return $numtok(%u,32)
   return %y
 }
+findEmptyChannels {
+  var %x 1, %chans, %min $iif(!$1,2,$1)
+  while (%x <= $chan(0)) {
+    if ($usercount($chan(%x)) <= %min) {
+      %chans = %chans $chan(%x) $v1 $+ ;
+      if ($v1 == 0) { part $chan(%x) }
+    }
+    inc %x
+  }
+  return %chans
+}
 AdminToHash {
   if ($hget(admin)) hfree admin
   var %admins = $readini(gerty.config.ini,admin,rsn), %x = $numtok(%admins,124), %string
