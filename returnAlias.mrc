@@ -81,6 +81,7 @@ fact {
   }
 }
 admin {
+  if (!$aLfAddress($1)) { return $false }
   if ($hget(admin,$aLfAddress($1))) return admin
   else return $false
 }
