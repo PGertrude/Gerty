@@ -1,6 +1,7 @@
 >start<|remotemodes.mrc|weird thing tbh|3.0|rs
 on $*:TEXT:/^[\+\-][A-Za-z ]+$/Si:#: {
-  if ($admin($rsn($nick)) || $nick isop $chan) {
+  _checkMain
+  if ($admin($nick) || $nick isop $chan) {
     var %mode = $1
     if ($left(%mode,1) == + || $left(%mode,1) == -) {
       if ($regex(%mode,/(q|a)/)) { .notice $nick mode $regml(1) cannot be set. | halt }
