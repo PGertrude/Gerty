@@ -25,8 +25,6 @@ on *:START: {
   if ($exists(runeprice.txt)) { .hload runeprice runeprice.txt }
   if !$hget(spelluse) { .hmake spelluse }
   if ($exists(spelluse.txt)) { .hload spelluse spelluse.txt }
-  if !$hget(ge) { .hmake ge }
-  if ($exists(geupdatebackup.txt)) { .hload ge geupdatebackup.txt }
   if !$hget(commands) { .hmake commands }
   if ($exists(commands.txt)) { .hload commands commands.txt }
 }
@@ -35,7 +33,6 @@ on *:QUIT: {
     ; Save Data Files
     .hsave runeprice runeprice.txt
     .hsave spelluse spelluse.txt
-    .hsave ge geupdatebackup.txt
     .hsave commands commands.txt
   }
   /* looping through channels needed
@@ -50,7 +47,6 @@ on *:DISCONNECT: {
   .hsave prices price.txt
   .hsave runeprice runeprice.txt
   .hsave spelluse spelluse.txt
-  .hsave ge geupdatebackup.txt
   .hsave commands commands.txt
 
 }
