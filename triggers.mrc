@@ -1,7 +1,7 @@
->start<|triggers.mrc|compiled all triggers|3.3|rs
+>start<|triggers.mrc|Entry point|3.32|rs
 on *:TEXT:*:*: {
   if ($left($1,1) !isin !.@) {
-    var %botCheck = $botid($1) 
+    var %botCheck = $botid($1)
     if (%botCheck) {
       tokenize 32 $2-
       var %botid = $true

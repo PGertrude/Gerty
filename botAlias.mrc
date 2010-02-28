@@ -1,4 +1,4 @@
->start<|botAlias.mrc|new|3.0|a
+>start<|botAlias.mrc|internal bot commands|3.22|a
 timeCount {
   ; 1 second timer
   if ($read(timer.txt,nw,$ctime($asctime($gmt)) $+ *) && $server) { $gettok($read(timer.txt,nw,$ctime($asctime($gmt)) $+ *),2,124) }
@@ -249,7 +249,6 @@ spamCheck {
 ;@SYNTAX /die
 ;@SUMMARY used as a callback to a threaded com call, when the data recieved is not required.
 die return
-
 ;@SYNTAX shuffleHash(string commandLine)
 ;@SUMMARY manages the store of recent commands. (up to 5)
 shuffleHash {
@@ -356,7 +355,7 @@ gertyQuit {
   }
   else {
     timertim off
-    quit Gerty shutting down. Please /invite Gerty or /join #gerty 
+    quit Gerty shutting down. Please /invite Gerty or /join #gerty
   }
 }
 statusOut {
