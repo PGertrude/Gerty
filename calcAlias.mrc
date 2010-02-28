@@ -43,6 +43,8 @@ fixInt {
   %string = $regsubex(%string,/(\d+(?:\.\d+)?)([kmb])/gi,$calc(\1 $replace(\2,k,*1000,m,*1000000,b,*1000000000)))
   %string = $regsubex(%string,/(a?(?:sin|cos|tan|log|sqrt|l(?:vl)?))((?:\+|\-)?(?:[ep~]|\d+(?:\.\d+)?))/gi,\1 $+ $chr(40) $+ \2 $+ $chr(41))
   %string = $replace(%string,~,3.141593,e,2.718281,p,$hget($nick,p),$chr(44),$null)
+  tokenize 32 $_checkCalc($remove(%string,x))
+  if ($1 == false) { return 0 }
   return $calc($parser(%string))
 }
 ; will return a nice version of the calculation
@@ -105,7 +107,7 @@ _checkCalc {
   %string = $regsubex(%string,/(?:([\dep~kmbx\x29])([\x28])|([\x29])([\dep~xastcl])|([ep~])([ep~xastcl])|(x)([e~ctsxl])|(\d)([ep~xastcl]))/gi,\1*\2)
   if ($_checkParen(%string)) { return false Unbalanced Parenthesis:07 $v1 }
   if ($_checkFunct(%string,$2)) { return false Unknown function:07 $v1 }
-  if ($regex(%string,/(.+|)([\+\-\*\/\^])([\*\/\^])(.+|)|()(^[\*\/\^])()(.+|)|(.+|)([\+\-\*\/\^]$)/)) { return false Operations error: $regml(1) $+ 04 $+ $regml(2) $+ $regml(3) $+  $+ $regml(4) }
+  if ($regex(%string,/(.+|)([\+\-\*\/\^])([\*\/\^=])(.+|)|()(^[\*\/\^=])()(.+|)|(.+|)([\+\-\*\/\^=]$)/)) { return false Operations error: $regml(1) $+ 04 $+ $regml(2) $+ $regml(3) $+  $+ $regml(4) }
   return true
 }
 _checkParen {
