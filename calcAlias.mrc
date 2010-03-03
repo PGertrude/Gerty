@@ -155,9 +155,7 @@ func {
 solve {
   var %eq = $lower($1)
   %eq = $remove(%eq,$chr(32))
-  if (x isin %eq) {
-    if (= !isin %eq) %eq = %eq $+ =x
-  }
+  if (x isin %eq) { if (= !isin %eq) %eq = %eq $+ =x }
   else { return $calc($parser(%eq)) }
   if (= isin %eq) %eq = $gettok(%eq,1,61) $+ -( $+ $gettok($1,2,61) $+ )
   return $multiple(%eq,$xsolve(%eq))
@@ -186,11 +184,6 @@ xsolve {
   }
   return $xcheck($1,%x)
 }
-derivative {
-  var %num2 = $xcalculate($1,$2 + 1)
-  var %num3 = $xcalculate($1,$2 - 1)
-  return $calc((%num2 - %num3) / 2)
-}
 xcheck {
   if ($abs($xcalculate($1,$2)) < 0.001) {
     if (!$xcalculate($1,$round($2,0))) return $round($2,0)
@@ -202,6 +195,7 @@ xcheck {
   }
   else return $false
 }
+derivative return $calc(($xcalculate($1,$2 + 1) - $xcalculate($1,$2 - 1)) / 2)
 xcalculate return $calc($parser($replace($1,x,$calc($2))))
 parser return $regsubex($1-,/((sin|asin|acos|atan|cos|tan|log|sqrt|lvl|l)\050(-?\d+(?:\.\d+)?(?:[\*\/\+-]\d+(?:\.\d+)?)*)\051)/g,$($\2($calc(\3)) $+ .deg,2))
 redundant {

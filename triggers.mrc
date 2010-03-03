@@ -1418,7 +1418,7 @@ on *:TEXT:*:*: {
   var %sum $calcparse(%input)
   var %answer $solve(%string)
   %saystyle %sum 12=>07 $regsubex(%answer,/([^\.\d]|^)(\d+)/g,\1$bytes(\2,db))
-  hadd -m $nick p $strip($gettok(%answer,1,32))
+  ; hadd -m $nick p $strip($gettok(%answer,1,32))
   goto clean
   :exit
   return
