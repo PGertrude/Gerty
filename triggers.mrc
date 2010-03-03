@@ -1414,13 +1414,9 @@ on *:TEXT:*:*: {
   if ($1 == $false) goto exit
   .tokenize 32 $_checkCalc(%input,%ErrReply)
   if ($1 == false) { if (%ErrReply == yes) { %saystyle $2- } | goto exit }
-  var %string = $calcreg(%input)
-  var %sum = $calcparse(%input)
-  if ($chr(61) !isin %sum) {
-    %string = %string $+ =x
-    %sum = %sum $+ =x
-  }
-  var %answer = $solve(%string)
+  var %string $calcreg(%input)
+  var %sum $calcparse(%input)
+  var %answer $solve(%string)
   %saystyle %sum 12=>07 $regsubex(%answer,/([^\.\d]|^)(\d+)/g,\1$bytes(\2,db))
   hadd -m $nick p $strip($gettok(%answer,1,32))
   goto clean
