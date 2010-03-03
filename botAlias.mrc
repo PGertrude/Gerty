@@ -1,4 +1,6 @@
 >start<|botAlias.mrc|internal bot commands|3.22|a
+;@SYNTAX /timeCount
+;@SUMMARY The main timer for the program, all automated events processed in here.
 timeCount {
   ; 1 second timer
   if ($read(timer.txt,nw,$ctime($asctime($gmt)) $+ *) && $server) { $gettok($read(timer.txt,nw,$ctime($asctime($gmt)) $+ *),2,124) }
@@ -30,6 +32,9 @@ timeCount {
     hsave commands commands.txt
   }
 }
+;@SYNTAX /_setAdmin
+;@SUMMARY Loads the preset admins hostmasks into the admin table.
+;@NOTE It is important that the bots have each other (and themselves) set as admin for most functions to work.
 _setAdmin {
   if ($aLfAddress(P_Gertrude)) { noop $setDefname( $v1 , P_Gertrude ) }
   if ($aLfAddress(Elessar)) { noop $setDefname( $v1 , Tiedemanns ) }
@@ -47,6 +52,9 @@ _setAdmin {
   }
   AdminToHash
 }
+;@SYNTAX $bots
+;@SUMMARY Returns the list of bots in the network, in the order of priority.
+;@NOTE The order of bots must be the same on all bots, the order is taken from the botlist.txt file.
 bots {
   var %x 2, %bots
   while (%x <= $lines(botlist.txt)) {
@@ -55,6 +63,8 @@ bots {
   }
   return %bots
 }
+;@SYNTAX /_checkMain
+;@SUMMARY This will halt the script if this client is not found to be the bot with the highest priority in the channel.
 _checkMain {
   if (!$chan) { return }
   tokenize 32 $bots
@@ -66,7 +76,8 @@ _checkMain {
   }
   return
 }
-; $_checkMain(#chan)
+;@SYNTAX $_checkMainReturn(#chan)
+;@SUMMARY Boolean return style, similar use to the /_checkMain function.
 _checkMainReturn {
   if (!$1) { return $true }
   tokenize 32 $bots
@@ -78,7 +89,8 @@ _checkMainReturn {
   }
   return $true
 }
-; _throw $nopath($script) %thread
+;@SYNTAX /_throw $nopath($script) %thread
+;@SUMMARY Will throw an exception for errors in a script, saves the command data to the errorlog.txt file, and notifies the dev channel.
 _throw {
   var %script = $1
   if ($sockname) {
@@ -90,7 +102,7 @@ _throw {
     }
     write ErrorLog.txt $date $timestamp SocketError: %script %thread $([,) $+ %info $3- $+ $(],)
     $cmd(%thread,out) Connection Error: Please try again in a few moments.
-    .msg #gertyDev Error: %script %thread $([,) $+ %info $+ $(],) $3-
+    sendToDev Error: %script %thread $([,) $+ %info $+ $(],) $3-
     .hfree %thread
     sockclose $sockname
     return
@@ -104,12 +116,17 @@ _throw {
     .tokenize 32 $3-
   }
   write ErrorLog.txt $date $timestamp Error: %script $([,) $+ %info $2- $+ $(],)
-  .msg #gertyDev $date $timestamp Error: %script %thread $([,) $+ %info $+ $(],) $3-
+  sendToDev $date $timestamp Error: %script %thread $([,) $+ %info $+ $(],) $3-
 }
+;@SYNTAX /_network <command>
+;@SUMMARY Will pass a command onto all bots in the network. Bots must be in the dev channel to recieve the message.
 _network {
   [ [ $1 ] ]
   sendToDevOnly raw $1
 }
+;@SYNTAX $host(<timespan>)[.3]
+;@SUMMARY Returns the UTC DateTime in the selected format.
+;@PARAM Accepted formats: timezone, offset, time, day, date, month; Prop: 3 (changes the month output.)
 host {
   if ($1 == timezone) return $readini(Gerty.Config.ini,host,tzone)
   if ($1 == offset) return $asctime(z)
@@ -123,6 +140,9 @@ host {
     return $asctime($gmt,mmmm)
   }
 }
+;@SYNTAX $bot(<information>)
+;@SUMMARY returns information on the clients activity.
+;@PARAM Accepted activities: id, users, chanlist
 bot {
   ; bot ID
   if ($1 == id) {
@@ -149,8 +169,8 @@ bot {
     return $right(%chans,-1)
   }
 }
-; $command(%thread[command ID],var)
-; returns info on a command/user
+;@SYNTAX $command(%thread[command ID], key) or $command(%thread[command ID], key)
+;@SUMMARY Returns information about a current command.
 command {
   if (!$2) { return }
   return $hget($1,$2)
@@ -159,15 +179,15 @@ cmd {
   if (!$2) { return }
   return $hget($1,$2)
 }
-; _fillCommand %thread $left($1,1) $nick $iif($chan,$v1,PM) <command> [args...]
-; creates command info
+;@SYNTAX /_fillCommand %thread $left($1,1) $nick $iif($chan,$v1,PM) <command> [args...]
+;@SUMMARY Creates an object storing information about a command.
 _fillCommand {
   if (!$5) { return }
   var %thread = $1
   hadd -m %thread out $saystyle($2,$3,$4)
-  ;hadd -m %thread from $3
-  ;hadd -m %thread from.RSN $rsn($3)
-  ;hadd -m %thread from.IsAdmin $admin($3)
+  hadd -m %thread from $3
+  hadd -m %thread from.RSN $rsn($3)
+  hadd -m %thread from.IsAdmin $admin($3)
   hadd -m %thread command $5
   if ($6) {
     .tokenize 32 $6-
@@ -178,13 +198,16 @@ _fillCommand {
     }
   }
 }
-; _clearCommand %thread[command ID]
-; removes command info
+;@SYNTAX /_clearCommand %thread[command ID]
+;@SUMMARY Cleans up a command object at the end of a command.
 _clearCommand {
   if (!$1) { return }
   var %thread = $1
   if ($hget(%thread)) hfree %thread
 }
+;@SYNTAX $timeToday
+;@SUMMARY Returns four integers representing how far into the current day/week/month/year the bot currently is.
+;@NOTE Integer is the TimeSpan in seconds, useful for using the rscript parsers.
 TimeToday {
   var %today, %week, %month, %year
   if ($duration($host(time)) >= 25200) {
@@ -211,6 +234,9 @@ TimeToday {
   %year = $calc($gmt - $ctime(January 1 $date(yyyy) 07:00:00))
   return %today %week %month %year
 }
+;@SYNTAX $downloadstring(<socket id>, <url>)
+;@SUMMARY Returns the page content of the request URL.
+;@NOTE This command will wait for a response from the site. Be wary of using it with unreliable servers.
 downloadstring {
   .comopen $1 msxml2.xmlhttp
   var %Url = $2 $+ $iif($numtok($gettok($2, $numtok($2,47), 47),63) == 1,?,&) $+ DontCachePlease= $+ $ctime
@@ -221,12 +247,17 @@ downloadstring {
   .comclose $1
   return %p
 }
+;@SYNTAX /noop $download.break(<callback function>, <socket id>, <url>)
+;@SUMMARY This will pass the content of the requested url to the callback function in parameter $1.
 download.break {
   .comopen $2 msxml2.xmlhttp
   var %url = $3 $+ $iif($numtok($gettok($3, $numtok($3,47), 47), 63) == 1, ?, &) $+ DontCachePlease= $+ $ctime
   noop $com($2, open, 1, bstr, get, bstr, %url, bool, 0)
   noop $comcall($2, noop $!com($1, responseText, 2) $(|,) $1 $!com($1).result $(|,) .comclose $!1, send, 1)
 }
+;@SYNTAX $cleanHash
+;@SUMMARY does a wildcard clean of the hash tables starting with 'a', also closes any open coms.
+;@NOTE Because of this function, please don't make permanent hash tables beginning with a.
 cleanhash {
   .hfree -w a*
   var %x 1, %y = $com(0)
@@ -236,12 +267,15 @@ cleanhash {
   }
 }
 removeSpam if ($hget($1)) hfree $1
+;@SYNTAX /spamCheck $nick
+;@SUMMARY Performs a check on the users recent bot-use, and will ignore them for abuse if necessary.
+;@NOTE Will inform the dev channel of any abuse.
 spamCheck {
   if ($hget($1,spam) >= 5) {
     ignore -pcntikdu18000 $1
     if ($address($1,3)) { ignore -pcntikdu18000 $address($1,3) }
     .msg $1 $1 Blacklisted for 5 hours for spamming. (5 commands in 5 seconds).
-    .msg #gertyDev SPAM:07 $1 detected spamming.
+    sendToDevOnly SPAM:07 $1 detected spamming.
     return $true
   }
   return $false
@@ -261,6 +295,8 @@ shuffleHash {
   hadd -m commands 1 %newLine
   hinc commands amount
 }
+;@SYNTAX $bot(<bot tag|bot name>)
+;@SUMMARY Boolean return style, true if the id/botnick is the clients nickname.
 botid {
   var %id = $bot(id)
   if ($1 == $me) return $true
@@ -315,6 +351,9 @@ userCount {
   if ($1 == names) return $numtok(%u,32)
   return %y
 }
+;@SYNTAX $findEmptyChannels
+;@SUMMARY Will identify any low user channels using the $userCount alias. returns the list of low user channels.
+;@NOTE Will automatically part any channel found to have no 'real' users.
 findEmptyChannels {
   var %x 1, %chans, %min $iif(!$1,2,$1)
   while (%x <= $chan(0)) {
@@ -326,7 +365,10 @@ findEmptyChannels {
   }
   return %chans
 }
-AdminToHash {
+;@SYNTAX /adminToHash
+;@SUMMARY Will copy all admin signatures to the admin table.
+;@NOTE Worker function for _setAdmin.
+adminToHash {
   if ($hget(admin)) hfree admin
   var %admins = $readini(gerty.config.ini,admin,rsn), %x = $numtok(%admins,124), %string
   while (%x) { %string = %string rsn=" $+ $gettok(%admins,%x,124) $+ " OR | dec %x }
@@ -334,12 +376,16 @@ AdminToHash {
   var %a = $0
   while ($($ $+ %a,2)) { hadd -m admin $gettok($($ $+ %a,2),1,59) $gettok($($ $+ %a,2),2,59) | dec %a }
 }
+;@SYNTAX /runePriceUpdater
+;@SUMMARY Downloads the prices of all runes.
+;@NOTE Deprecated.
 runepriceupdater {
   sockopen runeprice.rune1 itemdb-rs.runescape.com 80
   sockopen runeprice.rune2 itemdb-rs.runescape.com 80
   if ($hget(potprice)) { hfree potprice }
 }
-; /gertyQuit - Will move all channels with 5 or more (real) users to another bot, then quit automatically when done
+;@SYNTAX /gertyQuit
+;@SUMMARY Will move all channels with 5 or more (real) users to another bot, then quit automatically when done.
 gertyQuit {
   if ($me == Gerty) { .notice $nick Don't quit main bot. Tag me and set one of the others as main first. | halt }
   if ($chan) { .notice $nick This alias can only be used in PM. | halt }
@@ -358,12 +404,16 @@ gertyQuit {
     quit Gerty shutting down. Please /invite Gerty or /join #gerty
   }
 }
+;@SYNTAX /statusOut %thread
+;@SUMMARY Will return the reply to a .status command performed by an admin.
 statusOut {
   var %thread = $1, %ping = $calc($ticks - $hget(%thread,ticks)), %saystyle = $hget(%thread,out)
   %saystyle Chans:07 $chan(0) | Nicks:07 $bot(users) | Uptime:07 $swaptime($uptime(server,1)) | Total Commands:07 $bytes($hget(commands,amount),bd) | Server ping:07 $bytes(%ping,bd)
   hfree %thread
 }
-; Syntax: $isBot(nick)[.excepts] ($prop opts: cs, stat, other)
+;@SYNTAX $isBot(nick)[.excepts]
+;@SUMMARY Boolean return style, $true if the nick is a bot, ie. Not a 'real' user.
+;@PARAM Valid props: cs, stat, other
 isBot {
   ; ChanServ bots:
   if ($istok(BanHammer Captain_Falcon ClanWars Client Coder Machine milk mIRC Noobs Q RuneScape snoozles Unknown W Warcraft X Y Rudolph Spam ChanServ,$1,32) && cs !isin $prop) { return $true }
