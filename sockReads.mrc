@@ -231,7 +231,7 @@ on *:sockread:*: {
   }
   ; SKILLPLAN - REWRITE
   else if (skillplan.* iswm $sockname) {
-    if (%row == $null) { !set %row 1 }
+    if (!%row) { !set %row 1 }
     while ($sock($sockname).rq > 0) {
       var %stats
       sockread %stats
@@ -245,107 +245,94 @@ on *:sockread:*: {
       if (Page not found isin %stats) { skillplan.out }
     }
   }
-  ; TOP - REWRITE
-  else if (top.* iswm $sockname) {
-    if (!%row) { %row = 1 }
-    var %top
-    sockread %top
-    if (%row < 350) {
-      if ($nohtml(%top)) {
-        set % [ $+ [ $calc(%row) ] ] $replace($nohtml(%top),$chr(32),_)
-        inc %row 1
-      }
-    }
-    if (</html> isin %top) { topout %thread | sockclose $sockname | halt }
-  }
   ; TRACK
   else if (trackyes.* iswm $sockname) {
     if (!%row) { set %row 1 }
     var %rscript
     .sockread %rscript
-    if (*start* iswm %rscript) {
-      if (*Overall* iswm %rscript) { set %1 $gettok($nohtml(%rscript),3,58) }
-      if (*Attack* iswm %rscript) { set %2 $gettok($nohtml(%rscript),3,58) }
-      if (*Defence* iswm %rscript) { set %3 $gettok($nohtml(%rscript),3,58) }
-      if (*Strength* iswm %rscript) { set %4 $gettok($nohtml(%rscript),3,58) }
-      if (*Hitpoints* iswm %rscript) { set %5 $gettok($nohtml(%rscript),3,58) }
-      if (*Ranged* iswm %rscript) { set %6 $gettok($nohtml(%rscript),3,58) }
-      if (*Prayer* iswm %rscript) { set %7 $gettok($nohtml(%rscript),3,58) }
-      if (*Magic* iswm %rscript) { set %8 $gettok($nohtml(%rscript),3,58) }
-      if (*Cooking* iswm %rscript) { set %9 $gettok($nohtml(%rscript),3,58) }
-      if (*Woodcutting* iswm %rscript) { set %10 $gettok($nohtml(%rscript),3,58) }
-      if (*Fletching* iswm %rscript) { set %11 $gettok($nohtml(%rscript),3,58) }
-      if (*Fishing* iswm %rscript) { set %12 $gettok($nohtml(%rscript),3,58) }
-      if (*Firemaking* iswm %rscript) { set %13 $gettok($nohtml(%rscript),3,58) }
-      if (*Crafting* iswm %rscript) { set %14 $gettok($nohtml(%rscript),3,58) }
-      if (*Smithing* iswm %rscript) { set %15 $gettok($nohtml(%rscript),3,58) }
-      if (*Mining* iswm %rscript) { set %16 $gettok($nohtml(%rscript),3,58) }
-      if (*Herblore* iswm %rscript) { set %17 $gettok($nohtml(%rscript),3,58) }
-      if (*Agility* iswm %rscript) { set %18 $gettok($nohtml(%rscript),3,58) }
-      if (*Thieving* iswm %rscript) { set %19 $gettok($nohtml(%rscript),3,58) }
-      if (*Slayer* iswm %rscript) { set %20 $gettok($nohtml(%rscript),3,58) }
-      if (*Farming* iswm %rscript) { set %21 $gettok($nohtml(%rscript),3,58) }
-      if (*Runecraft* iswm %rscript) { set %22 $gettok($nohtml(%rscript),3,58) }
-      if (*Hunter* iswm %rscript) { set %23 $gettok($nohtml(%rscript),3,58) }
-      if (*Construction* iswm %rscript) { set %24 $gettok($nohtml(%rscript),3,58) }
-      if (*Summoning* iswm %rscript) { set %25 $gettok($nohtml(%rscript),3,58) }
+    if (start isin %rscript) {
+      if (Overall isin %rscript) { set %1 $gettok(%rscript,3,58) }
+      if (Attack isin %rscript) { set %2 $gettok(%rscript,3,58) }
+      if (Defence isin %rscript) { set %3 $gettok(%rscript,3,58) }
+      if (Strength isin %rscript) { set %4 $gettok(%rscript,3,58) }
+      if (Hitpoints isin %rscript) { set %5 $gettok(%rscript,3,58) }
+      if (Ranged isin %rscript) { set %6 $gettok(%rscript,3,58) }
+      if (Prayer isin %rscript) { set %7 $gettok(%rscript,3,58) }
+      if (Magic isin %rscript) { set %8 $gettok(%rscript,3,58) }
+      if (Cooking isin %rscript) { set %9 $gettok(%rscript,3,58) }
+      if (Woodcutting isin %rscript) { set %10 $gettok(%rscript,3,58) }
+      if (Fletching isin %rscript) { set %11 $gettok(%rscript,3,58) }
+      if (Fishing isin %rscript) { set %12 $gettok(%rscript,3,58) }
+      if (Firemaking isin %rscript) { set %13 $gettok(%rscript,3,58) }
+      if (Crafting isin %rscript) { set %14 $gettok(%rscript,3,58) }
+      if (Smithing isin %rscript) { set %15 $gettok(%rscript,3,58) }
+      if (Mining isin %rscript) { set %16 $gettok(%rscript,3,58) }
+      if (Herblore isin %rscript) { set %17 $gettok(%rscript,3,58) }
+      if (Agility isin %rscript) { set %18 $gettok(%rscript,3,58) }
+      if (Thieving isin %rscript) { set %19 $gettok(%rscript,3,58) }
+      if (Slayer isin %rscript) { set %20 $gettok(%rscript,3,58) }
+      if (Farming isin %rscript) { set %21 $gettok(%rscript,3,58) }
+      if (Runecraft isin %rscript) { set %22 $gettok(%rscript,3,58) }
+      if (Hunter isin %rscript) { set %23 $gettok(%rscript,3,58) }
+      if (Construction isin %rscript) { set %24 $gettok(%rscript,3,58) }
+      if (Summoning isin %rscript) { set %25 $gettok(%rscript,3,58) }
     }
-    if (* $+ $hget($gettok($sockname,2,46),time) $+ * iswm %rscript && *gain* iswm %rscript) {
-      if (Overall isin %rscript) { set %r1 $gettok($nohtml(%rscript),4,58) }
-      if (Attack isin %rscript) { set %r2 $gettok($nohtml(%rscript),4,58) }
-      if (Defence isin %rscript) { set %r3 $gettok($nohtml(%rscript),4,58) }
-      if (Strength isin %rscript) { set %r4 $gettok($nohtml(%rscript),4,58) }
-      if (Hitpoints isin %rscript) { set %r5 $gettok($nohtml(%rscript),4,58) }
-      if (Ranged isin %rscript) { set %r6 $gettok($nohtml(%rscript),4,58) }
-      if (Prayer isin %rscript) { set %r7 $gettok($nohtml(%rscript),4,58) }
-      if (Magic isin %rscript) { set %r8 $gettok($nohtml(%rscript),4,58) }
-      if (Cooking isin %rscript) { set %r9 $gettok($nohtml(%rscript),4,58) }
-      if (Woodcutting isin %rscript) { set %r10 $gettok($nohtml(%rscript),4,58) }
-      if (Fletching isin %rscript) { set %r11 $gettok($nohtml(%rscript),4,58) }
-      if (Fishing isin %rscript) { set %r12 $gettok($nohtml(%rscript),4,58) }
-      if (Firemaking isin %rscript) { set %r13 $gettok($nohtml(%rscript),4,58) }
-      if (Crafting isin %rscript) { set %r14 $gettok($nohtml(%rscript),4,58) }
-      if (Smithing isin %rscript) { set %r15 $gettok($nohtml(%rscript),4,58) }
-      if (Mining isin %rscript) { set %r16 $gettok($nohtml(%rscript),4,58) }
-      if (Herblore isin %rscript) { set %r17 $gettok($nohtml(%rscript),4,58) }
-      if (Agility isin %rscript) { set %r18 $gettok($nohtml(%rscript),4,58) }
-      if (Thieving isin %rscript) { set %r19 $gettok($nohtml(%rscript),4,58) }
-      if (Slayer isin %rscript) { set %r20 $gettok($nohtml(%rscript),4,58) }
-      if (Farming isin %rscript) { set %r21 $gettok($nohtml(%rscript),4,58) }
-      if (Runecraft isin %rscript) { set %r22 $gettok($nohtml(%rscript),4,58) }
-      if (Hunter isin %rscript) { set %r23 $gettok($nohtml(%rscript),4,58) }
-      if (Construction isin %rscript) { set %r24 $gettok($nohtml(%rscript),4,58) }
-      if (Summoning isin %rscript) { set %r25 $gettok($nohtml(%rscript),4,58) }
+    if ($hget(%thread,time) isin %rscript && gain isin %rscript) {
+      if (Overall isin %rscript) { set %r1 $gettok(%rscript,4,58) }
+      if (Attack isin %rscript) { set %r2 $gettok(%rscript,4,58) }
+      if (Defence isin %rscript) { set %r3 $gettok(%rscript,4,58) }
+      if (Strength isin %rscript) { set %r4 $gettok(%rscript,4,58) }
+      if (Hitpoints isin %rscript) { set %r5 $gettok(%rscript,4,58) }
+      if (Ranged isin %rscript) { set %r6 $gettok(%rscript,4,58) }
+      if (Prayer isin %rscript) { set %r7 $gettok(%rscript,4,58) }
+      if (Magic isin %rscript) { set %r8 $gettok(%rscript,4,58) }
+      if (Cooking isin %rscript) { set %r9 $gettok(%rscript,4,58) }
+      if (Woodcutting isin %rscript) { set %r10 $gettok(%rscript,4,58) }
+      if (Fletching isin %rscript) { set %r11 $gettok(%rscript,4,58) }
+      if (Fishing isin %rscript) { set %r12 $gettok(%rscript,4,58) }
+      if (Firemaking isin %rscript) { set %r13 $gettok(%rscript,4,58) }
+      if (Crafting isin %rscript) { set %r14 $gettok(%rscript,4,58) }
+      if (Smithing isin %rscript) { set %r15 $gettok(%rscript,4,58) }
+      if (Mining isin %rscript) { set %r16 $gettok(%rscript,4,58) }
+      if (Herblore isin %rscript) { set %r17 $gettok(%rscript,4,58) }
+      if (Agility isin %rscript) { set %r18 $gettok(%rscript,4,58) }
+      if (Thieving isin %rscript) { set %r19 $gettok(%rscript,4,58) }
+      if (Slayer isin %rscript) { set %r20 $gettok(%rscript,4,58) }
+      if (Farming isin %rscript) { set %r21 $gettok(%rscript,4,58) }
+      if (Runecraft isin %rscript) { set %r22 $gettok(%rscript,4,58) }
+      if (Hunter isin %rscript) { set %r23 $gettok(%rscript,4,58) }
+      if (Construction isin %rscript) { set %r24 $gettok(%rscript,4,58) }
+      if (Summoning isin %rscript) { set %r25 $gettok(%rscript,4,58) }
     }
-    if ($hget($gettok($sockname,2,46),time2) && * $+ $hget($gettok($sockname,2,46),time2) $+ * iswm %rscript && *gain* iswm %rscript) {
-      if (*Overall* iswm %rscript) { set %r26 $gettok($nohtml(%rscript),4,58) }
-      if (*Attack* iswm %rscript) { set %r27 $gettok($nohtml(%rscript),4,58) }
-      if (*Defence* iswm %rscript) { set %r28 $gettok($nohtml(%rscript),4,58) }
-      if (*Strength* iswm %rscript) { set %r29 $gettok($nohtml(%rscript),4,58) }
-      if (*Hitpoints* iswm %rscript) { set %r30 $gettok($nohtml(%rscript),4,58) }
-      if (*Ranged* iswm %rscript) { set %r31 $gettok($nohtml(%rscript),4,58) }
-      if (*Prayer* iswm %rscript) { set %r32 $gettok($nohtml(%rscript),4,58) }
-      if (*Magic* iswm %rscript) { set %r33 $gettok($nohtml(%rscript),4,58) }
-      if (*Cooking* iswm %rscript) { set %r34 $gettok($nohtml(%rscript),4,58) }
-      if (*Woodcutting* iswm %rscript) { set %r35 $gettok($nohtml(%rscript),4,58) }
-      if (*Fletching* iswm %rscript) { set %r36 $gettok($nohtml(%rscript),4,58) }
-      if (*Fishing* iswm %rscript) { set %r37 $gettok($nohtml(%rscript),4,58) }
-      if (*Firemaking* iswm %rscript) { set %r38 $gettok($nohtml(%rscript),4,58) }
-      if (*Crafting* iswm %rscript) { set %r39 $gettok($nohtml(%rscript),4,58) }
-      if (*Smithing* iswm %rscript) { set %r40 $gettok($nohtml(%rscript),4,58) }
-      if (*Mining* iswm %rscript) { set %r41 $gettok($nohtml(%rscript),4,58) }
-      if (*Herblore* iswm %rscript) { set %r42 $gettok($nohtml(%rscript),4,58) }
-      if (*Agility* iswm %rscript) { set %r43 $gettok($nohtml(%rscript),4,58) }
-      if (*Thieving* iswm %rscript) { set %r44 $gettok($nohtml(%rscript),4,58) }
-      if (*Slayer* iswm %rscript) { set %r45 $gettok($nohtml(%rscript),4,58) }
-      if (*Farming* iswm %rscript) { set %r46 $gettok($nohtml(%rscript),4,58) }
-      if (*Runecraft* iswm %rscript) { set %r47 $gettok($nohtml(%rscript),4,58) }
-      if (*Hunter* iswm %rscript) { set %r48 $gettok($nohtml(%rscript),4,58) }
-      if (*Construction* iswm %rscript) { set %r49 $gettok($nohtml(%rscript),4,58) }
-      if (*Summoning* iswm %rscript) { set %r50 $gettok($nohtml(%rscript),4,58) }
+    if ($hget(%thread,time2) && $v1 isin %rscript && gain isin %rscript) {
+      if (Overall isin %rscript) { set %r26 $gettok(%rscript,4,58) }
+      if (Attack isin %rscript) { set %r27 $gettok(%rscript,4,58) }
+      if (Defence isin %rscript) { set %r28 $gettok(%rscript,4,58) }
+      if (Strength isin %rscript) { set %r29 $gettok(%rscript,4,58) }
+      if (Hitpoints isin %rscript) { set %r30 $gettok(%rscript,4,58) }
+      if (Ranged isin %rscript) { set %r31 $gettok(%rscript,4,58) }
+      if (Prayer isin %rscript) { set %r32 $gettok(%rscript,4,58) }
+      if (Magic isin %rscript) { set %r33 $gettok(%rscript,4,58) }
+      if (Cooking isin %rscript) { set %r34 $gettok(%rscript,4,58) }
+      if (Woodcutting isin %rscript) { set %r35 $gettok(%rscript,4,58) }
+      if (Fletching isin %rscript) { set %r36 $gettok(%rscript,4,58) }
+      if (Fishing isin %rscript) { set %r37 $gettok(%rscript,4,58) }
+      if (Firemaking isin %rscript) { set %r38 $gettok(%rscript,4,58) }
+      if (Crafting isin %rscript) { set %r39 $gettok(%rscript,4,58) }
+      if (Smithing isin %rscript) { set %r40 $gettok(%rscript,4,58) }
+      if (Mining isin %rscript) { set %r41 $gettok(%rscript,4,58) }
+      if (Herblore isin %rscript) { set %r42 $gettok(%rscript,4,58) }
+      if (Agility isin %rscript) { set %r43 $gettok(%rscript,4,58) }
+      if (Thieving isin %rscript) { set %r44 $gettok(%rscript,4,58) }
+      if (Slayer isin %rscript) { set %r45 $gettok(%rscript,4,58) }
+      if (Farming isin %rscript) { set %r46 $gettok(%rscript,4,58) }
+      if (Runecraft isin %rscript) { set %r47 $gettok(%rscript,4,58) }
+      if (Hunter isin %rscript) { set %r48 $gettok(%rscript,4,58) }
+      if (Construction isin %rscript) { set %r49 $gettok(%rscript,4,58) }
+      if (Summoning isin %rscript) { set %r50 $gettok(%rscript,4,58) }
     }
-    if ($regex(%rscript,/^0:-1$/)) { $hget(%thread,out) $hget(%thread,nick) Has not been tracked by Runescript. $hget(%thread,nick) is now being Tracked. | goto unset }
-    if (*PHP: Invalid argument supplied for foreach* iswm %rscript) { $hget(%thread,out) There is a gap in RScripts Data, data for $hget(%thread,nick) could not be found. | goto unset }
+    if (%rscript == 0:-1) { $hget(%thread,out) $hget(%thread,nick) Has not been tracked by Runescript. $hget(%thread,nick) is now being Tracked. | goto unset }
+    if (PHP: Invalid argument supplied for foreach isin %rscript) { $hget(%thread,out) There is a gap in RScripts Data, data for $hget(%thread,nick) could not be found. | goto unset }
     if (%rscript === END) { lastNdays }
   }
   ; WORLD
@@ -395,63 +382,6 @@ on *:sockread:*: {
     if ($bfind(&world2,0,</HTML>)) {
       var %a = $calc($bfind(&world2,0,There are currently)+20), %b = $calc($bfind(&world2,%a,playing)-8)
       $cmd(%thread,out) There are currently 07 $+ $bytes($bvar(&world2,%a,$calc(%b - %a)).text,db) People Playing across 171 servers. Runescape at07 $round($calc(100* $bvar(&world2,%a,$calc(%b - %a)).text / 338000),2) $+ 07% Capacity.
-      goto unset
-    }
-  }
-  ; ITEM
-  else if (zybez.* iswm $sockname) {
-    while ($sock($sockname).rq) {
-      sockread &item
-      bwrite %file -1 -1 &item
-    }
-    bread %file 0 $file(%file).size &item2
-    if ($bfind(&item2,0,</HTML>)) {
-      if ($bfind(&item2,0,location:) < 1) {
-        var %start = $bfind(&item2,0,>Submit Missing Item<)
-        if (%start < 1) { goto unset }
-        while ($bfind(&item2,%start,items.php?id=)) {
-          var %a = $calc($bfind(&item2,%start,items.php?id=)+13), %b = $bfind(&item2,%a,&amp;), %c = $calc($bfind(&item2,$calc(%b + 50),htm">)+5), %d = $bfind(&item2,%c,<)
-          var %e = %e | $bvar(&item2,%c,$calc(%d - %c)).text 07 $+ $chr(35) $+ $bvar(&item2,%a,$calc(%b - %a)).text
-          var %start = %d
-        }
-        var %e = $gettok(%e,1-8,124)
-        $hget($gettok($sockname,2,46),out) Matches found07 $count(%e,$chr(35)) %e
-        goto unset
-      }
-      if ($bfind(&item2,0,location:) > 1) {
-        var %start = $calc($bfind(&item2,0,?id=)+4)
-        hadd -m %thread id $iif($bvar(&item2,%start,4).text isnum,$bvar(&item2,%start,4).text,$iif($bvar(&item2,%start,3).text isnum,$bvar(&item2,%start,3).text,$iif($bvar(&item2,%start,2).text isnum,$bvar(&item2,%start,2).text,$iif($bvar(&item2,%start,1).text isnum,$bvar(&item2,%start,1).text))))
-        sockopen $+(zybez2.,$gettok($sockname,2,46)) www.zybez.net 80
-        .remove %file
-        sockclose $sockname
-      }
-    }
-  }
-  else if (zybez2.* iswm $sockname) {
-    while ($sock($sockname).rq) {
-      sockread &item3
-      bwrite %file -1 -1 &item3
-    }
-    bread %file 0 $file(%file).size &item4
-    if ($bfind(&item4,0,</HTML>)) {
-      var %start = $calc($bfind(&item4,0,"border-right:none">)+20), %a = $bfind(&item4,%start,<), %b = $calc($bfind(&item4,%a,members:)+17), %c = $bfind(&item4,%b,<), %d = $calc($bfind(&item4,%c,Tradable:)+18), %e = $bfind(&item4,%d,<)
-      if (%start < 21) { $hget($gettok($sockname,2,46),out) Item not found | goto unset }
-      var %f = $calc($bfind(&item4,%e,Equipable:)+19), %g = $bfind(&item4,%f,<), %h = $calc($bfind(&item4,%g,Stackable:)+19), %i = $bfind(&item4,%h,<), %j = $calc($bfind(&item4,%i,Weight:)+16), %k = $bfind(&item4,%j,<)
-      var %l = $calc($bfind(&item4,%k,Quest:)+15), %m = $bfind(&item4,$calc(%l +1),<), %n = $calc($bfind(&item4,%m,Examine:)+17), %o = $bfind(&item4,%n,<)
-      var %xx = $calc($bfind(&item4,%n,Price:)+15), %yy = $calc($bfind(&item4,%xx,>)+1), %zz = $bfind(&item4,%yy,<)
-      var %aa = $calc($bfind(&item4,%n,Price:)+12), %bb = $calc($bfind(&item4,%aa,>)+1), %cc = $bfind(&item4,%bb,<)
-      if ($bfind(&item4,%n,Price:) > 1) {
-        var %pp = $bfind(&item4,%n,Price:), %p = $bfind(&item4,%pp,<div), %q = $calc($bfind(&item4,%p,</div>)+6)
-        var %price = $nohtml($bvar(&item4,%p,$calc(%q - %p)).text)
-      }
-      if (!%price) { var %price = Not Applicable }
-      if ($yesno($bvar(&item4,%d,$calc(%e - %d)).text) == 03Yes) { var %price = Check Price Guide }
-      var %r = $calc($bfind(&item4,%n,alchemy:)+17), %s = $bfind(&item4,%r,<), %t = $calc($bfind(&item4,%s,alchemy:)+17), %u = $bfind(&item4,%t,<), %v = $calc($bfind(&item4,%n,from:)+14), %w = $bfind(&item4,%v,<)
-      var %halch = $iif( * $+ $chr(13) $+ * iswm $remove($bvar(&item4,%r,$calc(%s - %r)).text,gp),0,$remove($bvar(&item4,%r,$calc(%s - %r)).text,gp))
-      var %lalch = $iif( * $+ $chr(13) $+ * iswm $remove($bvar(&item4,%t,$calc(%u - %t)).text,gp),0,$remove($bvar(&item4,%t,$calc(%u - %t)).text,gp))
-      $hget($gettok($sockname,2,46),out)  $+ $bvar(&item4,%start,$calc(%a - %start)).text $+  Alch:07 %halch $+ / $+ %lalch gp | Market Price:07 $remove(%price,>) | Obtained From:07 $remove($bvar(&item4,%v,$calc(%w - %v)).text,>) | 12http://www.zybez.net/items.php?id= $+ $hget($gettok($sockname,2,46),id)
-      $hget($gettok($sockname,2,46),out) Members? $yesno($bvar(&item4,%b,$calc(%c - %b)).text) | Tradeable? $yesno($bvar(&item4,%d,$calc(%e - %d)).text) | Equipable: $yesno($bvar(&item4,%f,$calc(%g - %f)).text) | Stackable? $yesno($bvar(&item4,%h,$calc(%i - %h)).text) $&
-        | Weight:07 $regsubex($bvar(&item4,%j,$calc(%k - %j)).text,/^kg$/i,0Kg) | Quest?07 $yesno($nohtml($bvar(&item4,%l,$calc(%m - %l)).text)) | Examine:07 $nohtml($bvar(&item4,%n,$calc(%o - %n)).text)
       goto unset
     }
   }
