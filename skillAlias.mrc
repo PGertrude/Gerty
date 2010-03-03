@@ -3,7 +3,7 @@ skillNames {
   var %skills at|att|attack
   %skills = %skills $+ |strength|str|st
   %skills = %skills $+ |defen[cs]e|def|de
-  %skills = %skills $+ |hitpoints|hitpoint|hits|hp
+  %skills = %skills $+ |hitpoints|hitpoint|hits|hp|constitution
   %skills = %skills $+ |prayer|pray|pr
   %skills = %skills $+ |ranging|ranged|range|ra
   %skills = %skills $+ |magic|mage|ma
@@ -31,7 +31,7 @@ compares {
   if ($regex($1,/^(at|att|attack)$/Si)) { return Attack }
   if ($regex($1,/^(st|str|strength)$/Si)) { return Strength }
   if ($regex($1,/^(de|def|defen[cs]e)$/Si)) { return Defence }
-  if ($regex($1,/^(hp|hits|hitpoint|hitpoints)$/Si)) { return Hitpoints }
+  if ($regex($1,/^(hp|hits|hitpoint|hitpoints|constitution)$/Si)) { return Constitution }
   if ($regex($1,/^(pr|pray|prayer)$/Si)) { return Prayer }
   if ($regex($1,/^(ra|range|ranged|ranging)$/Si)) { return Ranged }
   if ($regex($1,/^(ma|mage|magic)$/Si)) { return Magic }
@@ -65,8 +65,8 @@ compares {
   if ($regex($1,/^(st|sk|all|skill|skills|stat|stats|statistics)$/Si)) { return Stats }
   if ($regex($1,/^(cb|cmb|comb|combat|warrior)$/Si)) { return Combat }
   if ($regex($1,/^(cmb%|combat%)$/Si)) { return combat% }
-  if ($regex($1,/^(p2p%)$/Si)) { return p2p% }
-  if ($regex($1,/^(f2p%)$/Si)) { return f2p% }
+  if ($1 == p2p%) { return p2p% }
+  if ($1 == f2p%) { return f2p% }
   if ($regex($1,/^(sl%|slay%|slayer%)$/Si)) { return slayer% }
   if ($regex($1,/^(skill%|skiller%)$/Si)) { return skiller% }
   if ($regex($1,/^(pc%|pest%|pestcontrol%|pest control%)$/Si)) { return pest control% }
@@ -75,7 +75,7 @@ lookups {
   if ($regex($1,/^(at|att|attack)$/Si)) { return Attack }
   if ($regex($1,/^(st|str|strength)$/Si)) { return Strength }
   if ($regex($1,/^(de|def|defen[cs]e)$/Si)) { return Defence }
-  if ($regex($1,/^(hp|hits|hitpoint|hitpoints)$/Si)) { return Hitpoints }
+  if ($regex($1,/^(hp|hits|hitpoint|hitpoints|constitution)$/Si)) { return Constitution }
   if ($regex($1,/^(pr|pray|prayer)$/Si)) { return Prayer }
   if ($regex($1,/^(ra|range|ranged|ranging)$/Si)) { return Ranged }
   if ($regex($1,/^(ma|mage|magic)$/Si)) { return Magic }
@@ -118,7 +118,7 @@ scores {
   if ($regex($1,/^(at|att|attack)$/Si)) { return Attack }
   if ($regex($1,/^(st|str|strength)$/Si)) { return Strength }
   if ($regex($1,/^(de|def|defen[cs]e)$/Si)) { return Defence }
-  if ($regex($1,/^(hp|hits|hitpoint|hitpoints)$/Si)) { return Hitpoints }
+  if ($regex($1,/^(hp|hits|hitpoint|hitpoints|constitution)$/Si)) { return Constitution }
   if ($regex($1,/^(pr|pray|prayer)$/Si)) { return Prayer }
   if ($regex($1,/^(ra|range|ranged|ranging)$/Si)) { return Ranged }
   if ($regex($1,/^(ma|mage|magic)$/Si)) { return Magic }
@@ -154,7 +154,7 @@ skills {
   if ($regex($1,/^(at|att|attack)$/Si)) { return Attack }
   if ($regex($1,/^(st|str|strength)$/Si)) { return Strength }
   if ($regex($1,/^(de|def|defen[cs]e)$/Si)) { return Defence }
-  if ($regex($1,/^(hp|hits|hitpoint|hitpoints)$/Si)) { return Hitpoints }
+  if ($regex($1,/^(hp|hits|hitpoint|hitpoints|constitution)$/Si)) { return Constitution }
   if ($regex($1,/^(pr|pray|prayer)$/Si)) { return Prayer }
   if ($regex($1,/^(ra|range|ranged|ranging|rang)$/Si)) { return Ranged }
   if ($regex($1,/^(ma|mage|magic)$/Si)) { return Magic }
@@ -199,30 +199,32 @@ misc {
   if ($regex($1,/^(ri|right|rightc|rightcol|rightcolumn)$/Si)) { return right }
   if ($regex($1,/^(mid|middle|midc|midcol|middlec|middlecol|middlecolumn)$/Si)) { return mid }
   if ($regex($1,/^(cmb%|combat%)$/Si)) { return combat% }
-  if ($regex($1,/^(p2p%)$/Si)) { return p2p% }
-  if ($regex($1,/^(f2p%)$/Si)) { return f2p% }
+  if ($1 == p2p%) { return p2p% }
+  if ($1 == f2p%) { return f2p% }
   if ($regex($1,/^(sl%|slay%|slayer%)$/Si)) { return slayer% }
   if ($regex($1,/^(skill%|skiller%)$/Si)) { return skiller% }
   if ($regex($1,/^(pc%|pest%|pestcontrol%|pest control%)$/Si)) { return pest control% }
 }
 state {
-  if ($regex($remove($1,@),/^(r|ra|ran|rank|ranking)s?$/Si)) { return 1 }
-  if ($regex($remove($1,@),/^(l|lv|lvl|level)s?$/Si)) { return 2 }
-  if ($regex($remove($1,@),/^(x|xp|ex|exp|experience)$/Si)) { return 3 }
-  if ($regex($remove($1,@),/^(v|vi|vir|virt|virtual)$/Si)) { return 4 }
+  var %state $remove($1,@)
+  if ($regex(%state,/^(r|ra|ran|rank|ranking)s?$/Si)) { return 1 }
+  if ($regex(%state,/^(l|lv|lvl|level)s?$/Si)) { return 2 }
+  if ($regex(%state,/^(x|xp|ex|exp|experience)$/Si)) { return 3 }
+  if ($regex(%state,/^(v|vi|vir|virt|virtual)$/Si)) { return 4 }
 }
 tracks {
-  if ($regex($remove($1,@),/^(2day|today)$/Si)) { return Today }
-  if ($regex($remove($1,@),/^(week)$/Si)) { return Week }
-  if ($regex($remove($1,@),/^(month)$/Si)) { return Month }
-  if ($regex($remove($1,@),/^(year)$/Si)) { return Year }
+  var %timePeriod $remove($1,@)
+  if (%timePeriod == 2day || %timePeriod == today) { return Today }
+  if (%timePeriod == week) { return Week }
+  if (%timePeriod == month) { return Month }
+  if (%timePeriod == year) { return Year }
 }
 statnum {
   if ($1 == overall) { return 1 }
   if ($1 == attack) { return 2 }
   if ($1 == defence) { return 3 }
   if ($1 == strength) { return 4 }
-  if ($1 == hitpoints) { return 5 }
+  if ($1 == hitpoints || $1 == constitution) { return 5 }
   if ($1 == ranged) { return 6 }
   if ($1 == prayer) { return 7 }
   if ($1 == magic) { return 8 }
@@ -256,7 +258,7 @@ statnum {
   if ($1 == 2) { return attack }
   if ($1 == 3) { return defence }
   if ($1 == 4) { return strength }
-  if ($1 == 5) { return hitpoints }
+  if ($1 == 5) { return constitution }
   if ($1 == 6) { return ranged }
   if ($1 == 7) { return prayer }
   if ($1 == 8) { return magic }
@@ -296,7 +298,7 @@ smartno {
   if ($1 == Attack) { return 1 }
   if ($1 == Defence) { return 2 }
   if ($1 == Strength) { return 3 }
-  if ($1 == Hitpoints) { return 4 }
+  if ($1 == Hitpoints || $1 == constitution) { return 4 }
   if ($1 == Ranged) { return 5 }
   if ($1 == Prayer) { return 6 }
   if ($1 == Magic) { return 7 }
