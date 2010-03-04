@@ -1,4 +1,4 @@
->start<|skillAlias.mrc|new|3.15|a
+>start<|skillAlias.mrc|new|3.17|a
 skillNames {
   var %skills at|att|attack
   %skills = %skills $+ |strength|str|st

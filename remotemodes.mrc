@@ -1,4 +1,4 @@
->start<|remotemodes.mrc|weird thing tbh|3.01|rs
+>start<|remotemodes.mrc|weird thing tbh|3.05|rs
 on $*:TEXT:/^[\+\-][a-z]+\b/Si:#: {
   _checkMain
   if ($admin($nick) || $nick isop $chan) {

@@ -1,4 +1,4 @@
->start<|sockreads.mrc|compiled sockreads|3.1|rs
+>start<|sockreads.mrc|compiled sockreads|3.25|rs
 on *:sockread:*: {
   var %thread = $gettok($sockname,2,46)
   var %file = %thread $+ .txt
@@ -174,7 +174,7 @@ on *:sockread:*: {
       if (Quest points gained upon completion isin %quest) {
         %store = 0
         $hget(%thread,out) $cmd(%thread,title) 12http://tip.it/runescape/index.php?rs2quest_id= $+ $hget(%thread,id)
-        var %qp 
+        var %qp
         $hget(%thread,out) $regsubex($replace($cmd(%thread,reward),:;,:,.;,;),/(Reward:) (.+?) Quest points gained upon completion: (\d+)(.+?)$/i,\1 \2 QP: $+(07,\3,))
         goto unset
       }
@@ -446,16 +446,12 @@ on *:sockread:*: {
       goto unset
     }
   }
-
-
-
   return
   :unset
   if ($exists(%file)) .remove %file
   if ($sockname) sockclose $sockname
   _clearCommand %thread
   unset %*
-
   return
   :error
   _throw $sockname %thread $error
