@@ -156,7 +156,7 @@ solve {
   var %eq = $lower($1)
   %eq = $remove(%eq,$chr(32))
   if (x isin %eq && = !isin %eq) { %eq = %eq $+ =x }
-  else { return $calc($parser(%eq)) }
+  else if (x !isin %eq) { return $calc($parser(%eq)) }
   if (= isin %eq) %eq = $gettok(%eq,1,61) $+ -( $+ $gettok($1,2,61) $+ )
   return $multiple(%eq,$xsolve(%eq))
 }
