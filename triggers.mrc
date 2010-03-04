@@ -1,4 +1,4 @@
->start<|triggers.mrc|Entry point|3.32|rs
+>start<|triggers.mrc|Entry point|3.33|rs
 on *:TEXT:*:*: {
   if ($left($1,1) !isin !.@) {
     var %botCheck = $botid($1)
@@ -38,11 +38,11 @@ on *:TEXT:*:*: {
     else {
       if ($2) {
         if ($left($2,1) == $#) {
-          var %output Channel Info for07 $chan $+ 
+          var %output Channel Info for07 $2 $+ 
           var %x 1
-          while (%x <= $hget($chan,0).item) {
-            if ($hget($chan,%x).item != site && $v1 != event && $v1 != users && $hget($chan,$v1)) {
-              %output = %output $hget($chan,%x).item $+ : $normaliseItem($hget($chan,$hget($chan,%x).item)) $+ ;
+          while (%x <= $hget($2,0).item) {
+            if ($hget($2,%x).item != site && $v1 != event && $v1 != users && $hget($2,$v1)) {
+              %output = %output $hget($2,%x).item $+ : $normaliseItem($hget($2,$hget($2,%x).item)) $+ ;
             }
             inc %x
           }
@@ -999,6 +999,18 @@ on *:TEXT:*:*: {
       else if (%command == spotify) {
         noop $_network(noop $!setStringParameter(channel, [ $chan ] , spotify, setting, %mode , $false ))
         %saystyle $chan Settings: Spotify link information messages are now %mode $+ .
+      }
+      else if (%command == autocmb) {
+        noop $_network(noop $!setStringParameter(channel, [ $chan ] , autocmb, setting, %mode , $false ))
+        %saystyle $chan Settings: Automatic combat lookup messages are now %mode $+ .
+      }
+      else if (%command == autoclan) {
+        noop $_network(noop $!setStringParameter(channel, [ $chan ] , autoclan, setting, %mode , $false ))
+        %saystyle $chan Settings: Automatic clan lookup messages are now %mode $+ .
+      }
+      else if (%command == autooa) {
+        noop $_network(noop $!setStringParameter(channel, [ $chan ] , autooa, setting, %mode , $false ))
+        %saystyle $chan Settings: Automatic overall lookup messages are now %mode $+ .
       }
     }
     if ($admin($nick)) {
