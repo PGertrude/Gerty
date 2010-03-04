@@ -20,6 +20,7 @@ alias name {
   if ($1 == 17) { $cmd(%thread,out) The rsn07 $cmd(%thread,arg1) is 03currently available. Visit 12https://secure.runescape.com/m=create/index.html to claim it! }
   else if ($1 == 18) { $cmd(%thread,out) The rsn07 $cmd(%thread,arg1) is 04not currently available. Jagex suggests:07 $replace($2-,$chr(32), $+ $chr(44) 07) }
   else if ($1 == 19) { $cmd(%thread,out) The rsn07 $cmd(%thread,arg1) contains invalid characters. Jagex suggests:07 $replace($2-,$chr(32), $+ $chr(44) 07) }
+  else if ($1 == 36 || $1 == 47) { $cmd(%thread,out) The rsn07 $cmd(%thread,out) has been blocked by the jagex staff. }
   else {
     sendToDevOnly Unknown names response: $([,) $+ $cmd(%thread,arg1) $+ $(],) $1-
   }
