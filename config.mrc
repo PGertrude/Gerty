@@ -1,4 +1,4 @@
->start<|config.mrc|config and join merged|3.1|rs
+>start<|config.mrc|config and join merged|3.25|rs
 on *:START: {
 
   ; Authenticate Host
@@ -79,7 +79,7 @@ on *:CONNECT: {
 
 }
 raw 421:*: {
-  if (status.* iswm $2) { 
+  if (status.* iswm $2) {
     statusOut $gettok($2,2,46)
   }
   else {
