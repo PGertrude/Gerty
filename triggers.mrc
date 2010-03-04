@@ -1,4 +1,4 @@
->start<|triggers.mrc|Entry point|3.33|rs
+>start<|triggers.mrc|Entry point|3.35|rs
 on *:TEXT:*:*: {
   if ($left($1,1) !isin !.@) {
     var %botCheck = $botid($1)
@@ -100,7 +100,7 @@ on *:TEXT:*:*: {
     goto clean
   }
   ; RSN
-  else if ($regex($1,/^[!@.](name|rsn|whois)$/Si)) {
+  else if ($regex($1,/^[!@.](rsn|whois)$/Si)) {
     var %nick = $regsubex($iif($right($2-,1) == &,$left($2-,-1),$2-),/\W/,_)
     var %address = $aLfAddress(%nick)
     if ($3) .tokenize 32 $1 $replace($2-,$chr(32),_)
@@ -112,6 +112,15 @@ on *:TEXT:*:*: {
       if ($getDefname($nick)) %saystyle 07 $+ $caps($nick) $+ 's rsn is07 [ $v1 ]
       else %saystyle We have no rsn saved for07 $nick
     }
+    goto clean
+  }
+  ; NAME ; AVAILABLE
+  else if ($regex($1,/^[!@.](name|available)$/Si)) {
+    if (!$2) { %saystyle Syntax Error: !name <rsn> | goto clean }
+    if ($len($2-) > 12) { %saystyle The max character limit for rsn's is 12 characters.07 $2- contains $len($2-) characters. | goto clean }
+    var %rsn $replace($2-,$chr(32),_), %url https://secure.runescape.com/m=create/checkusername.ajax?username= $+ %rsn
+    _fillCommand %thread $left($1,1) $nick $iif($chan,$v1,PM) name %rsn
+    noop $download.break(name %thread, %thread, %url)
     goto clean
   }
   ; GRAPH
