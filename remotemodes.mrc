@@ -1,5 +1,5 @@
 >start<|remotemodes.mrc|weird thing tbh|3.01|rs
-on $*:TEXT:/^[\+\-][A-Za-z ]+$/Si:#: {
+on $*:TEXT:/^[\+\-][a-z]+\b/Si:#: {
   _checkMain
   if ($admin($nick) || $nick isop $chan) {
     var %mode = $1
@@ -8,7 +8,7 @@ on $*:TEXT:/^[\+\-][A-Za-z ]+$/Si:#: {
       if ($left($2,1) != $chr(35)) {
         if (*b* iswm %mode) {
           if (*+* iswm %mode) {
-            mode $chan +bbbbbbbb $address($2,2) $2 $address($2,3)
+            mode $chan +bbb $address($2,2) $2 $address($2,3)
             if (*k* iswm %mode) kick $chan $2 $3-
             halt
           }
