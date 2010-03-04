@@ -1156,7 +1156,8 @@ on *:TEXT:*:*: {
     goto clean
   }
   ; POLL
-  else if ($chan && $regex($1,/^[!@.]poll$/Si)) {
+  else if ($regex($1,/^[!@.]poll$/Si)) {
+    if (!$chan) { %saystyle This would be a pretty one sided poll now, wouldn't it. | goto clean }
     if ($nick !isop $chan && $nick !ishop $chan && $admin($nick) != admin) { .notice $nick You must be a (half)op to use the command | goto clean }
     if (!$2) { .notice $nick You must specify a Question | goto clean }
     if ($hget($chan,poll)) { .notice $nick A poll is already in progress. | goto clean }
