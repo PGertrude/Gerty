@@ -877,7 +877,7 @@ alias stats {
     :skillreply
     %saystyle %info %items
     if (!%itemstogo && %param != null) { %saystyle Here is a list of valid params for use with Gerty:12 http://hng.av.it.pt/~jdias/gerty/param.html }
-    rscript.singleskill %socket %nick %skill %saystyle %time
+    if ($hget(%socket) && $hget(%socket,arg1) != true) { rscript.singleskill %socket %nick %skill %saystyle %time }
     goto unset
   }
   if (%skill == stats) {
@@ -952,7 +952,9 @@ alias stats {
     %combat = %combat $validate($25,%state,%morethan,%lessthan,25,%average)
     :cmbreply
     %saystyle %info
-    %saystyle Skills: %combat
+    if ($hget(%socket) && $hget(%socket,arg1) != true) {
+      %saystyle Skills: %combat
+    }
     goto unset
   }
   if ($minigames(%skill)) {
@@ -981,6 +983,7 @@ alias stats {
   :unranked
   %saystyle  $+ %nick $+  does not feature07 $replace(%skill,stats,$null,reqs,$null) hiscores.
   :unset
+  _clearCommand %socket
   unset %*
 }
 ; SPOTIFY

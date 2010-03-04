@@ -146,6 +146,27 @@ on *:JOIN:*: {
     hadd -m %thread chan $chan
     .timer 1 1 .delayedjoin %thread
   }
+  else {
+    _checkMain
+    var %url http://hiscore.runescape.com/index_lite.ws?player= $+ $rsn($nick), %thread
+    if ($chanset(#,autocmb) == on) {
+      %thread = a $+ $r(0,999999)
+      _fillCommand %thread @ $nick $iif($chan,$v1,PM) autocmb true
+      noop $download.break(stats $cmd(%thread,out) combat null $rsn($nick) null null 1 200000001 %thread yes yes null , %thread , %url )
+    }
+    if ($chanset(#,autooa) == on) {
+      %thread = a $+ $r(0,999999)
+      _fillCommand %thread @ $nick $iif($chan,$v1,PM) autooa true
+      noop $download.break(stats $cmd(%thread,out) overall 1 $rsn($nick) null null 1 200000001 %thread yes yes null , %thread , %url )
+    }
+    if ($chanset(#,autoclan) == on) {
+      %thread = a $+ $r(0,999999)
+      var %user $rsn($nick)
+      _fillCommand %thread @ $nick $iif($chan,$v1,PM) autoclan true
+      noop $download.break(getClans %user $hget(%thread,out) clan %thread , a $+ $r(0,999999) , http://runehead.com/feeds/lowtech/searchuser.php?user= $+ %user )
+      noop $download.break(getClans %user $hget(%thread,out) non-clan %thread, a $+ $r(0,999999), http://runehead.com/feeds/lowtech/searchuser.php?type=1&user= $+ %user)
+    }
+  }
 }
 alias delayedjoin {
   var %chan = $hget($1,chan)
