@@ -14,7 +14,18 @@ price {
   var %url http://gerty.rsportugal.org/parsers/ge.php?item= $+ $replace(%item,$chr(32),+)
   var %string = $downloadstring(%thread, %url)
   downloadGe %thread %string
+  if ($prop == exact && %item != $gettok(%string,2,44)) { return 0 }
   return $iif($gettok(%string,3,44), $v1, 0)
+}
+exactPriceInfo {
+  var %item $remove($1,$chr(42))
+  if ($getPrice(%item).exact) return $v1
+  var %thread $+(a,$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9))
+  var %url http://gerty.rsportugal.org/parsers/ge.php?item= $+ $replace(%item,$chr(32),+)
+  var %string = $downloadstring(%thread, %url)
+  downloadGe %thread %string
+  if (%item != $gettok(%string,2,44)) { return %item $+ ;0;0 }
+  return $iif($gettok(%string,1,44), $v1, %item) $+ ; $+ $iif($gettok(%string,3,44), $v1, 0) $+ ; $+ $iif($gettok(%string,4,44), $v1, 0)
 }
 FormatWith {
   var %out, %x = 0

@@ -344,27 +344,49 @@ on *:TEXT:*:*: {
   ; GELINK
   else if ($regex($1,/^[!@.](g(reat|rand)?e(xchange)?|price)$/Si)) {
     if (!$2) { %saystyle Syntax: !ge [number] <item> | halt }
-    var %num = 1, %search = $2-
-    if ($fixInt($2) >= 1) {
-      %num = $v1
-      %search = $3-
+    if ($chr(44) !isin $2-) {
+      var %num = 1, %search = $2-
+      if ($fixInt($2) >= 1) {
+        %num = $v1
+        %search = $3-
+      }
+      var %dbPrices $getPrice(%search)
+      if (!%dbPrices) {
+        _fillCommand %thread $left($1,1) $nick $iif($chan,$v1,PM) gelink %num $replace(%search, $chr(32), _)
+        var %url http://gerty.rsportugal.org/parsers/ge.php?item= $+ $replace(%search,$chr(32),+)
+        noop $download.break(downloadGe %thread,%thread,%url)
+        halt
+      }
+      var %numberOfResults = $countResults($getPrice(%search).sql)
+      .tokenize 44 %dbPrices
+      var %x = 1, %results
+      while (%x <= $0 && $len(%results) < 350) {
+        var %name = $gettok($($ $+ %x,2),1,59), %price = $gettok($($ $+ %x,2),2,59), %change = $gettok($($ $+ %x,2),3,59)
+        %results = %results | %name $+ 07 $format_number($calc(%price * %num)) $updo(%change)
+        inc %x
+      }
+      %saystyle Results:07 %numberOfResults (07x $+ %num $+ ) %results
     }
-    var %dbPrices $getPrice(%search)
-    if (!%dbPrices) {
-      _fillCommand %thread $left($1,1) $nick $iif($chan,$v1,PM) gelink %num $replace(%search, $chr(32), _)
-      var %url http://gerty.rsportugal.org/parsers/ge.php?item= $+ $replace(%search,$chr(32),+)
-      noop $download.break(downloadGe %thread,%thread,%url)
-      halt
+    else {
+      tokenize 44 $2-
+      var %x 1, %output
+      while (%x <= $0) {
+        var %num 1, %dirtyItem $($ $+ %x,2), %cleanItem $trim(%dirtyItem), %itemPrice
+        if ($fixint($gettok(%dirtyItem,1,32)) > 0) {
+          %num = $v1
+          %cleanItem = $trim($gettok(%dirtyItem,2-,32))
+        }
+        %itemPrice = $exactPriceInfo(%cleanItem)
+        if ($gettok(%itemPrice,2,59) == 0 || $gettok(%itemPrice,2,59) == null) {
+          %saystyle item07 $gettok(%itemPrice,1,59) was not found on the grand exchange database. Make sure you use exact terms when looking up multiple items.
+          inc %x
+          continue
+        }
+        %output = %output $gettok(%itemPrice,1,59) 07 $+ $format_number($calc(%num * $gettok(%itemPrice,2,59))) $updo($calc(%num * $gettok(%itemPrice,3,59))) $+ ;
+        inc %x
+      }
+      %saystyle %output
     }
-    var %numberOfResults = $countResults($getPrice(%search).sql)
-    .tokenize 44 %dbPrices
-    var %x = 1, %results
-    while (%x <= $0 && $len(%results) < 350) {
-      var %name = $gettok($($ $+ %x,2),1,59), %price = $gettok($($ $+ %x,2),2,59), %change = $gettok($($ $+ %x,2),3,59)
-      %results = %results | %name $+ 07 $format_number($calc(%price * %num)) $updo(%change)
-      inc %x
-    }
-    %saystyle Results:07 %numberOfResults (07x $+ %num $+ ) %results
     goto clean
   }
   ; GEINFO
