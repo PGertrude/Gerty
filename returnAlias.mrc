@@ -1,4 +1,4 @@
->start<|returnAlias.mrc|RS related bot formatters|3.25|a
+>start<|returnAlias.mrc|RS related bot formatters|3.3|a
 # return $chr(35)
 $ return $chr(36)
 % return $chr(37)
@@ -25,7 +25,7 @@ exactPriceInfo {
   var %string = $downloadstring(%thread, %url)
   downloadGe %thread %string
   if (%item != $gettok(%string,2,44)) { return %item $+ ;0;0 }
-  return $iif($gettok(%string,1,44), $v1, %item) $+ ; $+ $iif($gettok(%string,3,44), $v1, 0) $+ ; $+ $iif($gettok(%string,4,44), $v1, 0)
+  return $iif($gettok(%string,2,44), $v1, %item) $+ ; $+ $iif($gettok(%string,3,44), $v1, 0) $+ ; $+ $iif($gettok(%string,4,44), $v1, 0)
 }
 FormatWith {
   var %out, %x = 0

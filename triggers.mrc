@@ -1,4 +1,4 @@
->start<|triggers.mrc|Entry point|3.35|rs
+>start<|triggers.mrc|Entry point|3.4|rs
 on *:TEXT:*:*: {
   if ($left($1,1) !isin !.@) {
     var %botCheck = $botid($1)
@@ -369,7 +369,7 @@ on *:TEXT:*:*: {
     }
     else {
       tokenize 44 $2-
-      var %x 1, %output
+      var %x 1, %output, %totalPrice
       while (%x <= $0) {
         var %num 1, %dirtyItem $($ $+ %x,2), %cleanItem $trim(%dirtyItem), %itemPrice
         if ($fixint($gettok(%dirtyItem,1,32)) > 0) {
@@ -382,10 +382,14 @@ on *:TEXT:*:*: {
           inc %x
           continue
         }
-        %output = %output $gettok(%itemPrice,1,59) 07 $+ $format_number($calc(%num * $gettok(%itemPrice,2,59))) $updo($calc(%num * $gettok(%itemPrice,3,59))) $+ ;
+        %output = %output $iif(%num > 1,%num) $gettok(%itemPrice,1,59) 07 $+ $format_number($calc(%num * $gettok(%itemPrice,2,59))) $updo($calc(%num * $gettok(%itemPrice,3,59))) $+ ;
+        %totalPrice = $calc(%totalPrice + (%num * $gettok(%itemPrice,2,59)))
         inc %x
       }
-      %saystyle %output
+      if ($len(%output) > 0) {
+        %saystyle grand exchange results: %output
+        %saystyle Total item values:07 $regsubex($format_number(%totalPrice),/(\d+)/,$bytes(\1,db)) gp.
+      }
     }
     goto clean
   }
@@ -1468,6 +1472,7 @@ on *:TEXT:*:*: {
   return
   :clean
   ; SPAMCONTROL
+  if ($admin($nick)) { return }
   hadd -m $nick spam $calc($hget($nick,spam) +1)
   var %spam $spamcheck($nick)
   if ($window($nick)) { window -c $nick }
