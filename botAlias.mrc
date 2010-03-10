@@ -151,13 +151,7 @@ bot {
   }
   ; Current Users
   if ($1 == users) {
-    var %x 1
-    while ($chan(%x)) {
-      var %a $calc(%a + $nick($chan(%x),0))
-      var %b %b $chan(%x) $+ $chr(91) $+ $nick($chan(%x),0) $+ $chr(93)
-      inc %x
-    }
-    return %a
+    return $ial(*,0)
   }
   ; Current Channels
   if ($1 == chanlist) {
