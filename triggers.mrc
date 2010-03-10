@@ -17,7 +17,7 @@ on *:TEXT:*:*: {
   if ($1- == ^) {
     var %save = $userSet($alfaddress($nick) ,save ,$false)
     if (%save) tokenize 32 %save
-    else goto clean
+    else goto exit
   }
   tokenize 32 $strip($1-)
   var %thread $+(a,$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9)), %saystyle
