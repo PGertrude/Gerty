@@ -272,12 +272,13 @@ yesno {
   if ($1 == no || $1 == $false) { return 04No }
   else return $1
 }
-;SYNTAX: $grouper(ITEM|ITEM|ITEM)
+;SYNTAX: $grouper(ITEM[;amount]|ITEM|...|ITEM)
 grouper {
-  var %x = 1
+  var %x = 1, %item, %num
   while ($gettok($1-,%x,124)) {
-    var %item = $replace($gettok($1-,%x,124),$chr(32),:space:)
-    inc %item. $+ %item
+    %item = $replace($gettok($gettok($1-,%x,124),1,59),$chr(32),:space:)
+    %num = $iif($gettok($gettok($1-,%x,124),2,59),$v1,1)
+    inc %item. $+ %item %num
     inc %x
   }
   var %y = 1

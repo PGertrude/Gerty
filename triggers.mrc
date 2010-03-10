@@ -1452,6 +1452,11 @@ on *:TEXT:*:*: {
       %saystyle The default runescape name for07 $2 is now07 $caps($regsubex($3-,/\W/g,_)) $+ . This RSN is associated with the address $aLfAddress($2) $+ .
       goto clean
     }
+    ; GTFO
+    else if ($regex($1,/^([!@.])?gtfo$/Si) && $botid($2)) {
+      part $chan I'm sorry master.
+      goto clean
+    }
   }
   ; CALCULATOR
   var %input, %ErrReply, %chanset $iif($chan, $chanset(#,autocalc), on)

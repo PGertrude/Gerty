@@ -1047,7 +1047,7 @@ alias alog {
     elseif ($1 == KILL) {
       var %old = $hget(%thread,kill)
       if ($regex($2,/^(\d+ |)?(.+?)s?$/)) { var %rep = $iif($regml(1),$v1,1), %item = $regml(2) }
-      hadd -m %thread kill %old $+ $str(%item $+ |,%rep)
+      hadd -m %thread kill $+(%old,|,%item,;,%rep)
       if ($len($alogout(%thread)) > 350) hadd -m %thread kill %old
     }
     elseif ($1 == QUEST) {
@@ -1096,9 +1096,7 @@ alias checkGeUpdate {
   if ($1 != $readini(gerty.config.ini,GeUpdate,Rise) && $1) { writeini gerty.config.ini GeUpdate Rise $1 | if (!hget(GeUpdate,Rise)) hadd -mu1200 GeUpdate Rise $true }
   if ($2 != $readini(gerty.config.ini,GeUpdate,Drop) && $2) { writeini gerty.config.ini GeUpdate Drop $2 | if (!hget(GeUpdate,Drop)) hadd -mu1200 GeUpdate Drop $true }
   if ($hget(GeUpdate,Rise) && $hget(GeUpdate,Drop) && $calc($ctime - $gettok($read(GeUpdate.txt,1),2,124)) > 1200) {
-    write geDebug.txt UPDATE
     var %x = 1 | while ($chan(%x)) { if ($chanset($chan(%x)) == on && $_checkMainReturn($chan(%x))) { .msg $chan(%x) GeUpdate in progress. Lookup update will be completed within 15 minutes and ingame within 5. } | inc %x }
-    write -il1 geupdate.txt $host(time) $+ $chr(124) $+ $ctime $+ $chr(124) $+ $ord($host(date)) $host(month).3
     resetPrices | .timer 1 1000 resetPrices | runepriceupdater
 } }
 ; ml
