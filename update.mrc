@@ -89,7 +89,7 @@ on *:sockclose:update: {
   !if ($exists(%file) && ($hget(update,vers) > $readini(versions.ini,versions,%file) || !$readini(versions.ini,versions,%file))) {
     !writeini versions.ini versions $iif(%type != param,$gettok(%file,1,46),%file) $hget(update,vers)
     !if (%type != param) {
-      !.load $+(-,%type) %file
+      !.reload $+(-,%type) %file
     }
     !echo -at [Update Complete]
   }
