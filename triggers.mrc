@@ -1,4 +1,4 @@
->start<|triggers.mrc|Entry point|3.4|rs
+>start<|triggers.mrc|Entry point|3.45|rs
 on *:TEXT:*:*: {
   if ($left($1,1) !isin !.@) {
     var %botCheck = $botid($1)
@@ -185,7 +185,7 @@ on *:TEXT:*:*: {
   }
   ; ANAGRAMS
   else if ($regex($1,/^[!@.](ana|anagrams?)$/Si)) {
-    if (!$2) %saystyle Syntax Error: !anagram <anagram> | goto clean
+    if (!$2) { %saystyle Syntax Error: !anagram <anagram> | goto clean }
     var %anagram = $read(anagram.txt,nw,* $+ $2- $+ *)
     if (!%anagram) { %saystyle Anagram "07 $+ $2- $+ " not found. | halt }
     %Saystyle Anagram:07 $gettok(%anagram,1,124) | NPC:07 $gettok(%anagram,2,124) | Location:07 $gettok(%anagram,3,124)
@@ -193,7 +193,7 @@ on *:TEXT:*:*: {
   }
   ; RIDDLES
   else if ($regex($1,/^[!@.]riddles?$/Si)) {
-    if (!$2) %saystyle Syntax Error: !riddle <riddle> | goto clean
+    if (!$2) { %saystyle Syntax Error: !riddle <riddle> | goto clean }
     var %riddle = $read(riddles.txt,nw,* $+ $2- $+ *)
     if (!%riddle) { %saystyle Riddle "07 $+ $2- $+ " not found. | halt }
     %Saystyle Riddle:07 $gettok(%riddle,1,124) | Location:07 $gettok(%riddle,2,124)
@@ -201,7 +201,7 @@ on *:TEXT:*:*: {
   }
   ; CHALLENGES
   else if ($regex($1,/^[!@.]challenges?$/Si)) {
-    if (!$2) %saystyle Syntax Error: !challenge <challenge question> | goto clean
+    if (!$2) { %saystyle Syntax Error: !challenge <challenge question> | goto clean }
     var %challenge = $read(challenge.txt,nw,* $+ $2- $+ *)
     if (!%challenge) { %saystyle Challenge "07 $+ $2- $+ " not found. | halt }
     %Saystyle Challenge:07 $gettok(%challenge,1,124) | Answer:07 $gettok(%challenge,3,124) (07 $+ $gettok(%challenge,2,124) $+ )
@@ -209,7 +209,7 @@ on *:TEXT:*:*: {
   }
   ; URI
   else if ($regex($1,/^[!@.]uri$/Si)) {
-    if (!$2) %saystyle Syntax Error: !uri <uri clue> | goto clean
+    if (!$2) { %saystyle Syntax Error: !uri <uri clue> | goto clean }
     var %uri = $read(uri.txt,nw,* $+ $2- $+ *)
     if (!%uri) { %saystyle Uri clue "07 $+ $2- $+ " not found. | halt }
     %Saystyle Uri:07 $gettok(%uri,1,124) | Location:07 $gettok(%uri,3,124) | Gear:07 $+ $gettok(%uri,2,124)
@@ -1010,7 +1010,7 @@ on *:TEXT:*:*: {
   else if ($regex($1,/^[!@.]set(tings?)?$/Si)) {
     var %command $2
     var %mode $iif($3 == on,on,off)
-    if ($chan && ($nick isop $chan || $nick ishop $chan || $admin($nick) == admin)) {
+    if ($chan && ($nick isop $chan || $nick ishop $chan || $admin($nick))) {
       if (%command == youtube) {
         noop $_network(noop $!setStringParameter(channel, [ $chan ] , youtube, setting, %mode , $false ))
         %saystyle $chan Settings: Youtube link information messages are now %mode $+ .
