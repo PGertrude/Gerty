@@ -17,7 +17,7 @@ on *:TEXT:*:*: {
   if ($1- == ^) {
     var %save = $userSet($alfaddress($nick) ,save ,$false)
     if (%save) tokenize 32 %save
-    else goto clean
+    else goto exit
   }
   tokenize 32 $strip($1-)
   var %thread $+(a,$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9)), %saystyle
@@ -1450,6 +1450,11 @@ on *:TEXT:*:*: {
     else if ($regex($1,/^[!@.]admindefname$/Si)) {
       noop $_network(noop $!setDefname( $aLfAddress($2) , $caps($regsubex($3-,/\W/g,_)) ))
       %saystyle The default runescape name for07 $2 is now07 $caps($regsubex($3-,/\W/g,_)) $+ . This RSN is associated with the address $aLfAddress($2) $+ .
+      goto clean
+    }
+    ; GTFO
+    else if ($regex($1,/^([!@.])?gtfo$/Si) && $botid($2)) {
+      part $chan I'm sorry master.
       goto clean
     }
   }
