@@ -124,80 +124,69 @@ on *:INVITE:*: {
     join #
   }
 }
-on *:KICK:*: {
-  if ($knick == $me) {
-    sendToDevOnly KICKED:07 $chan by:07 $nick Reason:07 $1-
-  }
-}
+on *:KICK:*: if ($knick == $me) sendToDevOnly KICKED:07 $chan by:07 $nick Reason:07 $1-
 on *:PART:*: {
-  if ($nick == $me) {
-    .msg #gertyDev PARTED:07 $chan
-  }
-  else if ($nick(#,0) < $chanset(#,users)) {
-    part # Channel has fallen below the user limit (07 $+ $chanset(#,users) $+ ).
-  }
+  if ($nick == $me) sendToDevOnly PARTED:07 $chan
+  else if ($nick(#,0) < $chanset(#,users)) part # Channel has fallen below the user limit (07 $+ $chanset(#,users) $+ ).
 }
 on *:JOIN:*: {
   if ($nick == $me) {
     reloadChannel $chan
     who $chan
-    var %thread = $+(a,$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9))
+    var %thread $newThread
     if (!$rowExists(channel, channel, $chan)) { noop $_network(noop $!sqlite_query(1, INSERT INTO channel (channel) VALUES (" $+ $chan $+ ");)) }
-    hadd -m %thread chan $chan
-    .timer 1 1 .delayedjoin %thread
+    .timer 1 1 .delayedjoin %thread $chan
   }
   else {
     _checkMain
     var %url http://hiscore.runescape.com/index_lite.ws?player= $+ $rsn($nick), %thread
     if ($chanset(#,autocmb) == on) {
-      %thread = a $+ $r(0,999999)
+      %thread = $newThread
       _fillCommand %thread @ $nick $iif($chan,$v1,PM) autocmb true
       noop $download.break(stats $cmd(%thread,out) combat null $rsn($nick) null null 1 200000001 %thread yes yes null , %thread , %url )
     }
     if ($chanset(#,autooa) == on) {
-      %thread = a $+ $r(0,999999)
+      %thread = $newThread
       _fillCommand %thread @ $nick $iif($chan,$v1,PM) autooa true
       noop $download.break(stats $cmd(%thread,out) overall 1 $rsn($nick) null null 1 200000001 %thread yes yes null , %thread , %url )
     }
     if ($chanset(#,autoclan) == on) {
-      %thread = a $+ $r(0,999999)
+      %thread = $newThread
       var %user $rsn($nick)
       _fillCommand %thread @ $nick $iif($chan,$v1,PM) autoclan true
-      noop $download.break(getClans %user $hget(%thread,out) clan %thread , a $+ $r(0,999999) , http://runehead.com/feeds/lowtech/searchuser.php?user= $+ %user )
-      noop $download.break(getClans %user $hget(%thread,out) non-clan %thread, a $+ $r(0,999999), http://runehead.com/feeds/lowtech/searchuser.php?type=1&user= $+ %user)
+      noop $download.break(getClans %user $hget(%thread,out) clan %thread , $newThread, http://runehead.com/feeds/lowtech/searchuser.php?user= $+ %user )
+      noop $download.break(getClans %user $hget(%thread,out) non-clan %thread, $newThread, http://runehead.com/feeds/lowtech/searchuser.php?type=1&user= $+ %user)
     }
   }
 }
 alias delayedjoin {
-  var %chan = $hget($1,chan)
-  if (%chan == #gerty || %chan == #howdy || %chan == #gertyDev) { goto clean }
+  var %chan $2
+  if (%chan isin #gerty#gertydev#howdy) { goto clean }
   var %x = 1
   while (%x <= $lines(botlist.txt)) {
     if ($read(botlist.txt,%x) ison %chan && $read(botlist.txt,%x) != $me) {
       part %chan You already have a Gerty bot.
-      sendToDevOnly Failed Join:07 %chan Reason:07 Two Gerty bots in channel.
+      sendToDevOnly Failed Join:07 %chan Reason:07 Two bots in channel.
       goto clean
     }
     inc %x
   }
-  if (!$hget(invite,%chan)) { var %invite = %chan }
-  else { var %invite = $hget(invite,%chan) }
-  if ($chanset(%chan,users)) { var %min = $chanset(%chan,users) }
-  if (!%min) { var %min = 5 }
-  if ($nick(%chan,0) < %min) {
+  var %invite $hget(invite,%chan), %min $chanset(%chan,users)
+  if (!%invite) { %invite = %chan }
+  if (!%min) { %min = 5 }
+  if ($nick(%chan,0) < %min && $userCount(%chan) < 2) {
     .msg %chan You do not have the required minimum users to keep me here. (Minimum users for this channel is07 %min $+ ).
     .msg %chan Contact a bot admin if you wish to have the user minimum lowered for this channel.
     sendToDevOnly Failed Join:07 %chan Reason:07 Channel below user requirement.
     part %chan
     goto clean
   }
-  if ($uptime(server,3) > 20) {
+  if ($uptime(server,3) > 60) {
     .msg %chan RScape Stats Bot Gerty ~ Invited by %invite ~ Please report Bugs/Suggestions to #gerty
     sendToDevOnly JOIN:07 %chan Invited by07 %invite Modes:07 $chan(%chan).mode Users:07 $nick(%chan,0) Total Chans:07 $chan(0)
   }
   :clean
   if ($hget(invite)) { hfree invite }
-  if ($hget($1)) { hfree $1 }
 }
 ctcp *:users:*: {
   hadd -m bot $nick $2
@@ -304,8 +293,6 @@ alias OnInvite {
 }
 on *:text:!!users:#gertyDev:{
   if ($nick !ishop $chan && $nick !isop $chan) { halt }
-  var %x = 1, %y
-  while ($chan(%x)) { %y = $calc(%y + $nick($chan(%x),0)) | inc %x }
-  .ctcp Gerty users $chan(0) %y
+  .ctcp Gerty users $chan(0) $bot(users)
 }
 on *:quit:{ if (%* iswm $nick(#gertyDev,$nick).pnick && $me == Gerty) { JoinQueueStart } }
