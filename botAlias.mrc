@@ -417,3 +417,21 @@ isBot {
   if ($regex($1,/(^Noobwegian$|^Onzichtbaar|^ChanStat-|GrandExchange$)/Si) && other !isin $prop) { return $true }
   return $false
 }
+;@SYNTAX /parseGe
+;@SUMMARY will take a file of syntax id,name,price,change and updates the database with the data.
+;@NOTE causes roughly 4s of lag. The amount of commands can be reduced in future if lag is a problem.
+parseGe {
+  if (!$exists(dlGe.txt)) return
+  .fopen dlge dlGe.txt
+  sqlite_begin 1
+  while (!$feof) {
+    tokenize 44 $fread(dlge)
+    if ($0 == 4) noop $sqlite_exec(1, UPDATE prices SET price=' $+ $3 $+ ' $chr(44) change=' $+ $4 $+ ' WHERE id=' $+ $1 $+ ';)
+  }
+  sqlite_commit 1
+  .fclose dlge
+  .remove dlGe.txt
+}
+;@SYNTAX $newThread
+;@SUMMARY shortcut for creating a new thread id.
+newThread return $+(a,$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9))
