@@ -1,7 +1,6 @@
 >start<|sockreads.mrc|compiled sockreads|3.25|rs
 on *:sockread:*: {
-  var %thread = $gettok($sockname,2,46)
-  var %file = %thread $+ .txt
+  var %thread $gettok($sockname,2,46), %command $hget(%thread,command), %file %thread $+ .txt
   if ($sockerr) {
     _throw $sockname %thread
     halt
@@ -73,7 +72,7 @@ on *:sockread:*: {
       var %url = $nohtml($regsubex(%url,/(?:\\u(.{4})|%(.{2}))/g,$chr($base(\1,16,10))))
       if (%url) {
         if ($hget(%thread,page) == video) { %url = $regsubex(%url,/^.+?q=(.+?)&(.+?)$/,\1) }
-        $hget(%thread,out) Google $caps($hget(%thread,page)) Search " $+ $replace($hget(%thread,search),+,$chr(32)) $+ ":07 %title url:12 %url content:07 %content
+        $hget(%thread,out) Google $hget(%thread,page) Search " $+ $replace($hget(%thread,search),+,$chr(32)) $+ ":07 %title url:12 %url content:07 %content
       }
       else { $hget(%thread,out) No search results for $+(",$replace($hget(%thread,search),+,$chr(32)),".) }
       if ($hget(%thread,page) == video) {
@@ -128,51 +127,44 @@ on *:sockread:*: {
     }
   }
   ; QUESTS
-  else if (rs2quest.* iswm $sockname) {
+  else if (%command == questSearch) {
     var %quest
     sockread %quest
-    if ($hget(%thread,switch)) {
-      if (rs2quest_id= isin %quest) {
-        var %regex = $regex(%quest,/rs2quest_id=(\d+)/)
-        %output = %output 07# $+ $regml(1) $+  $nohtml(%quest) $+ ;
-      }
+    if ($hget(%thread,switch) && $regex(%quest,/rs2quest_id=(\d+)/)) {
+      %output = %output 07# $+ $regml(1) $+  $fix_special_html($nohtml(%quest)) $+ ;
     }
-    else {
-      if ($regex(quest,%quest,/<.+?quest_id=(\d+)">(.+?)</i)) {
-        if ($+(*,$hget(%thread,search),*) iswm $regml(quest,2)) {
-          set %output %output $+(07,$chr(35),$regml(quest,1), $regml(quest,2),;)
-        }
-      }
+    elseif ($regex(quest,%quest,/<.+?quest_id=(\d+)">(.+?)</i) && $hget(%thread,search) isin $regml(quest,2)) {
+      %output = %output $+(07,$#,$regml(quest,1), $regml(quest,2),;)
     }
     if (Save Done isin %quest) {
-      if ($count(%output,$chr(35)) < 1) {
-        $hget($gettok($sockname,2,46),out) No results for "07 $+ $replace($hget($gettok($sockname,2,46),search),+,$chr(32)) $+ ". Visit12 http://www.tip.it/runescape/?rs2quest
+      if ($count(%output,$#) < 1) {
+        $hget(%thread,out) No results for "07 $+ $replace($hget(%thread,search),+,$chr(32)) $+ ". Visit12 http://www.tip.it/runescape/?rs2quest
         goto unset
       }
-      else if ($count(%output,$chr(35)) == 1) {
-        hadd -m $gettok($sockname,2,46) id $regsubex(%output,/#(\d+)\D.+?$/S,\1)
-        sockopen $+(rs2questinfo.,$gettok($sockname,2,46)) www.tip.it 80
+      else if ($count(%output,$#) == 1) {
+        hadd -m %thread id $regsubex(%output,/#(\d+)\D.+?$/S,\1)
+        hadd -m %thread command questInfo
+        sockopen $+(rs2questinfo.,%thread) www.tip.it 80
         unset %*
         sockclose $sockname
         halt
       }
       else {
-        $hget($gettok($sockname,2,46),out) Quests found for "07 $+ $replace($hget($gettok($sockname,2,46),search),+,$chr(32)) $+ ": %output
+        $hget(%thread,out) Quests found for "07 $+ $replace($hget(%thread,search),+,$chr(32)) $+ ": %output
         goto unset
       }
     }
   }
-  else if (rs2questinfo.* iswm $sockname) {
+  else if (%command == questInfo) {
     var %quest
-    .sockread %quest
+    sockread %quest
     if ($regex(%quest,/\s*<td colspan="\d+" class="databasebig">(.+?)<\/td>/)) {
-      hadd -m %thread title $trim($regml(1))
+      hadd -m %thread title $fix_special_html($regml(1))
     }
     if (<b>Reward:</b> isin %quest) hadd -m %thread store 1
     if ($cmd(%thread,store) == 1) {
-      hadd -m %thread reward $cmd(%thread,reward) $nohtml(%quest) $+ ;
+      hadd -m %thread reward $cmd(%thread,reward) $fix_special_html($nohtml(%quest)) $+ ;
       if (Quest points gained upon completion isin %quest) {
-        %store = 0
         $hget(%thread,out) $cmd(%thread,title) 12http://tip.it/runescape/index.php?rs2quest_id= $+ $hget(%thread,id)
         var %qp
         $hget(%thread,out) $regsubex($replace($cmd(%thread,reward),:;,:,.;,;),/(Reward:) (.+?) Quest points gained upon completion: (\d+)(.+?)$/i,\1 \2 QP: $+(07,\3,))

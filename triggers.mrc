@@ -502,14 +502,17 @@ on *:TEXT:*:*: {
     if ($2 == -t) {
       hadd -m %thread search $replace($3-,$chr(32),+)
       hadd -m %thread switch yes
+      hadd -m %thread command questSearch
       sockopen $+(rs2quest.,%thread) www.tip.it 80
     }
     elseif ($2 !isnum && $left($2,1) != $chr(35)) {
       hadd -m %thread search $2-
+      hadd -m %thread command questSearch
       sockopen $+(rs2quest.,%thread) www.tip.it 80
     }
     else {
       hadd -m %thread id $remove($2,$chr(35))
+      hadd -m %thread command questInfo
       sockopen $+(rs2questinfo.,%thread) www.tip.it 80
     }
     goto clean

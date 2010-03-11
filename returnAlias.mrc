@@ -112,12 +112,8 @@ caps {
   %regex = $capwords($regsubex(%regex,/(\w[^a-zA-Z0-9]+)([a-z])/g,\1 $+ $upper(\2)))
   return $capwords($regsubex(%regex,/(\w[^a-zA-Z0-9]+)([a-z])/g,\1 $+ $upper(\2)))
 }
-nohtml {
-  var %x, %i = $regsub($1-,/(^[^<]*>|<[^>]*>|<[^>]*$)/g,$null,%x)
-  %x = $replace($remove(%x,&nbsp;,$chr(9)),&quot;,$chr(34),&amp;,&,&lt;,<,&gt;,>,&#8242;,:,&quot;,")
-  %x = $replace(%x,&apos;,')
-  return %x
-}
+nohtml return $regsubex($1-,/(^[^<]*>|<[^>]*>|<[^>]*$)/g,$null)
+fix_special_html return $replace($1,&#39;,',&amp;,&,&lt;,<,&gt;,>,&#8242;,:,&quot;,",&apos;,',&nbsp;,$chr(32),$chr(9),$chr(32))
 urlencode {
   var %a = $regsubex($$1,/([^\w\s])/Sg,$+(%,$base($asc(\t),10,16,2)))
   return $replace(%a,$chr(32),$chr(43))
