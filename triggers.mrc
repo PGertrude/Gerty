@@ -238,15 +238,14 @@ on *:TEXT:*:*: {
   }
   ; RANK
   else if ($regex($1,/^[@!.]Rank$/Si)) {
-    var %skill, %rank
-    var %rawRank = $litecalc($remove($2,$#))
-    if ($scores($3) && %rawRank >= 1 && %rawRank <= 2000000) {
-      %skill = $scores($3)
+    var %skill, %rank, %rawRank $litecalc($remove($2,$#)), %skill1 $scores($3), %skill2 $scores(2)
+    if (%skil1 && %rawRank >= 1 && %rawRank <= 2000000) {
+      %skill = %skill1
       %rank = %rawRank
     }
     var %rawRank = $litecalc($remove($3,$#))
-    if ($scores($2) && %rawRank >= 1 && %rawRank <= 2000000) {
-      %skill = $scores($2)
+    if (%skill2 && %rawRank >= 1 && %rawRank <= 2000000) {
+      %skill = %skill2
       %rank = %rawRank
     }
     _fillCommand %thread $left($1,1) $nick $iif($chan, $v1, PM) rank %skill %rank
@@ -306,12 +305,12 @@ on *:TEXT:*:*: {
     %state = 3
     if ($regex(%string,/@(\w+)( |$)/)) {
       %state = $state($regml(1))
-      %string = $regsubex(%string,/@(\w+)( |$)/,$null)
+      %string = $trim($regsubex(%string,/@(\w+)( |$)/,$null))
     }
     if (%state == 2) { %state = 3 }
     %nick = $nick
-    if ($len($trim(%string)) > 0) {
-      %nick = $trim(%string)
+    if ($len(%string) > 0) {
+      %nick = %string
     }
     %nick = $rsn(%nick)
     %command = $misc($right($1,-1))
@@ -323,7 +322,7 @@ on *:TEXT:*:*: {
   else if ($regex($1,/^[!@.](iq|life|e-?penis)$/Si)) {
     var %nick, %command = $remove($right($1,-1),-)
     if (!$2) %nick = $rsn($nick)
-    if ($2) %nick = $caps($rsn($regsubex($2-,/\W/g,_)))
+    if ($2) %nick = $rsn($2-)
     var %socket = stats. $+ %thread
     var %url = http://hiscore.runescape.com/index_lite.ws?player= $+ %nick
     noop $download.break(spam. $+ %command %saystyle %nick %socket,%socket,%url)

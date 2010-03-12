@@ -617,18 +617,18 @@ alias itemsOut {
 ;############################
 ; rscript.singleskill %socket %nick %skill %saystyle
 alias rscript.singleskill {
-  var %socket = $1 $+ 2, %nick = $2, %skill = $3,%saystyle = $4 $5, %time = $6
+  var %socket = $1 $+ 2, %nick = $2, %skill = $3, %saystyle = $4 $5, %time = $6
   .tokenize 32 $timetoday
   var %today = $1, %week = $2, %month = $3, %year = $4
   var %url = http://www.rscript.org/lookup.php?type=track&user= $+ %nick $+ &skill= $+ $calc($statnum(%skill) - 1) $+ &time= $+ %today $+ , $+ %week $+ , $+ %month $+ , $+ %year $+ , $+ $iif(%time != null,%time)
   noop $download.break(rscript.singleskillreply %saystyle %skill %nick %time,%socket,%url)
 }
 alias rscript.singleminigame {
-  var %socket = $1 $+ 2, %nick = $2, %skill = $replace($3,_,$chr(32)),%saystyle = $4 $5
+  var %socket = $1 $+ 2, %nick = $2, %skill = $3, %saystyle = $4 $5
   .tokenize 32 $timetoday
   var %today = $1, %week = $2, %month = $3, %year = $4
-  var %url = http://www.rscript.org/lookup.php?type=track&user= $+ %nick $+ &skill= $+ $smartno(%skill) $+ .1&time= $+ %today $+ , $+ %week $+ , $+ %month $+ , $+ %year
-  noop $download.break(rscript.singleminigamereply %saystyle $replace(%skill,$chr(32),_) %nick,%socket,%url)
+  var %url = http://www.rscript.org/lookup.php?type=track&user= $+ %nick $+ &skill= $+ $smartno($replace(%skill,_,$chr(32))) $+ .1&time= $+ %today $+ , $+ %week $+ , $+ %month $+ , $+ %year
+  noop $download.break(rscript.singleminigamereply %saystyle %skill %nick,%socket,%url)
 }
 alias rscript.singleskillreply {
   var %saystyle = $1 $2
@@ -718,7 +718,7 @@ alias reqs {
   if ($1 >= 121) { return 2050 }
   return 2000
 }
-; STATS ; GUESSING ; DISTRIBUTE
+; GUESSING ; DISTRIBUTE
 ;$distribute(litehiscorestring)
 alias distribute {
   var %string = $1
@@ -890,7 +890,8 @@ alias stats {
     :skillreply
     %saystyle %info %items
     if (!%itemstogo && %param != null) { %saystyle Here is a list of valid params for use with Gerty:12 http://hng.av.it.pt/~jdias/gerty/param.html }
-    if ($hget(%socket) && $hget(%socket,arg1) != true) { rscript.singleskill %socket %nick %skill %saystyle %time }
+    echo -a o $hget(%socket) o $hget(%socket,arg1)
+    if (!$hget(%socket)) { rscript.singleskill %socket %nick %skill %saystyle %time }
     goto unset
   }
   if (%skill == stats) {

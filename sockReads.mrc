@@ -174,10 +174,9 @@ on *:sockread:*: {
   }
   ; RANK
   else if (Rank.* iswm $sockname) {
-    var %skill = $cmd(%thread,arg1), %rank = $cmd(%thread,arg2)
-    var %read
+    var %skill $cmd(%thread,arg1), %rank $cmd(%thread,arg2), %read
     sockread %read
-    if (*#F3C334* iswm %read) {
+    if (#F3C334 isin %read) {
       var %nick $nohtml(%read)
       sockread %read
       var %level $nohtml(%read)
@@ -188,9 +187,9 @@ on *:sockread:*: {
         rscript.singleminigame $sockname $replace(%nick,$chr(32),_) $replace(%skill,$chr(32),_) $hget(%thread,out)
       }
       else {
-        $hget(%thread,out)  $+ %nick 07 $+ %skill | Rank:07 $bytes(%rank,db) | Lvl:07 %level $iif(%skill != overall,(07 $+ $virtual(%exp) $+ )) | Exp:07 $bytes(%exp,db) $&
+        $hget(%thread,out)  $+ %nick 07 $+ %skill | Rank:07 $bytes(%rank,db) | Level:07 %level $iif(%skill != overall,(07 $+ $virtual(%exp) $+ )) | Exp:07 $bytes(%exp,db) $&
           $iif(%skill != overall,(07 $+ $round($calc(100 * %exp / 13034431 ),1) $+ 07% of 99) | Exp till $calc($virtual(%exp) +1) $+ :07 $bytes($calc($lvltoxp($calc($virtual(%exp) +1)) - %exp),db)))
-        rscript.singleskill $sockname $replace(%nick,$chr(32),_) %skill $hget(%thread,out)
+        rscript.singleskill $sockname $replace(%nick,$chr(160),_) %skill $hget(%thread,out) null
         sockclose $sockname
       }
     }
@@ -335,22 +334,15 @@ on *:sockread:*: {
     }
     bread %file 0 $file(%file).size &world2
     if ($bfind(&world2,0,</HTML>)) {
-      var %world = $cmd(%thread,arg2)
-      if (%world == World) {
-        var %start = $bfind(&world2,0,Activity)
-      }
-      else if (%world == Welt) {
-        var %start = $bfind(&world2,0,Thema)
-      }
-      else if (%world == Serveur) {
-        var %start = $bfind(&world2,0,Activité)
-      }
-      else if (%world == Mundo) {
-        var %start = $bfind(&world2,0,Tipo)
-      }
+      var %world $cmd(%thread,arg2), %start
+      if (%world == World) %start = $bfind(&world2,0,Activity)
+      else if (%world == Welt) %start = $bfind(&world2,0,Thema)
+      else if (%world == Serveur) %start = $bfind(&world2,0,Activité)
+      else if (%world == Mundo) %start = $bfind(&world2,0,Tipo)
       var %world = $cmd(%thread,arg2) $+ $iif(%world != Mundo,$chr(32)) $+ $cmd(%thread,arg3)
       ; Get the amount of players.
       var %a = $calc($bfind(&world2,%start,%world) +4), %b = $calc($bfind(&world2,%a,<td>)+4), %c = $bfind(&world2,%b,</td>)
+      if (%a == 4) { $cmd(%thread,out) World07 $cmd(%thread,arg3) Not Found. | goto unset }
       ; Get the worlds activity
       var %d = $calc($bfind(&world2,%c,class=") +7), %e = $bfind(&world2,%d,<)
       ; Get lootshare? and f2p/p2p
@@ -360,8 +352,7 @@ on *:sockread:*: {
       var %type = $regml(1)
       var %activity = $nohtml($bvar(&world2,%d,$calc(%e - %d)).text)
       var %players = $nohtml($bvar(&world2,%b,$calc(%c - %b)).text)
-      if (%a == 4) { $cmd(%thread,out) World07 $cmd(%thread,arg3) Not Found. }
-      else { $cmd(%thread,out) World07 $cmd(%thread,arg3) (07 $+ %activity $+ ) | Players:07 %players | Type:07 %type | Lootshare:07 $iif(%lootshare == N,04No,03Yes) | Link: 12http://world $+ $cmd(%thread,arg3) $+ .runescape.com/a2,m0,j0,o0 }
+      $cmd(%thread,out) World07 $cmd(%thread,arg3) (07 $+ %activity $+ ) | Players:07 %players | Type:07 %type | Lootshare:07 $iif(%lootshare == N,04No,03Yes) | Link: 12http://world $+ $cmd(%thread,arg3) $+ .runescape.com/a2,m0,j0,o0
       goto unset
     }
   }
@@ -450,6 +441,7 @@ on *:sockread:*: {
   sendToDev Error @ sockread:07 $sockname $error
   if ($exists(%file)) .remove %file
   if ($sockname) sockclose $sockname
+  _clearCommand %thread
   unset %*
   reseterror
 }
