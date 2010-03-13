@@ -582,7 +582,7 @@ on *:TEXT:*:*: {
         %saystyle You do not have a timer started!07 !start <skill> <nick> to start one.
         halt
       }
-      if ($readini(timer.ini,%nick,owner) != $rsn($regsubex($nick,/\W/g,_))) {
+      if ($readini(timer.ini,%nick,owner) != $rsn($nick)) {
         %saystyle This is not your timer to end!
         halt
       }
