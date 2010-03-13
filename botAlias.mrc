@@ -294,7 +294,7 @@ shuffleHash {
 botid {
   var %id = $bot(id)
   if ($1 == $me) return $true
-  elseif ($istok($1-,%id,44) || $+([,$1,]) == %id) { return $true }
+  elseif ($istok($1-,%id,44) || $+([,$1,]) == %id || $1 == [**]) { return $true }
   elseif ($1 == Gerty && Gerty !ison $chan) { return $true }
   elseif ($+([,$1,]Gerty) ison #gertyDev) { return $false }
   tokenize 44 $1-
@@ -410,7 +410,7 @@ statusOut {
 ;@PARAM Valid props: cs, stat, other
 isBot {
   ; ChanServ bots:
-  if ($istok(BanHammer Captain_Falcon ClanWars Client Coder Machine milk mIRC Noobs Q RuneScape snoozles Unknown W Warcraft X Y Rudolph Spam ChanServ,$1,32) && cs !isin $prop) { return $true }
+  if ($istok(BanHammer Captain_Falcon ClanWars Client Coder Machine milk mIRC Noobs Q RuneScape snoozles Unknown W Warcraft X Y Rudolph Spam Minibar ChanServ,$1,32) && cs !isin $prop) { return $true }
   ; Stat bots:
   if ($regex($1,/(BigSister$|Gerty$|RuneScript$|^Vectra|ChaosScript$)/Si) && stat !isin $prop) { return $true }
   ; Other:
