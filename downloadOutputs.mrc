@@ -890,7 +890,6 @@ alias stats {
     :skillreply
     %saystyle %info %items
     if (!%itemstogo && %param != null) { %saystyle Here is a list of valid params for use with Gerty:12 http://hng.av.it.pt/~jdias/gerty/param.html }
-    echo -a o $hget(%socket) o $hget(%socket,arg1)
     if (!$hget(%socket)) { rscript.singleskill %socket %nick %skill %saystyle %time }
     goto unset
   }

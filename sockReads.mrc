@@ -363,8 +363,8 @@ on *:sockread:*: {
     }
     bread %file 0 $file(%file).size &world2
     if ($bfind(&world2,0,</HTML>)) {
-      var %a = $calc($bfind(&world2,0,There are currently)+20), %b = $calc($bfind(&world2,%a,playing)-8)
-      $cmd(%thread,out) There are currently 07 $+ $bytes($bvar(&world2,%a,$calc(%b - %a)).text,db) People Playing across 171 servers. Runescape at07 $round($calc(100* $bvar(&world2,%a,$calc(%b - %a)).text / 338000),2) $+ 07% Capacity.
+      var %a $calc($bfind(&world2,0,There are currently) + 20), %b $calc($bfind(&world2,%a,playing) - 8)
+      $cmd(%thread,out) There are currently 07 $+ $bvar(&world2,%a,$calc(%b - %a)).text People Playing across 171 servers. Runescape at07 $round($calc(100* $remove($bvar(&world2,%a,$calc(%b - %a)).text,$chr(44)) / 338000),2) $+ 07% Capacity.
       goto unset
     }
   }
