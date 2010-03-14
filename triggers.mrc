@@ -560,8 +560,8 @@ on *:TEXT:*:*: {
     if ($skills($2) && $3) { %skill = $skills($2) | %nick = $regsubex($3-,/\W/g,_) }
     else if ($skills($($ $+ $0,2)) && $skills($($ $+ $0,2)) && $3) { %skill = $skills($($ $+ $0,2)) | %nick = $regsubex(%input,/\W/g,_) }
     else if ($2 && (!$skills($($ $+ $0,2)))) { %nick = $regsubex($2-,/\W/g,_) | %skill = Overall }
-    else if ($2) { %nick = $regsubex($nick,/\W/g,_) | %skill = $skills($2) }
-    else { %nick = $regsubex($nick,/\W/g,_) | %skill = Overall }
+    else if ($2) { %nick = $nick | %skill = $skills($2) }
+    else { %nick = $nick | %skill = Overall }
     %nick = $rsn(%nick)
     %skill = $skills(%skill)
     if (%command == start) {
@@ -582,7 +582,7 @@ on *:TEXT:*:*: {
         %saystyle You do not have a timer started!07 !start <skill> <nick> to start one.
         halt
       }
-      if ($readini(timer.ini,%nick,owner) != $rsn($regsubex($nick,/\W/g,_))) {
+      if ($readini(timer.ini,%nick,owner) != $rsn($nick)) {
         %saystyle This is not your timer to end!
         halt
       }
