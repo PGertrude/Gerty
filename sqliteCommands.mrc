@@ -9,7 +9,7 @@ on *:START:{
   echo 3 -a gerty.db Loaded
 }
 
-;@SYNTAX /loadChans
+;@SYNTAX /loadChans #channel
 ;@SUMMARY loads the channel table into a hash object for faster querying.
 alias loadChans {
   var %sql SELECT * FROM channel;

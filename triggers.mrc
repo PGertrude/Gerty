@@ -1,4 +1,4 @@
->start<|triggers.mrc|Entry point|3.47|rs
+>start<|triggers.mrc|Entry point|3.51|rs
 on *:TEXT:*:*: {
   if ($left($1,1) !isin !.@) {
     var %botCheck = $botid($1)
@@ -1457,6 +1457,13 @@ on *:TEXT:*:*: {
     ; GTFO
     else if ($regex($1,/^([!@.])?gtfo$/Si) && $botid($2)) {
       part $chan I'm sorry master.
+      goto clean
+    }
+    ; SETMINUSERS
+    else if ($regex($1,/^[!@.]setminusers$/Si)) {
+      if (!$rowexists(channel,channel,$2)) { noop $_network(noop $!sqlite_query(1,INSERT INTO channel (channel) VALUES (" $+ $2 $+ ");)) }
+      noop $_network(noop $!sqlite_query(1, UPDATE channel SET users= $+ $3 WHERE channel=" $+ $2 $+ ";))
+      noop $_network(loadChans $2 )
       goto clean
     }
   }
