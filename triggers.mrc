@@ -238,8 +238,8 @@ on *:TEXT:*:*: {
   }
   ; RANK
   else if ($regex($1,/^[@!.]Rank$/Si)) {
-    var %skill, %rank, %rawRank $litecalc($remove($2,$#)), %skill1 $scores($3), %skill2 $scores(2)
-    if (%skil1 && %rawRank >= 1 && %rawRank <= 2000000) {
+    var %skill, %rank, %rawRank $litecalc($remove($2,$#)), %skill1 $scores($3), %skill2 $scores($2)
+    if (%skill1 && %rawRank >= 1 && %rawRank <= 2000000) {
       %skill = %skill1
       %rank = %rawRank
     }
@@ -594,7 +594,7 @@ on *:TEXT:*:*: {
     goto clean
   }
   ;URBAN
-  else if ($regex($1,/^[!@.]urban$/Si)) {
+  else if ($regex($1,/^[!@.](urban|ud)$/Si)) {
     _fillCommand %thread $left($1,1) $nick $iif($chan,$v1,PM) urban $replace($2-,$chr(32),+)
     var %url = http://www.rscript.org/lookup.php?type=urban&id=1&search= $+ $cmd(%thread,arg1)
     noop $download.break(urban %thread,urban. $+ %thread, %url)
