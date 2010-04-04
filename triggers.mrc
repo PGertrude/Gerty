@@ -1014,15 +1014,15 @@ on *:TEXT:*:*: {
     var %mode $iif($3 == on,on,off)
     if ($chan && ($nick isop $chan || $nick ishop $chan || $admin($nick))) {
       if (%command == youtube) {
-        noop $_network(noop $!setStringParameter(channel, [ $chan ] , youtube, setting, %mode , $false ))
+        noop $_network(noop $!setStringParameter(channel, [ $lower($chan) ] , youtube, setting, %mode , $false ))
         %saystyle $chan Settings: Youtube link information messages are now %mode $+ .
       }
       else if (%command == ge || %command == geupdate) {
-        noop $_network(noop $!setStringParameter(channel, [ $chan ] , geupdate, setting, %mode , $false ))
+        noop $_network(noop $!setStringParameter(channel, [ $lower($chan) ] , geupdate, setting, %mode , $false ))
         %saystyle $chan Settings: Ge Update messages are now %mode $+ .
       }
       else if (%command == qfc) {
-        noop $_network(noop $!setStringParameter(channel, [ $chan ] , qfc, setting, %mode , $false ))
+        noop $_network(noop $!setStringParameter(channel, [ $lower($chan) ] , qfc, setting, %mode , $false ))
         %saystyle $chan Settings: QFC link information messages are now %mode $+ .
       }
       else if (%command == site) {
@@ -1030,23 +1030,23 @@ on *:TEXT:*:*: {
         %saystyle The website for07 $chan has been set to:07 $3-
       }
       else if (%command == autocalc) {
-        noop $_network(noop $!setStringParameter(channel, [ $chan ] , autocalc, setting, %mode , $false ))
+        noop $_network(noop $!setStringParameter(channel, [ $lower($chan) ] , autocalc, setting, %mode , $false ))
         %saystyle The no-trigger calculator has been turned07 %mode for07 $chan $+ .
       }
       else if (%command == spotify) {
-        noop $_network(noop $!setStringParameter(channel, [ $chan ] , spotify, setting, %mode , $false ))
+        noop $_network(noop $!setStringParameter(channel, [ $lower($chan) ] , spotify, setting, %mode , $false ))
         %saystyle $chan Settings: Spotify link information messages are now %mode $+ .
       }
       else if (%command == autocmb) {
-        noop $_network(noop $!setStringParameter(channel, [ $chan ] , autocmb, setting, %mode , $false ))
+        noop $_network(noop $!setStringParameter(channel, [ $lower($chan) ] , autocmb, setting, %mode , $false ))
         %saystyle $chan Settings: Automatic combat lookup messages are now %mode $+ .
       }
       else if (%command == autoclan) {
-        noop $_network(noop $!setStringParameter(channel, [ $chan ] , autoclan, setting, %mode , $false ))
+        noop $_network(noop $!setStringParameter(channel, [ $lower($chan) ] , autoclan, setting, %mode , $false ))
         %saystyle $chan Settings: Automatic clan lookup messages are now %mode $+ .
       }
       else if (%command == autooa) {
-        noop $_network(noop $!setStringParameter(channel, [ $chan ] , autooa, setting, %mode , $false ))
+        noop $_network(noop $!setStringParameter(channel, [ $lower($chan) ] , autooa, setting, %mode , $false ))
         %saystyle $chan Settings: Automatic overall lookup messages are now %mode $+ .
       }
     }

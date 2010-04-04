@@ -119,7 +119,7 @@ on *:JOIN:*: {
     reloadChannel $chan
     who $chan
     var %thread $newThread
-    if (!$rowExists(channel, channel, $chan)) { noop $_network(noop $!sqlite_query(1, INSERT INTO channel (channel) VALUES (" $+ $chan $+ ");)) }
+    if (!$rowExists(channel, channel, $chan)) { noop $_network(noop $!sqlite_query(1, INSERT INTO channel (channel) VALUES (" $+ $lower($chan) $+ ");)) }
     .timer 1 1 .delayedjoin %thread $chan
   }
   else {
