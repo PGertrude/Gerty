@@ -353,7 +353,7 @@ findEmptyChannels {
   while (%x <= $chan(0)) {
     if ($usercount($chan(%x)) <= %min) {
       %chans = %chans $chan(%x) $v1 $+ ;
-      if ($v1 == 0) { part $chan(%x) }
+      if ($v1 == 0 && $chan(%x) != #gertyDev) { part $chan(%x) }
     }
     inc %x
   }
