@@ -1092,13 +1092,29 @@ alias alog-r {
 alias startGeUpdate noop $download.break(checkGeUpdate,a $+ $ticks,http://SSElessar.net/parser/gulist.php)
 alias checkGeUpdate {
   tokenize 10 $1
-  write geDebug.txt $1-
-  if ($1 != $readini(gerty.config.ini,GeUpdate,Rise) && $1) { writeini gerty.config.ini GeUpdate Rise $1 | if (!hget(GeUpdate,Rise)) hadd -mu1200 GeUpdate Rise $true }
-  if ($2 != $readini(gerty.config.ini,GeUpdate,Drop) && $2) { writeini gerty.config.ini GeUpdate Drop $2 | if (!hget(GeUpdate,Drop)) hadd -mu1200 GeUpdate Drop $true }
-  if ($hget(GeUpdate,Rise) && $hget(GeUpdate,Drop) && $calc($ctime - $gettok($read(GeUpdate.txt,1),2,124)) > 1200) {
-    var %x = 1 | while ($chan(%x)) { if ($chanset($chan(%x)) == on && $_checkMainReturn($chan(%x))) { .msg $chan(%x) GeUpdate in progress. Lookup update will be completed within 15 minutes and ingame within 5. } | inc %x }
-    resetPrices | .timer 1 1000 resetPrices | runepriceupdater
-} }
+  if ($1 && $1 != $readini(gerty.config.ini,GeUpdate,Rise)) {
+    writeini gerty.config.ini GeUpdate Rise $1
+    if (!hget(GeUpdate,Rise)) hadd -mu1200 GeUpdate Rise $true
+  }
+  if ($2 && $2 != $readini(gerty.config.ini,GeUpdate,Drop)) {
+    writeini gerty.config.ini GeUpdate Drop $2
+    if (!hget(GeUpdate,Drop)) hadd -mu1200 GeUpdate Drop $true
+  }
+  if ($hget(GeUpdate,Rise) && $hget(GeUpdate,Drop) && $calc($ctime - $gettok($read(GeUpdate.txt,1),2,124)) > 1260) {
+    var %x = 1, %chan
+    while ($chan(%x)) {
+      %chan = $v1
+      if ($chanset(%chan,geupdate) == on && $_checkMainReturn(%chan)) {
+        .msg %chan GeUpdate in progress. Lookup update will be completed within 15 minutes and ingame within 5.
+      }
+      inc %x
+    }
+    write -il1 GeUpdate.txt $host(time) $+ $| $+ $gmt $+ $| $+ $ord($host(date)) $host(month).3
+    resetPrices
+    .timer 1 1200 resetPrices
+    runepriceupdater
+  }
+}
 ; ml
 alias memberlist {
   var %thread = $1
