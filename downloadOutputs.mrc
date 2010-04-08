@@ -403,10 +403,10 @@ alias urban {
     halt
   }
   if (DEFINED: isin $4) {
-    $cmd(%thread,out) Urban Dictionary: ' $+ $cmd(%thread,arg1) $+ ' $nohtml($regsubex($gettok($4,2,58),/(^|\s)(\d+\.)\s/g,$+($chr(32),07\2,$chr(32))))
+    $cmd(%thread,out) Urban Dictionary: ' $+ $cmd(%thread,arg1) $+ ' $fix_special_html($nohtml($regsubex($gettok($4,2,58),/(^|\s)(\d+\.)\s/g,$+($chr(32),07\2,$chr(32)))))
   }
   if (EXAMPLE: isin $5) {
-    $cmd(%thread,out) Example: $nohtml($regsubex($gettok($5,2,58),/(^|\s)(\d+\.)\s/g,$+($chr(32),07\2,$chr(32))))
+    $cmd(%thread,out) Example: $fix_special_html($nohtml($regsubex($gettok($5,2,58),/(^|\s)(\d+\.)\s/g,$+($chr(32),07\2,$chr(32)))))
   }
   _clearCommand %thread
 }
