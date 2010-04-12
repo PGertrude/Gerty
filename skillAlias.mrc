@@ -25,6 +25,7 @@ skillNames {
   %skills = %skills $+ |cok|cook|cooking|coo
   %skills = %skills $+ |su|sum|summy|summon|summoning
   %skills = %skills $+ |oa|overall|total
+  %skills = %skills $+ |du|dun|dungeon|dungeoneering
   return %skills
 }
 compares {
@@ -52,11 +53,12 @@ compares {
   if ($regex($1,/^(wc|wcing|wood|woodcutting|woodcut)$/Si)) { return Woodcutting }
   if ($regex($1,/^(cok|cook|cooking|coo)$/Si)) { return Cooking }
   if ($regex($1,/^(su|sum|summy|summon|summoning)$/Si)) { return Summoning }
+  if ($regex($1,/^(du|dun|dungeon|dungeoneering)$/Si)) { return Dungeoneering }
   if ($regex($1,/^(oa|overall|total)$/Si)) { return Overall }
   if ($regex($1,/^(bh|bo|bount|bounty|bountyhunter|Bounty Hunter)$/Si)) { return Bounty Hunter }
   if ($regex($1,/^(bhr|bor|bountrogue|bountyrogue|bountyhunterrogue|rogue|rogues|Bounty Hunter Rogues)$/Si)) { return Bounty Hunter Rogues }
   if ($regex($1,/^(fog|fist|fisting|fistofguth|guth|guthix|fistofguthix|fist of guthix)$/Si)) { return Fist of Guthix }
-  if ($regex($1,/^(du|duel|tournament)$/Si)) { return Duel }
+  if ($regex($1,/^(duel|tournament)$/Si)) { return Duel }
   if ($regex($1,/^(mob?|mobilise|mobilising)(ar|army|armies|armys)?$/Si)) { return Mobilising Armies }
   if ($regex($1,/^(baat|baatt|baattack|baattacker|baattackers|ba attackers|ba_attackers)$/Si)) { return BA Attackers }
   if ($regex($1,/^(bade|badef|badefend|badefender|badefenders|ba defenders|ba_defenders)$/Si)) { return BA Defenders }
@@ -96,11 +98,12 @@ lookups {
   if ($regex($1,/^(wc|wcing|wood|woodcutting|woodcut)$/Si)) { return Woodcutting }
   if ($regex($1,/^(cok|cook|cooking|coo)$/Si)) { return Cooking }
   if ($regex($1,/^(su|sum|summy|summon|summoning)$/Si)) { return Summoning }
+  if ($regex($1,/^(du|dun|dungeon|dungeoneering)$/Si)) { return Dungeoneering }
   if ($regex($1,/^(oa|overall|total)$/Si)) { return Overall }
   if ($regex($1,/^(bh|bo|bount|bounty|bountyhunter|Bounty Hunter)$/Si)) { return Bounty Hunter }
   if ($regex($1,/^(bhr|bor|bountrogue|bountyrogue|bountyhunterrogue|rogue|rogues|Bounty Hunter Rogues)$/Si)) { return Bounty Hunter Rogues }
   if ($regex($1,/^(fog|fist|fisting|fistofguth|guth|guthix|fistofguthix|fist of guthix)$/Si)) { return Fist of Guthix }
-  if ($regex($1,/^(du|duel|tournament)$/Si)) { return Duel }
+  if ($regex($1,/^(duel|tournament)$/Si)) { return Duel }
   if ($regex($1,/^(mob?|mobilise|mobilising)(ar|army|armies|armys)?$/Si)) { return Mobilising Armies }
   if ($regex($1,/^(baat|baatt|baattack|baattacker|baattackers|ba attackers|ba_attackers)$/Si)) { return BA Attackers }
   if ($regex($1,/^(bade|badef|badefend|badefender|badefenders|ba defenders|ba_defenders)$/Si)) { return BA Defenders }
@@ -139,11 +142,12 @@ scores {
   if ($regex($1,/^(wc|wcing|wood|woodcutting|woodcut)$/Si)) { return Woodcutting }
   if ($regex($1,/^(cok|cook|cooking|coo)$/Si)) { return Cooking }
   if ($regex($1,/^(su|sum|summy|summon|summoning)$/Si)) { return Summoning }
+  if ($regex($1,/^(du|dun|dungeon|dungeoneering)$/Si)) { return Dungeoneering }
   if ($regex($1,/^(oa|overall|total)$/Si)) { return Overall }
   if ($regex($1,/^(bh|bo|bount|bounty|bountyhunter|Bounty Hunter)$/Si)) { return Bounty Hunter }
   if ($regex($1,/^(bhr|bor|bountrogue|bountyrogue|bountyhunterrogue|rogue|rogues|Bounty Hunter Rogues)$/Si)) { return Bounty Hunter Rogues }
   if ($regex($1,/^(fog|fist|fisting|fistofguth|guth|guthix|fistofguthix|fist of guthix)$/Si)) { return Fist of Guthix }
-  if ($regex($1,/^(du|duel|tournament)$/Si)) { return Duel }
+  if ($regex($1,/^(duel|tournament)$/Si)) { return Duel }
   if ($regex($1,/^(mob?|mobilise|mobilising)(ar|army|armies|armys)?$/Si)) { return Mobilising Armies }
   if ($regex($1,/^(baat|baatt|baattack|baattacker|baattackers|ba attackers|ba_attackers)$/Si)) { return BA Attackers }
   if ($regex($1,/^(bade|badef|badefend|badefender|badefenders|ba defenders|ba_defenders)$/Si)) { return BA Defenders }
@@ -175,13 +179,14 @@ skills {
   if ($regex($1,/^(wc|wcing|wood|woodcutting|woodcut)$/Si)) { return Woodcutting }
   if ($regex($1,/^(cok|cook|cooking|coo)$/Si)) { return Cooking }
   if ($regex($1,/^(su|sum|summy|summon|summoning)$/Si)) { return Summoning }
+  if ($regex($1,/^(du|dun|dungeon|dungeoneering)$/Si)) { return Dungeoneering }
   if ($regex($1,/^(oa|overall|total)$/Si)) { return Overall }
 }
 minigames {
   if ($regex($1,/^(bh|bo|bount|bounty|bountyhunter|Bounty Hunter)$/Si)) { return Bounty Hunter }
   if ($regex($1,/^(bhr|bor|bountrogue|bountyrogue|bountyhunterrogue|rogue|rogues|Bounty Hunter Rogues)$/Si)) { return Bounty Hunter Rogues }
   if ($regex($1,/^(fog|fist|fisting|fistofguth|guth|guthix|fistofguthix|fist of guthix)$/Si)) { return Fist of Guthix }
-  if ($regex($1,/^(du|duel|tournament)$/Si)) { return Duel }
+  if ($regex($1,/^(duel|tournament)$/Si)) { return Duel }
   if ($regex($1,/^(mob?|mobilise|mobilising) ?(ar|army|armies|armys)?$/Si)) { return Mobilising Armies }
   if ($regex($1,/^(baat|baatt|baattack|baattacker|baattackers|ba attackers|ba_attackers)$/Si)) { return BA Attackers }
   if ($regex($1,/^(bade|badef|badefend|badefender|badefenders|ba defenders|ba_defenders)$/Si)) { return BA Defenders }
@@ -245,15 +250,16 @@ statnum {
   if ($1 == hunter) { return 23 }
   if ($1 == construction) { return 24 }
   if ($1 == summoning) { return 25 }
-  if ($1 == duel || $1 == dueling) { return 26 }
-  if ($1 == bounty hunter) { return 27 }
-  if ($1 == bounty hunter rogues) { return 28 }
-  if ($1 == fist of guthix) { return 29 }
-  if ($1 == mobilising armies) { return 30 }
-  if ($1 == ba attackers || $1 == ba attacker) { return 31 }
-  if ($1 == ba defenders || $1 == ba defender) { return 32 }
-  if ($1 == ba collectors || $1 == ba collector) { return 33 }
-  if ($1 == ba healers || $1 == ba healer) { return 34 }
+  if ($1 == dungeoneering) { return 26 }
+  if ($1 == duel || $1 == dueling) { return 27 }
+  if ($1 == bounty hunter) { return 28 }
+  if ($1 == bounty hunter rogues) { return 29 }
+  if ($1 == fist of guthix) { return 30 }
+  if ($1 == mobilising armies) { return 31 }
+  if ($1 == ba attackers || $1 == ba attacker) { return 32 }
+  if ($1 == ba defenders || $1 == ba defender) { return 33 }
+  if ($1 == ba collectors || $1 == ba collector) { return 34 }
+  if ($1 == ba healers || $1 == ba healer) { return 35 }
   if ($1 == 1) { return overall }
   if ($1 == 2) { return attack }
   if ($1 == 3) { return defence }
@@ -279,15 +285,16 @@ statnum {
   if ($1 == 23) { return hunter }
   if ($1 == 24) { return construction }
   if ($1 == 25) { return summoning }
-  if ($1 == 26) { return duel }
-  if ($1 == 27) { return bounty hunter }
-  if ($1 == 28) { return bounty hunter rogues }
-  if ($1 == 29) { return fist of guthix }
-  if ($1 == 30) { return mobilising armies }
-  if ($1 == 31) { return ba attackers }
-  if ($1 == 32) { return ba defenders }
-  if ($1 == 33) { return ba collectors }
-  if ($1 == 34) { return ba healers }
+  if ($1 == 26) { return dungeoneering }
+  if ($1 == 27) { return duel }
+  if ($1 == 28) { return bounty hunter }
+  if ($1 == 29) { return bounty hunter rogues }
+  if ($1 == 30) { return fist of guthix }
+  if ($1 == 31) { return mobilising armies }
+  if ($1 == 32) { return ba attackers }
+  if ($1 == 33) { return ba defenders }
+  if ($1 == 34) { return ba collectors }
+  if ($1 == 35) { return ba healers }
 }
 catno {
   if (!$minigames($1)) { return 0 }
@@ -319,6 +326,7 @@ smartno {
   if ($1 == Hunter) { return 22 }
   if ($1 == Construction) { return 23 }
   if ($1 == summoning) { return 24 }
+  if ($1 == dungeoneering) { return 25 }
   if ($1 == duel) { return 0 }
   if ($1 == bounty hunter) { return 1 }
   if ($1 == bounty hunter Rogues) { return 2 }

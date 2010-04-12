@@ -726,7 +726,7 @@ alias distribute {
   if (<html> isin $1) { return unranked }
   if (-1 !isin $gettok(%string,1-25,10)) {
     var %x = 2,%reply,%voa = 0
-    while (%x <= 34) {
+    while (%x <= 35) {
       if ($gettok($ [ $+ [ %x ] ],2,44) == -1) { var % [ $+ [ %x ] ] NR,NR }
       else {
         var %vlvl = $xptolvl($gettok($ [ $+ [ %x ] ],3,44))
@@ -741,7 +741,7 @@ alias distribute {
   }
   if ($gettok($1,2,44) != -1) {
     var %x = 2, %lvl = 0, %unranked
-    while (%x <= 25) {
+    while (%x <= 26) {
       if ($gettok($($ $+ %x,2),2,44) != -1) { %lvl = $calc(%lvl + $gettok($($ $+ %x,2),2,44)) }
       else { %unranked = %unranked %x }
       inc %x
@@ -793,7 +793,7 @@ alias distribute {
     var %5 = NR,~10,1154,10
   }
   var %x = 2, %exp = 0
-  while (%x <= 25) {
+  while (%x <= 26) {
     if ($gettok($ [ $+ [ %x ] ],2,44) != -1) {
       var %vlvl = $xptolvl($gettok($ [ $+ [ %x ] ],3,44))
       var % [ $+ [ %x ] ] $ [ $+ [ %x ] ] $+ , $+ %vlvl
@@ -808,7 +808,7 @@ alias distribute {
   }
   var %1 = NR,~ $+ %total $+ ,~ $+ %exp $+ , $+ %voa
   var %x = 2, %reply = %1
-  while (%x <= 30) {
+  while (%x <= 35) {
     if (!% [ $+ [ %x ] ]) { var % [ $+ [ %x ] ] NR,NR }
     %reply = %reply $+ \n $+ % [ $+ [ %x ] ]
     inc %x
@@ -925,6 +925,7 @@ alias stats {
       %others = %others $validate($($ $+ %x,2),%state,%morethan,%lessthan,%x,%average)
       inc %x
     }
+    %others = %others $validate($($26,2),%state,%morethan,%lessthan,26,%average)
     inc %x
     var %minigames
     while (%x <= 34) {
