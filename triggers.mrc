@@ -1257,14 +1257,14 @@ on *:TEXT:*:*: {
     if (!%skill) var %temp %skill, %skill %exp, %exp $fixInt($2)
     else %exp = $fixInt($1)
     if (!%exp) { goto fail }
-    if (%level && %skill == overall && %exp > 2376) { goto fail }
+    if (%level && %skill == overall && %exp > 2475) { goto fail }
     else if (%level && %skill != overall && %exp > 126) { goto fail }
     else if (!%level && %skill == overall && %exp > 4800000000000) { goto fail }
     else if (!%level && %skill != overall && %exp > 200000000) { goto fail }
     %output = :D\-< 4¤11.12¡9*4°9*12¡11.4¤ Congratulations on
     if (%level) { %output = %output level %exp %skill %nick }
     else { %output = %output $format_number(%exp) %skill experience %nick }
-    if (%level && %skill == overall && %exp == 2376) { %output = %output $+ , and congratulations for maxing out }
+    if (%level && %skill == overall && %exp == 2475) { %output = %output $+ , and congratulations for maxing out }
     else if (%level && %skill != overall && %exp == 99) { %output = %output $+ , and congratulations for maxing out }
     else if (!%level && %skill == overall && %exp == 4800000000) { %output = %output $+ , and congratulations for maxing out }
     else if (!%level && %skill != overall && %exp == 200000000) { %output = %output $+ , and congratulations for maxing out }
