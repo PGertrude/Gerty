@@ -146,7 +146,7 @@ on *:JOIN:*: {
 }
 alias delayedjoin {
   var %chan $2
-  if (%chan isin #gerty#gertydev#howdy) { goto clean }
+  if (%chan isin #gertydev#howdy) { goto clean }
   var %x = 1
   while (%x <= $lines(botlist.txt)) {
     if ($read(botlist.txt,%x) ison %chan && $read(botlist.txt,%x) != $me) {
