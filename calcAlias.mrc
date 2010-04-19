@@ -158,33 +158,33 @@ solve {
   if (x isin %eq && = !isin %eq) { %eq = %eq $+ =x }
   else if (x !isin %eq) { return $calc($parser(%eq)) }
   if (= isin %eq) %eq = $gettok(%eq,1,61) $+ -( $+ $gettok($1,2,61) $+ )
-  return $multiple(%eq,$xsolve(%eq))
+  return $multiple(%eq,$newton(%eq))
 }
 multiple {
   var %x = $2
   var %eq = $1
   var %solutions = $iif($abs($xcalculate(%eq,%x)) < 0.001,or07 $2 or07,$false)
-  if ($regex(%eq,asin|acos|atan|sin|cos|tan) && %solutions) { return $mid(%solutions,7,-7) }
+  if ($regex(%eq,/(asin|acos|atan|sin|cos|tan)/i) && %solutions) { return $mid(%solutions,7,-7) }
   if (!%solutions) return Unsolvable
   while ($abs($xcalculate(%eq,%x)) < 0.001) {
     %eq = $+($chr(40),%eq,$chr(41),/,$chr(40),x,-,%x,$chr(41))
-    %x = $xsolve(%eq)
+    %x = $newton(%eq)
     if ($redundant(%solutions,%x)) goto finish
     if (($abs($xcalculate(%eq,%x)) < 0.001)) %solutions = %solutions %x or07
   }
   :finish
   return $right($left(%solutions,-7),-7)
 }
-xsolve {
+newton {
   var %x = 20
   var %a = 0
   while (%a <= 30) {
     %x = $calc(%x - $+($chr(40),$xcalculate($1,%x),/,$derivative($1,%x),$chr(41)))
     inc %a
   }
-  return $xcheck($1,%x)
+  return $roundErrors($1,%x)
 }
-xcheck {
+roundErrors {
   if ($abs($xcalculate($1,$2)) < 0.001) {
     if (!$xcalculate($1,$round($2,0))) return $round($2,0)
     if (!$xcalculate($1,$floor($2))) return $floor($2)
@@ -195,9 +195,9 @@ xcheck {
   }
   else return $false
 }
-derivative return $calc(($xcalculate($1,$2 + 1) - $xcalculate($1,$2 - 1)) / 2)
+derivative return $calc(($xcalculate($1,$2 + 0.01) - $xcalculate($1,$2 - 0.01)) / 0.02)
 xcalculate return $calc($parser($replace($1,x,$calc($2))))
-parser return $regsubex($1-,/((sin|asin|acos|atan|cos|tan|log|sqrt|lvl|l)\050(-?\d+(?:\.\d+)?(?:[\*\/\+-]\d+(?:\.\d+)?)*)\051)/g,$($\2($calc(\3)) $+ .deg,2))
+parser return $regsubex($1-,/((sin|asin|acos|atan|cos|tan|log|sqrt|lvl|l)\050(-?\d+(?:\.\d+)?(?:[\*\/\+-]\d+(?:\.\d+)?)*)\051)/gi,$($\2($calc(\3)) $+ .deg,2))
 redundant {
   var %temp = $chr(44)
   var %a = 1
