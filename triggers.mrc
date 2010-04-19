@@ -790,11 +790,11 @@ on *:TEXT:*:*: {
     if (!$scores($2)) {
       var %string = $2-
       var %time = %today, %command = Today
-      if ($regex(%string,/(?:^| )@(.+?)$/)) {
+      if ($regex(%string,/(?:^| ?)@(.+?)$/)) {
         %time = $regml(1)
         if (%time !isnum) { %time = $duration(%time) }
         %command = $duration(%time)
-        var %string = $regsubex(%string,/(?:^| )@(.+?)$/,$null)
+        var %string = $regsubex(%string,/(?:^| ?)@(.+?)$/,$null)
       }
       var %nick = $nick
       if ($len($trim(%string)) > 0) {
