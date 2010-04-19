@@ -1,4 +1,4 @@
->start<|downloadoutputs.mrc|compiled parser outputs|3.56|rs
+>start<|downloadoutputs.mrc|compiled parser outputs|3.57|rs
 ; CLAN
 alias getClans {
   var %user = $1, %out = $2 $3, %clan = $4, %thread = $5
@@ -66,7 +66,7 @@ alias stats.hilow {
   ; SORT
   ; form string for sorting by old alias 'skill exp'
   var %x = 2
-  while (%x <= 25) {
+  while (%x <= 26) {
     %string = %string %x $gettok($($ $+ %x,2),%state,44)
     inc %x
   }
@@ -87,8 +87,8 @@ alias stats.hilow {
     inc %x
   }
   ; output - lowest
-  var %x = 24
-  while (%x >= 23) {
+  var %x = 25
+  while (%x >= 24) {
     var %skillid = $gettok(%string,%x,32)
     var %skill = $($ $+ %skillid,2)
     var %low = %low $iif(%x == 23,followed by ) 07 $+ $statnum(%skillid) level07 $gettok(%skill,2,44) $+  $iif(%state == 1,ranked,with) $+ 07 $regsubex($gettok(%skill,%state,44),/(\d+)/,$bytes(\1,db)) $+ $iif(%state == 3,$chr(32) $+ exp,) $+ .
@@ -116,7 +116,7 @@ alias stats.next {
   ; SORT
   ; form string for sorting by old alias 'skill exp lvl'
   var %x = 2, %lvl, %xp, %xptogo
-  while (%x <= 25) {
+  while (%x <= 26) {
     %xp = $gettok($($ $+ %x,2),%state,44)
     %lvl = $xptolvl(%xp)
     %xptogo = $calc($lvltoxp($calc(%lvl + 1)) - %xp)
@@ -422,7 +422,7 @@ alias trackAll {
   if (%r1 == 0) { %saystyle  $+ %nick Skills  $+ %command $+ : 07Overall 03+0 exp; | unset %* | goto unset }
   var %cmb = $sort(Attack %2 %r2 Defence %3 %r3 Strength %4 %r4 Hitpoints %5 %r5 Range %6 %r6 Pray %7 %r7 Mage %8 %r8 Summon %25 %r25)
   if (%cmb) { var %out1 = %saystyle  $+ %nick Combat  $+ %command $+ : %cmb }
-  var %others = $sort(Cook %9 %r9 Woodcut %10 %r10 Fletching %11 %r11 Fishing %12 %r12 Firemake %13 %r13 Crafting %14 %r14 Smithing %15 %r15 Mine %16 %r16 Herblore %17 %r17 Agility %18 %r18 Thieve %19 %r19 Slayer %20 %r20 Farming %21 %r21 Runecraft %22 %r22 Hunter %23 %r23 Construct %24 %r24)
+  var %others = $sort(Cook %9 %r9 Woodcut %10 %r10 Fletching %11 %r11 Fishing %12 %r12 Firemake %13 %r13 Crafting %14 %r14 Smithing %15 %r15 Mine %16 %r16 Herblore %17 %r17 Agility %18 %r18 Thieve %19 %r19 Slayer %20 %r20 Farming %21 %r21 Runecraft %22 %r22 Hunter %23 %r23 Construct %24 %r24 Dungeon %26 %r26)
   if (%others) { var %out2 = %saystyle  $+ %nick Others  $+ %command $+ : %others }
   %saystyle  $+ %nick Skills  $+ %command $+ : 07Overall $iif(%total > 0,[+ $+ %total $+ ]) 03+ $+ $iif(%r1 > 1000,$bytes($round($calc($v1 /1000),0),db) $+ k,$bytes($v1,db)) exp;
   %out1
@@ -462,7 +462,7 @@ alias voidRscript {
   }
   ; Unranked Skills (no guessing /effort)
   %x = 1
-  while (%x <= 25) {
+  while (%x <= 26) {
     if (!% [ $+ [ %x ] ]) { % [ $+ [ %x ] ] = 0 }
     if (!%r [ $+ [ %x ] ]) { %r [ $+ [ %x ] ] = 0 }
     inc %x
@@ -470,12 +470,12 @@ alias voidRscript {
   return
 }
 alias lastNdays {
-  var %x = 50
+  var %x = 52
   while (%x) {
     if (!%r [ $+ [ %x ] ]) { %r [ $+ [ %x ] ] = 0 }
     dec %x
   }
-  var %x = 25
+  var %x = 26
   while (%x) {
     if (!% [ $+ [ %x ] ]) { % [ $+ [ %x ] ] = 0 }
     dec %x
@@ -484,7 +484,7 @@ alias lastNdays {
     if (%r1 == 0) { $hget($gettok($sockname,2,46),out)  $+ $hget($gettok($sockname,2,46),nick) Skills  $+ $hget($gettok($sockname,2,46),command) $+ : 07Overall 03+0 exp; | goto unset }
     var %cmb = $sort(Attack %2 %r2 Defence %3 %r3 Strength %4 %r4 Hitpoints %5 %r5 Range %6 %r6 Pray %7 %r7 Mage %8 %r8 Summon %25 %r25)
     if (%cmb) { var %out1 = $hget($gettok($sockname,2,46),out)  $+ $hget($gettok($sockname,2,46),nick) Combat  $+ $hget($gettok($sockname,2,46),command) $+ : %cmb }
-    var %others = $sort(Cook %9 %r9 Woodcut %10 %r10 Fletching %11 %r11 Fishing %12 %r12 Firemake %13 %r13 Crafting %14 %r14 Smithing %15 %r15 Mine %16 %r16 Herblore %17 %r17 Agility %18 %r18 Thieve %19 %r19 Slayer %20 %r20 Farming %21 %r21 Runecraft %22 %r22 Hunter %23 %r23 Construct %24 %r24)
+    var %others = $sort(Cook %9 %r9 Woodcut %10 %r10 Fletching %11 %r11 Fishing %12 %r12 Firemake %13 %r13 Crafting %14 %r14 Smithing %15 %r15 Mine %16 %r16 Herblore %17 %r17 Agility %18 %r18 Thieve %19 %r19 Slayer %20 %r20 Farming %21 %r21 Runecraft %22 %r22 Hunter %23 %r23 Construct %24 %r24 Dungeon %26 %r26)
     if (%others) { var %out2 = $hget($gettok($sockname,2,46),out)  $+ $hget($gettok($sockname,2,46),nick) Others  $+ $hget($gettok($sockname,2,46),command) $+ : %others }
     $hget($gettok($sockname,2,46),out)  $+ $hget($gettok($sockname,2,46),nick) Skills  $+ $hget($gettok($sockname,2,46),command) $+ : 07Overall $iif(%total > 0,[+ $+ %total $+ ]) 03+ $+ $iif(%r1 > 1000,$bytes($round($calc($v1 /1000),0),db) $+ k,$bytes($v1,db)) exp;
     %out1
@@ -493,7 +493,7 @@ alias lastNdays {
   else {
     var %cmb = $sort(Attack $calc(%2 - %r27) $calc(%r2 - %r27) Defence $calc(%3 - %r28) $calc(%r3 - %r28) Strength $calc(%4 - %r29) $calc(%r4 - %r29) Hitpoints $calc(%5 - %r30) $calc(%r5 - %r30) Range $calc(%6 - %r31) $calc(%r6 - %r31) Pray $calc(%7 - %r32) $calc(%r7 - %r32) Mage $calc(%8 - %r33) $calc(%r8 - %r33) Summon $calc(%25 - %r50) $calc(%r25 - %r50))
     if (%cmb) { var %out1 = $hget($gettok($sockname,2,46),out)  $+ $hget($gettok($sockname,2,46),nick) Combat  $+ $hget($gettok($sockname,2,46),command) $+ : %cmb }
-    var %others = $sort(Cook $calc(%9 - %r34) $calc(%r9 - %r34) Woodcut $calc(%10 - %r35) $calc(%r10 - %r35) Fletching $calc(%11 - %r36) $calc(%r11 - %r36) Fishing $calc(%12 - %r37) $calc(%r12 - %r37) Firemake $calc(%13 - %r38) $calc(%r13 - %r38) Crafting $calc(%14 - %r39) $calc(%r14 - %r39) Smithing $calc(%15 - %r40) $calc(%r15 - %r40) Mine $calc(%16 - %r41) $calc(%r16 - %r41) Herblore $calc(%17 - %r42) $calc(%r17 - %r42) Agility $calc(%18 - %r43) $calc(%r18 - %r43) Thieve $calc(%19 - %r44) $calc(%r19 - %r44) Slayer $calc(%20 - %r45) $calc(%r20 - %r45) Farming $calc(%21 - %r46) $calc(%r21 - %r46) Runecraft $calc(%22 - %r47) $calc(%r22 - %r47) Hunter $calc(%23 - %r48) $calc(%r23 - %r48) Construct $calc(%24 - %r49) $calc(%r24 - %r49))
+    var %others = $sort(Cook $calc(%9 - %r34) $calc(%r9 - %r34) Woodcut $calc(%10 - %r35) $calc(%r10 - %r35) Fletching $calc(%11 - %r36) $calc(%r11 - %r36) Fishing $calc(%12 - %r37) $calc(%r12 - %r37) Firemake $calc(%13 - %r38) $calc(%r13 - %r38) Crafting $calc(%14 - %r39) $calc(%r14 - %r39) Smithing $calc(%15 - %r40) $calc(%r15 - %r40) Mine $calc(%16 - %r41) $calc(%r16 - %r41) Herblore $calc(%17 - %r42) $calc(%r17 - %r42) Agility $calc(%18 - %r43) $calc(%r18 - %r43) Thieve $calc(%19 - %r44) $calc(%r19 - %r44) Slayer $calc(%20 - %r45) $calc(%r20 - %r45) Farming $calc(%21 - %r46) $calc(%r21 - %r46) Runecraft $calc(%22 - %r47) $calc(%r22 - %r47) Hunter $calc(%23 - %r48) $calc(%r23 - %r48) Construct $calc(%24 - %r49) $calc(%r24 - %r49) Dungeon $calc(%26 - 51) $calc(%r26 - %r51))
     if (%others) { var %out2 = $hget($gettok($sockname,2,46),out)  $+ $hget($gettok($sockname,2,46),nick) Others  $+ $hget($gettok($sockname,2,46),command) $+ : %others }
     $hget($gettok($sockname,2,46),out)  $+ $hget($gettok($sockname,2,46),nick) Skills  $+ $hget($gettok($sockname,2,46),command) $+ : 07Overall $iif(%total > 0,[+ $+ %total $+ ]) 03+ $+ $iif($calc(%r1 - %r26) > 1000,$bytes($round($calc($v1 /1000),0),db) $+ k,$bytes($v1,db)) exp;
     %out1
@@ -714,9 +714,9 @@ alias validate {
 }
 ;$reqs(combat level)
 alias reqs {
-  if ($1 >= 131) { return 2100 }
-  if ($1 >= 121) { return 2050 }
-  return 2000
+  if ($1 >= 131) { return 2150 }
+  if ($1 >= 121) { return 2100 }
+  return 2050
 }
 ; GUESSING ; DISTRIBUTE
 ;$distribute(litehiscorestring)
@@ -897,7 +897,7 @@ alias stats {
     if (%param == null) { %param = lvl }
     var %state = $state(%param)
     if (!%state) { %state = 2 }
-    var %average = $iif(%state == 4,$round($calc($gettok($1,4,44) /24),1),$regsubex($gettok($1,2,44),/(\d+)/,$round($calc(\1 / 24),1))))
+    var %average = $iif(%state == 4,$round($calc($gettok($1,4,44) /25),1),$regsubex($gettok($1,2,44),/(\d+)/,$round($calc(\1 / 25),1))))
     if (((%morethan > 100 && %morethan < 200000001) || ($xptolvl(%morethan) > 100 && %morethan < 200000001) || (%lessthan > 100 && %lessthan < 200000001) || ($xptolvl(%lessthan) > 100 && %lessthan < 200000001)) && %state == 2) { %state = 4 }
     var %info =  $+ %nick $+  07all skills | Rank:07 $regsubex($gettok($1,1,44),/(\d+)/,$bytes(\1,db)) | Level:07 $iif(%state == 4,$bytes($gettok($1,4,44),db),$regsubex($gettok($1,2,44),/(\d+)/,$bytes(\1,db))) (avg lvl:07 %average $+ ) | Exp:07 $regsubex($gettok($1,3,44),/(\d+)/,$bytes(\1,db))
     if (%state == 3) {
@@ -987,7 +987,7 @@ alias stats {
     var %junior = Junior: $iif($2 >= %min,reqs met (07 $+ $calc($2 - %min) above $+ );,07 $+ $calc(%min - $2) to go;)
     inc %min 100
     var %member = Member: $iif($2 >= %min,reqs met (07 $+ $calc($2 - %min) above $+ );,07 $+ $calc(%min - $2) to go;)
-    inc %min 100
+    inc %min 150
     var %elite = Elite: $iif($2 >= %min,reqs met (07 $+ $calc($2 - %min) above $+ );,07 $+ $calc(%min - $2) to go;)
     %saystyle  $+ %nick $+  Supreme Skillers Reqs %junior %member %elite | Forum: 12www.supremeskillers.com | Memberlist: 12http://runehead.com/clans/ml.php?clan=lovvel
     goto unset

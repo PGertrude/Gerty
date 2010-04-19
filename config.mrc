@@ -1,4 +1,4 @@
->start<|config.mrc|config and join merged|3.32|rs
+>start<|config.mrc|config and join merged|3.33|rs
 on *:START: {
   ; Authenticate Host
   if (!$exists(Gerty.Config.ini)) {

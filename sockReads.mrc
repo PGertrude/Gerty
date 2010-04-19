@@ -1,4 +1,4 @@
->start<|sockreads.mrc|compiled sockreads|3.3|rs
+>start<|sockreads.mrc|compiled sockreads|3.31|rs
 on *:sockread:*: {
   var %thread $gettok($sockname,2,46), %command $hget(%thread,command), %file %thread $+ .txt
   if ($sockerr) {
@@ -337,7 +337,7 @@ on *:sockread:*: {
       var %world $cmd(%thread,arg2), %start
       if (%world == World) %start = $bfind(&world2,0,Activity)
       else if (%world == Welt) %start = $bfind(&world2,0,Thema)
-      else if (%world == Serveur) %start = $bfind(&world2,0,Activité)
+      else if (%world == Serveur) %start = $bfind(&world2,0,ActivitÃ©)
       else if (%world == Mundo) %start = $bfind(&world2,0,Tipo)
       var %world = $cmd(%thread,arg2) $+ $iif(%world != Mundo,$chr(32)) $+ $cmd(%thread,arg3)
       ; Get the amount of players.
