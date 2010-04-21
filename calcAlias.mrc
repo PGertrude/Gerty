@@ -176,10 +176,12 @@ multiple {
   return $right($left(%solutions,-7),-7)
 }
 newton {
-  var %x = 20
+  var %x = 20, %xn
   var %a = 0
   while (%a <= 30) {
-    %x = $calc(%x - $+($chr(40),$xcalculate($1,%x),/,$derivative($1,%x),$chr(41)))
+    %xn = $calc(%x - $+($chr(40),$xcalculate($1,%x),/,$derivative($1,%x),$chr(41)))
+    if (%x == %xn) break
+    else %x = %xn
     inc %a
   }
   return $roundErrors($1,%x)
