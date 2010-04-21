@@ -276,7 +276,7 @@ alias skillplan.out {
     set %1 Unranked, $+ $calc(%w) $+ , $+ $calc(%y)
   }
   var %skillinfo = $(% $+ $statnum(%skill),2)
-  var %lev = $virtual($gettok(%skillinfo,3,44))
+  var %lev = $xptolvl($gettok(%skillinfo,3,44))
   var %exp = $gettok(%skillinfo,3,44)
   var %file = %skill $+ .txt
   var %iteminfo = $read(%file, w, * $+ %item $+ *)
@@ -284,7 +284,7 @@ alias skillplan.out {
   var %itemexpe = $gettok(%iteminfo,2,9)
   if (!%iteminfo) { %saystyle Invalid item07 %item $+ . List of valid items available at12 http://p-gertrude.rsportugal.org/gerty/commands.html | goto unset }
   %saystyle  $+ %nick Current  $+ %skill $+  level:07 %lev ( $+ $bytes(%exp,db) $+ ) $chr(124) experience for %amount %itemname $+ 's:07 $bytes($calc( %amount * %itemexpe ),db) $&
-    ( $+ %itemexpe each) $chr(124) resulting level:07 $virtual($calc( %exp + ( %amount * %itemexpe ) )) ( $+ $bytes($calc( %exp + ( %amount * %itemexpe ) ),db) $+ )
+    ( $+ %itemexpe each) $chr(124) resulting level:07 $xptolvl($calc( %exp + ( %amount * %itemexpe ) )) ( $+ $bytes($calc( %exp + ( %amount * %itemexpe ) ),db) $+ )
   :unset
   .hfree $gettok($sockname,2,46)
   unset %*
@@ -313,9 +313,9 @@ alias taskOut {
   .tokenize 44 $20
   var %info = $read(slayer.txt,w,* $+ $replace($hget(%thread,arg3),_,$chr(32)) $+ *)
   var %taskxp = $calc( $gettok(%info,2,9) * $hget(%thread,arg2) )
-  $hget(%thread,out) Next Task:07 $bytes($hget(%thread,arg2),db) $gettok(%info,1,9) | Current Exp:07 $bytes($3,db) (07 $+ $virtual($3) $+ ) | Exp this Task:07 $bytes(%taskxp,db) $&
-    | Exp After Task:07 $bytes($calc($3 + %taskxp),db) | Which is Level:07 $virtual($calc($3 + %taskxp )) $&
-    | With:07 $bytes($calc( $lvltoxp($calc($virtual($calc($3 + %taskxp)) +1)) - ($3 + %taskxp)),db) exp till level07 $calc($virtual($calc($3 + %taskxp)) +1)
+  $hget(%thread,out) Next Task:07 $bytes($hget(%thread,arg2),db) $gettok(%info,1,9) | Current Exp:07 $bytes($3,db) (07 $+ $xptolvl($3) $+ ) | Exp this Task:07 $bytes(%taskxp,db) $&
+    | Exp After Task:07 $bytes($calc($3 + %taskxp),db) | Which is Level:07 $xptolvl($calc($3 + %taskxp )) $&
+    | With:07 $bytes($calc( $lvltoxp($calc($xptolvl($calc($3 + %taskxp)) +1)) - ($3 + %taskxp)),db) exp till level07 $calc($xptolvl($calc($3 + %taskxp)) +1)
   _clearCommand %thread
 }
 alias plural {
