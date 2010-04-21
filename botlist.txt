@@ -1,9 +1,11 @@
 >start<|botlist.txt|list of bots|3.0|param
 Gerty
-[GZ]Gerty
+[SS]Gerty
 [SL]Gerty
-[TL]Gerty
+[EL]Gerty
+[NB]Gerty
 [FF]Gerty
+[ZZ]Gerty
 [GS]Gerty
 [IZ]Gerty
-[ZZ]Gerty
+[GZ]Gerty
