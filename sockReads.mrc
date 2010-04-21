@@ -187,8 +187,8 @@ on *:sockread:*: {
         rscript.singleminigame $sockname $replace(%nick,$chr(32),_) $replace(%skill,$chr(32),_) $hget(%thread,out)
       }
       else {
-        $hget(%thread,out)  $+ %nick 07 $+ %skill | Rank:07 $bytes(%rank,db) | Level:07 %level $iif(%skill != overall,(07 $+ $virtual(%exp) $+ )) | Exp:07 $bytes(%exp,db) $&
-          $iif(%skill != overall,(07 $+ $round($calc(100 * %exp / 13034431 ),1) $+ 07% of 99) | Exp till $calc($virtual(%exp) +1) $+ :07 $bytes($calc($lvltoxp($calc($virtual(%exp) +1)) - %exp),db)))
+        $hget(%thread,out)  $+ %nick 07 $+ %skill | Rank:07 $bytes(%rank,db) | Level:07 %level $iif(%skill != overall,(07 $+ $xptolvl(%exp) $+ )) | Exp:07 $bytes(%exp,db) $&
+          $iif(%skill != overall,(07 $+ $round($calc(100 * %exp / 13034431 ),1) $+ 07% of 99) | Exp till $calc($xptolvl(%exp) +1) $+ :07 $bytes($calc($lvltoxp($calc($xptolvl(%exp) +1)) - %exp),db)))
         rscript.singleskill $sockname $replace(%nick,$chr(160),_) %skill $hget(%thread,out) null
         sockclose $sockname
       }
