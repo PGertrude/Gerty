@@ -12,12 +12,14 @@ timeCount {
   }
   ; 15 second timer
   if ($calc($ctime % 15) == 0) {
-    if ((!$hget(joinqueue,list) || $ctime > $hget(joinqueue,time) || $nick(#gertyDev,0,h) != $hget(joinqueue,num)) && $me == Gerty) {
+    if ($me == Gerty && (!$hget(joinqueue,list) || $ctime > $hget(joinqueue,time) || $nick(#gertyDev,0,h) != $hget(joinqueue,num))) {
       JoinQueueStart
     }
   }
   ; 1 minute timer
-  if ($calc($ctime % 60) == 0) { startGeUpdate }
+  if ($calc($ctime % 60) == 0) {
+    if ($me == Gerty) startGeUpdate
+  }
   ; 5 minute timer
   if ($calc($ctime % 300) == 0) {
     if ($server) {
@@ -66,19 +68,33 @@ bots {
 ;@SYNTAX /_checkMain
 ;@SUMMARY This will halt the script if this client is not found to be the bot with the highest priority in the channel.
 _checkMain {
-  if (!$chan) { return }
-  tokenize 32 $bots
-  var %x 1
-  while (%x <= $0) {
-    if ($($ $+ %x,2) ison $chan && $me != $($ $+ %x,2)) { halt }
-    else if ($me == $($ $+ %x,2)) { return }
-    inc %x
+  if ($isid) {
+    if (!$1) { return $true }
+    tokenize 32 $bots
+    var %x 1
+    while (%x <= $0) {
+      if ($($ $+ %x,2) ison $chan && $me != $($ $+ %x,2)) { return $false }
+      else if ($me == $($ $+ %x,2)) { return $true }
+      inc %x
+    }
+    return $true
   }
-  return
+  else {
+    if (!$chan) { return }
+    tokenize 32 $bots
+    var %x 1
+    while (%x <= $0) {
+      if ($($ $+ %x,2) ison $chan && $me != $($ $+ %x,2)) { halt }
+      else if ($me == $($ $+ %x,2)) { return }
+      inc %x
+    }
+    return
+  }
 }
 ;@SYNTAX $_checkMainReturn(#chan)
 ;@SUMMARY Boolean return style, similar use to the /_checkMain function.
 _checkMainReturn {
+  deprecated _checkMainReturn
   if (!$1) { return $true }
   tokenize 32 $bots
   var %x 1
@@ -435,3 +451,13 @@ parseGe {
 ;@SYNTAX $newThread
 ;@SUMMARY shortcut for creating a new thread id.
 newThread return $+(a,$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9))
+;@SYNTAX /deprecated <command name>
+;@SUMMARY use this to flag deprecated functions, for easy tracking throughout bot.
+deprecated {
+  var %string, %x 1
+  while (%x <= 5) {
+    %string = %string $hget(commands, %x) $+ ,07
+    inc %x
+  }
+  sendToDev use of deprecated function $1 $left(%string, -4)
+}

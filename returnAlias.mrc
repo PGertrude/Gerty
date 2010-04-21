@@ -119,6 +119,7 @@ urlencode {
   return $replace(%a,$chr(32),$chr(43))
 }
 virt {
+  deprecated virt
   if ($1 !isnum) { return 0 }
   var %xp = 0
   var %lvl = 0
@@ -394,7 +395,7 @@ getStat {
   return $gettok($gettok(%stat,%sk,10),3,44)
 }
 get_multiple_prices {
-  var %x = 1, %out, %price, %item, %regex, %thread = a $+ $ran, %url = http://gerty.rsportugal.org/parsers/ge.php?item=
+  var %x = 1, %out, %price, %item, %regex, %thread = $newThread, %url = http://gerty.rsportugal.org/parsers/ge.php?item=
   while (%x <= $0) {
     %item = $($ $+ %x,2)
     %string = $downloadstring(%thread, $+(%url,",%item,"))

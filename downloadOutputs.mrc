@@ -1101,21 +1101,24 @@ alias checkGeUpdate {
     writeini gerty.config.ini GeUpdate Drop $2
     if (!hget(GeUpdate,Drop)) hadd -mu1200 GeUpdate Drop $true
   }
-  if ($hget(GeUpdate,Rise) && $hget(GeUpdate,Drop) && $calc($ctime - $gettok($read(GeUpdate.txt,1),2,124)) > 1260) {
+  if (($hget(GeUpdate,Rise) || $hget(GeUpdate,Drop)) && $calc($ctime - $gettok($read(GeUpdate.txt,1),2,124)) > 1260) {
     hadd -m GeUpdate Rise $false
     hadd -m GeUpdate Drop $false
-    var %x = 1, %chan
-    while ($chan(%x)) {
-      %chan = $v1
-      if ($chanset(%chan,geupdate) == on && $_checkMainReturn(%chan)) {
-        .msg %chan GeUpdate in progress. Lookup update will be completed within 15 minutes and ingame within 5.
-      }
-      inc %x
-    }
+    noop $_network(GeNotifyChannels)
     write -il1 GeUpdate.txt $host(time) $+ $| $+ $gmt $+ $| $+ $ord($host(date)) $host(month).3
     resetPrices
     .timer 1 1200 resetPrices
     runepriceupdater
+  }
+}
+alias GeNotifyChannels {
+  var %x = 1, %chan
+  while ($chan(%x)) {
+    %chan = $v1
+    if ($chanset(%chan,geupdate) == on && $_checkMain(%chan)) {
+      .msg %chan GeUpdate in progress. Lookup update will be completed within 15 minutes and ingame within 5.
+    }
+    inc %x
   }
 }
 ; ml
