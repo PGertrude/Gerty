@@ -119,7 +119,6 @@ urlencode {
   return $replace(%a,$chr(32),$chr(43))
 }
 virt {
-  deprecated virt
   if ($1 !isnum) { return 0 }
   var %xp = 0
   var %lvl = 0
@@ -130,6 +129,7 @@ virt {
   return %lvl
 }
 virtual {
+  deprecated virtual
   if ($1 !isnum) { return 0 }
   var %xp = 0
   var %lvl = 0
