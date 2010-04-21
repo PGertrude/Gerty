@@ -199,7 +199,7 @@ roundErrors {
 }
 derivative return $calc(($xcalculate($1,$2 + 0.01) - $xcalculate($1,$2 - 0.01)) / 0.02)
 xcalculate return $calc($parser($replace($1,x,$calc($2))))
-parser return $regsubex($1-,/((sin|asin|acos|atan|cos|tan|log|sqrt|lvl|l)\050(-?\d+(?:\.\d+)?(?:[\*\/\+-]\d+(?:\.\d+)?)*)\051)/gi,$($\2($calc(\3)) $+ .deg,2))
+parser return $regsubex($1-,/((a?(?:sin|cos|tan)|log|sqrt|lvl|l)\050(-?\d+(?:\.\d+)?(?:[*/+-]\d+(?:\.\d+)?)*)\051)/gi,$($\2($calc(\3)) $+ .deg,2))
 redundant {
   var %temp = $chr(44)
   var %a = 1
