@@ -19,6 +19,7 @@ timeCount {
   ; 1 minute timer
   if ($calc($ctime % 60) == 0) {
     if ($me == Gerty) startGeUpdate
+    sendToDevOnly $findEmpty Channels
   }
   ; 5 minute timer
   if ($calc($ctime % 300) == 0) {
