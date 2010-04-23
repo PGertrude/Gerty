@@ -671,6 +671,36 @@ on *:TEXT:*:*: {
     }
     goto clean
   }
+  ; SPELL
+  else if ($regex($1,/^[!.@](mag(e|ic))?spell?$/Si)) {
+    .tokenize 32 $remove($2-,$chr(44),$chr(36))
+    if ($litecalc($1)) { var %num $v1 | var %spell $2- }
+    else { var %num 1 | var %spell $1- }
+    if ($chr(34) isin %spell) { var %spell $remove(%spell,$chr(34)) | var %exact $true }
+    var %fname $newThread
+    .fopen %fname param.txt
+    var %x 1, %y $lines(param.txt)
+    while (!$feof && %x <= 4 && %y) {
+      var %spel = $fread(%fname)
+      tokenize 9 %spel
+      if ($1 != MAGIC) { dec %y | continue }
+      if ($iif(%exact,$+(%spell,$chr(9)),%spell) isin %spel) {
+        var %spellname $4
+        var %spellexp $calc(%num * $3)
+        var %spelllvl $2
+        var %spellrunes $regsubex($5,/(\d+) (\w+)/ig,$calc(%num * \1) \2)
+        var %spellprice $calc($replace($regsubex(%spellrunes,/(\d+) (\w+)/Sig,$calc( $+(\1,$chr(42),$hget(runeprice,\2 $+ _Rune)) )),$chr(32),$chr(43),$chr(44),$chr(32)))
+        var %spellmax $6
+        var %spellbook $7
+        var %spellother $8
+        %saystyle Magic Params07 %spellname $+(,$iif(%num > 1,$+($chr(40),x,07,%num,,$chr(41),$chr(32))),$chr(124)) Exp:07 $bytes(%spellexp,bd)  $+ $chr(124) Level:07 %spelllvl  $+ $chr(124) Runes:07 $regsubex(%spellrunes,/(\d+) (\w+)(\x2c)?/ig,$bytes(\1,bd) \2 $+ $iif(\3,$+(,\3,07)))  $+ $chr(124) Price:07 $bytes(%spellprice,bd) $+ gp $chr(124) Max hit:07 %spellmax  $+ $chr(124) Spellbook:07 %spellbook  $+ $chr(124) Other info:07 %spellother $+ .
+        inc %x
+      }
+      dec %y
+    }
+    if (%x == 1) { %saystyle 07 $+ $iif(%exact,Exact match $+(07,",%spell,"),%spell) $+  spell not found. }
+    .fclose %fname
+  }
   ; LASTNDAYS
   else if ($regex($1,/^[!@.](l|last)(\d+)([A-Za-z]+)$/Si)) {
     var %time = $regml(2) $+ $regml(3)
