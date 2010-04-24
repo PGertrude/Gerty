@@ -24,14 +24,6 @@ on *:sockopen:*: {
     sockwrite -nt $sockname Host: itemdb-rs.runescape.com
     sockwrite -n $sockname $crlf
   }
-  else if (draynor.* iswm $sockname) {
-    var %string = username= $+ %thread $+ &user_submit=Update%20Signatures!
-    sockwrite -n $sockname POST /signature_updater.php HTTP/1.1
-    sockwrite -n $sockname Host: www.draynor.net
-    sockwrite -n $sockname Content-Length: $len(%string)
-    sockwrite -n $sockname Content-Type: application/x-www-form-urlencoded
-    sockwrite -n $sockname $crlf %string
-  }
   else if (drop.* iswm $sockname) {
     sockwrite -n $sockname GET /monsters.php?search_area=name&search_term= $+ $hget(%thread,npc) HTTP/1.0
     sockwrite -n $sockname host: www.zybez.net
