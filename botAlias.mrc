@@ -15,6 +15,7 @@ timeCount {
     if ($me == Gerty && (!$hget(joinqueue,list) || $ctime > $hget(joinqueue,time) || $nick(#gertyDev,0,h) != $hget(joinqueue,num))) {
       JoinQueueStart
     }
+    if (Gerty !ison #gertyDev) { nick Gerty }
   }
   ; 1 minute timer
   if ($calc($ctime % 60) == 0) {
@@ -138,8 +139,8 @@ _throw {
 ;@SYNTAX /_network <command>
 ;@SUMMARY Will pass a command onto all bots in the network. Bots must be in the dev channel to recieve the message.
 _network {
-  [ [ $1 ] ]
   sendToDevOnly raw $1
+  [ [ $1 ] ]
 }
 ;@SYNTAX $host(<timespan>)[.3]
 ;@SUMMARY Returns the UTC DateTime in the selected format.
