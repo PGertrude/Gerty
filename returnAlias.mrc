@@ -332,13 +332,13 @@ swapTime {
   return %days $+ d %time
 }
 ;@SYNTAX $param([skill],<item>)[.prop]
-;@SUMMERY No $prop specified or number 1-20: Output: Skill;lvl;exp;item,Skill;lvl;exp;item, etc - Max 20 or whichever $prop nr specified.
+;@SUMMARY No $prop specified or number 1-20: Output: Skill;lvl;exp;item,Skill;lvl;exp;item, etc - Max 20 or whichever $prop nr specified.
 ;@PARAM $prop: .skill .lvl .exp .item - Outputs specified item on first match.
 ;@NOTE Skill and $prop optional.
 param {
-  if ($prop >= 1 && $prop <= 20) { var %num = $prop }
-  elseif ($prop isnum || !$prop) { var %num = 20 }
-  var %ran = $ran
+  if ($prop isnum 1-20) { var %num = $prop }
+  else { var %num = 20 }
+  var %ran = $ran, %results
   if ($2) { var %skill = $1, %item = $2 }
   else var %item $1
   .fopen param $+ %ran param.txt
@@ -351,10 +351,11 @@ param {
       }
     }
     else {
-      if (!%skill || %skill == $1) && ($+(*,%item,*) iswm $4) {
+      if (!%skill || %skill == $1) && (%item isin $4) {
         var %output = $+(%output,$iif(%output,$chr(44)),$1,;,$2,;,$3,;,$4)
+        inc %results
       }
-      if (%num <= $calc($count(%output,$chr(44)) + 1)) break
+      if (%num == %results) break
     }
   }
   .fclose param $+ %ran
