@@ -1,4 +1,4 @@
->start<|downloadoutputs.mrc|compiled parser outputs|3.58|rs
+>start<|downloadoutputs.mrc|compiled parser outputs|3.59|rs
 ; CLAN
 alias getClans {
   var %user = $1, %out = $2 $3, %clan = $4, %thread = $5
@@ -259,7 +259,7 @@ alias skillplan.out {
     }
   }
   if ($gettok(%1,2,44) < 100) {
-    var %v = 24
+    var %v = 25
     var %w = 0
     while (%v > 0) {
       var %w = %w + $remove($gettok(% [ $+ [ $calc(%v +1) ] ],2,44),-)
@@ -267,7 +267,7 @@ alias skillplan.out {
       if ($gettok(% [ $+ [ $calc(%v +1) ] ],2,44) == -1 && %v == 4) { set %5 Unranked,10,1154 | var %w = %w + 9 }
       dec %v 1
     }
-    var %x = 24
+    var %x = 25
     var %y = 0
     while (%x > 0) {
       var %y = %y + $replace($gettok(% [ $+ [ $calc(%x +1) ] ],3,44),-1,0)
@@ -278,11 +278,14 @@ alias skillplan.out {
   var %skillinfo = $(% $+ $statnum(%skill),2)
   var %lev = $xptolvl($gettok(%skillinfo,3,44))
   var %exp = $gettok(%skillinfo,3,44)
-  var %file = %skill $+ .txt
-  var %iteminfo = $read(%file, w, * $+ %item $+ *)
-  var %itemname = $gettok(%iteminfo,1,9)
-  var %itemexpe = $gettok(%iteminfo,2,9)
-  if (!%iteminfo) { %saystyle Invalid item07 %item $+ . List of valid items available at12 http://p-gertrude.rsportugal.org/gerty/commands.html | goto unset }
+  if ($param(%skill, %item).1) {
+    var %itemname = $gettok($v1,4,59)
+    var %itemexpe = $gettok($v1,3,59)
+  }
+  else {
+    %saystyle Invalid item07 %item $+ . List of valid items available at 12http://gerty.rsportugal.org/param.html
+    goto unset
+  }
   %saystyle  $+ %nick Current  $+ %skill $+  level:07 %lev ( $+ $bytes(%exp,db) $+ ) $chr(124) experience for %amount %itemname $+ 's:07 $bytes($calc( %amount * %itemexpe ),db) $&
     ( $+ %itemexpe each) $chr(124) resulting level:07 $xptolvl($calc( %exp + ( %amount * %itemexpe ) )) ( $+ $bytes($calc( %exp + ( %amount * %itemexpe ) ),db) $+ )
   :unset
@@ -868,24 +871,16 @@ alias stats {
       var %items = (07 $+ $bytes(%itemstogo,db) items to go.)
     }
     else if (%param != null) {
-      var %file = %skill $+ .txt
-      .fopen %socket %file
-      if ($ferr) { goto skillreply }
-      while (!$feof) {
-        var %line = $fread(%socket)
-        if (%param isin %line) {
-          var %itemstogo = $ceil($calc( %exptogo / $gettok(%line,2,9) ))
-          %param = $gettok(%line,1,9)
-          var %items = (07 $+ $bytes(%itemstogo,db) $gettok(%line,1,9) $+ )
-          break
-        }
+      if ($param(%skill, %param).1) {
+        var %itemstogo = $ceil($calc( %exptogo / $gettok($v1,3,59) ))
+        %param = $gettok($v1,4,59)
+        var %items = (07 $+ $bytes(%itemstogo,db) $gettok($v1,4,59) $+ )
       }
       if (!%itemstogo) { var %items = (Unknown Item) }
       else if (%presetparam == no && $aLfAddress(%nick)) {
         if (!$rowExists(users, fingerprint, $aLfAddress(%nick))) { noop $_network(noop $!sqlite_query(1, INSERT INTO users (fingerprint, rsn) VALUES (' $+ $aLfAddress(%nick) $+ ',' $+ %nick $+ ');)) }
         noop $_network(noop $!setStringParameter( users , $aLfAddress(%nick) , %skill , items , %param , $false ))
       }
-      .fclose %socket
     }
     :skillreply
     %saystyle %info %items
@@ -1090,9 +1085,9 @@ alias alog-r {
   _clearCommand %thread
 }
 ; GeUpdate
-alias startGeUpdate noop $download.break(checkGeUpdate,a $+ $ticks,http://SSElessar.net/parser/gulist.php)
+alias startGeUpdate noop $download.break(checkGeUpdate, $newThread, http://SSElessar.net/parser/gulist.php)
 alias checkGeUpdate {
-  tokenize 10 $1
+  tokenize 10 $1-
   if ($1 && $1 != $readini(gerty.config.ini,GeUpdate,Rise)) {
     writeini gerty.config.ini GeUpdate Rise $1
     if (!hget(GeUpdate,Rise)) hadd -mu1200 GeUpdate Rise $true
@@ -1105,13 +1100,13 @@ alias checkGeUpdate {
     hadd -m GeUpdate Rise $false
     hadd -m GeUpdate Drop $false
     noop $_network(GeNotifyChannels)
-    write -il1 GeUpdate.txt $host(time) $+ $| $+ $gmt $+ $| $+ $ord($host(date)) $host(month).3
     resetPrices
     .timer 1 1200 resetPrices
     runepriceupdater
   }
 }
 alias GeNotifyChannels {
+  write -il1 GeUpdate.txt $host(time) $+ $| $+ $gmt $+ $| $+ $ord($host(date)) $host(month).3
   var %x = 1, %chan
   while ($chan(%x)) {
     %chan = $v1
