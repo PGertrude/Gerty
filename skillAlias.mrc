@@ -25,7 +25,7 @@ skillNames {
   %skills = %skills $+ |cok|cook|cooking|coo
   %skills = %skills $+ |su|sum|summy|summon|summoning
   %skills = %skills $+ |oa|overall|total
-  %skills = %skills $+ |du|dun|dungeon|dungeoneering
+  %skills = %skills $+ |du|dg|dun|dung|dungeon|dungeoneering
   return %skills
 }
 compares {
@@ -53,7 +53,7 @@ compares {
   if ($regex($1,/^(wc|wcing|wood|woodcutting|woodcut)$/Si)) { return Woodcutting }
   if ($regex($1,/^(cok|cook|cooking|coo)$/Si)) { return Cooking }
   if ($regex($1,/^(su|sum|summy|summon|summoning)$/Si)) { return Summoning }
-  if ($regex($1,/^(du|dun|dungeon|dungeoneering)$/Si)) { return Dungeoneering }
+  if ($regex($1,/^(du|dg|dun|dung|dungeon|dungeoneering)$/Si)) { return Dungeoneering }
   if ($regex($1,/^(oa|overall|total)$/Si)) { return Overall }
   if ($regex($1,/^(bh|bo|bount|bounty|bountyhunter|Bounty Hunter)$/Si)) { return Bounty Hunter }
   if ($regex($1,/^(bhr|bor|bountrogue|bountyrogue|bountyhunterrogue|rogue|rogues|Bounty Hunter Rogues)$/Si)) { return Bounty Hunter Rogues }
@@ -98,7 +98,7 @@ lookups {
   if ($regex($1,/^(wc|wcing|wood|woodcutting|woodcut)$/Si)) { return Woodcutting }
   if ($regex($1,/^(cok|cook|cooking|coo)$/Si)) { return Cooking }
   if ($regex($1,/^(su|sum|summy|summon|summoning)$/Si)) { return Summoning }
-  if ($regex($1,/^(du|dun|dungeon|dungeoneering)$/Si)) { return Dungeoneering }
+  if ($regex($1,/^(du|dg|dun|dung|dungeon|dungeoneering)$/Si)) { return Dungeoneering }
   if ($regex($1,/^(oa|overall|total)$/Si)) { return Overall }
   if ($regex($1,/^(bh|bo|bount|bounty|bountyhunter|Bounty Hunter)$/Si)) { return Bounty Hunter }
   if ($regex($1,/^(bhr|bor|bountrogue|bountyrogue|bountyhunterrogue|rogue|rogues|Bounty Hunter Rogues)$/Si)) { return Bounty Hunter Rogues }
@@ -142,7 +142,7 @@ scores {
   if ($regex($1,/^(wc|wcing|wood|woodcutting|woodcut)$/Si)) { return Woodcutting }
   if ($regex($1,/^(cok|cook|cooking|coo)$/Si)) { return Cooking }
   if ($regex($1,/^(su|sum|summy|summon|summoning)$/Si)) { return Summoning }
-  if ($regex($1,/^(du|dun|dungeon|dungeoneering)$/Si)) { return Dungeoneering }
+  if ($regex($1,/^(du|dg|dun|dung|dungeon|dungeoneering)$/Si)) { return Dungeoneering }
   if ($regex($1,/^(oa|overall|total)$/Si)) { return Overall }
   if ($regex($1,/^(bh|bo|bount|bounty|bountyhunter|Bounty Hunter)$/Si)) { return Bounty Hunter }
   if ($regex($1,/^(bhr|bor|bountrogue|bountyrogue|bountyhunterrogue|rogue|rogues|Bounty Hunter Rogues)$/Si)) { return Bounty Hunter Rogues }
@@ -179,7 +179,7 @@ skills {
   if ($regex($1,/^(wc|wcing|wood|woodcutting|woodcut)$/Si)) { return Woodcutting }
   if ($regex($1,/^(cok|cook|cooking|coo)$/Si)) { return Cooking }
   if ($regex($1,/^(su|sum|summy|summon|summoning)$/Si)) { return Summoning }
-  if ($regex($1,/^(du|dun|dungeon|dungeoneering)$/Si)) { return Dungeoneering }
+  if ($regex($1,/^(du|dg|dun|dung|dungeon|dungeoneering)$/Si)) { return Dungeoneering }
   if ($regex($1,/^(oa|overall|total)$/Si)) { return Overall }
 }
 minigames {
