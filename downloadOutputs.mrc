@@ -1,4 +1,4 @@
->start<|downloadoutputs.mrc|compiled parser outputs|3.59|rs
+>start<|downloadoutputs.mrc|compiled parser outputs|3.6|rs
 ; CLAN
 alias getClans {
   var %user = $1, %out = $2 $3, %clan = $4, %thread = $5
@@ -1008,7 +1008,7 @@ alias youtube {
   else {
     tokenize 10 $2-
     var %x = 1
-    while ($($ $+ %x,2) != END) {
+    while ($($ $+ %x,2) != END && %x <= 100) {
       var %string = $($ $+ %x,2)
       if (TITLE:* iswm %string) var %title = Title:07 $gettok(%string,2-,32)
       if (DURATION:* iswm %string) var %dur = Duration: $regsubex($duration($gettok(%string,2,32),1),/(\d+)/g,$+(07,\1,))
