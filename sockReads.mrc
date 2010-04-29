@@ -1,4 +1,4 @@
->start<|sockreads.mrc|compiled sockreads|3.31|rs
+>start<|sockreads.mrc|compiled sockreads|3.35|rs
 on *:sockread:*: {
   var %thread $gettok($sockname,2,46), %command $hget(%thread,command), %file %thread $+ .txt
   if ($sockerr) {
@@ -72,7 +72,7 @@ on *:sockread:*: {
       var %url = $nohtml($regsubex(%url,/(?:\\u(.{4})|%(.{2}))/g,$chr($base(\1,16,10))))
       if (%url) {
         if ($hget(%thread,page) == video) { %url = $regsubex(%url,/^.+?q=(.+?)&(.+?)$/,\1) }
-        $hget(%thread,out) Google $hget(%thread,page) Search " $+ $replace($hget(%thread,search),+,$chr(32)) $+ ":07 %title url:12 %url content:07 %content
+        $hget(%thread,out) Google $hget(%thread,page) Search " $+ $replace($hget(%thread,search),+,$chr(32)) $+ ":07 %title url:12 %url content:07 $fix_special_html(%content)
       }
       else { $hget(%thread,out) No search results for $+(",$replace($hget(%thread,search),+,$chr(32)),".) }
       if ($hget(%thread,page) == video) {
