@@ -1,4 +1,4 @@
->start<|sockOpens.mrc|compiled sockopens|3.1|rs
+>start<|sockOpens.mrc|compiled sockopens|3.25|rs
 on *:sockopen:*: {
   var %thread = $gettok($sockname,2,46)
   if ($sockerr) {
@@ -65,7 +65,7 @@ on *:sockopen:*: {
     sockwrite -n $sockname $crlf
   }
   else if (google.* iswm $sockname) {
-    sockwrite -n $sockname GET /ajax/services/search/ $+ $hget(%thread,page) $+ ?v=1.0&q= $+ $hget(%thread,search) HTTP/1.1
+    sockwrite -n $sockname GET /ajax/services/search/ $+ $hget(%thread,page) $+ ?v=1.0&q= $+ $urlencode($hget(%thread,search)) HTTP/1.1
     sockwrite -n $sockname Referer: http://gerty.rsportugal.org/
     sockwrite -n $sockname User-Agent: curl/7.18.2 (i486-pc-linux-gnu) libcurl/7.18.2 OpenSSL/0.9.8g zlibidn/1.8
     sockwrite -n $sockname Host: ajax.googleapis.com
@@ -119,7 +119,7 @@ on *:sockopen:*: {
   else if (runehcalc.* iswm $sockname) {
     sockwrite -n $sockname GET /clans/ml.php?clan= $+ $hget(%thread,clan) HTTP/1.1
     sockwrite -n $sockname Host: www5.runehead.com $+ $crlf $+ $crlf
-  }  
+  }
   else if (runeprice.rune1 == $sockname) {
     sockwrite -nt $sockname GET /results.ws?query="+Rune"&price=0-500&members= HTTP/1.1
     sockwrite -nt $sockname Host: itemdb-rs.runescape.com
@@ -175,11 +175,6 @@ on *:sockopen:*: {
     sockwrite -n $sockname Host: www.zybez.net
     sockwrite -n $sockname $crlf
   }
-
-
-
-
-
   return
   :error
   _throw $sockname %thread
