@@ -1,4 +1,4 @@
->start<|triggers.mrc|Entry point|3.53|rs
+>start<|triggers.mrc|Entry point|3.55|rs
 on *:TEXT:*:*: {
   if ($left($1,1) !isin !.@) {
     var %botCheck = $botid($1)
@@ -136,7 +136,7 @@ on *:TEXT:*:*: {
   ; GEUPDATE
   else if ($regex($1,/^[!@.]ge?u(pdate)?$/Si)) {
     var %output, %x = 2, %update
-    %output = Recent Ge Updates (UK): $gettok($read(geupdate.txt,1),3,124) $+ 07 $gettok($read(geupdate.txt,1),1,124) $+  ( $+ $duration($calc($ctime($date $time) - $gettok($read(geupdate.txt,1),2,124))) ago);
+    %output = Recent Ge Updates (UK): $gettok($read(geupdate.txt,1),3,124) $+ 07 $gettok($read(geupdate.txt,1),1,124) $+  ( $+ $duration($calc($gmt - $gettok($read(geupdate.txt,1),2,124))) ago);
     while (%x <= 7) {
       if (!$read(geupdate.txt,%x)) { break }
       %update = $read(geupdate.txt,%x)
@@ -447,7 +447,7 @@ on *:TEXT:*:*: {
     else {
       if ($2) {
         hadd -m %thread page web
-        hadd -m %thread search $urlencode($2-)
+        hadd -m %thread search $2-
       }
       else {
         %saystyle Syntax Error: !google [-vi] <search term> (-i image search, -v video search)
@@ -1083,7 +1083,7 @@ on *:TEXT:*:*: {
     if ($admin($nick)) {
       var %join = $regsubex($read(Perform.txt,3), /^JOIN /, $null)
       if (!%join) { %join = #gerty }
-      var %reg /^MODE $me $+ /
+      var %reg /^MODE $!!me /
       var %mode = $regsubex($read(Perform.txt,2), %reg, $null)
       if (!%mode) { %mode = +Bp }
       var %pass = $regsubex($read(Perform.txt,1), /^NS ID /, $null)
