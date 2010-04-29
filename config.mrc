@@ -1,4 +1,4 @@
->start<|config.mrc|config and join merged|3.33|rs
+>start<|config.mrc|config and join merged|3.35|rs
 on *:START: {
   ; Authenticate Host
   if (!$exists(Gerty.Config.ini)) {
@@ -30,11 +30,6 @@ on *:QUIT: {
     .hsave spelluse spelluse.txt
     .hsave commands commands.txt
   }
-  /* looping through channels needed
-  else if ($nick(#,0) < 5) {
-    part # Channel has fallen below the user limit (07 $+ $chanset(#,users) $+ ).
-  }
-  */
 }
 on *:DISCONNECT: {
   if ($nick != $me) return
@@ -45,6 +40,7 @@ on *:DISCONNECT: {
   .hsave commands commands.txt
 }
 on *:CONNECT: {
+  remini Gerty.Config.ini GeUpdate
   if ($network == SwiftIrc) {
     ; Join #Gerty and Load Addressess
     join #gerty,#gertyDev
