@@ -1,4 +1,4 @@
->start<|botAlias.mrc|internal bot commands|3.28|a
+>start<|botAlias.mrc|internal bot commands|3.3|a
 ;@SYNTAX /timeCount
 ;@SUMMARY The main timer for the program, all automated events processed in here.
 timeCount {

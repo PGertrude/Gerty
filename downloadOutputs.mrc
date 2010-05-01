@@ -1,4 +1,4 @@
->start<|downloadoutputs.mrc|compiled parser outputs|3.6|rs
+>start<|downloadoutputs.mrc|compiled parser outputs|3.64|rs
 ; CLAN
 alias getClans {
   var %user = $1, %out = $2 $3, %clan = $4, %thread = $5
@@ -314,11 +314,12 @@ alias taskOut {
   var %thread $1, %hiscores $2-
   .tokenize 10 %hiscores
   .tokenize 44 $20
-  var %info = $read(slayer.txt,w,* $+ $replace($hget(%thread,arg3),_,$chr(32)) $+ *)
-  var %taskxp = $calc( $gettok(%info,2,9) * $hget(%thread,arg2) )
-  $hget(%thread,out) Next Task:07 $bytes($hget(%thread,arg2),db) $gettok(%info,1,9) | Current Exp:07 $bytes($3,db) (07 $+ $xptolvl($3) $+ ) | Exp this Task:07 $bytes(%taskxp,db) $&
-    | Exp After Task:07 $bytes($calc($3 + %taskxp),db) | Which is Level:07 $xptolvl($calc($3 + %taskxp )) $&
-    | With:07 $bytes($calc( $lvltoxp($calc($xptolvl($calc($3 + %taskxp)) +1)) - ($3 + %taskxp)),db) exp till level07 $calc($xptolvl($calc($3 + %taskxp)) +1)
+  var %info $param(slayer, $replace($hget(%thread,arg3),_,$chr(32)))
+  var %taskxp $calc( $gettok(%info,3,59) * $hget(%thread,arg2) )
+  var %newLvl $xptolvl($calc($3 + %taskxp))
+  $hget(%thread,out) Next Task:07 $bytes($hget(%thread,arg2),db) $gettok(%info,4,59) | Current Exp:07 $bytes($3,db) (07 $+ $xptolvl($3) $+ ) | Exp this Task:07 $bytes(%taskxp,db) $&
+    | Exp After Task:07 $bytes($calc($3 + %taskxp),db) | Which is Level:07 %newLvl $&
+    | With:07 $bytes($calc( $lvltoxp($calc(%newLvl +1)) - ($3 + %taskxp)),db) exp till level07 $calc(%newLvl +1)
   _clearCommand %thread
 }
 alias plural {

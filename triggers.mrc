@@ -1,4 +1,4 @@
->start<|triggers.mrc|Entry point|3.55|rs
+>start<|triggers.mrc|Entry point|3.57|rs
 on *:TEXT:*:*: {
   if ($left($1,1) !isin !.@) {
     var %botCheck = $botid($1)
