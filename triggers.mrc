@@ -1,4 +1,4 @@
->start<|triggers.mrc|Entry point|3.57|rs
+>start<|triggers.mrc|Entry point|3.6|rs
 on *:TEXT:*:*: {
   if ($left($1,1) !isin !.@) {
     var %botCheck = $botid($1)
@@ -95,8 +95,13 @@ on *:TEXT:*:*: {
     if (!$2) { %saystyle Syntax Error: !defname <rsn> | goto clean }
     if ($regsubex($2-,/\W/,_) isin $readini(Gerty.Config.ini,admin,rsn) && !$admin($nick)) { %saystyle This RSN is protected, please Contact an Admin if this is your RSN. | goto clean }
     var %nick $regsubex($caps($left($2-,12)),/\W/g,_)
-    noop $_network(noop $!setDefname( $aLfAddress($nick) , %nick ))
-    %saystyle Your default RuneScape name is now07 %nick $+ . This RSN is associated with the address07 $aLfAddress($nick,3) $+ .
+    if ($alfAddress($nick)) {
+      noop $_network(noop $!setDefname( $v1 , %nick ))
+      %saystyle Your default RuneScape name is now07 %nick $+ . This RSN is associated with the address07 $aLfAddress($nick,3) $+ .
+    }
+    else {
+      %saystyle Error retrieving your address: please try the command again.
+    }
     goto clean
   }
   ; RSN
