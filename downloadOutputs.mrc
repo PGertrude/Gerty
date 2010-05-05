@@ -1,4 +1,4 @@
->start<|downloadoutputs.mrc|compiled parser outputs|3.64|rs
+>start<|downloadoutputs.mrc|compiled parser outputs|3.65|rs
 ; CLAN
 alias getClans {
   var %user = $1, %out = $2 $3, %clan = $4, %thread = $5
@@ -314,7 +314,7 @@ alias taskOut {
   var %thread $1, %hiscores $2-
   .tokenize 10 %hiscores
   .tokenize 44 $20
-  var %info $param(slayer, $replace($hget(%thread,arg3),_,$chr(32)))
+  var %info $param(slayer, $replace($hget(%thread,arg3),_,$chr(32))).1
   var %taskxp $calc( $gettok(%info,3,59) * $hget(%thread,arg2) )
   var %newLvl $xptolvl($calc($3 + %taskxp))
   $hget(%thread,out) Next Task:07 $bytes($hget(%thread,arg2),db) $gettok(%info,4,59) | Current Exp:07 $bytes($3,db) (07 $+ $xptolvl($3) $+ ) | Exp this Task:07 $bytes(%taskxp,db) $&
@@ -1089,11 +1089,11 @@ alias alog-r {
 alias startGeUpdate noop $download.break(checkGeUpdate, $newThread, http://SSElessar.net/parser/gulist.php)
 alias checkGeUpdate {
   tokenize 10 $1-
-  if ($1 && $1 != $readini(gerty.config.ini,GeUpdate,Rise)) {
+  if ($1 && $readini(gerty.config.ini,GeUpdate,Rise) && $1 != $readini(gerty.config.ini,GeUpdate,Rise)) {
     writeini gerty.config.ini GeUpdate Rise $1
     if (!hget(GeUpdate,Rise)) hadd -mu1200 GeUpdate Rise $true
   }
-  if ($2 && $2 != $readini(gerty.config.ini,GeUpdate,Drop)) {
+  if ($2 && $readini(gerty.config.ini,GeUpdate,Drop) && $2 != $readini(gerty.config.ini,GeUpdate,Drop)) {
     writeini gerty.config.ini GeUpdate Drop $2
     if (!hget(GeUpdate,Drop)) hadd -mu1200 GeUpdate Drop $true
   }
@@ -1101,13 +1101,13 @@ alias checkGeUpdate {
     hadd -m GeUpdate Rise $false
     hadd -m GeUpdate Drop $false
     noop $_network(GeNotifyChannels)
-    resetPrices
-    .timer 1 1200 resetPrices
     runepriceupdater
   }
 }
 alias GeNotifyChannels {
   write -il1 GeUpdate.txt $host(time) $+ $| $+ $gmt $+ $| $+ $ord($host(date)) $host(month).3
+  resetPrices
+  .timer 1 1200 resetPrices
   var %x = 1, %chan
   while ($chan(%x)) {
     %chan = $v1
