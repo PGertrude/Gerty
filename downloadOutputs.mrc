@@ -1,4 +1,4 @@
->start<|downloadoutputs.mrc|compiled parser outputs|3.65|rs
+>start<|downloadoutputs.mrc|compiled parser outputs|3.66|rs
 ; CLAN
 alias getClans {
   var %user = $1, %out = $2 $3, %clan = $4, %thread = $5
@@ -985,7 +985,7 @@ alias stats {
     var %member = Member: $iif($2 >= %min,reqs met (07 $+ $calc($2 - %min) above $+ );,07 $+ $calc(%min - $2) to go;)
     inc %min 150
     var %elite = Elite: $iif($2 >= %min,reqs met (07 $+ $calc($2 - %min) above $+ );,07 $+ $calc(%min - $2) to go;)
-    %saystyle  $+ %nick $+  Supreme Skillers Reqs %junior %member %elite | Forum: 12www.supremeskillers.com | Memberlist: 12http://runehead.com/clans/ml.php?clan=lovvel
+    %saystyle  $+ %nick $+  Supreme Skillers Reqs %junior %member %elite | Forum: 12www.supremeskillers.co.nr | Memberlist: 12http://runehead.com/clans/ml.php?clan=supreme
     goto unset
   }
   %saystyle Syntax Error: !<skill> user @param #goal
@@ -1090,11 +1090,9 @@ alias startGeUpdate noop $download.break(checkGeUpdate, $newThread, http://SSEle
 alias checkGeUpdate {
   tokenize 10 $1-
   if ($1 && $readini(gerty.config.ini,GeUpdate,Rise) && $1 != $readini(gerty.config.ini,GeUpdate,Rise)) {
-    writeini gerty.config.ini GeUpdate Rise $1
     if (!hget(GeUpdate,Rise)) hadd -mu1200 GeUpdate Rise $true
   }
   if ($2 && $readini(gerty.config.ini,GeUpdate,Drop) && $2 != $readini(gerty.config.ini,GeUpdate,Drop)) {
-    writeini gerty.config.ini GeUpdate Drop $2
     if (!hget(GeUpdate,Drop)) hadd -mu1200 GeUpdate Drop $true
   }
   if (($hget(GeUpdate,Rise) || $hget(GeUpdate,Drop)) && $calc($ctime - $gettok($read(GeUpdate.txt,1),2,124)) > 1260) {
@@ -1103,6 +1101,8 @@ alias checkGeUpdate {
     noop $_network(GeNotifyChannels)
     runepriceupdater
   }
+  writeini gerty.config.ini GeUpdate Rise $1
+  writeini gerty.config.ini GeUpdate Drop $2
 }
 alias GeNotifyChannels {
   write -il1 GeUpdate.txt $host(time) $+ $| $+ $gmt $+ $| $+ $ord($host(date)) $host(month).3
