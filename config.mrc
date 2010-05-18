@@ -178,7 +178,7 @@ ctcp *:invite:*:{
   if ($hget(buffer,$3)) halt
   hadd -mu10 buffer $3 $true
   if ($me == Gerty) {
-    if ($chanset(#,blacklist) == yes) {
+    if ($gettok($chanset(#,blacklist),1,59) == yes) {
       .notice $2 Channel $3 is blacklisted. Speak to an admin to remove the blacklist.
       sendToDevOnly Failed Join:07 $3 Reason:07 Channel is blacklisted.
       halt
@@ -193,7 +193,7 @@ ctcp *:invite:*:{
   }
   elseif (Gerty ison #gertyDev) { ctcp Gerty INVITE $2 $3 }
   elseif ($chan(0) < 30) {
-    if ($chanset($3,blacklist) == yes) {
+    if ($gettok($chanset($3,blacklist),1,59) == yes) {
       .notice $2 Channel $3 is blacklisted. Speak to an admin to remove the blacklist.
       sendToDevOnly Failed Join:07 $3 Reason:07 Channel is blacklisted.
       halt

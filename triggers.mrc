@@ -33,7 +33,6 @@ on *:TEXT:*:*: {
         }
         inc %x
       }
-      %saystyle %output
     }
     else {
       if ($2) {
@@ -46,7 +45,7 @@ on *:TEXT:*:*: {
             }
             inc %x
           }
-          %saystyle %output
+          %saystyle %output $iif($gettok($chanset($2,blacklist),1,59) == yes,blacklist reason:07 $iif($gettok($chanset($2,blacklist),2,59),$v1,Unknown))
           goto clean
         }
       }
@@ -1432,11 +1431,24 @@ on *:TEXT:*:*: {
       %saystyle User $2 added to ignore.
       goto clean
     }
+    ; UNIGNORE
+    if ($regex($1,/^[!@.]unignore$/Si)) {
+      noop $_network(ignore -r $2)
+      noop $_network(ignore -r $!address($2,3))
+      %saystyle User $2 removed from ignore.
+      goto clean
+    }
     ; BLACKLIST
     else if ($regex($1,/^[!@.]b(lack)?l(ist)?$/Si)) {
-      noop $_network(noop $!dbUpdate(channel, `channel`=' $+ $2 $+ ', blacklist, yes))
+      noop $_network(noop $!dbUpdate(channel, `channel`=' $+ $2 $+ ', blacklist, yes; $+ $iif($3,$3,Unknown)))
       %saystyle Channel $2 blacklisted.
       if ($me ison $2) { part $2 Blacklisted. }
+      goto clean
+    }
+    ; UNBLACKLIST
+    else if ($regex($1,/^[!@.]unb(lack)?l(ist)?$/Si)) {
+      noop $_network(noop $!dbUpdate(channel, `channel`=' $+ $2 $+ ', blacklist, no))
+      %saystyle Channel $2 unblacklisted.
       goto clean
     }
     ; ADD ADMIN

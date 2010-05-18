@@ -267,6 +267,7 @@ on *:sockread:*: {
       if (Hunter isin %rscript) { set %23 $gettok(%rscript,3,58) }
       if (Construction isin %rscript) { set %24 $gettok(%rscript,3,58) }
       if (Summoning isin %rscript) { set %25 $gettok(%rscript,3,58) }
+      if (Dungeoneering isin %rscript) { set %26 $gettok(%rscript,3,58) }
     }
     if ($hget(%thread,time) isin %rscript && gain isin %rscript) {
       if (Overall isin %rscript) { set %r1 $gettok(%rscript,4,58) }
@@ -294,6 +295,7 @@ on *:sockread:*: {
       if (Hunter isin %rscript) { set %r23 $gettok(%rscript,4,58) }
       if (Construction isin %rscript) { set %r24 $gettok(%rscript,4,58) }
       if (Summoning isin %rscript) { set %r25 $gettok(%rscript,4,58) }
+      if (Dungeoneering isin %rscript) { set %r26 $gettok(%rscript,4,58) }
     }
     if ($hget(%thread,time2) && $v1 isin %rscript && gain isin %rscript) {
       if (Overall isin %rscript) { set %r26 $gettok(%rscript,4,58) }
@@ -321,6 +323,7 @@ on *:sockread:*: {
       if (Hunter isin %rscript) { set %r48 $gettok(%rscript,4,58) }
       if (Construction isin %rscript) { set %r49 $gettok(%rscript,4,58) }
       if (Summoning isin %rscript) { set %r50 $gettok(%rscript,4,58) }
+      if (Dungeoneering isin %rscript) { set %r51 $gettok(%rscript,4,58) }
     }
     if (%rscript == 0:-1) { $hget(%thread,out) $hget(%thread,nick) Has not been tracked by Runescript. $hget(%thread,nick) is now being Tracked. | goto unset }
     if (PHP: Invalid argument supplied for foreach isin %rscript) { $hget(%thread,out) There is a gap in RScripts Data, data for $hget(%thread,nick) could not be found. | goto unset }

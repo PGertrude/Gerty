@@ -2,7 +2,7 @@
 calcreg {
   var %string = $1
   %string = $getStats($1, $rsn($nick))
-  %string = $replace(%string,Q,£,xp,A,ge,Q,price,Q,pi,~,p,&,ans,p)
+  %string = $replace(%string,£,$null,~,$null,&,$null,Q,£,xp,A,ge,Q,price,Q,pi,~,p,&,ans,p)
   %string = $regsubex(%string,/(?:([\dep~kmbx\x29])([\x28])|([\x29])([\dep~xastcl])|([ep~])([ep~xastcl])|(x)([e~ctsxl])|(\d)([ep~xastcl]))/gi,\1*\2)
   %string = $regsubex(%string,/(?:([\dep~kmbx\x29])([\x28])|([\x29])([\dep~xastcl])|([ep~])([ep~xastcl])|(x)([e~ctsxl])|(\d)([ep~xastcl]))/gi,\1*\2)
   %string = $regsubex(%string,/([^\+\-\*\/\^]|)Q\(([^\x29]+)\)/g,$chr(40) $+ $iif(\1,\1*,1*) $+ $price($replace(\2,&,p,~,pi,q,ge,£,q)) $+ $chr(41))

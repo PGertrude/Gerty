@@ -497,7 +497,7 @@ alias lastNdays {
   else {
     var %cmb = $sort(Attack $calc(%2 - %r27) $calc(%r2 - %r27) Defence $calc(%3 - %r28) $calc(%r3 - %r28) Strength $calc(%4 - %r29) $calc(%r4 - %r29) Hitpoints $calc(%5 - %r30) $calc(%r5 - %r30) Range $calc(%6 - %r31) $calc(%r6 - %r31) Pray $calc(%7 - %r32) $calc(%r7 - %r32) Mage $calc(%8 - %r33) $calc(%r8 - %r33) Summon $calc(%25 - %r50) $calc(%r25 - %r50))
     if (%cmb) { var %out1 = $hget($gettok($sockname,2,46),out)  $+ $hget($gettok($sockname,2,46),nick) Combat  $+ $hget($gettok($sockname,2,46),command) $+ : %cmb }
-    var %others = $sort(Cook $calc(%9 - %r34) $calc(%r9 - %r34) Woodcut $calc(%10 - %r35) $calc(%r10 - %r35) Fletching $calc(%11 - %r36) $calc(%r11 - %r36) Fishing $calc(%12 - %r37) $calc(%r12 - %r37) Firemake $calc(%13 - %r38) $calc(%r13 - %r38) Crafting $calc(%14 - %r39) $calc(%r14 - %r39) Smithing $calc(%15 - %r40) $calc(%r15 - %r40) Mine $calc(%16 - %r41) $calc(%r16 - %r41) Herblore $calc(%17 - %r42) $calc(%r17 - %r42) Agility $calc(%18 - %r43) $calc(%r18 - %r43) Thieve $calc(%19 - %r44) $calc(%r19 - %r44) Slayer $calc(%20 - %r45) $calc(%r20 - %r45) Farming $calc(%21 - %r46) $calc(%r21 - %r46) Runecraft $calc(%22 - %r47) $calc(%r22 - %r47) Hunter $calc(%23 - %r48) $calc(%r23 - %r48) Construct $calc(%24 - %r49) $calc(%r24 - %r49) Dungeon $calc(%26 - 51) $calc(%r26 - %r51))
+    var %others = $sort(Cook $calc(%9 - %r34) $calc(%r9 - %r34) Woodcut $calc(%10 - %r35) $calc(%r10 - %r35) Fletching $calc(%11 - %r36) $calc(%r11 - %r36) Fishing $calc(%12 - %r37) $calc(%r12 - %r37) Firemake $calc(%13 - %r38) $calc(%r13 - %r38) Crafting $calc(%14 - %r39) $calc(%r14 - %r39) Smithing $calc(%15 - %r40) $calc(%r15 - %r40) Mine $calc(%16 - %r41) $calc(%r16 - %r41) Herblore $calc(%17 - %r42) $calc(%r17 - %r42) Agility $calc(%18 - %r43) $calc(%r18 - %r43) Thieve $calc(%19 - %r44) $calc(%r19 - %r44) Slayer $calc(%20 - %r45) $calc(%r20 - %r45) Farming $calc(%21 - %r46) $calc(%r21 - %r46) Runecraft $calc(%22 - %r47) $calc(%r22 - %r47) Hunter $calc(%23 - %r48) $calc(%r23 - %r48) Construct $calc(%24 - %r49) $calc(%r24 - %r49) Dungeon $calc(%26 - %51) $calc(%r26 - %r51))
     if (%others) { var %out2 = $hget($gettok($sockname,2,46),out)  $+ $hget($gettok($sockname,2,46),nick) Others  $+ $hget($gettok($sockname,2,46),command) $+ : %others }
     $hget($gettok($sockname,2,46),out)  $+ $hget($gettok($sockname,2,46),nick) Skills  $+ $hget($gettok($sockname,2,46),command) $+ : 07Overall $iif(%total > 0,[+ $+ %total $+ ]) 03+ $+ $iif($calc(%r1 - %r26) > 1000,$bytes($round($calc($v1 /1000),0),db) $+ k,$bytes($v1,db)) exp;
     %out1
@@ -1089,23 +1089,31 @@ alias alog-r {
 alias startGeUpdate noop $download.break(checkGeUpdate, $newThread, http://SSElessar.net/parser/gulist.php)
 alias checkGeUpdate {
   tokenize 10 $1-
-  if ($1 && $readini(gerty.config.ini,GeUpdate,Rise) && $1 != $readini(gerty.config.ini,GeUpdate,Rise)) {
-    if (!hget(GeUpdate,Rise)) hadd -mu1200 GeUpdate Rise $true
+  if ($1 && $readini(gerty.config.ini, GeUpdate, List1) && $1 != $readini(gerty.config.ini,GeUpdate,List1)) {
+    if (!hget(GeUpdate,List1)) hadd -mu1200 GeUpdate List1 $true
   }
-  if ($2 && $readini(gerty.config.ini,GeUpdate,Drop) && $2 != $readini(gerty.config.ini,GeUpdate,Drop)) {
-    if (!hget(GeUpdate,Drop)) hadd -mu1200 GeUpdate Drop $true
+  if ($2 && $readini(gerty.config.ini, GeUpdate, List2) && $2 != $readini(gerty.config.ini,GeUpdate,List2)) {
+    if (!hget(GeUpdate,List2)) hadd -mu1200 GeUpdate List2 $true
   }
-  if (($hget(GeUpdate,Rise) || $hget(GeUpdate,Drop)) && $calc($ctime - $gettok($read(GeUpdate.txt,1),2,124)) > 1260) {
-    hadd -m GeUpdate Rise $false
-    hadd -m GeUpdate Drop $false
+  ;if ($3 && $readini(Gerty.config.ini, GeUpdate, List3) && $3 != $readini(Gerty.config.ini, GeUpdate, List3)) {
+  ;  if (!hget(GeUpdate,List3)) hadd -mu1200 GeUpdate List3 $true
+  ;}
+  if (($hget(GeUpdate,List1) || $hget(GeUpdate,List2) || $hget(GeUpdate,List3)) && $calc($ctime - $gettok($read(GeUpdate.txt,1),2,124)) > 1260) {
+    hadd -m GeUpdate List1 $false
+    hadd -m GeUpdate List2 $false
+    ;hadd -m GeUpdate List3 $false
     noop $_network(GeNotifyChannels)
     runepriceupdater
   }
-  writeini gerty.config.ini GeUpdate Rise $1
-  writeini gerty.config.ini GeUpdate Drop $2
+  if ($0 == 2) {
+    writeini gerty.config.ini GeUpdate List1 $1
+    writeini gerty.config.ini GeUpdate List2 $2
+    ;writeini gerty.config.ini GeUpdate List3 $3
+  }
 }
 alias GeNotifyChannels {
   write -il1 GeUpdate.txt $host(time) $+ $| $+ $gmt $+ $| $+ $ord($host(date)) $host(month).3
+  echo GEUPDATE
   resetPrices
   .timer 1 1200 resetPrices
   var %x = 1, %chan
