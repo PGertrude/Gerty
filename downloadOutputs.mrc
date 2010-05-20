@@ -962,7 +962,7 @@ alias stats {
     %combat = %combat $validate($25,%state,%morethan,%lessthan,25,%average)
     :cmbreply
     %saystyle %info
-    if ($hget(%socket) && $hget(%socket,arg1) != true) {
+    if (($hget(%socket) && $hget(%socket,arg1) != true) || !$hget(%socket)) {
       %saystyle Skills: %combat
     }
     goto unset
@@ -980,12 +980,12 @@ alias stats {
     var %cmb = $calccombat($gettok($2,2,44),$gettok($3,2,44),$gettok($4,2,44),$gettok($5,2,44),$gettok($6,2,44),$gettok($7,2,44),$gettok($8,2,44),$gettok($25,2,44)).p2p
     .tokenize 44 $1
     var %min = $reqs(%cmb)
-    var %junior = Junior: $iif($2 >= %min,reqs met (07 $+ $calc($2 - %min) above $+ );,07 $+ $calc(%min - $2) to go;)
+    var %junior = Member: $iif($2 >= %min,reqs met (07 $+ $calc($2 - %min) above $+ );,07 $+ $calc(%min - $2) to go;)
     inc %min 100
-    var %member = Member: $iif($2 >= %min,reqs met (07 $+ $calc($2 - %min) above $+ );,07 $+ $calc(%min - $2) to go;)
+    var %member = Advanced: $iif($2 >= %min,reqs met (07 $+ $calc($2 - %min) above $+ );,07 $+ $calc(%min - $2) to go;)
     inc %min 150
     var %elite = Elite: $iif($2 >= %min,reqs met (07 $+ $calc($2 - %min) above $+ );,07 $+ $calc(%min - $2) to go;)
-    %saystyle  $+ %nick $+  Supreme Skillers Reqs %junior %member %elite | Forum: 12www.supremeskillers.co.nr | Memberlist: 12http://runehead.com/clans/ml.php?clan=supreme
+    %saystyle  $+ %nick $+  Supreme Skillers Reqs %junior %member %elite | Forum: 12www.supremeskillers.net | Memberlist: 12http://runehead.com/clans/ml.php?clan=supreme
     goto unset
   }
   %saystyle Syntax Error: !<skill> user @param #goal
