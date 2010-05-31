@@ -3,7 +3,7 @@
 ;@SUMMARY The main timer for the program, all automated events processed in here.
 timeCount {
   ; 1 second timer
-  if ($read(timer.txt,nw,$ctime($asctime($gmt)) $+ *) && $server) { $gettok($read(timer.txt,nw,$ctime($asctime($gmt)) $+ *),2,124) }
+  if ($read(timer.txt,nw,$gmt $+ *) && $server) { $gettok($read(timer.txt,nw,$gmt $+ *),2,124) }
   ; 10 second timer
   if ($calc($ctime % 10) == 0) {
     if (!$server) {
