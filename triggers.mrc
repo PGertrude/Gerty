@@ -607,15 +607,9 @@ on *:TEXT:*:*: {
   else if ($regex($1,/^[!@.](hi(gh)?|low?)?(item|alch|alk)$/Si)) {
     if (!$2) %saystyle Syntax Error: !item <item|#item id>
     var %search $remove($2-,$#)
-    if ($fixInt(%search) > 0) {
-      var %url http://www.zybez.net/exResults.aspx?type=1&id= $+ $v1
-      _fillCommand %thread $left($1,1) $nick $iif($chan,$v1,PM) item
-      noop $download.break(itemOut %thread, %thread, %url)
-      goto clean
-    }
-    var %url http://gerty.rsportugal.org/parsers/items.php?item= $+ $urlencode(%search)
+    var %url http://sselessar.net/Gerty/parser.php?type=items&item= $+ $urlencode(%search)
     _fillCommand %thread $left($1,1) $nick $iif($chan,$v1,PM) item %search
-    noop $download.break(itemsOut %thread, %thread, %url)
+    noop $download.break(itemOut %thread, %thread, %url)
     goto clean
   }
   ; WORLD
