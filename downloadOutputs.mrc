@@ -565,27 +565,6 @@ alias rscriptCompareOut {
   .msg #gertyDev ERROR:07 compare:07 $error
   reseterror
 }
-; ITEM
-alias itemOut {
-  var %thread = $1, %itemPage = $2-
-  ; line 1
-  var %id $regget(%itemPage, /"id":"(\d+)"/)
-  var %name $regget(%itemPage, /"name":"([^"]+)"/)
-  var %market $regget(%itemPage, /"price":([^\x2c]+)/)
-  var %lowAlch $regget(%itemPage, /"item_price_alchemy_min": "(\d+)"/)
-  var %highAlch $regget(%itemPage, /"item_price_alchemy_max": "(\d+)"/)
-  var %location $regget(%itemPage, /"item_source_text_en": "([^"]+)"/)
-  ; line 2
-  var %members $regget(%itemPage, /"members":(true|false)/)
-  var %quest $regget(%itemPage, /"item_quests": "(Yes|No)"/)
-  var %trade $regget(%itemPage, /"item_tradable": "(True|False)"/)
-  var %stack $regget(%itemPage, /"item_stackable": "(True|False)"/)
-  var %weight $regget(%itemPage, /"item_weight": "([^"]+)"/)
-  var %examine $regget(%itemPage, /"item_examine_text_en": "([^"]+)"/)
-  $cmd(%thread, out) 07 $+ %name | Alch:07 $format_number(%highAlch) $+ / $+ $format_number(%lowAlch) | MarketPrice:07 $format_number(%market) | Location:07 %location |12 www.zybez.net/item.aspx?id= $+ %id
-  $cmd(%thread, out) Members: $normaliseItem(%members) | Quest: $normaliseItem(%quest) | Tradeable: $normaliseItem(%trade) | Stackable: $normaliseItem(%stack) | Weight:07 %weight $+ Kg | Examine:07 %examine
-  _clearCommand %thread
-}
 alias normaliseItem {
   if $1 == yes return 03Yes
   if $1 == no return 04No
@@ -595,7 +574,8 @@ alias normaliseItem {
   if $1 == off return 04Off
   return 07 $+ $1
 }
-alias itemsOut {
+; ITEM
+alias itemOut {
   var %thread $1, %items = $2-
   .tokenize 10 $2-
   if ($0 == 0) {
@@ -603,9 +583,13 @@ alias itemsOut {
     _clearCommand %thread
     return
   }
-  else if ($0 == 1) {
-    var %url http://www.zybez.net/exResults.aspx?type=1&id= $+ $gettok($1,1,58)
-    noop $download.break(itemOut %thread, %thread $+ 2, %url)
+  else if ($0 == 2 && $numtok($1,44) > 2) {
+    var %line1 $1, %line2 $2
+    .tokenize 44 %line1
+    $cmd(%thread, out) 07 $+ $2 | Alch:07 $3 $+ / $+ $4 | MarketPrice:07 $5 | Location:07 $6 |12 www.zybez.net/item.aspx?id= $+ $1
+    .tokenize 44 %line2
+    $cmd(%thread, out) Members: $normaliseItem($1) | Quest: $normaliseItem($2) | Tradeable: $normaliseItem($3) | Stackable: $normaliseItem($4) | Weight:07 $5 $+ Kg | Examine:07 $6
+    _clearCommand %thread
     return
   }
   var %x 1, %output
@@ -730,7 +714,7 @@ alias distribute {
   if (<html> isin $1) { return unranked }
   if (-1 !isin $gettok(%string,1-26,10)) {
     var %x = 2,%reply,%voa = 0
-    while (%x <= 35) {
+    while (%x <= 36) {
       if ($gettok($ [ $+ [ %x ] ],2,44) == -1) { var % [ $+ [ %x ] ] NR,NR }
       else {
         var %vlvl = $xptolvl($gettok($ [ $+ [ %x ] ],3,44))
@@ -812,7 +796,7 @@ alias distribute {
   }
   var %1 = NR,~ $+ %total $+ ,~ $+ %exp $+ , $+ %voa
   var %x = 2, %reply = %1
-  while (%x <= 35) {
+  while (%x <= 36) {
     if (!% [ $+ [ %x ] ]) { var % [ $+ [ %x ] ] NR,NR }
     %reply = %reply $+ \n $+ % [ $+ [ %x ] ]
     inc %x
@@ -1086,7 +1070,7 @@ alias alog-r {
   _clearCommand %thread
 }
 ; GeUpdate
-alias startGeUpdate noop $download.break(checkGeUpdate, $newThread, http://SSElessar.net/parser/gulist.php)
+alias startGeUpdate noop $download.break(checkGeUpdate, $newThread, http://sselessar.net/Gerty/parser.php?type=gulist)
 alias checkGeUpdate {
   tokenize 10 $1-
   if ($1 && $readini(gerty.config.ini, GeUpdate, List1) && $1 != $readini(gerty.config.ini,GeUpdate,List1)) {
@@ -1095,25 +1079,37 @@ alias checkGeUpdate {
   if ($2 && $readini(gerty.config.ini, GeUpdate, List2) && $2 != $readini(gerty.config.ini,GeUpdate,List2)) {
     if (!hget(GeUpdate,List2)) hadd -mu1200 GeUpdate List2 $true
   }
-  ;if ($3 && $readini(Gerty.config.ini, GeUpdate, List3) && $3 != $readini(Gerty.config.ini, GeUpdate, List3)) {
-  ;  if (!hget(GeUpdate,List3)) hadd -mu1200 GeUpdate List3 $true
-  ;}
+  if ($3 && $readini(Gerty.config.ini, GeUpdate, List3) && $3 != $readini(Gerty.config.ini, GeUpdate, List3)) {
+    if (!hget(GeUpdate,List3)) hadd -mu1200 GeUpdate List3 $true
+  }
   if (($hget(GeUpdate,List1) || $hget(GeUpdate,List2) || $hget(GeUpdate,List3)) && $calc($ctime - $gettok($read(GeUpdate.txt,1),2,124)) > 1260) {
     hadd -m GeUpdate List1 $false
     hadd -m GeUpdate List2 $false
-    ;hadd -m GeUpdate List3 $false
+    hadd -m GeUpdate List3 $false
     noop $_network(GeNotifyChannels)
     runepriceupdater
   }
-  if ($0 == 2) {
+  if ($0 == 3) {
     writeini gerty.config.ini GeUpdate List1 $1
     writeini gerty.config.ini GeUpdate List2 $2
-    ;writeini gerty.config.ini GeUpdate List3 $3
+    writeini gerty.config.ini GeUpdate List3 $3
   }
+}
+alias geLists return 3
+alias newUpdate {
+  tokenize 10 $1-
+  if ($0 != $geLists || $calc($ctime - $gettok($read(GeUpdate.txt,1),2,124)) < 1260) return
+  var %x 1, %update $false
+  while (%x <= $0) {
+    if ($readini(Gerty.Config.ini, GeUpdate, List $+ %x) && $v1 != $($+($,%x),2)) %update = $true
+    writeini Gerty.Config.ini GeUpdate List $+ %x $($+($,%x),2)
+    inc %x
+  }
+  if (%update) noop $_network(GeNotifyChannels)
+  remini Gerty.Config.ini GeUpdate
 }
 alias GeNotifyChannels {
   write -il1 GeUpdate.txt $host(time) $+ $| $+ $gmt $+ $| $+ $ord($host(date)) $host(month).3
-  echo GEUPDATE
   resetPrices
   .timer 1 1200 resetPrices
   var %x = 1, %chan
