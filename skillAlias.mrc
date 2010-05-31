@@ -64,6 +64,7 @@ compares {
   if ($regex($1,/^(bade|badef|badefend|badefender|badefenders|ba defenders|ba_defenders)$/Si)) { return BA Defenders }
   if ($regex($1,/^(baco|bacol|bacollect|bacollector|bacollectors|ba collectors|ba_collectors)$/Si)) { return BA Collectors }
   if ($regex($1,/^(bahe|baheal|bahealer|bahealers|ba healers|ba_healers)$/Si)) { return BA Healers }
+  if ($regex($1,/^(cw|cwars|castle|castlewars|castle wars)$/Si)) { return Castle Wars }
   if ($regex($1,/^(st|sk|all|skill|skills|stat|stats|statistics)$/Si)) { return Stats }
   if ($regex($1,/^(cb|cmb|comb|combat|warrior)$/Si)) { return Combat }
   if ($regex($1,/^(cmb%|combat%)$/Si)) { return combat% }
@@ -109,6 +110,7 @@ lookups {
   if ($regex($1,/^(bade|badef|badefend|badefender|badefenders|ba defenders|ba_defenders)$/Si)) { return BA Defenders }
   if ($regex($1,/^(baco|bacol|bacollect|bacollector|bacollectors|ba collectors|ba_collectors)$/Si)) { return BA Collectors }
   if ($regex($1,/^(bahe|baheal|bahealer|bahealers|ba healers|ba_healers)$/Si)) { return BA Healers }
+  if ($regex($1,/^(cw|cwars|castle|castlewars|castle wars)$/Si)) { return Castle Wars }
   if ($regex($1,/^(st|sk|all|skill|skills|stat|stats|statistics)$/Si)) { return Stats }
   if ($regex($1,/^(cb|cmb|comb|combat|warrior)$/Si)) { return Combat }
   if ($regex($1,/^(ncb|noncmb|non-cmb|non-comb|noncomb|non-combat|noncombat|non-warrior)$/Si)) { return Noncmb }
@@ -153,6 +155,7 @@ scores {
   if ($regex($1,/^(bade|badef|badefend|badefender|badefenders|ba defenders|ba_defenders)$/Si)) { return BA Defenders }
   if ($regex($1,/^(baco|bacol|bacollect|bacollector|bacollectors|ba collectors|ba_collectors)$/Si)) { return BA Collectors }
   if ($regex($1,/^(bahe|baheal|bahealer|bahealers|ba healers|ba_healers)$/Si)) { return BA Healers }
+  if ($regex($1,/^(cw|cwars|castle|castlewars|castle wars)$/Si)) { return Castle Wars }
 }
 skills {
   if ($regex($1,/^(at|att|attack)$/Si)) { return Attack }
@@ -192,6 +195,7 @@ minigames {
   if ($regex($1,/^(bade|badef|badefend|badefender|badefenders|ba defenders|ba_defenders)$/Si)) { return BA Defenders }
   if ($regex($1,/^(baco|bacol|bacollect|bacollector|bacollectors|ba collectors|ba_collectors)$/Si)) { return BA Collectors }
   if ($regex($1,/^(bahe|baheal|bahealer|bahealers|ba healers|ba_healers)$/Si)) { return BA Healers }
+  if ($regex($1,/^(cw|cwars|castle|castlewars|castle wars)$/Si)) { return Castle Wars }
 }
 misc {
   if ($regex($1,/^(st|sk|all|skill|skills|stat|stats|statistics)$/Si)) { return Stats }
@@ -260,6 +264,7 @@ statnum {
   if ($1 == ba defenders || $1 == ba defender) { return 33 }
   if ($1 == ba collectors || $1 == ba collector) { return 34 }
   if ($1 == ba healers || $1 == ba healer) { return 35 }
+  if ($1 == castle wars) { return 36 }
   if ($1 == 1) { return overall }
   if ($1 == 2) { return attack }
   if ($1 == 3) { return defence }
@@ -295,6 +300,7 @@ statnum {
   if ($1 == 33) { return ba defenders }
   if ($1 == 34) { return ba collectors }
   if ($1 == 35) { return ba healers }
+  if ($1 == 36) { return castle wars }
 }
 catno {
   if (!$minigames($1)) { return 0 }
@@ -336,4 +342,5 @@ smartno {
   if ($1 == ba defenders) { return 6 }
   if ($1 == ba collectors) { return 7 }
   if ($1 == ba healers) { return 8 }
+  if ($1 == castle wars) { return 9 }
 }
