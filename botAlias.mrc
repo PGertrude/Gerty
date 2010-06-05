@@ -181,7 +181,7 @@ bot {
     return $right(%chans,-1)
   }
 }
-;@SYNTAX $command(%thread[command ID], key) or $command(%thread[command ID], key)
+;@SYNTAX $command(%thread[command ID], key)
 ;@SUMMARY Returns information about a current command.
 command {
   if (!$2) { return }
@@ -295,7 +295,7 @@ spamCheck {
 ;@SYNTAX /die
 ;@SUMMARY used as a callback to a threaded com call, when the data recieved is not required.
 die return
-;@SYNTAX shuffleHash(string commandLine)
+;@SYNTAX $shuffleHash(string commandLine)
 ;@SUMMARY manages the store of recent commands. (up to 5)
 shuffleHash {
   var %newLine $1
@@ -463,3 +463,6 @@ deprecated {
   }
   sendToDev use of deprecated function $1 $left(%string, -4)
 }
+;@SYNTAX $parser
+;@SUMMARY returns the main parser link
+parser return http://sselessar.net/Gerty/parser.php?type=

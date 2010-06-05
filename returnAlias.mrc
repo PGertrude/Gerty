@@ -11,7 +11,7 @@ price {
   var %item $remove($1,$chr(42))
   if ($getPrice(%item). [ $+ [ $prop ] ]) return $trim($gettok($v1,2,59))
   var %thread $+(a,$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9))
-  var %url http://gerty.rsportugal.org/parsers/ge.php?item= $+ $replace(%item,$chr(32),+)
+  var %url $parser $+ ge&item= $+ $replace(%item,$chr(32),+)
   var %string = $downloadstring(%thread, %url)
   downloadGe %thread %string
   if ($prop == exact && %item != $gettok(%string,2,44)) { return 0 }
@@ -21,7 +21,7 @@ exactPriceInfo {
   var %item $remove($1,$chr(42))
   if ($getPrice(%item).exact) return $v1
   var %thread $+(a,$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9))
-  var %url http://gerty.rsportugal.org/parsers/ge.php?item= $+ $replace(%item,$chr(32),+)
+  var %url $parser $+ ge&item= $+ $replace(%item,$chr(32),+)
   var %string = $downloadstring(%thread, %url)
   downloadGe %thread %string
   if (%item != $gettok(%string,2,44)) { return %item $+ ;0;0 }
@@ -321,7 +321,7 @@ regget {
   return $false
 }
 ;@SYNTAX swapTime(string durationOutput)
-;@SYNTAX turns a duration output (52wks 31days 4hrs 32mins 3secs) into a string (395d 04:32:03)
+;@SUMMARY turns a duration output (52wks 31days 4hrs 32mins 3secs) into a string (395d 04:32:03)
 swapTime {
   noop $regex($1,/(?:(\d+)wks?|())(?: (\d+)days?|())(.+?)$/g)
   var %days $calc($regml(1) * 7 + $regml(2))
