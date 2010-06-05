@@ -1073,40 +1073,17 @@ alias alog-r {
 alias startGeUpdate noop $download.break(checkGeUpdate, $newThread, http://sselessar.net/Gerty/parser.php?type=gulist)
 alias checkGeUpdate {
   tokenize 10 $1-
-  if ($1 && $readini(gerty.config.ini, GeUpdate, List1) && $1 != $readini(gerty.config.ini,GeUpdate,List1)) {
-    if (!hget(GeUpdate,List1)) hadd -mu1200 GeUpdate List1 $true
-  }
-  if ($2 && $readini(gerty.config.ini, GeUpdate, List2) && $2 != $readini(gerty.config.ini,GeUpdate,List2)) {
-    if (!hget(GeUpdate,List2)) hadd -mu1200 GeUpdate List2 $true
-  }
-  if ($3 && $readini(Gerty.config.ini, GeUpdate, List3) && $3 != $readini(Gerty.config.ini, GeUpdate, List3)) {
-    if (!hget(GeUpdate,List3)) hadd -mu1200 GeUpdate List3 $true
-  }
-  if (($hget(GeUpdate,List1) || $hget(GeUpdate,List2) || $hget(GeUpdate,List3)) && $calc($ctime - $gettok($read(GeUpdate.txt,1),2,124)) > 1260) {
-    hadd -m GeUpdate List1 $false
-    hadd -m GeUpdate List2 $false
-    hadd -m GeUpdate List3 $false
-    noop $_network(GeNotifyChannels)
-    runepriceupdater
-  }
-  if ($0 == 3) {
-    writeini gerty.config.ini GeUpdate List1 $1
-    writeini gerty.config.ini GeUpdate List2 $2
-    writeini gerty.config.ini GeUpdate List3 $3
-  }
-}
-alias geLists return 3
-alias newUpdate {
-  tokenize 10 $1-
-  if ($0 != $geLists || $calc($ctime - $gettok($read(GeUpdate.txt,1),2,124)) < 1260) return
+  if ($0 != 3 || $calc($ctime - $gettok($read(GeUpdate.txt,1),2,124)) < 1260) { return }
   var %x 1, %update $false
   while (%x <= $0) {
-    if ($readini(Gerty.Config.ini, GeUpdate, List $+ %x) && $v1 != $($+($,%x),2)) %update = $true
+    if ($readini(Gerty.Config.ini, GeUpdate, List $+ %x) && $v1 != $($+($,%x),2)) { %update = $true }
     writeini Gerty.Config.ini GeUpdate List $+ %x $($+($,%x),2)
     inc %x
   }
-  if (%update) noop $_network(GeNotifyChannels)
-  remini Gerty.Config.ini GeUpdate
+  if (%update) {
+    noop $_network(GeNotifyChannels)
+    remini Gerty.Config.ini GeUpdate
+  }
 }
 alias GeNotifyChannels {
   write -il1 GeUpdate.txt $host(time) $+ $| $+ $gmt $+ $| $+ $ord($host(date)) $host(month).3
