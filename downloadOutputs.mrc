@@ -1073,7 +1073,7 @@ alias alog-r {
 alias startGeUpdate noop $download.break(checkGeUpdate, $newThread, http://sselessar.net/Gerty/parser.php?type=gulist)
 alias checkGeUpdate {
   tokenize 10 $1-
-  if ($0 != 3 || $calc($ctime - $gettok($read(GeUpdate.txt,1),2,124)) < 1260) { return }
+  if ($0 != 3 || $calc($gmt - $gettok($read(GeUpdate.txt,1),2,124)) < 1260) { return }
   var %x 1, %update $false
   while (%x <= $0) {
     if ($readini(Gerty.Config.ini, GeUpdate, List $+ %x) && $v1 != $($+($,%x),2)) { %update = $true }
