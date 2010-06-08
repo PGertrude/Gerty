@@ -698,6 +698,7 @@ on *:TEXT:*:*: {
     }
     if (%x == 1) { %saystyle 07 $+ $iif(%exact,Exact match $+(07,",%spell,"),%spell) $+  spell not found. }
     .fclose %fname
+    goto clean
   }
   ; LASTNDAYS
   else if ($regex($1,/^[!@.](l|last)(\d+)([A-Za-z]+)$/Si)) {
@@ -1496,7 +1497,7 @@ on *:TEXT:*:*: {
       goto clean
     }
     ; GTFO
-    else if ($regex($1,/^([!@.])?gtfo$/Si) && $botid($2)) {
+    else if ($regex($1,/^([!@.])?(gtfo|shoo)$/Si) && $botid($2)) {
       part $chan I'm sorry master.
       goto clean
     }
@@ -1506,6 +1507,20 @@ on *:TEXT:*:*: {
       noop $_network(noop $!sqlite_query(1, UPDATE channel SET users= $+ $3 WHERE channel=" $+ $2 $+ ";))
       noop $_network(loadChans $2 )
       goto clean
+    }
+    ; LAST5
+    else if ($regex($1,/^[!.@]last5$/Si)) {
+      if (!$2) {
+        var %x = 1, %string
+        while ($hget(commands,%x)) {
+          %string = %string $+ , 07 $+ $v1
+          inc %x
+        }
+        %string = $right(%string,-3)
+      }
+      else %string = $replace(07 $+ $hget(commands,$2),$chr(9), $+ $chr(44) 07)
+      %string = $replace(%string,>,>07)
+      %saystyle Last 5 commands $+ $iif($2,$chr(32) $+ for $2) $+ : %string
     }
   }
   ; CALCULATOR

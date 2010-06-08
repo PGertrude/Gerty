@@ -305,6 +305,9 @@ shuffleHash {
     dec %x
   }
   hadd -m commands 1 %newLine
+  ; Chan specific commands
+  var %last4 = $gettok($hget(commands,$chan),1-4,9)
+  hadd -m commands $chan $addtok(%newLine,%last4,9)
   hinc commands amount
 }
 ;@SYNTAX $bot(<bot tag|bot name>)
