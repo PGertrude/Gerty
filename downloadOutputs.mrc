@@ -1011,7 +1011,7 @@ alias youtube {
 }
 ; ALOG
 alias alog {
-  var %string = $2-, %x = 1, %y = $numtok(%string,10), %thread = $1
+  var %string = $2-, %x = 1, %y = $numtok(%string,10), %thread = $1, %out
   while (%x <= %y) {
     tokenize 58 $gettok(%string,%x,10)
     if ($1 == N/A) { %out = No events found for07 $hget(%thread,arg1) $+ . Please check spelling and that user profile is publicly available. | break }
@@ -1070,7 +1070,7 @@ alias alog-r {
   _clearCommand %thread
 }
 ; GeUpdate
-alias startGeUpdate noop $download.break(checkGeUpdate, $newThread, http://sselessar.net/Gerty/parser.php?type=gulist)
+alias startGeUpdate noop $download.break(checkGeUpdate, $newThread, $parser $+ gulist)
 alias checkGeUpdate {
   tokenize 10 $1-
   if ($0 != 3 || $calc($gmt - $gettok($read(GeUpdate.txt,1),2,124)) < 1260) { return }
@@ -1089,6 +1089,7 @@ alias GeNotifyChannels {
   write -il1 GeUpdate.txt $host(time) $+ $| $+ $gmt $+ $| $+ $ord($host(date)) $host(month).3
   resetPrices
   .timer 1 1200 resetPrices
+  .timer 1 1200 updateSitePrices
   var %x = 1, %chan
   while ($chan(%x)) {
     %chan = $v1

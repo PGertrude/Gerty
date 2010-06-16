@@ -328,7 +328,7 @@ botid {
 ;@SYNTAX /sendToDev errorMessage
 ;@SUMMARY sends an error message to the developers channel, also echos to the status window.
 sendToDev {
-  if (!$1) return
+  if (!$1 || $me !ison #gertyDev) return
   linesep
   echo $color(info) $timestamp * $1-
   linesep
@@ -336,7 +336,7 @@ sendToDev {
 }
 ;@SYNTAX /sendToDevOnly errorMessage
 ;@SUMMARY sends an error message to the developers channel only.
-sendToDevOnly .msg #gertyDev $1-
+sendToDevOnly if ($me ison #gertyDev) .msg #gertyDev $1-
 userCount {
   var %x = 1, %n = 0, %m = 0, %u, %nick
   if ($# $+ * iswm $1) {
@@ -452,6 +452,7 @@ parseGe {
   sqlite_commit 1
   .fclose dlge
   .remove dlGe.txt
+  echo -at finished
 }
 ;@SYNTAX $newThread
 ;@SUMMARY shortcut for creating a new thread id.
