@@ -1,4 +1,4 @@
->start<|triggers.mrc|Entry point|3.6|rs
+﻿>start<|triggers.mrc|Entry point|3.6|rs
 on *:TEXT:*:*: {
   if ($left($1,1) !isin !.@) {
     var %botCheck = $botid($1)
@@ -1008,7 +1008,7 @@ on *:TEXT:*:*: {
       var %info = $read(fairy.txt,nw,* $+ $2- $+ *)
       if (!%info && $len(%param) == 3) { %saystyle Fairy Code07 $upper($2-) not found | halt }
       if (!%info && $len(%param) != 3) { %saystyle Location07 $2- not found | halt }
-      %saystyle Code:07 $upper($gettok(%info,1,124)) | Location:07 $gettok(%info,2,124) | Features:07 $gettok(%info,3,124)
+      %saystyle Code:07 $upper($gettok(%info,1,9)) | Location:07 $gettok(%info,2,9) | Features:07 $gettok(%info,3,9)
     }
     if (!$2) {
       %saystyle All Valid Fairy Codes: 07AJQ | 07AKQ | 07AJS | 07CIP | 07DKS | 07AJR | 07CJR | 07DJR | 07ALS | 07BLR | 07BIS | 07DJP | 07CIQ | 07CLS | 07BKP | 07AKS | 07ALR | 07DKR | 07DIS | 07DIR | 07BKQ | 07CKP | 07AIQ | 07BJR | 07BLP | 07DKP | 07CKR | 07DLS | 07CKS | 07BKR | 07BIQ | 07DLQ | 07AIR | 07BIP | 07CLP | 07DLR
