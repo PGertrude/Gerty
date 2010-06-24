@@ -50,6 +50,6 @@ on *:sockclose:sitePrices.*: {
   sockclose $sockname
   if ($sock(sitePrices.*,0) == 0 && !$timer(SiteUpdate25)) {
     echo -at updated at site
-    downloadSitePrices
+    noop $_network(downloadSitePrices)
   }
 }

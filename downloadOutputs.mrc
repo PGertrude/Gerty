@@ -1089,7 +1089,7 @@ alias GeNotifyChannels {
   write -il1 GeUpdate.txt $host(time) $+ $| $+ $gmt $+ $| $+ $ord($host(date)) $host(month).3
   resetPrices
   .timer 1 1200 resetPrices
-  .timer 1 1200 updateSitePrices
+  if ($me == Gerty) .timer 1 1200 updateSitePrices
   var %x = 1, %chan
   while ($chan(%x)) {
     %chan = $v1
