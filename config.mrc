@@ -1,4 +1,4 @@
->start<|config.mrc|config and join merged|3.37|rs
+>start<|config.mrc|config and join merged|3.4|rs
 on *:START: {
   ; Authenticate Host
   if (!$exists(Gerty.Config.ini)) {
@@ -22,6 +22,8 @@ on *:START: {
   if ($exists(spelluse.txt)) { .hload spelluse spelluse.txt }
   if !$hget(commands) { .hmake commands }
   if ($exists(commands.txt)) { .hload commands commands.txt }
+  ; Check for last ge update
+  noop $download.break(checkForOfflineGeUpdate, $newThread, $parser $+ lastupdate)
 }
 on *:QUIT: {
   if ($nick == $me) {
