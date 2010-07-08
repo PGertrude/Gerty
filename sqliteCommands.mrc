@@ -270,7 +270,7 @@ alias setStringParameter {
   var %regex /( $+ $3 $+ :[^;]+;)/i
   var %replace $replace($3,_,$chr(32)) $+ : $+ $replace($5,_,$chr(32)) $+ ;
   var %newField $remove($regsubex(%fieldValue, %regex, %replace),$false)
-  if ($3 !isin %newField) %newField = %newField $+ %replace
+  if ($3 $+ : !isin %newField) %newField = %newField $+ %replace
   noop $dbUpdate($1,` $+ $iif($1 == users,$iif($6,rsn,fingerprint),channel) $+ `=' $+ $2 $+ ', $4, %newField)
 }
 
@@ -281,6 +281,18 @@ alias rowExists {
   return $false
 }
 
+;@SYNTAX findSkillTimers(rsn, ircnick, fingerprint)
+alias findSkillTimers {
+  var %sql SELECT * FROM skillTimers WHERE rsn LIKE ' $+ $1 $+ ' OR ircnick LIKE ' $+ $2 $+ ' OR fingerprint LIKE ' $+ $3 $+ ';
+  var %fields id,ircnick,fingerprint,rsn,skill,startTime,startExp,startRank
+  return $sql_query(%sql, %fields)
+}
+;@SYNTAX findTimers(ircnick, fingerprint)
+alias findTimers {
+  var %sql SELECT * FROM timers WHERE ircnick LIKE ' $+ $1 $+ ' OR fingerprint LIKE ' $+ $2 $+ ';
+  var %fields id,ircnick,fingerprint,startTime,endTime,message
+  return $sql_query(%sql, %fields)
+}
 
 
 ; 'PRIVATE' METHODS

@@ -326,76 +326,79 @@ alias plural {
   if ($right($1,1) == s) return $left($1,-1)
   return $1
 }
-; SKILL TIMER ; TIMER
+; SKILL TIMER ; TIMER ; START
 alias timer.start {
-  var %saystyle = $1 $2, %skill = $3, %skillid = $4, %nick = $caps($5)
-  .tokenize 10 $distribute($6)
+  var %thread $1, %skillId $cmd(%thread, arg1)
+  .tokenize 10 $distribute($2)
   if ($1 == unranked) { goto unranked }
-  else if (!$1) { %saystyle Connection Error: Please try again in a few moments. | goto unset }
-  .tokenize 44 $($ $+ %skillid,2)
-  ; save start
-  ; output
+  else if (!$1) { $cmd(%thread, out) Connection Error: Please try again in a few moments. | goto unset }
+  .tokenize 44 $($ $+ %skillId,2)
   if ($3 == NR || !$3) { goto unranked }
-  %saystyle  $+ %nick $+ 's starting experience of07 $bytes($3,db) in  $+ %skill $+  has been saved.
+  $cmd(%thread, out)  $+ $cmd(%thread, from.RSN) $+ 's starting experience of07 $bytes($3,db) in  $+ $statnum(%skillId) $+  has been saved.
   goto unset
   :unranked
-  %saystyle  $+ %nick $+  does not feature %skill Hiscores.
+  $cmd(%thread, out)  $+ $cmd(%thread, from.RSN) $+  does not feature $statnum(%skillId) Hiscores.
+  _clearCommand %thread
   return
   :unset
-  noop $_network(writeini -n timer.ini %nick skill %skill)
-  noop $_network(writeini -n timer.ini %nick start $3)
-  noop $_network(writeini -n timer.ini %nick starttime $ctime($date $time))
+  noop $_network(noop $!dbUpdate(skillTimers, rsn=' $+ $cmd(%thread, from.RSN) $+ ' AND skill=' $+ %skillId $+ ', startExp, $3, startRank, $1) )
+  _clearCommand %thread
 }
+; CHECK
 alias timer.check {
-  var %saystyle = $1 $2, %nick = $5
-  var %skill = $readini(timer.ini,%nick,skill), %skillid = $statnum(%skill)
-  .tokenize 10 $distribute($6)
-  else if (!$1) { %saystyle Connection Error: Please try again in a few moments. | goto unset }
-  .tokenize 44 $($ $+ %skillid,2)
+  var %thread $1, %skillId $cmd(%thread, arg1), %skill $statnum(%skillId), %timer $replace($cmd(%thread, arg2), _, $chr(32)), %nick $cmd(%thread, from.RSN)
+  .tokenize 10 $distribute($2)
+  else if (!$1) { $cmd(%thread, out) Connection Error: Please try again in a few moments. | goto unset }
+  .tokenize 44 $($ $+ %skillId,2)
   ; changes
-  var %expchange = $calc($3 - $readini(timer.ini,%nick,start))
-  var %timechange = $calc($ctime($date $time) - $readini(timer.ini,%nick,starttime))
-  var %exp.hour = $calc( 3600 * %expchange / %timechange )
-  var %exp.second = $calc( %expchange / %timechange )
-  var %target = $lvlceil($3), %goal = $lvltoxp(%target)
+  var %expchange $calc($3 - $gettok(%timer, 7, 59)), %rankchange $calc($1 - $gettok(%timer, 8, 59))
+  var %timechange $calc($gmt - $gettok(%timer, 6, 59))
+  var %exp.hour $calc( 3600 * %expchange / %timechange ), %exp.second $calc( %expchange / %timechange )
+  var %target $lvlceil($3), %goal $lvltoxp(%target)
   ; check for goal in skill
-  var %userAddress $iif($aLfAddress(%nick), $v1, %nick)
-  var %boolRsn $iif($aLfAddress(%nick), $false, $true)
-  if ($getStringParameter(%userAddress,%skill,goals,%boolRsn)) {
+  var %userAddress $aLfAddress($cmd(%thread, from))
+  if ($getStringParameter(%userAddress, %skill, goals, $false)) {
     %goal = $v1
     %target = $xptolvl(%goal)
   }
   ; output
-  %saystyle  $+ %nick $+  gained07 $bytes(%expchange,db)  $+ %skill $+  experience in07 $duration(%timechange) $+ . That's07 $bytes($round(%exp.hour,0),db) exp/hour so far. $&
-    Estimated time till %target $+ :07 $iif(%exp.hour == 0,Infinite,$duration($calc( (%goal - $3) / %exp.second )))
+  $cmd(%thread, out)  $+ %nick $+  gained07 $bytes(%expchange,db)  $+ %skill $+  experience in07 $duration(%timechange) $+  $&
+    $+ $iif(%rankchange != 0,$iif(%rankchange < 0, $chr(44) and gained07 $abs(%rankchange) ranks, $chr(44) and lost07 %rankchange ranks)) $&
+    $+ . That's07 $bytes($round(%exp.hour,0),db) exp/hour so far. $&
+    $iif(%skillId != 1, Estimated time till %target $+ :07 $iif(%exp.hour == 0,Infinite,$duration($calc( (%goal - $3) / %exp.second ))))
   :unset
+  _clearCommand %thread
 }
+; END
 alias timer.end {
-  var %saystyle = $1 $2, %nick = $5
-  var %skill = $readini(timer.ini,%nick,skill), %skillid = $statnum(%skill)
-  .tokenize 10 $distribute($6)
+  var %thread $1, %skillId $cmd(%thread, arg1), %skill $statnum(%skillId), %timer $replace($cmd(%thread, arg2), _, $chr(32)), %nick $cmd(%thread, from.RSN)
+  .tokenize 10 $distribute($2)
   else if (!$1) { %saystyle Connection Error: Please try again in a few moments. | goto unset }
   .tokenize 44 $($ $+ %skillid,2)
   ; changes
-  var %expchange = $calc($3 - $readini(timer.ini,%nick,start))
-  var %timechange = $calc($ctime($date $time) - $readini(timer.ini,%nick,starttime))
-  var %exp.hour = $calc( 3600 * %expchange / %timechange )
-  var %exp.second = $calc( %expchange / %timechange )
-  var %target = $lvlceil($3), %goal = $lvltoxp(%target)
+  var %expchange $calc($3 - $gettok(%timer, 7, 59)), %rankchange $calc($1 - $gettok(%timer, 8, 59))
+  var %timechange $calc($gmt - $gettok(%timer, 6, 59))
+  var %exp.hour $calc( 3600 * %expchange / %timechange ), %exp.second $calc( %expchange / %timechange )
+  var %target $lvlceil($3), %goal $lvltoxp(%target)
   ; check for goal in skill
-  var %userAddress $iif($aLfAddress(%nick), $v1, %nick)
-  var %boolRsn $iif($aLfAddress(%nick), $false, $true)
-  if ($getStringParameter(%userAddress,%skill,goals,%boolRsn)) {
+  var %userAddress $aLfAddress($cmd(%thread, from))
+  if ($getStringParameter(%userAddress, %skill, goals, $false)) {
     %goal = $v1
     %target = $xptolvl(%goal)
   }
   ; output
-  %saystyle  $+ %nick $+  gained07 $bytes(%expchange,db)  $+ %skill $+  experience in07 $duration(%timechange) $+ . That's07 $bytes($round(%exp.hour,0),db) exp/hour. $&
-    Estimated time till %target $+ :07 $iif(%exp.hour == 0,Infinite,$duration($calc( (%goal - $3) / %exp.second )))
-  noop $_network(remini timer.ini %nick)
+  $cmd(%thread, out)  $+ %nick $+  gained07 $bytes(%expchange,db)  $+ %skill $+  experience in07 $duration(%timechange) $+  $&
+    $+ $iif(%rankchange != 0,$iif(%rankchange < 0, $chr(44) and gained07 $abs(%rankchange) ranks, $chr(44) and lost07 %rankchange ranks)) $&
+    $+ . That's07 $bytes($round(%exp.hour,0),db) exp/hour. $&
+    $iif(%skillId != 1,Estimated time till %target $+ :07 $iif(%exp.hour == 0,Infinite,$duration($calc( (%goal - $3) / %exp.second ))))
+  var %sql DELETE FROM skillTimers WHERE (rsn LIKE ' $+ %nick $+ ' OR fingerprint LIKE ' $+ $aLfAddress($cmd(%thread, from)) $+ ' OR ircnick LIKE ' $+ $cmd(%thread, from) $+ ') $&
+    AND skill=' $+ %skillId $+ ';
+  noop $_network(noop $!sqlite_query(1, %sql ) )
   :unset
+  _clearCommand %thread
   return
   :unranked
+  _clearCommand %thread
 }
 ; URBAN
 alias urban {

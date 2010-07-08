@@ -1,4 +1,4 @@
-ï»¿>start<|triggers.mrc|Entry point|3.6|rs
+>start<|triggers.mrc|Entry point|3.65|rs
 on *:TEXT:*:*: {
   if ($left($1,1) !isin !.@) {
     var %botCheck = $botid($1)
@@ -85,6 +85,7 @@ on *:TEXT:*:*: {
   ; YOUTUBE link
   else if ($regex(yt,$1-,/youtube\.com\/watch\?v=([\w-]+)\W?/Si)) {
     if ($chanset($chan,youtube) == off) goto clean
+    if ($isBot($nick)) { goto clean }
     _fillCommand %thread @ $nick $iif($chan,$v1,PM) Youtubelink
     var %url = http://rscript.org/lookup.php?type=youtubeinfo&id= $+ $regml(yt,1)
     noop $download.break(youtube %thread $regml(yt,1),%thread,%url)
@@ -346,6 +347,7 @@ on *:TEXT:*:*: {
   }
   ; GELINK
   else if ($regex($1,/^[!@.](g(reat|rand)?e(xchange)?|price)$/Si)) {
+    if ($hget(#,ge) == off) { goto clean }
     if (!$2) { %saystyle Syntax: !ge [number] <item> | halt }
     if ($chr(44) !isin $2-) {
       var %num = 1, %search = $2-
@@ -551,53 +553,110 @@ on *:TEXT:*:*: {
     noop $download.break(taskOut %thread, %thread, http://hiscore.runescape.com/index_lite.ws?player= $+ $rsn($nick))
     goto clean
   }
-  ; TIMER - REWRITE MAYBE
-  else if ($regex($1,/^[!@.](start|check|end|stop)$/Si)) {
+  ; TIMER
+  else if ($regex($1,/^[!@.](start|check|end|stop|timers?)$/Si)) {
+    if ($hget(#, timers) == off) { goto clean }
+    ; get command type
     var %command $regml(1)
     if (%command == stop) { %command = end }
-    var %nick, %skill
-    var %x = 2, %input
-    while (%x < $0) {
-      %input = %input $($ $+ %x,2)
-      inc %x
+    var %nick, %skill, %skillId, %trigger $left($1, 1), %input $1-
+
+    ; extract rsn and skill
+    %skill = $skills($2)
+    %skillId = $statnum(%skill)
+    if ($getDefname($nick)) %nick = $v1
+    else {
+      %saystyle You must have your defname set to use this command. Syntax: !defname <rsn>
+      goto clean
     }
-    if ($skills($2) && $3) { %skill = $skills($2) | %nick = $regsubex($3-,/\W/g,_) }
-    else if ($skills($($ $+ $0,2)) && $skills($($ $+ $0,2)) && $3) { %skill = $skills($($ $+ $0,2)) | %nick = $regsubex(%input,/\W/g,_) }
-    else if ($2 && (!$skills($($ $+ $0,2)))) { %nick = $regsubex($2-,/\W/g,_) | %skill = Overall }
-    else if ($2) { %nick = $nick | %skill = $skills($2) }
-    else { %nick = $nick | %skill = Overall }
-    %nick = $rsn(%nick)
-    %skill = $skills(%skill)
-    if (%command == start) {
-      if (($readini(timer.ini,%nick,start) && $readini(timer.ini,%nick,start) != 0)) {
-        %saystyle You must end your current timer (07 $+ $readini(timer.ini,%nick,skill) $+ ) before starting a new one.
-        halt
+
+    ; extract timers from the database relating to this user
+    var %timers $findSkillTimers(%nick, $nick, $aLfAddress(%nick))
+    .tokenize 44 %timers
+    if (%command == start && %skill != $null) {
+      if ($0 != 0) {
+        %saystyle You must end your current timer (07 $+ $statnum($trim($gettok($1,6,59))) $+ ) id $# $+ $gettok($1,1,59) before starting a new one.
+        goto clean
       }
-      noop $_network(writeini -n timer.ini %nick owner $rsn($nick))
+      var %sql INSERT INTO skillTimers ('ircnick', 'fingerprint', 'rsn', 'skill', 'startTime') $&
+        VALUES (' $+ $nick $+ ', ' $+ $aLfAddress($nick) $+ ', ' $+ %nick $+ ', ' $+ %skillid $+ ', ' $+ $gmt $+ ');
+      noop $_network(noop $!sqlite_query(1, %sql ))
+    }
+    else if (%command == start || %command == timer) {
+      .tokenize 32 %input
+      var %length $false, %endTime 0
+      if ($2 isnum) %length = $2
+      elseif ($duration($2-) isnum) %length = $v1
+      if (%length) %endTime = $calc($gmt + %length)
+      var %sql INSERT INTO timers ('ircnick', 'fingerprint', 'startTime', 'message' $+ $iif(%endTime > 0, $chr(44) $+ 'endTime') $+ ) VALUES $& 
+        (' $+ $nick $+ ', ' $+ $aLfAddress($nick) $+ ', ' $+ $gmt $+ ', 'Your Timer has expired!' $+ $iif(%endTime > 0, $chr(44) $+ ' $+ %endTime $+ ') $+ );
+      noop $sqlite_query(1, %sql )
+      %saystyle Your timer has been successfully initiated. $iif(%endTime > 0, It will expire in07 $duration(%length) $+ .) Note: This timer is local to this bot.
+      goto clean
     }
     else if (%command == check) {
-      if (!$readini(timer.ini,%nick,start)) {
-        %saystyle You have to start a timer before you can check your progress!07 !start <skill> <nick> to start one.
-        halt
+      if ($0 == 0) {
+        %saystyle You have to start a timer before you can check your progress!07 !start <skill> to start one.
+        goto clean
       }
+      %skillId = $gettok(%timers, 5, 59)
+      %timers = $replace(%timers, $chr(32), _)
     }
     else {
-      if (!$readini(timer.ini,%nick,start)) {
-        %saystyle You do not have a timer started!07 !start <skill> <nick> to start one.
-        halt
+      if ($gettok(%input, 2, 32) == all) {
+        noop $sqlite_query(1, DELETE FROM timers WHERE ircnick LIKE ' $+ $nick $+ ' OR fingerprint LIKE ' $+ $aLfAddress($nick) $+ ';)
+        %saystyle All your timers have been cleared.
+        goto clean
       }
-      if ($readini(timer.ini,%nick,owner) != $rsn($nick)) {
+      if ($0 == 0) {
+        var %regTimers $findTimers($nick, $aLfAddress($nick))
+        .tokenize 44 %regTimers
+        if ($0 == 0) {
+          %saystyle You do not have a timer started!07 !start [duration] to start one.
+          goto clean
+        }
+        if ($0 == 1 && %command != timers && $numtok(%input, 32) != 2) {
+          %saystyle You have ended timer07 $# $+ $trim($gettok($1,1,59)) $+ . It ran for07 $duration($calc($gmt - $gettok($1, 4, 59))) $+ .
+          noop $sqlite_query(1, DELETE FROM timers WHERE id=' $+ $trim($gettok($1,1,59)) $+ ';)
+          goto clean
+        }
+        if ($remove($gettok(%input,2,32), $#) !isnum || %command == timers) {
+          var %x 1, %output
+          while (%x <= $0) {
+            var %thistimer $($ $+ %x, 2)
+            %output = %output 07 $+ $# $+ $gettok(%thistimer, 1, 59) (running: $duration($calc($gmt - $gettok(%thistimer, 4, 59))) $+ $iif($trim($gettok(%thisTimer, 5, 59)) > 0, $chr(32) $+ ends: $duration($calc($gettok(%thisTimer, 5, 59) - $gmt)) ) $+ );
+            inc %x
+          }
+          %saystyle Current Timers: %output
+          goto clean
+        }
+        var %x 1
+        while (%x <= $0) {
+          if ($remove($gettok(%input,2,32), $#) == $trim($gettok($($ $+ %x, 2), 1, 59))) {
+            %saystyle Timer07 $# $+ $remove($gettok(%input,2,32), $#) has been ended. It ran for07 $duration($calc($gmt - $gettok(%regTimers, 4, 59))) $+ .
+            noop $sqlite_query(1, DELETE FROM timers WHERE id=' $+ $remove($gettok(%input,2,32), $#) $+ ';)
+            goto clean
+          }
+          inc %x
+        }
+        %saystyle You do not own timer07 $# $+ $remove($gettok(%input,2,32), $#) $+ .
+        goto clean
+      }
+      if ($trim($gettok($1,2,59)) != $nick && $trim($gettok($1,3,59)) != $aLfAddress($nick) && $trim($gettok($1,4,59)) != $rsn($nick)) {
         %saystyle This is not your timer to end!
-        halt
+        goto clean
       }
+      %skillId = $gettok(%timers, 5, 59)
+      %timers = $replace(%timers, $chr(32), _)
     }
-    var %skillid = $statnum(%skill)
-    var %socket = %thread
-    var %url = http://hiscore.runescape.com/index_lite.ws?player= $+ %nick
-    noop $download.break(timer. $+ %command %saystyle %skill %skillid %nick,%socket,%url)
+    _fillCommand %thread %trigger $nick $iif($chan,$v1,PM) timer %skillid $iif(%command != start, %timers)
+    var %url http://hiscore.runescape.com/index_lite.ws?player= $+ %nick
+    noop $download.break(timer. $+ %command %thread, %thread, %url)
     goto clean
+
+
   }
-  ;URBAN
+  ; URBAN
   else if ($regex($1,/^[!@.](urban|ud)$/Si)) {
     _fillCommand %thread $left($1,1) $nick $iif($chan,$v1,PM) urban $replace($2-,$chr(32),+)
     var %url = http://www.rscript.org/lookup.php?type=urban&id=1&search= $+ $cmd(%thread,arg1)
@@ -1042,21 +1101,29 @@ on *:TEXT:*:*: {
     var %command $2
     var %mode $iif($3 == on,on,off)
     if ($chan && ($nick isop $chan || $nick ishop $chan || $admin($nick))) {
-      if (%command == youtube) {
+      if (%command == site) {
+        noop $_network(noop $!dbUpdate(channel, `channel`LIKE" $+ $chan $+ ", site, $3- ))
+        %saystyle The website for07 $chan has been set to:07 $3-
+      }
+      else if (%command == youtube) {
         noop $_network(noop $!setStringParameter(channel, [ $lower($chan) ] , youtube, setting, %mode , $false ))
         %saystyle $chan Settings: Youtube link information messages are now %mode $+ .
       }
-      else if (%command == ge || %command == geupdate) {
+      else if (%command == geupdate) {
         noop $_network(noop $!setStringParameter(channel, [ $lower($chan) ] , geupdate, setting, %mode , $false ))
         %saystyle $chan Settings: Ge Update messages are now %mode $+ .
+      }
+      else if (%command == ge || %command == prices) {
+        noop $_network(noop $!setStringParameter(channel, [ $lower($chan) ] , ge, setting, %mode , $false ))
+        %saystyle $chan Settings: Price lookup messages are now %mode $+ .
       }
       else if (%command == qfc) {
         noop $_network(noop $!setStringParameter(channel, [ $lower($chan) ] , qfc, setting, %mode , $false ))
         %saystyle $chan Settings: QFC link information messages are now %mode $+ .
       }
-      else if (%command == site) {
-        noop $_network(noop $!dbUpdate(channel, `channel`LIKE" $+ $chan $+ ", site, $3- ))
-        %saystyle The website for07 $chan has been set to:07 $3-
+      else if (%command == timer || %command == timers) {
+        noop $_network(noop $!setStringParameter(channel, [ $lower($chan) ] , timers, setting, %mode , $false ))
+        %saystyle $chan Settings: skill and regular timers are now %mode $+ .
       }
       else if (%command == autocalc) {
         noop $_network(noop $!setStringParameter(channel, [ $lower($chan) ] , autocalc, setting, %mode , $false ))
@@ -1290,14 +1357,14 @@ on *:TEXT:*:*: {
     else if (%level && %skill != overall && %exp > 126) { goto fail }
     else if (!%level && %skill == overall && %exp > 4800000000000) { goto fail }
     else if (!%level && %skill != overall && %exp > 200000000) { goto fail }
-    %output = :D\-< 4Â¤11.12Â¡9*4Â°9*12Â¡11.4Â¤ Congratulations on
+    %output = :D\-< 4¤11.12¡9*4°9*12¡11.4¤ Congratulations on
     if (%level) { %output = %output level %exp %skill %nick }
     else { %output = %output $format_number(%exp) %skill experience %nick }
     if (%level && %skill == overall && %exp == 2475) { %output = %output $+ , and congratulations for maxing out }
     else if (%level && %skill != overall && %exp == 99) { %output = %output $+ , and congratulations for maxing out }
     else if (!%level && %skill == overall && %exp == 4800000000) { %output = %output $+ , and congratulations for maxing out }
     else if (!%level && %skill != overall && %exp == 200000000) { %output = %output $+ , and congratulations for maxing out }
-    %output = %output $+ ! 4Â¤11.12Â¡9*4Â°9*12Â¡11.4Â¤ :D/-<
+    %output = %output $+ ! 4¤11.12¡9*4°9*12¡11.4¤ :D/-<
     %saystyle %output
     goto clean
     :fail

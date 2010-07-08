@@ -1,9 +1,19 @@
->start<|botAlias.mrc|internal bot commands|3.3|a
+>start<|botAlias.mrc|internal bot commands|3.35|a
 ;@SYNTAX /timeCount
 ;@SUMMARY The main timer for the program, all automated events processed in here.
 timeCount {
   ; 1 second timer
   if ($read(timer.txt,nw,$gmt $+ *) && $server) { $gettok($read(timer.txt,nw,$gmt $+ *),2,124) }
+  if ($dbSelect(timers, id;ircnick;fingerprint;startTime;message, endTime, $gmt) != $null) {
+    var %timer $v1
+    if ($ial($trim($gettok(%timer, 2, 59)), 1).nick != $null) {
+      .msg $v1 $gettok(%timer, 5, 59) $+ , this timer (07# $+ $trim($gettok(%timer, 1, 59)) $+ ) ran for07 $duration($calc($gmt - $gettok(%timer, 4, 59))) $+ .
+    }
+    elseif ($ial($chr(42) $+ $trim($gettok(%timer, 3, 59)), 1).nick != $null) {
+      .msg $v1 $gettok(%timer, 5, 59) $+ , this timer (07# $+ $trim($gettok(%timer, 1, 59)) $+ ) ran for07 $duration($calc($gmt - $gettok(%timer, 4, 59))) $+ .
+    }
+    noop $sqlite_query(1, DELETE FROM timers WHERE endTime <= $gmt $+ ;)
+  }
   ; 10 second timer
   if ($calc($ctime % 10) == 0) {
     if (!$server) {
@@ -15,7 +25,7 @@ timeCount {
     if ($me == Gerty && (!$hget(joinqueue,list) || $ctime > $hget(joinqueue,time) || $nick(#gertyDev,0,h) != $hget(joinqueue,num))) {
       JoinQueueStart
     }
-    if (Gerty !ison #gertyDev) { nick Gerty }
+    if (Gerty !ison #gertyDev && $me ison #gertyDev) { nick Gerty }
   }
   ; 1 minute timer
   if ($calc($ctime % 60) == 0) {

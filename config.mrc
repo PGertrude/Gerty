@@ -24,6 +24,7 @@ on *:START: {
   if ($exists(commands.txt)) { .hload commands commands.txt }
   ; Check for last ge update
   noop $download.break(checkForOfflineGeUpdate, $newThread, $parser $+ lastupdate)
+  noop $sqlite_query(1, DELETE FROM timers WHERE endTime < $gmt $+ ;)
 }
 on *:QUIT: {
   if ($nick == $me) {
