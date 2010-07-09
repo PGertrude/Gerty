@@ -1,4 +1,4 @@
->start<|downloadoutputs.mrc|compiled parser outputs|3.75|rs
+>start<|downloadoutputs.mrc|compiled parser outputs|3.8|rs
 ; CLAN
 alias getClans {
   var %user = $1, %out = $2 $3, %clan = $4, %thread = $5
@@ -873,7 +873,7 @@ alias stats {
     :skillreply
     %saystyle %info %items
     if (!%itemstogo && %param != null) { %saystyle Here is a list of valid params for use with Gerty:12 http://hng.av.it.pt/~jdias/gerty/param.html }
-    if (!$hget(%socket) && $hget(%chan, track) != off) { rscript.singleskill %socket %nick %skill %saystyle %time }
+    if ($hget(%socket, command) != autooa && $hget(%chan, track) != off) { rscript.singleskill %socket %nick %skill %saystyle %time }
     goto unset
   }
   if (%skill == stats) {
@@ -918,7 +918,7 @@ alias stats {
     }
     :statreply
     %saystyle %info
-    if (%combat) { %saystyle combat: %combat }
+    if (%combat) { %saystyle Combat: %combat }
     if (%others) { %saystyle Other: %others }
     if (%minigames) { %saystyle Minigame: %minigames }
     goto unset
@@ -949,7 +949,7 @@ alias stats {
     %combat = %combat $validate($25,%state,%morethan,%lessthan,25,%average)
     :cmbreply
     %saystyle %info
-    if (($hget(%socket) && $hget(%socket,arg1) != true) || !$hget(%socket)) {
+    if ($hget(%socket,arg1) != true) {
       %saystyle Skills: %combat
     }
     goto unset
