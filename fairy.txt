@@ -1,4 +1,4 @@
->start<|fairy.txt|fairy ring locations|1.0|param
+>start<|fairy.txt|fairy ring locations|1.1|param
 AJR	Slayer Cave	Arrive outside and slightly west of cave. Rellekka (Fremennik village) to west.
 AIQ	Mudskipper Point	Mogre slayer area. Rimmington to north, Port Sarim to northeast.
 AJS	Penguin Island	Small Island with only Penguins, located north-west of Miscellania.

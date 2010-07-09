@@ -1,4 +1,4 @@
->start<|triggers.mrc|Entry point|3.65|rs
+>start<|triggers.mrc|Entry point|3.67|rs
 on *:TEXT:*:*: {
   if ($left($1,1) !isin !.@) {
     var %botCheck = $botid($1)
@@ -560,7 +560,6 @@ on *:TEXT:*:*: {
     var %command $regml(1)
     if (%command == stop) { %command = end }
     var %nick, %skill, %skillId, %trigger $left($1, 1), %input $1-
-
     ; extract rsn and skill
     %skill = $skills($2)
     %skillId = $statnum(%skill)
@@ -569,7 +568,6 @@ on *:TEXT:*:*: {
       %saystyle You must have your defname set to use this command. Syntax: !defname <rsn>
       goto clean
     }
-
     ; extract timers from the database relating to this user
     var %timers $findSkillTimers(%nick, $nick, $aLfAddress(%nick))
     .tokenize 44 %timers
@@ -588,7 +586,7 @@ on *:TEXT:*:*: {
       if ($2 isnum) %length = $2
       elseif ($duration($2-) isnum) %length = $v1
       if (%length) %endTime = $calc($gmt + %length)
-      var %sql INSERT INTO timers ('ircnick', 'fingerprint', 'startTime', 'message' $+ $iif(%endTime > 0, $chr(44) $+ 'endTime') $+ ) VALUES $& 
+      var %sql INSERT INTO timers ('ircnick', 'fingerprint', 'startTime', 'message' $+ $iif(%endTime > 0, $chr(44) $+ 'endTime') $+ ) VALUES $&
         (' $+ $nick $+ ', ' $+ $aLfAddress($nick) $+ ', ' $+ $gmt $+ ', 'Your Timer has expired!' $+ $iif(%endTime > 0, $chr(44) $+ ' $+ %endTime $+ ') $+ );
       noop $sqlite_query(1, %sql )
       %saystyle Your timer has been successfully initiated. $iif(%endTime > 0, It will expire in07 $duration(%length) $+ .) Note: This timer is local to this bot.
@@ -653,8 +651,6 @@ on *:TEXT:*:*: {
     var %url http://hiscore.runescape.com/index_lite.ws?player= $+ %nick
     noop $download.break(timer. $+ %command %thread, %thread, %url)
     goto clean
-
-
   }
   ; URBAN
   else if ($regex($1,/^[!@.](urban|ud)$/Si)) {
