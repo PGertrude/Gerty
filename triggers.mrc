@@ -84,7 +84,7 @@ on *:TEXT:*:*: {
   }
   ; YOUTUBE link
   else if ($regex(yt,$1-,/youtube\.com\/watch\?v=([\w-]+)\W?/Si)) {
-    if ($chanset($chan,youtube) == off) goto clean
+    if ($chanset($chan,youtubelinks) == off) goto clean
     if ($isBot($nick)) { goto clean }
     _fillCommand %thread @ $nick $iif($chan,$v1,PM) Youtubelink
     var %url = http://rscript.org/lookup.php?type=youtubeinfo&id= $+ $regml(yt,1)
@@ -222,6 +222,7 @@ on *:TEXT:*:*: {
   }
   ; CLAN
   else if ($regex($1,/^[!@.]clans?$/Si)) {
+    if ($hget(#, clan) == off) { goto clean }
     var %user
     hmake %thread
     if ($2) { %user = $rsn($2-) }
@@ -429,6 +430,7 @@ on *:TEXT:*:*: {
   }
   ; GOOGLE
   else if ($regex($1,/^[!@.]y(ou)?t(ube)?$/Si)) {
+    if ($hget(#, youtube) == off) { goto clean }
     hadd -m %thread out %saystyle
     if ($2) {
       hadd -m %thread page video
@@ -441,6 +443,7 @@ on *:TEXT:*:*: {
     goto clean
   }
   else if ($regex($1,/^[!@.]google$/Si)) {
+    if ($hget(#, google) == off) { goto clean }
     hadd -m %thread out %saystyle
     if ($2 == -i) {
       hadd -m %thread page images
@@ -757,6 +760,7 @@ on *:TEXT:*:*: {
   }
   ; LASTNDAYS
   else if ($regex($1,/^[!@.](l|last)(\d+)([A-Za-z]+)$/Si)) {
+    if ($hget(#, track) == off) { goto clean }
     var %time = $regml(2) $+ $regml(3)
     %time = $duration(%time)
     if ($2) { var %nick = $rsn($2-) }
@@ -771,6 +775,7 @@ on *:TEXT:*:*: {
   }
   ; NDAYSAGO
   else if ($regex($1,/^[!@.](\d+)([A-Za-z]+)ago$/Si)) {
+    if ($hget(#, track) == off) { goto clean }
     var %time $regml(1) $+ $regml(2)
     if ($2) { var %nick = $rsn($2-) }
     if (!$2) { var %nick = $rsn($nick) }
@@ -790,6 +795,7 @@ on *:TEXT:*:*: {
   }
   ; TODAY/WEEK/MONTH/YEAR
   else if ($regex($1,/^[!@.](today|week|month|year)$/Si)) {
+    if ($hget(#, track) == off) { goto clean }
     var %input = $1-
     .tokenize 32 $timetoday
     var %today = $1, %week = $2, %month = $3, %year = $4
@@ -808,6 +814,7 @@ on *:TEXT:*:*: {
   }
   ; LASTWEEK ; LASTMONTH ; LASTYEAR ; YESTERDAY
   else if ($regex($1,/^[!@.](?:y(?:ester)?(day)|l(?:ast)?(week|month|year))$/Si)) {
+    if ($hget(#, track) == off) { goto clean }
     var %timescale = $regml(1), %time, %time2, %command
     var %input = $1-
     .tokenize 32 $timetoday
@@ -848,6 +855,7 @@ on *:TEXT:*:*: {
   }
   ; TRACK
   else if ($regex($1,/^[!@.]track$/Si)) {
+    if ($hget(#, track) == off) { goto clean }
     var %input = $1-
     .tokenize 32 $timetoday
     var %today = $1, %week = $2, %month = $3, %year $4
@@ -972,9 +980,13 @@ on *:TEXT:*:*: {
     }
     %param = $replace(%param,$chr(32),~)
     var %skill = $lookups($right($1,-1))
+    if ($hget(#, skills) == off && $scores(%skill) != $null) { goto clean }
+    if ($hget(#, stats) == off && %skill == stats) { goto clean }
+    if ($hget(#, combat) == off && %skill == combat) { goto clean }
     var %skillid = null
     if ($statnum(%skill)) { %skillid = $v1 }
     var %socket = stats. $+ %thread
+    _fillCommand %socket $left($1,1) $nick $iif($chan,$v1,PM) stats #
     var %url = http://www.rscript.org/lookup.php?type=track&user= $+ %nick $+ &skill=all&time=10000
     noop $download.break(die,%socket $+ 1,%url)
     var %url = http://hiscore.runescape.com/index_lite.ws?player= $+ %nick
@@ -1140,6 +1152,34 @@ on *:TEXT:*:*: {
       else if (%command == autooa) {
         noop $_network(noop $!setStringParameter(channel, [ $lower($chan) ] , autooa, setting, %mode , $false ))
         %saystyle $chan Settings: Automatic overall lookup messages are now %mode $+ .
+      }
+      else if (%command == google) {
+        noop $_network(noop $!setStringParameter(channel, [ $lower($chan) ] , google, setting, %mode , $false ))
+        %saystyle $chan Settings: Google searches are now %mode $+ .
+      }
+      else if (%command == youtubelinks) {
+        noop $_network(noop $!setStringParameter(channel, [ $lower($chan) ] , youtubelinks, setting, %mode , $false ))
+        %saystyle $chan Settings: Youtube link reply messages are now %mode $+ .
+      }
+      else if (%command == clan) {
+        noop $_network(noop $!setStringParameter(channel, [ $lower($chan) ] , clan, setting, %mode , $false ))
+        %saystyle $chan Settings: Clan lookup messages are now %mode $+ .
+      }
+      else if (%command == skills || %command == skill) {
+        noop $_network(noop $!setStringParameter(channel, [ $lower($chan) ] , skills, setting, %mode , $false ))
+        %saystyle $chan Settings: Skill messages are now %mode $+ .
+      }
+      else if (%command == stat || %command == all || %command == stats) {
+        noop $_network(noop $!setStringParameter(channel, [ $lower($chan) ] , stats, setting, %mode , $false ))
+        %saystyle $chan Settings: Stats messages are now %mode $+ .
+      }
+      else if (%command == combat || %command == cmb) {
+        noop $_network(noop $!setStringParameter(channel, [ $lower($chan) ] , combat, setting, %mode , $false ))
+        %saystyle $chan Settings: Combat lookup messages are now %mode $+ .
+      }
+      else if (%command == track || %command == tracker) {
+        noop $_network(noop $!setStringParameter(channel, [ $lower($chan) ] , track, setting, %mode , $false ))
+        %saystyle $chan Settings: Tracking messages are now %mode $+ .
       }
     }
     if ($admin($nick)) {

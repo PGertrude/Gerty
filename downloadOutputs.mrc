@@ -808,7 +808,7 @@ alias distribute {
 }
 ; STATS
 alias stats {
-  var %saystyle = $1 $2, %skill = $replace($3,_,$chr(32)), %skillid = $4, %nick = $5, %param = $replace($6,~,$chr(32)), %goal = $7, %morethan = $8, %lessthan = $9, %socket = $10, %presetgoal = $11, %presetparam = $12, %time = $13
+  var %saystyle = $1 $2, %skill = $replace($3,_,$chr(32)), %skillid = $4, %nick = $5, %param = $replace($6,~,$chr(32)), %goal = $7, %morethan = $8, %lessthan = $9, %socket = $10, %presetgoal = $11, %presetparam = $12, %time = $13, %chan = $cmd(%socket, arg1)
   .tokenize 10 $distribute($14)
   if ($1 == unranked) { goto unranked }
   else if (!$1 || !$2) { %saystyle Connection Error: Please try again in a few moments. | goto unset }
@@ -873,7 +873,7 @@ alias stats {
     :skillreply
     %saystyle %info %items
     if (!%itemstogo && %param != null) { %saystyle Here is a list of valid params for use with Gerty:12 http://hng.av.it.pt/~jdias/gerty/param.html }
-    if (!$hget(%socket)) { rscript.singleskill %socket %nick %skill %saystyle %time }
+    if (!$hget(%socket) && $hget(%chan, track) != off) { rscript.singleskill %socket %nick %skill %saystyle %time }
     goto unset
   }
   if (%skill == stats) {
@@ -960,7 +960,7 @@ alias stats {
     if ($bytes($1,db) == 0) { goto unranked }
     :minireply
     %saystyle %info
-    rscript.singleminigame %socket %nick $replace(%skill,$chr(32),_) %saystyle
+    if ($hget(%chan, track) != off) rscript.singleminigame %socket %nick $replace(%skill,$chr(32),_) %saystyle
     goto unset
   }
   if (%skill == reqs) {
