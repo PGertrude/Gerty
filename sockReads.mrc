@@ -1,4 +1,4 @@
->start<|sockreads.mrc|compiled sockreads|3.4|rs
+>start<|sockreads.mrc|compiled sockreads|3.42|rs
 on *:sockread:*: {
   var %thread $gettok($sockname,2,46), %command $hget(%thread,command), %file %thread $+ .txt
   if ($sockerr) {

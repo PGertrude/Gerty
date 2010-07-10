@@ -1,4 +1,4 @@
-;>start<|downloadoutputs.mrc|compiled parser outputs|3.82|rs
+>start<|downloadoutputs.mrc|compiled parser outputs|3.83|rs
 ; CLAN
 alias getClans {
   var %user = $1, %out = $2 $3, %clan = $4, %thread = $5
