@@ -1,4 +1,4 @@
->start<|triggers.mrc|Entry point|3.67|rs
+>start<|triggers.mrc|Entry point|3.7|rs
 on *:TEXT:*:*: {
   if ($left($1,1) !isin !.@) {
     var %botCheck = $botid($1)
@@ -1020,16 +1020,6 @@ on *:TEXT:*:*: {
     .timer 1 30 %saystyle Your Bounty Hunter timer has Expired.
     goto clean
   }
-  ; TIMER
-  else if ($regex($1,/^[!@.]timer$/Si)) {
-    if ($2 isnum) {
-      var %time = $calc($2 * 60 + $ctime($asctime($gmt)))
-      write timer.txt %time $+ $chr(124) $+ %saystyle $nick $+ , your timer has expired.
-      %saystyle Your timer will expire in $duration($calc($2 * 60)) $+ .
-    }
-    else { %saystyle You must specify a time(mins) for your timer to expire. }
-    goto clean
-  }
   ; SHARDS
   else if ($regex($1,/^[!@.](sh|shards?)$/Si)) {
     var %familiar = $read(summoning.txt,w,$gettok($2-,2,64) $+ *)
@@ -1090,7 +1080,12 @@ on *:TEXT:*:*: {
   }
   ; PVP WORLDS [ACTIVITY]
   else if ($regex($1,/^[!@.]pvp?$/Si)) {
-    %saystyle PVP worlds: 07F2P: 21 32 55 62 63 72 74 80 101 109 122 123 125 136 | 07P2P: 23 65 89 111 124 137 150 159 164 167
+    %saystyle PVP worlds: 07F2P: 17 21 32 55 62 63 72 74 80 101 109 122 123 125 136 | 07P2P: 23 26 65 72 86 89 111 124 137 150 159 164 167
+    goto clean
+  }
+  ; BH WORLDS [ACTIVITY]
+  else if ($regex($1,/^[!@.]bhworlds$/Si)) {
+    %saystyle BH worlds: 07F2P: 32(+1) 57 136 $| 07P2P: 18(+1) 65(+1) 124 137
     goto clean
   }
   ; ACTIVITY
@@ -1100,7 +1095,10 @@ on *:TEXT:*:*: {
       %saystyle 07F2P Lootshare Worlds: 7 10 11 14 29 30 34 37 40 43 47 51 52 85 94 95 106 108 113 117 118 126 127 134 142 153 154 155
     }
     if ($2 == pvp) {
-      %saystyle PVP worlds: 07F2P: 21 32 55 62 63 72 74 80 101 109 122 123 125 136 | 07P2P: 23 65 89 111 124 137 150 159 164 167
+      %saystyle PVP worlds: 07F2P: 17 21 32 55 62 63 72 74 80 101 109 122 123 125 136 $| 07P2P: 23 26 65 72 86 89 111 124 137 150 159 164 167
+    }
+    if ($2 == bh) {
+      %saystyle BH worlds: 07F2P: 32(+1) 57 136 $| 07P2P: 18(+1) 65(+1) 124 137
     }
     goto clean
   }
@@ -1237,34 +1235,25 @@ on *:TEXT:*:*: {
         %saystyle Your07 $lookups($3) item has been removed.
         goto clean
       }
-      var %x = 3
-      while (%x < $0) {
-        var %input = %input $($ $+ %x,2)
-        inc %x
-      }
-      if ($lookups($($ $+ $0,2))) { var %skill = $lookups($($ $+ $0,2)), %itemin = %input }
-      else if ($lookups($3)) { var %skill = $3, %itemin = $4- }
-      else { %saystyle Sytax Error: !set item <skill> <item> | goto clean }
-      var %socket = $+(a,$ticks)
-      var %file = $lookups(%skill) $+ .txt
-      .fopen %socket %file
+      var %itemin $4-, %thread $newThread, %skill $lookups($3)
+      .fopen %thread param.txt
       if ($ferr) { goto clean }
       while (!$feof) {
-        var %line = $fread(%socket)
-        if (%itemin isin %line) {
-          var %item = $gettok(%line,1,9)
+        var %line = $fread(%thread)
+        if ($gettok(%line, 1, 9) == %skill && %itemin isin %line) {
+          var %item = $gettok(%line,4,9)
           break
         }
       }
       if (!%item) {
-        %saystyle Your item07 %itemin could not be found in our07 $lookups(%skill) params.
-        %saystyle Here is a list of valid params for use with Gerty:12 http://p-gertrude.rsportugal.org/gerty/param.html
+        %saystyle Your item07 %itemin could not be found in our07 %skill params.
+        %saystyle Here is a list of valid params for use with Gerty:12 http://gerty.rsportugal.org/param.html
       }
       else {
         noop $_network(noop $!setStringParameter( users , $aLfAddress($nick) , $lookups($3) , items , %item , $false ))
-        %saystyle Your07 $lookups(%skill) item has been set to07 %item $+ .
+        %saystyle Your07 %skill item has been set to07 %item $+ .
       }
-      .fclose %socket
+      .fclose %thread
     }
     goto clean
   }

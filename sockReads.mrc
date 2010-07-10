@@ -46,8 +46,8 @@ on *:sockread:*: {
   else if (fml.* iswm $sockname) {
     var %fml
     sockread %fml
-    if ($regex(%fml,/<div class="post"><p>(.+?)<\/p><[^>]+><div[^>]*><a[^>]+>(.+?)<\/a>/)) {
-      $hget(%thread,out) 07FML $regml(2) $+ : $nohtml($left($regml(1),-3))
+    if ($regex(%fml,/<div class="post" id="(\d+)"><p><a[^>]+>(.+?)<\/a><\/p>/)) {
+      $hget(%thread,out) 07FML $# $+ $regml(1) $+ : $nohtml($left($regml(2),-3))
       goto unset
     }
   }
@@ -119,6 +119,11 @@ on *:sockread:*: {
       %strTime = $remove($nohtml(%strTime),$chr(10))
       var %start = $bfind(&qfc2,%cutD,class="msgcontents"), %cutE = $bfind(&qfc2,%start,</div>)
       var %strContent = $bvar(&qfc2,%start,$calc(%cutE - %start)).text
+      %strContent = $regsubex(%strContent, /(<style[^>]*>[^<]+<\/style><script[^>]*>[^<]+<\/script>)/, $null)
+      if ($trim($nohtml(%strContent)) == $null) {
+        var %start = $bfind(&qfc2,%cutD,class="sccontent"), %cutE = $bfind(&qfc2,%start,</div>)
+        %strContent = $bvar(&qfc2,%start,$calc(%cutE - %start)).text
+      }
       %strContent = $remove($nohtml(%strContent),$chr(10))
       if ($hget(%thread,link)) $hget(%thread,out) $formatwith(\c12\uhttp://forum.runescape.com/forums.ws?{0}\o $| Forum:\c07 %strForum \o| By:\c07 %strPoster \o| Title:\c07 %strTitle \o| Posted at:\c07 %strTime, $replace($hget(%thread,qfc),-,$chr(44)))
       else $hget(%thread,out) $formatwith(Forum:\c07 %strForum \o| By:\c07 %strPoster \o| Title:\c07 %strTitle \o| Posted at:\c07 %strTime, $replace($hget(%thread,qfc),-,$chr(44)))
@@ -295,7 +300,7 @@ on *:sockread:*: {
       if (Hunter isin %rscript) { set %r23 $gettok(%rscript,4,58) }
       if (Construction isin %rscript) { set %r24 $gettok(%rscript,4,58) }
       if (Summoning isin %rscript) { set %r25 $gettok(%rscript,4,58) }
-      if (Dungeoneering isin %rscript) { set %r26 $gettok(%rscript,4,58) }
+      if (Dungeoneering isin %rscript) { set %r51 $gettok(%rscript,4,58) }
     }
     if ($hget(%thread,time2) && $v1 isin %rscript && gain isin %rscript) {
       if (Overall isin %rscript) { set %r26 $gettok(%rscript,4,58) }
@@ -323,7 +328,7 @@ on *:sockread:*: {
       if (Hunter isin %rscript) { set %r48 $gettok(%rscript,4,58) }
       if (Construction isin %rscript) { set %r49 $gettok(%rscript,4,58) }
       if (Summoning isin %rscript) { set %r50 $gettok(%rscript,4,58) }
-      if (Dungeoneering isin %rscript) { set %r51 $gettok(%rscript,4,58) }
+      if (Dungeoneering isin %rscript) { set %r52 $gettok(%rscript,4,58) }
     }
     if (%rscript == 0:-1) { $hget(%thread,out) $hget(%thread,nick) Has not been tracked by Runescript. $hget(%thread,nick) is now being Tracked. | goto unset }
     if (PHP: Invalid argument supplied for foreach isin %rscript) { $hget(%thread,out) There is a gap in RScripts Data, data for $hget(%thread,nick) could not be found. | goto unset }

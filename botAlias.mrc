@@ -3,7 +3,6 @@
 ;@SUMMARY The main timer for the program, all automated events processed in here.
 timeCount {
   ; 1 second timer
-  if ($read(timer.txt,nw,$gmt $+ *) && $server) { $gettok($read(timer.txt,nw,$gmt $+ *),2,124) }
   if ($dbSelect(timers, id;ircnick;fingerprint;startTime;message, endTime, $gmt) != $null) {
     var %timer $v1
     if ($ial($trim($gettok(%timer, 2, 59)), 1).nick != $null) {
