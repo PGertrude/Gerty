@@ -1120,3 +1120,25 @@ alias memberlist {
   }
   _clearCommand %thread
 }
+; DROPS
+alias npcSearch {
+  var %thread $1, %results $2-
+  if (%results == $false) { $cmd(%thread, out) No results for $replace($cmd(%thread, arg1), _, $chr(32)) | goto unset }
+  .tokenize 10 %results
+  if ($0 == 1) {
+    .tokenize 9 $1
+    $cmd(%thread, out)  $+ $2 $+  | Level:07 $5 | Lifepoints:07 $4 | Members: $iif($6 == 1, 03Yes, 04No) | Examine:07 $3 | Habitat:07 $7
+    if ($9) { $cmd(%thread, out) Top Drops:07 $9 }
+    elseif ($cmd(%thread, command) == drops) { $cmd(%thread, out) No drops listed. }
+  }
+  else {
+    var %x 1, %results $null
+    while (%x <= $0) {
+      %results = %results $gettok($($ $+ %x, 2), 2, 44) 07# $+ $gettok($($ $+ %x, 2), 1, 44) $+ ;
+      inc %x
+    }
+    $cmd(%thread, out) $0 results: %results 12www.zybez.net
+  }
+  :unset
+  _clearCommand %thread
+}

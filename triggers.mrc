@@ -695,24 +695,16 @@ on *:TEXT:*:*: {
     sockopen $+(world2.,%thread) www.runescape.com 80
     goto clean
   }
-  ; NPC DROPS - REWRITE {JSON PARSER}
+  ; NPC DROPS
   else if ($regex($1,/^[!@.](npc|monster|mdb(info)?|drops?|loot)$/Si)) {
-    var %command
+    var %command, %thread $newThread
     if (!$2) { %saystyle you must specify a monster to look up. }
-    if ($regex($right($1,-1),/(drops?|loot)/i)) %command = drop
+    if ($regex($right($1,-1),/(drops?|loot)/i)) %command = drops
     else %command = npc
-    if ($left($2,1) != $chr(35) && $2 !isnum) {
-      hadd -m %thread npc $replace($2-,$chr(32),+)
-      hadd -m %thread out %saystyle
-      hadd -m %thread command %command
-      sockopen $+(drop.,%thread) www.zybez.net 80
-    }
-    if ($left($2,1) == $chr(35) || $2 isnum) {
-      hadd -m %thread id $remove($2,$chr(35))
-      hadd -m %thread out %saystyle
-      hadd -m %thread command %command
-      sockopen $+(drop2.,%thread) www.zybez.net 80
-    }
+    var %url $parser $+ %command $+ &npc=
+    _fillCommand %thread $left($1,1) $nick $iif($chan,$v1,PM) %command $replace($caps($2-), $chr(32), _)
+    if ($remove($2, $#) isnum) noop $download.break(npcSearch %thread, %thread, %url $+ $v1)
+    else noop $download.break(npcSearch %thread, %thread, %url $+ $urlencode($2-))
     goto clean
   }
   ; ALOG
