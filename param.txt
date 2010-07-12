@@ -203,7 +203,7 @@ Magic	32	45	Bounty Locate	1 Law, 1 Air, 1 Fire	-	Normal	Teleport to your target 
 Magic	31	41	Lumbridge Teleport	1 Earth, 3 Air, 1 Law	-	Normal	-
 Magic	29	19.5	Earth Bolt	3 Earth, 2 Air, 1 Chaos	11	Normal	-
 Magic	27	37	Lvl-2 Enchant	3 Air, 1 Cosmic	-	Normal	Enchants Emerald jewellery
-Magic	31	41	Varrock Teleport	1 Fire, 3 Air, 1 Law	-	Normal	-
+Magic	25	35	Varrock Teleport	1 Fire, 3 Air, 1 Law	-	Normal	-
 Magic	23	16.5	Water Bolt	2 Water, 2 Air, 1 Chaos	10	Normal	-
 Magic	21	31	Low Level Alchemy	3 Fire, 1 Nature	-	Normal	Converts items into a low amount of coins	low alch lo alch low lvl alch
 Magic	20	30	Bind	3 Earth, 3 Water, 2 Nature	-	Normal	Holds target for 5 seconds

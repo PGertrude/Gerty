@@ -407,3 +407,4 @@ get_multiple_prices {
   }
   return %out
 }
+comma return $regsubex($1,/(\d+)/,$bytes(\1,db))

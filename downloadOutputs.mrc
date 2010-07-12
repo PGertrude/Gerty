@@ -808,43 +808,47 @@ alias distribute {
 }
 ; STATS
 alias stats {
-  var %saystyle = $1 $2, %skill = $replace($3,_,$chr(32)), %skillid = $4, %nick = $5, %param = $replace($6,~,$chr(32)), %goal = $7, %morethan = $8, %lessthan = $9, %socket = $10, %presetgoal = $11, %presetparam = $12, %time = $13, %chan = $cmd(%socket, arg1)
+  var %saystyle = $1 $2, %skill = $replace($3,_,$chr(32)), %skillid = $4, %nick = $5, %param = $replace($6,~,$chr(32)), %goal = $iif(%goall == nl, nl, $litecalc($7)), %morethan = $8, %lessthan = $9, %socket = $10, %presetgoal = $11, %presetparam = $12, %time = $13, %chan = $cmd(%socket, arg1), %target = $litecalc(%goal)
   .tokenize 10 $distribute($14)
   if ($1 == unranked) { goto unranked }
   else if (!$1 || !$2) { %saystyle Connection Error: Please try again in a few moments. | goto unset }
   if ($skills(%skill)) {
     .tokenize 44 $($ $+ %skillid,2)
-    var %endgoal = $iif($3 < 13034431,13034431,200000000)
-    var %endgoalname = $iif($3 < 13034431,99,max)
-    var %vlvl = $xptolvl($3)
-    var %info =  $+ %nick $+ 07 $lower(%skill) $(|,) Rank:07 $regsubex($1,/^(\d+)$/,$bytes(\1,db)) $(|,) Level:07 $regsubex($2,/^(\d+)$/,$bytes(\1,db)) $&
-       $+ $iif(%skill != overall,(07 $+ %vlvl $+ ) $+ $chr(32)) $+ $(|,) Exp:07 $bytes($3,db) $+ 
+    ; Line 1 output
+    var %endgoal $iif($3 < 13034431,13034431,200000000)
+    var %endgoalname $iif($3 < 13034431,99,max)
+    var %info =  $+ %nick $+ 07 $lower(%skill) $(|,) Rank:07 $comma($1) $(|,) Level:07 $comma($2) $&
+       $+ $iif(%skill != overall,(07 $+ $comma($4) $+ ) $+ $chr(32)) $+ $| Exp:07 $comma($3) $+ 
     if (%skill == overall || $3 == 200000000) { goto skillreply }
     var %info = %info (07 $+ $round($calc( 100 * $3 / %endgoal),1) $+ % of %endgoalname $+ )
+    ; GOALS
     ; Exp to goal
     if (%presetgoal == yes) {
       var %userAddress $iif($aLfAddress(%nick), $v1, %nick)
       var %boolRsn $iif($aLfAddress(%nick), $false, $true)
-      if ($getStringParameter(%userAddress,%skill,goals, %boolRsn)) {
+      if ($getStringParameter(%userAddress, %skill, goals, %boolRsn)) {
         %goal = $v1
         %target = $xptolvl(%goal)
       }
     }
-    if ((%goal > 126 && %goal <= $3) || (%goal < 127 && %goal <= $2)) { %goal = nl | unset %target }
-    if (%goal == nl) { %goal = $calc(%vlvl + 1) }
-    if (%goal == 127) { %goal = 200000000 }
-    if ($litecalc(%goal) < 127 && !%target) { var %target = %goal | %goal = $lvltoxp(%goal) }
-    else if (!%target) { var %target = $format_number($litecalc(%goal)) }
-    %goal = $litecalc(%goal)
-    if (%goal <= $3 && $3 < 188884740) { %target = $calc(%vlvl + 1) | %goal = $lvltoxp(%target) }
-    else if (%goal <= $3) { %target = 200m | %goal = 200000000 }
-    if (%goal > 200000000) { %goal = 200000000 | %target = 200m }
+    ; Goal should be exp
+    if (%goal == nl) { %target = $calc($4 + 1) | %goal = $lvltoxp(%target) }
+    if (%goal < 127) { %target = $litecalc(%goal) | %goal = $lvltoxp(%goal) }
+    if (%goal <= $3) { %target = $iif($4 < 126, $calc($4 + 1), max) | %goal = $iif($4 < 126, $lvltoxp($calc($4 + 1)), 200000000) }
+    if (%goal >= 200000000) { %target = 200000000 | %goal = 200000000 }
+    %target = $format_number($litecalc(%target))
     var %exptogo = $calc(%goal - $3)
+    ; If new goal: save it!
     if (%presetgoal == no && $aLfAddress(%nick)) {
       if (!$rowExists(users, fingerprint, $aLfAddress(%nick))) { noop $_network(noop $!sqlite_query(1, INSERT INTO users (fingerprint, rsn) VALUES (' $+ $aLfAddress(%nick) $+ ',' $+ %nick $+ ');)) }
-      noop $_network(noop $!setStringParameter( users , $aLfAddress(%nick) , %skill , goals , %goal , $false ))
+      var %oldGoal $getStringParameter($aLfAddress(%nick), %skill, goals)
+      if ($litecalc(%oldGoal) != %goal) {
+        noop $_network(noop $!setStringParameter( users , $aLfAddress(%nick) , %skill , goals , %goal , $false ))
+      }
     }
-    var %info = %info | exp till %target $+ :07 $bytes(%exptogo,db) (07 $+ $round($calc(100 * ($3 - $lvltoxp(%vlvl)) / (%goal - $lvltoxp(%vlvl))),1) $+ $(%,) $+ )
+    var %info = %info | exp till %target $+ :07 $bytes(%exptogo,db) (07 $+ $round($calc(100 * ($3 - $lvltoxp($4)) / (%goal - $lvltoxp($4))),1) $+ $% $+ )
+    ; END OF GOALS
+    ; ITEMS
     ; Items to next level
     if (%presetparam == yes) {
       var %userAddress $iif($aLfAddress(%nick), $v1, %nick)
@@ -853,6 +857,7 @@ alias stats {
         %param = $v1
       }
     }
+    ; param is an exp amount
     if ($litecalc(%param)) {
       %param = $litecalc(%param)
       var %itemstogo = $ceil($calc( %exptogo / %param ))
@@ -867,12 +872,15 @@ alias stats {
       if (!%itemstogo) { var %items = (Unknown Item) }
       else if (%presetparam == no && $aLfAddress(%nick)) {
         if (!$rowExists(users, fingerprint, $aLfAddress(%nick))) { noop $_network(noop $!sqlite_query(1, INSERT INTO users (fingerprint, rsn) VALUES (' $+ $aLfAddress(%nick) $+ ',' $+ %nick $+ ');)) }
-        noop $_network(noop $!setStringParameter( users , $aLfAddress(%nick) , %skill , items , %param , $false ))
+        if ($getStringParameter(%userAddress, %skill, items, %boolRsn) != %param) {
+          noop $_network(noop $!setStringParameter( users , $aLfAddress(%nick) , %skill , items , %param , $false ))
+        }
       }
     }
+    ; END OF ITEMS
     :skillreply
     %saystyle %info %items
-    if (!%itemstogo && %param != null) { %saystyle Here is a list of valid params for use with Gerty:12 http://hng.av.it.pt/~jdias/gerty/param.html }
+    if (!%itemstogo && %param != null) { %saystyle Here is a list of valid params for use with Gerty:12 http://gerty.rsportugal.org/param.html }
     if ($hget(%socket, command) != autooa && $hget(%chan, track) != off) { rscript.singleskill %socket %nick %skill %saystyle %time }
     goto unset
   }
