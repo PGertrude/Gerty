@@ -1142,3 +1142,12 @@ alias npcSearch {
   :unset
   _clearCommand %thread
 }
+; RECORD
+alias record {
+  var %thread $1, %source $2-, %skill $cmd(%thread, arg1), %rsn $cmd(%thread, arg2)
+  .tokenize 10 %source
+  if ($remove($gettok($1, 2, 9), $chr(44)) !isnum) { $cmd(%thread, out) 12http://runetracker.org/track has no records for07 %rsn in07 %skill | goto unset }
+  $cmd(%thread, out) %rsn $+ 's records in %skill $+ : Day07 $gettok($1, 1, 9) ( $+ $gettok($1, 2, 9) $+ ); Week07 $gettok($2, 1, 9) ( $+ $gettok($2, 2, 9) $+ ); Month07 $gettok($3, 1, 9) ( $+ $gettok($3, 2, 9) $+ ); 12http://runetracker.org/track- $+ %rsn $+ , $+ %skill $+ ,0
+  :unset
+  _fillCommand %thread
+}

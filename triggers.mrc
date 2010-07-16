@@ -986,6 +986,21 @@ on *:TEXT:*:*: {
     :unset
     goto clean
   }
+  ; RECORD
+  else if ($regex($1,/^[!@.]record$/Si)) {
+    var %rsn $rsn($nick), %skill Overall, %thread $newThread
+    if ($2) {
+      if ($lookups($2)) {
+        %skill = $v1
+        if ($3) %rsn = $rsn($3-)
+      }
+      else %rsn = $rsn($2-)
+    }
+    _fillCommand %thread $left($1,1) $nick $iif($chan,$v1,PM) record %skill %rsn
+    var %url $parser $+ record $+ &rsn= $+ %rsn $+ &skill= $+ $smartno(%skill)
+    noop $download.break(record %thread, %thread, %url)
+    goto clean
+  }
   ; LOGIN
   else if ($regex($1,/^[!@.]login$/Si)) {
     if ($2 == $readini(Gerty.Config.ini,admin,pass)) {
