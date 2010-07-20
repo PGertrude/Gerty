@@ -218,10 +218,12 @@ alias updo {
 alias geInfo {
   var %thread $1
   var %geInfo $remove($2-,$cr,$lf)
-  .tokenize 44 %geInfo
-  if ($0 == 1) { _throw geInfo %thread | halt }
+  if (!%geinfo) { $cmd(%thread, out) No results found for id07 $cmd(%thread, arg1) | goto unset }
+  .tokenize 9 %geInfo
+  if ($0 == 1) { _throw geInfo %thread | goto unset }
   if (!$getPrice($1)) noop $setPrice($1,$4)
-  $cmd(%thread,out)  $+ $2 $+  | Min:07 $format_number($3) Avg:07 $format_number($4) Max:07 $format_number($5) | 30 Days:07 $6 $+ $% | 90 Days:07 $7 $+ $% | 180 Days:07 $8 $+ $% | 12http://itemdb-rs.runescape.com/viewitem.ws?obj= $+ $1
+  $cmd(%thread,out)  $+ $2 $+  | Min:07 $format_number($3) Avg:07 $format_number($4) Max:07 $format_number($5) | Today:07 $format_number($6) | 30 Days:07 $7 $+ $% | 90 Days:07 $8 $+ $% | 180 Days:07 $9 $+ $% | Last Update:07 $asctime($10, ddoo mmmm) | 12http://itemdb-rs.runescape.com/viewitem.ws?obj= $+ $1
+  :unset
   _clearCommand %thread
 }
 ; COINSHARE ; CS

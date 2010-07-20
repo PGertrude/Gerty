@@ -404,19 +404,19 @@ on *:TEXT:*:*: {
     if (!$2) { %saystyle Syntax: !geinfo <item> | halt }
     var %id $fixInt($remove($2-,$chr(35)))
     if (%id > 0) {
-      var %id = $regsubex($2-,/(\D+)/g,$null)
-      _fillCommand %thread $left($1,1) $nick $iif($chan,$v1,PM) geinfo
-      var %url http://gerty.rsportugal.org/parsers/geinfo.php?id= $+ %id
-      noop $download.break(geInfo %thread,%thread,%url)
+      var %id $regsubex($2-,/(\D+)/g,$null)
+      _fillCommand %thread $left($1,1) $nick $iif($chan,$v1,PM) geinfo %id
+      var %url $parser $+ geinfo $+ &item= $+ %id
+      noop $download.break(geInfo %thread, %thread, %url)
       goto clean
     }
     var %items $getPriceId($2-), %left $left($1,1)
     .tokenize 44 %items
     if ($0 == 1) {
-      var %id = $gettok(%items,1,59)
+      var %id $gettok(%items,1,59)
       _fillCommand %thread %left $nick $iif($chan,$v1,PM) geinfo
-      var %url http://gerty.rsportugal.org/parsers/geinfo.php?id= $+ %id
-      noop $download.break(geInfo %thread,%thread,%url)
+      var %url $parser $+ geinfo $+ &item= $+ %id
+      noop $download.break(geInfo %thread, %thread, %url)
       goto clean
     }
     var %x 1, %itemList = |

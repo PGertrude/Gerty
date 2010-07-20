@@ -1132,7 +1132,7 @@ Fletching	52	15	Broad Arrow	0	Headless arrow+Broad Arrow Head	53
 Fletching	52	11.2	Mithril Dart	809	Mithril Dart Tip+3 Feathers	822
 Fletching	54	5	Mithril Bolt	9142	Mithril Bolts(unf)+Feathers	9379+314
 Fletching	54	128	Mithril Crossbow	9181	Maple Crossbow Stock+Mithril Limbs+Crossbow String	9448+9427+9438
-Fletching	55	3	Broad Bolt	0	Broad Bolt Tips+3 Feathers	13279+314
+Fletching	55	3	Broad-tipped Bolt	13280	Broad Bolt Tips+3 Feathers	13279+314
 Fletching	55	116.5	Maple Longbow	851	Maple Logs+Bowstring	1517+1777+62	384
 Fletching	56	9.7	Sapphire Bolt	9337	Mithril Bolts+Sapphire tips	9142+9189
 Fletching	58	10.5	Emerald Bolt	9338	Mithril Bolts+Emerald tips	9142+9190

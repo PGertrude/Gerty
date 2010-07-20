@@ -267,6 +267,9 @@ downloadstring {
   %p = $com($1 ).result
   .comclose $1
   return %p
+  :error
+  reseterror
+  return $false
 }
 ;@SYNTAX /noop $download.break(<callback function>, <socket id>, <url>)
 ;@SUMMARY This will pass the content of the requested url to the callback function in parameter $1.
@@ -442,7 +445,7 @@ isBot {
   ; ChanServ bots:
   if ($istok(BanHammer Captain_Falcon ClanWars Client Coder Machine milk mIRC Noobs Q RuneScape snoozles Unknown W Warcraft X Y Rudolph Spam Minibar ChanServ,$1,32) && cs !isin $prop) { return $true }
   ; Stat bots:
-  if ($regex($1,/(BigSister$|Gerty$|RuneScript$|^Vectra|ChaosScript$)/Si) && stat !isin $prop) { return $true }
+  if ($regex($1,/(BigSister$|Gerty$|RuneScript$|^Vectra|ChaosScript$|^GwBot)/Si) && stat !isin $prop) { return $true }
   ; Other:
   if ($regex($1,/(^Noobwegian$|^Onzichtbaar|^ChanStat-|GrandExchange$)/Si) && other !isin $prop) { return $true }
   return $false
