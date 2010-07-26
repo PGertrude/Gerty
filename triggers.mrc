@@ -1,4 +1,4 @@
->start<|triggers.mrc|Entry point|3.75|rs
+>start<|triggers.mrc|Entry point|3.77|rs
 on *:TEXT:*:*: {
   if ($left($1,1) !isin !.@) {
     var %botCheck = $botid($1)
@@ -201,7 +201,7 @@ on *:TEXT:*:*: {
     if (!$2) { %saystyle Syntax Error: !riddle <riddle> | goto clean }
     var %riddle = $read(riddles.txt,nw,* $+ $2- $+ *)
     if (!%riddle) { %saystyle Riddle "07 $+ $2- $+ " not found. | halt }
-    %Saystyle Riddle:07 $gettok(%riddle,1,124) | Location:07 $gettok(%riddle,2,124)
+    %Saystyle Riddle:07 $gettok(%riddle,1,124) | Answer:07 $gettok(%riddle,2,124)
     goto clean
   }
   ; CHALLENGES
