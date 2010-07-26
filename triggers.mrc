@@ -1001,6 +1001,39 @@ on *:TEXT:*:*: {
     noop $download.break(record %thread, %thread, %url)
     goto clean
   }
+  ; DGPOT
+  else if ($regex($1,/^[!@.](du|dg)pots?$/Si)) {
+    if (!$2) { %saystyle Syntax Error: !dgpot <skill> | goto clean }
+    var %skill $skills($2)
+    if (!%skill) { %saystyle Syntax Error: !dgpot <skill> | goto clean }
+    if (%skill == Magic) {
+      %saystyle 07Magic Potion Herbs: (weak)07Sagewort, (normal)07Wormwood, (strong)07Winter's Grip Second:07 Void Dust
+    }
+    if (%skill == Ranged) {
+      %saystyle 07Ranged Potion Herbs: (weak)07Valerian, (normal)07Magebane, (strong)07Lycopus Second:07 Void Dust
+    }
+    if ($istok(Attack Strength, %skill, 32)) {
+      %saystyle 07Melee Potion Herbs: (weak)07Valerian, (normal)07Magebane, (strong)07Lycopus Second:07 Misshapen Claw
+    }
+    if (%skill == Defence) {
+      %saystyle 07Defence Potion Herbs: (weak)07Aloe, (normal)07Featherfoil, (strong)07Buckthorn Second:07 Void Dust
+    }
+    if ($istok(Prayer Summoning, %skill, 32)) {
+      %saystyle 07Rejuvenation Potion Herbs: (weak)07Aloe, (normal)07Featherfoil, (strong)07Buckthorn Second:07 Misshapen Claw
+    }
+    if ($istok(Woodcutting Mining Fishing, %skill, 32)) {
+      %saystyle 07Gatherer's Potion Herbs: (weak)07Sagewort, (normal)07Wormwood, (strong)07Winter's Grip Second:07 Red Moss
+    }
+    if ($istok(Smithing Crafting Fletching Construction Firemaking, %skill, 32)) {
+      %saystyle 07Artisan's Potion Herbs: (weak)07Valerian, (normal)07Magebane, (strong)07Lycopus Second:07 Red Moss
+    }
+    if ($istok(Cooking Farming Herblore Runecraft, %skill, 32)) {
+      %saystyle 07Naturalist's Potion Herbs: (weak)07Sagewort, (normal)07Wormwood, (strong)07Winter's Grip Second:07 Misshapen Claw
+    }
+    if ($istok(Agility Thieving Hunter Slayer, %skill, 32)) {
+      %saystyle 07Survivalist's Potion Herbs: (weak)07Valerian, (normal)07Magebane, (strong)07Lycopus Second:07 Firebreath Whiskey
+    }
+  }
   ; LOGIN
   else if ($regex($1,/^[!@.]login$/Si)) {
     if ($2 == $readini(Gerty.Config.ini,admin,pass)) {
