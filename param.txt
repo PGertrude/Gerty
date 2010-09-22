@@ -1065,6 +1065,7 @@ Skill|Level|Exp|Item|Item ID
 prayer	1	4.5	Normal Bones	526
 prayer	1	72	Dragon Bones	536
 prayer	1	30	Baby Dragon Bones	534
+prayer	1	180	Frost Dragon Bones	18832
 prayer	1	4.5	Wolf Bones	2859
 prayer	1	4.5	Burnt Bones	528
 prayer	1	5	Monkey Bones	3183
