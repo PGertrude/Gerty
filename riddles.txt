@@ -1,3 +1,4 @@
+>start<|riddles.txt|riddle list|1.1|param
 46 is my number|Sapphire respawn, level 46 wilderness.
 'A bag belt only?'|Speak with Abbot Langley in the Monastery Northwest of Barbarian Village.
 Aggie I see|Dig under the Southern window in Aggie the witch's house in Draynor Village.

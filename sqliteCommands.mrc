@@ -215,6 +215,7 @@ alias setPrice {
 alias resetPrices {
   var %sql UPDATE `prices` SET `price`=0,`change`='NULL';
   noop $sqlite_query(1, %sql)
+  hfree cost
 }
 ;@SYNTAX countResults(string sql)
 ;@SUMMARY returns the number of rows in a query result.

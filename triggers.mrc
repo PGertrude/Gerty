@@ -1,4 +1,4 @@
->start<|triggers.mrc|Entry point|3.77|rs
+>start<|triggers.mrc|Entry point|3.78|rs
 on *:TEXT:*:*: {
   if ($left($1,1) !isin !.@) {
     var %botCheck = $botid($1)
@@ -1422,14 +1422,14 @@ on *:TEXT:*:*: {
     else if (%level && %skill != overall && %exp > 126) { goto fail }
     else if (!%level && %skill == overall && %exp > 4800000000000) { goto fail }
     else if (!%level && %skill != overall && %exp > 200000000) { goto fail }
-    %output = :D\-< 4¤11.12¡9*4°9*12¡11.4¤ Congratulations on
+    %output = :D\-< 4Â¤11.12Â¡9*4Â°9*12Â¡11.4Â¤ Congratulations on
     if (%level) { %output = %output level %exp %skill %nick }
     else { %output = %output $format_number(%exp) %skill experience %nick }
     if (%level && %skill == overall && %exp == 2475) { %output = %output $+ , and congratulations for maxing out }
     else if (%level && %skill != overall && %exp == 99) { %output = %output $+ , and congratulations for maxing out }
     else if (!%level && %skill == overall && %exp == 4800000000) { %output = %output $+ , and congratulations for maxing out }
     else if (!%level && %skill != overall && %exp == 200000000) { %output = %output $+ , and congratulations for maxing out }
-    %output = %output $+ ! 4¤11.12¡9*4°9*12¡11.4¤ :D/-<
+    %output = %output $+ ! 4Â¤11.12Â¡9*4Â°9*12Â¡11.4Â¤ :D/-<
     %saystyle %output
     goto clean
     :fail

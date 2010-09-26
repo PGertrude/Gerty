@@ -707,9 +707,9 @@ alias validate {
 }
 ;$reqs(combat level)
 alias reqs {
-  if ($1 >= 131) { return 2150 }
-  if ($1 >= 121) { return 2100 }
-  return 2050
+  if ($1 >= 131) { return 2200 }
+  if ($1 >= 121) { return 2150 }
+  return 2100
 }
 ; GUESSING ; DISTRIBUTE
 ;$distribute(litehiscorestring)
@@ -980,7 +980,7 @@ alias stats {
     var %junior = Member: $iif($2 >= %min,reqs met (07 $+ $calc($2 - %min) above $+ );,07 $+ $calc(%min - $2) to go;)
     inc %min 100
     var %member = Advanced: $iif($2 >= %min,reqs met (07 $+ $calc($2 - %min) above $+ );,07 $+ $calc(%min - $2) to go;)
-    inc %min 150
+    inc %min 100
     var %elite = Elite: $iif($2 >= %min,reqs met (07 $+ $calc($2 - %min) above $+ );,07 $+ $calc(%min - $2) to go;)
     %saystyle  $+ %nick $+  Supreme Skillers Reqs %junior %member %elite | Forum: 12www.supremeskillers.net | Memberlist: 12http://runehead.com/clans/ml.php?clan=supreme
     goto unset

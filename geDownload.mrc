@@ -36,14 +36,28 @@ alias updateSitePrices {
   echo -at starting ge update
   while (%x !> 25) {
     .timerSiteUpdate [ $+ [ %x ] ] 1 $calc(%x * 15) updateSitePricesBuffer $calc(%x +65)
+    .timerSiteUpdate [ $+ [ %x ] $+ ] .1 1 $calc(%x * 15) updateSitePricesBuffer $calc(%x +65) $+ .1
     inc -u1 %x
   }
   updateSitePricesBuffer Other
 }
-alias updateSitePricesBuffer sockopen sitePrices. $+ $1 sselessar.net 80
+alias updateSitePricesBuffer {
+  if ($numtok($1, 46) == 1) {
+    sockopen sitePrices. $+ $1 sselessar.net 80
+  }
+  else {
+    sockopen sitePrices. $+ $1 rsportugal.org 80
+  }
+}
 on *:sockopen:sitePrices.*: {
-  sockwrite -n $sockname GET /Gerty/GEDownload.php?id= $+ $iif($gettok($sockname,2,46) isnum,$chr($v1),$v1) HTTP/1.1
-  sockwrite -n $sockname Host: sselessar.net $+ $crlf $+ $crlf
+  if ($numtok($sockname, 46) == 2) {
+    sockwrite -n $sockname GET /Gerty/GEDownload.php?id= $+ $iif($gettok($sockname,2,46) isnum,$chr($v1),$v1) HTTP/1.1
+    sockwrite -n $sockname Host: sselessar.net $+ $crlf $+ $crlf
+  }
+  else {
+    sockwrite -n $sockname GET /tracker/geDownload.php?id= $+ $iif($gettok($sockname,2,46) isnum,$chr($v1),$v1) HTTP/1.1
+    sockwrite -n $sockname Host: rsportugal.org $+ $crlf $+ $crlf
+  }
 }
 on *:sockclose:sitePrices.*: {
   sockclose $sockname
