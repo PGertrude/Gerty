@@ -1,4 +1,4 @@
->start<|geDownload.mrc|downloads full ge database|3.1|rs
+>start<|geDownload.mrc|downloads full ge database|3.2|rs
 alias downloadSitePrices {
   var %thread $newThread
   sockopen dlGe. $+ %thread sselessar.net 80

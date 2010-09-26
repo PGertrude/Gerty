@@ -1,4 +1,4 @@
->start<|param.txt|!xp list|3.16|param
+>start<|param.txt|!xp list|3.18|param
 Agility	1	86.5	Gnome Stronghold
 Agility	30	540	Penguin Course
 Agility	30	1014	Agility Pyramid

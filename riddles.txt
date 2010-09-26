@@ -1,4 +1,4 @@
->start<|riddles.txt|riddle list|1.1|param
+>start<|riddles.txt|riddle list|1.15|param
 46 is my number|Sapphire respawn, level 46 wilderness.
 'A bag belt only?'|Speak with Abbot Langley in the Monastery Northwest of Barbarian Village.
 Aggie I see|Dig under the Southern window in Aggie the witch's house in Draynor Village.
@@ -97,7 +97,7 @@ Observe: in the crate just north of the stairs leading down, you will find the a
 Sophind yourself some treasure by searching these boxes.|Search the stacked boxes by the bridge in Sophanem, north of the altar.
 The gnomes' nearby cart must have collapsed under the weight of all the treasure in these boxes!|West of the Making History quest start (south of Gnome Stronghold), it's the boxes west of the cart.
 The owner of this crate has a hunch that he put more than fish inside.|Beach south of Brimhaven where Lubufu is fishing for karambwan.
-The rock cakes to the south are definitely more edible than the two rocks I buried the treasure between.|In Gu´Tanoth, dig between two heaps of rocks just north of the Rock cake stall. (Requires starting Watchtower quest.)
+The rock cakes to the south are definitely more edible than the two rocks I buried the treasure between.|In GuÂ´Tanoth, dig between two heaps of rocks just north of the Rock cake stall. (Requires starting Watchtower quest.)
 The socks in these drawers are holier than thine, according to the tonsured owners.|Northeast corner of the Monastery (west of Edgeville). You will need to kill a Zamorak monk to get a key. (Chaos Temple west of Goblin Village is one location.)
 The treasure is buried in a small house full of bones. Here's a Hint: It's not near a graveyard.|South west house at Rag and Bone Man quest start (north of limestone mine on road east of Varrock to Salve Temple). Dig just south of box of bones.
 This crate clearly marks the end of the line for coal.|Search the crate to the north of the entrance to the coal trucks area in Seers Village.
