@@ -1,4 +1,4 @@
->start<|config.mrc|config and join merged|3.5|rs
+>start<|config.mrc|config and join merged|3.51|rs
 on *:START: {
   ; Authenticate Host
   if (!$exists(Gerty.Config.ini)) {
@@ -37,7 +37,6 @@ on *:QUIT: {
 on *:DISCONNECT: {
   if ($nick != $me) return
   ; Save Data Files
-  .hsave prices price.txt
   .hsave runeprice runeprice.txt
   .hsave spelluse spelluse.txt
   .hsave commands commands.txt

@@ -1,4 +1,4 @@
->start<|sqlitecommands.mrc|gerty sql functions|3.2|rs
+>start<|sqlitecommands.mrc|gerty sql functions|3.25|rs
 ; Connects to the database on startup
 on *:START:{
   var %db $sqlite_open(gerty.db)
@@ -215,6 +215,7 @@ alias setPrice {
 alias resetPrices {
   var %sql UPDATE `prices` SET `price`=0,`change`='NULL';
   noop $sqlite_query(1, %sql)
+  hfree cost
 }
 ;@SYNTAX countResults(string sql)
 ;@SUMMARY returns the number of rows in a query result.
