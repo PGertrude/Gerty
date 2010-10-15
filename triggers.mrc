@@ -1422,14 +1422,14 @@ on *:TEXT:*:*: {
     else if (%level && %skill != overall && %exp > 126) { goto fail }
     else if (!%level && %skill == overall && %exp > 4800000000000) { goto fail }
     else if (!%level && %skill != overall && %exp > 200000000) { goto fail }
-    %output = :D\-< 4Â¤11.12Â¡9*4Â°9*12Â¡11.4Â¤ Congratulations on
+    %output = :D\-< 4¤11.12¡9*4°9*12¡11.4¤ Congratulations on
     if (%level) { %output = %output level %exp %skill %nick }
     else { %output = %output $format_number(%exp) %skill experience %nick }
     if (%level && %skill == overall && %exp == 2475) { %output = %output $+ , and congratulations for maxing out }
     else if (%level && %skill != overall && %exp == 99) { %output = %output $+ , and congratulations for maxing out }
     else if (!%level && %skill == overall && %exp == 4800000000) { %output = %output $+ , and congratulations for maxing out }
     else if (!%level && %skill != overall && %exp == 200000000) { %output = %output $+ , and congratulations for maxing out }
-    %output = %output $+ ! 4Â¤11.12Â¡9*4Â°9*12Â¡11.4Â¤ :D/-<
+    %output = %output $+ ! 4¤11.12¡9*4°9*12¡11.4¤ :D/-<
     %saystyle %output
     goto clean
     :fail
@@ -1548,6 +1548,24 @@ on *:TEXT:*:*: {
     if ($chanset($chan,ml) == off || !$2) { goto clean }
     _fillCommand %thread $left($1,1) $nick $iif($chan, $v1, PM) ml $urlencode($2-)
     noop $download.break(memberlist %thread,%thread,http://www6.runehead.com/feeds/lowtech/searchclan.php?search= $+ $hget(%thread,arg1) $+ &type=2)
+    goto clean
+  }
+  ; Effigy
+  else if ($regex($1,/^[!@.](effigy|dragonkin)$/Si)) {
+    if ($2 !isnum 1-120) { 
+      %saystyle Invalid level. Syntax: !effigy <level>. 
+      goto clean
+    }
+    %saystyle Exp gained from a Dragonkin lamp on level07 $floor($2) is07 $bytes($floor($calc($floor($2) ^3/20.2)),bd) $+ .
+    goto clean
+  }
+  ; Strange rock
+  else if ($regex($1,/^[!@.]((strange)?rock|sr)$/Si)) {
+    if ($2 !isnum 1-99) { 
+      %saystyle Invalid level. Syntax: !rock <level>. 
+      goto clean
+    }
+    %saystyle Exp gained from a Strange rock set on level07 $floor($2) is07 $bytes($floor($calc($floor($2) ^2 - $floor($2) * 2 + 100)),bd) $+ .
     goto clean
   }
   ; ADMIN SECTION
