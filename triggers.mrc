@@ -1,4 +1,4 @@
->start<|triggers.mrc|Entry point|3.8|rs
+>start<|triggers.mrc|Entry point|3.81|rs
 on *:TEXT:*:*: {
   if ($left($1,1) !isin !.@) {
     var %botCheck = $botid($1)
@@ -1548,6 +1548,24 @@ on *:TEXT:*:*: {
     if ($chanset($chan,ml) == off || !$2) { goto clean }
     _fillCommand %thread $left($1,1) $nick $iif($chan, $v1, PM) ml $urlencode($2-)
     noop $download.break(memberlist %thread,%thread,http://www6.runehead.com/feeds/lowtech/searchclan.php?search= $+ $hget(%thread,arg1) $+ &type=2)
+    goto clean
+  }
+  ; Effigy
+  else if ($regex($1,/^[!@.](effigy|dragonkin)$/Si)) {
+    if ($2 !isnum 1-120) {
+      %saystyle Invalid level. Syntax: !effigy <level>.
+      goto clean
+    }
+    %saystyle Exp gained from a Dragonkin lamp on level07 $floor($2) is07 $bytes($floor($calc($floor($2) ^3/20.2)),bd) $+ .
+    goto clean
+  }
+  ; Strange rock
+  else if ($regex($1,/^[!@.]((strange)?rock|sr)$/Si)) {
+    if ($2 !isnum 1-99) {
+      %saystyle Invalid level. Syntax: !rock <level>.
+      goto clean
+    }
+    %saystyle Exp gained from a Strange rock set on level07 $floor($2) is07 $bytes($floor($calc($floor($2) ^2 - $floor($2) * 2 + 100)),bd) $+ .
     goto clean
   }
   ; ADMIN SECTION
