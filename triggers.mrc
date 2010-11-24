@@ -1,4 +1,4 @@
->start<|triggers.mrc|Entry point|3.81|rs
+>start<|triggers.mrc|Entry point|3.83|rs
 on *:TEXT:*:*: {
   if ($left($1,1) !isin !.@) {
     var %botCheck = $botid($1)
@@ -117,15 +117,6 @@ on *:TEXT:*:*: {
       if ($getDefname($nick)) %saystyle 07 $+ $caps($nick) $+ 's rsn is07 [ $v1 ]
       else %saystyle We have no rsn saved for07 $nick
     }
-    goto clean
-  }
-  ; NAME ; AVAILABLE
-  else if ($regex($1,/^[!@.](name|available)$/Si)) {
-    if (!$2) { %saystyle Syntax Error: !name <rsn> | goto clean }
-    if ($len($2-) > 12) { %saystyle The max character limit for rsn's is 12 characters.07 $2- contains $len($2-) characters. | goto clean }
-    var %rsn $replace($2-,$chr(32),_), %url https://secure.runescape.com/m=create/checkusername.ajax?username= $+ %rsn
-    _fillCommand %thread $left($1,1) $nick $iif($chan,$v1,PM) name %rsn
-    noop $download.break(name %thread, %thread, %url)
     goto clean
   }
   ; GRAPH
@@ -1033,6 +1024,7 @@ on *:TEXT:*:*: {
     if ($istok(Agility Thieving Hunter Slayer, %skill, 32)) {
       %saystyle 07Survivalist's Potion Herbs: (weak)07Valerian, (normal)07Magebane, (strong)07Lycopus Second:07 Firebreath Whiskey
     }
+    goto clean
   }
   ; LOGIN
   else if ($regex($1,/^[!@.]login$/Si)) {
@@ -1422,14 +1414,14 @@ on *:TEXT:*:*: {
     else if (%level && %skill != overall && %exp > 126) { goto fail }
     else if (!%level && %skill == overall && %exp > 4800000000000) { goto fail }
     else if (!%level && %skill != overall && %exp > 200000000) { goto fail }
-    %output = :D\-< 4¤11.12¡9*4°9*12¡11.4¤ Congratulations on
+    %output = :D\-< 4Â¤11.12Â¡9*4Â°9*12Â¡11.4Â¤ Congratulations on
     if (%level) { %output = %output level %exp %skill %nick }
     else { %output = %output $format_number(%exp) %skill experience %nick }
     if (%level && %skill == overall && %exp == 2475) { %output = %output $+ , and congratulations for maxing out }
     else if (%level && %skill != overall && %exp == 99) { %output = %output $+ , and congratulations for maxing out }
     else if (!%level && %skill == overall && %exp == 4800000000) { %output = %output $+ , and congratulations for maxing out }
     else if (!%level && %skill != overall && %exp == 200000000) { %output = %output $+ , and congratulations for maxing out }
-    %output = %output $+ ! 4¤11.12¡9*4°9*12¡11.4¤ :D/-<
+    %output = %output $+ ! 4Â¤11.12Â¡9*4Â°9*12Â¡11.4Â¤ :D/-<
     %saystyle %output
     goto clean
     :fail
