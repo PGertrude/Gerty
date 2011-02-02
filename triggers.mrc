@@ -1539,7 +1539,7 @@ on *:TEXT:*:*: {
   else if ($regex($1,/^[!@.]m(ember)?l(ist)?$/Si)) {
     if ($chanset($chan,ml) == off || !$2) { goto clean }
     _fillCommand %thread $left($1,1) $nick $iif($chan, $v1, PM) ml $urlencode($2-)
-    noop $download.break(memberlist %thread,%thread,http://www6.runehead.com/feeds/lowtech/searchclan.php?search= $+ $hget(%thread,arg1) $+ &type=2)
+    noop $download.break(memberlist %thread, %thread, http://www.runehead.com/feeds/lowtech/searchclan.php?search= $+ $hget(%thread,arg1) $+ &type=2)
     goto clean
   }
   ; Effigy
