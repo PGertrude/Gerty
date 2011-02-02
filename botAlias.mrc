@@ -443,11 +443,11 @@ statusOut {
 ;@PARAM Valid props: cs, stat, other
 isBot {
   ; ChanServ bots:
-  if ($istok(BanHammer Captain_Falcon ClanWars Client Coder Machine milk mIRC Noobs Q RuneScape snoozles Unknown W Warcraft X Y Rudolph Spam Minibar ChanServ,$1,32) && cs !isin $prop) { return $true }
+  if ($istok(BanHammer Captain_Falcon ClanWars Client Coder Machine milk Minibar mIRC Noobs Q RSHelp RuneScape snoozles Spam SwiftIRC Unknown W Warcraft X Y ChanServ,$1,32)) { return $true }
   ; Stat bots:
-  if ($regex($1,/(BigSister$|Gerty$|RuneScript$|^Vectra|ChaosScript$|^GwBot)/Si) && stat !isin $prop) { return $true }
+  if ($regex($1,/^(\[..\]BigSister|(\[..\])?Gerty|(\[..\])?RuneScript|Vectra(\[..\])?|Impact(\[..\])?|(\[..\])?Carbon|iKick|Miley-Cyrus)$/Si)) { return $true }
   ; Other:
-  if ($regex($1,/(^Noobwegian$|^Onzichtbaar|^ChanStat-|GrandExchange$)/Si) && other !isin $prop) { return $true }
+  if ($regex($1,/^(Noobwegian|Onzichtbaar(\[..\])?|ChanStat(-\[..\])?|ChaosTrivia(\[..\])?|Overflow|PokemonBot(\[..\])?)$/Si)) { return $true }
   return $false
 }
 ;@SYNTAX /parseGe
@@ -460,6 +460,19 @@ parseGe {
   while (!$feof) {
     tokenize 44 $fread(dlge)
     if ($0 == 4) noop $sqlite_exec(1, UPDATE prices SET price=' $+ $3 $+ ' $chr(44) change=' $+ $4 $+ ' WHERE id=' $+ $1 $+ ';)
+  }
+  sqlite_commit 1
+  .fclose dlge
+  .remove dlGe.txt
+  echo -at finished
+}
+restoreGe {
+  if (!$exists(dlGe.txt)) return
+  .fopen dlge dlGe.txt
+  sqlite_begin 1
+  while (!$feof) {
+    tokenize 44 $fread(dlge)
+    if ($0 == 4) noop $sqlite_exec(1, INSERT INTO prices (id, name, price, change) VALUES (' $+ $1 $+ ', " $+ $replace($2, &amp;, &) $+ ", ' $+ $3 $+ ', ' $+ $4 $+ ');)
   }
   sqlite_commit 1
   .fclose dlge
