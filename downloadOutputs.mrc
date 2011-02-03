@@ -1,4 +1,4 @@
->start<|downloadoutputs.mrc|compiled parser outputs|3.89|rs
+>start<|downloadoutputs.mrc|compiled parser outputs|3.91|rs
 ; CLAN
 alias getClans {
   var %user = $1, %out = $2 $3, %clan = $4, %thread = $5
@@ -1089,8 +1089,8 @@ alias GeNotifyChannels {
   write -il1 GeUpdate.txt $host(time) $+ $| $+ $gmt $+ $| $+ $ord($host(date)) $host(month).3
   resetPrices
   .timer 1 1200 resetPrices
-  if ($me == Gerty) .timer 1 1200 updateSitePrices
-  var %x = 1, %chan
+  if ($me == Gerty) { .timer 1 1200 updateSitePrices }
+  var %x 1, %chan
   while ($chan(%x)) {
     %chan = $v1
     if ($chanset(%chan,geupdate) == on && $_checkMain(%chan)) {
