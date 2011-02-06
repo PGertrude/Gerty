@@ -1,4 +1,4 @@
->start<|sockreads.mrc|compiled sockreads|3.42|rs
+>start<|sockreads.mrc|compiled sockreads|3.43|rs
 on *:sockread:*: {
   var %thread $gettok($sockname,2,46), %command $hget(%thread,command), %file %thread $+ .txt
   if ($sockerr) {
@@ -9,9 +9,9 @@ on *:sockread:*: {
   if (cost.* iswm $sockname) {
     var %sockcost
     sockread %sockcost
-    if ($regex(cost,%sockcost,/^<\w>Market Price:<\/\w> ([\d\Wmk]+)/Si)) {
+    if ($regex(cost, %sockcost, /^<b>Current guide price:<\/b> ([\d\Wmk]+)/Si)) {
       hadd -m cost $gettok($sockname,3,46) $litecalc($remove($regml(cost,1),$chr(44)))
-      cost $+ $gettok($hget($gettok($sockname,2,46),cost),1,9) $remove($gettok($sockname,2,46),a)
+      cost $+ $gettok($hget($gettok($sockname,2,46),cost),1,9) $gettok($sockname,2,46)
       unset %*
       sockclose $sockname
     }
