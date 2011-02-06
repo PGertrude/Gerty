@@ -1,4 +1,4 @@
->start<|downloadoutputs.mrc|compiled parser outputs|3.91|rs
+>start<|downloadoutputs.mrc|compiled parser outputs|3.92|rs
 ; CLAN
 alias getClans {
   var %user = $1, %out = $2 $3, %clan = $4, %thread = $5
@@ -211,19 +211,6 @@ alias geInfo {
   if (!$getPrice($1)) noop $setPrice($1,$4)
   $cmd(%thread,out)  $+ $2 $+  | Min:07 $format_number($floor($calc($4 * 0.95))) Avg:07 $format_number($4) Max:07 $format_number($floor($calc($4 * 1.05))) | Today:07 $format_number($6) | 30 Days:07 $7 $+ $% | 90 Days:07 $8 $+ $% | 180 Days:07 $9 $+ $% | Last Update:07 $asctime($10, ddoo mmmm) | 12http://itemdb-rs.runescape.com/viewitem.ws?obj= $+ $1
   :unset
-  _clearCommand %thread
-}
-; COINSHARE ; CS
-alias csOut {
-  var %thread $1, %gePage = $2-
-  .tokenize 44 %gePage
-  if (!%gePage) {
-    $cmd(%thread, out) Error retrieving price for this item. Please try again in a few moments.
-    _clearCommand %thread
-    halt
-  }
-  .tokenize 44 %gePage
-  $cmd(%thread, out)  $+ $2 Minimum price:07 $format_number($3) (Loot per player (07 $+ $cmd(%thread, arg1) $+ ):07 ~ $+ $format_number($calc($3 / $cmd(%thread, arg1))) $+ )12 http://itemdb-rs.runescape.com/viewitem.ws?obj= $+ $1
   _clearCommand %thread
 }
 ; SKILLPLAN

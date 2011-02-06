@@ -1,4 +1,4 @@
->start<|sqlitecommands.mrc|gerty sql functions|3.26|rs
+>start<|sqlitecommands.mrc|gerty sql functions|3.27|rs
 ; Connects to the database on startup
 on *:START:{
   var %db $sqlite_open(gerty.db)
@@ -268,7 +268,7 @@ alias findTimers {
 ;@SYNTAX sql_query(string sqlQuery, string fields)
 ;@SUMMARY Performs the sqlQuery on the gerty database. Will return an array if necessary, respective of the fields input.
 ;@NOTE return type $null = no results, return type $false = error occured
-alias -l sql_query {
+alias sql_query {
   var %sql = $1
   ; Perform Query
   var %query $sqlite_query(1, %sql)

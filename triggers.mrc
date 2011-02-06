@@ -1,4 +1,4 @@
->start<|triggers.mrc|Entry point|3.86|rs
+>start<|triggers.mrc|Entry point|3.87|rs
 on *:TEXT:*:*: {
   if ($left($1,1) !isin !.@) {
     var %botCheck = $botid($1)
@@ -458,29 +458,33 @@ on *:TEXT:*:*: {
   }
   ; COINSHARE
   else if ($regex($1,/^[!@.]c(oin)?s(hare)?$/Si)) {
-    var %people, %search = $remove($3-,$#)
+    var %people, %search $remove($3-, $#), %sql
     if ($2 isnum) %people = $2
     else goto csSyntax
-    if (%search isnum) {
-      _fillCommand %thread $left($1,1) $nick $iif($chan,$v1,PM) coinshare %people
-      var %url http://gerty.rsportugal.org/parsers/geinfo.php?id= $+ %search
-      noop $download.break(csOut %thread, %thread, %url)
-      goto clean
-    }
-    var %sql $dbSelectWhere(prices, id;name, name LIKE "% $+ %search $+ $% $+ ").sql
+    if (%search isnum) %sql = $dbSelectWhere(prices, id;name;price, id = "% $+ %search $+ $% $+ ").sql
+    else %sql = $dbSelectWhere(prices, id;name;price, name LIKE "% $+ %search $+ $% $+ ").sql
     var %results $countResults(%sql)
     if (!%results) {
       %saystyle No results for07 %search found. If you think this is a valid item, please report it at #gerty
       goto clean
     }
-    var %items $getPriceId(%search)
+    var %fields $replace(id;name;price, ;, $chr(44))
+    var %result $sql_query(%sql, %fields), %price
     if (%results == 1) {
-      _fillCommand %thread $left($1,1) $nick $iif($chan,$v1,PM) coinshare %people
-      var %url http://gerty.rsportugal.org/parsers/geinfo.php?id= $+ $gettok(%items, 1, 59)
-      noop $download.break(csOut %thread, %thread, %url)
+      tokenize 59 %result
+      if ($3 == 0) {
+        var %thread $newThread
+        var %url $parser $+ ge&item= $+ $replace($2,$chr(32),+)
+        var %string $downloadstring(%thread, %url)
+        downloadGe %thread %string
+        tokenize 44 %string
+        %price = $3
+      }
+      else %price = $3
+      %saystyle  $+ $trim($2) Guide price:07 $format_number(%price) (Loot per player (07 $+ %people $+ ):07 ~ $+ $format_number($calc(%price / %people)) $+ )12 http://itemdb-rs.runescape.com/viewitem.ws?obj= $+ $1
     }
     else {
-      .tokenize 44 %items
+      .tokenize 44 %result
       var %x 1, %itemList, %item
       while (%x <= %results && %x <= 10) {
         %item = $($ $+ %x,2)
