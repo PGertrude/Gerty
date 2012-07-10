@@ -1,12 +1,13 @@
->start<|calcAlias.mrc|Calculator|3.45|a
+versions.calc return 4.0
+
 calcreg {
   var %string = $1
   %string = $getStats($1, $rsn($nick))
-  %string = $replace(%string,£,$null,~,$null,&,$null,Q,£,xp,A,ge,Q,price,Q,pi,~,p,&,ans,p)
+  %string = $replace(%string,Â£,$null,~,$null,&,$null,Q,Â£,xp,A,ge,Q,price,Q,pi,~,p,&,ans,p)
   %string = $regsubex(%string,/(?:([\dep~kmbx\x29])([\x28])|([\x29])([\dep~xastcl])|([ep~])([ep~xastcl])|(x)([e~ctsxl])|(\d)([ep~xastcl]))/gi,\1*\2)
   %string = $regsubex(%string,/(?:([\dep~kmbx\x29])([\x28])|([\x29])([\dep~xastcl])|([ep~])([ep~xastcl])|(x)([e~ctsxl])|(\d)([ep~xastcl]))/gi,\1*\2)
-  %string = $regsubex(%string,/([^\+\-\*\/\^]|)Q\(([^\x29]+)\)/g,$chr(40) $+ $iif(\1,\1*,1*) $+ $price($replace(\2,&,p,~,pi,q,ge,£,q)) $+ $chr(41))
-  %string = $regsubex(%string,/([^\+\-\*\^\/]|)A\(([^\x29]+)\)/g,$chr(40) $+ $iif(\1,\1*,1*) $+ $gettok($param($replace(\2,&,p,~,pi,q,ge,£,q)),3,59) $+ $chr(41))
+  %string = $regsubex(%string,/([^\+\-\*\/\^]|)Q\(([^\x29]+)\)/g,$chr(40) $+ $iif(\1,\1*,1*) $+ $price($replace(\2,&,p,~,pi,q,ge,Â£,q)) $+ $chr(41))
+  %string = $regsubex(%string,/([^\+\-\*\^\/]|)A\(([^\x29]+)\)/g,$chr(40) $+ $iif(\1,\1*,1*) $+ $gettok($param($replace(\2,&,p,~,pi,q,ge,Â£,q)),3,59) $+ $chr(41))
   %string = $regsubex(%string,/(\d+(?:\.\d+)?)([kmb])/gi,$calc(\1 $replace(\2,k,*1000,m,*1000000,b,*1000000000)))
   %string = $regsubex(%string,/(a?(?:sin|cos|tan|log|sqrt|l(?:vl)?|A|Q))((?:\+|\-)?(?:[ep~x]|\d+(?:\.\d+)?))/gi,\1 $+ $chr(40) $+ \2 $+ $chr(41))
   return $replace(%string,~,3.141593,e,2.718281,p,$hget($nick,p),$chr(44),$null)
@@ -51,7 +52,7 @@ fixInt {
 calcparse {
   var %eq = $remove($1-,$chr(44))
   %eq = $regsubex(%eq,/([^\+\-\*\/\^]|)(?:price|ge)\(([^\x29]+)\)/gi,$iif(\1,\1*) $+ ge( $+ \2 $+ ))
-  %eq = $replace($remove(%eq,$chr(32)),Q,£,xp,A,ge,Q,price,Q,pi,~,p,&,ans,p)
+  %eq = $replace($remove(%eq,$chr(32)),Q,Â£,xp,A,ge,Q,price,Q,pi,~,p,&,ans,p)
   %eq = $regsubex(%eq,/([0-9\.]+)([kmb])/gi,$calc(\1 $replace(\2,k,*1000,m,*1000000,b,*1000000000)))
   %eq = $regsubex(%eq,/([zpex])([zpexastc])/gi,\1* $+ \2)
   %eq = $regsubex(%eq,/([zpex])([zpexastc])/gi,\1* $+ \2)
@@ -59,7 +60,7 @@ calcparse {
   %eq = $regsubex(%eq,/(\x29|\d)(\x28|[zpexastcls])/gi,\1* $+ \2)
   %eq = $regsubex(%eq,/(\x29)(\d|[zpexastcls])/gi,\1* $+ \2)
   %eq = $regsubex(%eq,/([zpex])(\d|\x28)/gi,\1* $+ \2)
-  %eq = $replace(%eq,p,ans,z,pi,&,p,q,ge,£,q,~,pi,A $+ $chr(40),xp $+ $chr(40))
+  %eq = $replace(%eq,p,ans,z,pi,&,p,q,ge,Â£,q,~,pi,A $+ $chr(40),xp $+ $chr(40))
   %eq = $preg_replace_all_skills(%eq)
   return %eq
 }
@@ -101,7 +102,7 @@ litecalc {
 _checkCalc {
   var %reg /\b( $+ $skillNames $+ )\b/Sig
   var %string = $regsubex($1, %reg, 1)
-  %string = $replace(%string,Q,£,xp,A,ge,Q,price,Q,pi,~,p,&,ans,p)
+  %string = $replace(%string,Q,Â£,xp,A,ge,Q,price,Q,pi,~,p,&,ans,p)
   %string = $regsubex(%string,/([QA])\x28(.+?)\x29/g,\1(1))
   %string = $regsubex(%string,/(?:([\dep~kmbx\x29])([\x28])|([\x29])([\dep~xastcl])|([ep~])([ep~xastcl])|(x)([e~ctsxl])|(\d)([ep~xastcl]))/gi,\1*\2)
   %string = $regsubex(%string,/(?:([\dep~kmbx\x29])([\x28])|([\x29])([\dep~xastcl])|([ep~])([ep~xastcl])|(x)([e~ctsxl])|(\d)([ep~xastcl]))/gi,\1*\2)

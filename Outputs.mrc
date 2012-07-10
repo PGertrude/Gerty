@@ -1,4 +1,4 @@
->start<|downloadoutputs.mrc|compiled parser outputs|3.92|rs
+alias versions.outputs return 4.15
 ; CLAN
 alias getClans {
   var %user = $1, %out = $2 $3, %clan = $4, %thread = $5
@@ -168,23 +168,21 @@ alias downloadGe {
     var %line = $($ $+ %x,2)
     var %id = $gettok(%line,1,44), %name = $gettok(%line,2,44), %price = $gettok(%line,3,44), %change = $iif($gettok(%line,4,44) != 0,$v1,NULL)
     var %oldPrice = $getPrice(%id)
-    if (%oldPrice > 0) { inc %x | continue }
-    else if (%oldPrice == $null) { noop $sqlite_query(1, INSERT INTO prices (id, name, price, change) VALUES (' $+ %id $+ ',' $+ %name $+ ',' $+ %price $+ ',' $+ %change $+ ');) }
-    else if (%oldPrice == $false) { noop $dbUpdate(prices,`id`=' $+ %id $+ ', price, %price, change, %change) }
+    if (%oldPrice == $null) { noop $sqlite_query(1, INSERT INTO prices (id, name, price, change) VALUES (' $+ %id $+ ',' $+ %name $+ ',' $+ %price $+ ',' $+ %change $+ ');) }
+    else { noop $dbUpdate(prices,`id`=' $+ %id $+ ', price, %price, change, %change) }
     inc %x
   }
   if ($cmd(%thread, out)) {
-    var %num $cmd(%thread,arg1), %search $replace($cmd(%thread,arg2), _, $chr(32))
-    var %numberOfResults $countResults($getPrice(%search).sql)
-    var %dbPrices $getPrice(%search)
-    .tokenize 44 %dbPrices
+    if ($numtok($1, 44) != 4) {
+      $cmd(%thread, out) Results:07 0 (07x $+ $cmd(%thread, arg1) $+ ) error occured retrieving prices for07 $replace($cmd(%thread, arg2), _, $chr(32)) $+ .
+      goto end
+    }
     var %x = 1, %results
-    while (%x <= $0 && %dbPrices && $len(%results) < 350) {
-      var %name = $gettok($($ $+ %x,2),1,59), %price = $gettok($($ $+ %x,2),2,59), %change = $gettok($($ $+ %x,2),3,59)
+    while (%x <= $0 && $len(%results) < 350) {
+      var %name = $gettok($($ $+ %x,2), 2, 44), %price = $gettok($($ $+ %x,2), 3, 44), %change = $gettok($($ $+ %x,2), 4, 44)
       %results = %results | %name $+ 07 $format_number($calc(%price * $cmd(%thread,arg1))) $updo(%change)
       inc %x
     }
-    if (!%dbPrices) %results = error occured retrieving prices for %search $+ .
     $cmd(%thread,out) Results:07 %numberOfResults (07x $+ $cmd(%thread,arg1) $+ ) %results
     _clearCommand %thread
   }
@@ -275,15 +273,21 @@ alias topOut {
   var %thread $1, %hiscores $2-, %user
   .tokenize 10 %hiscores
   var %x 1, %output $+(,$cmd(%thread,arg1),) ranks:, %u
-  while (%x <= 10) {
+  var %valid = $false
+  while (%x <= $0) {
     %user = $($ $+ %x,2)
-    if ($gettok(%user,1,58) == $cmd(%thread,arg2) || $gettok(%user,2,58) == $cmd(%thread,arg3)) { %u = $chr(31) }
-    %output = %output $+(07#,$gettok(%user,1,58),) %u $+ $gettok(%user,2,58) $+ %u $+(07,$gettok(%user,3,58),) $+ $iif($gettok(%user,4,58),$chr(32) $+ ( $+ $v1 $+ );,;)
+    if ($remove($gettok(%user,2,9), $chr(44)) == $cmd(%thread,arg2) || $gettok(%user,1,9) == $cmd(%thread,arg3)) { %u = $chr(31) | %valid = $true }
+    %output = %output $+(07#,$gettok(%user,2,9),) %u $+ $gettok(%user,1,9) $+ %u $+(07,$gettok(%user,3,9),) $+ $iif($gettok(%user,4,9),$chr(32) $+ ( $+ $bytes($v1, db) $+ );,;)
     unset %u
     inc %x
   }
-  $cmd(%thread,out) %output
-  _clearcommand %thread
+  if (%valid == $true) {
+    $cmd(%thread,out) %output
+  }
+  else {
+    $cmd(%thread, out) There is no player ranked $cmd(%thread, arg2) in $cmd(%thread, arg1) $+ .
+    _clearcommand %thread
+  }
 }
 ; TASK
 alias taskOut {
@@ -693,7 +697,7 @@ alias distribute {
   if (<html> isin $1) { return unranked }
   if (-1 !isin $gettok(%string,1-26,10)) {
     var %x = 2,%reply,%voa = 0
-    while (%x <= 36) {
+    while (%x <= 39) {
       if ($gettok($ [ $+ [ %x ] ],2,44) == -1) { var % [ $+ [ %x ] ] NR,NR }
       else {
         var %vlvl = $xptolvl($gettok($ [ $+ [ %x ] ],3,44))
@@ -734,7 +738,7 @@ alias distribute {
       inc %x
     }
     var %reply,%x = 2,%voa,%vlevels
-    while (%x <= 35) {
+    while (%x <= 39) {
       var %vlvl = $xptolvl($gettok($ [ $+ [ %x ] ],3,44))
       if (!% [ $+ [ %x ] ]) {
         var %vlvl = $xptolvl($gettok($ [ $+ [ %x ] ],3,44))
@@ -742,7 +746,7 @@ alias distribute {
       }
       else %vlvl = $xptolvl($gettok($($chr(37) $+ %x,2),3,44))
       %reply = %reply $+ \n $+ $replace($($chr(37) $+ %x,2),-1,NR)
-      if (%x <= 25) { inc %voa %vlvl }
+      if (%x <= 26) { inc %voa %vlvl }
       inc %x
     }
     %reply = $1 $+ , $+ %voa $+ %reply
@@ -750,7 +754,7 @@ alias distribute {
   }
   ; unranked oa
   var %x = 2, %total = 0,%voa
-  while (%x <= 25) {
+  while (%x <= 26) {
     inc %total $remove($gettok($ [ $+ [ %x ] ],2,44),-)
     inc %x
   }
@@ -775,7 +779,7 @@ alias distribute {
   }
   var %1 = NR,~ $+ %total $+ ,~ $+ %exp $+ , $+ %voa
   var %x = 2, %reply = %1
-  while (%x <= 36) {
+  while (%x <= 39) {
     if (!% [ $+ [ %x ] ]) { var % [ $+ [ %x ] ] NR,NR }
     %reply = %reply $+ \n $+ % [ $+ [ %x ] ]
     inc %x
@@ -895,7 +899,7 @@ alias stats {
     %others = %others $validate($($26,2),%state,%morethan,%lessthan,26,%average)
     inc %x 2
     var %minigames
-    while (%x <= 34) {
+    while (%x <= 39) {
       if (%state > 2) { %state = 2 }
       if ($gettok($($ $+ %x,2),%state,44) != NR) { %minigames = %minigames 03 $+ $bytes($gettok($($ $+ %x,2),%state,44),db) $+  $statnum(%x) $+ ; }
       inc %x
@@ -991,8 +995,7 @@ alias youtube {
       }
       inc %x
     }
-    var %dl = Download:12 http://www.xaaa.co.uk/youtube.php?yturl= $+ %id
-    $cmd(%thread,out) Youtube id $qt(07 $+ %id $+ ) $| %title | %dur | %views | %rating | %dl
+    $cmd(%thread,out) Youtube id $qt(07 $+ %id $+ ) $| %title | %dur | %views | %rating
   }
   _clearCommand %thread
 }
@@ -1057,19 +1060,35 @@ alias alog-r {
   _clearCommand %thread
 }
 ; GeUpdate
-alias startGeUpdate noop $download.break(checkGeUpdate, $newThread, $parser $+ gulist)
+alias startGeUpdate noop $download.break(checkGeUpdate, $newThread, $gertySite $+ gulist)
 alias checkGeUpdate {
   tokenize 10 $1-
   if ($0 != 3 || $calc($gmt - $gettok($read(GeUpdate.txt,1),2,124)) < 1260) { return }
   var %x 1, %update $false
   while (%x <= $0) {
-    if ($readini(Gerty.Config.ini, GeUpdate, List $+ %x) && $v1 != $($+($,%x),2)) { %update = $true }
-    writeini Gerty.Config.ini GeUpdate List $+ %x $($+($,%x),2)
+    var %y 1
+    while (%y <= $numtok($($+($,%x),2), 44)) {
+      var %item $gettok($($+($,%x),2), %y, 44)
+      if ($hget(geupdate, $gettok(%item, 1, 58)) && $v1 != $gettok(%item, 2, 58)) {
+        %update = $true
+      }
+      if ($gettok(%item, 2, 58) > 0) {
+        hadd -m geupdate $gettok(%item, 1, 58) $gettok(%item, 2, 58)
+      }
+      inc %y
+    }
     inc %x
   }
   if (%update) {
-    noop $_network(GeNotifyChannels)
-    remini Gerty.Config.ini GeUpdate
+    ; from here
+    sendToDev ge update.
+    write -il1 GeUpdate.txt $host(time) $+ $| $+ $gmt $+ $| $+ $ord($host(date)) $host(month).3
+    resetPrices
+    .timer 1 1200 resetPrices
+    if ($me == Gerty) { .timer 1 1200 updateSitePrices }
+    ; to here, delete
+    ;noop $_network(GeNotifyChannels)
+    hfree geupdate
   }
 }
 alias GeNotifyChannels {
@@ -1081,10 +1100,11 @@ alias GeNotifyChannels {
   while ($chan(%x)) {
     %chan = $v1
     if ($chanset(%chan,geupdate) == on && $_checkMain(%chan)) {
-      .msg %chan GeUpdate in progress. Lookup update will be completed within 15 minutes and ingame within 5.
+      ;.msg %chan GeUpdate in progress. Lookup update will be completed within 15 minutes and ingame within 5.
     }
     inc %x
   }
+  .msg #gertyDev ge update.
 }
 ; ml
 alias memberlist {
@@ -1125,5 +1145,24 @@ alias record {
   if ($remove($gettok($1, 2, 9), $chr(44)) !isnum) { $cmd(%thread, out) 12http://runetracker.org/track has no records for07 %rsn in07 %skill | goto unset }
   $cmd(%thread, out) %rsn $+ 's records in %skill $+ : Day07 $gettok($1, 1, 9) ( $+ $gettok($1, 2, 9) $+ ); Week07 $gettok($2, 1, 9) ( $+ $gettok($2, 2, 9) $+ ); Month07 $gettok($3, 1, 9) ( $+ $gettok($3, 2, 9) $+ ); 12http://runetracker.org/track- $+ %rsn $+ , $+ %skill $+ ,0
   :unset
-  _fillCommand %thread
+  _clearCommand %thread
+}
+alias rank {
+  var %thread $1, %source $2-, %skill $hget(%thread, arg1), %cat $catno(%skill)
+  .tokenize 44 %source
+  if (!$1) {
+    $cmd(%thread, out) There is no player ranked $cmd(%thread, arg2) in %skill $+ .
+    goto unset
+  }
+  if (%cat == 0) {
+    $hget(%thread,out)  $+ $1 07 $+ %skill | Rank:07 $bytes($2, db) | Level:07 $3 $iif(%skill != overall,(07 $+ $xptolvl($4) $+ )) | Exp:07 $bytes($4,db) $&
+      $iif(%skill != overall,(07 $+ $round($calc(100 * $4 / 13034431 ),1) $+ 07% of 99) | Exp till $calc($xptolvl($4) +1) $+ :07 $bytes($calc($lvltoxp($calc($xptolvl($4) +1)) - $4),db)))
+    rscript.singleskill rank. $+ %thread $replace($1, $chr(160), _) %skill $hget(%thread, out) null
+  }
+  else {
+    $hget(%thread,out)  $+ $1 $+ 07 %skill | Rank:07 $bytes($2, db) | Score:07 $3
+    rscript.singleminigame rank. $+ %thread $replace($1, $chr(32), _) $replace(%skill, $chr(32), _) $hget(%thread, out)
+  }
+  :unset
+  _clearCommand %thread
 }

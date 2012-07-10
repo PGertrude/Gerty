@@ -1,4 +1,6 @@
->start<|botAlias.mrc|internal bot commands|3.4|a
+versions.bot return 4.02
+
+_queue .timer 1 0 $1-
 ;@SYNTAX /timeCount
 ;@SUMMARY The main timer for the program, all automated events processed in here.
 timeCount {
@@ -28,6 +30,7 @@ timeCount {
   }
   ; 1 minute timer
   if ($calc($ctime % 60) == 0) {
+    if ($me != Gerty && $hget(geupdate)) { hfree geupdate  }
     if ($me == Gerty) startGeUpdate
     noop $findEmptyChannels
   }
@@ -39,7 +42,8 @@ timeCount {
     ; ge price updates
     var %thread = $+(a,$r(0,999))
     var %search = $dbSelectWhere(prices, name, `price`='0' LIMIT 1)
-    var %url http://gerty.rsportugal.org/parsers/ge.php?item= $+ $replace(%search,$chr(32),+)
+    var %url $gertySite $+ ge?item= $+ $replace(%search,$chr(32),+)
+    echo -a %url
     noop $download.break(downloadGe %thread,%thread,%url)
     ; save command count
     hsave commands commands.txt
@@ -228,7 +232,7 @@ _clearCommand {
 }
 ;@SYNTAX $timeToday
 ;@SUMMARY Returns four integers representing how far into the current day/week/month/year the bot currently is.
-;@NOTE Integer is the TimeSpan in seconds, useful for using the rscript parsers.
+;@NOTE Integer is the TimeSpan in seconds, useful for using the rscript sites.
 TimeToday {
   var %today, %week, %month, %year
   if ($duration($host(time)) >= 25200) {
@@ -492,6 +496,16 @@ deprecated {
   }
   sendToDev use of deprecated function $1 $left(%string, -4)
 }
-;@SYNTAX $parser
-;@SUMMARY returns the main parser link
-parser return http://sselessar.net/Gerty/parser.php?type=
+;@SYNTAX $gertySite
+;@SUMMARY returns the main site link
+gertySite return http://sselessar.net/Gerty/parser.php?type=
+_fatalError {
+  writeini $errFile $1 err $+ $calc($ini($errFile, $1, 0) +1) $time $date $2-
+  if ($me ison $dev) .msg $dev err07 $1 issue: $2-
+  linesep
+  echo 4 -s err07 $1 issue: $2-
+  linesep
+  if ($error) reseterror
+  halt
+}
+_warning if ($me ison $dev) .msg $dev err07 $1 issue: $2-

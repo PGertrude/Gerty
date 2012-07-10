@@ -1,4 +1,5 @@
->start<|skillAlias.mrc|skill recognition|3.3|a
+versions.skill return 4.01
+
 skillNames {
   var %skills at|att|attack
   %skills = %skills $+ |strength|str|st
@@ -65,6 +66,9 @@ compares {
   if ($regex($1,/^(baco|bacol|bacollect|bacollector|bacollectors|ba collectors|ba_collectors)$/Si)) { return BA Collectors }
   if ($regex($1,/^(bahe|baheal|bahealer|bahealers|ba healers|ba_healers)$/Si)) { return BA Healers }
   if ($regex($1,/^(cw|cwars|castle|castlewars|castle wars)$/Si)) { return Castle Wars }
+  if ($regex($1,/^(cq|conq|conquest)$/Si)) { return Conquest }
+  if ($regex($1,/^(dt|dom|dominion|dominion tower)$/Si)) { return Dominion Tower }
+  if ($regex($1,/^(cru|cruc|crucible|the crucible)$/Si)) { return The Crucible }
   if ($regex($1,/^(st|sk|all|skill|skills|stat|stats|statistics)$/Si)) { return Stats }
   if ($regex($1,/^(cb|cmb|comb|combat|warrior)$/Si)) { return Combat }
   if ($regex($1,/^(cmb%|combat%)$/Si)) { return combat% }
@@ -111,6 +115,9 @@ lookups {
   if ($regex($1,/^(baco|bacol|bacollect|bacollector|bacollectors|ba collectors|ba_collectors)$/Si)) { return BA Collectors }
   if ($regex($1,/^(bahe|baheal|bahealer|bahealers|ba healers|ba_healers)$/Si)) { return BA Healers }
   if ($regex($1,/^(cw|cwars|castle|castlewars|castle wars)$/Si)) { return Castle Wars }
+  if ($regex($1,/^(cq|conq|conquest)$/Si)) { return Conquest }
+  if ($regex($1,/^(dt|dom|dominion|dominion tower)$/Si)) { return Dominion Tower }
+  if ($regex($1,/^(cru|cruc|crucible|the crucible)$/Si)) { return The Crucible }
   if ($regex($1,/^(st|sk|all|skill|skills|stat|stats|statistics)$/Si)) { return Stats }
   if ($regex($1,/^(cb|cmb|comb|combat|warrior)$/Si)) { return Combat }
   if ($regex($1,/^(ncb|noncmb|non-cmb|non-comb|noncomb|non-combat|noncombat|non-warrior)$/Si)) { return Noncmb }
@@ -156,6 +163,9 @@ scores {
   if ($regex($1,/^(baco|bacol|bacollect|bacollector|bacollectors|ba collectors|ba_collectors)$/Si)) { return BA Collectors }
   if ($regex($1,/^(bahe|baheal|bahealer|bahealers|ba healers|ba_healers)$/Si)) { return BA Healers }
   if ($regex($1,/^(cw|cwars|castle|castlewars|castle wars)$/Si)) { return Castle Wars }
+  if ($regex($1,/^(cq|conq|conquest)$/Si)) { return Conquest }
+  if ($regex($1,/^(dt|dom|dominion|dominion tower)$/Si)) { return Dominion Tower }
+  if ($regex($1,/^(cru|cruc|crucible|the crucible)$/Si)) { return The Crucible }
 }
 skills {
   if ($regex($1,/^(at|att|attack)$/Si)) { return Attack }
@@ -196,6 +206,9 @@ minigames {
   if ($regex($1,/^(baco|bacol|bacollect|bacollector|bacollectors|ba collectors|ba_collectors)$/Si)) { return BA Collectors }
   if ($regex($1,/^(bahe|baheal|bahealer|bahealers|ba healers|ba_healers)$/Si)) { return BA Healers }
   if ($regex($1,/^(cw|cwars|castle|castlewars|castle wars)$/Si)) { return Castle Wars }
+  if ($regex($1,/^(cq|conq|conquest)$/Si)) { return Conquest }
+  if ($regex($1,/^(dt|dom|dominion|dominion tower)$/Si)) { return Dominion Tower }
+  if ($regex($1,/^(cru|cruc|crucible|the crucible)$/Si)) { return The Crucible }
 }
 misc {
   if ($regex($1,/^(st|sk|all|skill|skills|stat|stats|statistics)$/Si)) { return Stats }
@@ -265,6 +278,9 @@ statnum {
   if ($1 == ba collectors || $1 == ba collector) { return 34 }
   if ($1 == ba healers || $1 == ba healer) { return 35 }
   if ($1 == castle wars) { return 36 }
+  if ($1 == conquest) { return 37 }
+  if ($1 == dominion tower) { return 38 }
+  if ($1 == the crucible) { return 39 }
   if ($1 == 1) { return overall }
   if ($1 == 2) { return attack }
   if ($1 == 3) { return defence }
@@ -301,6 +317,9 @@ statnum {
   if ($1 == 34) { return ba collectors }
   if ($1 == 35) { return ba healers }
   if ($1 == 36) { return castle wars }
+  if ($1 == 37) { return conquest }
+  if ($1 == 38) { return Dominion Tower }
+  if ($1 == 39) { return The Crucible }
 }
 catno {
   if (!$minigames($1)) { return 0 }
@@ -343,4 +362,7 @@ smartno {
   if ($1 == ba collectors) { return 7 }
   if ($1 == ba healers) { return 8 }
   if ($1 == castle wars) { return 9 }
+  if ($1 == conquest) { return 10 }
+  if ($1 == dominion tower) { return 11 }
+  if ($1 == the crucible) { return 12 }
 }

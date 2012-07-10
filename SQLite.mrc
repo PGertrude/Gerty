@@ -1,4 +1,5 @@
->start<|msqlite.mrc|sqlite capability added|3.0|rs
+alias versions.sqlite return 4.0
+
 alias SQLITE_OK                   return 0
 alias SQLITE_ERROR                return 1
 alias SQLITE_INTERNAL             return 2
