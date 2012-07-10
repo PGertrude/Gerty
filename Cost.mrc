@@ -1,4 +1,5 @@
->start<|Cost.mrc|Cost script in process of cleaning|3.11|rs
+alias versions.cost return 4.0
+
 on $*:text:/[!.@]((pot)(ion)?s?|(po)(uch)?|(farmer|payment)|(\w+)costs?|costs? (\w+))/Si:*: {
   var %skill $regml(2)
   if ($left($1,1) !isin !.@) {
@@ -18,7 +19,7 @@ on $*:text:/[!.@]((pot)(ion)?s?|(po)(uch)?|(farmer|payment)|(\w+)costs?|costs? (
   else %skill = $skills(%skill)
   var %saystyle $saystyle($left($1,1), $nick, $chan), %ticks $newThread
   ; filter out skills with no params/non-skills
-  if (!%skill || %skill == Overall) { %saystyle Cost param syntax: !cost <skill> [amount] <item>| halt }
+  if (!%skill || %skill == Overall) { %saystyle Cost param syntax: !cost <skill> [amount] <item> | halt }
   tokenize 32 $2-
   if ($skills($1) == %skill) { tokenize 32 $2- }
   var %num 1
@@ -373,11 +374,6 @@ alias costfletching {
   elseif (Dart isin $gettok(%param,4,9) || Barbed Bolt == $gettok(%param,4,9)) {
     var %parts = %parts +07 3 Feathers $+(,$chr(40),07,$calc(3 * $hget(cost,314)),gp,,$chr(41))
     var %loss = $calc(%loss + (%num * 3 * $hget(cost,314)) - (%num * %price))
-    var %costs = Cost:07 $bytes(%loss,bd) $+(,$chr(40),07,$round($calc(%loss / %exp),1),gp/xp,,$chr(41))
-  }
-  elseif (Broad Arrow == $gettok(%param,4,9)) {
-    var %parts = %parts +07 Broad Arrow Head $+(,$chr(40),07,50,gp,,$chr(41))
-    var %loss = $calc(%loss + (%num * 50))
     var %costs = Cost:07 $bytes(%loss,bd) $+(,$chr(40),07,$round($calc(%loss / %exp),1),gp/xp,,$chr(41))
   }
   else {

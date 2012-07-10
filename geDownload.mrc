@@ -1,4 +1,5 @@
->start<|geDownload.mrc|downloads full ge database|3.2|rs
+alias versions.gedown return 4.1
+
 alias downloadSitePrices {
   var %thread $newThread
   sockopen dlGe. $+ %thread sselessar.net 80
@@ -34,34 +35,21 @@ on *:sockclose:dlGe.*: {
 }
 alias updateSitePrices {
   echo -at starting ge update
-  while (%x !> 25) {
-    .timerSiteUpdate [ $+ [ %x ] ] 1 $calc(%x * 15) updateSitePricesBuffer $calc(%x +65)
-    .timerSiteUpdate [ $+ [ %x ] $+ ] .1 1 $calc(%x * 15) updateSitePricesBuffer $calc(%x +65) $+ .1
+  while (%x !> 36) {
+    .timerSiteUpdate [ $+ [ %x ] ] 1 $calc(%x * 15) updateSitePricesBuffer %x
     inc -u1 %x
   }
-  updateSitePricesBuffer Other
 }
 alias updateSitePricesBuffer {
-  if ($numtok($1, 46) == 1) {
-    sockopen sitePrices. $+ $1 sselessar.net 80
-  }
-  else {
-    sockopen sitePrices. $+ $1 rsportugal.org 80
-  }
+  sockopen sitePrices. $+ $1 sselessar.net 80
 }
 on *:sockopen:sitePrices.*: {
-  if ($numtok($sockname, 46) == 2) {
-    sockwrite -n $sockname GET /Gerty/GEDownload.php?id= $+ $iif($gettok($sockname,2,46) isnum,$chr($v1),$v1) HTTP/1.1
-    sockwrite -n $sockname Host: sselessar.net $+ $crlf $+ $crlf
-  }
-  else {
-    sockwrite -n $sockname GET /tracker/geDownload.php?id= $+ $iif($gettok($sockname,2,46) isnum,$chr($v1),$v1) HTTP/1.1
-    sockwrite -n $sockname Host: rsportugal.org $+ $crlf $+ $crlf
-  }
+  sockwrite -n $sockname GET /Gerty/GEDownload.php?cat= $+ $gettok($sockname,2,46) HTTP/1.1
+  sockwrite -n $sockname Host: sselessar.net $+ $crlf $+ $crlf
 }
 on *:sockclose:sitePrices.*: {
   sockclose $sockname
-  if ($sock(sitePrices.*,0) == 0 && !$timer(SiteUpdate25)) {
+  if ($sock(sitePrices.*,0) == 0 && !$timer(SiteUpdate36)) {
     echo -at updated at site
     noop $_network(downloadSitePrices)
   }

@@ -1,4 +1,3 @@
->start<|param.txt|!xp list|3.18|param
 Agility	1	86.5	Gnome Stronghold
 Agility	30	540	Penguin Course
 Agility	30	1014	Agility Pyramid
@@ -11,8 +10,23 @@ Agility	1	320000	Agility Ticket (1000)
 Agility	60	540	Werewolf Course
 Agility	52	571	Wilderness Course
 Agility	48	580	Ape Atoll
+
 Agility	70	2750	DorgeshKaan Course
 Agility	1	15	Mouse Catch Attempt
+Agility	60	380	Bandos Throne Room Course
+Agility	80	2375	Dorgesh-Kaan Double Long
+Agility	80	1429	Dorgesh-Kaan Long and Grapple
+Agility	85	725	Advanced Gnome Course
+Agility	90	740.7	Advanced Barbarian Course
+Agility 15	5	Barbarian Fishing Trout
+Agility	30	6	Barbarian Fishing Salmon
+Agility	45	7	Barbarian Fishing Sturgeon
+Agility	60	169.7	Livid Farm Energy Transfer
+Agility	75	50	Catch Ruby Harvest
+Agility	80	70	Catch Sapphire Glacialis
+Agility	85	100	Catch Snowy Knight
+Agility	90	125	Catch Black Warlock
+
 Fishing	90	380	Rocktail
 Fishing	85	300	Cavefish
 Fishing	70	80	Leaping Sturgeon
@@ -31,7 +45,7 @@ Fishing	16	20	Mackerel
 Fishing	15	40	Anchovy
 Fishing	10	30	Herring
 Fishing	5	20	Sardine
-Fishing	5	10	Karambwanji
+Fishing	5	5	Karambwanji
 Fishing	1	10	Shrimp
 Fishing	81	46	Manta Ray
 Fishing	79	38	Sea Turtle
@@ -45,6 +59,23 @@ Fishing	20	50	Trout
 Fishing	96	110	Barbarian Shark
 Fishing	70	100	Barbarian Swordfish
 Fishing	55	80	Barbarian Tuna
+Fishing	1	10	Crayfish
+Fishing	1	900	Cracked Fishing urn
+Fishing	1	2100	Fragile Fishing urn
+Fishing	1	3000	Normal Fishing urn
+Fishing	1	3600	Strong Fishing urn
+Fishing 1	11400	Decorated Fishing urn
+Fishing	1	9	Heim crab
+Fishing	10	27	Red-eye
+Fishing	20	45	Dusk Eel
+Fishing	30	63	Giant Flatfish
+Fishing	40	81	Short-finned Eel
+Fishing	50	99	Web Snipper
+Fishing	60	117	Bouldabass
+Fishing	70	135	Salve Eel
+Fishing	80	153	Blue Crab
+Fishing	90	171	Cave Moray
+
 Hunter	77	1100	Grenwall
 Hunter	69	156	Dashing Kebbit
 Hunter	67	304	Black Salamander
@@ -87,6 +118,52 @@ Hunter	45	54	Black Warlock
 Hunter	35	44	Snowy White
 Hunter	25	34	Sapphire Glacialis
 Hunter	15	24	Ruby Harvest
+Hunter	56	150	Penguin
+Hunter	71	450	Imp
+Hunter	72	150	Gleaelg
+Hunter	72	200	Tranart
+Hunter	72	400	Slithtils
+Hunter	51	210	Penguin (DF)
+Hunter	50	250	Penguin
+Hunter	1	55	Protomastyx
+Hunter	10	94.5	Submastyx
+Hunter	20	164	Paramastyx
+Hunter	30	247	Archaemastyx
+Hunter	40	330	Dromomastyx
+Hunter	50	435.5	Spinomastyx
+Hunter	60	519	Gallimastyx
+Hunter	70	599.5	Stegomastyx
+Hunter	80	673	Megamastyx
+Hunter	90	745.5	Tyrannomastyx
+Hunter	70	350	Common Jadinko
+Hunter	71	475	Shadow Jadinko
+Hunter	74	465	Igneous Jadinko
+Hunter	75	475	Cannibal Jadinko
+Hunter	76	475	Aquatic Jadinko
+Hunter	77	485	Amphibian Jadinko
+Hunter	78	505	Carrion Jadinko
+Hunter	79	600	Camouflaged Jadinko
+Hunter	80	525	Draconic Jadinko
+Hunter	81	600	Saradomin Jadinko
+Hunter	81	600	Guthix Jadinko
+Hunter	81	600	Zamorak Jadinko
+Hunter	17	25	Baby Impling
+Hunter	22	65	Young Impling
+Hunter	28	113	Gourmet Impling
+Hunter	36	177	Earth Impling
+Hunter	42	225	Essence Impling
+Hunter	50	289	Eclectic Impling
+Hunter	54	321	Spirit Impling
+Hunter	58	353	Nature Impling
+Hunter	65	409	Magpie Impling
+Hunter	74	481	Ninja Impling
+Hunter	76	497	Pirate Impling
+Hunter	83	553	Dragon Impling
+Hunter	87	585	Zombie Impling
+Hunter	91	617	Kingly Impling
+
+
+
 Magic	96	130	Spellbook Swap	3 Astral, 2 Cosmic, 1 Law	-	Lunar	Requires quest Dream Mentor & Allows you to swap spellbooks(Normal or Ancient) for one cast & Spellbook will return to Lunar after 2 minutes if no spells were cast
 Magic	95	124	Heal Group	4 Astral, 6 Law, 3 Blood	-	Lunar	Transfer up to 75% of your current Hitpoints to nearby players, starting with the most injured
 Magic	94	112	Vengeance	4 Astral, 10 Earth, 2 Death	-	Lunar	You will recoil up to 75% of the damage on the next hit over 0 you receive	Vengencevengancevengeance
@@ -228,6 +305,7 @@ Magic	4	9	Crossbow Bolt Enchant(Opal)	1 Cosmic, 2 Air	-	Normal	Enchants Opal tip
 Magic	4	-	Crossbow Bolt Enchant	-	-	Normal	Specify with writing Crossbow Bolt Enchant(gem type)
 Magic	3	12	Confuse	3 Water, 2 Earth, 1 Body	-	Normal	Reduces attack 5%
 Magic	1	5.5	Wind Strike	1 Air, 1 Mind	2	Normal	-
+
 Mining	40	65	Gem Rock
 Mining	35	60	Sandstone
 Mining	30	5	Pure Essence
@@ -243,10 +321,30 @@ Mining	70	95	Adamantite Ore
 Mining	55	80	Mithril Ore
 Mining	45	56.2	Average Granite exp
 Mining	40	65	Gold Ore
-Mining	35	60	SandStone
 Mining	30	50	Coal
 Mining	20	40	Silver Ore
 Mining	15	35	Iron Ore
+Mining	68	100	Lava Flow Crust
+Mining	73	25	Living Rock Remains
+Mining	77	90	Bane
+Mining	77	50	Concentrated Coal
+Mining	80	65	Concentrated Gold
+Mining	1	525	Cracked Mining urn
+Mining	1	1200	Fragile Mining urn
+Mining	1	1950	Normal Mining urn
+Mining	1	2400	Strong Mining urn
+Mining	1	3750	Decorated Mining urn
+Mining	1	15	Novite
+Mining	10	27.5	Bathus
+Mining	20	41	Marmaros
+Mining	30	56.5	Kratonium
+Mining	40	71	Fractite
+Mining	50	85	Zephyrium
+Mining	60	100.5	Argonite
+Mining	70	117	Katagon
+Mining	80	131.5	Gorgonite
+Mining	90	148	Promethium
+
 Runecraft	1	5	Air Rune
 Runecraft	2	5.5	Mind Rune
 Runecraft	5	6	Water Rune
@@ -280,6 +378,41 @@ Runecraft	1	47.5	Law Tiara
 Runecraft	1	50	Death Tiara
 Runecraft	1	52.5	Blood Tiara
 Runecraft	1	55	Soul Tiara
+Runecraft	72	10	Armadyl Rune
+Runecraft	1	10	Air Essling
+Runecraft	1	19	Cyclone
+Runecraft	1	10	Mind Essling
+Runecraft	1	20	Mind Storm
+Runecraft	5	12.5	Water Essling
+Runecraft	5	25	Water Pool
+Runecraft	9	14	Earth Essling
+Runecraft	9	28	Rock Fragment
+Runecraft	14	35	Fire Ball
+Runecraft	14	17	Fire Essling
+Runecraft	17	32	Vine
+Runecraft	20	23	Body Essling
+Runecraft	20	46	Fleshy Growth
+Runecraft	27	26	Cosmic Esshound
+Runecraft	27	32	Fire Storm
+Runecraft	35	61	Chaotic Cloud
+Runecraft	35	30	Chaos Esshound
+Runecraft	40	35	Astral Esshound
+Runecraft	40	74.5	Nebula
+Runecraft	44	43	Nature Esshound
+Runecraft	44	87	Shifter
+Runecraft	54	107	Jumper
+Runecraft	54	53	Law Esshound
+Runecraft	65	60	Death Esswrath
+Runecraft	66	120	Skulls
+Runecraft	77	146	Blood Pool
+Runecraft	77	71	Blood Esswraith
+Runecraft	83	160	Bloody Skulls
+Runecraft	90	213	Living Soul
+Runecraft	90	106	Soul Esswraith
+Runecraft	95	199.5	Undead Soul
+
+
+
 Slayer	-	3	Chicken	1
 Slayer	-	5	Cave bug	5
 Slayer	-	16	Crawling Hand	8
@@ -397,6 +530,9 @@ Slayer	1	250	Avg Living rock creatures
 Slayer	1	225	Living rock protector
 Slayer	1	275	Living rock striker
 Slayer	1	530	Living rock patriarch
+
+
+
 Thieving	75	16	Gem Stall
 Thieving	65	81.3	Spice Stall
 Thieving	65	160	Scimitar Stall
@@ -407,13 +543,14 @@ Thieving	42	42	Fish Stall
 Thieving	35	36	Fur Stall
 Thieving	27	10	Seed Stall
 Thieving	22	27	Wine Stall
-Thieving	15		10	Rock Cake Stall
+Thieving	15	10	Rock Cake Stall
 Thieving	5	16	Monkey Food Stall
 Thieving	5	10	Crafting Stall
 Thieving	5	16	Tea Stall
 Thieving	5	10	General Stall
 Thieving	5	16	Baker's Stall
 Thieving	2	10	Vegetable Stall
+Thieving	20	24	Silk Stall
 Thieving	65	3000	Summer Sq'irk Juice
 Thieving	45	2350	Autumn Sq'irk Juice
 Thieving	25	1350	Spring Sq'irk Juice
@@ -425,7 +562,7 @@ Thieving	70	151.8	Paladin
 Thieving	65	137.5	Yanille Watchman
 Thieving	65	137.5	Menaphite Thug
 Thieving	55	84.3	Pollnivian Bandit
-Thieving	53		79.4	Desert Bandit
+Thieving	53	79.4	Desert Bandit
 Thieving	45	65	Bearded Pollnivian Bandit
 Thieving	45	65	Fremminik
 Thieving	36	40	Cave Goblin
@@ -441,8 +578,25 @@ Thieving	28	25	Nature Rune Chest
 Thieving	55	84.3	Knight of Ardougne
 Thieving	40	46.8	Guard
 Thieving	38	43	Master Farmer
-Thieving	20	24	Silk Stall
 Thieving	1	8	Man/Woman
+Thieving	13	7.5	10 Coins Chest
+Thieving	43	125	50 Coins Chest
+Thieving	23	22.2	HAM Guard
+Thieving	47	150	Steel Arrowheads Chest
+Thieving	52	200	Dorgesh Kaan (low)
+Thieving	63	75	Evidence Locker
+Thieving	70	170	Monkey Knife Fighter 1 stun
+Thieving	70	320	Monkey Knife Fighter 2 stuns
+Thieving	78	650	Dorgesh Kaan (high)
+Thieving	90	556.5	Dwarf Trader
+
+
+
+
+
+
+
+
 Woodcutting	1	25	Normal Tree
 Woodcutting	1	25	Logs
 Woodcutting	1	25	Achey Tree
@@ -470,6 +624,33 @@ Woodcutting	58	169.1	Lumberjack Eucalyptus
 Woodcutting	60	179.3	Lumberjack Yew Tree
 Woodcutting	68	340.8	Lumberjack Ivy
 Woodcutting	75	256.2	Lumberjack Magic Tree
+Woodcutting	76	200	Blisterwood
+Woodcutting	82	275	Cursed Magic Tree
+Woodcutting	83	140	Mutated Vine
+Woodcutting	83	161.6	Curly Root
+Woodcutting	83	161.6	Straight Root
+Woodcutting	1	960	Cracked Woodcutting urn
+Woodcutting	1	2550	Fragile Woodcutting urn
+Woodcutting	1	4950	Normal Woodcutting urn
+Woodcutting	1	9975	Strong Woodcutting urn
+Woodcutting	80	15	Short and Long Planks
+Woodcutting	80	18	Diagonal Planks
+Woodcutting	80	22	Curved Planks
+Woodcutting	80	25	Tooth and Groove Plank
+Woodcutting	80	4290	Complete Easy Task
+Woodcutting	80	8580	Complete Hard Task
+Woodcutting	1	35	Tangle Gum Tree
+Woodcutting	10	60	Sleeping Elm Tree
+Woodcutting	20	85	Blood Spindle Tree
+Woodcutting	30	115	Utuku Tree
+Woodcutting	40	145	Spinebeam Tree
+Woodcutting	50	175	Bovistrangler
+Woodcutting	60	210	Thigat Tree
+Woodcutting	70	245	Corpsethorn
+Woodcutting	80	285	Entgallow
+Woodcutting	90	330	Grave Creeper Tree
+
+
 Combat	125	440	spiritual warrior
 Combat	134	524	spiritual warrior bandos
 Combat	123	392	spiritual warrior armadyl
@@ -778,6 +959,7 @@ Herblore	75	53	Antifire mix (2)	11505	Antifire potion(2);Caviar	2456+11326	An an
 Herblore	80	54	Ranging mix (2)	11509	Ranging potion(2);Caviar	171+11326	A ranging potion that also heals 6hp
 Herblore	83	57	Magic mix (2)	11513	Magic potion(2);Caviar	3044+11326	A magic potion that also heals 6hp
 Herblore	85	58	Zamorak mix (2)	11521	Zamorak brew(2);Caviar	191+11326	A zamorak brew that also heals 6hp
+
 Summoning	1	4.8	Spirit Wolf	12047	Wolf Bones	2859	7	359	6	Gold	Attack	Howl (3) - Scares opponent NPC away	-
 Summoning	4	9.3	Dreadfowl	12043	Raw Chicken	2138	8	374	4	Gold	Magic	Deadfowl Strike (3) - Attack with 3 maxhit	Farming boost +1
 Summoning	10	12.6	Spirit Spider	12059	Spider Carcass	6291	8	374	15	Gold	Controlled	Egg Spawn (6) - Spawns a random amount of red spider eggs	Forager - Red spiders' eggs
@@ -857,6 +1039,8 @@ Summoning	95	417.6	Iron Titan	12822	Iron Platebody	1115	198	3224	60	Crimson	Defe
 Summoning	96	422.4	Pack Yak	12093	Yak Hide	10818	211	3419	58	Crimson	Strength	Winter Storage(12) - Banks one item	Beast of Burden (30)
 Summoning	99	435.2	Steel Titan	12790	Steel Platebody	1119	178	2924	64	Crimson	Ranged	Steel of Legends(12) - Attack with 4 hits	Melee defence boost +15%
 Skill|lvl|exp|Pouch|Pouch ID|Second|Second ID|Shards|Alch|Minutes|Charm|Combat|Scroll|Ability
+
+
 Firemaking	1	40	Logs	1511
 Firemaking	15	60	Oak Logs	1521
 Firemaking	30	90	Willow Logs	1519
@@ -877,6 +1061,30 @@ Firemaking	55	210	Mahogany Pyre Log	6213
 Firemaking	63	246	Eucalyptus Pyre Logs	12583
 Firemaking	65	255	Yew Pyre Logs	3446
 Firemaking	80	404.5	Magic Pyre Logs	3448
+Firemaking	11	40	Normal Pyre Ship	-
+Firemaking	25	60	Oak Pyre Ship	-
+Firemaking	40	90	Willow Pyre Ship	-
+Firemaking	45	105	Teak Pyre Ship	-
+Firemaking	52	125	Arctic Pine Pyre Ship	-
+Firemaking	52	1000	Dorgeshuun Lightorb	-
+Firemaking	55	135	Maple Pyre Ship	-
+Firemaking	70	202.5	Yew Pyre Ship	-
+Firemaking	76	303.8	Blisterwood Logs	-
+Firemaking	83	378.7	Curly Root	-
+Firemaking	85	303.8	Magic Pyre Ship	-
+Firemaking	1	25	Tangle Gum Branches	-
+Firemaking	10	44.5	Seeping Elm Branches	-
+Firemaking	20	65.6	Blood Spindle Branches	-
+Firemaking	30	88.3	Utuku Branches	-
+Firemaking	40	112.6	Spinebeam Branches	-
+Firemaking	50	138.5	Bovistrangler Branches	-
+Firemaking	60	166	Thigat Branches	-
+Firemaking	70	195.1	Corpsethorn Branches	-
+Firemaking	80	225.8	Entgallow Branches	-
+Firemaking	90	258.1	Grave Creeper Branches	-
+
+
+
 Smithing	1	6.5	Bronze Bar	2349	Ore	438+436	0
 Smithing	15	12.5	Iron Bar	2351	Ore	440	0
 Smithing	20	13.7	Silver Bar	2355	Ore	442	0
@@ -1088,6 +1296,7 @@ prayer	1	100	Fiyr Remains	3404
 prayer	1	125	Dagannoth Bones	6729
 prayer	1	140	Ourg Bones	4834
 skill|lvl|exp|item|item-id|(u)-id|ingedient|ingredient-id
+
 Fletching	1	0.33	Arrow Shaft	52	Log	1511
 Fletching	1	2.63	Bronze Arrow	882	Headless arrow+Bronze Arrowtips	53+39
 Fletching	1	1.8	Bronze Dart	806	Bronze Dart Tip+3 Feathers	819
@@ -1129,11 +1338,11 @@ Fletching	48	7.4	Red Topaz Bolt	9336	Steel Bolts+Red Topaz tips	9141+9188
 Fletching	49	10	Mithril Brutal Arrow	0	Flighted Ogre Arrow+Mithril Nails	2864+4822
 Fletching	50	100	Maple Shortbow	853	Maple Logs+Bowstring	1517+1777+64	240
 Fletching	51	10	Barbed Bolt	881	Barbed Tips+3 Feathers	47
-Fletching	52	15	Broad Arrow	0	Headless arrow+Broad Arrow Head	53
+Fletching	52	15	Broad Arrow	0	Headless arrow+Broad Arrow Head	53+13278
 Fletching	52	11.2	Mithril Dart	809	Mithril Dart Tip+3 Feathers	822
 Fletching	54	5	Mithril Bolt	9142	Mithril Bolts(unf)+Feathers	9379+314
 Fletching	54	128	Mithril Crossbow	9181	Maple Crossbow Stock+Mithril Limbs+Crossbow String	9448+9427+9438
-Fletching	55	3	Broad Bolt	0	Broad Bolt Tips+3 Feathers	13279+314
+Fletching	55	3	Broad Bolt	13280	Broad Bolt Tips+3 Feathers	13279+314
 Fletching	55	116.5	Maple Longbow	851	Maple Logs+Bowstring	1517+1777+62	384
 Fletching	56	9.7	Sapphire Bolt	9337	Mithril Bolts+Sapphire tips	9142+9189
 Fletching	58	10.5	Emerald Bolt	9338	Mithril Bolts+Emerald tips	9142+9190
@@ -1159,6 +1368,7 @@ Fletching	85	183	Magic Longbow	859	Magic Logs+Bowstring	1513+1777+70	1536
 Fletching	90	16.33	Dragon Arrow	11212	Headless arrow+Dragon Arrowtips	53+11237
 Fletching	95	25	Dragon Dart	11230	Dragon dart tip+3 Feathers	11232
 SKILL|LEVEL|EXP|PLANT|SEED|SEED_ID|PRODUCE|PRODUCE_ID|PATCH|PLANT_EXP|HARVEST_XP|CHECKHEALTH_XP|TIME|PAYMENT|PAYMENT_ID|PAYMENT_AMOUNT|PICK_AMOUNT
+
 Farming	1	242	Potato	3x Potato seed	5318	26x Potato	1942 	Allotment	8	9	0	40	2x Compost	6032	2	26
 Farming	5	282.5	Onion	3x Onion seed	5319	26x Onion	1957	Allotment	9.5	10.5	0	40	Potatoes(10)	5438	1	26
 Farming	7	309	Cabbage	3x Cabbage seed	5324	26x Cabbage	1965	Allotment	10	11.5	0	40	Onions(10)	5458	1	26
@@ -1220,6 +1430,7 @@ Farming	55	515.5	Cactus	Cactus seed	5280	3x Cactus spine	6016	Special	66.5	25	37
 Farming	63	603	Belladonna	Belladonna seed	5281	Nightshade	0	Special	91	512	0	280	-	0	0	0
 Farming	72	12516.5	Calquat tree	Calquat tree seed	5290	6x Calquat fruit	5980	Special	129.5	48.5	12096	1440	8x Poison ivy berries	6018	8	6
 Farming	83	19501.3	Spirit tree	Spirit tree seed	0	-	0	Special	199.5	0	19301.8	3680	5x Monkey nuts + Monkey bar + Ground suqah tooth	0	0	0
+
 Skill|Level|Exp|Item|GE_ID|Shop
 Construction	1	25	Plank	960	100
 Construction	15	60	Oak plank	8778	250
@@ -1357,6 +1568,7 @@ Cooking	88	214	Cavefish	15266	Raw cavefish	15264	20 hp & +2 boost to either atta
 Cooking	91	216.3	Manta Ray	391	Raw manta ray	389	22hp
 Cooking	93	225	Rocktail	15272	Raw rocktail	15270	23hp & heals up to 10 over max hp
 Cooking	95	260	Summer Pie	7218	Pie dish;Pastry dough;Strawberry;Watermelon;Cooking apple	2171+1953+5504+5982+1955	Restores 10% of run energy and increases agility by 5	7216
+
 Crafting	1	12.6	Pot	1031	Soft clay	1761	1
 Crafting	7	25	Pie dish	2313	Soft clay	1761	1
 Crafting	8	33	Bowl	1923	Soft clay	1761	1

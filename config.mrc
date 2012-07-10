@@ -1,4 +1,4 @@
->start<|config.mrc|config and join merged|3.51|rs
+alias versions.config return 4.01
 on *:START: {
   ; Authenticate Host
   if (!$exists(Gerty.Config.ini)) {
@@ -23,7 +23,7 @@ on *:START: {
   if !$hget(commands) { .hmake commands }
   if ($exists(commands.txt)) { .hload commands commands.txt }
   ; Check for last ge update
-  noop $download.break(checkForOfflineGeUpdate, $newThread, $parser $+ lastupdate)
+  noop $download.break(checkForOfflineGeUpdate, $newThread, $gertySite $+ lastupdate)
   noop $sqlite_query(1, DELETE FROM timers WHERE endTime < $gmt $+ ;)
 }
 on *:QUIT: {
@@ -42,7 +42,7 @@ on *:DISCONNECT: {
   .hsave commands commands.txt
 }
 on *:CONNECT: {
-  remini Gerty.Config.ini GeUpdate
+  if ($hget(geupdate)) hfree geupdate
   if ($network == SwiftIrc) {
     ; Join #Gerty and Load Addressess
     join #gerty,#gertyDev

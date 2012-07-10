@@ -1,4 +1,5 @@
->start<|sockOpens.mrc|compiled sockopens|3.3|rs
+alias versions.sockopen return 4.01
+
 on *:sockopen:*: {
   var %thread = $gettok($sockname,2,46)
   if ($sockerr) {
@@ -40,28 +41,6 @@ on *:sockopen:*: {
   else if (fml.* iswm $sockname) {
     sockwrite -n $sockname GET $hget(%thread,page) HTTP/1.1
     sockwrite -n $sockname Host: www.fmylife.com
-    sockwrite -n $sockname $crlf
-  }
-  else if (geinfo.* iswm $sockname) {
-    sockwrite -n $sockname GET /results.ws?query= $+ $hget(%thread,search) $+ &price=all&members= HTTP/1.0
-    sockwrite -n $sockname Host: itemdb-rs.runescape.com
-    sockwrite -n $sockname $crlf
-  }
-  else if (geinfo2.* iswm $sockname) {
-    sockwrite -n $sockname GET /viewitem.ws?obj= $+ $hget(%thread,id) HTTP/1.0
-    sockwrite -n $sockname Host: itemdb-rs.runescape.com
-    sockwrite -n $sockname $crlf
-  }
-  else if (gelink.* iswm $sockname) {
-    sockwrite -n $sockname GET /results.ws?query= $+ $cmd(%thread,arg2) $+ &price=all&members= HTTP/1.1
-    sockwrite -n $sockname Host: itemdb-rs.runescape.com
-    sockwrite -n $sockname $crlf
-  }
-  else if (CheckGePrices.* iswm $sockname) {
-    var %page = $iif(%thread == front,/frontpage.ws,/results.ws?query=zamorak&price=all)
-    %thread = ge
-    sockwrite -n $sockname GET %page HTTP/1.1
-    sockwrite -n $sockname Host: itemdb-rs.runescape.com
     sockwrite -n $sockname $crlf
   }
   else if (google.* iswm $sockname) {
@@ -110,12 +89,6 @@ on *:sockopen:*: {
     sockwrite -n $sockname Host: www.tip.it
     sockwrite -n $sockname $crlf
   }
-  else if (rank.* iswm $sockname) {
-    var %skill = $cmd(%thread,arg1), %rank = $cmd(%thread,arg2)
-    sockwrite -n $sockname GET /overall.ws?category_type= $+ $catno(%skill) $+ &table= $+ $calc($statnum(%skill) -1) $+ &rank= $+ %rank
-    sockwrite -n $sockname Host: hiscore.runescape.com
-    sockwrite -n $sockname $crlf
-  }
   else if (runehcalc.* iswm $sockname) {
     sockwrite -n $sockname GET /clans/ml.php?clan= $+ $hget(%thread,clan) HTTP/1.1
     sockwrite -n $sockname Host: www5.runehead.com $+ $crlf $+ $crlf
@@ -137,11 +110,6 @@ on *:sockopen:*: {
   }
   else if (skillplan.* iswm $sockname) {
     sockwrite -n $sockname GET /index_lite.ws?player= $+ $hget(%thread,nick) HTTP/1.1
-    sockwrite -n $sockname Host: hiscore.runescape.com
-    sockwrite -n $sockname $crlf
-  }
-  else if (top.* iswm $sockname) {
-    sockwrite -n $sockname GET /overall.ws?category_type= $+ $catno($hget(%thread,skill)) $+ &table= $+ $smartno($hget(%thread,skill)) $+ &user= $+ $hget(%thread,nick) $+ &rank= $+ $hget(%thread,rank) HTTP/1.1
     sockwrite -n $sockname Host: hiscore.runescape.com
     sockwrite -n $sockname $crlf
   }
@@ -178,6 +146,5 @@ on *:sockopen:*: {
   return
   :error
   _throw $sockname %thread
-  sendToDev Error @ sockopen:07 $sockname $error
   reseterror
 }

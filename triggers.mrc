@@ -1,4 +1,5 @@
->start<|triggers.mrc|Entry point|3.87|rs
+alias versions.trigger return 4.15
+
 on *:TEXT:*:*: {
   if ($left($1,1) !isin !.@) {
     var %botCheck = $botid($1)
@@ -20,7 +21,7 @@ on *:TEXT:*:*: {
     else goto exit
   }
   tokenize 32 $strip($1-)
-  var %thread $+(a,$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9),$r(0,9)), %saystyle
+  var %thread $newThread, %saystyle
   if ($left($1,1) isin .!@) %saystyle = $saystyle($left($1,1),$nick,$chan)
   ; STATUS
   if ($regex($1,/^[!@.]status$/Si)) {
@@ -182,9 +183,20 @@ on *:TEXT:*:*: {
   ; ANAGRAMS
   else if ($regex($1,/^[!@.](ana|anagrams?)$/Si)) {
     if (!$2) { %saystyle Syntax Error: !anagram <anagram> | goto clean }
-    var %anagram = $read(anagram.txt,nw,* $+ $2- $+ *)
-    if (!%anagram) { %saystyle Anagram "07 $+ $2- $+ " not found. | halt }
-    %Saystyle Anagram:07 $gettok(%anagram,1,124) | NPC:07 $gettok(%anagram,2,124) | Location:07 $gettok(%anagram,3,124)
+    var %fname coord $+ $ran(0,999), %anagram $2-, %details
+    .fopen %fname treasure.txt
+    while (!$feof) {
+      var %fileCoord = $fread(%fname)
+      tokenize 9 %fileCoord
+      if ($1 != ANAGRAM) { continue }
+      if (%anagram isin $2) {
+        %details = $gettok(%fileCoord, 2-, 9)
+        break
+      }
+    }
+    .fclose %fname
+    if (!%details) { %saystyle Anagram "07 $+ %anagram $+ " not found. | halt }
+    %Saystyle Anagram:07 $gettok(%details, 1, 9) | NPC:07 $gettok(%details, 2, 9) | Location:07 $gettok(%details, 3, 9)
     goto clean
   }
   ; RIDDLES
@@ -251,7 +263,8 @@ on *:TEXT:*:*: {
       _clearCommand %thread
       halt
     }
-    sockopen $+(rank.,%thread) hiscore.runescape.com 80
+    var %url = $gertysite $+ rank&rank= $+ %rank $+ &skill= $+ $smartno(%skill) $+ &cat= $+ $catno(%skill)
+    noop $download.break(rank %thread, %thread, %url)
     goto clean
   }
   ; SHOP
@@ -350,7 +363,7 @@ on *:TEXT:*:*: {
       var %dbPrices $getPrice(%search)
       if (!%dbPrices) {
         _fillCommand %thread $left($1,1) $nick $iif($chan,$v1,PM) gelink %num $replace(%search, $chr(32), _)
-        var %url http://gerty.rsportugal.org/parsers/ge.php?item= $+ $replace(%search,$chr(32),+)
+        var %url http://sselessar.net/Gerty/parser.php?type=ge&item= $+ $replace(%search,$chr(32),+)
         noop $download.break(downloadGe %thread,%thread,%url)
         halt
       }
@@ -397,7 +410,7 @@ on *:TEXT:*:*: {
     if (%id > 0) {
       var %id $regsubex($2-,/(\D+)/g,$null)
       _fillCommand %thread $left($1,1) $nick $iif($chan,$v1,PM) geinfo %id
-      var %url $parser $+ geinfo $+ &item= $+ %id
+      var %url $gertySite $+ geinfo&item= $+ %id
       noop $download.break(geInfo %thread, %thread, %url)
       goto clean
     }
@@ -405,14 +418,14 @@ on *:TEXT:*:*: {
     .tokenize 44 %items
     if ($0 == 1) {
       var %id $gettok(%items,1,59)
-      _fillCommand %thread %left $nick $iif($chan,$v1,PM) geinfo
-      var %url $parser $+ geinfo $+ &item= $+ %id
+      _fillCommand %thread %left $nick $iif($chan,$v1,PM) geinfo %id
+      var %url $gertySite $+ geinfo $+ &item= $+ %id
       noop $download.break(geInfo %thread, %thread, %url)
       goto clean
     }
     var %x 1, %itemList = |
     while (%x <= $0) {
-      %itemList = %itemList $trim($gettok($($ $+ %x,2),2,59)) 07 $+ $# $+ $trim($gettok($($ $+ %x,2),1,59)) $+ ;
+      %itemList = %itemList $trim($gettok($($ $+ %x,2),2,59)) 07 $+ $# $+ $trim($gettok($($ $+ %x,2),1,59)) $+ ;
       if ($len(%itemList) > 400) break
       inc %x
     }
@@ -461,7 +474,7 @@ on *:TEXT:*:*: {
     var %people, %search $remove($3-, $#), %sql
     if ($2 isnum) %people = $2
     else goto csSyntax
-    if (%search isnum) %sql = $dbSelectWhere(prices, id;name;price, id = "% $+ %search $+ $% $+ ").sql
+    if (%search isnum) %sql = $dbSelectWhere(prices, id;name;price, id = %search).sql
     else %sql = $dbSelectWhere(prices, id;name;price, name LIKE "% $+ %search $+ $% $+ ").sql
     var %results $countResults(%sql)
     if (!%results) {
@@ -474,7 +487,7 @@ on *:TEXT:*:*: {
       tokenize 59 %result
       if ($3 == 0) {
         var %thread $newThread
-        var %url $parser $+ ge&item= $+ $replace($2,$chr(32),+)
+        var %url $gertySite $+ ge&item= $+ $replace($2,$chr(32),+)
         var %string $downloadstring(%thread, %url)
         downloadGe %thread %string
         tokenize 44 %string
@@ -528,13 +541,14 @@ on *:TEXT:*:*: {
       .tokenize 32 $1 $3-
     }
     var %rank $false, %string $2-, %nick $false
-    if ($regex($2-,/(?:#|^)(\d+[km]?)( |$)/S)) {
+    if ($regex($2-,/(?:#|^)(\d+(?:.\d+)?[km]?)( |$)/S)) {
       %rank = $fixInt($regml(1))
-      %string = $regsubex($2-,/(?:#|^)(\d+[km]?)( |$)/S,$null)
+      %string = $regsubex($2-,/(?:#|^)(\d+(?:.\d+)?[km]?)( |$)/S,$null)
     }
     if ($trim(%string)) %nick = %string
     _fillcommand %thread $left($1,1) $nick $iif($chan,$v1,PM) top %skill %rank %nick
-    var %url = http://gerty.rsportugal.org/parsers/hiscores.php?cat= $+ $catno(%skill) $+ &table= $+ $smartno(%skill) $+ &user= $+ $iif(%nick,$v1) $+ &rank= $+ $iif(%rank,$v1)
+    var %url = $gertysite $+ top10&cat= $+ $catno(%skill) $+ &skill= $+ $smartno(%skill) $+ &player= $+ $iif(%nick, $v1, %rank)
+    echo -a %url
     noop $download.break(topOut %thread, %thread, %url)
     goto clean
   }
@@ -652,6 +666,7 @@ on *:TEXT:*:*: {
   }
   ; URBAN
   else if ($regex($1,/^[!@.](urban|ud)$/Si)) {
+    if ($hget(#, urban) == off) { goto clean }
     _fillCommand %thread $left($1,1) $nick $iif($chan,$v1,PM) urban $replace($2-,$chr(32),+)
     var %url = http://www.rscript.org/lookup.php?type=urban&id=1&search= $+ $cmd(%thread,arg1)
     noop $download.break(urban %thread,urban. $+ %thread, %url)
@@ -696,7 +711,7 @@ on *:TEXT:*:*: {
     if (!$2) { %saystyle you must specify a monster to look up. }
     if ($regex($right($1,-1),/(drops?|loot)/i)) %command = drops
     else %command = npc
-    var %url $parser $+ %command $+ &npc=
+    var %url $gertySite $+ %command $+ &npc=
     _fillCommand %thread $left($1,1) $nick $iif($chan,$v1,PM) %command $replace($caps($2-), $chr(32), _)
     if ($remove($2, $#) isnum) noop $download.break(npcSearch %thread, %thread, %url $+ $v1)
     else noop $download.break(npcSearch %thread, %thread, %url $+ $urlencode($2-))
@@ -992,7 +1007,7 @@ on *:TEXT:*:*: {
       else %rsn = $rsn($2-)
     }
     _fillCommand %thread $left($1,1) $nick $iif($chan,$v1,PM) record %skill %rsn
-    var %url $parser $+ record $+ &rsn= $+ %rsn $+ &skill= $+ $smartno(%skill)
+    var %url $gertySite $+ record $+ &rsn= $+ %rsn $+ &skill= $+ $smartno(%skill)
     noop $download.break(record %thread, %thread, %url)
     goto clean
   }
@@ -1214,6 +1229,10 @@ on *:TEXT:*:*: {
       else if (%command == track || %command == tracker) {
         noop $_network(noop $!setStringParameter(channel, [ $lower($chan) ] , track, setting, %mode , $false ))
         %saystyle $chan Settings: Tracking messages are now %mode $+ .
+      }
+      else if (%command == urban) {
+        noop $_network(noop $!setStringParameter(channel, [ $lower($chan) ] , urban, setting, %mode , $false ))
+        %saystyle $chan Settings: Urban Dictionary messages are now %mode $+ .
       }
     }
     if ($admin($nick)) {

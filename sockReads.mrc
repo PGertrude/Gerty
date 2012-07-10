@@ -1,4 +1,5 @@
->start<|sockreads.mrc|compiled sockreads|3.43|rs
+alias versions.sockread return 4.03
+
 on *:sockread:*: {
   var %thread $gettok($sockname,2,46), %command $hget(%thread,command), %file %thread $+ .txt
   if ($sockerr) {
@@ -9,8 +10,9 @@ on *:sockread:*: {
   if (cost.* iswm $sockname) {
     var %sockcost
     sockread %sockcost
-    if ($regex(cost, %sockcost, /^<b>Current guide price:<\/b> ([\d\Wmk]+)/Si)) {
-      hadd -m cost $gettok($sockname,3,46) $litecalc($remove($regml(cost,1),$chr(44)))
+    if ($regex(cost, %sockcost, /Current guide price:/Si)) {
+      sockread %sockcost
+      hadd -m cost $gettok($sockname,3,46) $litecalc($remove($nohtml(%sockcost),$chr(44)))
       cost $+ $gettok($hget($gettok($sockname,2,46),cost),1,9) $gettok($sockname,2,46)
       unset %*
       sockclose $sockname
@@ -103,23 +105,28 @@ on *:sockread:*: {
     }
     bread %file 0 $file(%file).size &qfc2
     if ($bfind(&qfc2,0,</body)) {
-      var %start = $bfind(&qfc2,0,backtoforum.gif), %cutA = $bfind(&qfc2,%start,</li>)
+      var %start = $bfind(&qfc2,0,RuneScape Forums), %cutA = $bfind(&qfc2,%start,<span><span>)
       var %strForum = $bvar(&qfc2,%start,$calc(%cutA - %start)).text
-      noop $regex(%strForum,/up to (.+?)</i)
+      noop $regex(%strForum,/<a href="forums.ws[^>]+><span>([^<]+)</i)
       %strForum = $regml(1)
       if (!%strForum) { goto error }
-      var %start = $bfind(&qfc2,0,class="title thrd"), %cutB = $bfind(&qfc2,%start,</div)
-      var %strTitle = $bvar(&qfc2,%start,$calc(%cutB - %start)).text
+      var %cutB = $bfind(&qfc2,%cutA,</div)
+      var %strTitle = $bvar(&qfc2,%cutA,$calc(%cutB - %cutA)).text
+      noop $regex(%strTitle, /<span><span>([^<]+)<\/span><\/span>/)
+      %strTitle = $regml(1)
       %strTitle = $remove($nohtml(%strTitle),$chr(10))
-      var %start = $bfind(&qfc2,%cutB,class="msgcreator), %cutC = $bfind(&qfc2,%start,</div>)
+      var %start = $calc($bfind(&qfc2,%cutB,class="author CssMO">) + 21), %cutC = $bfind(&qfc2,%start,</a>)
       var %strPoster = $bvar(&qfc2,%start,$calc(%cutC - %start)).text
       %strPoster = $remove($nohtml(%strPoster),$chr(10))
-      var %start = $bfind(&qfc2,%cutC,class="msgtime"), %cutD = $bfind(&qfc2,%start,</div>)
-      var %strTime = $bvar(&qfc2,%start,$calc(%cutD - %start)).text
-      %strTime = $remove($nohtml(%strTime),$chr(10))
-      var %start = $bfind(&qfc2,%cutD,class="msgcontents"), %cutE = $bfind(&qfc2,%start,</div>)
-      var %strContent = $bvar(&qfc2,%start,$calc(%cutE - %start)).text
-      %strContent = $regsubex(%strContent, /(<style[^>]*>[^<]+<\/style><script[^>]*>[^<]+<\/script>)/, $null)
+      var %start = $bfind(&qfc2, %cutC, BubbleCreation), %cutD = $bfind(&qfc2, %start, </span>)
+      var %strTime = $bvar(&qfc2, %start, $calc(%cutD - %start)).text
+      noop $regex(%strTime, /<span>([^\$]+)$/)
+      %strTime = $regml(1)
+      %strTime = $remove($nohtml(%strTime), $chr(10))
+      var %start = $bfind(&qfc2, %cutD, <table>), %cutE = $bfind(&qfc2, %start, </table>)
+      %end = $min($calc(%cutE - %start), 250)
+      var %strContent = $bvar(&qfc2, %start, %end).text
+      %strContent = $remove($nohtml(%strContent), $chr(10))
       if ($trim($nohtml(%strContent)) == $null) {
         var %start = $bfind(&qfc2,%cutD,class="sccontent"), %cutE = $bfind(&qfc2,%start,</div>)
         %strContent = $bvar(&qfc2,%start,$calc(%cutE - %start)).text
@@ -127,7 +134,7 @@ on *:sockread:*: {
       %strContent = $remove($nohtml(%strContent),$chr(10))
       if ($hget(%thread,link)) $hget(%thread,out) $formatwith(\c12\uhttp://forum.runescape.com/forums.ws?{0}\o $| Forum:\c07 %strForum \o| By:\c07 %strPoster \o| Title:\c07 %strTitle \o| Posted at:\c07 %strTime, $replace($hget(%thread,qfc),-,$chr(44)))
       else $hget(%thread,out) $formatwith(Forum:\c07 %strForum \o| By:\c07 %strPoster \o| Title:\c07 %strTitle \o| Posted at:\c07 %strTime, $replace($hget(%thread,qfc),-,$chr(44)))
-      $hget(%thread,out) $formatwith(\uThread Content:\u) $mid(%strContent,1,150) $+ $iif($len(%strContent) > 150,...)
+      $hget(%thread,out) $formatwith(\uThread Content:\u) $mid(%strContent,1,150) $+ $iif($len(%strContent) > 150, ...)
       goto unset
     }
   }
@@ -175,32 +182,6 @@ on *:sockread:*: {
         $hget(%thread,out) $regsubex($replace($cmd(%thread,reward),:;,:,.;,;),/(Reward:) (.+?) Quest points gained upon completion: (\d+)(.+?)$/i,\1 \2 QP: $+(07,\3,))
         goto unset
       }
-    }
-  }
-  ; RANK
-  else if (Rank.* iswm $sockname) {
-    var %skill $cmd(%thread,arg1), %rank $cmd(%thread,arg2), %read
-    sockread %read
-    if (#F3C334 isin %read) {
-      var %nick $nohtml(%read)
-      sockread %read
-      var %level $nohtml(%read)
-      sockread %read
-      var %exp $remove($nohtml(%read),$chr(44))
-      if ($minigames(%skill)) {
-        $hget(%thread,out)  $+ %nick $+ 07 %skill | Rank:07 $bytes(%rank,db) | Score:07 %level
-        rscript.singleminigame $sockname $replace(%nick,$chr(32),_) $replace(%skill,$chr(32),_) $hget(%thread,out)
-      }
-      else {
-        $hget(%thread,out)  $+ %nick 07 $+ %skill | Rank:07 $bytes(%rank,db) | Level:07 %level $iif(%skill != overall,(07 $+ $xptolvl(%exp) $+ )) | Exp:07 $bytes(%exp,db) $&
-          $iif(%skill != overall,(07 $+ $round($calc(100 * %exp / 13034431 ),1) $+ 07% of 99) | Exp till $calc($xptolvl(%exp) +1) $+ :07 $bytes($calc($lvltoxp($calc($xptolvl(%exp) +1)) - %exp),db)))
-        rscript.singleskill $sockname $replace(%nick,$chr(160),_) %skill $hget(%thread,out) null
-        sockclose $sockname
-      }
-    }
-    if (</tbody> isin %read) {
-      $hget(%thread,out) Hiscores does not contain an entry for rank $format_number($hget(%thread,rank)) $hget(%thread,skill) $+ .
-      goto unset
     }
   }
   ; SHOP
@@ -447,7 +428,6 @@ on *:sockread:*: {
   return
   :error
   _throw $sockname %thread $error
-  sendToDev Error @ sockread:07 $sockname $error
   if ($exists(%file)) .remove %file
   if ($sockname) sockclose $sockname
   _clearCommand %thread
