@@ -36,7 +36,7 @@ on *:sockclose:dlGe.*: {
 alias updateSitePrices {
   echo -at starting ge update
   while (%x !> 36) {
-    .timerSiteUpdate [ $+ [ %x ] ] 1 $calc(%x * 15) updateSitePricesBuffer %x
+    .timerSiteUpdate [ $+ [ %x ] ] 1 $calc(%x * 30) updateSitePricesBuffer %x
     inc -u1 %x
   }
 }

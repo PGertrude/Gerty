@@ -113,6 +113,9 @@ on *:PART:*: {
   else if ($nick(#,0) < $chanset(#,users)) part # Channel has fallen below the user limit (07 $+ $chanset(#,users) $+ ).
 }
 on *:JOIN:*: {
+  if ($timer(tim)) == $null) {
+    .timertim -o 0 1 .timecount
+  }
   if ($nick == $me) {
     reloadChannel $chan
     who $chan

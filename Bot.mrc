@@ -42,7 +42,7 @@ timeCount {
     ; ge price updates
     var %thread = $+(a,$r(0,999))
     var %search = $dbSelectWhere(prices, name, `price`='0' LIMIT 1)
-    var %url $gertySite $+ ge?item= $+ $replace(%search,$chr(32),+)
+    var %url $gertySite $+ ge&item= $+ $replace(%search,$chr(32),+)
     echo -a %url
     noop $download.break(downloadGe %thread,%thread,%url)
     ; save command count
