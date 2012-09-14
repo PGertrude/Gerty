@@ -60,7 +60,7 @@ _setAdmin {
   var %x = 2, %y = 1
   while (%x <= $lines(botlist.txt)) {
     var %bot = $read(botlist.txt,%x)
-    if ($nick(#gerty,%bot) || $nick(#gertyDev,%bot)) {
+    if ($nick(#gertyDev,%bot)) {
       hadd -m botlist %y %bot
       noop $setDefname( $aLfAddress(%bot) , Gerty )
       inc %y
@@ -411,6 +411,7 @@ adminToHash {
 ;@SUMMARY Downloads the prices of all runes.
 ;@NOTE Deprecated.
 runepriceupdater {
+  deprecated
   sockopen runeprice.rune1 itemdb-rs.runescape.com 80
   sockopen runeprice.rune2 itemdb-rs.runescape.com 80
   if ($hget(potprice)) { hfree potprice }
@@ -468,7 +469,7 @@ parseGe {
   sqlite_commit 1
   .fclose dlge
   .remove dlGe.txt
-  echo -at finished
+  echo -s - GE update finished.
 }
 restoreGe {
   if (!$exists(dlGe.txt)) return
@@ -500,7 +501,7 @@ deprecated {
 ;@SUMMARY returns the main site link
 gertySite return http://sselessar.net/Gerty/parser.php?type=
 _fatalError {
-  writeini $errFile $1 err $+ $calc($ini($errFile, $1, 0) +1) $time $date $2-
+  write ErrorLog.txt $1 err $+ $calc($ini($errFile, $1, 0) +1) $time $date $2-
   if ($me ison $dev) .msg $dev err07 $1 issue: $2-
   linesep
   echo 4 -s err07 $1 issue: $2-
@@ -509,3 +510,4 @@ _fatalError {
   halt
 }
 _warning if ($me ison $dev) .msg $dev err07 $1 issue: $2-
+debug 

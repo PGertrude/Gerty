@@ -1,14 +1,5 @@
 alias versions.sqlcomm return 4.0
 
-; Connects to the database on startup
-on *:START:{
-  var %db $sqlite_open(gerty.db)
-  if (!%db) {
-    echo 4 -a Failed to connect to gerty.db
-    return
-  }
-  echo 3 -a gerty.db Loaded
-}
 ;@SYNTAX /loadChans #channel
 ;@SUMMARY loads the channel table into a hash object for faster querying.
 alias loadChans {

@@ -1,6 +1,7 @@
-alias versions.config return 4.01
+alias versions.config return 4.03
 on *:START: {
-  ; Authenticate Host
+  echo -s Initialising Bot...
+  ; First run
   if (!$exists(Gerty.Config.ini)) {
     writeini Gerty.Config.ini admin rsn P_Gertrude|Tiedemanns|Gerty
   }
@@ -12,33 +13,65 @@ on *:START: {
     write -l2 Perform.txt MODE +Bp
     write -l3 Perform.txt JOIN $?="Any AutoJoin channels?"
   }
+  if (!$exists(gerty.db)) {
+    _fatalError The database is missing, please contact an admin.
+    return
+  }
+
+  ; check the database is readable.
+  echo -s Database exists, checking connectivity...
+  _queue $!iif($hget(row),hfree row)
+  if (!$sqlite_is_valid_conn(1)) {
+    var %db $sqlite_open(gerty.db)
+    ; check connection to database opened
+    if (!%db) { _fatalError core Database not connected. }
+    ; check database is readable
+    if ($sqlite_fetch_row($sqlite_query(1, SELECT rsn FROM users WHERE rsn='P_Gertrude';), row, $SQLITE_ASSOC)) {
+      if ($hget(row, rsn) != P_Gertrude) { _fatalError core Database not readable }
+    }
+    else { _fatalError core Database corrupted }
+    echo -s - database OK
+  }
+  else {
+    ; check database is readable
+    if ($sqlite_fetch_row($sqlite_query(1, SELECT rsn FROM users WHERE rsn='P_Gertrude';), row, $SQLITE_ASSOC)) {
+      if ($hget(row, rsn) != P_Gertrude) { _fatalError core Database not readable }
+    }
+    else { _fatalError core Database corrupted }
+    echo -s - database OK
+  }
+
+  echo -s Loading admins...
+  AdminToHash
+  if (!$hget(admin)) {
+    _fatalError core Unable to load admins, contact an admin.
+  }
+  else {
+    echo -s - $hget(admin, 0).item Admins loaded.
+  }
+
   ; Set off update check
-  !echo -at Checking for updates...
-  ;findupdate
+  ;!echo -s Checking for updates to script and parameter files...
+  ;_findupdate
+
   ; Load Data Files
-  if !$hget(runeprice) { .hmake runeprice }
-  if ($exists(runeprice.txt)) { .hload runeprice runeprice.txt }
-  if !$hget(spelluse) { .hmake spelluse }
-  if ($exists(spelluse.txt)) { .hload spelluse spelluse.txt }
-  if !$hget(commands) { .hmake commands }
-  if ($exists(commands.txt)) { .hload commands commands.txt }
+  if (!$hget(commands) && $exists(commands.txt)) { .hmake commands | .hload commands commands.txt }
+
   ; Check for last ge update
+  echo -s Checking for a geupdate during offline time...
   noop $download.break(checkForOfflineGeUpdate, $newThread, $gertySite $+ lastupdate)
   noop $sqlite_query(1, DELETE FROM timers WHERE endTime < $gmt $+ ;)
+
 }
 on *:QUIT: {
   if ($nick == $me) {
     ; Save Data Files
-    .hsave runeprice runeprice.txt
-    .hsave spelluse spelluse.txt
     .hsave commands commands.txt
   }
 }
 on *:DISCONNECT: {
   if ($nick != $me) return
   ; Save Data Files
-  .hsave runeprice runeprice.txt
-  .hsave spelluse spelluse.txt
   .hsave commands commands.txt
 }
 on *:CONNECT: {
@@ -53,14 +86,13 @@ on *:CONNECT: {
       [ [ $read(Perform.txt,%x) ] ]
       inc %x
     }
-    ; Set admin hash tables
-    AdminToHash
     ; Set admins to save time.
     _setAdmin
   }
   loadChans
   ; Start up main timer
   .timertim -o 0 1 .timecount
+
 }
 raw 421:*: {
   if (status.* iswm $2) {
@@ -113,7 +145,7 @@ on *:PART:*: {
   else if ($nick(#,0) < $chanset(#,users)) part # Channel has fallen below the user limit (07 $+ $chanset(#,users) $+ ).
 }
 on *:JOIN:*: {
-  if ($timer(tim)) == $null) {
+  if ($timer(tim) == $null) {
     .timertim -o 0 1 .timecount
   }
   if ($nick == $me) {

@@ -30,11 +30,11 @@ on *:sockread:dlGe.*:{
 }
 on *:sockclose:dlGe.*: {
   .fclose geDownloadFileStream
-  echo -at downloaded, ready to parse
+  echo -s - Downloaded new prices, adding to database...
   parseGe
 }
 alias updateSitePrices {
-  echo -at starting ge update
+  echo -s - sending update to site...
   while (%x !> 36) {
     .timerSiteUpdate [ $+ [ %x ] ] 1 $calc(%x * 30) updateSitePricesBuffer %x
     inc -u1 %x
@@ -50,7 +50,7 @@ on *:sockopen:sitePrices.*: {
 on *:sockclose:sitePrices.*: {
   sockclose $sockname
   if ($sock(sitePrices.*,0) == 0 && !$timer(SiteUpdate36)) {
-    echo -at updated at site
+    echo -s - Site is up to date.
     noop $_network(downloadSitePrices)
   }
 }
@@ -58,5 +58,8 @@ alias checkForOfflineGeUpdate {
   if ($gettok($read(geupdate.txt,1),2,124) < $calc($1 - 1600)) {
     write -il1 geupdate.txt $asctime($calc($1 - 1600), HH:nn:ss) $+ $| $+ $calc($1 - 1600) $+ $| $+ $ord($asctime($calc($1 - 1600), dd)) $asctime($calc($1 - 1600), mmm)
     downloadSitePrices
+  }
+  else {
+    echo -s - GE is currently up to date.
   }
 }
